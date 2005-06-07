@@ -1433,8 +1433,293 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
 }
 #endif /* #if ENABLE_PRINTING */
 
+static void
+open_ulink_in_browser (CongNodePtr node)
+{
+	gchar *url = cong_node_get_attribute (node, NULL, "url");
+
+	if (url) {	
+		/* FIXME: should we have some error handling? */
+		gnome_url_show (url,
+				NULL);
+	}
+
+	g_free (url);
+}
+
+static void
+on_test_link_pressed (GtkButton *button,
+		      gpointer user_data)
+{
+	CongNodePtr node = user_data;
+
+	open_ulink_in_browser (node);
+}
+
+/* Property pages: */
 /**
- * docbook_generic_node_factory_method:
+ * docbook_orderedlist_page_factory_method:
+ * @custom_property_page:
+ * @doc:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+GtkWidget* 
+docbook_orderedlist_page_factory_method (CongServiceNodePropertyPage *custom_property_page,
+					 CongDocument *doc)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+#if 0
+	GtkWidget *notebook1;
+#endif
+
+	g_message("docbook_orderedlist_properties_page_factory_method");
+
+	g_return_val_if_fail (custom_property_page, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-orderedlist-properties.glade",
+						    FALSE,
+						    NULL);
+
+	global_glade_doc_ptr = doc;
+#if 0
+	global_glade_node_ptr = node;
+#endif
+
+	xml = glade_xml_new(glade_filename, "orderedlist_page", NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	g_free(glade_filename);
+
+#if 0
+	/* Wire stuff up: */
+	{
+		/* The numeration radio buttons: */
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "arabic")),
+					doc,
+					node,
+					NULL,
+					"numeration",
+					"arabic");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "loweralpha")),
+					doc,
+					node,
+					NULL,
+					"numeration",
+					"loweralpha");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "lowerroman")),
+					doc,
+					node,
+					NULL,
+					"numeration",
+					"lowerroman");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperalpha")),
+					doc,
+					node,
+					NULL,
+					"numeration",
+					"upperalpha");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperroman")),
+					doc,
+					node,
+					NULL,
+					"numeration",
+					"upperroman");
+		
+		/* The checkboxes: */
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "inheritnum")),
+					doc,
+					node,
+					NULL,
+					"inheritnum",
+					"ignore",
+					"inherit");
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "spacing")),
+					doc,
+					node,
+					NULL,
+					"spacing",
+					"normal",
+					"compact");
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "continuation")),
+					doc,
+					node,
+					NULL,
+					"continuation",
+					"restart",
+					"continues");
+		
+	}
+	
+	/* Add the advanced properties tab: */
+	notebook1 = glade_xml_get_widget(xml, "notebook1");
+	cong_ui_append_advanced_node_properties_page(GTK_NOTEBOOK(notebook1),
+						     doc, 
+						     node);
+#endif
+	
+	return glade_xml_get_widget (xml, "orderedlist_page");
+}
+
+/**
+ * docbook_ulink_page_factory_method:
+ * @custom_property_page:
+ * @doc:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+GtkWidget* 
+docbook_ulink_page_factory_method (CongServiceNodePropertyPage *custom_property_page,
+				   CongDocument *doc)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+
+	g_message("docbook_ulink_properties_page_factory_method");
+
+	g_return_val_if_fail(custom_property_page, NULL);
+	g_return_val_if_fail(doc, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-ulink-properties.glade",
+						    FALSE,
+						    NULL);
+	global_glade_doc_ptr = doc;
+#if 0
+	global_glade_node_ptr = node;
+#endif
+
+	xml = glade_xml_new(glade_filename, "ulink_page", NULL);
+	glade_xml_signal_autoconnect(xml);
+
+#if 0
+	g_signal_connect (G_OBJECT (glade_xml_get_widget(xml, "test_link_button")),
+			  "pressed",
+			  G_CALLBACK (on_test_link_pressed),
+			  node);
+#endif
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	g_free(glade_filename);
+
+	return glade_xml_get_widget(xml, "ulink_page");
+}
+#if 1
+static GtkWidget* 
+docbook_node_page_factory_method_scope (CongServiceNodePropertyPage *custom_property_page, 
+					CongDocument *doc)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+
+	g_return_val_if_fail (custom_property_page, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-common-properties.glade",
+						    FALSE,
+						    NULL);
+
+	global_glade_doc_ptr = doc;
+#if 0
+	global_glade_node_ptr = node;
+#endif
+
+	xml = glade_xml_new(glade_filename, "scope_page", NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	/* FIXME: wire stuff up! */
+	
+	g_free(glade_filename);
+	
+	return glade_xml_get_widget(xml, "scope_page");
+}
+static GtkWidget* 
+docbook_node_page_factory_method_language (CongServiceNodePropertyPage *custom_property_page, 
+					CongDocument *doc)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+
+	g_return_val_if_fail (custom_property_page, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-common-properties.glade",
+						    FALSE,
+						    NULL);
+
+	global_glade_doc_ptr = doc;
+#if 0
+	global_glade_node_ptr = node;
+#endif
+
+	xml = glade_xml_new(glade_filename, "language_page", NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	/* FIXME: wire stuff up! */
+	
+	g_free(glade_filename);
+
+	return glade_xml_get_widget(xml, "language_page");
+}
+static GtkWidget* 
+docbook_node_page_factory_method_revisions (CongServiceNodePropertyPage *custom_property_page, 
+					CongDocument *doc)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+
+	g_return_val_if_fail (custom_property_page, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-common-properties.glade",
+						    FALSE,
+						    NULL);
+
+	global_glade_doc_ptr = doc;
+#if 0
+	global_glade_node_ptr = node;
+#endif
+
+	xml = glade_xml_new(glade_filename, "revisions_page", NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	/* FIXME: wire stuff up! */
+	
+	g_free(glade_filename);
+
+	return glade_xml_get_widget(xml, "revisions_page");
+}
+#endif
+/* Property dialogs: */
+/**
+ * docbook_generic_node_properties_factory_method:
  * @custom_property_dialog:
  * @doc:
  * @node:
@@ -1443,7 +1728,9 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
  * Returns:
  */
 GtkWidget* 
-docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+docbook_generic_node_properties_factory_method (CongServiceNodePropertyDialog *custom_property_dialog, 
+						CongDocument *doc, 
+						CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1590,29 +1877,6 @@ docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *cus
 						     node);
 	
 	return glade_xml_get_widget(xml, "common_dialog");
-}
-
-static void
-open_ulink_in_browser (CongNodePtr node)
-{
-	gchar *url = cong_node_get_attribute (node, NULL, "url");
-
-	if (url) {	
-		/* FIXME: should we have some error handling? */
-		gnome_url_show (url,
-				NULL);
-	}
-
-	g_free (url);
-}
-
-static void
-on_test_link_pressed (GtkButton *button,
-		      gpointer user_data)
-{
-	CongNodePtr node = user_data;
-
-	open_ulink_in_browser (node);
 }
 
 /**
@@ -1873,11 +2137,43 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 					  NULL);
 #endif
 
+	/* Property pages: */
+#if 1
+	cong_plugin_register_custom_property_page (plugin,
+						    _("Scope"), 
+						    _("Provides a Scope properties page for most DocBook nodes"),
+						    "docbook-scope-property_page",
+						    docbook_node_page_factory_method_scope,
+						    NULL);
+	cong_plugin_register_custom_property_page (plugin,
+						    _("Language"), 
+						    _("Provides a Language properties page for most DocBook nodes"),
+						    "docbook-language-property_page",
+						    docbook_node_page_factory_method_language,
+						    NULL);
+	cong_plugin_register_custom_property_page (plugin,
+						    _("Revisions"), 
+						    _("Provides a Revisions properties page for most DocBook nodes"),
+						    "docbook-revisions-property_page",
+						    docbook_node_page_factory_method_revisions,
+						    NULL);
+	cong_plugin_register_custom_property_page_for_element (plugin,
+							       "List",
+							       "docbook-orderedlist-properties",
+							       docbook_orderedlist_page_factory_method,
+							       NULL);
+#endif
+	cong_plugin_register_custom_property_page_for_element (plugin,
+							       "Link",
+							       "docbook-ulink-properties",
+							       docbook_ulink_page_factory_method,
+							       NULL);
+	/* Property dialogs: */
 	cong_plugin_register_custom_property_dialog(plugin,
 						    _("Generic DocBook property dialog"), 
 						    _("Provides a Properties dialog for most DocBook nodes"),
 						    "docbook-generic-node-properties",
-						    docbook_generic_node_factory_method,
+						    docbook_generic_node_properties_factory_method,
 						    NULL);
 
 	cong_plugin_register_custom_property_dialog_for_element (plugin,

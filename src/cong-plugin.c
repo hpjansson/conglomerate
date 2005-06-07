@@ -43,22 +43,7 @@ struct CongPluginPrivate
 
 	CongPluginCallbackConfigure configure_callback;
 
-#if 1
 	GList *list_of_service; /* ptrs of type CongService */
-#else
-	GList *list_of_document_factory; /* ptrs of type CongServiceDocumentFactory */
-	GList *list_of_importer; /* ptrs of type CongServiceImporter */
-	GList *list_of_exporter; /* ptrs of type CongServiceExporter */
-#if ENABLE_PRINTING
-	GList *list_of_print_method; /* ptrs of type CongServicePrintMethod */
-#endif
-	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
-	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
-	GList *list_of_editor_node_factory; /* ptrs of type CongServiceEditorNodeFactory */
-	GList *list_of_doc_tool; /* ptrs of type CongServiceDocTool */
-	GList *list_of_node_tool; /* ptrs of type CongServiceNodeTool */
-	GList *list_of_property_dialog; /* ptrs of type CongServiceNodePropertyDialog */
-#endif
 };
 
 CONG_DEFINE_CLASS (CongPlugin, cong_plugin, CONG_PLUGIN, GObject, G_TYPE_OBJECT)
@@ -237,14 +222,10 @@ cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongS
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
-	cong_plugin_for_each_service_of_type (plugin, 
+	cong_plugin_for_each_service_of_type (plugin,
 					      CONG_SERVICE_DOCUMENT_FACTORY_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE(plugin)->list_of_document_factory, (GFunc)callback, user_data);
-#endif
 }
 
 /**
@@ -261,14 +242,10 @@ cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServiceIm
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
 	cong_plugin_for_each_service_of_type (plugin, 
 					      CONG_SERVICE_IMPORTER_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE (plugin)->list_of_importer, (GFunc)callback, user_data);
-#endif
 }
 
 /**
@@ -285,14 +262,10 @@ cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServiceEx
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
 	cong_plugin_for_each_service_of_type (plugin, 
 					      CONG_SERVICE_EXPORTER_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE (plugin)->list_of_exporter, (GFunc)callback, user_data);
-#endif
 }
 
 #if ENABLE_PRINTING
@@ -310,14 +283,10 @@ cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongServi
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
 	cong_plugin_for_each_service_of_type (plugin, 
 					      CONG_SERVICE_PRINT_METHOD_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE (plugin)->list_of_print_method, (GFunc)callback, user_data);
-#endif
 }
 #endif
 
@@ -335,14 +304,10 @@ cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServiceDo
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
 	cong_plugin_for_each_service_of_type (plugin, 
 					      CONG_SERVICE_DOC_TOOL_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE (plugin)->list_of_doc_tool, (GFunc)callback, user_data);
-#endif
 }
 
 /**
@@ -359,14 +324,10 @@ cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongServiceN
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
-#if 1
 	cong_plugin_for_each_service_of_type (plugin, 
 					      CONG_SERVICE_NODE_TOOL_TYPE,
 					      (CongServiceCallback*)callback,
 					      user_data);
-#else
-	g_list_foreach(PRIVATE (plugin)->list_of_node_tool, (GFunc)callback, user_data);
-#endif
 }
 
 
@@ -1056,6 +1017,95 @@ cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 	
 	return property_dialog;
 }
+
+/**
+ * cong_plugin_register_custom_property_page:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+CongServiceNodePropertyPage*
+cong_plugin_register_custom_property_page (CongPlugin *plugin,
+					   const gchar *name, 
+					   const gchar *description,
+					   const gchar *service_id,
+					   CongCustomPropertyPageFactoryMethod factory_method,
+					   gpointer user_data)
+{
+	CongServiceNodePropertyPage *property_page;
+
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+	g_return_val_if_fail (name, NULL);
+	g_return_val_if_fail (description, NULL);
+	g_return_val_if_fail (service_id, NULL);
+
+        property_page = cong_service_node_property_page_construct (g_object_new (CONG_SERVICE_NODE_PROPERTY_PAGE_TYPE, NULL),
+								   name,
+								   description,
+								   service_id,
+								   factory_method,
+								   user_data);
+
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (property_page));
+
+	return property_page;
+}
+
+/**
+ * cong_plugin_register_custom_property_page_for_element:
+ * @plugin:
+ * @element_name:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+CongServiceNodePropertyPage*
+cong_plugin_register_custom_property_page_for_element (CongPlugin *plugin,
+						       const gchar *element_name,
+						       const gchar *service_id,
+						       CongCustomPropertyPageFactoryMethod factory_method,
+						       gpointer user_data)
+{
+	CongServiceNodePropertyPage *property_page;
+	gchar *name;
+	gchar *description;	
+
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+	g_return_val_if_fail (element_name, NULL);
+	g_return_val_if_fail (service_id, NULL);
+
+	/* Generate a user-visible name for this plugin property page */
+#if 1
+	name = g_strdup (element_name);
+#else
+	name = g_strdup_printf (_("<%s> property page"), element_name);
+#endif
+
+	/* Generate a user-visible description for this plugin */
+	description = g_strdup_printf (_("Provides a Properties page for the <%s> element"), element_name);
+
+	property_page = cong_plugin_register_custom_property_page (plugin,
+								   name, 
+								   description,
+								   service_id,
+								   factory_method,
+								   user_data);
+	g_free (name);
+	g_free (description);
+	
+	return property_page;
+}
+
 
 #if ENABLE_PRINTING
 /**

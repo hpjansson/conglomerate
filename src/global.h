@@ -92,6 +92,7 @@ typedef struct CongServiceDocTool CongServiceDocTool;
 typedef struct CongServiceNodeTool CongServiceNodeTool;
 
 typedef struct CongServiceNodePropertyDialog CongServiceNodePropertyDialog;
+typedef struct CongServiceNodePropertyPage CongServiceNodePropertyPage;
 
 struct CongCursor
 {

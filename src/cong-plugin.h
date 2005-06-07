@@ -33,6 +33,7 @@
 #include "cong-service-exporter.h"
 #include "cong-service-importer.h"
 #include "cong-service-node-property-dialog.h"
+#include "cong-service-node-property-page.h"
 #include "cong-service-node-tool.h"
 #include "cong-service-print-method.h"
 #include "cong-service-tool.h"

@@ -50,6 +50,9 @@ struct CongPrimaryWindow
 	GtkToolbar *toolbar;
 	GtkWidget *app_bar;
 
+	/* Property pages: */
+	GtkNotebook *property_notebook;
+
 	GtkAccelGroup *accel;
 };
 

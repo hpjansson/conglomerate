@@ -247,6 +247,28 @@ cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (
 	}
 }
 
+void
+cong_plugin_manager_for_each_service_of_type (CongPluginManager *plugin_manager, 
+					      GType type,
+					      void 
+					      (*callback) (CongService *service,
+							   gpointer user_data),
+					      gpointer user_data)
+{
+	GList *iter;
+	g_return_if_fail (plugin_manager);
+	g_return_if_fail (callback);
+
+	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
+		cong_plugin_for_each_service_of_type (iter->data, 
+						      type, 
+						      callback, 
+						      user_data);
+	}
+	
+}
+
+
 /**
  * cong_plugin_manager_locate_custom_property_dialog_by_id:
  * @plugin_manager:
@@ -302,3 +324,4 @@ cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_
 	
 	return NULL;
 }
+

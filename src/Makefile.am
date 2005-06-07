@@ -118,6 +118,7 @@ conglomerate_SOURCES =      \
   cong-plugin-manager.h     \
   cong-primary-window.h     \
   cong-progress-checklist.h \
+  cong-property-page.h      \
   cong-random-document.h    \
   cong-range.h              \
   cong-selection.h          \
@@ -128,6 +129,7 @@ conglomerate_SOURCES =      \
   cong-service-exporter.h   \
   cong-service-importer.h   \
   cong-service-node-property-dialog.h \
+  cong-service-node-property-page.h \
   cong-service-node-tool.h  \
   cong-service-print-method.h \
   cong-service-tool.h \
@@ -252,6 +254,7 @@ conglomerate_SOURCES =      \
   cong-plugin-manager.c     \
   cong-primary-window.c     \
   cong-progress-checklist.c \
+  cong-property-page.c      \
   cong-random-document.c    \
   cong-range.c              \
   cong-service.c            \
@@ -261,6 +264,7 @@ conglomerate_SOURCES =      \
   cong-service-exporter.c   \
   cong-service-importer.c   \
   cong-service-node-property-dialog.c \
+  cong-service-node-property-page.c \
   cong-service-node-tool.c  \
   cong-service-print-method.c \
   cong-service-tool.c       \

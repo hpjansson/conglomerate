@@ -1,5 +1,22 @@
 2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
 
+	* plugin-docbook.c:
+	* global.h: 
+	* cong-service-node-property-page.h: 
+	* cong-service-node-property-page.c: 
+	* cong-property-page.h: 
+	* cong-property-page.c: 
+	* cong-primary-window.c: 
+	* cong-plugin.h: 
+	* cong-plugin.c: 
+	* cong-plugin-manager.h: 
+	* cong-plugin-manager.c: 
+	* Makefile.am: 
+
+	Add initial (disabled) implementation of property pages; fix focus so that editor widget gets initial focus.
+
+2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
+
 	* popup.c: 
 	* cong-util.c: 
 	* cong-primary-window.c: 

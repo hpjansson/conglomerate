@@ -94,6 +94,7 @@ void cong_plugin_manager_for_each_print_method (CongPluginManager *plugin_manage
 void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocTool *doc_tool, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceNodeTool *node_tool, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_custom_property_dialog(CongPluginManager *plugin_manager, void (*callback)(CongServiceNodePropertyDialog *custom_property_dialog, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_custom_property_page (CongPluginManager *plugin_manager, void (*callback)(CongServiceNodePropertyPage *custom_property_page, gpointer user_data), gpointer user_data);
 
 CongServiceNodePropertyDialog*
 cong_plugin_manager_locate_custom_property_dialog_by_id (CongPluginManager *plugin_manager, 

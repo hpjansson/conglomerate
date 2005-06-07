@@ -40,6 +40,7 @@
 #include "cong-selection.h"
 #include "cong-range.h"
 #include "cong-ui-hooks.h"
+#include "cong-plugin-manager.h"
 
 #if 0
 #include <libgnome/libgnome.h>
@@ -49,6 +50,7 @@
 #endif
 
 #define ENABLE_MAIN_WIDGET 1
+#define ENABLE_PROPERTY_PAGES 0
 #define LOG_PRIMARY_WINDOW_CREATION 0
 
 #if LOG_PRIMARY_WINDOW_CREATION
@@ -65,20 +67,20 @@
  * |---------------------------------| LOGO |
  * | Toolbar                         |      |
  * |---------------------------------`------|
- * |       |                                |
- * | Tree  | Document view                  |
- * | View  |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       |                                |
- * |       O <- split pane                  |
- * |       |                                |
+ * |         |                              |
+ * | Tree    | Document view                |
+ * | View    |                              |
+ * |         |                              |
+ * |         |                              |
+ * |         |                              |
+ * |         |                              |
+ * |         |                              |
+ * |---------|                              |
+ * |Property |                              |
+ * |  pages  |                              |
+ * |         |                              |
+ * |         O <- split pane                |
+ * |         |                              |
  * |----------------------------------------|
  * | AppBar                                 |
  * `----------------------------------------'
@@ -341,24 +343,63 @@ destroy( GtkWidget *widget,
 	}
 }
 
+#if ENABLE_PROPERTY_PAGES
+#if 0
+static void
+property_page_selection_change_cb (CongDocument *doc, gpointer user_data)
+{
+	GtkWidget *w = GTK_WIDGET (user_data);
+
+#error move these into an inheritance hierarchy below GtkWidget
+	/* Do something sane... */
+	gtk_widget_hide (w);
+}
+#endif
+
+static void
+create_property_page_cb (CongService *service,
+			 gpointer user_data)
+{
+	CongServiceNodePropertyPage *custom_property_page = CONG_SERVICE_NODE_PROPERTY_PAGE (service);
+	CongPrimaryWindow *primary_window = (CongPrimaryWindow*)user_data;
+	/* CongDocument *doc = cong_primary_window_get_document (primary_window); */
+	GtkWidget *w = cong_custom_property_page_make (custom_property_page,
+						       cong_primary_window_get_document (primary_window));
+	gtk_widget_show (w);
+	gtk_notebook_append_page (primary_window->property_notebook,
+				  w,
+				  gtk_label_new (cong_service_get_name (CONG_SERVICE (custom_property_page)))
+				  );
+#if 0
+	g_signal_connect (G_OBJECT (doc), "selection_change", G_CALLBACK (property_page_selection_change_cb), w);
+	/* FIXME: disconnect from this signal? */
+#endif
+}
+#endif
+	
 static void
 add_standard_layout_for_doc (CongPrimaryWindow *primary_window, 
 			     CongDocument *doc)
 {
 	GtkWidget *w1 = NULL, *w2 = NULL;
 	GtkWidget *sidebar_notebook = NULL;
+	GtkWidget *sidebar_vpane;
 
 	/* --- Main window -> hpane --- */
 	w1 = gtk_hpaned_new();
 	gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
 	gtk_widget_show(w1);
+
+	/* Sidebar vpane */
+	sidebar_vpane = gtk_vpaned_new();
+	gtk_widget_show (sidebar_vpane);
+	gtk_paned_add1(GTK_PANED(w1), sidebar_vpane);
 	
 	/* --- Notebook to appear in the sidebar: --- */
 	sidebar_notebook = gtk_notebook_new();
 	gtk_widget_show(sidebar_notebook);
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
-	
-	gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
+	gtk_paned_add1(GTK_PANED(sidebar_vpane), sidebar_notebook);
 	
 	/* --- Tree view --- */
 	LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
@@ -394,8 +435,23 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 						    primary_window),
 				  gtk_label_new(_("Raw XML"))
 				  );
+
+#if ENABLE_PROPERTY_PAGES
+	/* Property pages for sidebar pane */
+	{
+		primary_window->property_notebook = GTK_NOTEBOOK (gtk_notebook_new());
+		gtk_widget_show (GTK_WIDGET (primary_window->property_notebook));
+		gtk_notebook_set_tab_pos (primary_window->property_notebook, GTK_POS_BOTTOM);
+		gtk_paned_add2 (GTK_PANED(sidebar_vpane), GTK_WIDGET (primary_window->property_notebook));
+
+		cong_plugin_manager_for_each_service_of_type (cong_app_get_plugin_manager (cong_app_singleton ()),
+							      CONG_SERVICE_NODE_PROPERTY_PAGE_TYPE,
+							      create_property_page_cb,
+							      primary_window);
+	}
+#endif
 	
-		/* Set up the editor_widget v3: */
+	/* Set up the editor_widget v3: */
 #if ENABLE_MAIN_WIDGET
 	{
 		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
@@ -416,6 +472,8 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 		
 		gtk_paned_add2 (GTK_PANED(w1), 
 				primary_window->scroller3);
+
+		gtk_widget_grab_focus (GTK_WIDGET(primary_window->cong_editor_widget3));
 	}
 #endif
 	
