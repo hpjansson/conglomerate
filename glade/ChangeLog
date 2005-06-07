@@ -1,3 +1,11 @@
+2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
+
+	* docbook-ulink-properties.glade:
+	* docbook-orderedlist-properties.glade:
+	* docbook-common-properties.glade:
+
+	Named some of the widgets so that the glade files are reusable by the property page code.
+
 2005-06-06  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-file-properties.glade: 
