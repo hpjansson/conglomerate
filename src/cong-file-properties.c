@@ -70,6 +70,101 @@ on_doc_set_url (CongDocument *doc,
 		const gchar *new_url,
 		gpointer user_data);
 
+static guint 
+count_words (PangoLanguage *language,
+	     const gchar *text)
+{
+	int n_chars;
+	int len_bytes;
+	PangoLogAttr *log_attrs;
+	guint num_words;
+	int i;
+
+	g_return_val_if_fail (text, 0);
+
+	len_bytes = strlen (text);
+
+	n_chars = g_utf8_strlen (text, len_bytes);
+
+	log_attrs = g_new0 (PangoLogAttr, n_chars+1);
+
+	pango_get_log_attrs (text,
+			     len_bytes,
+			     -1,
+			     language,
+			     log_attrs,
+			     n_chars+1);
+
+	num_words = 0;
+
+	for (i=0;i<n_chars;i++) {
+		if (log_attrs[i].is_word_start) {
+			num_words++;
+		}
+	}
+
+	g_free (log_attrs);
+
+	return num_words;
+}
+
+typedef struct CongDocumentStatistics CongDocumentStatistics;
+struct CongDocumentStatistics
+{
+	guint num_nodes;
+	guint num_elements;
+	guint num_words;
+};
+
+gboolean
+refresh_statistics_node_cb (CongDocument *doc,
+			    CongNodePtr node,
+			    gpointer data,
+			    guint recursion_level)
+{
+	CongDocumentStatistics *stats = (CongDocumentStatistics*)data;
+	PangoLanguage* language;
+
+	stats->num_nodes++;
+
+	switch (cong_node_type (node)) {
+	default: 
+		break;
+	case CONG_NODE_TYPE_TEXT:
+		language = cong_document_get_language_for_node (doc, node);
+		stats->num_words += count_words (language, (const gchar*)node->content);
+		break;
+	case CONG_NODE_TYPE_ELEMENT:
+		stats->num_elements++;
+		break;
+	}
+
+	return FALSE;
+}
+
+static void
+refresh_statistics (CongFilePropertiesDialogDetails *dialog_details,
+		    CongDocument *doc)
+{
+	struct CongDocumentStatistics stats;
+	gchar *text;
+	
+	stats.num_nodes = 0;
+	stats.num_elements = 0;
+	stats.num_words = 0;
+	
+	cong_document_for_each_node (doc, refresh_statistics_node_cb, &stats);
+
+	text = g_strdup_printf ("%i", stats.num_words);
+	gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_words")), 
+			     text);
+	g_free (text);
+
+	text = g_strdup_printf ("%i", stats.num_elements);
+	gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_elements")), 
+			     text);
+	g_free (text);	
+}
 
 static void
 refresh_filename_and_location (CongFilePropertiesDialogDetails *dialog_details,
@@ -248,6 +343,9 @@ cong_file_properties_dialog_new (CongDocument *doc,
 
 	dialog = glade_xml_get_widget(dialog_details->xml, "common_dialog");
 
+	/* Statistics*/
+	refresh_statistics (dialog_details, doc);
+
 	/* Filename & Location: */
 	refresh_filename_and_location (dialog_details, doc);
 	
@@ -403,6 +501,9 @@ on_doc_end_edit (CongDocument *doc,
 
 	refresh_modified (dialog_details, 
 			  doc);
+
+	refresh_statistics (dialog_details,
+			    doc);
 }
 
 

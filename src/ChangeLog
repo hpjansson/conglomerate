@@ -1,3 +1,9 @@
+2005-06-06  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-file-properties.c: 
+
+	Implemented word-count routine (#135093)
+
 2005-05-17  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-app.c: 
