@@ -1,5 +1,16 @@
 2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
 
+	* cong-eel.h: 
+	* cong-eel.c: 
+	* cong-editor-node-entity-ref.c: 
+	* cong-editor-node-entity-decl.c: 
+	* cong-editor-area-structural.h: 
+	* cong-editor-area-structural.c: 
+	* cong-editor-area-structural-tag.c:
+	Reworked structural heading to take a callback, rather than having hardcoded colours
+
+2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
+
 	* cong-editor-widget3.c: 
 	* cong-editor-node-text.c: 
 	* cong-document.c: 

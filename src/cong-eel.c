@@ -100,6 +100,34 @@ cong_eel_rgb_to_gdk_color (GdkColor             *color,
 	g_assert (result);
 }
 
+/**
+ * cong_eel_rgb_to_gdk_color2:
+ * @r:
+ * @g:
+ * @b:
+ *
+ * TODO: Write me
+ */
+GdkColor*
+cong_eel_rgb_to_gdk_color2 (guchar               r,
+			    guchar               g,
+			    guchar               b)
+{
+	gboolean result;
+	GdkColor color;
+
+	color.red = (r<<8);
+	color.green = (g<<8);
+	color.blue = (b<<8);
+
+	result = gdk_colormap_alloc_color (cong_gui_get_a_window()->style->colormap, 
+					   &color, 
+					   FALSE, 
+					   TRUE);
+	g_assert (result);
+	
+	return gdk_color_copy (&color);
+}
 
 /**
  * cong_eel_rectangle_contains:

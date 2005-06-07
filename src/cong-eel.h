@@ -38,6 +38,10 @@ cong_eel_rgb_to_gdk_color (GdkColor             *color,
 			   guchar               r,
 			   guchar               g,
 			   guchar               b);
+GdkColor*
+cong_eel_rgb_to_gdk_color2 (guchar               r,
+			    guchar               g,
+			    guchar               b);
 
 /* From eel-gdk-extensions.h: */
 gboolean            cong_eel_rectangle_contains             (const GdkRectangle  *rectangle,

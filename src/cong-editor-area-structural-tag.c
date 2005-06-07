@@ -120,6 +120,14 @@ cong_editor_area_structural_tag_instance_init (CongEditorAreaStructuralTag *area
 }
 
 
+static GdkColor*
+theme_cb (CongEditorArea *editor_area,
+	  CongDispspecGCUsage usage)
+{
+	CongEditorAreaStructuralTag *area_structural_tag = (CongEditorAreaStructuralTag*)editor_area;
+	return gdk_color_copy (cong_dispspec_element_col (PRIVATE(area_structural_tag)->ds_element,  usage));
+}
+
 /* Exported function definitions: */
 /**
  * cong_editor_area_structural_tag_construct:
@@ -142,16 +150,13 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 	g_return_val_if_fail (ds_element, NULL);
 	g_return_val_if_fail (text, NULL);
 
+	PRIVATE(area_structural_tag)->ds_element = ds_element;
 	cong_editor_area_structural_construct (CONG_EDITOR_AREA_STRUCTURAL(area_structural_tag),
 					       editor_widget,
 					       pixbuf,
 					       text,
-					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_DIM_LINE),
-					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_BACKGROUND),
-					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_TEXT));
+					       theme_cb);
 
-	PRIVATE(area_structural_tag)->ds_element = ds_element;
 
 	return CONG_EDITOR_AREA (area_structural_tag);
 }

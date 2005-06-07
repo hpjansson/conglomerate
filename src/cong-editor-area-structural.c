@@ -44,6 +44,7 @@
 
 struct CongEditorAreaStructuralDetails
 {
+	CongEditorAreaThemeCallback theme_cb;
 	GdkColor *col_array[CONG_DISPSPEC_GC_USAGE_NUM];
 	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
 
@@ -125,10 +126,7 @@ cong_editor_area_structural_instance_init (CongEditorAreaStructural *area_struct
  * @editor_widget:
  * @pixbuf:
  * @text:
- * @col_bold:
- * @col_dim:
- * @col_background:
- * @col_text:
+ * @theme_cb:
  *
  * TODO: Write me
  * Returns:
@@ -138,31 +136,21 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 				       CongEditorWidget3 *editor_widget,
 				       GdkPixbuf *pixbuf,
 				       const gchar *text,
-				       const GdkColor *col_bold,
-				       const GdkColor *col_dim,
-				       const GdkColor *col_background,
-				       const GdkColor *col_text)
+				       CongEditorAreaThemeCallback theme_cb)
 {
 	int i;
 
 	g_return_val_if_fail (text, NULL);
-	g_return_val_if_fail (col_bold, NULL);
-	g_return_val_if_fail (col_dim, NULL);
-	g_return_val_if_fail (col_background, NULL);
-	g_return_val_if_fail (col_text, NULL);
+	g_return_val_if_fail (theme_cb, NULL);
 
 	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_structural),
 					editor_widget);
-
-	PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_BOLD_LINE] = gdk_color_copy (col_bold);
-	PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_DIM_LINE] = gdk_color_copy (col_dim);
-	PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_BACKGROUND] = gdk_color_copy (col_background);
-	PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_TEXT] = gdk_color_copy (col_text);
-
+	PRIVATE(area_structural)->theme_cb = theme_cb;
 	for (i=0;i<CONG_DISPSPEC_GC_USAGE_NUM; i++) {
+		g_assert (area_structural);
+		PRIVATE(area_structural)->col_array[i] = theme_cb ((CongEditorArea*)area_structural, i);
 		PRIVATE(area_structural)->gc_array[i] = generate_gc_for_col (PRIVATE(area_structural)->col_array[i]);
 	}
-
 
 	PRIVATE(area_structural)->title_vcompose = cong_editor_area_composer_new (editor_widget,
 										  GTK_ORIENTATION_VERTICAL,
@@ -273,22 +261,16 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
  * @editor_widget:
  * @pixbuf:
  * @text:
- * @col_bold:
- * @col_dim:
- * @col_background:
- * @col_text:
+ * @theme_cb:
  *
  * TODO: Write me
  * Returns:
  */
 CongEditorArea*
 cong_editor_area_structural_new (CongEditorWidget3 *editor_widget,
-				 GdkPixbuf *pixbuf,
-				 const gchar *text,
-				 const GdkColor *col_bold,
-				 const GdkColor *col_dim,
-				 const GdkColor *col_background,
-				 const GdkColor *col_text)
+		GdkPixbuf *pixbuf,
+		const gchar *text,
+		CongEditorAreaThemeCallback theme_cb)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_structural_new(%s)", text);
@@ -302,10 +284,7 @@ cong_editor_area_structural_new (CongEditorWidget3 *editor_widget,
 		 editor_widget,
 		 pixbuf,
 		 text,
-		 col_bold,
-		 col_dim,
-		 col_background,
-		 col_text);
+		 theme_cb);
 }
 
 /* Method implementation definitions: */

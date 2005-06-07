@@ -50,27 +50,24 @@ struct CongEditorAreaStructuralClass
 	CongEditorAreaContainerClass klass;
 };
 
+typedef GdkColor* (*CongEditorAreaThemeCallback) (CongEditorArea *area,
+						  CongDispspecGCUsage usage);
+
 GType
 cong_editor_area_structural_get_type (void);
 
 CongEditorArea*
 cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural,
 				       CongEditorWidget3 *editor_widget,
-				       GdkPixbuf *pixbuf,					   
+				       GdkPixbuf *pixbuf,
 				       const gchar *text,
-				       const GdkColor *col_bold,
-				       const GdkColor *col_dim,
-				       const GdkColor *col_background,
-				       const GdkColor *col_text);
+				       CongEditorAreaThemeCallback theme_cb);
 
 CongEditorArea*
 cong_editor_area_structural_new (CongEditorWidget3 *editor_widget,
 				 GdkPixbuf *pixbuf,
 				 const gchar *text,
-				 const GdkColor *col_bold,
-				 const GdkColor *col_dim,
-				 const GdkColor *col_background,
-				 const GdkColor *col_text);
+				 CongEditorAreaThemeCallback theme_cb);
 
 G_END_DECLS
 

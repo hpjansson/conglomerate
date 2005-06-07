@@ -138,6 +138,7 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
  * @editor_widget:
  * @font:
  * @fg_col:
+
  * @text:
  * @use_markup:
  *
