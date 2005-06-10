@@ -1,4 +1,7 @@
 # temporary hack until yelp support qanda sets
+
+BUILT_SOURCES = faq.xml
+
 faq.xml: faq.xml.qna
 	xsltproc --output $@ faq-hack.xsl $<
 
