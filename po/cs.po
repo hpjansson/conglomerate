@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-19 18:51+0000\n"
-"PO-Revision-Date: 2005-05-22 13:00+0200\n"
+"POT-Creation-Date: 2005-06-12 10:53+0000\n"
+"PO-Revision-Date: 2005-06-12 13:57+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
-#: ../src/cong-primary-window.c:547 ../src/cong-primary-window.c:733
-#: ../src/cong-primary-window.c:735 ../src/cong-primary-window.c:741
+#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:791
+#: ../src/cong-primary-window.c:793 ../src/cong-primary-window.c:799
 msgid "Conglomerate XML Editor"
 msgstr "Editor XML Conglomerate"
 
@@ -118,6 +118,14 @@ msgid "Name"
 msgstr "Název"
 
 #: ../glade/cong-file-properties.glade.h:11
+msgid "Number of elements:"
+msgstr "Počet elementů"
+
+#: ../glade/cong-file-properties.glade.h:12
+msgid "Number of words :"
+msgstr "Počet slov:"
+
+#: ../glade/cong-file-properties.glade.h:13
 #: ../glade/docbook-common-properties.glade.h:3
 #: ../glade/docbook-orderedlist-properties.glade.h:9
 #: ../glade/docbook-ulink-properties.glade.h:3
@@ -126,30 +134,86 @@ msgstr "Název"
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: ../glade/cong-file-properties.glade.h:12
+#: ../glade/cong-file-properties.glade.h:14
 msgid "Standalone"
 msgstr "Samostatný"
 
-#: ../glade/cong-file-properties.glade.h:13
+#: ../glade/cong-file-properties.glade.h:15
+msgid "Statistics"
+msgstr "Statistika"
+
+#: ../glade/cong-file-properties.glade.h:16
 msgid "System ID"
 msgstr "Systémové ID"
 
-#: ../glade/cong-file-properties.glade.h:14
+#: ../glade/cong-file-properties.glade.h:17
 #: ../glade/docbook-ulink-properties.glade.h:5
 msgid "Type"
 msgstr "Typ"
 
-#: ../glade/cong-file-properties.glade.h:15
+#: ../glade/cong-file-properties.glade.h:18
 msgid "Version"
 msgstr "Verze"
 
-#: ../glade/cong-file-properties.glade.h:16
+#: ../glade/cong-file-properties.glade.h:19
 msgid "XML Header"
 msgstr "Hlavička XML"
 
-#: ../glade/cong-file-properties.glade.h:17 ../src/cong-file-properties.c:184
+#: ../glade/cong-file-properties.glade.h:20 ../src/cong-file-properties.c:279
 msgid "_Associate this DTD"
 msgstr "_Přiřadit tuto DTD"
+
+#: ../glade/cong-file-properties.glade.h:21
+msgid "label_dtd_external_id"
+msgstr "label_dtd_external_id"
+
+#: ../glade/cong-file-properties.glade.h:22
+msgid "label_dtd_notes"
+msgstr "label_dtd_notes"
+
+#: ../glade/cong-file-properties.glade.h:23
+msgid "label_dtd_system_id"
+msgstr "label_dtd_system_id"
+
+#: ../glade/cong-file-properties.glade.h:24
+msgid "label_elements"
+msgstr "label_elements"
+
+#: ../glade/cong-file-properties.glade.h:25
+msgid "label_location"
+msgstr "label_location"
+
+#: ../glade/cong-file-properties.glade.h:26
+msgid "label_modified"
+msgstr "label_modified"
+
+#: ../glade/cong-file-properties.glade.h:27
+msgid "label_name"
+msgstr "label_name"
+
+#: ../glade/cong-file-properties.glade.h:28
+msgid "label_typedesc"
+msgstr "label_typedesc"
+
+#: ../glade/cong-file-properties.glade.h:29
+msgid "label_typename"
+msgstr "label_typename"
+
+#: ../glade/cong-file-properties.glade.h:30
+msgid "label_words"
+msgstr "label_words"
+
+#: ../glade/cong-file-properties.glade.h:31
+msgid "label_xml_encoding"
+msgstr "label_xml_encoding"
+
+#: ../glade/cong-file-properties.glade.h:32
+msgid "label_xml_standalone"
+msgstr "label_xml_standalone"
+
+#: ../glade/cong-file-properties.glade.h:33
+msgid "label_xml_version"
+msgstr "label_xml_version"
 
 #: ../glade/cong-find-replace.glade.h:1 ../glade/custom-element.glade.h:1
 #: ../glade/plugin-arbitrary.glade.h:1
@@ -240,15 +304,15 @@ msgstr ""
 "<small>Co je rozsah textu? Tuto stranu můžete použít pro popsání toho, jak "
 "se text týká různých typů počítačových systémů.</small>"
 
-#: ../glade/docbook-common-properties.glade.h:2
+#: ../glade/docbook-common-properties.glade.h:2 ../src/plugin-docbook.c:2149
 msgid "Language"
 msgstr "Jazyk"
 
-#: ../glade/docbook-common-properties.glade.h:4
+#: ../glade/docbook-common-properties.glade.h:4 ../src/plugin-docbook.c:2155
 msgid "Revisions"
 msgstr "Revize"
 
-#: ../glade/docbook-common-properties.glade.h:5
+#: ../glade/docbook-common-properties.glade.h:5 ../src/plugin-docbook.c:2143
 msgid "Scope"
 msgstr "Rozsah"
 
@@ -385,7 +449,9 @@ msgstr "dialog_výběru_řetězce"
 msgid ""
 "Unit test: quit immediately (after loading any files specified on the "
 "command-line)"
-msgstr "Test modulu: okamžitě skonči (po načtení souborů určených na příkazovém řádku)"
+msgstr ""
+"Test modulu: okamžitě skonči (po načtení souborů určených na příkazovém "
+"řádku)"
 
 #: ../src/cong-app.c:1021
 msgid "XML Editor"
@@ -1380,23 +1446,23 @@ msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
 "Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
 
-#: ../src/cong-file-properties.c:105
+#: ../src/cong-file-properties.c:200
 msgid "Yes"
 msgstr "Ano"
 
-#: ../src/cong-file-properties.c:105
+#: ../src/cong-file-properties.c:200
 msgid "No"
 msgstr "Ne"
 
-#: ../src/cong-file-properties.c:124 ../src/cong-file-properties.c:127
+#: ../src/cong-file-properties.c:219 ../src/cong-file-properties.c:222
 msgid "None"
 msgstr "Žádný"
 
-#: ../src/cong-file-properties.c:165
+#: ../src/cong-file-properties.c:260
 msgid "_Remove this DTD"
 msgstr "_Odstranit tuto DTD"
 
-#: ../src/cong-file-properties.c:190
+#: ../src/cong-file-properties.c:285
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1406,27 +1472,27 @@ msgstr ""
 "informace výše. Určete tuto informaci v dokumentu explicitně kliknutím na "
 "\"Asociovat tuto DTD\"."
 
-#: ../src/cong-file-properties.c:199
+#: ../src/cong-file-properties.c:294
 msgid "No External Subset"
 msgstr "Žádná externí podmnožina"
 
-#: ../src/cong-file-properties.c:201 ../src/plugin-validate.c:171
+#: ../src/cong-file-properties.c:296 ../src/plugin-validate.c:171
 msgid "_Add a DTD"
 msgstr "_Přidat DTD"
 
-#: ../src/cong-file-properties.c:275 ../src/cong-file-properties.c:277
+#: ../src/cong-file-properties.c:373 ../src/cong-file-properties.c:375
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: ../src/cong-file-properties.c:288
+#: ../src/cong-file-properties.c:386
 msgid "Unspecified"
 msgstr "Neurčeno"
 
-#: ../src/cong-file-properties.c:363
+#: ../src/cong-file-properties.c:461
 msgid "Remove DTD"
 msgstr "Odstranit DTD"
 
-#: ../src/cong-file-properties.c:380 ../src/cong-util.c:1636
+#: ../src/cong-file-properties.c:478 ../src/cong-util.c:1636
 msgid "Associate with DTD"
 msgstr "Přiřadit DTD"
 
@@ -1784,39 +1850,50 @@ msgstr ""
 msgid "Show Details"
 msgstr "Zobrazit detaily"
 
-#: ../src/cong-plugin.c:554 ../src/cong-plugin.c:619
+#: ../src/cong-plugin.c:515 ../src/cong-plugin.c:580
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate nemohl najít informace o zobrazování nového souboru"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: ../src/cong-plugin.c:1043
+#: ../src/cong-plugin.c:1004
 #, c-format
 msgid "<%s> property dialog"
 msgstr "Dialog vlastností <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: ../src/cong-plugin.c:1046
+#: ../src/cong-plugin.c:1007
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Poskytuje dialog Vlastnosti pro element <%s>"
 
-#: ../src/cong-primary-window.c:374
+#: ../src/cong-plugin.c:1091
+#, c-format
+msgid "<%s> property page"
+msgstr "Stránka vlastností <%s>"
+
+#. Generate a user-visible description for this plugin
+#: ../src/cong-plugin.c:1095
+#, c-format
+msgid "Provides a Properties page for the <%s> element"
+msgstr "Poskytuje stránku Vlastnosti pro element <%s>"
+
+#: ../src/cong-primary-window.c:415
 msgid "Overview"
 msgstr "Přehled"
 
-#: ../src/cong-primary-window.c:385
+#: ../src/cong-primary-window.c:426
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: ../src/cong-primary-window.c:395
+#: ../src/cong-primary-window.c:436
 msgid "Raw XML"
 msgstr "Přímo XML"
 
-#: ../src/cong-primary-window.c:600 ../src/cong-primary-window.c:619
+#: ../src/cong-primary-window.c:658 ../src/cong-primary-window.c:677
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 
-#: ../src/cong-primary-window.c:733
+#: ../src/cong-primary-window.c:791
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
@@ -2015,46 +2092,46 @@ msgstr "Převádím formátovací objekty XSL do PDF"
 msgid "Printing DocBook file"
 msgstr "Tisknu soubor DocBook"
 
-#: ../src/plugin-docbook.c:1796
+#: ../src/plugin-docbook.c:2060
 msgid "DocBook Article"
 msgstr "Článek DocBook"
 
-#: ../src/plugin-docbook.c:1797
+#: ../src/plugin-docbook.c:2061
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
 
-#: ../src/plugin-docbook.c:1804
+#: ../src/plugin-docbook.c:2068
 msgid "DocBook Book"
 msgstr "Kniha DocBook"
 
-#: ../src/plugin-docbook.c:1805
+#: ../src/plugin-docbook.c:2069
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Vytvořit knihu pomocí formátu \"DocBook\""
 
-#: ../src/plugin-docbook.c:1812
+#: ../src/plugin-docbook.c:2076
 msgid "DocBook Set"
 msgstr "Sada DocBook"
 
-#: ../src/plugin-docbook.c:1813
+#: ../src/plugin-docbook.c:2077
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Vytvořit sadu souvisejících knih pomocí formátu \"DocBook\""
 
-#: ../src/plugin-docbook.c:1821
+#: ../src/plugin-docbook.c:2085
 msgid "Import text as a DocBook article"
 msgstr "Importovat text jako článek DocBook"
 
-#: ../src/plugin-docbook.c:1822
+#: ../src/plugin-docbook.c:2086
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Importovat čistý textový soubor do formátu \"DocBook\" jako článek"
 
-#: ../src/plugin-docbook.c:1840
+#: ../src/plugin-docbook.c:2104
 msgid "Export DocBook as HTML"
 msgstr "Exportovat DocBook jako HTML"
 
-#: ../src/plugin-docbook.c:1841
+#: ../src/plugin-docbook.c:2105
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -2062,11 +2139,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto "
 "souboru DocBook"
 
-#: ../src/plugin-docbook.c:1849
+#: ../src/plugin-docbook.c:2113
 msgid "Export DocBook as PDF"
 msgstr "Exportovat DocBook jako PDF"
 
-#: ../src/plugin-docbook.c:1850
+#: ../src/plugin-docbook.c:2114
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -2074,11 +2151,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto "
 "souboru DocBook"
 
-#: ../src/plugin-docbook.c:1858
+#: ../src/plugin-docbook.c:2122
 msgid "Export DocBook as XSL:FO"
 msgstr "Exportovat DocBook jako XSL:FO"
 
-#: ../src/plugin-docbook.c:1859
+#: ../src/plugin-docbook.c:2123
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -2086,58 +2163,70 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z "
 "tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
 
-#: ../src/plugin-docbook.c:1868
+#: ../src/plugin-docbook.c:2132
 msgid "Print DocBook"
 msgstr "Vytisknout DocBook"
 
-#: ../src/plugin-docbook.c:1877
+#: ../src/plugin-docbook.c:2144
+msgid "Provides a Scope properties page for most DocBook nodes"
+msgstr "Poskytuje stránku Vlastnosti rozsahu pro většinu uzlů DocBook"
+
+#: ../src/plugin-docbook.c:2150
+msgid "Provides a Language properties page for most DocBook nodes"
+msgstr "Poskytuje dialog Vlastnosti jazyka pro většinu uzlů DocBook"
+
+#: ../src/plugin-docbook.c:2156
+msgid "Provides a Revisions properties page for most DocBook nodes"
+msgstr "Poskytuje stránku Vlastnosti verzí pro většinu uzlů DocBook"
+
+#: ../src/plugin-docbook.c:2173
 msgid "Generic DocBook property dialog"
 msgstr "Obecný dialog vlastností DocBook"
 
-#: ../src/plugin-docbook.c:1878
+#: ../src/plugin-docbook.c:2174
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Poskytuje dialog Vlastnosti pro většinu uzlů DocBook"
 
-#: ../src/plugin-docbook.c:1896 ../src/plugin-docbook.c:1899
+#: ../src/plugin-docbook.c:2192 ../src/plugin-docbook.c:2195
 #: ../src/plugin-html.c:137 ../src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Otevřít odkaz v prohlížeči"
 
-#: ../src/plugin-docbook.c:1908
+#: ../src/plugin-docbook.c:2204
 msgid "Promote Section"
 msgstr "Povýšit oddíl"
 
-#: ../src/plugin-docbook.c:1909
+#: ../src/plugin-docbook.c:2205
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Povýší oddíl DocBook na vyšší úroveň organizace v dokumentu"
 
-#: ../src/plugin-docbook.c:1911 ../src/plugin-html.c:148
+#: ../src/plugin-docbook.c:2207 ../src/plugin-html.c:148
 #: ../src/plugin-html.c:151
 msgid "Promote"
 msgstr "Povýšit"
 
-#: ../src/plugin-docbook.c:1912 ../src/plugin-docbook.c:1913
+#: ../src/plugin-docbook.c:2208 ../src/plugin-docbook.c:2209
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Povýšit oddíl na vyšší úroveň organizace v dokumentu"
 
-#: ../src/plugin-docbook.c:1919
+#: ../src/plugin-docbook.c:2215
 msgid "Demote Section"
 msgstr "Ponížit oddíl"
 
-#: ../src/plugin-docbook.c:1920
+#: ../src/plugin-docbook.c:2216
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Poníží oddíl DocBook na nižší úroveň organizace v dokumentu"
 
-#: ../src/plugin-docbook.c:1922 ../src/plugin-html.c:159
+#: ../src/plugin-docbook.c:2218 ../src/plugin-html.c:159
 #: ../src/plugin-html.c:162
 msgid "Demote"
 msgstr "Ponížit"
 
-#: ../src/plugin-docbook.c:1923 ../src/plugin-docbook.c:1924
+#: ../src/plugin-docbook.c:2219 ../src/plugin-docbook.c:2220
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Ponížit oddíl DocBook na nižší úroveň organizace v dokumentu"
 
