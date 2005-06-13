@@ -178,6 +178,9 @@ cong_menus_setup_action_groups (CongPrimaryWindow *primary_window);
 guint
 cong_menus_setup_ui_layout (CongPrimaryWindow *primary_window);
 
+void
+cong_menus_setup_recent_files (CongPrimaryWindow *primary_window);
+
 #if 0
 guint
 cong_menus_create_items (CongPrimaryWindow *primary_window);

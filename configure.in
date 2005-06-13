@@ -348,7 +348,8 @@ AC_CONFIG_FILES(Makefile
 	        pixmaps/Makefile
 	        examples/Makefile 
 	        templates/Makefile 
-                src/Makefile)
+                src/Makefile
+  		 src/recent-files/Makefile)
 
 AC_OUTPUT
 

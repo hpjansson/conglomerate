@@ -12,7 +12,7 @@ DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 # The directory containing the source code. Relative to $(srcdir).
 # gtk-doc will search all .c & .h files beneath here for inline comments
 # documenting functions and macros.
-DOC_SOURCE_DIR=../../src
+DOC_SOURCE_DIR=../../src 
 
 # Extra options to pass to gtkdoc-scanobj or gtkdoc-scangobj.
 SCANOBJ_OPTIONS=
@@ -44,10 +44,11 @@ extra_files = version.xml.in
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
 # contains GtkObjects/GObjects and you want to document signals and properties.
-GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src
+GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src -I$(top_srcdir)/src/recent-files
 GTKDOC_LIBS = $(CONGLOMERATE_LIBS) \
 	      	$(GTKSOURCEVIEW_LIBS) $(ENCHANT_LIBS) $(PRINTING_LIBS) \
-		$(filter-out ../../src/main.o,$(wildcard ../../src/*.o))
+		$(filter-out ../../src/main.o,$(wildcard ../../src/*.o)) \
+		$(top_builddir)/src/recent-files/libeggrecent.la
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)

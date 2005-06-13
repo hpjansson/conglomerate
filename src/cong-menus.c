@@ -1601,6 +1601,10 @@ static const gchar *ui_description =
 "      <separator name='FileSep5'/>"
 "      <menuitem action='Properties'/>"
 "      <separator name='FileSep6'/>"
+"      <placeholder name='FileRecentsPlaceholder'>"
+"        <separator/>"
+"      </placeholder>"
+"      <separator name='FileSep7'/>"
 "      <menuitem action='Close'/>"
 "      <menuitem action='Quit'/>"
 "    </menu>"
@@ -1940,3 +1944,68 @@ cong_menus_setup_ui_layout (CongPrimaryWindow *primary_window)
 
 	return merge_id;
 }
+
+static void
+recent_open_cb (GtkAction *action, CongPrimaryWindow *primary_window)
+{
+	EggRecentItem *item;
+	gchar *uri;
+
+	item = egg_recent_view_uimanager_get_item (primary_window->recent_view,
+						   action);
+	g_return_if_fail (item != NULL);
+
+	uri = egg_recent_item_get_uri (item);
+	open_document_do (uri, GTK_WINDOW (primary_window->window));
+	g_free (uri);
+}
+
+static gchar *
+recent_tooltip_func (EggRecentItem *item, gpointer user_data)
+{
+	char *tip;
+	char *uri_for_display;
+
+	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	g_return_val_if_fail (uri_for_display != NULL, NULL);
+
+	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+
+	g_free (uri_for_display);
+
+	return tip;
+}
+
+/**
+ * cong_menus_setup_recent_files:
+ * @primary_window: Primary window to use
+ *
+ * With this function we perform recent files initialization
+ */
+void
+cong_menus_setup_recent_files (CongPrimaryWindow *primary_window)
+{
+       EggRecentModel *model;
+       EggRecentViewUIManager *view;
+
+	model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
+
+	egg_recent_model_set_limit (model, 5);
+	egg_recent_model_set_filter_groups (model, "Conglomerate", NULL);
+
+	view = egg_recent_view_uimanager_new (primary_window->ui_manager,
+					      "/MainMenuBar/FileMenu/FileRecentsPlaceholder",
+					      G_CALLBACK (recent_open_cb),
+					      primary_window);
+	egg_recent_view_uimanager_set_tooltip_func (view,
+						    recent_tooltip_func,
+						    NULL);
+       egg_recent_view_uimanager_show_icons (view, FALSE);
+	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
+	primary_window->recent_view = view;
+	primary_window->recent_model = model;
+
+	
+	return;
+}
+

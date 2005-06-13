@@ -639,6 +639,8 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		gtk_window_add_accel_group (GTK_WINDOW (primary_window->window), accel_group);	
 	}
 	
+	cong_menus_setup_recent_files (primary_window);
+
 	/* --- Toolbar --- */
 	primary_window->toolbar = GTK_TOOLBAR (gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainToolBar"));
 	gnome_app_set_toolbar(GNOME_APP(primary_window->window), primary_window->toolbar);

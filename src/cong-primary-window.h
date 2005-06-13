@@ -25,6 +25,11 @@
 #ifndef __CONG_PRIMARY_WINDOW_H__
 #define __CONG_PRIMARY_WINDOW_H__
 
+#include <gtk/gtk.h>
+#include "egg-recent-model.h"
+#include "egg-recent-view.h"
+#include "egg-recent-view-uimanager.h"
+
 G_BEGIN_DECLS
 
 enum CongActionGroup {
@@ -54,6 +59,10 @@ struct CongPrimaryWindow
 	GtkNotebook *property_notebook;
 
 	GtkAccelGroup *accel;
+	
+	/* Recent files support: */
+	EggRecentModel *recent_model;
+	EggRecentViewUIManager *recent_view;	
 };
 
 
