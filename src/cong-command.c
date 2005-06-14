@@ -1017,7 +1017,7 @@ cong_command_add_delete_selection (CongCommand *cmd)
  *
  * Utility function to add a series of modifications to the given command.
  *
- * Inserts the given text at the cursor, moving it to the cursor to the end of the inserted text.
+ * Inserts the given text at the cursor, moving the cursor to the end of the inserted text.
  */
 void 
 cong_command_add_insert_text_at_cursor (CongCommand *cmd, 
@@ -1027,8 +1027,8 @@ cong_command_add_insert_text_at_cursor (CongCommand *cmd,
 	CongCursor *curs;
 	CongLocation old_cursor_loc;
 	CongLocation new_cursor_loc;
+	gchar *initial_part;
 	gchar *new_content;
-	gchar *new_content_end;
 	int byte_length;
 
 	g_return_if_fail (IS_CONG_COMMAND (cmd));
@@ -1051,22 +1051,24 @@ cong_command_add_insert_text_at_cursor (CongCommand *cmd,
 
 	byte_length = strlen(string);
 
-	new_content = g_strndup ((const gchar*)old_cursor_loc.node->content, old_cursor_loc.byte_offset);
-	CONG_VALIDATE_UTF8(new_content);
-
-	new_content_end = g_stpcpy (new_content, string);
-	CONG_VALIDATE_UTF8(new_content);
+	initial_part = g_strndup ((const gchar*)old_cursor_loc.node->content, old_cursor_loc.byte_offset);
+	CONG_VALIDATE_UTF8(initial_part);
 
 	CONG_VALIDATE_UTF8((const gchar*)old_cursor_loc.node->content+old_cursor_loc.byte_offset);
-	new_content_end = g_stpcpy (new_content_end, (const gchar*)old_cursor_loc.node->content+old_cursor_loc.byte_offset);
+
+	new_content = g_strconcat (initial_part,
+				   string, 
+				   (const gchar*)old_cursor_loc.node->content+old_cursor_loc.byte_offset, 
+				   NULL);
 	CONG_VALIDATE_UTF8(new_content);
+	g_free (initial_part);
 
 	cong_command_add_node_set_text (cmd, 
 					old_cursor_loc.node,
 					new_content);
 	g_free (new_content);
 
-	new_cursor_loc.byte_offset += byte_length;		
+	new_cursor_loc.byte_offset += byte_length;
 	CONG_VALIDATE_UTF8((const gchar*)new_cursor_loc.node->content+new_cursor_loc.byte_offset);
 
 	cong_command_add_cursor_change (cmd,
