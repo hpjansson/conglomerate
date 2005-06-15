@@ -1,3 +1,8 @@
+2005-06-15  Jens Seidel  <jensseidel@users.sf.net>
+
+	* de.po: German translation spell checked.
+	This is for Debian bugreport #314138
+
 2005-06-12  Miloslav Trmac  <mitr@volny.cz>
 
 	* cs.po: Updated Czech translation.
