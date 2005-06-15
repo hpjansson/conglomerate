@@ -860,29 +860,42 @@ on_signal_button_press (CongEditorArea *editor_area,
 		/* Main mouse button: "left" for most users */
 		switch (event->type) {
 		default: return FALSE; /* do nothing */
-#if 0
+
 		case GDK_3BUTTON_PRESS:
 			/* Handle triple-click by locating the tag containing the click location, 
 			   making that the selection, with the cursor at the end of it? */
 			{
 				CongLocation click_location;
-				CongLocation start_of_tag;
-				CongLocation end_of_tag;
+				CongLocation start_of_line;
+				CongLocation end_of_line;
 
-				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
-					cong_location_calc_tag_start(&click_location, &tag_start);
-					cong_location_calc_tag_end(&click_location, &tag_end);
-						
-					cong_location_copy(&selection->loc0, &start_of_tag);
-					cong_location_copy(&selection->loc1, &end_of_tag);
-					cong_location_copy(&cursor->location, &end_of_tag);
-				
-					cong_document_on_selection_change(doc);
-					cong_document_on_cursor_change(doc);
+				if (get_location_at_xy(editor_node_text,
+					    editor_area_text_fragment,
+					    event->x, event->y,
+					    &click_location))
+			       	{
+					CongCommand *cmd;
+					cong_location_calc_line_start(
+						&click_location,
+						doc,
+						&start_of_line);
+					cong_location_calc_line_end(
+						&click_location,
+						doc,
+						&end_of_line);
+					cmd = cong_document_begin_command(doc,
+						_("Select line"),
+						NULL);
+					cong_command_add_selection_change(cmd,
+						&start_of_line,
+						&end_of_line);
+					cong_command_add_cursor_change(cmd,
+						&end_of_line);
+
+					cong_document_end_command(doc, cmd);
 				}
 			}
 			return TRUE;
-#endif
 
 		case GDK_2BUTTON_PRESS:
 			/* Handle double-click by locating the word containing the click location, 

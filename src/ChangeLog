@@ -1,3 +1,9 @@
+2005-06-15  Yuriy Syrota  <ysyrota@softservecom.com>
+
+	* text-editor-node-text.c:
+	Implemented tripple click selection in text nodes.
+	(bug #144667).
+
 2005-06-13  Dave Malcolm  <dmalcolm@redhat.com>
 
 	* cong-command.c
