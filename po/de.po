@@ -1844,7 +1844,7 @@ msgid ""
 msgstr ""
 "Conglomerate macht es momentan erforderlich, dass Dokumente »wohlgeformt« "
 "sind. Die Regeln sind hierbei wesentlich strikter als bei den meisten "
-"Webbrowsern. Außerdem unterstützt es SGML noch nicht.Diese Probleme werden "
+"Webbrowsern. Außerdem unterstützt es SGML noch nicht. Diese Probleme werden "
 "in späteren Versionen hoffentlich behoben."
 
 #: ../src/cong-parser-error.c:402
@@ -2327,7 +2327,7 @@ msgstr "Zufallsdokument"
 
 #: ../src/plugin-random.c:224
 msgid "Create an XML document containing random content."
-msgstr "Ein XML-Dokument anlegen, das zufälligen Inhalt enthällt."
+msgstr "Ein XML-Dokument anlegen, das zufälligen Inhalt enthält."
 
 #: ../src/plugin-relaxng.c:128
 msgid "Compact Syntax View"
