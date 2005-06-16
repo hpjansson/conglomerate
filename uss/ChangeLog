@@ -1,3 +1,10 @@
+2005-06-15 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* mkpotfilesin:
+	
+	Fix error in mkpotfilesin with encoding in every text line
+	Encoding should be only in the beginning of the file
+
 2005-01-25 Geert Stappers  <stappers@stappers.nl>
 
 	* mkpotfilesin :
