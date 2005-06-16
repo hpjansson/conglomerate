@@ -5,8 +5,6 @@ BUILT_SOURCES = faq.xml
 faq.xml: faq.xml.qna
 	xsltproc --output $@ faq-hack.xsl $<
 
-EXTRA_DIST = faq.xml.qna
-
 # end of temporary hack until yelp support qanda sets
 
 more_C_docs = \
@@ -24,6 +22,7 @@ entities = global.ent cong_element_map_ref.xml conventions.xml \
 	faq.xml
 
 include $(top_srcdir)/xmldocs.make
+EXTRA_DIST += faq.xml.qna
 
 dist-hook: app-dist-hook
 
