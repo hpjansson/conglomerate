@@ -1,3 +1,9 @@
+2005-06-16  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* POTFILES.in:
+	Regenerated, with uss/mkpotfilesin version 1.12,
+	this will effect the .po files.
+
 2005-06-15  Jens Seidel  <jensseidel@users.sf.net>
 
 	* de.po: German translation spell checked.
