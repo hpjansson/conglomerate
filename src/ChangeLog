@@ -1,3 +1,10 @@
+2005-06-16  Dave Malcolm  <dmalcolm@redhat.com>
+
+	* recent-files/egg-recent-view-uimanager.c:
+
+	Fix various gtk-doc errors as reported by Michele Garoche.  Reported
+	(with a patch) for libegg upstream as bug #307960
+
 2005-06-15  Yuriy Syrota  <ysyrota@softservecom.com>
 
 	* text-editor-node-text.c:
