@@ -8,17 +8,2990 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-08 17:29-0400\n"
-"PO-Revision-Date: 2005-06-08 15:29-0400\n"
+"POT-Creation-Date: 2005-06-17 00:44-0400\n"
+"PO-Revision-Date: 2005-06-17 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: dispspecs/cnxml.xds.in.h:1
+msgid "Experimental \"cnxml\" format"
+msgstr "Experimental \"cnxml\" format"
+
+#: dispspecs/cnxml.xds.in.h:2
+msgid "Test CNXML ds"
+msgstr "Test CNXML ds"
+
+#: dispspecs/cnxml.xds.in.h:3
+msgid "cite"
+msgstr "cite"
+
+#: dispspecs/cnxml.xds.in.h:4
+msgid "cnxn"
+msgstr "cnxn"
+
+#: dispspecs/cnxml.xds.in.h:5
+msgid "codeblock"
+msgstr "codeblock"
+
+#: dispspecs/cnxml.xds.in.h:6
+msgid "codeline"
+msgstr "codeline"
+
+#: dispspecs/cnxml.xds.in.h:7
+msgid "content"
+msgstr "content"
+
+#: dispspecs/cnxml.xds.in.h:8
+msgid "emphasis"
+msgstr "emphasis"
+
+#: dispspecs/cnxml.xds.in.h:9
+msgid "equation"
+msgstr "equation"
+
+#: dispspecs/cnxml.xds.in.h:10
+msgid "item"
+msgstr "item"
+
+#: dispspecs/cnxml.xds.in.h:11
+msgid "link"
+msgstr "link"
+
+#: dispspecs/cnxml.xds.in.h:12
+msgid "list"
+msgstr "list"
+
+#: dispspecs/cnxml.xds.in.h:13
+msgid "metadata"
+msgstr "metadata"
+
+#: dispspecs/cnxml.xds.in.h:14
+msgid "module"
+msgstr "module"
+
+#: dispspecs/cnxml.xds.in.h:15
+msgid "note"
+msgstr "note"
+
+#: dispspecs/cnxml.xds.in.h:16
+msgid "para"
+msgstr "para"
+
+#: dispspecs/cnxml.xds.in.h:17
+msgid "proof"
+msgstr "proof"
+
+#: dispspecs/cnxml.xds.in.h:18
+msgid "rule"
+msgstr "rule"
+
+#: dispspecs/cnxml.xds.in.h:19
+msgid "section"
+msgstr "section"
+
+#: dispspecs/cnxml.xds.in.h:20
+msgid "statement"
+msgstr "statement"
+
+#: dispspecs/cnxml.xds.in.h:21
+msgid "term"
+msgstr "term"
+
+#: dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr "Collapseto"
+
+#: dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "Conglomerate Display Specification"
+
+#: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:250
+#: src/cong-file-export.c:339 src/cong-file-new.c:363
+#: src/cong-file-print.c:250 src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Description"
+
+#: dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "Document Models"
+
+#: dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "External Document Model"
+
+#: dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "Format"
+
+#: dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "GUI"
+
+#: dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "Header Information"
+
+#: dispspecs/dispspec.xds.in.h:9
+msgid ""
+"Information that tells Conglomerate how to display a particular type of file."
+msgstr ""
+"Information that tells Conglomerate how to display a particular type of file."
+
+#: dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "List of XML Elements"
+
+#: dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "List of file types for this type of document"
+
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
+#: dispspecs/website-webpage.xds.in.h:55
+msgid "Metadata"
+msgstr "Metadata"
+
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
+#: dispspecs/teixlite.xds.in.h:194 dispspecs/website-webpage.xds.in.h:57
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Name"
+
+#: dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "Name of an XML element"
+
+#: dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "Serialization Type List"
+
+#: dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "Short Description"
+
+#: dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "Short Description of an XML element"
+
+#: dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "Short Description of the document type"
+
+#: dispspecs/dispspec.xds.in.h:19 dispspecs/relax-ng.xds.in.h:15
+msgid "XML Element"
+msgstr "XML Element"
+
+#: dispspecs/docbook.xds.in.h:1 dispspecs/website-webpage.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "A URL link (perhaps to a web site)"
+
+#: dispspecs/docbook.xds.in.h:2
+msgid ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
+msgstr ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
+
+#: dispspecs/docbook.xds.in.h:3 dispspecs/website-webpage.xds.in.h:2
+msgid "A brief description of the version of a document."
+msgstr "A brief description of the version of a document."
+
+#: dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "A collection of books."
+
+#: dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "A high-level division of a book."
+
+#: dispspecs/docbook.xds.in.h:6 dispspecs/website-webpage.xds.in.h:3
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "A specific piece of data from a computer system, to be taken literally."
+
+#: dispspecs/docbook.xds.in.h:7 dispspecs/website-webpage.xds.in.h:4
+msgid "A subsection within a section"
+msgstr "A subsection within a section"
+
+#: dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "A summary."
+
+#: dispspecs/docbook.xds.in.h:9 dispspecs/website-webpage.xds.in.h:6
+msgid "A top-level section of document"
+msgstr "A top-level section of document"
+
+#: dispspecs/docbook.xds.in.h:10 dispspecs/forrest-document.xds.in.h:1
+#: dispspecs/website-webpage.xds.in.h:7
+msgid "Abstract"
+msgstr "Abstract"
+
+#: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
+#: dispspecs/website-webpage.xds.in.h:8 dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "Acronym"
+
+#: dispspecs/docbook.xds.in.h:12 dispspecs/website-webpage.xds.in.h:9
+msgid "Additional metadata"
+msgstr "Additional metadata"
+
+#: dispspecs/docbook.xds.in.h:13 dispspecs/teixlite.xds.in.h:56
+#: dispspecs/website-webpage.xds.in.h:10 dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "Address"
+
+#: dispspecs/docbook.xds.in.h:14 dispspecs/website-webpage.xds.in.h:11
+msgid "An email address"
+msgstr "An email address"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: dispspecs/docbook.xds.in.h:16
+msgid "Anchor Point"
+msgstr "Anchor Point"
+
+#: dispspecs/docbook.xds.in.h:17
+msgid "Answer"
+msgstr "Answer"
+
+#: dispspecs/docbook.xds.in.h:18 dispspecs/website-webpage.xds.in.h:12
+msgid "Appendix"
+msgstr "Appendix"
+
+#: dispspecs/docbook.xds.in.h:19 dispspecs/website-webpage.xds.in.h:13
+msgid "Application"
+msgstr "Application"
+
+#: dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr "Article"
+
+#: dispspecs/docbook.xds.in.h:21
+msgid "Article Header"
+msgstr "Article Header"
+
+#: dispspecs/docbook.xds.in.h:22
+msgid "Article Information"
+msgstr "Article Information"
+
+#: dispspecs/docbook.xds.in.h:23
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:3
+#: dispspecs/teixlite.xds.in.h:75 dispspecs/website-webpage.xds.in.h:14
+msgid "Author"
+msgstr "Author"
+
+#: dispspecs/docbook.xds.in.h:24
+msgid "Author Initials"
+msgstr "Author Initials"
+
+#: dispspecs/docbook.xds.in.h:25 dispspecs/website-webpage.xds.in.h:15
+msgid "Authorship Information"
+msgstr "Authorship Information"
+
+#: dispspecs/docbook.xds.in.h:26 dispspecs/website-webpage.xds.in.h:16
+msgid "Bibliographic Information"
+msgstr "Bibliographic Information"
+
+#: dispspecs/docbook.xds.in.h:27 dispspecs/website-webpage.xds.in.h:17
+msgid "Bibliography"
+msgstr "Bibliography"
+
+#: dispspecs/docbook.xds.in.h:28
+msgid "Book"
+msgstr "Book"
+
+#: dispspecs/docbook.xds.in.h:29
+msgid "Book Information"
+msgstr "Book Information"
+
+#: dispspecs/docbook.xds.in.h:30 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "Caption"
+
+#: dispspecs/docbook.xds.in.h:31
+msgid "Caution"
+msgstr "Caution"
+
+#: dispspecs/docbook.xds.in.h:32 dispspecs/website-webpage.xds.in.h:18
+msgid "Chapter"
+msgstr "Chapter"
+
+#: dispspecs/docbook.xds.in.h:33 dispspecs/website-webpage.xds.in.h:19
+msgid "City"
+msgstr "City"
+
+#: dispspecs/docbook.xds.in.h:34 dispspecs/website-webpage.xds.in.h:20
+msgid "Colophon"
+msgstr "Colophon"
+
+#: dispspecs/docbook.xds.in.h:35
+msgid "Command"
+msgstr "Command"
+
+#: dispspecs/docbook.xds.in.h:36 dispspecs/website-webpage.xds.in.h:21
+msgid "Command Synopsis"
+msgstr "Command Synopsis"
+
+#: dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "Computer Output"
+
+#: dispspecs/docbook.xds.in.h:38 dispspecs/website-layout.xds.in.h:4
+#: dispspecs/website-webpage.xds.in.h:22
+msgid "Copyright"
+msgstr "Copyright"
+
+#: dispspecs/docbook.xds.in.h:39 dispspecs/website-webpage.xds.in.h:23
+msgid "Copyright Holder"
+msgstr "Copyright Holder"
+
+#: dispspecs/docbook.xds.in.h:40
+msgid "Corporate Name"
+msgstr "Corporate Name"
+
+#: dispspecs/docbook.xds.in.h:41 dispspecs/website-webpage.xds.in.h:24
+msgid "Cross-reference"
+msgstr "Cross-reference"
+
+#: dispspecs/docbook.xds.in.h:42 dispspecs/teixlite.xds.in.h:103
+msgid "Date"
+msgstr "Date"
+
+#: dispspecs/docbook.xds.in.h:43 dispspecs/website-webpage.xds.in.h:25
+msgid "Date of Publication"
+msgstr "Date of Publication"
+
+#: dispspecs/docbook.xds.in.h:44
+msgid "Defined terms"
+msgstr "Defined terms"
+
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/website-webpage.xds.in.h:26 dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "Definition"
+
+#: dispspecs/docbook.xds.in.h:46
+msgid "DocBook"
+msgstr "DocBook"
+
+#: dispspecs/docbook.xds.in.h:47
+msgid ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+msgstr ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+
+#: dispspecs/docbook.xds.in.h:48 dispspecs/teixlite.xds.in.h:128
+#: dispspecs/website-webpage.xds.in.h:27
+msgid "Edition"
+msgstr "Edition"
+
+#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:11
+#: dispspecs/teixlite.xds.in.h:130 dispspecs/website-webpage.xds.in.h:28
+msgid "Editor"
+msgstr "Editor"
+
+#: dispspecs/docbook.xds.in.h:50
+msgid "Email Address"
+msgstr "Email Address"
+
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13 dispspecs/readme.xds.in.h:5
+#: dispspecs/teixlite.xds.in.h:132 dispspecs/website-webpage.xds.in.h:29
+#: dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "Emphasis"
+
+#: dispspecs/docbook.xds.in.h:52 dispspecs/website-webpage.xds.in.h:30
+msgid "Entry"
+msgstr "Entry"
+
+#: dispspecs/docbook.xds.in.h:53
+msgid "Environment Variable"
+msgstr "Environment Variable"
+
+#: dispspecs/docbook.xds.in.h:54
+msgid "Example (formal)"
+msgstr "Example (formal)"
+
+#: dispspecs/docbook.xds.in.h:55 dispspecs/website-webpage.xds.in.h:31
+msgid "Example (informal)"
+msgstr "Example (informal)"
+
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
+#: dispspecs/teixlite.xds.in.h:139
+msgid "Figure"
+msgstr "Figure"
+
+#: dispspecs/docbook.xds.in.h:57
+msgid "Figure (informal)"
+msgstr "Figure (informal)"
+
+#: dispspecs/docbook.xds.in.h:58 dispspecs/website-webpage.xds.in.h:32
+msgid "Filename"
+msgstr "Filename"
+
+#: dispspecs/docbook.xds.in.h:59 dispspecs/website-webpage.xds.in.h:33
+msgid "First Name"
+msgstr "First Name"
+
+#: dispspecs/docbook.xds.in.h:60 dispspecs/website-webpage.xds.in.h:34
+msgid "First Term"
+msgstr "First Term"
+
+#: dispspecs/docbook.xds.in.h:61
+msgid "Footnote"
+msgstr "Footnote"
+
+#: dispspecs/docbook.xds.in.h:62 dispspecs/website-webpage.xds.in.h:35
+msgid "Free-floating Heading"
+msgstr "Free-floating Heading"
+
+#: dispspecs/docbook.xds.in.h:63 dispspecs/website-webpage.xds.in.h:36
+msgid "Function"
+msgstr "Function"
+
+#. various related localNames need to be added
+#: dispspecs/docbook.xds.in.h:65
+msgid "Function Synopsis"
+msgstr "Function Synopsis"
+
+#: dispspecs/docbook.xds.in.h:66 dispspecs/website-webpage.xds.in.h:37
+msgid "GUI Button"
+msgstr "GUI Button"
+
+#: dispspecs/docbook.xds.in.h:67 dispspecs/website-webpage.xds.in.h:38
+msgid "GUI Label"
+msgstr "GUI Label"
+
+#: dispspecs/docbook.xds.in.h:68 dispspecs/website-webpage.xds.in.h:39
+msgid "GUI Menu"
+msgstr "GUI Menu"
+
+#: dispspecs/docbook.xds.in.h:69 dispspecs/website-webpage.xds.in.h:40
+msgid "GUI Menu Item"
+msgstr "GUI Menu Item"
+
+#: dispspecs/docbook.xds.in.h:70 dispspecs/website-webpage.xds.in.h:41
+msgid "GUI Submenu"
+msgstr "GUI Submenu"
+
+#: dispspecs/docbook.xds.in.h:71 dispspecs/website-webpage.xds.in.h:42
+msgid "Glossary"
+msgstr "Glossary"
+
+#: dispspecs/docbook.xds.in.h:72 dispspecs/website-webpage.xds.in.h:43
+msgid "Glossary Entry"
+msgstr "Glossary Entry"
+
+#: dispspecs/docbook.xds.in.h:73
+msgid "Graphic"
+msgstr "Graphic"
+
+#: dispspecs/docbook.xds.in.h:74 dispspecs/website-webpage.xds.in.h:44
+msgid "ISBN"
+msgstr "ISBN"
+
+#: dispspecs/docbook.xds.in.h:75 dispspecs/website-webpage.xds.in.h:45
+msgid "ISSN"
+msgstr "ISSN"
+
+#: dispspecs/docbook.xds.in.h:76
+msgid "Image Data"
+msgstr "Image Data"
+
+#: dispspecs/docbook.xds.in.h:77
+msgid "Image Object"
+msgstr "Image Object"
+
+#: dispspecs/docbook.xds.in.h:78
+msgid "Important"
+msgstr "Important"
+
+#: dispspecs/docbook.xds.in.h:79 dispspecs/website-webpage.xds.in.h:46
+msgid "Index Term"
+msgstr "Index Term"
+
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19 dispspecs/readme.xds.in.h:9
+msgid "Introduction"
+msgstr "Introduction"
+
+#: dispspecs/docbook.xds.in.h:81 dispspecs/website-webpage.xds.in.h:47
+msgid "Key Caption"
+msgstr "Key Caption"
+
+#: dispspecs/docbook.xds.in.h:82 dispspecs/website-webpage.xds.in.h:48
+msgid "Legal Notice"
+msgstr "Legal Notice"
+
+#: dispspecs/docbook.xds.in.h:83 dispspecs/website-webpage.xds.in.h:49
+msgid "List (itemised)"
+msgstr "List (itemized)"
+
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: dispspecs/website-webpage.xds.in.h:50 dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "List (ordered)"
+
+#: dispspecs/docbook.xds.in.h:85 dispspecs/website-webpage.xds.in.h:51
+msgid "List (simple)"
+msgstr "List (simple)"
+
+#: dispspecs/docbook.xds.in.h:86
+msgid "List (terms and definitions)"
+msgstr "List (terms and definitions)"
+
+#: dispspecs/docbook.xds.in.h:87
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "List Item"
+
+#: dispspecs/docbook.xds.in.h:88
+msgid "List Member"
+msgstr "List Member"
+
+#: dispspecs/docbook.xds.in.h:89 dispspecs/website-webpage.xds.in.h:52
+msgid "Literal"
+msgstr "Literal"
+
+#: dispspecs/docbook.xds.in.h:90
+msgid "Media Object"
+msgstr "Media Object"
+
+#: dispspecs/docbook.xds.in.h:91 dispspecs/website-webpage.xds.in.h:53
+msgid "Menu Choice"
+msgstr "Menu Choice"
+
+#: dispspecs/docbook.xds.in.h:92 dispspecs/website-webpage.xds.in.h:54
+msgid "Meta-information about a Reference Page"
+msgstr "Meta-information about a Reference Page"
+
+#: dispspecs/docbook.xds.in.h:93
+msgid "Meta-information for a book"
+msgstr "Meta-information for a book"
+
+#: dispspecs/docbook.xds.in.h:94
+msgid "Meta-information for an article"
+msgstr "Meta-information for an article"
+
+#: dispspecs/docbook.xds.in.h:96 dispspecs/website-webpage.xds.in.h:56
+msgid "Miscellaneous Bibliographic Information"
+msgstr "Miscellaneous Bibliographic Information"
+
+#: dispspecs/docbook.xds.in.h:98 dispspecs/website-webpage.xds.in.h:58
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "Name, purpose and classification about a Reference Page"
+
+#: dispspecs/docbook.xds.in.h:99 dispspecs/website-webpage.xds.in.h:59
+msgid "Naming"
+msgstr "Naming"
+
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
+#: dispspecs/teixlite.xds.in.h:195
+msgid "Note"
+msgstr "Note"
+
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: dispspecs/readme.xds.in.h:11 dispspecs/teixlite.xds.in.h:206
+#: dispspecs/website-webpage.xds.in.h:60 dispspecs/xhtml1-strict.xds.in.h:55
+#: src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "Paragraph"
+
+#: dispspecs/docbook.xds.in.h:102
+msgid "Paragraph (titled)"
+msgstr "Paragraph (titled)"
+
+#: dispspecs/docbook.xds.in.h:103 dispspecs/website-webpage.xds.in.h:61
+msgid "Part"
+msgstr "Part"
+
+#: dispspecs/docbook.xds.in.h:104 dispspecs/website-webpage.xds.in.h:63
+msgid "Preface"
+msgstr "Preface"
+
+#: dispspecs/docbook.xds.in.h:105 dispspecs/website-webpage.xds.in.h:64
+msgid "Printing History"
+msgstr "Printing History"
+
+#: dispspecs/docbook.xds.in.h:106 dispspecs/website-webpage.xds.in.h:65
+msgid "Procedure"
+msgstr "Procedure"
+
+#: dispspecs/docbook.xds.in.h:107 dispspecs/website-webpage.xds.in.h:66
+msgid "Product Name"
+msgstr "Product Name"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: dispspecs/docbook.xds.in.h:116
+msgid "Program Listing"
+msgstr "Program Listing"
+
+#: dispspecs/docbook.xds.in.h:117
+msgid "Prompt"
+msgstr "Prompt"
+
+#: dispspecs/docbook.xds.in.h:118 dispspecs/teixlite.xds.in.h:214
+#: dispspecs/website-webpage.xds.in.h:67
+msgid "Publisher"
+msgstr "Publisher"
+
+#: dispspecs/docbook.xds.in.h:119 dispspecs/website-webpage.xds.in.h:68
+msgid "Publisher Name"
+msgstr "Publisher Name"
+
+#: dispspecs/docbook.xds.in.h:120 dispspecs/website-webpage.xds.in.h:69
+msgid "Purpose"
+msgstr "Purpose"
+
+#: dispspecs/docbook.xds.in.h:121
+msgid "Question"
+msgstr "Question"
+
+#: dispspecs/docbook.xds.in.h:122
+msgid "Question-and-Answer"
+msgstr "Question-and-Answer"
+
+#: dispspecs/docbook.xds.in.h:123
+msgid "Question-and-Answer Set"
+msgstr "Question-and-Answer Set"
+
+#: dispspecs/docbook.xds.in.h:124
+msgid "Question-and-Answer Subset"
+msgstr "Question-and-Answer Subset"
+
+#: dispspecs/docbook.xds.in.h:125 dispspecs/readme.xds.in.h:12
+msgid "Quote"
+msgstr "Quote"
+
+#: dispspecs/docbook.xds.in.h:126 dispspecs/relax-ng.xds.in.h:10
+#: dispspecs/website-webpage.xds.in.h:70
+msgid "Reference"
+msgstr "Reference"
+
+#: dispspecs/docbook.xds.in.h:127 dispspecs/website-webpage.xds.in.h:71
+msgid "Reference Page"
+msgstr "Reference Page"
+
+#: dispspecs/docbook.xds.in.h:128 dispspecs/website-webpage.xds.in.h:72
+msgid "Release Information"
+msgstr "Release Information"
+
+#: dispspecs/docbook.xds.in.h:129 dispspecs/website-webpage.xds.in.h:73
+msgid "Replaceable Text"
+msgstr "Replaceable Text"
+
+#: dispspecs/docbook.xds.in.h:130
+msgid "Revision"
+msgstr "Revision"
+
+#: dispspecs/docbook.xds.in.h:131
+msgid "Revision History"
+msgstr "Revision History"
+
+#: dispspecs/docbook.xds.in.h:132
+msgid "Revision Remark"
+msgstr "Revision Remark"
+
+#: dispspecs/docbook.xds.in.h:133 dispspecs/website-webpage.xds.in.h:74
+msgid "SGML Tag"
+msgstr "SGML Tag"
+
+#: dispspecs/docbook.xds.in.h:134 dispspecs/website-webpage.xds.in.h:75
+msgid "Screen"
+msgstr "Screen"
+
+#: dispspecs/docbook.xds.in.h:135
+msgid "Screenshot"
+msgstr "Screenshot"
+
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:29
+#: dispspecs/readme.xds.in.h:13 dispspecs/website-webpage.xds.in.h:76
+msgid "Section"
+msgstr "Section"
+
+#: dispspecs/docbook.xds.in.h:137 dispspecs/website-webpage.xds.in.h:77
+msgid "Section (level 5)"
+msgstr "Section (level 5)"
+
+#: dispspecs/docbook.xds.in.h:138
+msgid "Set"
+msgstr "Set"
+
+#: dispspecs/docbook.xds.in.h:139 dispspecs/website-webpage.xds.in.h:78
+msgid "Step"
+msgstr "Step"
+
+#: dispspecs/docbook.xds.in.h:140 dispspecs/website-webpage.xds.in.h:79
+msgid "Structure Name"
+msgstr "Structure Name"
+
+#: dispspecs/docbook.xds.in.h:141 dispspecs/website-webpage.xds.in.h:80
+msgid "Subsection"
+msgstr "Subsection"
+
+#: dispspecs/docbook.xds.in.h:142 dispspecs/website-webpage.xds.in.h:81
+msgid "Subsection (level 3)"
+msgstr "Subsection (level 3)"
+
+#: dispspecs/docbook.xds.in.h:143 dispspecs/website-webpage.xds.in.h:82
+msgid "Subsection (level 4)"
+msgstr "Subsection (level 4)"
+
+#: dispspecs/docbook.xds.in.h:144 dispspecs/website-webpage.xds.in.h:83
+msgid "Substeps"
+msgstr "Substeps"
+
+#: dispspecs/docbook.xds.in.h:145 dispspecs/website-webpage.xds.in.h:84
+msgid "Subsubsection"
+msgstr "Subsubsection"
+
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
+#: dispspecs/website-webpage.xds.in.h:85
+msgid "Subtitle"
+msgstr "Subtitle"
+
+#: dispspecs/docbook.xds.in.h:147 dispspecs/website-webpage.xds.in.h:86
+msgid "Surname"
+msgstr "Surname"
+
+#: dispspecs/docbook.xds.in.h:148 dispspecs/website-webpage.xds.in.h:87
+msgid "Symbol"
+msgstr "Symbol"
+
+#: dispspecs/docbook.xds.in.h:149 dispspecs/website-webpage.xds.in.h:88
+msgid "Synopsis (syntax)"
+msgstr "Synopsis (syntax)"
+
+#: dispspecs/docbook.xds.in.h:150 dispspecs/website-webpage.xds.in.h:89
+msgid "Table (informal)"
+msgstr "Table (informal)"
+
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "Table Body"
+
+#: dispspecs/docbook.xds.in.h:152
+msgid "Table Column Specification"
+msgstr "Table Column Specification"
+
+#: dispspecs/docbook.xds.in.h:153 src/plugin-table.c:417
+msgid "Table Entry"
+msgstr "Table Entry"
+
+#: dispspecs/docbook.xds.in.h:154
+msgid "Table Entry (subtable)"
+msgstr "Table Entry (subtable)"
+
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "Table Footer"
+
+#: dispspecs/docbook.xds.in.h:156 src/plugin-table.c:405
+msgid "Table Group"
+msgstr "Table Group"
+
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "Table Header"
+
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
+#: src/plugin-table.c:411
+msgid "Table Row"
+msgstr "Table Row"
+
+#: dispspecs/docbook.xds.in.h:159 dispspecs/teixlite.xds.in.h:250
+#: dispspecs/website-webpage.xds.in.h:90
+msgid "Term"
+msgstr "Term"
+
+#: dispspecs/docbook.xds.in.h:160
+msgid "Text Object"
+msgstr "Text Object"
+
+#: dispspecs/docbook.xds.in.h:161 dispspecs/website-webpage.xds.in.h:91
+msgid "The International Standard Book Number of a document."
+msgstr "The International Standard Book Number of a document."
+
+#: dispspecs/docbook.xds.in.h:162 dispspecs/website-webpage.xds.in.h:92
+msgid "The International Standard Serial Number of a periodical."
+msgstr "The International Standard Serial Number of a periodical."
+
+#: dispspecs/docbook.xds.in.h:163 dispspecs/website-webpage.xds.in.h:93
+msgid "The first place where a word or term occurs in a particular context"
+msgstr "The first place where a word or term occurs in a particular context"
+
+#: dispspecs/docbook.xds.in.h:164 dispspecs/website-webpage.xds.in.h:94
+msgid "The name of a function, subroutine or procedure"
+msgstr "The name of a function, subroutine or procedure"
+
+#: dispspecs/docbook.xds.in.h:165 dispspecs/website-webpage.xds.in.h:95
+msgid "The printed text on a particular key on a keyboard"
+msgstr "The printed text on a particular key on a keyboard"
+
+#: dispspecs/docbook.xds.in.h:166
+msgid "Tip"
+msgstr "Tip"
+
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: dispspecs/readme.xds.in.h:16 dispspecs/teixlite.xds.in.h:284
+#: dispspecs/website-webpage.xds.in.h:96 dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "Title"
+
+#: dispspecs/docbook.xds.in.h:168 dispspecs/website-webpage.xds.in.h:97
+msgid "Title Citation"
+msgstr "Title Citation"
+
+#: dispspecs/docbook.xds.in.h:169 dispspecs/website-webpage.xds.in.h:98
+msgid "URL Link"
+msgstr "URL Link"
+
+#: dispspecs/docbook.xds.in.h:170
+msgid "User Input"
+msgstr "User Input"
+
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "Warning"
+
+#: dispspecs/docbook.xds.in.h:172 dispspecs/website-layout.xds.in.h:10
+#: dispspecs/website-webpage.xds.in.h:101
+msgid "Year"
+msgstr "Year"
+
+#: dispspecs/forrest-document.xds.in.h:3 dispspecs/teixlite.xds.in.h:64
+#: dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "Anchor"
+
+#: dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "Apache Documentation DTD v1.2"
+
+#: dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "Authors"
+
+#: dispspecs/forrest-document.xds.in.h:7
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: dispspecs/teixlite.xds.in.h:93 dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "Code"
+
+#: dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "Defined term"
+
+#: dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "Definition list"
+
+#: dispspecs/forrest-document.xds.in.h:11 dispspecs/readme.xds.in.h:4
+#: src/cong-document.c:988
+msgid "Document"
+msgstr "Document"
+
+#: dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "Document body"
+
+#: dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "Fixme"
+
+#: dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "Footer"
+
+#: dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "Fork"
+
+#: dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "Header"
+
+#: dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "Icon"
+
+#: dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "Img"
+
+#: dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "Jump"
+
+#: dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "Legal info"
+
+#: dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "Line break"
+
+#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Link"
+
+#: dispspecs/forrest-document.xds.in.h:27
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "List (unordered)"
+
+#: dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "List item"
+
+#: dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "Notice"
+
+#: dispspecs/forrest-document.xds.in.h:32
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "Person"
+
+#: dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "Source"
+
+#: dispspecs/forrest-document.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "Strong"
+
+#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "Subscript"
+
+#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "Superscript"
+
+#: dispspecs/forrest-document.xds.in.h:39 dispspecs/teixlite.xds.in.h:245
+#: dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "Table"
+
+#: dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "Table cell"
+
+#: dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "Table header cell"
+
+#: dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "Table row"
+
+#: dispspecs/forrest-document.xds.in.h:43
+msgid ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://"
+"forrest.apache.org ."
+msgstr ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://"
+"forrest.apache.org ."
+
+#: dispspecs/forrest-document.xds.in.h:45
+#: glade/cong-file-properties.glade.h:17
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Type"
+
+#: dispspecs/forrest-document.xds.in.h:46
+#: glade/cong-file-properties.glade.h:18
+msgid "Version"
+msgstr "Version"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "&quot;Kernel Traffic&quot; Newsletter"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid ""
+"A newsletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+msgstr ""
+"A newsletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "Block Quote"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "Bold"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "Break (manual)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "Centred"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "Cite"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "Correction"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "Editorialize"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "Font"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "Heading (level 1)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "Heading (level 2)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "Heading (level 3)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "Hyperlink"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "Issue"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "Italicized"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "Kernel Cousin Newsletter"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "Quotation"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:30
+#: glade/cong-file-properties.glade.h:15
+msgid "Statistics"
+msgstr "Statistics"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "Topic"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Translator"
+msgstr "Translator"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Underlined"
+msgstr "Underlined"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Activity"
+msgstr "Version Control Activity"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Statistics"
+msgstr "Version Control Statistics"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
+msgid "Version Control Tree"
+msgstr "Version Control Tree"
+
+#: dispspecs/opml.xds.in.h:1
+msgid "Apple OPML dispspec"
+msgstr "Apple OPML dispspec"
+
+#: dispspecs/opml.xds.in.h:2
+msgid "Experimental \"opml\" format"
+msgstr "Experimental \"opml\" format"
+
+#: dispspecs/readme.xds.in.h:1
+msgid "Admission"
+msgstr "Admission"
+
+#: dispspecs/readme.xds.in.h:2
+msgid "Corp jargon"
+msgstr "Corp jargon"
+
+#: dispspecs/readme.xds.in.h:3
+msgid "Disclaimer"
+msgstr "Disclaimer"
+
+#: dispspecs/readme.xds.in.h:6
+msgid "Excuse"
+msgstr "Excuse"
+
+#: dispspecs/readme.xds.in.h:7
+msgid "Experimental \"readme\" format"
+msgstr "Experimental \"readme\" format"
+
+#: dispspecs/readme.xds.in.h:8
+msgid "Inspirational"
+msgstr "Inspirational"
+
+#: dispspecs/readme.xds.in.h:10
+msgid "Optimistic"
+msgstr "Optimistic"
+
+#: dispspecs/readme.xds.in.h:14 dispspecs/teixlite.xds.in.h:231
+msgid "Signature"
+msgstr "Signature"
+
+#: dispspecs/readme.xds.in.h:15
+msgid ""
+"This is a document type associated with the \"readme\" file distributed with "
+"the initial prototype of Conglomerate."
+msgstr ""
+"This is a document type associated with the \"readme\" file distributed with "
+"the initial prototype of Conglomerate."
+
+#: dispspecs/relax-ng.xds.in.h:1 src/cong-node-properties-dialog.c:879
+msgid "Choice"
+msgstr "Choice"
+
+#: dispspecs/relax-ng.xds.in.h:2
+msgid "Define"
+msgstr "Define"
+
+#: dispspecs/relax-ng.xds.in.h:3
+msgid "Empty"
+msgstr "Empty"
+
+#: dispspecs/relax-ng.xds.in.h:4 dispspecs/teixlite.xds.in.h:149
+msgid "Group"
+msgstr "Group"
+
+#: dispspecs/relax-ng.xds.in.h:5
+msgid "OneOrMore"
+msgstr "OneOrMore"
+
+#: dispspecs/relax-ng.xds.in.h:6 src/cong-node-properties-dialog.c:914
+msgid "Optional"
+msgstr "Optional"
+
+#: dispspecs/relax-ng.xds.in.h:7
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: dispspecs/relax-ng.xds.in.h:8
+msgid "RELAX NG Grammar"
+msgstr "RELAX NG Grammar"
+
+#: dispspecs/relax-ng.xds.in.h:9
+msgid ""
+"RELAX NG is a schema language i.e. a language for describing the structure "
+"of an XML document."
+msgstr ""
+"RELAX NG is a schema language, i.e. a language for describing the structure "
+"of an XML document."
+
+#: dispspecs/relax-ng.xds.in.h:11
+msgid "Start"
+msgstr "Start"
+
+#: dispspecs/relax-ng.xds.in.h:12 dispspecs/teixlite.xds.in.h:251
+#: src/cong-node-properties-dialog.c:827
+msgid "Text"
+msgstr "Text"
+
+#: dispspecs/relax-ng.xds.in.h:13 src/cong-node-properties-dialog.c:621
+msgid "Value"
+msgstr "Value"
+
+#: dispspecs/relax-ng.xds.in.h:14
+msgid "XML Attribute"
+msgstr "XML Attribute"
+
+#: dispspecs/relax-ng.xds.in.h:16
+msgid "ZeroOrMore"
+msgstr "ZeroOrMore"
+
+#: dispspecs/teixlite.xds.in.h:1
+msgid ""
+"A bibliographic description of the copy text(s) from which an electronic "
+"text was derived or generated"
+msgstr ""
+"A bibliographic description of the copy text(s) from which an electronic "
+"text was derived or generated"
+
+#: dispspecs/teixlite.xds.in.h:2
+msgid ""
+"A brief description of the place, date, time, etc. of production of a "
+"letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
+"of heading or trailer"
+msgstr ""
+"A brief description of the place, date, time, etc. of production of a "
+"letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
+"of heading or trailer"
+
+#: dispspecs/teixlite.xds.in.h:3
+msgid ""
+"A brief prose description of the appearance or content of a graphic figure, "
+"for use when documenting an image without displaying it"
+msgstr ""
+"A brief prose description of the appearance or content of a graphic figure, "
+"for use when documenting an image without displaying it"
+
+#: dispspecs/teixlite.xds.in.h:4
+msgid "A closing title or footer appearing at the end of a division of a text"
+msgstr "A closing title or footer appearing at the end of a division of a text"
+
+#: dispspecs/teixlite.xds.in.h:5
+msgid "A date in any format"
+msgstr "A date in any format"
+
+#: dispspecs/teixlite.xds.in.h:6
+msgid ""
+"A detailed description of non-bibliographic aspects of a text, specifically "
+"the languages and sublanguages used, the situation in which it was produced, "
+"the participants and their setting"
+msgstr ""
+"A detailed description of non-bibliographic aspects of a text, specifically "
+"the languages and sublanguages used, the situation in which it was produced, "
+"the participants and their setting"
+
+#: dispspecs/teixlite.xds.in.h:7
+msgid "A fifth-level subdivision of the front, body, or back of a text"
+msgstr "A fifth-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:8
+msgid ""
+"A first-level subdivision of the front, body, or back of a text (the "
+"largest, if &lt;div0&gt; is not used, the second largest if it is)"
+msgstr ""
+"A first-level subdivision of the front, body, or back of a text (the "
+"largest, if &lt;div0&gt; is not used, the second largest if it is)"
+
+#: dispspecs/teixlite.xds.in.h:9
+msgid ""
+"A formal list or prose description of the topics addressed by a subdivision "
+"of a text"
+msgstr ""
+"A formal list or prose description of the topics addressed by a subdivision "
+"of a text"
+
+#: dispspecs/teixlite.xds.in.h:10
+msgid "A fourth-level subdivision of the front, body, or back of a text"
+msgstr "A fourth-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:11
+msgid "A full bibliographic description of an electronic file"
+msgstr "A full bibliographic description of an electronic file"
+
+#: dispspecs/teixlite.xds.in.h:12
+msgid ""
+"A fully-structured bibliographic citation, in which all components of the "
+"TEI file description are present"
+msgstr ""
+"A fully-structured bibliographic citation, in which all components of the "
+"TEI file description are present"
+
+#: dispspecs/teixlite.xds.in.h:13
+msgid ""
+"A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
+"verse paragraph, etc."
+msgstr ""
+"A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
+"verse paragraph, etc."
+
+#: dispspecs/teixlite.xds.in.h:14
+msgid "A keyword in some formal language"
+msgstr "A keyword in some formal language"
+
+#: dispspecs/teixlite.xds.in.h:15
+msgid ""
+"A letter, word or passage deleted, marked as deleted, or otherwise indicated "
+"as superfluous or spurious in the copy text by an author, scribe, annotator, "
+"or corrector"
+msgstr ""
+"A letter, word or passage deleted, marked as deleted, or otherwise indicated "
+"as superfluous or spurious in the copy text by an author, scribe, annotator, "
+"or corrector"
+
+#: dispspecs/teixlite.xds.in.h:16
+msgid "A list of bibliographic citations of any kind"
+msgstr "A list of bibliographic citations of any kind"
+
+#: dispspecs/teixlite.xds.in.h:17
+msgid "A list of keywords or phrases identifying the topic or nature of a text"
+msgstr "A list of keywords or phrases identifying the topic or nature of a text"
+
+#: dispspecs/teixlite.xds.in.h:18
+msgid ""
+"A loosely-structured bibliographic citation of which the sub-components may "
+"or may not be explicitly localNameged"
+msgstr ""
+"A loosely-structured bibliographic citation of which the sub-components may "
+"or may not be explicitly localNameged"
+
+#: dispspecs/teixlite.xds.in.h:19
+msgid "A mathematical or other formula"
+msgstr "A mathematical or other formula"
+
+#: dispspecs/teixlite.xds.in.h:20
+msgid "A note of any type"
+msgstr "A note of any type"
+
+#: dispspecs/teixlite.xds.in.h:21
+msgid "A number, written in any form"
+msgstr "A number, written in any form"
+
+#: dispspecs/teixlite.xds.in.h:22
+msgid "A phrase defining a time of day in any format"
+msgstr "A phrase defining a time of day in any format"
+
+#: dispspecs/teixlite.xds.in.h:23
+msgid ""
+"A phrase describing the nature of a person's intellectual responsibility"
+msgstr ""
+"A phrase describing the nature of a person's intellectual responsibility"
+
+#: dispspecs/teixlite.xds.in.h:24
+msgid ""
+"A phrase or word used to provide a gloss or definition for some other word "
+"or phrase"
+msgstr ""
+"A phrase or word used to provide a gloss or definition for some other word "
+"or phrase"
+
+#: dispspecs/teixlite.xds.in.h:25
+msgid ""
+"A pointer to another location in the current document in terms of one or "
+"more identifiable elements"
+msgstr ""
+"A pointer to another location in the current document in terms of one or "
+"more identifiable elements"
+
+#: dispspecs/teixlite.xds.in.h:26
+msgid ""
+"A pointer to another location in the current document or an external document"
+msgstr ""
+"A pointer to another location in the current document or an external document"
+
+#: dispspecs/teixlite.xds.in.h:27
+msgid ""
+"A postal or other address, for example of a publisher, an organization, or "
+"an individual"
+msgstr ""
+"A postal or other address, for example of a publisher, an organization, or "
+"an individual"
+
+#: dispspecs/teixlite.xds.in.h:28
+msgid "A proper noun or noun phrase"
+msgstr "A proper noun or noun phrase"
+
+#: dispspecs/teixlite.xds.in.h:29
+msgid ""
+"A prose description of the rationale and methods used in sampling texts in "
+"the creation of a corpus or collection"
+msgstr ""
+"A prose description of the rationale and methods used in sampling texts in "
+"the creation of a corpus or collection"
+
+#: dispspecs/teixlite.xds.in.h:30
+msgid ""
+"A quotation from some other document, together with a bibliographic "
+"reference to its source"
+msgstr ""
+"A quotation from some other document, together with a bibliographic "
+"reference to its source"
+
+#: dispspecs/teixlite.xds.in.h:31
+msgid ""
+"A quotation or apparent quotation — a representation of speech or thought "
+"marked as being quoted from someone else (whether in fact quoted or not); in "
+"narrative, the words are usually those of of a character or speaker; in "
+"dictionaries, &lt;q&gt; may be used to mark real or contrived examples of "
+"usage"
+msgstr ""
+"A quotation or apparent quotation — a representation of speech or thought "
+"marked as being quoted from someone else (whether in fact quoted or not); in "
+"narrative, the words are usually those of of a character or speaker; in "
+"dictionaries, &lt;q&gt; may be used to mark real or contrived examples of "
+"usage"
+
+#: dispspecs/teixlite.xds.in.h:32
+msgid ""
+"A quotation, anonymous or attributed, appearing at the start of a section or "
+"chapter, or on a title page"
+msgstr ""
+"A quotation, anonymous or attributed, appearing at the start of a section or "
+"chapter, or on a title page"
+
+#: dispspecs/teixlite.xds.in.h:33
+msgid "A reading which has been regularized or normalized in some sense"
+msgstr "A reading which has been regularized or normalized in some sense"
+
+#: dispspecs/teixlite.xds.in.h:34
+msgid ""
+"A reference to another location in the current document, in terms of one or "
+"more identifiable elements, possibly modified by additional text or comment"
+msgstr ""
+"A reference to another location in the current document, in terms of one or "
+"more identifiable elements, possibly modified by additional text or comment"
+
+#: dispspecs/teixlite.xds.in.h:35
+msgid ""
+"A reference to another location in the current document, or an external "
+"document, using an extended pointer notation, possibly modified by "
+"additional text or comment"
+msgstr ""
+"A reference to another location in the current document, or an external "
+"document, using an extended pointer notation, possibly modified by "
+"additional text or comment"
+
+#: dispspecs/teixlite.xds.in.h:36
+msgid ""
+"A salutation or greeting prefixed to a foreword, dedicatory epistle, or "
+"other division of a text, or the salutation in the closing of a letter, "
+"preface, etc."
+msgstr ""
+"A salutation or greeting prefixed to a foreword, dedicatory epistle, or "
+"other division of a text, or the salutation in the closing of a letter, "
+"preface, etc."
+
+#: dispspecs/teixlite.xds.in.h:37
+msgid "A second-level subdivision of the front, body, or back of a text"
+msgstr "A second-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:38
+msgid "A sentence-like division of a text"
+msgstr "A sentence-like division of a text"
+
+#: dispspecs/teixlite.xds.in.h:39
+msgid "A seventh-level subdivision of the front, body, or back of a text"
+msgstr "A seventh-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:40
+msgid ""
+"A short fragment of code in some formal language (often a programming "
+"language)"
+msgstr ""
+"A short fragment of code in some formal language (often a programming "
+"language)"
+
+#: dispspecs/teixlite.xds.in.h:41
+msgid "A single example demonstrating the use of an element or attribute"
+msgstr "A single example demonstrating the use of an element or attribute"
+
+#: dispspecs/teixlite.xds.in.h:42
+msgid ""
+"A single text of any kind, whether unitary or composite, for example a poem "
+"or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
+msgstr ""
+"A single text of any kind, whether unitary or composite, for example a poem "
+"or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
+
+#: dispspecs/teixlite.xds.in.h:43
+msgid "A single, possibly incomplete, line of verse"
+msgstr "A single, possibly incomplete, line of verse"
+
+#: dispspecs/teixlite.xds.in.h:44
+msgid ""
+"A single-word, multi-word, or symbolic designation which is regarded as a "
+"technical term"
+msgstr ""
+"A single-word, multi-word, or symbolic designation which is regarded as a "
+"technical term"
+
+#: dispspecs/teixlite.xds.in.h:45
+msgid "A sixth-level subdivision of the front, body, or back of a text"
+msgstr "A sixth-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:46
+msgid ""
+"A specialized form of heading or label, giving the name of one or more "
+"speakers in a dramatic text or fragment"
+msgstr ""
+"A specialized form of heading or label, giving the name of one or more "
+"speakers in a dramatic text or fragment"
+
+#: dispspecs/teixlite.xds.in.h:47
+msgid ""
+"A statement of responsibility for someone responsible for the intellectual "
+"content of a text, edition, recording, or series, where the specialized "
+"elements for authors, editors, etc. do not suffice or do not apply"
+msgstr ""
+"A statement of responsibility for someone responsible for the intellectual "
+"content of a text, edition, recording, or series, where the specialized "
+"elements for authors, editors, etc. do not suffice or do not apply"
+
+#: dispspecs/teixlite.xds.in.h:48
+msgid "A subdivision of the front, body, or back of a text"
+msgstr "A subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:49
+msgid ""
+"A subsection or division of the title of a work, as indicated on a title page"
+msgstr ""
+"A subsection or division of the title of a work, as indicated on a title page"
+
+#: dispspecs/teixlite.xds.in.h:50
+msgid "A third-level subdivision of the front, body, or back of a text"
+msgstr "A third-level subdivision of the front, body, or back of a text"
+
+#: dispspecs/teixlite.xds.in.h:51
+msgid ""
+"A word or phrase belonging to some language other than that of the "
+"surrounding text"
+msgstr ""
+"A word or phrase belonging to some language other than that of the "
+"surrounding text"
+
+#: dispspecs/teixlite.xds.in.h:52
+msgid ""
+"A word or phrase for which the author or narrator indicates a disclaiming of "
+"responsibility, for example by the use of scare quotes or italics"
+msgstr ""
+"A word or phrase for which the author or narrator indicates a disclaiming of "
+"responsibility, for example by the use of scare quotes or italics"
+
+#: dispspecs/teixlite.xds.in.h:53
+msgid ""
+"A word, phrase, or passage which cannot be transcribed with certainty "
+"because it is illegible or inaudible in the source"
+msgstr ""
+"A word, phrase, or passage which cannot be transcribed with certainty "
+"because it is illegible or inaudible in the source"
+
+#: dispspecs/teixlite.xds.in.h:54
+msgid "Abbr"
+msgstr "Abbr"
+
+#: dispspecs/teixlite.xds.in.h:55
+msgid "Add"
+msgstr "Add"
+
+#: dispspecs/teixlite.xds.in.h:57
+msgid "Address Line"
+msgstr "Address Line"
+
+#: dispspecs/teixlite.xds.in.h:58
+msgid "An abbreviation of any sort"
+msgstr "An abbreviation of any sort"
+
+#: dispspecs/teixlite.xds.in.h:59
+msgid "An edition statement as presented on a title page of a document"
+msgstr "An edition statement as presented on a title page of a document"
+
+#: dispspecs/teixlite.xds.in.h:60
+msgid ""
+"An identifier of some kind, e.g. a variable name or the name of an SGML "
+"element or attribute"
+msgstr ""
+"An identifier of some kind, e.g. a variable name or the name of an SGML "
+"element or attribute"
+
+#: dispspecs/teixlite.xds.in.h:61
+msgid ""
+"An individual descriptive category, possibly nested within a superordinate "
+"category, within a user-defined taxonomy"
+msgstr ""
+"An individual descriptive category, possibly nested within a superordinate "
+"category, within a user-defined taxonomy"
+
+#: dispspecs/teixlite.xds.in.h:62
+msgid ""
+"An individual speech in a performance text, or a passage presented as such "
+"in a prose or verse text"
+msgstr ""
+"An individual speech in a performance text, or a passage presented as such "
+"in a prose or verse text"
+
+#: dispspecs/teixlite.xds.in.h:63
+msgid "An interpretative annotation which can be linked to a span of text"
+msgstr "An interpretative annotation which can be linked to a span of text"
+
+#: dispspecs/teixlite.xds.in.h:65
+msgid "Anonymous Block (&lt;ab&gt;)"
+msgstr "Anonymous Block (&lt;ab&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:66
+msgid ""
+"Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
+"elements)"
+msgstr ""
+"Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
+"elements)"
+
+#: dispspecs/teixlite.xds.in.h:67
+msgid ""
+"Any heading, for example, the title of a section, or the heading of a list "
+"or glossary"
+msgstr ""
+"Any heading, for example, the title of a section, or the heading of a list "
+"or glossary"
+
+#: dispspecs/teixlite.xds.in.h:68
+msgid "Any kind of stage direction within a dramatic text or fragment"
+msgstr "Any kind of stage direction within a dramatic text or fragment"
+
+#: dispspecs/teixlite.xds.in.h:69
+msgid ""
+"Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
+"found at the start of a document, before the main body"
+msgstr ""
+"Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
+"found at the start of a document, before the main body"
+
+#: dispspecs/teixlite.xds.in.h:70
+msgid "Any sequence of items organized as a list"
+msgstr "Any sequence of items organized as a list"
+
+#: dispspecs/teixlite.xds.in.h:71
+msgid ""
+"Any standard or non-standard number used to identify a bibliographic item"
+msgstr ""
+"Any standard or non-standard number used to identify a bibliographic item"
+
+#: dispspecs/teixlite.xds.in.h:72
+msgid "Arbitrary Segment (&lt;seg&gt;)"
+msgstr "Arbitrary Segment (&lt;seg&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:73
+msgid "Argument"
+msgstr "Argument"
+
+#: dispspecs/teixlite.xds.in.h:74
+msgid ""
+"Attaches an identifier to a point within a text, whether or not it "
+"corresponds with a textual element"
+msgstr ""
+"Attaches an identifier to a point within a text, whether or not it "
+"corresponds with a textual element"
+
+#: dispspecs/teixlite.xds.in.h:76
+msgid "Authority"
+msgstr "Authority"
+
+#: dispspecs/teixlite.xds.in.h:77
+msgid "Availability"
+msgstr "Availability"
+
+#: dispspecs/teixlite.xds.in.h:78
+msgid "Back Matter"
+msgstr "Back Matter"
+
+#: dispspecs/teixlite.xds.in.h:79
+msgid "BiblFull"
+msgstr "BiblFull"
+
+#: dispspecs/teixlite.xds.in.h:80
+msgid "Bibliographic Citation (&lt;bibl&gt;)"
+msgstr "Bibliographic Citation (&lt;bibl&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:81
+msgid "Bibliographic Scope"
+msgstr "Bibliographic Scope"
+
+#: dispspecs/teixlite.xds.in.h:82 dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "Body"
+
+#: dispspecs/teixlite.xds.in.h:83
+msgid "Byline"
+msgstr "Byline"
+
+#: dispspecs/teixlite.xds.in.h:84
+msgid "Category"
+msgstr "Category"
+
+#: dispspecs/teixlite.xds.in.h:85
+msgid "Category Description"
+msgstr "Category Description"
+
+#: dispspecs/teixlite.xds.in.h:86
+msgid "Category Reference"
+msgstr "Category Reference"
+
+#: dispspecs/teixlite.xds.in.h:87
+msgid "Cell"
+msgstr "Cell"
+
+#: dispspecs/teixlite.xds.in.h:88
+msgid "Change"
+msgstr "Change"
+
+#: dispspecs/teixlite.xds.in.h:89 dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "Citation"
+
+#: dispspecs/teixlite.xds.in.h:90
+msgid "ClassCode"
+msgstr "ClassCode"
+
+#: dispspecs/teixlite.xds.in.h:91
+msgid "Classification Declaration"
+msgstr "Classification Declaration"
+
+#: dispspecs/teixlite.xds.in.h:92
+msgid "Closer"
+msgstr "Closer"
+
+#: dispspecs/teixlite.xds.in.h:94
+msgid "Collects together &lt;interp&gt; tags"
+msgstr "Collects together &lt;interp&gt; tags"
+
+#: dispspecs/teixlite.xds.in.h:95
+msgid ""
+"Collects together any notes providing information about a text additional to "
+"that recorded in other parts of the bibliographic description"
+msgstr ""
+"Collects together any notes providing information about a text additional to "
+"that recorded in other parts of the bibliographic description"
+
+#: dispspecs/teixlite.xds.in.h:96
+msgid "Contains a general purpose name or referring string"
+msgstr "Contains a general purpose name or referring string"
+
+#: dispspecs/teixlite.xds.in.h:97
+msgid ""
+"Contains a single TEI-conformant document, comprising a TEI header and a "
+"text, either in isolation or as part of a &lt;teiCorpus&gt; element"
+msgstr ""
+"Contains a single TEI-conformant document, comprising a TEI header and a "
+"text, either in isolation or as part of a &lt;teiCorpus&gt; element"
+
+#: dispspecs/teixlite.xds.in.h:98
+msgid "Contains any appendixes, etc. following the main part of a text"
+msgstr "Contains any appendixes, etc. following the main part of a text"
+
+#: dispspecs/teixlite.xds.in.h:99
+msgid ""
+"Contains any arbitrary component-level unit of text, acting as an anonymous "
+"container for phrase or inter level elements analogous to, but without the "
+"semantic baggage of, a paragraph"
+msgstr ""
+"Contains any arbitrary component-level unit of text, acting as an anonymous "
+"container for phrase or inter level elements analogous to, but without the "
+"semantic baggage of, a paragraph"
+
+#: dispspecs/teixlite.xds.in.h:100
+msgid "Contains text displayed in tabular form, in rows and columns"
+msgstr "Contains text displayed in tabular form, in rows and columns"
+
+#: dispspecs/teixlite.xds.in.h:101
+msgid "Correct Form"
+msgstr "Correct Form"
+
+#: dispspecs/teixlite.xds.in.h:102
+msgid "Creation"
+msgstr "Creation"
+
+#: dispspecs/teixlite.xds.in.h:104
+msgid "Dateline"
+msgstr "Dateline"
+
+#: dispspecs/teixlite.xds.in.h:105
+msgid ""
+"Defines a typology used to classify texts either implicitly, by means of a "
+"bibliographic citation, or explicitly by a structured taxonomy"
+msgstr ""
+"Defines a typology used to classify texts either implicitly, by means of a "
+"bibliographic citation, or explicitly by a structured taxonomy"
+
+#: dispspecs/teixlite.xds.in.h:106
+msgid ""
+"Defines the scope of a bibliographic reference, for example as a list of "
+"pagenumbers, or a named subdivision of a larger work"
+msgstr ""
+"Defines the scope of a bibliographic reference, for example as a list of "
+"pagenumbers, or a named subdivision of a larger work"
+
+#: dispspecs/teixlite.xds.in.h:107
+msgid "Del"
+msgstr "Del"
+
+#: dispspecs/teixlite.xds.in.h:108
+msgid ""
+"Describes in detail the aim or purpose for which an electronic file was "
+"encoded, together with any other relevant information concerning the process "
+"by which it was assembled or collected"
+msgstr ""
+"Describes in detail the aim or purpose for which an electronic file was "
+"encoded, together with any other relevant information concerning the process "
+"by which it was assembled or collected"
+
+#: dispspecs/teixlite.xds.in.h:109
+msgid ""
+"Describes some category within a taxonomy or text typology, either in the "
+"form of a brief prose description or in terms of the situational parameters "
+"used by the TEI formal &lt;textDesc&gt;"
+msgstr ""
+"Describes some category within a taxonomy or text typology, either in the "
+"form of a brief prose description or in terms of the situational parameters "
+"used by the TEI formal &lt;textDesc&gt;"
+
+#: dispspecs/teixlite.xds.in.h:110
+msgid ""
+"Details of editorial principles and practices applied during the encoding of "
+"a text"
+msgstr ""
+"Details of editorial principles and practices applied during the encoding of "
+"a text"
+
+#: dispspecs/teixlite.xds.in.h:111
+msgid "Distributor"
+msgstr "Distributor"
+
+#: dispspecs/teixlite.xds.in.h:112
+msgid "Div"
+msgstr "Div"
+
+#: dispspecs/teixlite.xds.in.h:113
+msgid "Div0"
+msgstr "Div0"
+
+#: dispspecs/teixlite.xds.in.h:114
+msgid "Div1"
+msgstr "Div1"
+
+#: dispspecs/teixlite.xds.in.h:115
+msgid "Div2"
+msgstr "Div2"
+
+#: dispspecs/teixlite.xds.in.h:116
+msgid "Div3"
+msgstr "Div3"
+
+#: dispspecs/teixlite.xds.in.h:117
+msgid "Div4"
+msgstr "Div4"
+
+#: dispspecs/teixlite.xds.in.h:118
+msgid "Div5"
+msgstr "Div5"
+
+#: dispspecs/teixlite.xds.in.h:119
+msgid "Div6"
+msgstr "Div6"
+
+#: dispspecs/teixlite.xds.in.h:120
+msgid "Div7"
+msgstr "Div7"
+
+#: dispspecs/teixlite.xds.in.h:121
+msgid "DivGen"
+msgstr "DivGen"
+
+#: dispspecs/teixlite.xds.in.h:122
+msgid "Document Author"
+msgstr "Document Author"
+
+#: dispspecs/teixlite.xds.in.h:123
+msgid "Document Date"
+msgstr "Document Date"
+
+#: dispspecs/teixlite.xds.in.h:124
+msgid "Document Edition"
+msgstr "Document Edition"
+
+#: dispspecs/teixlite.xds.in.h:125
+msgid "Document Imprint"
+msgstr "Document Imprint"
+
+#: dispspecs/teixlite.xds.in.h:126
+msgid "Document Title"
+msgstr "Document Title"
+
+#: dispspecs/teixlite.xds.in.h:127
+msgid ""
+"Documents the relationship between an electronic text and the source or "
+"sources from which it was derived"
+msgstr ""
+"Documents the relationship between an electronic text and the source or "
+"sources from which it was derived"
+
+#: dispspecs/teixlite.xds.in.h:129
+msgid "Edition Statement"
+msgstr "Edition Statement"
+
+#: dispspecs/teixlite.xds.in.h:131
+msgid "Editorial Declaration"
+msgstr "Editorial Declaration"
+
+#: dispspecs/teixlite.xds.in.h:133
+msgid "Encoding Description"
+msgstr "Encoding Description"
+
+#: dispspecs/teixlite.xds.in.h:134
+msgid "Epigraph"
+msgstr "Epigraph"
+
+#: dispspecs/teixlite.xds.in.h:135
+msgid "Example"
+msgstr "Example"
+
+#: dispspecs/teixlite.xds.in.h:136
+msgid "Extended Pointer (xptr)"
+msgstr "Extended Pointer (xptr)"
+
+#: dispspecs/teixlite.xds.in.h:137
+msgid "Extended Reference (&lt;xref&gt;)"
+msgstr "Extended Reference (&lt;xref&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:138
+msgid "Extent"
+msgstr "Extent"
+
+#: dispspecs/teixlite.xds.in.h:140
+msgid "Figure Description"
+msgstr "Figure Description"
+
+#: dispspecs/teixlite.xds.in.h:141
+msgid "File Description (fileDesc)"
+msgstr "File Description (fileDesc)"
+
+#: dispspecs/teixlite.xds.in.h:142
+msgid "Foreign"
+msgstr "Foreign"
+
+#: dispspecs/teixlite.xds.in.h:143
+msgid "Formula"
+msgstr "Formula"
+
+#: dispspecs/teixlite.xds.in.h:144
+msgid "Front Matter"
+msgstr "Front Matter"
+
+#: dispspecs/teixlite.xds.in.h:145
+msgid "Funder"
+msgstr "Funder"
+
+#: dispspecs/teixlite.xds.in.h:146
+msgid "Gap"
+msgstr "Gap"
+
+#: dispspecs/teixlite.xds.in.h:147
+msgid "Generic Identifier (&lt;gi&gt;)"
+msgstr "Generic Identifier (&lt;gi&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:148
+msgid "Gloss"
+msgstr "Gloss"
+
+#: dispspecs/teixlite.xds.in.h:150
+msgid ""
+"Groups information about the series, if any, to which a publication belongs"
+msgstr ""
+"Groups information about the series, if any, to which a publication belongs"
+
+#: dispspecs/teixlite.xds.in.h:151
+msgid ""
+"Groups information concerning the publication or distribution of an "
+"electronic or other text"
+msgstr ""
+"Groups information concerning the publication or distribution of an "
+"electronic or other text"
+
+#: dispspecs/teixlite.xds.in.h:152
+msgid "Groups information relating to one edition of a text"
+msgstr "Groups information relating to one edition of a text"
+
+#: dispspecs/teixlite.xds.in.h:153
+msgid ""
+"Groups information relating to the publication or distribution of a "
+"bibliographic item"
+msgstr ""
+"Groups information relating to the publication or distribution of a "
+"bibliographic item"
+
+#: dispspecs/teixlite.xds.in.h:154
+msgid ""
+"Groups information which describes the nature or topic of a text in terms of "
+"a standard classification scheme, thesaurus, etc"
+msgstr ""
+"Groups information which describes the nature or topic of a text in terms of "
+"a standard classification scheme, thesaurus, etc"
+
+#: dispspecs/teixlite.xds.in.h:155
+msgid ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a final group at the end of a division, especially of a letter"
+msgstr ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a final group at the end of a division, especially of a letter"
+
+#: dispspecs/teixlite.xds.in.h:156
+msgid ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a preliminary group at the start of a division, especially of a letter"
+msgstr ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a preliminary group at the start of a division, especially of a letter"
+
+#: dispspecs/teixlite.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "Head"
+
+#: dispspecs/teixlite.xds.in.h:158
+msgid "Highlighted"
+msgstr "Highlighted"
+
+#: dispspecs/teixlite.xds.in.h:159
+msgid "Id. Number"
+msgstr "ID Number"
+
+#: dispspecs/teixlite.xds.in.h:160
+msgid "Ident"
+msgstr "Ident"
+
+#: dispspecs/teixlite.xds.in.h:161
+msgid ""
+"Identifies the language being described in the writing system declaration"
+msgstr ""
+"Identifies the language being described in the writing system declaration"
+
+#: dispspecs/teixlite.xds.in.h:162
+msgid "Imprint"
+msgstr "Imprint"
+
+#: dispspecs/teixlite.xds.in.h:163
+msgid "Index"
+msgstr "Index"
+
+#: dispspecs/teixlite.xds.in.h:164
+msgid ""
+"Indicates a point where material has been omitted in a transcription, "
+"whether for editorial reasons described in the TEI header, as part of "
+"sampling practice, or because the material is illegible or inaudible"
+msgstr ""
+"Indicates a point where material has been omitted in a transcription, "
+"whether for editorial reasons described in the TEI header, as part of "
+"sampling practice, or because the material is illegible or inaudible"
+
+#: dispspecs/teixlite.xds.in.h:165
+msgid "Indicates the location of a graphic, illustration, or figure"
+msgstr "Indicates the location of a graphic, illustration, or figure"
+
+#: dispspecs/teixlite.xds.in.h:166
+msgid ""
+"Information about the availability of a text, for example any restrictions "
+"on its use or distribution, its copyright status, etc."
+msgstr ""
+"Information about the availability of a text, for example any restrictions "
+"on its use or distribution, its copyright status, etc."
+
+#: dispspecs/teixlite.xds.in.h:167
+msgid "Information about the creation of a text"
+msgstr "Information about the creation of a text"
+
+#: dispspecs/teixlite.xds.in.h:168
+msgid "Information about the intended rendition of one or more elements"
+msgstr "Information about the intended rendition of one or more elements"
+
+#: dispspecs/teixlite.xds.in.h:169
+msgid ""
+"Information about the title of a work and those responsible for its "
+"intellectual content"
+msgstr ""
+"Information about the title of a work and those responsible for its "
+"intellectual content"
+
+#: dispspecs/teixlite.xds.in.h:170
+msgid "Information about the usage of a specific element within a &lt;text&gt;"
+msgstr "Information about the usage of a specific element within a &lt;text&gt;"
+
+#: dispspecs/teixlite.xds.in.h:171
+msgid "Interpretation"
+msgstr "Interpretation"
+
+#: dispspecs/teixlite.xds.in.h:172
+msgid "Interpretation Group"
+msgstr "Interpretation Group"
+
+#: dispspecs/teixlite.xds.in.h:173
+msgid "Item"
+msgstr "Item"
+
+#: dispspecs/teixlite.xds.in.h:174
+msgid "Keywords"
+msgstr "Keywords"
+
+#: dispspecs/teixlite.xds.in.h:175
+msgid "Kw"
+msgstr "Kw"
+
+#: dispspecs/teixlite.xds.in.h:176 dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "Label"
+
+#: dispspecs/teixlite.xds.in.h:177 glade/docbook-common-properties.glade.h:2
+#: src/plugin-docbook.c:2149
+msgid "Language"
+msgstr "Language"
+
+#: dispspecs/teixlite.xds.in.h:178
+msgid "Language Usage"
+msgstr "Language Usage"
+
+#: dispspecs/teixlite.xds.in.h:179
+msgid ""
+"Letters, words, or phrases inserted in the text by an author, scribe, "
+"annotator, or corrector"
+msgstr ""
+"Letters, words, or phrases inserted in the text by an author, scribe, "
+"annotator, or corrector"
+
+#: dispspecs/teixlite.xds.in.h:180
+msgid "Line Break"
+msgstr "Line Break"
+
+#: dispspecs/teixlite.xds.in.h:181
+msgid "Line Group"
+msgstr "Line Group"
+
+#: dispspecs/teixlite.xds.in.h:182
+msgid "List"
+msgstr "List"
+
+#: dispspecs/teixlite.xds.in.h:183
+msgid "ListBibl"
+msgstr "ListBibl"
+
+#: dispspecs/teixlite.xds.in.h:184
+msgid "Marks a location to be indexed for whatever purpose"
+msgstr "Marks a location to be indexed for whatever purpose"
+
+#: dispspecs/teixlite.xds.in.h:185
+msgid ""
+"Marks a word or phrase as graphically distinct from the surrounding text, "
+"for reasons concerning which no claim is made"
+msgstr ""
+"Marks a word or phrase as graphically distinct from the surrounding text, "
+"for reasons concerning which no claim is made"
+
+#: dispspecs/teixlite.xds.in.h:186
+msgid "Marks paragraphs in prose"
+msgstr "Marks paragraphs in prose"
+
+#: dispspecs/teixlite.xds.in.h:187
+msgid ""
+"Marks the boundary between one page of a text and the next in a standard "
+"reference system"
+msgstr ""
+"Marks the boundary between one page of a text and the next in a standard "
+"reference system"
+
+#: dispspecs/teixlite.xds.in.h:188
+msgid ""
+"Marks the boundary between sections of a text, as indicated by changes in a "
+"standard reference system"
+msgstr ""
+"Marks the boundary between sections of a text, as indicated by changes in a "
+"standard reference system"
+
+#: dispspecs/teixlite.xds.in.h:189
+msgid ""
+"Marks the start of a new (typographic) line in some edition or version of a "
+"text"
+msgstr ""
+"Marks the start of a new (typographic) line in some edition or version of a "
+"text"
+
+#: dispspecs/teixlite.xds.in.h:190
+msgid "Marks words or phrases mentioned, not used"
+msgstr "Marks words or phrases mentioned, not used"
+
+#: dispspecs/teixlite.xds.in.h:191
+msgid ""
+"Marks words or phrases which are stressed or emphasized for linguistic or "
+"rhetorical effect"
+msgstr ""
+"Marks words or phrases which are stressed or emphasized for linguistic or "
+"rhetorical effect"
+
+#: dispspecs/teixlite.xds.in.h:192
+msgid "Mentioned"
+msgstr "Mentioned"
+
+#: dispspecs/teixlite.xds.in.h:193
+msgid "Milestone"
+msgstr "Milestone"
+
+#: dispspecs/teixlite.xds.in.h:196
+msgid "Notes Statement"
+msgstr "Notes Statement"
+
+#: dispspecs/teixlite.xds.in.h:197
+msgid "Num"
+msgstr "Num"
+
+#: dispspecs/teixlite.xds.in.h:198
+msgid "One cell of a table"
+msgstr "One cell of a table"
+
+#: dispspecs/teixlite.xds.in.h:199
+msgid "One component of a list"
+msgstr "One component of a list"
+
+#: dispspecs/teixlite.xds.in.h:200
+msgid "One line of a postal or other address"
+msgstr "One line of a postal or other address"
+
+#: dispspecs/teixlite.xds.in.h:201
+msgid ""
+"One or more taxonomies defining any classificatory codes used elsewhere in "
+"the text"
+msgstr ""
+"One or more taxonomies defining any classificatory codes used elsewhere in "
+"the text"
+
+#: dispspecs/teixlite.xds.in.h:202
+msgid "One row of a table"
+msgstr "One row of a table"
+
+#: dispspecs/teixlite.xds.in.h:203
+msgid "Opener"
+msgstr "Opener"
+
+#: dispspecs/teixlite.xds.in.h:204
+msgid "Original Form"
+msgstr "Original Form"
+
+#: dispspecs/teixlite.xds.in.h:205
+msgid "Page Break"
+msgstr "Page Break"
+
+#: dispspecs/teixlite.xds.in.h:207
+msgid "Pointer"
+msgstr "Pointer"
+
+#: dispspecs/teixlite.xds.in.h:208
+msgid "Principal Researcher"
+msgstr "Principal Researcher"
+
+#: dispspecs/teixlite.xds.in.h:209
+msgid "Profile Description"
+msgstr "Profile Description"
+
+#: dispspecs/teixlite.xds.in.h:210
+msgid "Project Description"
+msgstr "Project Description"
+
+#: dispspecs/teixlite.xds.in.h:211
+msgid ""
+"Provides detailed information about the tagging applied to an SGML or XML "
+"document"
+msgstr ""
+"Provides detailed information about the tagging applied to an SGML or XML "
+"document"
+
+#: dispspecs/teixlite.xds.in.h:212
+msgid "Publication Place"
+msgstr "Publication Place"
+
+#: dispspecs/teixlite.xds.in.h:213
+msgid "Publication Statement"
+msgstr "Publication Statement"
+
+#: dispspecs/teixlite.xds.in.h:215
+msgid "Quotation (&lt;q&gt;)"
+msgstr "Quotation (&lt;q&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:216
+msgid "Ref"
+msgstr "Ref"
+
+#: dispspecs/teixlite.xds.in.h:217
+msgid "References Declaration"
+msgstr "References Declaration"
+
+#: dispspecs/teixlite.xds.in.h:218
+msgid "Referencing String (&lt;rs&gt;)"
+msgstr "Referencing String (&lt;rs&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:219
+msgid "Reg"
+msgstr "Reg"
+
+#: dispspecs/teixlite.xds.in.h:220
+msgid "Rendition"
+msgstr "Rendition"
+
+#: dispspecs/teixlite.xds.in.h:221
+msgid "Resp"
+msgstr "Resp"
+
+#: dispspecs/teixlite.xds.in.h:222
+msgid "Responsibility Statement (respStmt)"
+msgstr "Responsibility Statement (respStmt)"
+
+#: dispspecs/teixlite.xds.in.h:223
+msgid "Revision Description"
+msgstr "Revision Description"
+
+#: dispspecs/teixlite.xds.in.h:224
+msgid "Row"
+msgstr "Row"
+
+#: dispspecs/teixlite.xds.in.h:225
+msgid "Salute"
+msgstr "Salute"
+
+#: dispspecs/teixlite.xds.in.h:226
+msgid "Sampling Declaration"
+msgstr "Sampling Declaration"
+
+#: dispspecs/teixlite.xds.in.h:227
+msgid ""
+"Secondary statement of responsibility for a bibliographic item, for example "
+"the name of an individual, institution or organization, (or of several such) "
+"acting as editor, compiler, translator, etc."
+msgstr ""
+"Secondary statement of responsibility for a bibliographic item, for example "
+"the name of an individual, institution or organization, (or of several such) "
+"acting as editor, compiler, translator, etc."
+
+#: dispspecs/teixlite.xds.in.h:228
+msgid "Sentence"
+msgstr "Sentence"
+
+#: dispspecs/teixlite.xds.in.h:229
+msgid "Series Statement"
+msgstr "Series Statement"
+
+#: dispspecs/teixlite.xds.in.h:230
+msgid "Sic"
+msgstr "Sic"
+
+#: dispspecs/teixlite.xds.in.h:232
+msgid "So Called"
+msgstr "So-Called"
+
+#: dispspecs/teixlite.xds.in.h:233
+msgid "Source Description"
+msgstr "Source Description"
+
+#: dispspecs/teixlite.xds.in.h:234
+msgid "Speaker"
+msgstr "Speaker"
+
+#: dispspecs/teixlite.xds.in.h:235
+msgid "Specifies how canonical references are constructed for this text"
+msgstr "Specifies how canonical references are constructed for this text"
+
+#: dispspecs/teixlite.xds.in.h:236
+msgid ""
+"Specifies one or more defined categories within some taxonomy or text "
+"typology"
+msgstr ""
+"Specifies one or more defined categories within some taxonomy or text "
+"typology"
+
+#: dispspecs/teixlite.xds.in.h:237
+msgid "Speech (&lt;sp&gt;)"
+msgstr "Speech (&lt;sp&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:238
+msgid "Sponsor"
+msgstr "Sponsor"
+
+#: dispspecs/teixlite.xds.in.h:239
+msgid "Stage Direction (&lt;stage&gt;)"
+msgstr "Stage Direction (&lt;stage&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:240
+msgid ""
+"Summarizes a particular change or correction made to a particular version of "
+"an electronic text which is shared between several researchers"
+msgstr ""
+"Summarizes a particular change or correction made to a particular version of "
+"an electronic text which is shared between several researchers"
+
+#: dispspecs/teixlite.xds.in.h:241
+msgid "Summarizes the revision history for a file"
+msgstr "Summarizes the revision history for a file"
+
+#: dispspecs/teixlite.xds.in.h:242
+msgid "TEI Lite"
+msgstr "TEI Lite"
+
+#: dispspecs/teixlite.xds.in.h:243
+msgid ""
+"TEI stands for Text Encoding Initiative, see http://www.tei-c.org/ for more "
+"information; the TEI Lite dtd is a subset of the powerful TEI dtds which "
+"comprises the most commonly used elements."
+msgstr ""
+"TEI stands for Text Encoding Initiative; see http://www.tei-c.org/ for more "
+"information.  The TEI Lite DTD, a subset of the powerful TEI DTDs, "
+"comprises the most commonly used elements."
+
+#: dispspecs/teixlite.xds.in.h:244
+msgid "TEI.2"
+msgstr "TEI.2"
+
+#: dispspecs/teixlite.xds.in.h:246
+msgid "Tag Usage"
+msgstr "Tag Usage"
+
+#: dispspecs/teixlite.xds.in.h:247
+msgid "Tagging Declaration"
+msgstr "Tagging Declaration"
+
+#: dispspecs/teixlite.xds.in.h:248
+msgid "Taxonomy"
+msgstr "Taxonomy"
+
+#: dispspecs/teixlite.xds.in.h:249
+msgid "Tei Header"
+msgstr "Tei Header"
+
+#: dispspecs/teixlite.xds.in.h:252
+msgid "Text Classification"
+msgstr "Text Classification"
+
+#: dispspecs/teixlite.xds.in.h:253
+msgid "Text reproduced although apparently incorrect or inaccurate"
+msgstr "Text reproduced although apparently incorrect or inaccurate"
+
+#: dispspecs/teixlite.xds.in.h:254
+msgid ""
+"The approximate size of the electronic text as stored on some carrier "
+"medium, specified in any convenient units"
+msgstr ""
+"The approximate size of the electronic text as stored on some carrier "
+"medium, specified in any convenient unit"
+
+#: dispspecs/teixlite.xds.in.h:255
+msgid ""
+"The body of a composite text, grouping together a sequence of distinct texts "
+"(or groups of such texts) which are regarded as a unit for some purpose, for "
+"example the collected works of an author, a sequence of prose essays, etc."
+msgstr ""
+"The body of a composite text, grouping together a sequence of distinct texts "
+"(or groups of such texts) which are regarded as a unit for some purpose, for "
+"example the collected works of an author, a sequence of prose essays, etc."
+
+#: dispspecs/teixlite.xds.in.h:256
+msgid ""
+"The classification code used for this text in some standard classification "
+"system"
+msgstr ""
+"The classification code used for this text in some standard classification "
+"system"
+
+#: dispspecs/teixlite.xds.in.h:257
+msgid ""
+"The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
+"other division of a text"
+msgstr ""
+"The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
+"other division of a text"
+
+#: dispspecs/teixlite.xds.in.h:258
+msgid "The correct form of a passage apparently erroneous in the copy text"
+msgstr "The correct form of a passage apparently erroneous in the copy text"
+
+#: dispspecs/teixlite.xds.in.h:259
+msgid "The date of a document, as given (usually) on a title page"
+msgstr "The date of a document, as given (usually) on a title page"
+
+#: dispspecs/teixlite.xds.in.h:260
+msgid ""
+"The descriptive and declarative information making up an ‘electronic title "
+"page’ prefixed to every TEI-conformant text"
+msgstr ""
+"The descriptive and declarative information making up an ‘electronic title "
+"page’ prefixed to every TEI-conformant text"
+
+#: dispspecs/teixlite.xds.in.h:261
+msgid ""
+"The imprint statement (place and date of publication, publisher name), as "
+"given (usually) at the foot of a title page"
+msgstr ""
+"The imprint statement (place and date of publication, publisher name), as "
+"given (usually) at the foot of a title page"
+
+#: dispspecs/teixlite.xds.in.h:262
+msgid ""
+"The label associated with an item in a list; in glossaries, marks the term "
+"being defined"
+msgstr ""
+"The label associated with an item in a list; in glossaries, marks the term "
+"being defined"
+
+#: dispspecs/teixlite.xds.in.h:263
+msgid ""
+"The languages, sublanguages, registers, dialects etc. represented within a "
+"text"
+msgstr ""
+"The languages, sublanguages, registers, dialects etc. represented within a "
+"text"
+
+#: dispspecs/teixlite.xds.in.h:264
+msgid "The largest possible subdivision of the body of a text"
+msgstr "The largest possible subdivision of the body of a text"
+
+#: dispspecs/teixlite.xds.in.h:265
+msgid ""
+"The location at which a textual division generated automatically by a text-"
+"processing application is to appear"
+msgstr ""
+"The location at which a textual division generated automatically by a text-"
+"processing application is to appear"
+
+#: dispspecs/teixlite.xds.in.h:266
+msgid "The name (generic identifier) of an element"
+msgstr "The name (generic identifier) of an element"
+
+#: dispspecs/teixlite.xds.in.h:267
+msgid ""
+"The name of a person or other agency responsible for making an electronic "
+"file available, other than a publisher or distributor"
+msgstr ""
+"The name of a person or other agency responsible for making an electronic "
+"file available, other than a publisher or distributor"
+
+#: dispspecs/teixlite.xds.in.h:268
+msgid ""
+"The name of a person or other agency responsible for the distribution of a "
+"text"
+msgstr ""
+"The name of a person or other agency responsible for the distribution of a "
+"text"
+
+#: dispspecs/teixlite.xds.in.h:269
+msgid "The name of a sponsoring organization or institution"
+msgstr "The name of a sponsoring organization or institution"
+
+#: dispspecs/teixlite.xds.in.h:270
+msgid ""
+"The name of an individual, institution, or organization responsible for the "
+"funding of a project or text"
+msgstr ""
+"The name of an individual, institution, or organization responsible for the "
+"funding of a project or text"
+
+#: dispspecs/teixlite.xds.in.h:271
+msgid ""
+"The name of the author of the document, as given on the title page (often "
+"but not always contained in a &lt;byline&gt;)"
+msgstr ""
+"The name of the author of the document, as given on the title page (often "
+"but not always contained in a &lt;byline&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:272
+msgid ""
+"The name of the author(s), personal or corporate, of a work; the primary "
+"statement of responsibility for any bibliographic item"
+msgstr ""
+"The name of the author(s), personal or corporate, of a work; the primary "
+"statement of responsibility for any bibliographic item"
+
+#: dispspecs/teixlite.xds.in.h:273
+msgid ""
+"The name of the organization responsible for the publication or distribution "
+"of a bibliographic item"
+msgstr ""
+"The name of the organization responsible for the publication or distribution "
+"of a bibliographic item"
+
+#: dispspecs/teixlite.xds.in.h:274
+msgid "The name of the place where a bibliographic item was published"
+msgstr "The name of the place where a bibliographic item was published"
+
+#: dispspecs/teixlite.xds.in.h:275
+msgid ""
+"The name of the principal researcher responsible for the creation of an "
+"electronic text"
+msgstr ""
+"The name of the principal researcher responsible for the creation of an "
+"electronic text"
+
+#: dispspecs/teixlite.xds.in.h:276
+msgid ""
+"The original form of a reading, for which a regularized form is given in an "
+"attribute value"
+msgstr ""
+"The original form of a reading, for which a regularized form is given in an "
+"attribute value"
+
+#: dispspecs/teixlite.xds.in.h:277
+msgid "The particularities of one edition of a text"
+msgstr "The particularities of one edition of a text"
+
+#: dispspecs/teixlite.xds.in.h:278
+msgid ""
+"The primary statement of responsibility given for a work on its title page "
+"or at the head or end of the work"
+msgstr ""
+"The primary statement of responsibility given for a work on its title page "
+"or at the head or end of the work"
+
+#: dispspecs/teixlite.xds.in.h:279
+msgid ""
+"The title of a document, including all its constituents, as given on a title "
+"page"
+msgstr ""
+"The title of a document, including all its constituents, as given on a title "
+"page"
+
+#: dispspecs/teixlite.xds.in.h:280
+msgid ""
+"The title of a work, whether article, book, journal, or series, including "
+"any alternative titles or subtitles"
+msgstr ""
+"The title of a work, whether article, book, journal, or series, including "
+"any alternative titles or subtitles"
+
+#: dispspecs/teixlite.xds.in.h:281
+msgid "The title page of a text, appearing within the front or back matter"
+msgstr "The title page of a text, appearing within the front or back matter"
+
+#: dispspecs/teixlite.xds.in.h:282
+msgid ""
+"The whole body of a single unitary text, excluding any front or back matter"
+msgstr ""
+"The whole body of a single unitary text, excluding any front or back matter"
+
+#: dispspecs/teixlite.xds.in.h:283
+msgid "Time"
+msgstr "Time"
+
+#: dispspecs/teixlite.xds.in.h:285
+msgid "Title Page"
+msgstr "Title Page"
+
+#: dispspecs/teixlite.xds.in.h:286
+msgid "Title Part"
+msgstr "Title Part"
+
+#: dispspecs/teixlite.xds.in.h:287
+msgid "Title Statement"
+msgstr "Title Statement"
+
+#: dispspecs/teixlite.xds.in.h:288
+msgid "Trailer"
+msgstr "Trailer"
+
+#: dispspecs/teixlite.xds.in.h:289
+msgid "Unclear"
+msgstr "Unclear"
+
+#: dispspecs/teixlite.xds.in.h:290
+msgid "Verse Line (&lt;l&gt;)"
+msgstr "Verse Line (&lt;l&gt;)"
+
+#: dispspecs/website-layout.xds.in.h:1
+msgid "Additional Content"
+msgstr "Additional Content"
+
+#: dispspecs/website-layout.xds.in.h:2
+msgid "Configuration Data"
+msgstr "Configuration Data"
+
+#: dispspecs/website-layout.xds.in.h:3
+msgid "Content"
+msgstr "Content"
+
+#: dispspecs/website-layout.xds.in.h:5
+msgid "Header Link"
+msgstr "Header Link"
+
+#: dispspecs/website-layout.xds.in.h:6
+msgid "Holder"
+msgstr "Holder"
+
+#: dispspecs/website-layout.xds.in.h:7 dispspecs/xsl.xds.in.h:2
+msgid "Stylesheet"
+msgstr "Stylesheet"
+
+#: dispspecs/website-layout.xds.in.h:8
+msgid "Table of Contents"
+msgstr "Table of Contents"
+
+#: dispspecs/website-layout.xds.in.h:9
+msgid "Website Layout"
+msgstr "Website Layout"
+
+#: dispspecs/website-webpage.xds.in.h:5
+msgid "A sumamry."
+msgstr "A sumamry."
+
+#: dispspecs/website-webpage.xds.in.h:62
+msgid "Part Introduction"
+msgstr "Part Introduction"
+
+#: dispspecs/website-webpage.xds.in.h:99
+msgid "Web Page"
+msgstr "Web Page"
+
+#: dispspecs/website-webpage.xds.in.h:100
+msgid "Webpage"
+msgstr "Webpage"
+
+#: dispspecs/website-webpage.xds.in.h:102
+msgid "email"
+msgstr "email"
+
+#: dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "Abbreviated Form"
+
+#: dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr "Alternative Non-Scripted Content"
+
+#: dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "Area"
+
+#: dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "Base"
+
+#: dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr "Bidirectional Override"
+
+#: dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "Big"
+
+#: dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "Block Quotation"
+
+#: dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "Button"
+
+#: dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "Column"
+
+#: dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "Column Group"
+
+#: dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "Definition List"
+
+#: dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "Definition Term"
+
+#: dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "Deleted Text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "Division"
+
+#: dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "Forced Line Break"
+
+#: dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "Form Control"
+
+#: dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "Form Control Group"
+
+#: dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "HTML Page"
+
+#: dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "Heading (level 4)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "Heading (level 5)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "Heading (level 6)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "Horizontal Rule"
+
+#: dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "Image"
+
+#: dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "Image Map"
+
+#: dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "Inline Quotation"
+
+#: dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "Inserted Text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "Interactive Form"
+
+#: dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "Italic"
+
+#: dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "Keyboard"
+
+#: dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "Legend"
+
+#: dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "Metainformation"
+
+#: dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "Multi-line Text Field"
+
+#: dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "Object"
+
+#: dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "Option Group"
+
+#: dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "Option Selector"
+
+#: dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "Parameter"
+
+#: dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "Preformatted Text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "Sample"
+
+#: dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "Script"
+
+#: dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "Selectable Choice"
+
+#: dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "Small"
+
+#: dispspecs/xhtml1-strict.xds.in.h:62 glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Span"
+
+#: dispspecs/xhtml1-strict.xds.in.h:64
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Style"
+
+#: dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "Table Cell (data)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "Table Cell (header)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "Teletype"
+
+#: dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "The strict XML version of HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "Variable"
+
+#: dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (strict)"
+
+#: dispspecs/xsl.xds.in.h:1
+msgid ""
+"An XSL stylesheet describes a way of transforming a document of one type "
+"into one in another form. For example, it might describe a way of converting "
+"DocBook files into HTML web pages."
+msgstr ""
+"An XSL stylesheet describes a way of transforming a document of one type "
+"into one in another form. For example, it might describe a way of converting "
+"DocBook files into HTML web pages."
+
+#: dispspecs/xsl.xds.in.h:3
+msgid "Template-matching Rule"
+msgstr "Template-matching Rule"
+
+#: dispspecs/xsl.xds.in.h:4
+msgid "XSL stylesheet"
+msgstr "XSL stylesheet"
+
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
-#: src/cong-primary-window.c:605 src/cong-primary-window.c:791
-#: src/cong-primary-window.c:793 src/cong-primary-window.c:799
+#: src/cong-primary-window.c:605 src/cong-primary-window.c:793
+#: src/cong-primary-window.c:795 src/cong-primary-window.c:801
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML Editor"
 
@@ -77,13 +3050,6 @@ msgstr "Advanced"
 msgid "Basic"
 msgstr "Basic"
 
-#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:250 src/cong-file-export.c:339
-#: src/cong-file-new.c:363 src/cong-file-print.c:250
-#: src/cong-parser-error.c:320
-msgid "Description"
-msgstr "Description"
-
 #: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
 msgid "Document Type Declaration"
 msgstr "Document Type Declaration"
@@ -109,12 +3075,6 @@ msgstr "Location"
 msgid "Modified"
 msgstr "Modified"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
-#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
-#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
-msgid "Name"
-msgstr "Name"
-
 #: glade/cong-file-properties.glade.h:11
 msgid "Number of elements:"
 msgstr "Number of elements:"
@@ -135,22 +3095,9 @@ msgstr "Properties"
 msgid "Standalone"
 msgstr "Standalone"
 
-#: glade/cong-file-properties.glade.h:15
-msgid "Statistics"
-msgstr "Statistics"
-
 #: glade/cong-file-properties.glade.h:16
 msgid "System ID"
 msgstr "System ID"
-
-#: glade/cong-file-properties.glade.h:17
-#: glade/docbook-ulink-properties.glade.h:5
-msgid "Type"
-msgstr "Type"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "Version"
-msgstr "Version"
 
 #: glade/cong-file-properties.glade.h:19
 msgid "XML Header"
@@ -282,10 +3229,6 @@ msgstr "Element Type"
 msgid "I Don't Care"
 msgstr "I Don't Care"
 
-#: glade/custom-element.glade.h:6
-msgid "Span"
-msgstr "Span"
-
 #: glade/custom-element.glade.h:7
 msgid "Structural"
 msgstr "Structural"
@@ -297,10 +3240,6 @@ msgid ""
 msgstr ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
-
-#: glade/docbook-common-properties.glade.h:2 src/plugin-docbook.c:2149
-msgid "Language"
-msgstr "Language"
 
 #: glade/docbook-common-properties.glade.h:4 src/plugin-docbook.c:2155
 msgid "Revisions"
@@ -371,10 +3310,6 @@ msgstr "Minimise vertical space"
 msgid "Numbering"
 msgstr "Numbering"
 
-#: glade/docbook-orderedlist-properties.glade.h:10
-msgid "Style"
-msgstr "Style"
-
 #: glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
 msgstr "a, b, c, ..."
@@ -390,10 +3325,6 @@ msgid ""
 msgstr ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
-
-#: glade/docbook-ulink-properties.glade.h:2
-msgid "Link"
-msgstr "Link"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -741,10 +3672,6 @@ msgstr "XML Processing Instruction"
 msgid "Comment \"%s\""
 msgstr "Comment \"%s\""
 
-#: src/cong-document.c:988
-msgid "Document"
-msgstr "Document"
-
 #: src/cong-document.c:994
 msgid "Document Fragment"
 msgstr "Document Fragment"
@@ -812,15 +3739,19 @@ msgstr "Replace _All"
 msgid "Find"
 msgstr "Find"
 
-#: src/cong-editor-node-text.c:898
+#: src/cong-editor-node-text.c:887
+msgid "Select line"
+msgstr "Select line"
+
+#: src/cong-editor-node-text.c:911
 msgid "Select word"
 msgstr "Select word"
 
-#: src/cong-editor-node-text.c:923
+#: src/cong-editor-node-text.c:936
 msgid "Move cursor"
 msgstr "Move cursor"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:1022
 msgid "Drag out selection"
 msgstr "Drag out selection"
 
@@ -1383,27 +4314,27 @@ msgstr ""
 "\"Apply\" to create it.  You will need to save the document if you wish to "
 "keep it."
 
-#: src/cong-file-open.c:72
-msgid ""
-"The internal structure of the document does not match any of the types known "
-"to Conglomerate."
-msgstr ""
-"The internal structure of the document does not match any of the types known "
-"to Conglomerate."
-
 #: src/cong-file-open.c:73
 msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+
+#: src/cong-file-open.c:74
+msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 msgstr ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 
-#: src/cong-file-open.c:74
+#: src/cong-file-open.c:75
 msgid "Force"
 msgstr "Force"
 
-#: src/cong-file-open.c:218
+#: src/cong-file-open.c:228
 msgid "Select an XML document"
 msgstr "Select an XML document"
 
@@ -1689,11 +4620,11 @@ msgid "Proper_ties"
 msgstr "Proper_ties"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1543 src/cong-menus.c:1768
+#: src/cong-menus.c:1543 src/cong-menus.c:1772
 msgid "_Undo"
 msgstr "_Undo"
 
-#: src/cong-menus.c:1544 src/cong-menus.c:1778
+#: src/cong-menus.c:1544 src/cong-menus.c:1782
 msgid "_Redo"
 msgstr "_Redo"
 
@@ -1733,15 +4664,20 @@ msgstr "_Insert..."
 msgid "View _Source"
 msgstr "View _Source"
 
-#: src/cong-menus.c:1764
+#: src/cong-menus.c:1768
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Undo: %s"
 
-#: src/cong-menus.c:1774
+#: src/cong-menus.c:1778
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Redo: %s"
+
+#: src/cong-menus.c:1972
+#, c-format
+msgid "Open '%s'"
+msgstr "Open '%s'"
 
 #: src/cong-node-properties-dialog.c:254
 msgid "XPath"
@@ -1760,26 +4696,10 @@ msgstr "Namespace"
 msgid "Raw Attributes"
 msgstr "Raw Attributes"
 
-#: src/cong-node-properties-dialog.c:621
-msgid "Value"
-msgstr "Value"
-
 #: src/cong-node-properties-dialog.c:713
 #, c-format
 msgid "Attributes for <tt>%s</tt> elements"
 msgstr "Attributes for <tt>%s</tt> elements"
-
-#: src/cong-node-properties-dialog.c:827
-msgid "Text"
-msgstr "Text"
-
-#: src/cong-node-properties-dialog.c:879
-msgid "Choice"
-msgstr "Choice"
-
-#: src/cong-node-properties-dialog.c:914
-msgid "Optional"
-msgstr "Optional"
 
 #: src/cong-node-properties-dialog.c:930
 msgid "Zero or more"
@@ -1880,11 +4800,11 @@ msgstr "Bookmarks"
 msgid "Raw XML"
 msgstr "Raw XML"
 
-#: src/cong-primary-window.c:658 src/cong-primary-window.c:677
+#: src/cong-primary-window.c:660 src/cong-primary-window.c:679
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welcome to the much-delayed Conglomerate editor."
 
-#: src/cong-primary-window.c:791
+#: src/cong-primary-window.c:793
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (modified) - %s"
@@ -2297,10 +5217,6 @@ msgstr "List Member Element"
 msgid "An editor node for visualising a member of a list"
 msgstr "An editor node for visualising a member of a list"
 
-#: src/plugin-paragraph.c:68
-msgid "Paragraph"
-msgstr "Paragraph"
-
 #: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "An editor node for visualising a paragraph"
@@ -2388,18 +5304,6 @@ msgstr "Import SGML"
 #: src/plugin-sgml.c:210
 msgid "Import an SGML file, converting to XML."
 msgstr "Import an SGML file, converting to XML."
-
-#: src/plugin-table.c:405
-msgid "Table Group"
-msgstr "Table Group"
-
-#: src/plugin-table.c:411
-msgid "Table Row"
-msgstr "Table Row"
-
-#: src/plugin-table.c:417
-msgid "Table Entry"
-msgstr "Table Entry"
 
 #: src/plugin-tests.c:64
 msgid ""
