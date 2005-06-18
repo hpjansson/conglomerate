@@ -7,11 +7,10 @@
 #
 msgid ""
 msgstr ""
-
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-06-17 02:20+0200\n"
-"PO-Revision-Date: 2005-06-17 03:12+0200\n"
+"PO-Revision-Date: 2005-06-18 14:21+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -456,7 +455,7 @@ msgstr "Note de bas de page"
 
 #: dispspecs/docbook.xds.in.h:61 dispspecs/website-webpage.xds.in.h:35
 msgid "Free-floating Heading"
-msgstr "En-tête flottante"
+msgstr "En-tête flottant"
 
 #: dispspecs/docbook.xds.in.h:62 dispspecs/website-webpage.xds.in.h:36
 msgid "Function"
@@ -565,7 +564,7 @@ msgstr "Membre de liste"
 
 #: dispspecs/docbook.xds.in.h:87 dispspecs/website-webpage.xds.in.h:52
 msgid "Literal"
-msgstr "Litéral"
+msgstr "Littéral"
 
 #: dispspecs/docbook.xds.in.h:88
 msgid "Media Object"
@@ -1017,7 +1016,7 @@ msgid ""
 msgstr ""
 "Cette DTD a été conçue pour créer un type de document simple mais robuste en "
 "vue de documenter les logiciels utilisés par les projets Apache. Elle est "
-"conforme à XML et est maintenue par le project Apache XML. Voir http://"
+"conforme à XML et est maintenue par le projet Apache XML. Voir http://"
 "forrest.apache.org ."
 
 #: dispspecs/forrest-document.xds.in.h:45
@@ -1645,7 +1644,7 @@ msgid ""
 "category, within a user-defined taxonomy"
 msgstr ""
 "Catégorie descriptive individuelle, éventuellement contenue dans une "
-"catégorie de niveau supérieur, à l'intérieur d'un taxinomie définie par "
+"catégorie de niveau supérieur, à l'intérieur d'une taxinomie définie par "
 "l'utilisateur"
 
 #: dispspecs/teixlite.xds.in.h:62
@@ -1677,7 +1676,7 @@ msgid ""
 "Any heading, for example, the title of a section, or the heading of a list "
 "or glossary"
 msgstr ""
-"Toute en-tête, par exemple le tire d'une section, l''en-tête d'une liste ou "
+"Tout en-tête, par exemple le tire d'une section, l''en-tête d'une liste ou "
 "d'un glossaire"
 
 #: dispspecs/teixlite.xds.in.h:68
@@ -1740,7 +1739,7 @@ msgstr "BiblEntière"
 
 #: dispspecs/teixlite.xds.in.h:80
 msgid "Bibliographic Citation (&lt;bibl&gt;)"
-msgstr "Ciation bibliographique (&lt;bibl&gt;)"
+msgstr "Citation bibliographique (&lt;bibl&gt;)"
 
 #: dispspecs/teixlite.xds.in.h:81
 msgid "Bibliographic Scope"
@@ -1812,7 +1811,7 @@ msgid ""
 "Contains a single TEI-conformant document, comprising a TEI header and a "
 "text, either in isolation or as part of a &lt;teiCorpus&gt; element"
 msgstr ""
-"Contient un seul document conforme à la TEI, comprenant une en-tête TEI et "
+"Contient un seul document conforme à la TEI, comprenant un en-tête TEI et "
 "un texte, soit comme document isolé, soit comme partie d'un élément &lt;"
 "teiCorpus&gt;"
 
@@ -2555,7 +2554,7 @@ msgid ""
 "The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
 "other division of a text"
 msgstr ""
-"Salutations de fin, etc... ajoutée à la fin d'un avant-propos, d'une "
+"Salutations de fin, etc... ajoutées à la fin d'un avant-propos, d'une "
 "dédicace, ou de toute autre division d'un texte"
 
 #: dispspecs/teixlite.xds.in.h:258
@@ -3575,7 +3574,7 @@ msgid ""
 msgstr ""
 "Les symboles de nom XML ne peuvent contenir que des caractères "
 "alphanumériques et/ou des idéogrammes, ainsi les symboles _, -, . et :. Ils "
-"ne doivent contenir aucun espace."
+"ne doivent contenir aucune espace."
 
 #: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
 #: src/cong-node-properties-dialog.c:424
@@ -3845,7 +3844,7 @@ msgid ""
 msgstr ""
 "Désolé, cette fonctionnalité n'a pas encore été implémentée.\n"
 "\n"
-"Nous sommes au fait du problème ; c'est le bug n°%i dans le traqueur de "
+"Nous sommes au fait du problème ; c'est le bogue n°%i dans le traqueur de "
 "bogue %s"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
@@ -4255,7 +4254,7 @@ msgstr ""
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
 msgstr ""
-"L'emplacement \"%s\" n'accepter que les fichiers en lecture, pas en écriture."
+"L'emplacement \"%s\" n'accepte que les fichiers en lecture, pas en écriture."
 
 #. FIXME: need to think more about these messages
 #: src/cong-error-file-save.c:358
@@ -4924,7 +4923,7 @@ msgstr "Impression d'objets de formatage XSL"
 
 #: src/cong-util.c:365
 msgid "This will eventually be the result from cong_util_print_xslfo"
-msgstr "Ce sera éventuellement le résult de cong_util_print_xslfo"
+msgstr "Ce sera éventuellement le résultat de cong_util_print_xslfo"
 
 #: src/cong-util.c:1437
 msgid "(no description available)"
@@ -4995,7 +4994,7 @@ msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
 msgstr ""
-"Export sous format XML en convertissant en minuscules toutes les balises et "
+"Exporte sous format XML en convertissant en minuscules toutes les balises et "
 "les attributs du document. Utile quand on travaille avec des documents SGML "
 "anciens."
 
@@ -5044,7 +5043,7 @@ msgstr ""
 
 #: src/plugin-docbook.c:1106
 msgid "Unable to locate the DocBook stylesheets"
-msgstr "Impossible de trouver les feuilles de style DocBook"
+msgstr "Impossible de trouver les feuilles de styles DocBook"
 
 #: src/plugin-docbook.c:1108
 msgid ""
@@ -5053,7 +5052,7 @@ msgid ""
 "XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
 "information on catalogs)."
 msgstr ""
-"Assurez-vous que les feuilles de style DocBook de Norman Walsh, disponibles "
+"Assurez-vous que les feuilles de styles DocBook de Norman Walsh, disponibles "
 "sur http://docbook.sourceforge.net/projects/xsl/, sont installées sur votre "
 "système et ont été ajoutées au fichier catalogue XML (voir http://www."
 "xmlsoft.org/catalog.html pour de plus amples informations sur les "
@@ -5135,7 +5134,7 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr ""
-"Utiliser les feuilles de style DocBook de Norman Walsh pour créer une page "
+"Utiliser les feuilles de styles DocBook de Norman Walsh pour créer une page "
 "web à partir du fichier DocBook"
 
 #: src/plugin-docbook.c:2113
@@ -5147,7 +5146,7 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
-"Utiliser les feuilles de style DocBook de Norman Walsh pour créer un fichier "
+"Utiliser les feuilles de styles DocBook de Norman Walsh pour créer un fichier "
 "PDF à partir du fichier DocBook"
 
 #: src/plugin-docbook.c:2122
@@ -5159,7 +5158,7 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 msgstr ""
-"Utiliser les feuilles de style DocBook de Norman Walsh pour créer à partir "
+"Utiliser les feuilles de styles DocBook de Norman Walsh pour créer à partir "
 "de ce fichier DocBook un fichier XSL:FO qui puisse être imprimé ou converti "
 "ultérieurement sous format PDF"
 
@@ -5244,7 +5243,7 @@ msgstr "Type de document généré automatiquement à partir de %s"
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
-"Cette spécification d'affichage Conglomerate a été générée automtiquement à "
+"Cette spécification d'affichage Conglomerate a été générée automatiquement à "
 "partir de %s"
 
 #: src/plugin-dtd.c:215
@@ -5502,7 +5501,7 @@ msgstr "Élément de modèle XSL"
 #: src/plugin-xsl.c:325
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
-"Élément pour visualiser les règles du modèle dans une feuille de style XSL"
+"Élément pour visualiser les règles du modèle dans une feuille de styles XSL"
 
 #: src/popup.c:490
 #, c-format
