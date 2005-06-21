@@ -16,38 +16,32 @@ Many thanks to everyone who contributed to this release; my apologies if I misse
 
 
 New Translations: 
-Kinyarwanda (rw) (Steve Murphy)
+      * Kinyarwanda (rw) (Steve Murphy)
       * Ukrainian (uk) (Maxim Dziumanenko)
-      * Updated Translations: 
-Czech (cs) (Miloslav Trmac)
-      * German (de) (Frank Arnold)
-      * (Jens Seidel)
-        Canadian English (en_CA) (Adam Weinberger)
+Updated Translations: 
+      * Czech (cs) (Miloslav Trmac)
+      * German (de) (Frank Arnold, Jens Seidel)
+      * Canadian English (en_CA) (Adam Weinberger)
       * British English (en_GB) (David Lodge)
       * French (fr) (Michèle Garoche)
       * Swedish (sv) (Christian Rose)
-      * Enhancements
-Added recent files support to File menu based on libegg ( bug #108524)(Nickolay V. Shmyrev)
+Enhancements
+      * Added recent files support to File menu based on libegg ( bug #108524)(Nickolay V. Shmyrev)
       * Implemented triple-click selection of text ( bug #144667)(Yuriy Syrota)
-      * Implementation of word-count feature ( bug #135093) (Thierry Moisan)
-      * (David Malcolm)
-        Implemented --unit-test command line option and unit-testing of example files (Geert Stappers)
-      * (David Malcolm)
-        Added context-menu option to convert an entity reference to a copy (David Malcolm)
+      * Implementation of word-count feature ( bug #135093) (Thierry Moisan, David Malcolm)
+      * Implemented --unit-test command line option and unit-testing of example files (Geert Stappers, David Malcolm)
+      * Added context-menu option to convert an entity reference to a copy (David Malcolm)
       * Added new debug plugin (must be enabled with --enable-debug-plugin=yes), which adds a debug item to the Tools menu to dump the CongEditorArea tree as XML (and open the resulting file) (David Malcolm)
       * Initial (disabled) implementation of property pages (David Malcolm)
-      * Fixes
-Huge cleanup of character handling; should compile cleanly on GCC4 with -Wall (David Malcolm)
-      * Fixes to makefile and to packaging (Nickolay V. Shmyrev)
-      * (Geert Stappers)
-        Fixes to display specifications(Michèle Garoche)
+Fixes
+      * Huge cleanup of character handling; should compile cleanly on GCC4 with -Wall (David Malcolm)
+      * Fixes to makefile and to packaging (Nickolay V. Shmyrev, Geert Stappers)
+      * Fixes to display specifications(Michèle Garoche)
       * Remove lots of excess debug logging (David Malcolm)
-      * Various code cleanups (David Malcolm)
-      * (Nickolay V. Shmyrev)
-        (Marcus Meissner)
-        Fixes for cursor handling during source-code cleanup (Nickolay V. Shmyrev)
-      * Thanks
-Steve Murphy
+      * Various code cleanups (David Malcolm, Nickolay V. Shmyrev, Marcus Meissner)
+      * Fixes for cursor handling during source-code cleanup (Nickolay V. Shmyrev)
+Thanks
+      * Steve Murphy
       * Maxim Dziumanenko
       * Miloslav Trmac
       * Frank Arnold
