@@ -1,3 +1,9 @@
+2005-06-21  David Malcolm  <dmalcolm@redhat.com>
+
+	* NEWS
+
+	Added 0.9.1 to NEWS; removed 0.7.16
+
 2005-06-13  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* configure.in:
