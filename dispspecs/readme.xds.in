@@ -2,7 +2,7 @@
 <dispspec>
 	<metadata>
 		<_name>Experimental "readme" format</_name>
-		<_description xml:lang="en">This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</_description>
+		<_description>This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</_description>
 	</metadata>
 	<document-models>
 	</document-models>
