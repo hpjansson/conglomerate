@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-17 02:20+0200\n"
-"PO-Revision-Date: 2005-06-18 14:21+0200\n"
+"POT-Creation-Date: 2005-06-26 15:52+0200\n"
+"PO-Revision-Date: 2005-06-26 16:20+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -151,12 +151,12 @@ msgstr "Liste d'éléments XML"
 msgid "List of file types for this type of document"
 msgstr "Liste de types de fichiers pour ce type de document"
 
-#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:93
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
 #: dispspecs/website-webpage.xds.in.h:55
 msgid "Metadata"
 msgstr "Métadonnée"
 
-#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:95
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
 #: dispspecs/teixlite.xds.in.h:194 dispspecs/website-webpage.xds.in.h:57
 #: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
 #: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
@@ -234,7 +234,8 @@ msgid "Abstract"
 msgstr "Résumé"
 
 #: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
-#: dispspecs/website-webpage.xds.in.h:8 dispspecs/xhtml1-strict.xds.in.h:2
+#: dispspecs/website-webpage.xds.in.h:8
+#: dispspecs/xhtml1-strict.xds.in.h:2
 msgid "Acronym"
 msgstr "Acronyme"
 
@@ -243,7 +244,8 @@ msgid "Additional metadata"
 msgstr "Métadonnée supplémentaire"
 
 #: dispspecs/docbook.xds.in.h:13 dispspecs/teixlite.xds.in.h:56
-#: dispspecs/website-webpage.xds.in.h:10 dispspecs/xhtml1-strict.xds.in.h:3
+#: dispspecs/website-webpage.xds.in.h:10
+#: dispspecs/xhtml1-strict.xds.in.h:3
 msgid "Address"
 msgstr "Adresse"
 
@@ -251,136 +253,138 @@ msgstr "Adresse"
 msgid "An email address"
 msgstr "Adresse email"
 
-#: dispspecs/docbook.xds.in.h:15
+#. FIXME:  EMPTY content model should have a special type of localName
+#: dispspecs/docbook.xds.in.h:16
 msgid "Anchor Point"
 msgstr "Point d'ancrage"
 
-#: dispspecs/docbook.xds.in.h:16
+#: dispspecs/docbook.xds.in.h:17
 msgid "Answer"
 msgstr "Réponse"
 
-#: dispspecs/docbook.xds.in.h:17 dispspecs/website-webpage.xds.in.h:12
+#: dispspecs/docbook.xds.in.h:18 dispspecs/website-webpage.xds.in.h:12
 msgid "Appendix"
 msgstr "Appendice"
 
-#: dispspecs/docbook.xds.in.h:18 dispspecs/website-webpage.xds.in.h:13
+#: dispspecs/docbook.xds.in.h:19 dispspecs/website-webpage.xds.in.h:13
 msgid "Application"
 msgstr "Application"
 
-#: dispspecs/docbook.xds.in.h:19
+#: dispspecs/docbook.xds.in.h:20
 msgid "Article"
 msgstr "Article"
 
-#: dispspecs/docbook.xds.in.h:20
+#: dispspecs/docbook.xds.in.h:21
 msgid "Article Header"
 msgstr "En-tête d'article"
 
-#: dispspecs/docbook.xds.in.h:21
+#: dispspecs/docbook.xds.in.h:22
 msgid "Article Information"
 msgstr "Information sur l'article"
 
-#: dispspecs/docbook.xds.in.h:22
+#: dispspecs/docbook.xds.in.h:23
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:3
 #: dispspecs/teixlite.xds.in.h:75 dispspecs/website-webpage.xds.in.h:14
 msgid "Author"
 msgstr "Auteur"
 
-#: dispspecs/docbook.xds.in.h:23
+#: dispspecs/docbook.xds.in.h:24
 msgid "Author Initials"
 msgstr "Initiales de l'auteur"
 
-#: dispspecs/docbook.xds.in.h:24 dispspecs/website-webpage.xds.in.h:15
+#: dispspecs/docbook.xds.in.h:25 dispspecs/website-webpage.xds.in.h:15
 msgid "Authorship Information"
 msgstr "Information concernant les auteurs"
 
-#: dispspecs/docbook.xds.in.h:25 dispspecs/website-webpage.xds.in.h:16
+#: dispspecs/docbook.xds.in.h:26 dispspecs/website-webpage.xds.in.h:16
 msgid "Bibliographic Information"
 msgstr "Information bibliographique"
 
-#: dispspecs/docbook.xds.in.h:26 dispspecs/website-webpage.xds.in.h:17
+#: dispspecs/docbook.xds.in.h:27 dispspecs/website-webpage.xds.in.h:17
 msgid "Bibliography"
 msgstr "Bibliographie"
 
-#: dispspecs/docbook.xds.in.h:27
+#: dispspecs/docbook.xds.in.h:28
 msgid "Book"
 msgstr "Livre"
 
-#: dispspecs/docbook.xds.in.h:28
+#: dispspecs/docbook.xds.in.h:29
 msgid "Book Information"
 msgstr "Information sur le livre"
 
-#: dispspecs/docbook.xds.in.h:29 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/docbook.xds.in.h:30 dispspecs/forrest-document.xds.in.h:6
 #: dispspecs/xhtml1-strict.xds.in.h:14
 msgid "Caption"
 msgstr "Titre (tableau)"
 
-#: dispspecs/docbook.xds.in.h:30
+#: dispspecs/docbook.xds.in.h:31
 msgid "Caution"
 msgstr "Attention"
 
-#: dispspecs/docbook.xds.in.h:31 dispspecs/website-webpage.xds.in.h:18
+#: dispspecs/docbook.xds.in.h:32 dispspecs/website-webpage.xds.in.h:18
 msgid "Chapter"
 msgstr "Chapitre"
 
-#: dispspecs/docbook.xds.in.h:32 dispspecs/website-webpage.xds.in.h:19
+#: dispspecs/docbook.xds.in.h:33 dispspecs/website-webpage.xds.in.h:19
 msgid "City"
 msgstr "Ville"
 
-#: dispspecs/docbook.xds.in.h:33 dispspecs/website-webpage.xds.in.h:20
+#: dispspecs/docbook.xds.in.h:34 dispspecs/website-webpage.xds.in.h:20
 msgid "Colophon"
 msgstr "Achevé d'imprimer"
 
-#: dispspecs/docbook.xds.in.h:34
+#: dispspecs/docbook.xds.in.h:35
 msgid "Command"
 msgstr "Commande"
 
-#: dispspecs/docbook.xds.in.h:35 dispspecs/website-webpage.xds.in.h:21
+#: dispspecs/docbook.xds.in.h:36 dispspecs/website-webpage.xds.in.h:21
 msgid "Command Synopsis"
 msgstr "Synopsis de commande"
 
-#: dispspecs/docbook.xds.in.h:36
+#: dispspecs/docbook.xds.in.h:37
 msgid "Computer Output"
 msgstr "Sortie informatique"
 
-#: dispspecs/docbook.xds.in.h:37 dispspecs/website-layout.xds.in.h:4
+#: dispspecs/docbook.xds.in.h:38 dispspecs/website-layout.xds.in.h:4
 #: dispspecs/website-webpage.xds.in.h:22
 msgid "Copyright"
 msgstr "Copyright"
 
-#: dispspecs/docbook.xds.in.h:38 dispspecs/website-webpage.xds.in.h:23
+#: dispspecs/docbook.xds.in.h:39 dispspecs/website-webpage.xds.in.h:23
 msgid "Copyright Holder"
 msgstr "Détenteur du copyright"
 
-#: dispspecs/docbook.xds.in.h:39
+#: dispspecs/docbook.xds.in.h:40
 msgid "Corporate Name"
 msgstr "Raison sociale"
 
-#: dispspecs/docbook.xds.in.h:40 dispspecs/website-webpage.xds.in.h:24
+#: dispspecs/docbook.xds.in.h:41 dispspecs/website-webpage.xds.in.h:24
 msgid "Cross-reference"
 msgstr "Référence croisée"
 
-#: dispspecs/docbook.xds.in.h:41 dispspecs/teixlite.xds.in.h:103
+#: dispspecs/docbook.xds.in.h:42 dispspecs/teixlite.xds.in.h:103
 msgid "Date"
 msgstr "Date"
 
-#: dispspecs/docbook.xds.in.h:42 dispspecs/website-webpage.xds.in.h:25
+#: dispspecs/docbook.xds.in.h:43 dispspecs/website-webpage.xds.in.h:25
 msgid "Date of Publication"
 msgstr "Date d'édition"
 
-#: dispspecs/docbook.xds.in.h:43
+#: dispspecs/docbook.xds.in.h:44
 msgid "Defined terms"
 msgstr "Termes définis"
 
-#: dispspecs/docbook.xds.in.h:44 dispspecs/forrest-document.xds.in.h:9
-#: dispspecs/website-webpage.xds.in.h:26 dispspecs/xhtml1-strict.xds.in.h:19
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/website-webpage.xds.in.h:26
+#: dispspecs/xhtml1-strict.xds.in.h:19
 msgid "Definition"
 msgstr "Définition"
 
-#: dispspecs/docbook.xds.in.h:45
+#: dispspecs/docbook.xds.in.h:46
 msgid "DocBook"
 msgstr "DocBook"
 
-#: dispspecs/docbook.xds.in.h:46
+#: dispspecs/docbook.xds.in.h:47
 msgid ""
 "DocBook is a document type that broadly corresponds to what most people "
 "think of as \"a book\"; it is well-suited for writing books and articles, "
@@ -390,488 +394,501 @@ msgstr ""
 "qu'ont les gens de ce qu'est \"un livre\" ; il convient à l'écriture de "
 "livres et d'articles, pour publication imprimée ou sur site web."
 
-#: dispspecs/docbook.xds.in.h:47 dispspecs/teixlite.xds.in.h:128
+#: dispspecs/docbook.xds.in.h:48 dispspecs/teixlite.xds.in.h:128
 #: dispspecs/website-webpage.xds.in.h:27
 msgid "Edition"
 msgstr "Édition"
 
-#: dispspecs/docbook.xds.in.h:48
+#: dispspecs/docbook.xds.in.h:49
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:11
 #: dispspecs/teixlite.xds.in.h:130 dispspecs/website-webpage.xds.in.h:28
 msgid "Editor"
 msgstr "Éditeur"
 
-#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/docbook.xds.in.h:50
 msgid "Email Address"
 msgstr "Adresse email"
 
-#: dispspecs/docbook.xds.in.h:50 dispspecs/forrest-document.xds.in.h:13
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:13 dispspecs/readme.xds.in.h:5
-#: dispspecs/teixlite.xds.in.h:132 dispspecs/website-webpage.xds.in.h:29
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: dispspecs/readme.xds.in.h:5 dispspecs/teixlite.xds.in.h:132
+#: dispspecs/website-webpage.xds.in.h:29
 #: dispspecs/xhtml1-strict.xds.in.h:24
 msgid "Emphasis"
 msgstr "Emphase"
 
-#: dispspecs/docbook.xds.in.h:51 dispspecs/website-webpage.xds.in.h:30
+#: dispspecs/docbook.xds.in.h:52 dispspecs/website-webpage.xds.in.h:30
 msgid "Entry"
 msgstr "Entrée"
 
-#: dispspecs/docbook.xds.in.h:52
+#: dispspecs/docbook.xds.in.h:53
 msgid "Environment Variable"
 msgstr "Variable d'environnement"
 
-#: dispspecs/docbook.xds.in.h:53
+#: dispspecs/docbook.xds.in.h:54
 msgid "Example (formal)"
 msgstr "Exemple (formel)"
 
-#: dispspecs/docbook.xds.in.h:54 dispspecs/website-webpage.xds.in.h:31
+#: dispspecs/docbook.xds.in.h:55 dispspecs/website-webpage.xds.in.h:31
 msgid "Example (informal)"
 msgstr "Exemple (informel)"
 
-#: dispspecs/docbook.xds.in.h:55 dispspecs/forrest-document.xds.in.h:14
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
 #: dispspecs/teixlite.xds.in.h:139
 msgid "Figure"
 msgstr "Figure"
 
-#: dispspecs/docbook.xds.in.h:56
+#: dispspecs/docbook.xds.in.h:57
 msgid "Figure (informal)"
 msgstr "Figure (informelle)"
 
-#: dispspecs/docbook.xds.in.h:57 dispspecs/website-webpage.xds.in.h:32
+#: dispspecs/docbook.xds.in.h:58 dispspecs/website-webpage.xds.in.h:32
 msgid "Filename"
 msgstr "Nom de fichier"
 
-#: dispspecs/docbook.xds.in.h:58 dispspecs/website-webpage.xds.in.h:33
+#: dispspecs/docbook.xds.in.h:59 dispspecs/website-webpage.xds.in.h:33
 msgid "First Name"
 msgstr "Prénom"
 
-#: dispspecs/docbook.xds.in.h:59 dispspecs/website-webpage.xds.in.h:34
+#: dispspecs/docbook.xds.in.h:60 dispspecs/website-webpage.xds.in.h:34
 msgid "First Term"
 msgstr "Premier terme"
 
-#: dispspecs/docbook.xds.in.h:60
+#: dispspecs/docbook.xds.in.h:61
 msgid "Footnote"
 msgstr "Note de bas de page"
 
-#: dispspecs/docbook.xds.in.h:61 dispspecs/website-webpage.xds.in.h:35
+#: dispspecs/docbook.xds.in.h:62 dispspecs/website-webpage.xds.in.h:35
 msgid "Free-floating Heading"
 msgstr "En-tête flottant"
 
-#: dispspecs/docbook.xds.in.h:62 dispspecs/website-webpage.xds.in.h:36
+#: dispspecs/docbook.xds.in.h:63 dispspecs/website-webpage.xds.in.h:36
 msgid "Function"
 msgstr "Fonction"
 
-#: dispspecs/docbook.xds.in.h:63
+#. various related localNames need to be added
+#: dispspecs/docbook.xds.in.h:65
 msgid "Function Synopsis"
 msgstr "Synopsis de fonction"
 
-#: dispspecs/docbook.xds.in.h:64 dispspecs/website-webpage.xds.in.h:37
+#: dispspecs/docbook.xds.in.h:66 dispspecs/website-webpage.xds.in.h:37
 msgid "GUI Button"
 msgstr "Bouton IUG"
 
-#: dispspecs/docbook.xds.in.h:65 dispspecs/website-webpage.xds.in.h:38
+#: dispspecs/docbook.xds.in.h:67 dispspecs/website-webpage.xds.in.h:38
 msgid "GUI Label"
 msgstr "Étiquette IUG"
 
-#: dispspecs/docbook.xds.in.h:66 dispspecs/website-webpage.xds.in.h:39
+#: dispspecs/docbook.xds.in.h:68 dispspecs/website-webpage.xds.in.h:39
 msgid "GUI Menu"
 msgstr "Menu IUG"
 
-#: dispspecs/docbook.xds.in.h:67 dispspecs/website-webpage.xds.in.h:40
+#: dispspecs/docbook.xds.in.h:69 dispspecs/website-webpage.xds.in.h:40
 msgid "GUI Menu Item"
 msgstr "Article de menu IUG"
 
-#: dispspecs/docbook.xds.in.h:68 dispspecs/website-webpage.xds.in.h:41
+#: dispspecs/docbook.xds.in.h:70 dispspecs/website-webpage.xds.in.h:41
 msgid "GUI Submenu"
 msgstr "Sous-menu IUG"
 
-#: dispspecs/docbook.xds.in.h:69 dispspecs/website-webpage.xds.in.h:42
+#: dispspecs/docbook.xds.in.h:71 dispspecs/website-webpage.xds.in.h:42
 msgid "Glossary"
 msgstr "Glossaire"
 
-#: dispspecs/docbook.xds.in.h:70 dispspecs/website-webpage.xds.in.h:43
+#: dispspecs/docbook.xds.in.h:72 dispspecs/website-webpage.xds.in.h:43
 msgid "Glossary Entry"
 msgstr "Entrée de glossaire"
 
-#: dispspecs/docbook.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:73
 msgid "Graphic"
 msgstr "Graphique"
 
-#: dispspecs/docbook.xds.in.h:72 dispspecs/website-webpage.xds.in.h:44
+#: dispspecs/docbook.xds.in.h:74 dispspecs/website-webpage.xds.in.h:44
 msgid "ISBN"
 msgstr "ISBN"
 
-#: dispspecs/docbook.xds.in.h:73 dispspecs/website-webpage.xds.in.h:45
+#: dispspecs/docbook.xds.in.h:75 dispspecs/website-webpage.xds.in.h:45
 msgid "ISSN"
 msgstr "ISSN"
 
-#: dispspecs/docbook.xds.in.h:74
+#: dispspecs/docbook.xds.in.h:76
 msgid "Image Data"
 msgstr "Donnée image"
 
-#: dispspecs/docbook.xds.in.h:75
+#: dispspecs/docbook.xds.in.h:77
 msgid "Image Object"
 msgstr "Objet image"
 
-#: dispspecs/docbook.xds.in.h:76
+#: dispspecs/docbook.xds.in.h:78
 msgid "Important"
 msgstr "Important"
 
-#: dispspecs/docbook.xds.in.h:77 dispspecs/website-webpage.xds.in.h:46
+#: dispspecs/docbook.xds.in.h:79 dispspecs/website-webpage.xds.in.h:46
 msgid "Index Term"
 msgstr "Terme d'index"
 
-#: dispspecs/docbook.xds.in.h:78 dispspecs/forrest-document.xds.in.h:21
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:19 dispspecs/readme.xds.in.h:9
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19
+#: dispspecs/readme.xds.in.h:9
 msgid "Introduction"
 msgstr "Introduction"
 
-#: dispspecs/docbook.xds.in.h:79 dispspecs/website-webpage.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:81 dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
 msgstr "Intitulé de touche"
 
-#: dispspecs/docbook.xds.in.h:80 dispspecs/website-webpage.xds.in.h:48
+#: dispspecs/docbook.xds.in.h:82 dispspecs/website-webpage.xds.in.h:48
 msgid "Legal Notice"
 msgstr "Note juridique"
 
-#: dispspecs/docbook.xds.in.h:81 dispspecs/website-webpage.xds.in.h:49
+#: dispspecs/docbook.xds.in.h:83 dispspecs/website-webpage.xds.in.h:49
 msgid "List (itemised)"
 msgstr "Liste (non numérotée)"
 
-#: dispspecs/docbook.xds.in.h:82 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:23
-#: dispspecs/website-webpage.xds.in.h:50 dispspecs/xhtml1-strict.xds.in.h:47
+#: dispspecs/website-webpage.xds.in.h:50
+#: dispspecs/xhtml1-strict.xds.in.h:47
 msgid "List (ordered)"
 msgstr "Liste (numérotée)"
 
-#: dispspecs/docbook.xds.in.h:83 dispspecs/website-webpage.xds.in.h:51
+#: dispspecs/docbook.xds.in.h:85 dispspecs/website-webpage.xds.in.h:51
 msgid "List (simple)"
 msgstr "Liste (simple)"
 
-#: dispspecs/docbook.xds.in.h:84
+#: dispspecs/docbook.xds.in.h:86
 msgid "List (terms and definitions)"
 msgstr "Liste (termes et définitions)"
 
-#: dispspecs/docbook.xds.in.h:85
+#: dispspecs/docbook.xds.in.h:87
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:25
 #: dispspecs/xhtml1-strict.xds.in.h:49
 msgid "List Item"
 msgstr "Élément de liste"
 
-#: dispspecs/docbook.xds.in.h:86
+#: dispspecs/docbook.xds.in.h:88
 msgid "List Member"
 msgstr "Membre de liste"
 
-#: dispspecs/docbook.xds.in.h:87 dispspecs/website-webpage.xds.in.h:52
+#: dispspecs/docbook.xds.in.h:89 dispspecs/website-webpage.xds.in.h:52
 msgid "Literal"
 msgstr "Littéral"
 
-#: dispspecs/docbook.xds.in.h:88
+#: dispspecs/docbook.xds.in.h:90
 msgid "Media Object"
 msgstr "Objet média"
 
-#: dispspecs/docbook.xds.in.h:89 dispspecs/website-webpage.xds.in.h:53
+#: dispspecs/docbook.xds.in.h:91 dispspecs/website-webpage.xds.in.h:53
 msgid "Menu Choice"
 msgstr "Choix de menu"
 
-#: dispspecs/docbook.xds.in.h:90 dispspecs/website-webpage.xds.in.h:54
+#: dispspecs/docbook.xds.in.h:92 dispspecs/website-webpage.xds.in.h:54
 msgid "Meta-information about a Reference Page"
 msgstr "Métainformation au sujet d'une page de référence"
 
-#: dispspecs/docbook.xds.in.h:91
+#: dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
 msgstr "Métainformation pour un livre"
 
-#: dispspecs/docbook.xds.in.h:92
+#: dispspecs/docbook.xds.in.h:94
 msgid "Meta-information for an article"
 msgstr "Métainformation pour un article"
 
-#: dispspecs/docbook.xds.in.h:94 dispspecs/website-webpage.xds.in.h:56
+#: dispspecs/docbook.xds.in.h:96 dispspecs/website-webpage.xds.in.h:56
 msgid "Miscellaneous Bibliographic Information"
 msgstr "Informations bibliographiques diverses"
 
-#: dispspecs/docbook.xds.in.h:96 dispspecs/website-webpage.xds.in.h:58
+#: dispspecs/docbook.xds.in.h:98 dispspecs/website-webpage.xds.in.h:58
 msgid "Name, purpose and classification about a Reference Page"
 msgstr "Nom, usage et classification d'une page de référence"
 
-#: dispspecs/docbook.xds.in.h:97 dispspecs/website-webpage.xds.in.h:59
+#: dispspecs/docbook.xds.in.h:99 dispspecs/website-webpage.xds.in.h:59
 msgid "Naming"
 msgstr "Espace de nommage"
 
-#: dispspecs/docbook.xds.in.h:98 dispspecs/forrest-document.xds.in.h:29
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
 #: dispspecs/teixlite.xds.in.h:195
 msgid "Note"
 msgstr "Note"
 
-#: dispspecs/docbook.xds.in.h:99 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
 #: dispspecs/readme.xds.in.h:11 dispspecs/teixlite.xds.in.h:206
-#: dispspecs/website-webpage.xds.in.h:60 dispspecs/xhtml1-strict.xds.in.h:55
-#: src/plugin-paragraph.c:68
+#: dispspecs/website-webpage.xds.in.h:60
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:68
 msgid "Paragraph"
 msgstr "Paragraphe"
 
-#: dispspecs/docbook.xds.in.h:100
+#: dispspecs/docbook.xds.in.h:102
 msgid "Paragraph (titled)"
 msgstr "Paragraphe (avec titre)"
 
-#: dispspecs/docbook.xds.in.h:101 dispspecs/website-webpage.xds.in.h:61
+#: dispspecs/docbook.xds.in.h:103 dispspecs/website-webpage.xds.in.h:61
 msgid "Part"
 msgstr "Partie"
 
-#: dispspecs/docbook.xds.in.h:102 dispspecs/website-webpage.xds.in.h:63
+#: dispspecs/docbook.xds.in.h:104 dispspecs/website-webpage.xds.in.h:63
 msgid "Preface"
 msgstr "Préface"
 
-#: dispspecs/docbook.xds.in.h:103 dispspecs/website-webpage.xds.in.h:64
+#: dispspecs/docbook.xds.in.h:105 dispspecs/website-webpage.xds.in.h:64
 msgid "Printing History"
 msgstr "Historique d'impression"
 
-#: dispspecs/docbook.xds.in.h:104 dispspecs/website-webpage.xds.in.h:65
+#: dispspecs/docbook.xds.in.h:106 dispspecs/website-webpage.xds.in.h:65
 msgid "Procedure"
 msgstr "Procédure"
 
-#: dispspecs/docbook.xds.in.h:105 dispspecs/website-webpage.xds.in.h:66
+#: dispspecs/docbook.xds.in.h:107 dispspecs/website-webpage.xds.in.h:66
 msgid "Product Name"
 msgstr "Nom de produit"
 
-#: dispspecs/docbook.xds.in.h:106
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: dispspecs/docbook.xds.in.h:116
 msgid "Program Listing"
 msgstr "Listing de programme"
 
-#: dispspecs/docbook.xds.in.h:107
+#: dispspecs/docbook.xds.in.h:117
 msgid "Prompt"
 msgstr "Invite"
 
-#: dispspecs/docbook.xds.in.h:108 dispspecs/teixlite.xds.in.h:214
+#: dispspecs/docbook.xds.in.h:118 dispspecs/teixlite.xds.in.h:214
 #: dispspecs/website-webpage.xds.in.h:67
 msgid "Publisher"
 msgstr "Éditeur"
 
-#: dispspecs/docbook.xds.in.h:109 dispspecs/website-webpage.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:119 dispspecs/website-webpage.xds.in.h:68
 msgid "Publisher Name"
 msgstr "Nom de l'éditeur"
 
-#: dispspecs/docbook.xds.in.h:110 dispspecs/website-webpage.xds.in.h:69
+#: dispspecs/docbook.xds.in.h:120 dispspecs/website-webpage.xds.in.h:69
 msgid "Purpose"
 msgstr "Usage"
 
-#: dispspecs/docbook.xds.in.h:111
+#: dispspecs/docbook.xds.in.h:121
 msgid "Question"
 msgstr "Question"
 
-#: dispspecs/docbook.xds.in.h:112
+#: dispspecs/docbook.xds.in.h:122
 msgid "Question-and-Answer"
 msgstr "Question-et-Réponse"
 
-#: dispspecs/docbook.xds.in.h:113
+#: dispspecs/docbook.xds.in.h:123
 msgid "Question-and-Answer Set"
 msgstr "Jeu de questions et réponses"
 
-#: dispspecs/docbook.xds.in.h:114
+#: dispspecs/docbook.xds.in.h:124
 msgid "Question-and-Answer Subset"
 msgstr "Jeu subsidiaire de questions et réponses"
 
-#: dispspecs/docbook.xds.in.h:115 dispspecs/readme.xds.in.h:12
+#: dispspecs/docbook.xds.in.h:125 dispspecs/readme.xds.in.h:12
 msgid "Quote"
 msgstr "Citation (quote)"
 
-#: dispspecs/docbook.xds.in.h:116 dispspecs/relax-ng.xds.in.h:10
+#: dispspecs/docbook.xds.in.h:126 dispspecs/relax-ng.xds.in.h:10
 #: dispspecs/website-webpage.xds.in.h:70
 msgid "Reference"
 msgstr "Référence"
 
-#: dispspecs/docbook.xds.in.h:117 dispspecs/website-webpage.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:127 dispspecs/website-webpage.xds.in.h:71
 msgid "Reference Page"
 msgstr "Page de référence"
 
-#: dispspecs/docbook.xds.in.h:118 dispspecs/website-webpage.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:128 dispspecs/website-webpage.xds.in.h:72
 msgid "Release Information"
 msgstr "Informations de publication"
 
-#: dispspecs/docbook.xds.in.h:119 dispspecs/website-webpage.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:129 dispspecs/website-webpage.xds.in.h:73
 msgid "Replaceable Text"
 msgstr "Texte modifiable"
 
-#: dispspecs/docbook.xds.in.h:120
+#: dispspecs/docbook.xds.in.h:130
 msgid "Revision"
 msgstr "Révision"
 
-#: dispspecs/docbook.xds.in.h:121
+#: dispspecs/docbook.xds.in.h:131
 msgid "Revision History"
 msgstr "Historique de révision"
 
-#: dispspecs/docbook.xds.in.h:122
+#: dispspecs/docbook.xds.in.h:132
 msgid "Revision Remark"
 msgstr "Remarque de révision"
 
-#: dispspecs/docbook.xds.in.h:123 dispspecs/website-webpage.xds.in.h:74
+#: dispspecs/docbook.xds.in.h:133 dispspecs/website-webpage.xds.in.h:74
 msgid "SGML Tag"
 msgstr "Balise SGML"
 
-#: dispspecs/docbook.xds.in.h:124 dispspecs/website-webpage.xds.in.h:75
+#: dispspecs/docbook.xds.in.h:134 dispspecs/website-webpage.xds.in.h:75
 msgid "Screen"
 msgstr "Écran"
 
-#: dispspecs/docbook.xds.in.h:125
+#: dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
 msgstr "Capture d'écran"
 
-#: dispspecs/docbook.xds.in.h:126 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:29
 #: dispspecs/readme.xds.in.h:13 dispspecs/website-webpage.xds.in.h:76
 msgid "Section"
 msgstr "Section"
 
-#: dispspecs/docbook.xds.in.h:127 dispspecs/website-webpage.xds.in.h:77
+#: dispspecs/docbook.xds.in.h:137 dispspecs/website-webpage.xds.in.h:77
 msgid "Section (level 5)"
 msgstr "Section (niveau 5)"
 
-#: dispspecs/docbook.xds.in.h:128
+#: dispspecs/docbook.xds.in.h:138
 msgid "Set"
 msgstr "Jeu"
 
-#: dispspecs/docbook.xds.in.h:129 dispspecs/website-webpage.xds.in.h:78
+#: dispspecs/docbook.xds.in.h:139 dispspecs/website-webpage.xds.in.h:78
 msgid "Step"
 msgstr "Étape"
 
-#: dispspecs/docbook.xds.in.h:130 dispspecs/website-webpage.xds.in.h:79
+#: dispspecs/docbook.xds.in.h:140 dispspecs/website-webpage.xds.in.h:79
 msgid "Structure Name"
 msgstr "Nom de structure"
 
-#: dispspecs/docbook.xds.in.h:131 dispspecs/website-webpage.xds.in.h:80
+#: dispspecs/docbook.xds.in.h:141 dispspecs/website-webpage.xds.in.h:80
 msgid "Subsection"
 msgstr "Sous-section"
 
-#: dispspecs/docbook.xds.in.h:132 dispspecs/website-webpage.xds.in.h:81
+#: dispspecs/docbook.xds.in.h:142 dispspecs/website-webpage.xds.in.h:81
 msgid "Subsection (level 3)"
 msgstr "Sous-section (niveau 3)"
 
-#: dispspecs/docbook.xds.in.h:133 dispspecs/website-webpage.xds.in.h:82
+#: dispspecs/docbook.xds.in.h:143 dispspecs/website-webpage.xds.in.h:82
 msgid "Subsection (level 4)"
 msgstr "Sous-section (niveau 4)"
 
-#: dispspecs/docbook.xds.in.h:134 dispspecs/website-webpage.xds.in.h:83
+#: dispspecs/docbook.xds.in.h:144 dispspecs/website-webpage.xds.in.h:83
 msgid "Substeps"
 msgstr "Étapes intermédiaires"
 
-#: dispspecs/docbook.xds.in.h:135 dispspecs/website-webpage.xds.in.h:84
+#: dispspecs/docbook.xds.in.h:145 dispspecs/website-webpage.xds.in.h:84
 msgid "Subsubsection"
 msgstr "Sous-sous-section"
 
-#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:37
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
 #: dispspecs/website-webpage.xds.in.h:85
 msgid "Subtitle"
 msgstr "Sous-titre"
 
-#: dispspecs/docbook.xds.in.h:137 dispspecs/website-webpage.xds.in.h:86
+#: dispspecs/docbook.xds.in.h:147 dispspecs/website-webpage.xds.in.h:86
 msgid "Surname"
 msgstr "Nom"
 
-#: dispspecs/docbook.xds.in.h:138 dispspecs/website-webpage.xds.in.h:87
+#: dispspecs/docbook.xds.in.h:148 dispspecs/website-webpage.xds.in.h:87
 msgid "Symbol"
 msgstr "Symbole"
 
-#: dispspecs/docbook.xds.in.h:139 dispspecs/website-webpage.xds.in.h:88
+#: dispspecs/docbook.xds.in.h:149 dispspecs/website-webpage.xds.in.h:88
 msgid "Synopsis (syntax)"
 msgstr "Synopsis (syntaxe)"
 
-#: dispspecs/docbook.xds.in.h:140 dispspecs/website-webpage.xds.in.h:89
+#: dispspecs/docbook.xds.in.h:150 dispspecs/website-webpage.xds.in.h:89
 msgid "Table (informal)"
 msgstr "Tableau (informel)"
 
-#: dispspecs/docbook.xds.in.h:141 dispspecs/xhtml1-strict.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
 msgid "Table Body"
 msgstr "Corps de tableau"
 
-#: dispspecs/docbook.xds.in.h:142
+#: dispspecs/docbook.xds.in.h:152
 msgid "Table Column Specification"
 msgstr "Spécification de colonne de tableau"
 
-#: dispspecs/docbook.xds.in.h:143 src/plugin-table.c:417
+#: dispspecs/docbook.xds.in.h:153 src/plugin-table.c:417
 msgid "Table Entry"
 msgstr "Entrée de tableau"
 
-#: dispspecs/docbook.xds.in.h:144
+#: dispspecs/docbook.xds.in.h:154
 msgid "Table Entry (subtable)"
 msgstr "Entrée de tableau (sous-tableau)"
 
-#: dispspecs/docbook.xds.in.h:145 dispspecs/xhtml1-strict.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
 msgid "Table Footer"
 msgstr "Pied de tableau"
 
-#: dispspecs/docbook.xds.in.h:146 src/plugin-table.c:405
+#: dispspecs/docbook.xds.in.h:156 src/plugin-table.c:405
 msgid "Table Group"
 msgstr "Groupe dans un tableau"
 
-#: dispspecs/docbook.xds.in.h:147 dispspecs/xhtml1-strict.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
 msgid "Table Header"
 msgstr "En-tête de tableau"
 
-#: dispspecs/docbook.xds.in.h:148 dispspecs/xhtml1-strict.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
 #: src/plugin-table.c:411
 msgid "Table Row"
 msgstr "Ligne de tableau"
 
-#: dispspecs/docbook.xds.in.h:149 dispspecs/teixlite.xds.in.h:250
+#: dispspecs/docbook.xds.in.h:159 dispspecs/teixlite.xds.in.h:250
 #: dispspecs/website-webpage.xds.in.h:90
 msgid "Term"
 msgstr "Terme"
 
-#: dispspecs/docbook.xds.in.h:150
+#: dispspecs/docbook.xds.in.h:160
 msgid "Text Object"
 msgstr "Objet texte"
 
-#: dispspecs/docbook.xds.in.h:151 dispspecs/website-webpage.xds.in.h:91
+#: dispspecs/docbook.xds.in.h:161 dispspecs/website-webpage.xds.in.h:91
 msgid "The International Standard Book Number of a document."
 msgstr "Numéro standard international d'un livre"
 
-#: dispspecs/docbook.xds.in.h:152 dispspecs/website-webpage.xds.in.h:92
+#: dispspecs/docbook.xds.in.h:162 dispspecs/website-webpage.xds.in.h:92
 msgid "The International Standard Serial Number of a periodical."
 msgstr "Numéro de série standard international d'un périodique"
 
-#: dispspecs/docbook.xds.in.h:153 dispspecs/website-webpage.xds.in.h:93
+#: dispspecs/docbook.xds.in.h:163 dispspecs/website-webpage.xds.in.h:93
 msgid "The first place where a word or term occurs in a particular context"
 msgstr ""
 "Endroit où un mot ou un terme se trouve pour la première fois dans un "
 "contexte donné"
 
-#: dispspecs/docbook.xds.in.h:154 dispspecs/website-webpage.xds.in.h:94
+#: dispspecs/docbook.xds.in.h:164 dispspecs/website-webpage.xds.in.h:94
 msgid "The name of a function, subroutine or procedure"
 msgstr "Nom d'une fonction, sous-routine ou procédure"
 
-#: dispspecs/docbook.xds.in.h:155 dispspecs/website-webpage.xds.in.h:95
+#: dispspecs/docbook.xds.in.h:165 dispspecs/website-webpage.xds.in.h:95
 msgid "The printed text on a particular key on a keyboard"
 msgstr "Texte imprimé sur une touche donnée d'un clavier"
 
-#: dispspecs/docbook.xds.in.h:156
+#: dispspecs/docbook.xds.in.h:166
 msgid "Tip"
 msgstr "Astuce"
 
-#: dispspecs/docbook.xds.in.h:157 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:32
-#: dispspecs/readme.xds.in.h:15 dispspecs/teixlite.xds.in.h:284
-#: dispspecs/website-webpage.xds.in.h:96 dispspecs/xhtml1-strict.xds.in.h:76
+#: dispspecs/readme.xds.in.h:16 dispspecs/teixlite.xds.in.h:284
+#: dispspecs/website-webpage.xds.in.h:96
+#: dispspecs/xhtml1-strict.xds.in.h:76
 msgid "Title"
 msgstr "Titre"
 
-#: dispspecs/docbook.xds.in.h:158 dispspecs/website-webpage.xds.in.h:97
+#: dispspecs/docbook.xds.in.h:168 dispspecs/website-webpage.xds.in.h:97
 msgid "Title Citation"
 msgstr "Citation d'un titre"
 
-#: dispspecs/docbook.xds.in.h:159 dispspecs/website-webpage.xds.in.h:98
+#: dispspecs/docbook.xds.in.h:169 dispspecs/website-webpage.xds.in.h:98
 msgid "URL Link"
 msgstr "Lien URL"
 
-#: dispspecs/docbook.xds.in.h:160
+#: dispspecs/docbook.xds.in.h:170
 msgid "User Input"
 msgstr "Saisie utilisateur"
 
-#: dispspecs/docbook.xds.in.h:161 dispspecs/forrest-document.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
 msgid "Warning"
 msgstr "Avertissement"
 
-#: dispspecs/docbook.xds.in.h:162 dispspecs/website-layout.xds.in.h:10
+#: dispspecs/docbook.xds.in.h:172 dispspecs/website-layout.xds.in.h:10
 #: dispspecs/website-webpage.xds.in.h:101
 msgid "Year"
 msgstr "Année"
@@ -948,7 +965,8 @@ msgstr "Informations juridiques"
 msgid "Line break"
 msgstr "Saut de ligne"
 
-#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: dispspecs/forrest-document.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:46
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
 msgstr "Lien"
@@ -982,16 +1000,18 @@ msgstr "Source"
 msgid "Strong"
 msgstr "Fort"
 
-#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+#: dispspecs/forrest-document.xds.in.h:36
+#: dispspecs/xhtml1-strict.xds.in.h:65
 msgid "Subscript"
 msgstr "Indice"
 
-#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+#: dispspecs/forrest-document.xds.in.h:38
+#: dispspecs/xhtml1-strict.xds.in.h:66
 msgid "Superscript"
 msgstr "Exposant"
 
-#: dispspecs/forrest-document.xds.in.h:39 dispspecs/teixlite.xds.in.h:245
-#: dispspecs/xhtml1-strict.xds.in.h:67
+#: dispspecs/forrest-document.xds.in.h:39
+#: dispspecs/teixlite.xds.in.h:245 dispspecs/xhtml1-strict.xds.in.h:67
 msgid "Table"
 msgstr "Tableau"
 
@@ -1031,8 +1051,8 @@ msgid "Version"
 msgstr "Version"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:1
-msgid "\"Kernel Traffic\" Newsletter"
-msgstr "Bulletin d'informations \"Kernel Traffic\""
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "Bulletin d'informations &quot;Kernel Traffic&quot;"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid ""
@@ -1119,23 +1139,24 @@ msgstr "Statistiques"
 msgid "Topic"
 msgstr "Sujet"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:34
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
 msgid "Translator"
 msgstr "Traducteur"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
 msgid "Underlined"
 msgstr "Souligné"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
 msgid "Version Control Activity"
 msgstr "Activité de contrôle de version"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
 msgid "Version Control Statistics"
 msgstr "Statistiques de contrôle de version"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
 msgid "Version Control Tree"
 msgstr "Arborescence de contrôle de version"
 
@@ -1178,6 +1199,14 @@ msgstr "Optimiste"
 #: dispspecs/readme.xds.in.h:14 dispspecs/teixlite.xds.in.h:231
 msgid "Signature"
 msgstr "Signature"
+
+#: dispspecs/readme.xds.in.h:15
+msgid ""
+"This is a document type associated with the \"readme\" file distributed with "
+"the initial prototype of Conglomerate."
+msgstr ""
+"C'est un document associé au fichier \"readme\" distribué avec "
+"le prototype initial de Conglomerate."
 
 #: dispspecs/relax-ng.xds.in.h:1 src/cong-node-properties-dialog.c:879
 msgid "Choice"
@@ -1811,8 +1840,8 @@ msgid ""
 "Contains a single TEI-conformant document, comprising a TEI header and a "
 "text, either in isolation or as part of a &lt;teiCorpus&gt; element"
 msgstr ""
-"Contient un seul document conforme à la TEI, comprenant un en-tête TEI et "
-"un texte, soit comme document isolé, soit comme partie d'un élément &lt;"
+"Contient un seul document conforme à la TEI, comprenant un en-tête TEI et un "
+"texte, soit comme document isolé, soit comme partie d'un élément &lt;"
 "teiCorpus&gt;"
 
 #: dispspecs/teixlite.xds.in.h:98
@@ -2190,8 +2219,8 @@ msgstr "Kw"
 msgid "Label"
 msgstr "Étiquette"
 
-#: dispspecs/teixlite.xds.in.h:177 glade/docbook-common-properties.glade.h:2
-#: src/plugin-docbook.c:2149
+#: dispspecs/teixlite.xds.in.h:177
+#: glade/docbook-common-properties.glade.h:2 src/plugin-docbook.c:2149
 msgid "Language"
 msgstr "Langue"
 
@@ -3073,7 +3102,8 @@ msgstr "Importer"
 msgid "Options"
 msgstr "Options"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
+#: glade/cong-file-properties.glade.h:1
+#: src/cong-node-properties-dialog.c:1193
 #: src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
 msgstr "Expert"
@@ -3099,7 +3129,8 @@ msgstr "ID externe"
 msgid "General"
 msgstr "Général"
 
-#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:247
+#: glade/cong-file-properties.glade.h:8
+#: src/cong-node-properties-dialog.c:247
 msgid "Location"
 msgstr "Emplacement"
 
@@ -3118,8 +3149,9 @@ msgstr "Nombre de mots :"
 #: glade/cong-file-properties.glade.h:13
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
-#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
+#: glade/docbook-ulink-properties.glade.h:3
+#: glade/plugin-arbitrary.glade.h:5 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1283
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -3204,12 +3236,15 @@ msgstr "Rechercher suivant"
 msgid "Match _entire word only"
 msgstr "_Mot entier seulement"
 
-#: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
-#: src/cong-edit-find-and-replace.c:836 src/cong-edit-find-and-replace.c:850
+#: glade/cong-find-replace.glade.h:4
+#: src/cong-edit-find-and-replace.c:187
+#: src/cong-edit-find-and-replace.c:836
+#: src/cong-edit-find-and-replace.c:850
 msgid "Replace"
 msgstr "Remplacer"
 
-#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:908
+#: glade/cong-find-replace.glade.h:5
+#: src/cong-edit-find-and-replace.c:908
 msgid "Replace All"
 msgstr "Tout remplacer"
 
@@ -3321,8 +3356,8 @@ msgstr "A, B, C, ..."
 msgid "Continue numbering from previous list"
 msgstr "Continuer la numérotation à partir de la liste précédente"
 
-#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:337
-#: src/cong-error-file-open.c:518
+#: glade/docbook-orderedlist-properties.glade.h:4
+#: src/cong-error-dialog.c:337 src/cong-error-file-open.c:518
 msgid "Details"
 msgstr "Détails"
 
@@ -3440,8 +3475,9 @@ msgid "Add attribute \"%s\""
 msgstr "Ajouter l'attribut  \"%s\""
 
 #: src/cong-attribute-editor-cdata.c:232
-#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-editor.c:253
-#: src/cong-attribute-wrapper.c:263 src/cong-node-properties-dialog.c:506
+#: src/cong-attribute-editor-nmtoken.c:298
+#: src/cong-attribute-editor.c:253 src/cong-attribute-wrapper.c:263
+#: src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Supprimer l'attribut \"%s\""
@@ -3779,8 +3815,10 @@ msgstr "Aucune chaîne \"%s\" trouvée."
 msgid "Replace _All"
 msgstr "_Tout Remplacer"
 
-#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:761
-#: src/cong-edit-find-and-replace.c:959 src/cong-edit-find-and-replace.c:1000
+#: src/cong-edit-find-and-replace.c:307
+#: src/cong-edit-find-and-replace.c:761
+#: src/cong-edit-find-and-replace.c:959
+#: src/cong-edit-find-and-replace.c:1000
 msgid "Find"
 msgstr "Rechercher"
 
@@ -4338,8 +4376,8 @@ msgstr "Importer un fichier..."
 msgid "Creating a new file (%s)"
 msgstr "Création d'un nouveau fichier (%s)"
 
-#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
-#: src/cong-file-new.c:643
+#: src/cong-file-new.c:595 src/cong-file-new.c:618
+#: src/cong-file-new.c:626 src/cong-file-new.c:643
 msgid "Creating a new file"
 msgstr "Création d'un nouveau fichier"
 
@@ -4548,8 +4586,8 @@ msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 "Un problème s'est produit lors de la lecture de la feuille de styles \"%s\""
 
-#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-stylesheet.c:228
-#: src/cong-stylesheet.c:291
+#: src/cong-menus.c:531 src/cong-menus.c:555
+#: src/cong-stylesheet.c:228 src/cong-stylesheet.c:291
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate n'a pas réussi à transformer le document"
 
@@ -5146,8 +5184,8 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
-"Utiliser les feuilles de styles DocBook de Norman Walsh pour créer un fichier "
-"PDF à partir du fichier DocBook"
+"Utiliser les feuilles de styles DocBook de Norman Walsh pour créer un "
+"fichier PDF à partir du fichier DocBook"
 
 #: src/plugin-docbook.c:2122
 msgid "Export DocBook as XSL:FO"
@@ -5168,15 +5206,19 @@ msgstr "Imprimer un fichier DocBook"
 
 #: src/plugin-docbook.c:2144
 msgid "Provides a Scope properties page for most DocBook nodes"
-msgstr "Fournit une page de propriétés de domaine pour la plupart des noeuds DocBook"
+msgstr ""
+"Fournit une page de propriétés de domaine pour la plupart des noeuds DocBook"
 
 #: src/plugin-docbook.c:2150
 msgid "Provides a Language properties page for most DocBook nodes"
-msgstr "Fournit une page de propriétés de langues pour la plupart des noeuds DocBook"
+msgstr ""
+"Fournit une page de propriétés de langues pour la plupart des noeuds DocBook"
 
 #: src/plugin-docbook.c:2156
 msgid "Provides a Revisions properties page for most DocBook nodes"
-msgstr "Fournit une page de propriétés de révisions pour la plupart des noeuds DocBook"
+msgstr ""
+"Fournit une page de propriétés de révisions pour la plupart des noeuds "
+"DocBook"
 
 #: src/plugin-docbook.c:2173
 msgid "Generic DocBook property dialog"
@@ -5186,8 +5228,8 @@ msgstr "Dialogue de propriété générique DocBook"
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Fournit un dialogue de propriétés pour la plupart des noeuds DocBook"
 
-#: src/plugin-docbook.c:2192 src/plugin-docbook.c:2195 src/plugin-html.c:137
-#: src/plugin-html.c:140
+#: src/plugin-docbook.c:2192 src/plugin-docbook.c:2195
+#: src/plugin-html.c:137 src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Ouvrir le lien dans le navigateur"
 
@@ -5203,7 +5245,8 @@ msgstr ""
 "Place une section DocBook à un niveau d'organisation supérieur dans le "
 "document"
 
-#: src/plugin-docbook.c:2207 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:2207 src/plugin-html.c:148
+#: src/plugin-html.c:151
 msgid "Promote"
 msgstr "Placer à un niveau supérieur"
 
@@ -5224,7 +5267,8 @@ msgstr ""
 "Place une section DocBook à un niveau d'organisation inférieur dans le "
 "document"
 
-#: src/plugin-docbook.c:2218 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:2218 src/plugin-html.c:159
+#: src/plugin-html.c:162
 msgid "Demote"
 msgstr "Placer à un niveau inférieur"
 
@@ -5486,7 +5530,8 @@ msgstr "_Détails"
 msgid "Generate website"
 msgstr "Générer un site web"
 
-#: src/plugin-website.c:509 src/plugin-website.c:512 src/plugin-website.c:513
+#: src/plugin-website.c:509 src/plugin-website.c:512
+#: src/plugin-website.c:513
 msgid "Generates a collection of HTML pages from the website XML description"
 msgstr "Génère un jeu de pages HTML à partir de la description XML du site web"
 
@@ -5538,8 +5583,8 @@ msgid ""
 "Convert a reference to an XML entity to an inline copy of that entity's "
 "content"
 msgstr ""
-"Convertir une référence à une entité XML en une insertion "
-"dans le fragment du contenu de l'entité en question"
+"Convertir une référence à une entité XML en une insertion dans le fragment "
+"du contenu de l'entité en question"
 
 #: src/popup.c:729 src/popup.c:1047
 msgid "_Properties"
