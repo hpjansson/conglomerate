@@ -1,3 +1,9 @@
+2005-06-26  Conglomerate Developers  <conglomerate-devel@lists.copyleft.no>
+
+	* Makefile.am
+	Added schema.in to distribution files
+	Added NULL macro
+
 2004-11-03  David Malcolm  <dmalcolm@redhat.com>
 
 	* conglomerate.mime:
