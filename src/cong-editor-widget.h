@@ -36,9 +36,9 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_WIDGET3_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3Class)
 #define IS_CONG_EDITOR_WIDGET3(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_WIDGET3_TYPE)
 
-typedef struct CongEditorWidget3 CongEditorWidget3;
-typedef struct CongEditorWidget3Class CongEditorWidget3Class;
-typedef struct CongEditorWidget3Details CongEditorWidget3Details;
+typedef struct _CongEditorWidget3 CongEditorWidget3;
+typedef struct _CongEditorWidget3Class CongEditorWidget3Class;
+typedef struct _CongEditorWidget3Details CongEditorWidget3Details;
 
 typedef struct CongEditorLineIter CongEditorLineIter;
 typedef struct CongEditorLineManager CongEditorLineManager;
@@ -47,39 +47,39 @@ typedef struct CongEditorLineManagerSpanWrapper CongEditorLineManagerSpanWrapper
 typedef struct CongEditorCreationRecord CongEditorCreationRecord;
 
 /* CongEditorArea and some common subclasses: */
-typedef struct CongEditorArea CongEditorArea;
-typedef struct CongEditorAreaClass CongEditorAreaClass;
+typedef struct _CongEditorArea CongEditorArea;
+typedef struct _CongEditorAreaClass CongEditorAreaClass;
 
-typedef struct CongEditorAreaFlowHolder CongEditorAreaFlowHolder;
-typedef struct CongEditorAreaFlowHolderClass CongEditorAreaFlowHolderClass;
+typedef struct _CongEditorAreaFlowHolder CongEditorAreaFlowHolder;
+typedef struct _CongEditorAreaFlowHolderClass CongEditorAreaFlowHolderClass;
 
-typedef struct CongEditorAreaFlowHolderInlines CongEditorAreaFlowHolderInlines;
-typedef struct CongEditorAreaFlowHolderInlinesClass CongEditorAreaFlowHolderInlinesClass;
+typedef struct _CongEditorAreaFlowHolderInlines CongEditorAreaFlowHolderInlines;
+typedef struct _CongEditorAreaFlowHolderInlinesClass CongEditorAreaFlowHolderInlinesClass;
 
-typedef struct CongEditorAreaLine CongEditorAreaLine;
-typedef struct CongEditorAreaLineClass CongEditorAreaLineClass;
+typedef struct _CongEditorAreaLine CongEditorAreaLine;
+typedef struct _CongEditorAreaLineClass CongEditorAreaLineClass;
 
 /* CongEditorNode and some common subclasses: */
 typedef struct CongEditorNode CongEditorNode;
 
-typedef struct CongEditorNodeElement CongEditorNodeElement;
-typedef struct CongEditorNodeElementClass CongEditorNodeElementClass;
+typedef struct _CongEditorNodeElement CongEditorNodeElement;
+typedef struct _CongEditorNodeElementClass CongEditorNodeElementClass;
 
 /* Other related classes: */
-typedef struct CongEditorLineFragments CongEditorLineFragments;
-typedef struct CongEditorLineFragmentsClass CongEditorLineFragmentsClass;
+typedef struct _CongEditorLineFragments CongEditorLineFragments;
+typedef struct _CongEditorLineFragmentsClass CongEditorLineFragmentsClass;
 
-typedef struct CongEditorChildPolicy CongEditorChildPolicy;
-typedef struct CongEditorChildPolicyClass CongEditorChildPolicyClass;
+typedef struct _CongEditorChildPolicy CongEditorChildPolicy;
+typedef struct _CongEditorChildPolicyClass CongEditorChildPolicyClass;
 
-struct CongEditorWidget3
+struct _CongEditorWidget3
 {
 	GtkDrawingArea drawing_area;
 
 	CongEditorWidget3Details *private;
 };
 
-struct CongEditorWidget3Class
+struct _CongEditorWidget3Class
 {
 	GtkDrawingAreaClass klass;
 

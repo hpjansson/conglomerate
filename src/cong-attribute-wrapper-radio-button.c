@@ -29,7 +29,7 @@
 #define PRIVATE(x) ((x)->private)
 
 /* Internal types: */
-struct CongAttributeWrapperRadioButtonDetails
+struct _CongAttributeWrapperRadioButtonDetails
 {
 	GtkRadioButton *radio_button;
 	gchar *attribute_value;	

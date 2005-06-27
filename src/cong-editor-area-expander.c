@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaExpanderDetails
+struct _CongEditorAreaExpanderDetails
 {
 	gboolean target_state;
 	GtkExpanderStyle target_expander_style;

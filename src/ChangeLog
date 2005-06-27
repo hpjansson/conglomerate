@@ -1,3 +1,10 @@
+2005-06-16  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+    
+	* lots of files:
+	
+	Fixed gtk-doc build. Mostly renamed typedef struct SomeStruct SomeStruct
+	to typedef struct _SomeStruct SomeStruct.
+
 2005-06-16  Dave Malcolm  <dmalcolm@redhat.com>
 
 	* recent-files/egg-recent-view-uimanager.c:

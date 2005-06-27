@@ -34,7 +34,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongModificationDetails
+struct _CongModificationDetails
 {
 	CongDocument *doc;
 };

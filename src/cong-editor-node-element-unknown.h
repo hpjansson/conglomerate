@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_UNKNOWN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_UNKNOWN_TYPE, CongEditorNodeElementUnknownClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_UNKNOWN(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_UNKNOWN_TYPE)
 
-typedef struct CongEditorNodeElementUnknown CongEditorNodeElementUnknown;
-typedef struct CongEditorNodeElementUnknownClass CongEditorNodeElementUnknownClass;
-typedef struct CongEditorNodeElementUnknownDetails CongEditorNodeElementUnknownDetails;
+typedef struct _CongEditorNodeElementUnknown CongEditorNodeElementUnknown;
+typedef struct _CongEditorNodeElementUnknownClass CongEditorNodeElementUnknownClass;
+typedef struct _CongEditorNodeElementUnknownDetails CongEditorNodeElementUnknownDetails;
 
-struct CongEditorNodeElementUnknown
+struct _CongEditorNodeElementUnknown
 {
 	CongEditorNodeElement editor_node_element;
 
 	CongEditorNodeElementUnknownDetails *private;
 };
 
-struct CongEditorNodeElementUnknownClass
+struct _CongEditorNodeElementUnknownClass
 {
 	CongEditorNodeElementClass klass;
 

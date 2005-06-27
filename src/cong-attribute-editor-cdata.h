@@ -29,22 +29,22 @@
 
 G_BEGIN_DECLS
 
-typedef struct _CongAttributeEditorCDATA CongAttributeEditorCDATA;
-typedef struct _CongAttributeEditorCDATAClass CongAttributeEditorCDATAClass;
-typedef struct _CongAttributeEditorCDATADetails CongAttributeEditorCDATADetails;
+typedef struct _CongAttributeEditorCData CongAttributeEditorCData;
+typedef struct _CongAttributeEditorCDataClass CongAttributeEditorCDataClass;
+typedef struct _CongAttributeEditorCDataDetails CongAttributeEditorCDataDetails;
 
 #define CONG_ATTRIBUTE_EDITOR_CDATA_TYPE	      (cong_attribute_editor_cdata_get_type ())
-#define CONG_ATTRIBUTE_EDITOR_CDATA(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCDATA)
-#define CONG_ATTRIBUTE_EDITOR_CDATA_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCDATAClass)
+#define CONG_ATTRIBUTE_EDITOR_CDATA(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCData)
+#define CONG_ATTRIBUTE_EDITOR_CDATA_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCDataClass)
 #define IS_CONG_ATTRIBUTE_EDITOR_CDATA(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE)
 
-struct _CongAttributeEditorCDATA
+struct _CongAttributeEditorCData
 {
 	CongAttributeEditor attribute_editor;
-	CongAttributeEditorCDATADetails *private;
+	CongAttributeEditorCDataDetails *private;
 };
 
-struct _CongAttributeEditorCDATAClass
+struct _CongAttributeEditorCDataClass
 {
 	CongAttributeEditorClass attribute_editor_klass;
 };
@@ -53,7 +53,7 @@ GType
 cong_attribute_editor_cdata_get_type (void);
 
 CongAttributeEditor*
-cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_editor_cdata,
+cong_attribute_editor_cdata_construct (CongAttributeEditorCData *attribute_editor_cdata,
 				       CongDocument *doc,
 				       CongNodePtr node,
 				       xmlNs *ns_ptr,

@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorChildPolicyFlowHolderDetails
+struct _CongEditorChildPolicyFlowHolderDetails
 {
 	CongEditorAreaFlowHolder *area_flow_holder;
 };

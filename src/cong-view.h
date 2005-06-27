@@ -48,14 +48,14 @@
    "cursor_change"
    "set_dtd_ptr" or "set_external_dtd"
 */
-struct CongView
+struct _CongView
 {
 	CongViewClass *klass;
 	
 	CongDocument *doc;
 };
 
-struct CongViewClass
+struct _CongViewClass
 {
 	/*
 	  Hooks for amortising updates:
@@ -84,7 +84,7 @@ struct CongViewClass
 					 xmlDtdPtr dtd_ptr);
 };
 
-typedef struct CongDocumentEvent CongDocumentEvent;
+typedef struct _CongDocumentEvent CongDocumentEvent;
 
 enum CongDocumentEventType
 {
@@ -95,7 +95,7 @@ enum CongDocumentEventType
 	CONG_DOCUMENT_EVENT_SET_TEXT,
 };
 
-struct CongDocumentEvent
+struct _CongDocumentEvent
 {
 	gboolean before_event;
 

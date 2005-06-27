@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaUnderlineDetails
+struct _CongEditorAreaUnderlineDetails
 {
 	CongEditorAreaUnderlineStyle style;
 	

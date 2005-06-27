@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeWrapperRadioButton CongAttributeWrapperRadioButton;
-typedef struct CongAttributeWrapperRadioButtonClass CongAttributeWrapperRadioButtonClass;
-typedef struct CongAttributeWrapperRadioButtonDetails CongAttributeWrapperRadioButtonDetails;
+typedef struct _CongAttributeWrapperRadioButton CongAttributeWrapperRadioButton;
+typedef struct _CongAttributeWrapperRadioButtonClass CongAttributeWrapperRadioButtonClass;
+typedef struct _CongAttributeWrapperRadioButtonDetails CongAttributeWrapperRadioButtonDetails;
 
 #define CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_TYPE	      (cong_attribute_wrapper_radio_button_get_type ())
 #define CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_TYPE, CongAttributeWrapperRadioButton)
 #define CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_TYPE, CongAttributeWrapperRadioButtonClass)
 #define IS_CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_TYPE)
 
-struct CongAttributeWrapperRadioButton
+struct _CongAttributeWrapperRadioButton
 {
 	CongAttributeWrapper attribute_wrapper;
 
 	CongAttributeWrapperRadioButtonDetails *private;
 };
 
-struct CongAttributeWrapperRadioButtonClass
+struct _CongAttributeWrapperRadioButtonClass
 {
 	CongAttributeWrapperClass klass;
 };

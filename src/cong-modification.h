@@ -36,19 +36,19 @@ G_BEGIN_DECLS
 #define CONG_MODIFICATION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_MODIFICATION_TYPE, CongModificationClass)
 #define IS_CONG_MODIFICATION(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_MODIFICATION_TYPE)
 
-typedef struct CongModification CongModification;
-typedef struct CongModificationClass CongModificationClass;
-typedef struct CongModificationDetails CongModificationDetails;
+typedef struct _CongModification CongModification;
+typedef struct _CongModificationClass CongModificationClass;
+typedef struct _CongModificationDetails CongModificationDetails;
 
 
-struct CongModification
+struct _CongModification
 {
 	GObject object;
 
 	CongModificationDetails *private;
 };
 
-struct CongModificationClass
+struct _CongModificationClass
 {
 	GObjectClass klass;
 

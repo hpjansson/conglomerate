@@ -32,7 +32,7 @@
 #define PRIVATE(x) ((x)->private)
 
 /* Internal types: */
-struct CongPropertyPageDetails
+struct _CongPropertyPageDetails
 {
 	CongDocument *doc;
 	gulong handler_id_selection_change;

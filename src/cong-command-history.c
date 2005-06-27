@@ -44,7 +44,7 @@ static guint signals[LAST_SIGNAL] = {0};
 static void
 emit_changed (CongCommandHistory *history);
 
-struct CongCommandHistoryDetails
+struct _CongCommandHistoryDetails
 {
 	GList *list_of_commands_to_undo; /* front of list is most recent command */
 	GList *list_of_commands_to_redo; /* front of list is most recent command */

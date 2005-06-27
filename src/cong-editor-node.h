@@ -31,8 +31,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAreaCreationInfo CongAreaCreationInfo;
-typedef struct CongAreaCreationGeometry CongAreaCreationGeometry;
+typedef struct _CongAreaCreationInfo CongAreaCreationInfo;
+typedef struct _CongAreaCreationGeometry CongAreaCreationGeometry;
 
 #define DEBUG_EDITOR_NODE_LIFETIMES 0
 
@@ -84,7 +84,7 @@ CONG_DECLARE_CLASS_BEGIN(CongEditorNode, cong_editor_node, GObject)
 	CongFlowType (*get_flow_type) (CongEditorNode *editor_node);
 CONG_DECLARE_CLASS_END()
 
-struct CongAreaCreationInfo
+struct _CongAreaCreationInfo
 {
 	CongEditorLineManager *line_manager;
 
@@ -101,7 +101,7 @@ struct CongAreaCreationInfo
 };
 
 
-struct CongAreaCreationGeometry
+struct _CongAreaCreationGeometry
 {
 	/* Cache of data that the areas of a node were created with; if changes occur then the areas may need to be regenerated: */
 	CongEditorAreaLine *area_line;

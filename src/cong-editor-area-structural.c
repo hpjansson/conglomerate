@@ -42,7 +42,7 @@
 #define H_INDENT (4)
 #define FRAGMENT_WIDTH (45)
 
-struct CongEditorAreaStructuralDetails
+struct _CongEditorAreaStructuralDetails
 {
 	CongEditorAreaThemeCallback theme_cb;
 	GdkColor *col_array[CONG_DISPSPEC_GC_USAGE_NUM];

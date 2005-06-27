@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_TYPE, CongNodeModificationClass)
 #define IS_CONG_NODE_MODIFICATION(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_TYPE)
 
-typedef struct CongNodeModification CongNodeModification;
-typedef struct CongNodeModificationClass CongNodeModificationClass;
-typedef struct CongNodeModificationDetails CongNodeModificationDetails;
+typedef struct _CongNodeModification CongNodeModification;
+typedef struct _CongNodeModificationClass CongNodeModificationClass;
+typedef struct _CongNodeModificationDetails CongNodeModificationDetails;
 
-struct CongNodeModification
+struct _CongNodeModification
 {
 	CongModification base;
 
 	CongNodeModificationDetails *private;
 };
 
-struct CongNodeModificationClass
+struct _CongNodeModificationClass
 {
 	CongModificationClass klass;
 

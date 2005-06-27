@@ -29,9 +29,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongSourceCleanupOptions CongSourceCleanupOptions;
+typedef struct _CongSourceCleanupOptions CongSourceCleanupOptions;
 
-struct CongSourceCleanupOptions
+struct _CongSourceCleanupOptions
 {
 	gboolean use_tabs; /* if false then use spaces */
 	guint num_spaces_per_indent; /* only if not using tabs */

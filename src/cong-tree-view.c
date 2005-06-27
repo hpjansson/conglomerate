@@ -43,7 +43,7 @@
 #define CONG_TREE_VIEW_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
-typedef struct CongTreeViewDetails
+typedef struct _CongTreeViewDetails
 {
 	CongPrimaryWindow *primary_window;
 

@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorChildPolicyDetails
+struct _CongEditorChildPolicyDetails
 {
 	CongEditorNode *editor_node;
 };

@@ -34,7 +34,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaUnknownTagDetails
+struct _CongEditorAreaUnknownTagDetails
 {
 	CongNodePtr xml_node;
 

@@ -27,8 +27,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongStylesheetParameter CongStylesheetParameter;
-struct CongStylesheetParameter
+typedef struct _CongStylesheetParameter CongStylesheetParameter;
+struct _CongStylesheetParameter
 {
 	gchar *name;
 	gchar *value;

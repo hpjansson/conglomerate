@@ -12,16 +12,16 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongDependencyNode CongDependencyNode;
-typedef struct CongDependencyNodeClass CongDependencyNodeClass;
-typedef struct CongDependencyNodeFromFile CongDependencyNodeFromFile;
-typedef struct CongDependencyGraph CongDependencyGraph;
-typedef struct CongBuildProcess CongBuildProcess;
+typedef struct _CongDependencyNode CongDependencyNode;
+typedef struct _CongDependencyNodeClass CongDependencyNodeClass;
+typedef struct _CongDependencyNodeFromFile CongDependencyNodeFromFile;
+typedef struct _CongDependencyGraph CongDependencyGraph;
+typedef struct _CongBuildProcess CongBuildProcess;
 
 #define CONG_DEPENDENCY_NODE(x) ((CongDependencyNode*)(x))
 #define CONG_DEPENDENCY_NODE_FROM_FILE(x) ((CongDependencyNodeFromFile*)(x))
 
-struct CongDependencyNode
+struct _CongDependencyNode
 {
 	const CongDependencyNodeClass *klass;
 
@@ -36,26 +36,26 @@ struct CongDependencyNode
 	GList *list_of_downstream; /* These are cong targets; the targets affected by this target */
 };
 
-struct CongDependencyNodeClass
+struct _CongDependencyNodeClass
 {
 	/* A rule for building a target */
 	gboolean (*is_up_to_date)(CongDependencyNode *target); 
 	gboolean (*generate) (CongDependencyNode *target, GError **error); /* can be NULL to indicate a pure dependency? */
 };
 
-struct CongDependencyNodeFromFile
+struct _CongDependencyNodeFromFile
 {
 	CongDependencyNode base;
 
 	GnomeVFSURI *uri; /* in a subclass, to allow in-memory modification */
 };
 
-struct CongDependencyGraph
+struct _CongDependencyGraph
 {
 	GList *list_of_ultimate_targets; /* These are CongDependencyNodes */
 };
 
-struct CongBuildProcess
+struct _CongBuildProcess
 {
 	/* mapping from targets to modification times? */
 };

@@ -33,7 +33,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaLineDetails
+struct _CongEditorAreaLineDetails
 {
 	CongEditorAreaComposer *outer_compose;
 

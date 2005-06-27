@@ -27,9 +27,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongPerLanguageData CongPerLanguageData;
+typedef struct _CongPerLanguageData CongPerLanguageData;
 
-struct CongPerLanguageData
+struct _CongPerLanguageData
 {
 	GHashTable *hash_table;
 };

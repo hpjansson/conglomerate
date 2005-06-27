@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorLineFragmentsDetails
+struct _CongEditorLineFragmentsDetails
 {
 	GList *list_of_areas;
 

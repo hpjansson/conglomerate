@@ -30,22 +30,22 @@
 
 G_BEGIN_DECLS
 
-typedef struct _CongAttributeEditorNMTOKEN CongAttributeEditorNMTOKEN;
-typedef struct _CongAttributeEditorNMTOKENClass CongAttributeEditorNMTOKENClass;
-typedef struct _CongAttributeEditorNMTOKENDetails CongAttributeEditorNMTOKENDetails;
+typedef struct _CongAttributeEditorNmtoken CongAttributeEditorNmtoken;
+typedef struct _CongAttributeEditorNmtokenClass CongAttributeEditorNmtokenClass;
+typedef struct _CongAttributeEditorNmtokenDetails CongAttributeEditorNmtokenDetails;
 
 #define CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE	      (cong_attribute_editor_nmtoken_get_type ())
-#define CONG_ATTRIBUTE_EDITOR_NMTOKEN(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE, CongAttributeEditorNMTOKEN)
-#define CONG_ATTRIBUTE_EDITOR_NMTOKEN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE, CongAttributeEditorNMTOKENClass)
+#define CONG_ATTRIBUTE_EDITOR_NMTOKEN(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE, CongAttributeEditorNmtoken)
+#define CONG_ATTRIBUTE_EDITOR_NMTOKEN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE, CongAttributeEditorNmtokenClass)
 #define IS_CONG_ATTRIBUTE_EDITOR_NMTOKEN(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE)
 
-struct _CongAttributeEditorNMTOKEN
+struct _CongAttributeEditorNmtoken
 {
 	CongAttributeEditor attribute_editor;
-	CongAttributeEditorNMTOKENDetails *private;
+	CongAttributeEditorNmtokenDetails *private;
 };
 
-struct _CongAttributeEditorNMTOKENClass
+struct _CongAttributeEditorNmtokenClass
 {
 	CongAttributeEditorClass attribute_editor_klass;
 };
@@ -54,7 +54,7 @@ GType
 cong_attribute_editor_nmtoken_get_type (void);
 
 CongAttributeEditor*
-cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_editor_nmtoken,
+cong_attribute_editor_nmtoken_construct (CongAttributeEditorNmtoken *attribute_editor_nmtoken,
 					 CongDocument *doc,
 					 CongNodePtr node,
 					 xmlNs *ns_ptr,

@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaPixbufDetails
+struct _CongEditorAreaPixbufDetails
 {
 	GdkPixbuf *pixbuf_states[5];
 	gint pixbuf_size[2];

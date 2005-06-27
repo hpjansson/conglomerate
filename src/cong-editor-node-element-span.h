@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_SPAN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_SPAN_TYPE, CongEditorNodeElementSpanClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_SPAN(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_SPAN_TYPE)
 
-typedef struct CongEditorNodeElementSpan CongEditorNodeElementSpan;
-typedef struct CongEditorNodeElementSpanClass CongEditorNodeElementSpanClass;
-typedef struct CongEditorNodeElementSpanDetails CongEditorNodeElementSpanDetails;
+typedef struct _CongEditorNodeElementSpan CongEditorNodeElementSpan;
+typedef struct _CongEditorNodeElementSpanClass CongEditorNodeElementSpanClass;
+typedef struct _CongEditorNodeElementSpanDetails CongEditorNodeElementSpanDetails;
 
-struct CongEditorNodeElementSpan
+struct _CongEditorNodeElementSpan
 {
 	CongEditorNodeElement editor_node_element;
 
 	CongEditorNodeElementSpanDetails *private;
 };
 
-struct CongEditorNodeElementSpanClass
+struct _CongEditorNodeElementSpanClass
 {
 	CongEditorNodeElementClass klass;
 

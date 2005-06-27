@@ -30,23 +30,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorChildPolicyInline CongEditorChildPolicyInline;
-typedef struct CongEditorChildPolicyInlineClass CongEditorChildPolicyInlineClass;
-typedef struct CongEditorChildPolicyInlineDetails CongEditorChildPolicyInlineDetails;
+typedef struct _CongEditorChildPolicyInline CongEditorChildPolicyInline;
+typedef struct _CongEditorChildPolicyInlineClass CongEditorChildPolicyInlineClass;
+typedef struct _CongEditorChildPolicyInlineDetails CongEditorChildPolicyInlineDetails;
 
 #define CONG_EDITOR_CHILD_POLICY_INLINE_TYPE	      (cong_editor_child_policy_inline_get_type ())
 #define CONG_EDITOR_CHILD_POLICY_INLINE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_CHILD_POLICY_INLINE_TYPE, CongEditorChildPolicyInline)
 #define CONG_EDITOR_CHILD_POLICY_INLINE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_CHILD_POLICY_INLINE_TYPE, CongEditorChildPolicyInlineClass)
 #define IS_CONG_EDITOR_CHILD_POLICY_INLINE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_CHILD_POLICY_INLINE_TYPE)
 
-struct CongEditorChildPolicyInline
+struct _CongEditorChildPolicyInline
 {
 	CongEditorChildPolicy child_policy;
 
 	CongEditorChildPolicyInlineDetails *private;
 };
 
-struct CongEditorChildPolicyInlineClass
+struct _CongEditorChildPolicyInlineClass
 {
 	CongEditorChildPolicyClass klass;
 };

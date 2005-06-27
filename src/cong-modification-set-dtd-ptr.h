@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_MODIFICATION_SET_DTD_PTR_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_MODIFICATION_SET_DTD_PTR_TYPE, CongModificationSetDtdPtrClass)
 #define IS_CONG_MODIFICATION_SET_DTD_PTR(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_MODIFICATION_SET_DTD_PTR_TYPE)
 
-typedef struct CongModificationSetDtdPtr CongModificationSetDtdPtr;
-typedef struct CongModificationSetDtdPtrClass CongModificationSetDtdPtrClass;
-typedef struct CongModificationSetDtdPtrDetails CongModificationSetDtdPtrDetails;
+typedef struct _CongModificationSetDtdPtr CongModificationSetDtdPtr;
+typedef struct _CongModificationSetDtdPtrClass CongModificationSetDtdPtrClass;
+typedef struct _CongModificationSetDtdPtrDetails CongModificationSetDtdPtrDetails;
 
-struct CongModificationSetDtdPtr
+struct _CongModificationSetDtdPtr
 {
 	CongModification base;
 
 	CongModificationSetDtdPtrDetails *private;
 };
 
-struct CongModificationSetDtdPtrClass
+struct _CongModificationSetDtdPtrClass
 {
 	CongModificationClass klass;
 

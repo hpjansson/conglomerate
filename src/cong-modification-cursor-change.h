@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_MODIFICATION_CURSOR_CHANGE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_MODIFICATION_CURSOR_CHANGE_TYPE, CongModificationCursorChangeClass)
 #define IS_CONG_MODIFICATION_CURSOR_CHANGE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_MODIFICATION_CURSOR_CHANGE_TYPE)
 
-typedef struct CongModificationCursorChange CongModificationCursorChange;
-typedef struct CongModificationCursorChangeClass CongModificationCursorChangeClass;
-typedef struct CongModificationCursorChangeDetails CongModificationCursorChangeDetails;
+typedef struct _CongModificationCursorChange CongModificationCursorChange;
+typedef struct _CongModificationCursorChangeClass CongModificationCursorChangeClass;
+typedef struct _CongModificationCursorChangeDetails CongModificationCursorChangeDetails;
 
-struct CongModificationCursorChange
+struct _CongModificationCursorChange
 {
 	CongModification base;
 
 	CongModificationCursorChangeDetails *private;
 };
 
-struct CongModificationCursorChangeClass
+struct _CongModificationCursorChangeClass
 {
 	CongModificationClass klass;
 

@@ -41,7 +41,7 @@
 /* FIXME: this should probabky be done by interrogating the font, or something like that */
 #define LINE_SPACING (5)
 
-struct CongEditorAreaFlowHolderInlinesDetails
+struct _CongEditorAreaFlowHolderInlinesDetails
 {
 	CongEditorAreaComposer *line_composer;
 	/* child areas will all be CongEditorAreaLine */

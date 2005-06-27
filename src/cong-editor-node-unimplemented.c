@@ -33,7 +33,7 @@
 #undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorNodeUnimplementedDetails
+struct _CongEditorNodeUnimplementedDetails
 {
 	gchar *description;
 };

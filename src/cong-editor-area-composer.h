@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaComposer CongEditorAreaComposer;
-typedef struct CongEditorAreaComposerClass CongEditorAreaComposerClass;
-typedef struct CongEditorAreaComposerDetails CongEditorAreaComposerDetails;
+typedef struct _CongEditorAreaComposer CongEditorAreaComposer;
+typedef struct _CongEditorAreaComposerClass CongEditorAreaComposerClass;
+typedef struct _CongEditorAreaComposerDetails CongEditorAreaComposerDetails;
 
 #define CONG_EDITOR_AREA_COMPOSER_TYPE	   (cong_editor_area_composer_get_type ())
 #define CONG_EDITOR_AREA_COMPOSER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_COMPOSER_TYPE, CongEditorAreaComposer)
 #define CONG_EDITOR_AREA_COMPOSER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_COMPOSER_TYPE, CongEditorAreaComposerClass)
 #define IS_CONG_EDITOR_AREA_COMPOSER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_COMPOSER_TYPE)
 
-struct CongEditorAreaComposer
+struct _CongEditorAreaComposer
 {
 	CongEditorAreaContainer area;
 
 	CongEditorAreaComposerDetails *private;
 };
 
-struct CongEditorAreaComposerClass
+struct _CongEditorAreaComposerClass
 {
 	CongEditorAreaContainerClass klass;
 };

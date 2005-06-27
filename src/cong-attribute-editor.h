@@ -30,23 +30,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeEditor CongAttributeEditor;
-typedef struct CongAttributeEditorClass CongAttributeEditorClass;
-typedef struct CongAttributeEditorDetails CongAttributeEditorDetails;
+typedef struct _CongAttributeEditor CongAttributeEditor;
+typedef struct _CongAttributeEditorClass CongAttributeEditorClass;
+typedef struct _CongAttributeEditorDetails CongAttributeEditorDetails;
 
 #define CONG_ATTRIBUTE_EDITOR_TYPE	      (cong_attribute_editor_get_type ())
 #define CONG_ATTRIBUTE_EDITOR(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_TYPE, CongAttributeEditor)
 #define CONG_ATTRIBUTE_EDITOR_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_TYPE, CongAttributeEditorClass)
 #define IS_CONG_ATTRIBUTE_EDITOR(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_TYPE)
 
-struct CongAttributeEditor
+struct _CongAttributeEditor
 {
 	GtkHBox hbox;
 
 	CongAttributeEditorDetails *private;
 };
 
-struct CongAttributeEditorClass
+struct _CongAttributeEditorClass
 {
 	GtkHBoxClass klass;
 

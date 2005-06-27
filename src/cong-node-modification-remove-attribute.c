@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongNodeModificationRemoveAttributeDetails
+struct _CongNodeModificationRemoveAttributeDetails
 {
 	gchar *ns_prefix;
 	gchar *name;
@@ -89,7 +89,7 @@ cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAtt
 						   xmlNs *ns_ptr,
 						   const gchar *name)
 {
-	struct CongNodeModificationRemoveAttributeDetails *private = 
+	struct _CongNodeModificationRemoveAttributeDetails *private = 
 		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (node_modification_remove_attribute));
 
 	cong_node_modification_construct (CONG_NODE_MODIFICATION(node_modification_remove_attribute),
@@ -149,7 +149,7 @@ finalize (GObject *object)
 static void
 dispose (GObject *object)
 {
-	struct CongNodeModificationRemoveAttributeDetails *private = 
+	struct _CongNodeModificationRemoveAttributeDetails *private = 
 		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (object));
 	
 #if DEBUG_MODIFICATION_LIFETIMES
@@ -179,7 +179,7 @@ dispose (GObject *object)
 static void
 undo (CongModification *modification)
 {
-	struct CongNodeModificationRemoveAttributeDetails *private = 
+	struct _CongNodeModificationRemoveAttributeDetails *private = 
 		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification));
 
 	CongDocument *doc = cong_modification_get_document (modification);
@@ -207,7 +207,7 @@ undo (CongModification *modification)
 static void
 redo (CongModification *modification)
 {
-	struct CongNodeModificationRemoveAttributeDetails *private = 
+	struct _CongNodeModificationRemoveAttributeDetails *private = 
 		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification));
 
 	CongDocument *doc = cong_modification_get_document (modification);

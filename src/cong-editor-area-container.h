@@ -29,9 +29,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaContainer CongEditorAreaContainer;
-typedef struct CongEditorAreaContainerClass CongEditorAreaContainerClass;
-typedef struct CongEditorAreaContainerDetails CongEditorAreaContainerDetails;
+typedef struct _CongEditorAreaContainer CongEditorAreaContainer;
+typedef struct _CongEditorAreaContainerClass CongEditorAreaContainerClass;
+typedef struct _CongEditorAreaContainerDetails CongEditorAreaContainerDetails;
 
 #define CONG_EDITOR_AREA_CONTAINER_TYPE	   (cong_editor_area_container_get_type ())
 #define CONG_EDITOR_AREA_CONTAINER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_CONTAINER_TYPE, CongEditorAreaContainer)
@@ -43,14 +43,14 @@ typedef struct CongEditorAreaContainerDetails CongEditorAreaContainerDetails;
  * 
  * Areas don't know which their parents are (for now)
  */
-struct CongEditorAreaContainer
+struct _CongEditorAreaContainer
 {
 	CongEditorArea area;
 
 	CongEditorAreaContainerDetails *private;
 };
 
-struct CongEditorAreaContainerClass
+struct _CongEditorAreaContainerClass
 {
 	CongEditorAreaClass klass;
 

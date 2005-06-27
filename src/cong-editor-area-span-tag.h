@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaSpanTag CongEditorAreaSpanTag;
-typedef struct CongEditorAreaSpanTagClass CongEditorAreaSpanTagClass;
-typedef struct CongEditorAreaSpanTagDetails CongEditorAreaSpanTagDetails;
+typedef struct _CongEditorAreaSpanTag CongEditorAreaSpanTag;
+typedef struct _CongEditorAreaSpanTagClass CongEditorAreaSpanTagClass;
+typedef struct _CongEditorAreaSpanTagDetails CongEditorAreaSpanTagDetails;
 
 #define CONG_EDITOR_AREA_SPAN_TAG_TYPE	   (cong_editor_area_span_tag_get_type ())
 #define CONG_EDITOR_AREA_SPAN_TAG(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_SPAN_TAG_TYPE, CongEditorAreaSpanTag)
 #define CONG_EDITOR_AREA_SPAN_TAG_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_SPAN_TAG_TYPE, CongEditorAreaSpanTagClass)
 #define IS_CONG_EDITOR_AREA_SPAN_TAG(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_SPAN_TAG_TYPE)
 
-struct CongEditorAreaSpanTag
+struct _CongEditorAreaSpanTag
 {
 	CongEditorAreaBin bin;
 
 	CongEditorAreaSpanTagDetails *private;
 };
 
-struct CongEditorAreaSpanTagClass
+struct _CongEditorAreaSpanTagClass
 {
 	CongEditorAreaContainerClass klass;
 };

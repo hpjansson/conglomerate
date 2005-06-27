@@ -38,31 +38,31 @@ G_BEGIN_DECLS
 #define CONG_DOCUMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_DOCUMENT_TYPE, CongDocumentClass)
 #define IS_CONG_DOCUMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_DOCUMENT_TYPE)
 
-typedef struct CongDocumentClass CongDocumentClass;
-typedef struct CongDocumentDetails CongDocumentDetails;
+typedef struct _CongDocumentClass CongDocumentClass;
+typedef struct _CongDocumentDetails CongDocumentDetails;
 
-typedef struct CongDocumentTraversal CongDocumentTraversal;
-typedef struct CongDocumentTraversalClass CongDocumentTraversalClass;
+typedef struct _CongDocumentTraversal CongDocumentTraversal;
+typedef struct _CongDocumentTraversalClass CongDocumentTraversalClass;
 
-typedef struct CongTraversalNode CongTraversalNode;
-typedef struct CongTraversalNodeClass CongTraversalNodeClass;
+typedef struct _CongTraversalNode CongTraversalNode;
+typedef struct _CongTraversalNodeClass CongTraversalNodeClass;
 
-typedef struct CongCommand CongCommand;
-typedef struct CongCommandClass CongCommandClass;
+typedef struct _CongCommand CongCommand;
+typedef struct _CongCommandClass CongCommandClass;
 
-typedef struct CongCommandHistory CongCommandHistory;
-typedef struct CongCommandHistoryClass CongCommandHistoryClass;
+typedef struct _CongCommandHistory CongCommandHistory;
+typedef struct _CongCommandHistoryClass CongCommandHistoryClass;
 
-typedef struct CongFindDialogData CongFindDialogData;
+typedef struct _CongFindDialogData CongFindDialogData;
 
-struct CongDocument
+struct _CongDocument
 {
 	GObject object;
 
 	CongDocumentDetails *private;
 };
 
-struct CongDocumentClass
+struct _CongDocumentClass
 {
 	GObjectClass klass;
 

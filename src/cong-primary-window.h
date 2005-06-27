@@ -40,7 +40,7 @@ enum CongActionGroup {
 	NUM_CONG_ACTION_GROUPS
 };
 
-struct CongPrimaryWindow
+struct _CongPrimaryWindow
 {
 	CongDocument *doc;
 

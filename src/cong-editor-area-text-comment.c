@@ -31,7 +31,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaTextCommentDetails
+struct _CongEditorAreaTextCommentDetails
 {
 #if 1
 	GdkGC *gc;

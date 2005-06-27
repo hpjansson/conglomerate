@@ -21,9 +21,9 @@ gxx_hash_table_of_children_with_pcdata_to_xml_tree (gpointer key,
 						    gpointer value,
 						    gpointer user_data);
 
-typedef struct GXXCallbackData_HashTableOfChildrenWithPCDATA GXXCallbackData_HashTableOfChildrenWithPCDATA;
+typedef struct _GXXCallbackData_HashTableOfChildrenWithPCDATA GXXCallbackData_HashTableOfChildrenWithPCDATA;
 
-struct GXXCallbackData_HashTableOfChildrenWithPCDATA
+struct _GXXCallbackData_HashTableOfChildrenWithPCDATA
 {
 	xmlNodePtr xml_node;
 	const gchar *str_child_name;

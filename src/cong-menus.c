@@ -286,7 +286,7 @@ action_callback_file_quit (GtkAction *action,
 	current = g_list_first(cong_app_singleton()->primary_windows);
 
 	while (current) {
-		if (!cong_primary_window_can_close((struct CongPrimaryWindow*)(current->data))) {
+		if (!cong_primary_window_can_close((struct _CongPrimaryWindow*)(current->data))) {
 			canceled = TRUE;
 			break;
 		}

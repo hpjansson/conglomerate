@@ -28,7 +28,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaSpacerDetails
+struct _CongEditorAreaSpacerDetails
 {
 	GtkOrientation orientation;
 	guint spacing;

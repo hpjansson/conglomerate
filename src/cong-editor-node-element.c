@@ -31,7 +31,7 @@
 #undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorNodeElementDetails
+struct _CongEditorNodeElementDetails
 {
 	int dummy;
 };

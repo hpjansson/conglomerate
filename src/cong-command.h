@@ -37,17 +37,17 @@ G_BEGIN_DECLS
 #define CONG_COMMAND_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_COMMAND_TYPE, CongCommandClass)
 #define IS_CONG_COMMAND(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_COMMAND_TYPE)
 
-typedef struct CongCommandDetails CongCommandDetails;
+typedef struct _CongCommandDetails CongCommandDetails;
 
 
-struct CongCommand
+struct _CongCommand
 {
 	GObject object;
 
 	CongCommandDetails *priv;
 };
 
-struct CongCommandClass
+struct _CongCommandClass
 {
 	GObjectClass klass;
 

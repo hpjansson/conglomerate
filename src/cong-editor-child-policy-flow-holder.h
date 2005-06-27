@@ -30,23 +30,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorChildPolicyFlowHolder CongEditorChildPolicyFlowHolder;
-typedef struct CongEditorChildPolicyFlowHolderClass CongEditorChildPolicyFlowHolderClass;
-typedef struct CongEditorChildPolicyFlowHolderDetails CongEditorChildPolicyFlowHolderDetails;
+typedef struct _CongEditorChildPolicyFlowHolder CongEditorChildPolicyFlowHolder;
+typedef struct _CongEditorChildPolicyFlowHolderClass CongEditorChildPolicyFlowHolderClass;
+typedef struct _CongEditorChildPolicyFlowHolderDetails CongEditorChildPolicyFlowHolderDetails;
 
 #define CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_TYPE	      (cong_editor_child_policy_flow_holder_get_type ())
 #define CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_TYPE, CongEditorChildPolicyFlowHolder)
 #define CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_TYPE, CongEditorChildPolicyFlowHolderClass)
 #define IS_CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_TYPE)
 
-struct CongEditorChildPolicyFlowHolder
+struct _CongEditorChildPolicyFlowHolder
 {
 	CongEditorChildPolicy child_policy;
 
 	CongEditorChildPolicyFlowHolderDetails *private;
 };
 
-struct CongEditorChildPolicyFlowHolderClass
+struct _CongEditorChildPolicyFlowHolderClass
 {
 	CongEditorChildPolicyClass klass;
 };

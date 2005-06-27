@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaExpander CongEditorAreaExpander;
-typedef struct CongEditorAreaExpanderClass CongEditorAreaExpanderClass;
-typedef struct CongEditorAreaExpanderDetails CongEditorAreaExpanderDetails;
+typedef struct _CongEditorAreaExpander CongEditorAreaExpander;
+typedef struct _CongEditorAreaExpanderClass CongEditorAreaExpanderClass;
+typedef struct _CongEditorAreaExpanderDetails CongEditorAreaExpanderDetails;
 
 #define CONG_EDITOR_AREA_EXPANDER_TYPE	   (cong_editor_area_expander_get_type ())
 #define CONG_EDITOR_AREA_EXPANDER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_EXPANDER_TYPE, CongEditorAreaExpander)
 #define CONG_EDITOR_AREA_EXPANDER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_EXPANDER_TYPE, CongEditorAreaExpanderClass)
 #define IS_CONG_EDITOR_AREA_EXPANDER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_EXPANDER_TYPE)
 
-struct CongEditorAreaExpander
+struct _CongEditorAreaExpander
 {
 	CongEditorArea area;
 
 	CongEditorAreaExpanderDetails *private;
 };
 
-struct CongEditorAreaExpanderClass
+struct _CongEditorAreaExpanderClass
 {
 	CongEditorAreaClass klass;
 };

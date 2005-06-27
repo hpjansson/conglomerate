@@ -132,7 +132,7 @@ on_signal_set_parent_notify_after (CongDocument *doc,
 #define PRIVATE(x) ((x)->private)
 
 
-struct CongDocumentTraversalDetails
+struct _CongDocumentTraversalDetails
 {
 	CongDocument *doc;
 

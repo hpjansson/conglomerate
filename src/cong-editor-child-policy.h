@@ -31,21 +31,21 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_CHILD_POLICY_LIFETIMES 0
 
-typedef struct CongEditorChildPolicyDetails CongEditorChildPolicyDetails;
+typedef struct _CongEditorChildPolicyDetails CongEditorChildPolicyDetails;
 
 #define CONG_EDITOR_CHILD_POLICY_TYPE	      (cong_editor_child_policy_get_type ())
 #define CONG_EDITOR_CHILD_POLICY(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_CHILD_POLICY_TYPE, CongEditorChildPolicy)
 #define CONG_EDITOR_CHILD_POLICY_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_CHILD_POLICY_TYPE, CongEditorChildPolicyClass)
 #define IS_CONG_EDITOR_CHILD_POLICY(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_CHILD_POLICY_TYPE)
 
-struct CongEditorChildPolicy
+struct _CongEditorChildPolicy
 {
 	GObject object;
 
 	CongEditorChildPolicyDetails *private;
 };
 
-struct CongEditorChildPolicyClass
+struct _CongEditorChildPolicyClass
 {
 	GObjectClass klass;
 

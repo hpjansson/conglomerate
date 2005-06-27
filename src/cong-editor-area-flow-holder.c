@@ -34,7 +34,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaFlowHolderDetails
+struct _CongEditorAreaFlowHolderDetails
 {
 	int dummy;
 };

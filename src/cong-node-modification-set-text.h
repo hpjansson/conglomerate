@@ -34,19 +34,19 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_SET_TEXT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_SET_TEXT_TYPE, CongNodeModificationSetTextClass)
 #define IS_CONG_NODE_MODIFICATION_SET_TEXT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_SET_TEXT_TYPE)
 
-typedef struct CongNodeModificationSetText CongNodeModificationSetText;
-typedef struct CongNodeModificationSetTextClass CongNodeModificationSetTextClass;
-typedef struct CongNodeModificationSetTextDetails CongNodeModificationSetTextDetails;
+typedef struct _CongNodeModificationSetText CongNodeModificationSetText;
+typedef struct _CongNodeModificationSetTextClass CongNodeModificationSetTextClass;
+typedef struct _CongNodeModificationSetTextDetails CongNodeModificationSetTextDetails;
 
 
-struct CongNodeModificationSetText
+struct _CongNodeModificationSetText
 {
 	CongNodeModification base;
 
 	CongNodeModificationSetTextDetails *private;
 };
 
-struct CongNodeModificationSetTextClass
+struct _CongNodeModificationSetTextClass
 {
 	CongNodeModificationClass klass;
 

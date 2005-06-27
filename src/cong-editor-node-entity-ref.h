@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ENTITY_REF_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ENTITY_REF_TYPE, CongEditorNodeEntityRefClass)
 #define IS_CONG_EDITOR_NODE_ENTITY_REF(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ENTITY_REF_TYPE)
 
-typedef struct CongEditorNodeEntityRef CongEditorNodeEntityRef;
-typedef struct CongEditorNodeEntityRefClass CongEditorNodeEntityRefClass;
-typedef struct CongEditorNodeEntityRefDetails CongEditorNodeEntityRefDetails;
+typedef struct _CongEditorNodeEntityRef CongEditorNodeEntityRef;
+typedef struct _CongEditorNodeEntityRefClass CongEditorNodeEntityRefClass;
+typedef struct _CongEditorNodeEntityRefDetails CongEditorNodeEntityRefDetails;
 
-struct CongEditorNodeEntityRef
+struct _CongEditorNodeEntityRef
 {
 	CongEditorNode node;
 
 	CongEditorNodeEntityRefDetails *private;
 };
 
-struct CongEditorNodeEntityRefClass
+struct _CongEditorNodeEntityRefClass
 {
 	CongEditorNodeClass klass;
 

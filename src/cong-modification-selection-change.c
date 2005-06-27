@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongModificationSelectionChangeDetails
+struct _CongModificationSelectionChangeDetails
 {
 	/* Undo info: */
 	CongLocation old_logical_start;

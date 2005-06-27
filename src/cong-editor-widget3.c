@@ -60,7 +60,7 @@
 #undef PRIVATE
 #define PRIVATE(foo) ((foo)->private)
 
-struct CongEditorWidget3Details
+struct _CongEditorWidget3Details
 {
 	CongDocument *doc;
 

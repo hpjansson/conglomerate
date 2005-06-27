@@ -124,7 +124,7 @@ typedef struct CongDependencyNodeTransformWebsiteContent
 	WebsiteContent *content;
 } CongDependencyNodeTransformWebsiteContent;
 
-struct CongDependencyNodeClass klass_transform_website_content = 
+struct _CongDependencyNodeClass klass_transform_website_content = 
 {
 	cong_dependency_node_from_file_is_up_to_date,
 	generate_html
@@ -255,7 +255,7 @@ static void traverse_dom_tree(GenerateWebsiteWorkspace *workspace, xmlNodePtr no
 }
 
 /* Evaluate dir attribute, inheriting if necessary: */
-const CongXMLChar* content_get_dir(WebsiteContent *content)
+const gchar* content_get_dir(WebsiteContent *content)
 {
 	g_return_val_if_fail(content, NULL);
 
@@ -272,7 +272,7 @@ const CongXMLChar* content_get_dir(WebsiteContent *content)
 
 static GnomeVFSURI *content_make_dst_uri(WebsiteContent *content, GenerateWebsiteWorkspace *workspace)
 {
-	const CongXMLChar *dst_dir;
+	const gchar *dst_dir;
 	GnomeVFSURI *path_uri;
 	GnomeVFSURI *result_uri;
 
@@ -397,7 +397,7 @@ static void build_node_graph(GenerateWebsiteWorkspace *workspace)
 
 static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
-	const CongXMLChar* dtd_public_id = cong_document_get_dtd_public_identifier(doc);
+	const xmlChar* dtd_public_id = cong_document_get_dtd_public_identifier(doc);
 	
 	if (NULL==dtd_public_id) {
 		return FALSE;

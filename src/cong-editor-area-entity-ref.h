@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaEntityRef CongEditorAreaEntityRef;
-typedef struct CongEditorAreaEntityRefClass CongEditorAreaEntityRefClass;
-typedef struct CongEditorAreaEntityRefDetails CongEditorAreaEntityRefDetails;
+typedef struct _CongEditorAreaEntityRef CongEditorAreaEntityRef;
+typedef struct _CongEditorAreaEntityRefClass CongEditorAreaEntityRefClass;
+typedef struct _CongEditorAreaEntityRefDetails CongEditorAreaEntityRefDetails;
 
 #define CONG_EDITOR_AREA_ENTITY_REF_TYPE	   (cong_editor_area_entity_ref_get_type ())
 #define CONG_EDITOR_AREA_ENTITY_REF(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_ENTITY_REF_TYPE, CongEditorAreaEntityRef)
 #define CONG_EDITOR_AREA_ENTITY_REF_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_ENTITY_REF_TYPE, CongEditorAreaEntityRefClass)
 #define IS_CONG_EDITOR_AREA_ENTITY_REF(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_ENTITY_REF_TYPE)
 
-struct CongEditorAreaEntityRef
+struct _CongEditorAreaEntityRef
 {
 	CongEditorAreaBin bin;
 
 	CongEditorAreaEntityRefDetails *private;
 };
 
-struct CongEditorAreaEntityRefClass
+struct _CongEditorAreaEntityRefClass
 {
 	CongEditorAreaContainerClass klass;
 };

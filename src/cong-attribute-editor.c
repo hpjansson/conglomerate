@@ -33,7 +33,7 @@
 #define PRIVATE(x) ((x)->private)
 
 /* Internal types: */
-struct CongAttributeEditorDetails
+struct _CongAttributeEditorDetails
 {
 	CongDocument *doc;
 	CongNodePtr node;

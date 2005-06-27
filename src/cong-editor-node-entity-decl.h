@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ENTITY_DECL_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ENTITY_DECL_TYPE, CongEditorNodeEntityDeclClass)
 #define IS_CONG_EDITOR_NODE_ENTITY_DECL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ENTITY_DECL_TYPE)
 
-typedef struct CongEditorNodeEntityDecl CongEditorNodeEntityDecl;
-typedef struct CongEditorNodeEntityDeclClass CongEditorNodeEntityDeclClass;
-typedef struct CongEditorNodeEntityDeclDetails CongEditorNodeEntityDeclDetails;
+typedef struct _CongEditorNodeEntityDecl CongEditorNodeEntityDecl;
+typedef struct _CongEditorNodeEntityDeclClass CongEditorNodeEntityDeclClass;
+typedef struct _CongEditorNodeEntityDeclDetails CongEditorNodeEntityDeclDetails;
 
-struct CongEditorNodeEntityDecl
+struct _CongEditorNodeEntityDecl
 {
 	CongEditorNode node;
 
 	CongEditorNodeEntityDeclDetails *private;
 };
 
-struct CongEditorNodeEntityDeclClass
+struct _CongEditorNodeEntityDeclClass
 {
 	CongEditorNodeClass klass;
 

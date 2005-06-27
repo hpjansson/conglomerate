@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeWrapper CongAttributeWrapper;
-typedef struct CongAttributeWrapperClass CongAttributeWrapperClass;
-typedef struct CongAttributeWrapperDetails CongAttributeWrapperDetails;
+typedef struct _CongAttributeWrapper CongAttributeWrapper;
+typedef struct _CongAttributeWrapperClass CongAttributeWrapperClass;
+typedef struct _CongAttributeWrapperDetails CongAttributeWrapperDetails;
 
 #define CONG_ATTRIBUTE_WRAPPER_TYPE	      (cong_attribute_wrapper_get_type ())
 #define CONG_ATTRIBUTE_WRAPPER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_WRAPPER_TYPE, CongAttributeWrapper)
 #define CONG_ATTRIBUTE_WRAPPER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_WRAPPER_TYPE, CongAttributeWrapperClass)
 #define IS_CONG_ATTRIBUTE_WRAPPER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_WRAPPER_TYPE)
 
-struct CongAttributeWrapper
+struct _CongAttributeWrapper
 {
 	GObject base_class;
 
 	CongAttributeWrapperDetails *private;
 };
 
-struct CongAttributeWrapperClass
+struct _CongAttributeWrapperClass
 {
 	GObjectClass klass;
 

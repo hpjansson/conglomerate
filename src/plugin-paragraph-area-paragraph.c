@@ -36,7 +36,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaParagraphDetails
+struct _CongEditorAreaParagraphDetails
 {
 	GdkGC *gc;
 };

@@ -27,10 +27,10 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongApp CongApp;
-typedef struct CongAppPrivate CongAppPrivate;
+typedef struct _CongApp CongApp;
+typedef struct _CongAppPrivate CongAppPrivate;
 
-struct CongApp
+struct _CongApp
 {
 	GtkWidget *popup;
 	GList *primary_windows;

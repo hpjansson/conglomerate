@@ -33,13 +33,13 @@ G_BEGIN_DECLS
 
 #define CONG_TREE_VIEW(x) ((CongTreeView*)(x))
 
-typedef struct CongTreeView CongTreeView;
+typedef struct _CongTreeView CongTreeView;
 
-struct CongTreeView
+struct _CongTreeView
 {
 	CongView view;
 
-	struct CongTreeViewDetails *private;
+	struct _CongTreeViewDetails *private;
 };
 
 typedef gboolean (*CongTreeViewNodeFilter) (CongTreeView *cong_tree_view,

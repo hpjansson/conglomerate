@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaEntityDecl CongEditorAreaEntityDecl;
-typedef struct CongEditorAreaEntityDeclClass CongEditorAreaEntityDeclClass;
-typedef struct CongEditorAreaEntityDeclDetails CongEditorAreaEntityDeclDetails;
+typedef struct _CongEditorAreaEntityDecl CongEditorAreaEntityDecl;
+typedef struct _CongEditorAreaEntityDeclClass CongEditorAreaEntityDeclClass;
+typedef struct _CongEditorAreaEntityDeclDetails CongEditorAreaEntityDeclDetails;
 
 #define CONG_EDITOR_AREA_ENTITY_DECL_TYPE	   (cong_editor_area_entity_decl_get_type ())
 #define CONG_EDITOR_AREA_ENTITY_DECL(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_ENTITY_DECL_TYPE, CongEditorAreaEntityDecl)
 #define CONG_EDITOR_AREA_ENTITY_DECL_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_ENTITY_DECL_TYPE, CongEditorAreaEntityDeclClass)
 #define IS_CONG_EDITOR_AREA_ENTITY_DECL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_ENTITY_DECL_TYPE)
 
-struct CongEditorAreaEntityDecl
+struct _CongEditorAreaEntityDecl
 {
 	CongEditorAreaBin bin;
 
 	CongEditorAreaEntityDeclDetails *private;
 };
 
-struct CongEditorAreaEntityDeclClass
+struct _CongEditorAreaEntityDeclClass
 {
 	CongEditorAreaContainerClass klass;
 };

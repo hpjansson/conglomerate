@@ -44,7 +44,7 @@ G_BEGIN_DECLS
    FIXME: we then need to go through all the code checking this!
    FIXME: do we support "backward" ranges?  How does it impact on all this?
  */
-struct CongRange
+struct _CongRange
 {
 	CongLocation loc0;
 	CongLocation loc1;

@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongAttributeEditorENUMERATIONDetails
+struct _CongAttributeEditorEnumerationDetails
 {
 	GtkWidget *combo_box;
 	GPtrArray *combo_array;
@@ -49,20 +49,20 @@ set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
 remove_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
-do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration);
+do_refresh (CongAttributeEditorEnumeration *attribute_editor_enumeration);
 
 static void
 on_selection_changed (GtkComboBox *combo_box,
-		      CongAttributeEditorENUMERATION *attribute_editor_enumeration);
+		      CongAttributeEditorEnumeration *attribute_editor_enumeration);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorENUMERATION, 
+GNOME_CLASS_BOILERPLATE(CongAttributeEditorEnumeration, 
 			cong_attribute_editor_enumeration,
 			CongAttributeEditor,
 			CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
-cong_attribute_editor_enumeration_class_init (CongAttributeEditorENUMERATIONClass *klass)
+cong_attribute_editor_enumeration_class_init (CongAttributeEditorEnumerationClass *klass)
 {
 	CongAttributeEditorClass *editor_klass = CONG_ATTRIBUTE_EDITOR_CLASS (klass);
 
@@ -74,9 +74,9 @@ cong_attribute_editor_enumeration_class_init (CongAttributeEditorENUMERATIONClas
 }
 
 static void
-cong_attribute_editor_enumeration_instance_init (CongAttributeEditorENUMERATION *area)
+cong_attribute_editor_enumeration_instance_init (CongAttributeEditorEnumeration *area)
 {
-	area->private = g_new0(CongAttributeEditorENUMERATIONDetails,1);
+	area->private = g_new0(CongAttributeEditorEnumerationDetails,1);
 }
 
 /**
@@ -93,7 +93,7 @@ cong_attribute_editor_enumeration_instance_init (CongAttributeEditorENUMERATION 
  * Returns:
  */
 CongAttributeEditor*
-cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
+cong_attribute_editor_enumeration_construct (CongAttributeEditorEnumeration *attribute_editor_enumeration,
 					     CongDocument *doc,
 					     CongNodePtr node,
 					     xmlNs *ns_ptr,
@@ -184,7 +184,7 @@ cong_attribute_editor_enumeration_new (CongDocument *doc,
 static void
 finalize (GObject *object)
 {
-	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
+	CongAttributeEditorEnumeration *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
 
 	g_free (PRIVATE(attribute_editor_enumeration));
 	PRIVATE(attribute_editor_enumeration) = NULL;
@@ -195,7 +195,7 @@ finalize (GObject *object)
 static void
 dispose (GObject *object)
 {
-	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
+	CongAttributeEditorEnumeration *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
 
 	if (PRIVATE(attribute_editor_enumeration)->combo_array) {
 		/* free the array of enumerated values and the values themselves */
@@ -219,7 +219,7 @@ remove_attribute_handler (CongAttributeEditor *attribute_editor)
 }
 
 static void
-do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration)
+do_refresh (CongAttributeEditorEnumeration *attribute_editor_enumeration)
 {
 	gchar *attr_value;
 	guint enum_pos = 0;
@@ -257,7 +257,7 @@ do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 
 static void
 on_selection_changed (GtkComboBox *combo_box,
-		      CongAttributeEditorENUMERATION *attribute_editor_enumeration)
+		      CongAttributeEditorEnumeration *attribute_editor_enumeration)
 {
 	gint selected;
 

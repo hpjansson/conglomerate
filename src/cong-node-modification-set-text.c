@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongNodeModificationSetTextDetails
+struct _CongNodeModificationSetTextDetails
 {
 	/* Undo info: */
 	gchar *old_content;

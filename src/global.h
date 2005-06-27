@@ -55,7 +55,7 @@ G_BEGIN_DECLS
 #include "cong-node.h"
 #include "cong-location.h"
 
-typedef struct CongRange CongRange;
+typedef struct _CongRange CongRange;
 
 typedef enum {
 	CONG_FONT_ROLE_BODY_TEXT,
@@ -94,7 +94,7 @@ typedef struct CongServiceNodeTool CongServiceNodeTool;
 typedef struct CongServiceNodePropertyDialog CongServiceNodePropertyDialog;
 typedef struct CongServiceNodePropertyPage CongServiceNodePropertyPage;
 
-struct CongCursor
+struct _CongCursor
 {
 	/* Visual representation */
 	GdkGC *gc;
@@ -109,9 +109,9 @@ struct CongCursor
 	CongDocument *doc;
 };
 
-typedef struct CongElementDescription CongElementDescription;
+typedef struct _CongElementDescription CongElementDescription;
 
-struct CongElementDescription 
+struct _CongElementDescription 
 {
 	gchar *ns_uri;
 	gchar *local_name;

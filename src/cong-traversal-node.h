@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 
 #define DEBUG_TRAVERSAL_NODE_LIFETIMES 0
 
-typedef struct CongTraversalNodeDetails CongTraversalNodeDetails;
+typedef struct _CongTraversalNodeDetails CongTraversalNodeDetails;
 
 #define CONG_TRAVERSAL_NODE_TYPE	      (cong_traversal_node_get_type ())
 #define CONG_TRAVERSAL_NODE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_TRAVERSAL_NODE_TYPE, CongTraversalNode)
@@ -51,14 +51,14 @@ typedef struct CongTraversalNodeDetails CongTraversalNodeDetails;
  * and new ones are created, rather than trying to move the traversal node somehow.
  *
  */
-struct CongTraversalNode
+struct _CongTraversalNode
 {
 	GObject object;
 
 	CongTraversalNodeDetails *private;
 };
 
-struct CongTraversalNodeClass
+struct _CongTraversalNodeClass
 {
 	GObjectClass klass;
 };

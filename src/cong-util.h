@@ -254,8 +254,8 @@ gint
 cong_util_get_byte_offset (const gchar *string, 
 			   gint char_offset);
 
-typedef struct CongWord CongWord;
-struct CongWord
+typedef struct _CongWord CongWord;
+struct _CongWord
 {
 	int start_byte_offset;
 	int length_in_bytes;

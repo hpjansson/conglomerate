@@ -34,19 +34,19 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE_TYPE, CongNodeModificationRemoveAttributeClass)
 #define IS_CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE_TYPE)
 
-typedef struct CongNodeModificationRemoveAttribute CongNodeModificationRemoveAttribute;
-typedef struct CongNodeModificationRemoveAttributeClass CongNodeModificationRemoveAttributeClass;
-typedef struct CongNodeModificationRemoveAttributeDetails CongNodeModificationRemoveAttributeDetails;
+typedef struct _CongNodeModificationRemoveAttribute CongNodeModificationRemoveAttribute;
+typedef struct _CongNodeModificationRemoveAttributeClass CongNodeModificationRemoveAttributeClass;
+typedef struct _CongNodeModificationRemoveAttributeDetails CongNodeModificationRemoveAttributeDetails;
 
 
-struct CongNodeModificationRemoveAttribute
+struct _CongNodeModificationRemoveAttribute
 {
 	CongNodeModification base;
 
 	CongNodeModificationRemoveAttributeDetails *private;
 };
 
-struct CongNodeModificationRemoveAttributeClass
+struct _CongNodeModificationRemoveAttributeClass
 {
 	CongNodeModificationClass klass;
 

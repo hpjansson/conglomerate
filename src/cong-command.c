@@ -56,7 +56,7 @@
 
 #define DEBUG_MODIFICATIONS 0
 
-struct CongCommandDetails
+struct _CongCommandDetails
 {
 	CongDocument *doc;
 	gchar *description;

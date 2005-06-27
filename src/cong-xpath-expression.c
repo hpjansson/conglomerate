@@ -41,7 +41,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = {0};
 
-struct CongXPathExpressionDetails
+struct _CongXPathExpressionDetails
 {
 	CongDocument *doc;
 	CongNodePtr context_node;

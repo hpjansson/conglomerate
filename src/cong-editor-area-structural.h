@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaStructural CongEditorAreaStructural;
-typedef struct CongEditorAreaStructuralClass CongEditorAreaStructuralClass;
-typedef struct CongEditorAreaStructuralDetails CongEditorAreaStructuralDetails;
+typedef struct _CongEditorAreaStructural CongEditorAreaStructural;
+typedef struct _CongEditorAreaStructuralClass CongEditorAreaStructuralClass;
+typedef struct _CongEditorAreaStructuralDetails CongEditorAreaStructuralDetails;
 
 #define CONG_EDITOR_AREA_STRUCTURAL_TYPE	   (cong_editor_area_structural_get_type ())
 #define CONG_EDITOR_AREA_STRUCTURAL(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_STRUCTURAL_TYPE, CongEditorAreaStructural)
 #define CONG_EDITOR_AREA_STRUCTURAL_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_STRUCTURAL_TYPE, CongEditorAreaStructuralClass)
 #define IS_CONG_EDITOR_AREA_STRUCTURAL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_STRUCTURAL_TYPE)
 
-struct CongEditorAreaStructural
+struct _CongEditorAreaStructural
 {
 	CongEditorAreaBin bin;
 
 	CongEditorAreaStructuralDetails *private;
 };
 
-struct CongEditorAreaStructuralClass
+struct _CongEditorAreaStructuralClass
 {
 	CongEditorAreaContainerClass klass;
 };

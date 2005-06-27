@@ -31,21 +31,21 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaFlowHolderDetails CongEditorAreaFlowHolderDetails;
+typedef struct _CongEditorAreaFlowHolderDetails CongEditorAreaFlowHolderDetails;
 
 #define CONG_EDITOR_AREA_FLOW_HOLDER_TYPE	   (cong_editor_area_flow_holder_get_type ())
 #define CONG_EDITOR_AREA_FLOW_HOLDER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_FLOW_HOLDER_TYPE, CongEditorAreaFlowHolder)
 #define CONG_EDITOR_AREA_FLOW_HOLDER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_FLOW_HOLDER_TYPE, CongEditorAreaFlowHolderClass)
 #define IS_CONG_EDITOR_AREA_FLOW_HOLDER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_FLOW_HOLDER_TYPE)
 
-struct CongEditorAreaFlowHolder
+struct _CongEditorAreaFlowHolder
 {
 	CongEditorArea area;
 
 	CongEditorAreaFlowHolderDetails *private;
 };
 
-struct CongEditorAreaFlowHolderClass
+struct _CongEditorAreaFlowHolderClass
 {
 	CongEditorAreaClass klass;
 

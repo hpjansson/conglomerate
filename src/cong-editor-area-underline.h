@@ -29,9 +29,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaUnderline CongEditorAreaUnderline;
-typedef struct CongEditorAreaUnderlineClass CongEditorAreaUnderlineClass;
-typedef struct CongEditorAreaUnderlineDetails CongEditorAreaUnderlineDetails;
+typedef struct _CongEditorAreaUnderline CongEditorAreaUnderline;
+typedef struct _CongEditorAreaUnderlineClass CongEditorAreaUnderlineClass;
+typedef struct _CongEditorAreaUnderlineDetails CongEditorAreaUnderlineDetails;
 
 #define CONG_EDITOR_AREA_UNDERLINE_TYPE	   (cong_editor_area_underline_get_type ())
 #define CONG_EDITOR_AREA_UNDERLINE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_UNDERLINE_TYPE, CongEditorAreaUnderline)
@@ -45,14 +45,14 @@ typedef enum  {
 	CONG_EDITOR_AREA_UNDERLINE_STYLE_GRAMMAR_ERROR
 } CongEditorAreaUnderlineStyle;
 
-struct CongEditorAreaUnderline
+struct _CongEditorAreaUnderline
 {
 	CongEditorArea area;
 
 	CongEditorAreaUnderlineDetails *private;
 };
 
-struct CongEditorAreaUnderlineClass
+struct _CongEditorAreaUnderlineClass
 {
 	CongEditorAreaClass klass;
 };

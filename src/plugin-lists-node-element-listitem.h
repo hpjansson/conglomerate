@@ -37,18 +37,18 @@ G_BEGIN_DECLS
 #if 1
 CONG_EDITOR_NODE_DECLARE_PLUGIN_SUBCLASS(Listitem, listitem)
 #else
-typedef struct CongEditorNodeElementListitem CongEditorNodeElementListitem;
-typedef struct CongEditorNodeElementListitemClass CongEditorNodeElementListitemClass;
-typedef struct CongEditorNodeElementListitemDetails CongEditorNodeElementListitemDetails;
+typedef struct _CongEditorNodeElementListitem CongEditorNodeElementListitem;
+typedef struct _CongEditorNodeElementListitemClass CongEditorNodeElementListitemClass;
+typedef struct _CongEditorNodeElementListitemDetails CongEditorNodeElementListitemDetails;
 
-struct CongEditorNodeElementListitem
+struct _CongEditorNodeElementListitem
 {
 	CongEditorNodeElement editor_node_element;
 
 	CongEditorNodeElementListitemDetails *private;
 };
 
-struct CongEditorNodeElementListitemClass
+struct _CongEditorNodeElementListitemClass
 {
 	CongEditorNodeElementClass klass;
 

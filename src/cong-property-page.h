@@ -30,23 +30,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongPropertyPage CongPropertyPage;
-typedef struct CongPropertyPageClass CongPropertyPageClass;
-typedef struct CongPropertyPageDetails CongPropertyPageDetails;
+typedef struct _CongPropertyPage CongPropertyPage;
+typedef struct _CongPropertyPageClass CongPropertyPageClass;
+typedef struct _CongPropertyPageDetails CongPropertyPageDetails;
 
 #define CONG_PROPERTY_PAGE_TYPE	      (cong_property_page_get_type ())
 #define CONG_PROPERTY_PAGE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_PROPERTY_PAGE_TYPE, CongPropertyPage)
 #define CONG_PROPERTY_PAGE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_PROPERTY_PAGE_TYPE, CongPropertyPageClass)
 #define IS_CONG_PROPERTY_PAGE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_PROPERTY_PAGE_TYPE)
 
-struct CongPropertyPage
+struct _CongPropertyPage
 {
 	GtkHBox hbox;
 
 	CongPropertyPageDetails *private;
 };
 
-struct CongPropertyPageClass
+struct _CongPropertyPageClass
 {
 	GtkHBoxClass klass;
 

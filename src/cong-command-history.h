@@ -36,16 +36,16 @@ G_BEGIN_DECLS
 #define CONG_COMMAND_HISTORY_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_COMMAND_HISTORY_TYPE, CongCommandHistoryClass)
 #define IS_CONG_COMMAND_HISTORY(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_COMMAND_HISTORY_TYPE)
 
-typedef struct CongCommandHistoryDetails CongCommandHistoryDetails;
+typedef struct _CongCommandHistoryDetails CongCommandHistoryDetails;
 
-struct CongCommandHistory
+struct _CongCommandHistory
 {
 	GObject object;
 
 	CongCommandHistoryDetails *private;
 };
 
-struct CongCommandHistoryClass
+struct _CongCommandHistoryClass
 {
 	GObjectClass klass;
 

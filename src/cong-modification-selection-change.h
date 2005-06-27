@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_MODIFICATION_SELECTION_CHANGE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_MODIFICATION_SELECTION_CHANGE_TYPE, CongModificationSelectionChangeClass)
 #define IS_CONG_MODIFICATION_SELECTION_CHANGE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_MODIFICATION_SELECTION_CHANGE_TYPE)
 
-typedef struct CongModificationSelectionChange CongModificationSelectionChange;
-typedef struct CongModificationSelectionChangeClass CongModificationSelectionChangeClass;
-typedef struct CongModificationSelectionChangeDetails CongModificationSelectionChangeDetails;
+typedef struct _CongModificationSelectionChange CongModificationSelectionChange;
+typedef struct _CongModificationSelectionChangeClass CongModificationSelectionChangeClass;
+typedef struct _CongModificationSelectionChangeDetails CongModificationSelectionChangeDetails;
 
-struct CongModificationSelectionChange
+struct _CongModificationSelectionChange
 {
 	CongModification base;
 
 	CongModificationSelectionChangeDetails *private;
 };
 
-struct CongModificationSelectionChangeClass
+struct _CongModificationSelectionChangeClass
 {
 	CongModificationClass klass;
 

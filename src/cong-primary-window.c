@@ -223,7 +223,7 @@ cong_gui_destroy_tree_store(struct cong_gui* gui)
 }
 #endif
  
-struct CongApp the_app;
+CongApp the_app;
 
 /**
  * cong_primary_window_create_pixmap:

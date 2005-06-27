@@ -31,7 +31,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongTraversalNodeDetails
+struct _CongTraversalNodeDetails
 {
 	CongDocumentTraversal *doc_traversal;
 	CongNodePtr xml_node;

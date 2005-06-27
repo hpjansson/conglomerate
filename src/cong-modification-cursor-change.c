@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongModificationCursorChangeDetails
+struct _CongModificationCursorChangeDetails
 {
 	/* Undo info: */
 	CongLocation old_location;

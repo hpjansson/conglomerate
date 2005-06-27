@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaBin CongEditorAreaBin;
-typedef struct CongEditorAreaBinClass CongEditorAreaBinClass;
-typedef struct CongEditorAreaBinDetails CongEditorAreaBinDetails;
+typedef struct _CongEditorAreaBin CongEditorAreaBin;
+typedef struct _CongEditorAreaBinClass CongEditorAreaBinClass;
+typedef struct _CongEditorAreaBinDetails CongEditorAreaBinDetails;
 
 #define CONG_EDITOR_AREA_BIN_TYPE	   (cong_editor_area_bin_get_type ())
 #define CONG_EDITOR_AREA_BIN(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_BIN_TYPE, CongEditorAreaBin)
 #define CONG_EDITOR_AREA_BIN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_BIN_TYPE, CongEditorAreaBinClass)
 #define IS_CONG_EDITOR_AREA_BIN(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_BIN_TYPE)
 
-struct CongEditorAreaBin
+struct _CongEditorAreaBin
 {
 	CongEditorAreaContainer area;
 
 	CongEditorAreaBinDetails *private;
 };
 
-struct CongEditorAreaBinClass
+struct _CongEditorAreaBinClass
 {
 	CongEditorAreaContainerClass klass;
 };

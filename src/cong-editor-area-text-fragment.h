@@ -30,23 +30,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaTextFragment CongEditorAreaTextFragment;
-typedef struct CongEditorAreaTextFragmentClass CongEditorAreaTextFragmentClass;
-typedef struct CongEditorAreaTextFragmentDetails CongEditorAreaTextFragmentDetails;
+typedef struct _CongEditorAreaTextFragment CongEditorAreaTextFragment;
+typedef struct _CongEditorAreaTextFragmentClass CongEditorAreaTextFragmentClass;
+typedef struct _CongEditorAreaTextFragmentDetails CongEditorAreaTextFragmentDetails;
 
 #define CONG_EDITOR_AREA_TEXT_FRAGMENT_TYPE	   (cong_editor_area_text_fragment_get_type ())
 #define CONG_EDITOR_AREA_TEXT_FRAGMENT(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_TEXT_FRAGMENT_TYPE, CongEditorAreaTextFragment)
 #define CONG_EDITOR_AREA_TEXT_FRAGMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_TEXT_FRAGMENT_TYPE, CongEditorAreaTextFragmentClass)
 #define IS_CONG_EDITOR_AREA_TEXT_FRAGMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_TEXT_FRAGMENT_TYPE)
 
-struct CongEditorAreaTextFragment
+struct _CongEditorAreaTextFragment
 {
 	CongEditorArea area;
 
 	CongEditorAreaTextFragmentDetails *private;
 };
 
-struct CongEditorAreaTextFragmentClass
+struct _CongEditorAreaTextFragmentClass
 {
 	CongEditorAreaClass klass;
 };

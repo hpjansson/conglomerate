@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 
-struct CongFindDialogData
+struct _CongFindDialogData
 {
    gchar *last_find;
    gchar *last_replace;

@@ -33,7 +33,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaListitemDetails
+struct _CongEditorAreaListitemDetails
 {
 	CongEditorAreaText *area_label;
 };

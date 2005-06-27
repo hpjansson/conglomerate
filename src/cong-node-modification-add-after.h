@@ -34,19 +34,19 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_ADD_AFTER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_ADD_AFTER_TYPE, CongNodeModificationAddAfterClass)
 #define IS_CONG_NODE_MODIFICATION_ADD_AFTER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_ADD_AFTER_TYPE)
 
-typedef struct CongNodeModificationAddAfter CongNodeModificationAddAfter;
-typedef struct CongNodeModificationAddAfterClass CongNodeModificationAddAfterClass;
-typedef struct CongNodeModificationAddAfterDetails CongNodeModificationAddAfterDetails;
+typedef struct _CongNodeModificationAddAfter CongNodeModificationAddAfter;
+typedef struct _CongNodeModificationAddAfterClass CongNodeModificationAddAfterClass;
+typedef struct _CongNodeModificationAddAfterDetails CongNodeModificationAddAfterDetails;
 
 
-struct CongNodeModificationAddAfter
+struct _CongNodeModificationAddAfter
 {
 	CongNodeModification base;
 
 	CongNodeModificationAddAfterDetails *private;
 };
 
-struct CongNodeModificationAddAfterClass
+struct _CongNodeModificationAddAfterClass
 {
 	CongNodeModificationClass klass;
 

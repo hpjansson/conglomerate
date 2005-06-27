@@ -28,7 +28,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaBinDetails
+struct _CongEditorAreaBinDetails
 {
 	CongEditorArea *only_child;
 };

@@ -35,16 +35,16 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_TYPE, CongEditorNodeElementClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_TYPE)
 
-typedef struct CongEditorNodeElementDetails CongEditorNodeElementDetails;
+typedef struct _CongEditorNodeElementDetails CongEditorNodeElementDetails;
 
-struct CongEditorNodeElement
+struct _CongEditorNodeElement
 {
 	CongEditorNode editor_node;
 
 	CongEditorNodeElementDetails *private;
 };
 
-struct CongEditorNodeElementClass
+struct _CongEditorNodeElementClass
 {
 	CongEditorNodeClass klass;
 

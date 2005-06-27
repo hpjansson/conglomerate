@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongModificationSetDtdPtrDetails
+struct _CongModificationSetDtdPtrDetails
 {
 	/* Undo info: */
 	xmlDtdPtr old_dtd_ptr;

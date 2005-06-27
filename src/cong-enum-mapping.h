@@ -27,9 +27,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEnumMapping CongEnumMapping;
+typedef struct _CongEnumMapping CongEnumMapping;
 
-struct CongEnumMapping
+struct _CongEnumMapping
 {
 	const gchar *text_value;
 	guint numeric_value;

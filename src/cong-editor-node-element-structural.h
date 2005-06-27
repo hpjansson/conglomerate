@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_STRUCTURAL_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_STRUCTURAL_TYPE, CongEditorNodeElementStructuralClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_STRUCTURAL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_STRUCTURAL_TYPE)
 
-typedef struct CongEditorNodeElementStructural CongEditorNodeElementStructural;
-typedef struct CongEditorNodeElementStructuralClass CongEditorNodeElementStructuralClass;
-typedef struct CongEditorNodeElementStructuralDetails CongEditorNodeElementStructuralDetails;
+typedef struct _CongEditorNodeElementStructural CongEditorNodeElementStructural;
+typedef struct _CongEditorNodeElementStructuralClass CongEditorNodeElementStructuralClass;
+typedef struct _CongEditorNodeElementStructuralDetails CongEditorNodeElementStructuralDetails;
 
-struct CongEditorNodeElementStructural
+struct _CongEditorNodeElementStructural
 {
 	CongEditorNodeElement editor_node_element;
 
 	CongEditorNodeElementStructuralDetails *private;
 };
 
-struct CongEditorNodeElementStructuralClass
+struct _CongEditorNodeElementStructuralClass
 {
 	CongEditorNodeElementClass klass;
 

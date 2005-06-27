@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongNodeModificationMakeOrphanDetails
+struct _CongNodeModificationMakeOrphanDetails
 {
 	/* Undo info: */
 	CongNodePtr former_parent;

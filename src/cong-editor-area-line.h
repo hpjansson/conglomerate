@@ -29,21 +29,21 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaLineDetails CongEditorAreaLineDetails;
+typedef struct _CongEditorAreaLineDetails CongEditorAreaLineDetails;
 
 #define CONG_EDITOR_AREA_LINE_TYPE	   (cong_editor_area_line_get_type ())
 #define CONG_EDITOR_AREA_LINE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_LINE_TYPE, CongEditorAreaLine)
 #define CONG_EDITOR_AREA_LINE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_LINE_TYPE, CongEditorAreaLineClass)
 #define IS_CONG_EDITOR_AREA_LINE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_LINE_TYPE)
 
-struct CongEditorAreaLine
+struct _CongEditorAreaLine
 {
 	CongEditorAreaContainer area;
 	
 	CongEditorAreaLineDetails *private;
 };
 
-struct CongEditorAreaLineClass
+struct _CongEditorAreaLineClass
 {
 	CongEditorAreaContainerClass klass;
 };

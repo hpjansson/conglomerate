@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaSpacer CongEditorAreaSpacer;
-typedef struct CongEditorAreaSpacerClass CongEditorAreaSpacerClass;
-typedef struct CongEditorAreaSpacerDetails CongEditorAreaSpacerDetails;
+typedef struct _CongEditorAreaSpacer CongEditorAreaSpacer;
+typedef struct _CongEditorAreaSpacerClass CongEditorAreaSpacerClass;
+typedef struct _CongEditorAreaSpacerDetails CongEditorAreaSpacerDetails;
 
 #define CONG_EDITOR_AREA_SPACER_TYPE	   (cong_editor_area_spacer_get_type ())
 #define CONG_EDITOR_AREA_SPACER(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_SPACER_TYPE, CongEditorAreaSpacer)
 #define CONG_EDITOR_AREA_SPACER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_SPACER_TYPE, CongEditorAreaSpacerClass)
 #define IS_CONG_EDITOR_AREA_SPACER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_SPACER_TYPE)
 
-struct CongEditorAreaSpacer
+struct _CongEditorAreaSpacer
 {
 	CongEditorArea area;
 
 	CongEditorAreaSpacerDetails *private;
 };
 
-struct CongEditorAreaSpacerClass
+struct _CongEditorAreaSpacerClass
 {
 	CongEditorAreaClass klass;
 };

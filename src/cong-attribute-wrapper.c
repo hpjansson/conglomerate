@@ -31,7 +31,7 @@
 #define PRIVATE(x) ((x)->private)
 
 /* Internal types: */
-struct CongAttributeWrapperDetails
+struct _CongAttributeWrapperDetails
 {
 	CongDocument *doc;
 	CongNodePtr node;

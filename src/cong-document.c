@@ -110,7 +110,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = {0};
 
-struct CongDocumentDetails
+struct _CongDocumentDetails
 {
 	xmlDocPtr xml_doc;
 

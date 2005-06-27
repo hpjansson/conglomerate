@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaPixbuf CongEditorAreaPixbuf;
-typedef struct CongEditorAreaPixbufClass CongEditorAreaPixbufClass;
-typedef struct CongEditorAreaPixbufDetails CongEditorAreaPixbufDetails;
+typedef struct _CongEditorAreaPixbuf CongEditorAreaPixbuf;
+typedef struct _CongEditorAreaPixbufClass CongEditorAreaPixbufClass;
+typedef struct _CongEditorAreaPixbufDetails CongEditorAreaPixbufDetails;
 
 #define CONG_EDITOR_AREA_PIXBUF_TYPE	   (cong_editor_area_pixbuf_get_type ())
 #define CONG_EDITOR_AREA_PIXBUF(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_PIXBUF_TYPE, CongEditorAreaPixbuf)
 #define CONG_EDITOR_AREA_PIXBUF_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_PIXBUF_TYPE, CongEditorAreaPixbufClass)
 #define IS_CONG_EDITOR_AREA_PIXBUF(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_PIXBUF_TYPE)
 
-struct CongEditorAreaPixbuf
+struct _CongEditorAreaPixbuf
 {
 	CongEditorArea area;
 
 	CongEditorAreaPixbufDetails *private;
 };
 
-struct CongEditorAreaPixbufClass
+struct _CongEditorAreaPixbufClass
 {
 	CongEditorAreaClass klass;
 };

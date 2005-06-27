@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongNodeModificationSetAttributeDetails
+struct _CongNodeModificationSetAttributeDetails
 {
 	gchar *ns_prefix;
 	gchar *name;
@@ -92,7 +92,7 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 						const gchar *name, 
 						const gchar *value)
 {
-	struct CongNodeModificationSetAttributeDetails *private;
+	struct _CongNodeModificationSetAttributeDetails *private;
 
 	private = PRIVATE(node_modification_set_attribute);
 
@@ -158,7 +158,7 @@ static void
 dispose (GObject *object)
 {
 	CongNodeModificationSetAttribute *node_modification_set_attribute = CONG_NODE_MODIFICATION_SET_ATTRIBUTE (object);
-	struct CongNodeModificationSetAttributeDetails *private;
+	struct _CongNodeModificationSetAttributeDetails *private;
 
 #if DEBUG_MODIFICATION_LIFETIMES
 	g_message ("CongNodeModificationSetAttribute::dispose");
@@ -194,7 +194,7 @@ dispose (GObject *object)
 static void
 undo (CongModification *modification)
 {
-	struct CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
+	struct _CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
@@ -226,7 +226,7 @@ undo (CongModification *modification)
 static void
 redo (CongModification *modification)
 {
-	struct CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
+	struct _CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 	xmlNs *ns_ptr = NULL;

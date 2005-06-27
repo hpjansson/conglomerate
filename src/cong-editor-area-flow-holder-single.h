@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaFlowHolderSingle CongEditorAreaFlowHolderSingle;
-typedef struct CongEditorAreaFlowHolderSingleClass CongEditorAreaFlowHolderSingleClass;
-typedef struct CongEditorAreaFlowHolderSingleDetails CongEditorAreaFlowHolderSingleDetails;
+typedef struct _CongEditorAreaFlowHolderSingle CongEditorAreaFlowHolderSingle;
+typedef struct _CongEditorAreaFlowHolderSingleClass CongEditorAreaFlowHolderSingleClass;
+typedef struct _CongEditorAreaFlowHolderSingleDetails CongEditorAreaFlowHolderSingleDetails;
 
 #define CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_TYPE	   (cong_editor_area_flow_holder_single_get_type ())
 #define CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_TYPE, CongEditorAreaFlowHolderSingle)
 #define CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_TYPE, CongEditorAreaFlowHolderSingleClass)
 #define IS_CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_TYPE)
 
-struct CongEditorAreaFlowHolderSingle
+struct _CongEditorAreaFlowHolderSingle
 {
 	CongEditorAreaFlowHolder flow_holder;
 
 	CongEditorAreaFlowHolderSingleDetails *private;
 };
 
-struct CongEditorAreaFlowHolderSingleClass
+struct _CongEditorAreaFlowHolderSingleClass
 {
 	CongEditorAreaFlowHolderClass klass;
 };

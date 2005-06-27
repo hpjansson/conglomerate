@@ -40,7 +40,7 @@
 #define H_INDENT (4)
 #define FRAGMENT_WIDTH (45)
 
-struct CongEditorAreaEntityDeclDetails
+struct _CongEditorAreaEntityDeclDetails
 {
 	CongEditorArea *outer_hcompose;
 	/****/ CongEditorArea *title_text;

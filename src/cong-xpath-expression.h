@@ -37,22 +37,22 @@ G_BEGIN_DECLS
 #define CONG_XPATH_EXPRESSION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_XPATH_EXPRESSION_TYPE, CongXPathExpressionClass)
 #define IS_CONG_XPATH_EXPRESSION(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_XPATH_EXPRESSION_TYPE)
 
-typedef struct CongXPathExpression CongXPathExpression;
-typedef struct CongXPathExpressionClass CongXPathExpressionClass;
-typedef struct CongXPathExpressionDetails CongXPathExpressionDetails;
+typedef struct _CongXPathExpression CongXPathExpression;
+typedef struct _CongXPathExpressionClass CongXPathExpressionClass;
+typedef struct _CongXPathExpressionDetails CongXPathExpressionDetails;
 
 /**
  * CongXPathExpression
  * 
  */
-struct CongXPathExpression
+struct _CongXPathExpression
 {
 	GObject object;
 
 	CongXPathExpressionDetails *private;
 };
 
-struct CongXPathExpressionClass
+struct _CongXPathExpressionClass
 {
 	GObjectClass klass;
 

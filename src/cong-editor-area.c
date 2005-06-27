@@ -68,7 +68,7 @@ typedef struct RequisitionCache
 	int cached_width_hint;
 } RequisitionCache;
 
-struct CongEditorAreaDetails
+struct _CongEditorAreaDetails
 {
 	CongEditorWidget3 *editor_widget;
 

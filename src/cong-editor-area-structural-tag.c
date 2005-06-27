@@ -41,7 +41,7 @@
 #define H_INDENT (4)
 #define FRAGMENT_WIDTH (45)
 
-struct CongEditorAreaStructuralTagDetails
+struct _CongEditorAreaStructuralTagDetails
 {
 	CongDispspecElement *ds_element;
 

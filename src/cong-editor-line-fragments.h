@@ -31,21 +31,21 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_LINE_FRAGMENTS_LIFETIMES 0
 
-typedef struct CongEditorLineFragmentsDetails CongEditorLineFragmentsDetails;
+typedef struct _CongEditorLineFragmentsDetails CongEditorLineFragmentsDetails;
 
 #define CONG_EDITOR_LINE_FRAGMENTS_TYPE	      (cong_editor_line_fragments_get_type ())
 #define CONG_EDITOR_LINE_FRAGMENTS(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_LINE_FRAGMENTS_TYPE, CongEditorLineFragments)
 #define CONG_EDITOR_LINE_FRAGMENTS_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_LINE_FRAGMENTS_TYPE, CongEditorLineFragmentsClass)
 #define IS_CONG_EDITOR_LINE_FRAGMENTS(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_LINE_FRAGMENTS_TYPE)
 
-struct CongEditorLineFragments
+struct _CongEditorLineFragments
 {
 	GObject object;
 
 	CongEditorLineFragmentsDetails *private;
 };
 
-struct CongEditorLineFragmentsClass
+struct _CongEditorLineFragmentsClass
 {
 	GObjectClass klass;
 };

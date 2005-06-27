@@ -31,7 +31,7 @@
 #undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaTextFragmentDetails
+struct _CongEditorAreaTextFragmentDetails
 {
 	CongEditorNodeText *editor_node_text;
 	PangoLayout *pango_layout;

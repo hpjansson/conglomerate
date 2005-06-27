@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaListitem CongEditorAreaListitem;
-typedef struct CongEditorAreaListitemClass CongEditorAreaListitemClass;
-typedef struct CongEditorAreaListitemDetails CongEditorAreaListitemDetails;
+typedef struct _CongEditorAreaListitem CongEditorAreaListitem;
+typedef struct _CongEditorAreaListitemClass CongEditorAreaListitemClass;
+typedef struct _CongEditorAreaListitemDetails CongEditorAreaListitemDetails;
 
 #define CONG_EDITOR_AREA_LISTITEM_TYPE	   (cong_editor_area_listitem_get_type ())
 #define CONG_EDITOR_AREA_LISTITEM(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_LISTITEM_TYPE, CongEditorAreaListitem)
 #define CONG_EDITOR_AREA_LISTITEM_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_LISTITEM_TYPE, CongEditorAreaListitemClass)
 #define IS_CONG_EDITOR_AREA_LISTITEM(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_LISTITEM_TYPE)
 
-struct CongEditorAreaListitem
+struct _CongEditorAreaListitem
 {
 	CongEditorAreaLabelled labelled;
 
 	CongEditorAreaListitemDetails *private;
 };
 
-struct CongEditorAreaListitemClass
+struct _CongEditorAreaListitemClass
 {
 	CongEditorAreaLabelledClass klass;
 };

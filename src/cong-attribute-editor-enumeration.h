@@ -29,22 +29,22 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeEditorENUMERATION CongAttributeEditorENUMERATION;
-typedef struct CongAttributeEditorENUMERATIONClass CongAttributeEditorENUMERATIONClass;
-typedef struct CongAttributeEditorENUMERATIONDetails CongAttributeEditorENUMERATIONDetails;
+typedef struct _CongAttributeEditorEnumeration CongAttributeEditorEnumeration;
+typedef struct _CongAttributeEditorEnumerationClass CongAttributeEditorEnumerationClass;
+typedef struct _CongAttributeEditorEnumerationDetails CongAttributeEditorEnumerationDetails;
 
 #define CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE	      (cong_attribute_editor_enumeration_get_type ())
-#define CONG_ATTRIBUTE_EDITOR_ENUMERATION(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE, CongAttributeEditorENUMERATION)
-#define CONG_ATTRIBUTE_EDITOR_ENUMERATION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE, CongAttributeEditorENUMERATIONClass)
+#define CONG_ATTRIBUTE_EDITOR_ENUMERATION(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE, CongAttributeEditorEnumeration)
+#define CONG_ATTRIBUTE_EDITOR_ENUMERATION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE, CongAttributeEditorEnumerationClass)
 #define IS_CONG_ATTRIBUTE_EDITOR_ENUMERATION(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE)
 
-struct CongAttributeEditorENUMERATION
+struct _CongAttributeEditorEnumeration
 {
 	CongAttributeEditor attribute_editor;
-	CongAttributeEditorENUMERATIONDetails *private;
+	CongAttributeEditorEnumerationDetails *private;
 };
 
-struct CongAttributeEditorENUMERATIONClass
+struct _CongAttributeEditorEnumerationClass
 {
 	CongAttributeEditorClass attribute_editor_klass;
 };
@@ -53,7 +53,7 @@ GType
 cong_attribute_editor_enumeration_get_type (void);
 
 CongAttributeEditor*
-cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
+cong_attribute_editor_enumeration_construct (CongAttributeEditorEnumeration *attribute_editor_enumeration,
 					     CongDocument *doc,
 					     CongNodePtr node,
 					     xmlNs *ns_ptr,

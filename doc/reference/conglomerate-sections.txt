@@ -306,7 +306,6 @@ cong_document_get_root_element
 cong_document_get_traversal
 cong_document_get_root_traversal_node
 cong_document_get_find_dialog_data
-cong_document_get_dispspec_element
 cong_document_get_dispspec_element_for_node
 cong_document_get_filename
 cong_document_get_full_uri
@@ -814,7 +813,6 @@ CONG_EDITOR_NODE
 CONG_EDITOR_NODE_CLASS
 IS_CONG_EDITOR_NODE
 CongFlowType
-cong_editor_node_get_type
 cong_editor_node_construct
 cong_editor_node_manufacture
 cong_editor_node_get_widget
@@ -1213,7 +1211,6 @@ cong_node_modification_get_node
 <FILE>cong-node</FILE>
 <TITLE>XML Nodes</TITLE>
 CongNodePtr
-CongXMLChar
 cong_node_prev
 cong_node_next
 cong_node_first_child
@@ -1749,8 +1746,6 @@ cong_debug_message_log_view_new
 cong_debug_signal_log_view_new
 cong_node_properties_dialog_new
 cong_cursor_blink
-xml_frag_data_nice
-xml_frag_name_nice
 xml_all_present_span_elements
 xml_all_valid_span_elements
 xml_fetch_clean_data

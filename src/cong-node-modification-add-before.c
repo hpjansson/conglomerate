@@ -29,7 +29,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongNodeModificationAddBeforeDetails
+struct _CongNodeModificationAddBeforeDetails
 {
 	/* Redo info: */
 	CongNodePtr new_parent;

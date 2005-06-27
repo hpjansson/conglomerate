@@ -33,7 +33,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaFlowHolderBlocksDetails
+struct _CongEditorAreaFlowHolderBlocksDetails
 {
 	CongEditorAreaComposer *outer_compose;
 	GHashTable *hash_of_doc_node_to_child_flow_holder;

@@ -34,19 +34,19 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_SET_PARENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_SET_PARENT_TYPE, CongNodeModificationSetParentClass)
 #define IS_CONG_NODE_MODIFICATION_SET_PARENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_SET_PARENT_TYPE)
 
-typedef struct CongNodeModificationSetParent CongNodeModificationSetParent;
-typedef struct CongNodeModificationSetParentClass CongNodeModificationSetParentClass;
-typedef struct CongNodeModificationSetParentDetails CongNodeModificationSetParentDetails;
+typedef struct _CongNodeModificationSetParent CongNodeModificationSetParent;
+typedef struct _CongNodeModificationSetParentClass CongNodeModificationSetParentClass;
+typedef struct _CongNodeModificationSetParentDetails CongNodeModificationSetParentDetails;
 
 
-struct CongNodeModificationSetParent
+struct _CongNodeModificationSetParent
 {
 	CongNodeModification base;
 
 	CongNodeModificationSetParentDetails *private;
 };
 
-struct CongNodeModificationSetParentClass
+struct _CongNodeModificationSetParentClass
 {
 	CongNodeModificationClass klass;
 

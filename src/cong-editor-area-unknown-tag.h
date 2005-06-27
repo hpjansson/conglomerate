@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaUnknownTag CongEditorAreaUnknownTag;
-typedef struct CongEditorAreaUnknownTagClass CongEditorAreaUnknownTagClass;
-typedef struct CongEditorAreaUnknownTagDetails CongEditorAreaUnknownTagDetails;
+typedef struct _CongEditorAreaUnknownTag CongEditorAreaUnknownTag;
+typedef struct _CongEditorAreaUnknownTagClass CongEditorAreaUnknownTagClass;
+typedef struct _CongEditorAreaUnknownTagDetails CongEditorAreaUnknownTagDetails;
 
 #define CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE	   (cong_editor_area_unknown_tag_get_type ())
 #define CONG_EDITOR_AREA_UNKNOWN_TAG(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE, CongEditorAreaUnknownTag)
 #define CONG_EDITOR_AREA_UNKNOWN_TAG_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE, CongEditorAreaUnknownTagClass)
 #define IS_CONG_EDITOR_AREA_UNKNOWN_TAG(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE)
 
-struct CongEditorAreaUnknownTag
+struct _CongEditorAreaUnknownTag
 {
 	CongEditorAreaBin bin;
 
 	CongEditorAreaUnknownTagDetails *private;
 };
 
-struct CongEditorAreaUnknownTagClass
+struct _CongEditorAreaUnknownTagClass
 {
 	CongEditorAreaContainerClass klass;
 };

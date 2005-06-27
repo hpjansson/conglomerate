@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeWrapperCheckButton CongAttributeWrapperCheckButton;
-typedef struct CongAttributeWrapperCheckButtonClass CongAttributeWrapperCheckButtonClass;
-typedef struct CongAttributeWrapperCheckButtonDetails CongAttributeWrapperCheckButtonDetails;
+typedef struct _CongAttributeWrapperCheckButton CongAttributeWrapperCheckButton;
+typedef struct _CongAttributeWrapperCheckButtonClass CongAttributeWrapperCheckButtonClass;
+typedef struct _CongAttributeWrapperCheckButtonDetails CongAttributeWrapperCheckButtonDetails;
 
 #define CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON_TYPE	      (cong_attribute_wrapper_check_button_get_type ())
 #define CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON_TYPE, CongAttributeWrapperCheckButton)
 #define CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON_TYPE, CongAttributeWrapperCheckButtonClass)
 #define IS_CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON_TYPE)
 
-struct CongAttributeWrapperCheckButton
+struct _CongAttributeWrapperCheckButton
 {
 	CongAttributeWrapper attribute_wrapper;
 
 	CongAttributeWrapperCheckButtonDetails *private;
 };
 
-struct CongAttributeWrapperCheckButtonClass
+struct _CongAttributeWrapperCheckButtonClass
 {
 	CongAttributeWrapperClass klass;
 };

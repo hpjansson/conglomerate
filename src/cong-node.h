@@ -66,9 +66,9 @@ typedef enum  {
 	CONG_WHITESPACE_PRESERVE
 } CongWhitespaceHandling;
 
-typedef struct CongDocument CongDocument;
-typedef struct CongView CongView;
-typedef struct CongViewClass CongViewClass;
+typedef struct _CongDocument CongDocument;
+typedef struct _CongView CongView;
+typedef struct _CongViewClass CongViewClass;
 typedef struct CongDispspec CongDispspec;
 typedef struct CongDispspecElement CongDispspecElement;
 typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
@@ -76,9 +76,9 @@ typedef struct CongDispspecRegistry CongDispspecRegistry;
 
 typedef struct CongFont CongFont;
 
-typedef struct CongCursor CongCursor;
+typedef struct _CongCursor CongCursor;
 typedef struct CongSelection CongSelection;
-typedef struct CongPrimaryWindow CongPrimaryWindow;
+typedef struct _CongPrimaryWindow CongPrimaryWindow;
 typedef struct CongEditorView CongEditorView;
 typedef struct CongSpanEditor CongSpanEditor; 
 

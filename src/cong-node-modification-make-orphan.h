@@ -34,19 +34,19 @@ G_BEGIN_DECLS
 #define CONG_NODE_MODIFICATION_MAKE_ORPHAN_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_NODE_MODIFICATION_MAKE_ORPHAN_TYPE, CongNodeModificationMakeOrphanClass)
 #define IS_CONG_NODE_MODIFICATION_MAKE_ORPHAN(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_NODE_MODIFICATION_MAKE_ORPHAN_TYPE)
 
-typedef struct CongNodeModificationMakeOrphan CongNodeModificationMakeOrphan;
-typedef struct CongNodeModificationMakeOrphanClass CongNodeModificationMakeOrphanClass;
-typedef struct CongNodeModificationMakeOrphanDetails CongNodeModificationMakeOrphanDetails;
+typedef struct _CongNodeModificationMakeOrphan CongNodeModificationMakeOrphan;
+typedef struct _CongNodeModificationMakeOrphanClass CongNodeModificationMakeOrphanClass;
+typedef struct _CongNodeModificationMakeOrphanDetails CongNodeModificationMakeOrphanDetails;
 
 
-struct CongNodeModificationMakeOrphan
+struct _CongNodeModificationMakeOrphan
 {
 	CongNodeModification base;
 
 	CongNodeModificationMakeOrphanDetails *private;
 };
 
-struct CongNodeModificationMakeOrphanClass
+struct _CongNodeModificationMakeOrphanClass
 {
 	CongNodeModificationClass klass;
 

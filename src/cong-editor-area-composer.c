@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaComposerDetails
+struct _CongEditorAreaComposerDetails
 {
 	GList *list_of_child_details;
 	GtkOrientation orientation;

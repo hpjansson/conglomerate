@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_AREA_LIFETIMES 0
 
-typedef struct CongEditorAreaDetails CongEditorAreaDetails;
+typedef struct _CongEditorAreaDetails CongEditorAreaDetails;
 
 #define CONG_EDITOR_AREA_TYPE	      (cong_editor_area_get_type ())
 #define CONG_EDITOR_AREA(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_TYPE, CongEditorArea)
@@ -42,14 +42,14 @@ typedef struct CongEditorAreaDetails CongEditorAreaDetails;
 typedef gboolean (*CongEditorAreaCallbackFunc) (CongEditorArea *editor_area, 
 						gpointer user_data);
 
-struct CongEditorArea
+struct _CongEditorArea
 {
 	GObject object;
 
 	CongEditorAreaDetails *private;
 };
 
-struct CongEditorAreaClass
+struct _CongEditorAreaClass
 {
 	GObjectClass klass;
 

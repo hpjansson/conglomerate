@@ -36,7 +36,7 @@ cong_editor_widget_create_child_policy_for_node_with_single_area(CongEditorNode 
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaFlowHolderSingleDetails
+struct _CongEditorAreaFlowHolderSingleDetails
 {
 	CongEditorArea *outer_bin;
 	CongEditorNode *single_editor_node;

@@ -29,7 +29,7 @@
 #define PRIVATE(x) ((x)->private)
 
 /* Internal types: */
-struct CongAttributeWrapperCheckButtonDetails
+struct _CongAttributeWrapperCheckButtonDetails
 {
 	GtkCheckButton *check_button;
 	gchar *attribute_value_unchecked;

@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaStructuralTag CongEditorAreaStructuralTag;
-typedef struct CongEditorAreaStructuralTagClass CongEditorAreaStructuralTagClass;
-typedef struct CongEditorAreaStructuralTagDetails CongEditorAreaStructuralTagDetails;
+typedef struct _CongEditorAreaStructuralTag CongEditorAreaStructuralTag;
+typedef struct _CongEditorAreaStructuralTagClass CongEditorAreaStructuralTagClass;
+typedef struct _CongEditorAreaStructuralTagDetails CongEditorAreaStructuralTagDetails;
 
 #define CONG_EDITOR_AREA_STRUCTURAL_TAG_TYPE	   (cong_editor_area_structural_tag_get_type ())
 #define CONG_EDITOR_AREA_STRUCTURAL_TAG(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_STRUCTURAL_TAG_TYPE, CongEditorAreaStructuralTag)
 #define CONG_EDITOR_AREA_STRUCTURAL_TAG_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_STRUCTURAL_TAG_TYPE, CongEditorAreaStructuralTagClass)
 #define IS_CONG_EDITOR_AREA_STRUCTURAL_TAG(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_STRUCTURAL_TAG_TYPE)
 
-struct CongEditorAreaStructuralTag
+struct _CongEditorAreaStructuralTag
 {
 	CongEditorAreaStructural structural;
 
 	CongEditorAreaStructuralTagDetails *private;
 };
 
-struct CongEditorAreaStructuralTagClass
+struct _CongEditorAreaStructuralTagClass
 {
 	CongEditorAreaStructuralClass klass;
 };

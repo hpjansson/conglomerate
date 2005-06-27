@@ -34,18 +34,18 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_UNIMPLEMENTED_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_UNIMPLEMENTED_TYPE, CongEditorNodeUnimplementedClass)
 #define IS_CONG_EDITOR_NODE_UNIMPLEMENTED(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_UNIMPLEMENTED_TYPE)
 
-typedef struct CongEditorNodeUnimplemented CongEditorNodeUnimplemented;
-typedef struct CongEditorNodeUnimplementedClass CongEditorNodeUnimplementedClass;
-typedef struct CongEditorNodeUnimplementedDetails CongEditorNodeUnimplementedDetails;
+typedef struct _CongEditorNodeUnimplemented CongEditorNodeUnimplemented;
+typedef struct _CongEditorNodeUnimplementedClass CongEditorNodeUnimplementedClass;
+typedef struct _CongEditorNodeUnimplementedDetails CongEditorNodeUnimplementedDetails;
 
-struct CongEditorNodeUnimplemented
+struct _CongEditorNodeUnimplemented
 {
 	CongEditorNode editor_node;
 
 	CongEditorNodeUnimplementedDetails *private;
 };
 
-struct CongEditorNodeUnimplementedClass
+struct _CongEditorNodeUnimplementedClass
 {
 	CongEditorNodeClass klass;
 

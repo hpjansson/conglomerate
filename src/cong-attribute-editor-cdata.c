@@ -28,7 +28,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct _CongAttributeEditorCDATADetails
+struct _CongAttributeEditorCDataDetails
 {
 	GtkBox *hbox;
 	GtkEntry *entry;
@@ -44,25 +44,25 @@ static void
 remove_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
 on_text_entry_changed (GtkEditable *editable,
-		       CongAttributeEditorCDATA *attribute_editor_cdata);
+		       CongAttributeEditorCData *attribute_editor_cdata);
 static void
 on_add_button (GtkButton *button,
-	       CongAttributeEditorCDATA *attribute_editor_cdata);
+	       CongAttributeEditorCData *attribute_editor_cdata);
 static void
 on_delete_button (GtkButton *button,
-		  CongAttributeEditorCDATA *attribute_editor_cdata);
+		  CongAttributeEditorCData *attribute_editor_cdata);
 static void
-do_refresh (CongAttributeEditorCDATA *attribute_editor_cdata);
+do_refresh (CongAttributeEditorCData *attribute_editor_cdata);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorCDATA, 
+GNOME_CLASS_BOILERPLATE(CongAttributeEditorCData, 
 			cong_attribute_editor_cdata,
 			CongAttributeEditor,
 			CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
-cong_attribute_editor_cdata_class_init (CongAttributeEditorCDATAClass *klass)
+cong_attribute_editor_cdata_class_init (CongAttributeEditorCDataClass *klass)
 {
 	CongAttributeEditorClass *editor_klass = CONG_ATTRIBUTE_EDITOR_CLASS (klass);
 
@@ -71,9 +71,9 @@ cong_attribute_editor_cdata_class_init (CongAttributeEditorCDATAClass *klass)
 }
 
 static void
-cong_attribute_editor_cdata_instance_init (CongAttributeEditorCDATA *area)
+cong_attribute_editor_cdata_instance_init (CongAttributeEditorCData *area)
 {
-	area->private = g_new0(CongAttributeEditorCDATADetails,1);
+	area->private = g_new0(CongAttributeEditorCDataDetails,1);
 }
 
 /**
@@ -88,7 +88,7 @@ cong_attribute_editor_cdata_instance_init (CongAttributeEditorCDATA *area)
  * Returns:
  */
 CongAttributeEditor*
-cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_editor_cdata,
+cong_attribute_editor_cdata_construct (CongAttributeEditorCData *attribute_editor_cdata,
 				       CongDocument *doc,
 				       CongNodePtr node,
 				       xmlNs *ns_ptr,
@@ -185,7 +185,7 @@ remove_attribute_handler (CongAttributeEditor *attribute_editor)
 
 static void
 on_text_entry_changed (GtkEditable *editable,
-		       CongAttributeEditorCDATA *attribute_editor_cdata)
+		       CongAttributeEditorCData *attribute_editor_cdata)
 {
 	const gchar *value;
 
@@ -196,7 +196,7 @@ on_text_entry_changed (GtkEditable *editable,
 
 static void
 on_add_button (GtkButton *button,
-	       CongAttributeEditorCDATA *attribute_editor_cdata)
+	       CongAttributeEditorCData *attribute_editor_cdata)
 {
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
@@ -222,7 +222,7 @@ on_add_button (GtkButton *button,
 
 static void
 on_delete_button (GtkButton *button,
-		  CongAttributeEditorCDATA *attribute_editor_cdata)
+		  CongAttributeEditorCData *attribute_editor_cdata)
 {
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
@@ -247,7 +247,7 @@ on_delete_button (GtkButton *button,
 
 
 static void
-do_refresh (CongAttributeEditorCDATA *attribute_editor_cdata)
+do_refresh (CongAttributeEditorCData *attribute_editor_cdata)
 {
 	gchar *attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	

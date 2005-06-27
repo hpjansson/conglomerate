@@ -28,7 +28,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaBorderDetails
+struct _CongEditorAreaBorderDetails
 {
 	guint left_pixels;
 	guint right_pixels;

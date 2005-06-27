@@ -34,7 +34,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaLabelledDetails
+struct _CongEditorAreaLabelledDetails
 {
 	CongEditorArea *outer_hcompose;
 	CongEditorArea *label;

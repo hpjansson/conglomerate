@@ -29,23 +29,23 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaTextComment CongEditorAreaTextComment;
-typedef struct CongEditorAreaTextCommentClass CongEditorAreaTextCommentClass;
-typedef struct CongEditorAreaTextCommentDetails CongEditorAreaTextCommentDetails;
+typedef struct _CongEditorAreaTextComment CongEditorAreaTextComment;
+typedef struct _CongEditorAreaTextCommentClass CongEditorAreaTextCommentClass;
+typedef struct _CongEditorAreaTextCommentDetails CongEditorAreaTextCommentDetails;
 
 #define CONG_EDITOR_AREA_TEXT_COMMENT_TYPE	   (cong_editor_area_text_comment_get_type ())
 #define CONG_EDITOR_AREA_TEXT_COMMENT(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_AREA_TEXT_COMMENT_TYPE, CongEditorAreaTextComment)
 #define CONG_EDITOR_AREA_TEXT_COMMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_TEXT_COMMENT_TYPE, CongEditorAreaTextCommentClass)
 #define IS_CONG_EDITOR_AREA_TEXT_COMMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_TEXT_COMMENT_TYPE)
 
-struct CongEditorAreaTextComment
+struct _CongEditorAreaTextComment
 {
 	CongEditorAreaText area;
 
 	CongEditorAreaTextCommentDetails *private;
 };
 
-struct CongEditorAreaTextCommentClass
+struct _CongEditorAreaTextCommentClass
 {
 	CongEditorAreaTextClass klass;
 };

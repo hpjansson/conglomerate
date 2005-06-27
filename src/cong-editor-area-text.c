@@ -30,7 +30,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongEditorAreaTextDetails
+struct _CongEditorAreaTextDetails
 {
 	gchar *text;
 
@@ -138,7 +138,6 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
  * @editor_widget:
  * @font:
  * @fg_col:
-
  * @text:
  * @use_markup:
  *

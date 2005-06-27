@@ -37,7 +37,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = {0};
 
-struct CongEditorAreaContainerDetails
+struct _CongEditorAreaContainerDetails
 {
 	int dummy;
 };

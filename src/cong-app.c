@@ -66,7 +66,7 @@ struct CongSelectionData
 	gchar *utf8_text;
 };
 
-struct CongAppPrivate
+struct _CongAppPrivate
 {
 	GnomeProgram *gnome_program;
 	CongPluginManager *plugin_manager;

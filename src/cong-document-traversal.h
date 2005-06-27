@@ -38,16 +38,16 @@ G_BEGIN_DECLS
 #define CONG_DOCUMENT_TRAVERSAL_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_DOCUMENT_TRAVERSAL_TYPE, CongDocumentTraversalClass)
 #define IS_CONG_DOCUMENT_TRAVERSAL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_DOCUMENT_TRAVERSAL_TYPE)
 
-typedef struct CongDocumentTraversalDetails CongDocumentTraversalDetails;
+typedef struct _CongDocumentTraversalDetails CongDocumentTraversalDetails;
 
-struct CongDocumentTraversal
+struct _CongDocumentTraversal
 {
 	GObject object;
 
 	CongDocumentTraversalDetails *private;
 };
 
-struct CongDocumentTraversalClass
+struct _CongDocumentTraversalClass
 {
 	GObjectClass klass;
 
