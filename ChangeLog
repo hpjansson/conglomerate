@@ -1,3 +1,54 @@
+2005-08-15  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.spec.in: sync with Dag Wiers
+
+2005-06-21  Geert Stappers  <stappers@stappers.nl>
+
+	* configure.in: Post-release version bump to 0.9.2
+
+	* NEWS: reformatted
+
+	--- 0.9.1 ---
+
+2005-06-21  David Malcolm  <dmalcolm@redhat.com>
+
+	* NEWS
+
+	Added 0.9.1 to NEWS; removed 0.7.16
+
+2005-06-13  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* configure.in:
+	* doc/reference/Makefile.am:
+	* src/Makefile.am:
+	* src/cong-file-open.c: (open_document_do):
+	* src/cong-file-save.c: (save_document_as):
+	* src/cong-menus.c: (recent_open_cb), (recent_tooltip_func),
+	(cong_menus_setup_recent_files):
+	* src/cong-primary-window.c: (cong_primary_window_make_gui):
+	* src/cong-primary-window.h:
+	* src/cong-ui-hooks.h:
+	
+	New directory with copy of recent files stuff from libegg. 
+	Support for recent files in congomerate. Fix for the bug
+	#108524.
+
+2005-06-10  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* doc/C/Makefile.am: Added faq.xml to BUILT_SOURCES.
+
+2005-05-28  Maxim Dziumanenko <mvd@mylinux.ua>
+
+        * configure.in: Added "uk" to ALL_LINGUAS.
+
+2005-04-05  David Malcolm  <dmalcolm@redhat.com>
+
+	* configure.in: added --enable-debug-plugin option, off by default
+
+	* autogen.sh: --enable-debug-plugin=yes by default when building
+	from CVS
+
+2005-04-03  Geert Stappers <stappers@stappers.nl>
 2005-07-16  Pawan Chitrakar  <pawan@nplinux.org>
 
 	* configure.in: Added ne in ALL_LINGUAS
