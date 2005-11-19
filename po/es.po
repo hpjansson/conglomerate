@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate-HEAD-SPANISH\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 18:22+0100\n"
-"PO-Revision-Date: 2005-11-18 19:04+0100\n"
+"POT-Creation-Date: 2005-11-19 14:44+0100\n"
+"PO-Revision-Date: 2005-11-19 15:27+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@tecknolabs.com>\n"
 "Language-Team:  <traductores@cvs.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -540,7 +540,7 @@ msgstr "Introducción"
 
 #: ../dispspecs/docbook.xds.in.h:81 ../dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
-msgstr ""
+msgstr "Intitular clave"
 
 #: ../dispspecs/docbook.xds.in.h:82 ../dispspecs/website-webpage.xds.in.h:48
 msgid "Legal Notice"
@@ -1209,7 +1209,9 @@ msgstr "Firma"
 msgid ""
 "This is a document type associated with the \"readme\" file distributed with "
 "the initial prototype of Conglomerate."
-msgstr "Esto es un tipo de documento asociado con el archivo \"readme\" distribuido con el prototipo inicial de Conglomerate."
+msgstr ""
+"Esto es un tipo de documento asociado con el archivo \"readme\" distribuido "
+"con el prototipo inicial de Conglomerate."
 
 #: ../dispspecs/relax-ng.xds.in.h:1 ../src/cong-node-properties-dialog.c:879
 msgid "Choice"
@@ -1276,24 +1278,30 @@ msgstr "Cero o más"
 msgid ""
 "A bibliographic description of the copy text(s) from which an electronic "
 "text was derived or generated"
-msgstr "Una descripción bibliográfica de los textos copiados de los que se deriva o genera un texto electrónico"
+msgstr ""
+"Una descripción bibliográfica de los textos copiados de los que se deriva o "
+"genera un texto electrónico"
 
 #: ../dispspecs/teixlite.xds.in.h:2
 msgid ""
 "A brief description of the place, date, time, etc. of production of a "
 "letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
 "of heading or trailer"
-msgstr "Una breve descripción del lugar, fecha, hora, etc de producción de una carta, periódico u otra obra, prefijada o sufijada a alla como una clase de cabecera o trailer"
+msgstr ""
+"Una breve descripción del lugar, fecha, hora, etc de producción de una "
+"carta, periódico u otra obra, prefijada o sufijada a alla como una clase de "
+"cabecera o trailer"
 
 #: ../dispspecs/teixlite.xds.in.h:3
 msgid ""
 "A brief prose description of the appearance or content of a graphic figure, "
 "for use when documenting an image without displaying it"
-msgstr ""
+msgstr "Una breve descripción de la apariencia o contenido de una figura gráfica, para usarla cuando se documenta una imagen sin mostrarla"
 
 #: ../dispspecs/teixlite.xds.in.h:4
 msgid "A closing title or footer appearing at the end of a division of a text"
-msgstr "Un título de cierre o pie que aparece al final de una división de un texto"
+msgstr ""
+"Un título de cierre o pie que aparece al final de una división de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:5
 msgid "A date in any format"
@@ -1304,27 +1312,27 @@ msgid ""
 "A detailed description of non-bibliographic aspects of a text, specifically "
 "the languages and sublanguages used, the situation in which it was produced, "
 "the participants and their setting"
-msgstr ""
+msgstr "Una descripción detallada de los aspectos no bibliográficos de un texto, específicamente los idiomas y subidiomas usados, la situación en la cual se produjo, los participantes y su configuración"
 
 #: ../dispspecs/teixlite.xds.in.h:7
 msgid "A fifth-level subdivision of the front, body, or back of a text"
-msgstr ""
+msgstr "Una subdivisión de quinto nivel de la cubierta, cuerpo o contracubierta de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:8
 msgid ""
 "A first-level subdivision of the front, body, or back of a text (the "
 "largest, if &lt;div0&gt; is not used, the second largest if it is)"
-msgstr ""
+msgstr "Una subdivisión de primer nivel de la cubierta, cuerpo o contracubierta de un texto (la más grande, si no se usa &lt;div0&gt;, la segunda más grande se se usa)<"
 
 #: ../dispspecs/teixlite.xds.in.h:9
 msgid ""
 "A formal list or prose description of the topics addressed by a subdivision "
 "of a text"
-msgstr ""
+msgstr "Una lista formal o descripcción en prosa de los temas tratados por una subdivisión de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:10
 msgid "A fourth-level subdivision of the front, body, or back of a text"
-msgstr ""
+msgstr "Una subdivisión de cuarto nivel de la cubierta, cuerpo o contracubierta de un texto<"
 
 #: ../dispspecs/teixlite.xds.in.h:11
 msgid "A full bibliographic description of an electronic file"
@@ -1334,13 +1342,13 @@ msgstr "Una descripción bibliográfica completa de un archivo electrónico."
 msgid ""
 "A fully-structured bibliographic citation, in which all components of the "
 "TEI file description are present"
-msgstr ""
+msgstr "Una cita bibliográfica completamente estructurada, en la cual todos los componentes de la descripción del archivo TEI están presentes"
 
 #: ../dispspecs/teixlite.xds.in.h:13
 msgid ""
 "A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
 "verse paragraph, etc."
-msgstr ""
+msgstr "Un grupo de líneas de versos funcionando como una unidad formal, ej, una estrofa, refrán, parágrafo de verso, etc."
 
 #: ../dispspecs/teixlite.xds.in.h:14
 msgid "A keyword in some formal language"
@@ -1351,7 +1359,7 @@ msgid ""
 "A letter, word or passage deleted, marked as deleted, or otherwise indicated "
 "as superfluous or spurious in the copy text by an author, scribe, annotator, "
 "or corrector"
-msgstr ""
+msgstr "Una carta, palabra o pasage borrado, marcado para borrado o indicado de otra forma como supérfluo o espúreo en el texto copiado por un autor, escriba, anotador, o corrector"
 
 #: ../dispspecs/teixlite.xds.in.h:16
 msgid "A list of bibliographic citations of any kind"
@@ -1367,7 +1375,7 @@ msgstr ""
 msgid ""
 "A loosely-structured bibliographic citation of which the sub-components may "
 "or may not be explicitly localNameged"
-msgstr ""
+msgstr "Una citación bibliográfica levemente estructurada en la cual los sub-componentes pueden o no pueden ser explícitamente nombres locales"
 
 #: ../dispspecs/teixlite.xds.in.h:19
 msgid "A mathematical or other formula"
@@ -1429,13 +1437,15 @@ msgstr "Un nombre propio o frase de nombre"
 msgid ""
 "A prose description of the rationale and methods used in sampling texts in "
 "the creation of a corpus or collection"
-msgstr "Una descripción en prosa del razonamiento y métodos usados en textos demuestra en la creación de un corpus o colección"
+msgstr ""
+"Una descripción en prosa del razonamiento y métodos usados en textos "
+"demuestra en la creación de un corpus o colección"
 
 #: ../dispspecs/teixlite.xds.in.h:30
 msgid ""
 "A quotation from some other document, together with a bibliographic "
 "reference to its source"
-msgstr ""
+msgstr "Una cita de algún otro documento, junto con una referencia bibliográfica a su origen"
 
 #: ../dispspecs/teixlite.xds.in.h:31
 msgid ""
@@ -1444,13 +1454,15 @@ msgid ""
 "narrative, the words are usually those of of a character or speaker; in "
 "dictionaries, &lt;q&gt; may be used to mark real or contrived examples of "
 "usage"
-msgstr ""
+msgstr "Una cita o cita aparente - una representación de discurso o pensamiento marcada como si fuera una cita de alguien más (si de hecho es una cita o no); en narrativa, las palabras usualmente son aquellas que dice un personaje o el narrador; en diccionarios, &lt;q&gt; puede usarse para marcar ejemplos reales o inventados de uso"
 
 #: ../dispspecs/teixlite.xds.in.h:32
 msgid ""
 "A quotation, anonymous or attributed, appearing at the start of a section or "
 "chapter, or on a title page"
-msgstr "Una cita, anónima o atribuida, que aparece al inicio de una sección o capítulo, o en una página de título"
+msgstr ""
+"Una cita, anónima o atribuida, que aparece al inicio de una sección o "
+"capítulo, o en una página de título"
 
 #: ../dispspecs/teixlite.xds.in.h:33
 msgid "A reading which has been regularized or normalized in some sense"
@@ -1460,21 +1472,21 @@ msgstr "Una lectura que haya sido regularizada o normalizada de alguna forma"
 msgid ""
 "A reference to another location in the current document, in terms of one or "
 "more identifiable elements, possibly modified by additional text or comment"
-msgstr ""
+msgstr "Una referencia a otro lugar del documento actual, en términos de uno o más elementos identificables, posiblemente modificados por texto adicional o comentarios"
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid ""
 "A reference to another location in the current document, or an external "
 "document, using an extended pointer notation, possibly modified by "
 "additional text or comment"
-msgstr ""
+msgstr "Una referencia a otro lugar en el documento actual, o un documento externo, usando una notación de apunte extendida, posiblemente modificada por texto adicional o comentario"
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid ""
 "A salutation or greeting prefixed to a foreword, dedicatory epistle, or "
 "other division of a text, or the salutation in the closing of a letter, "
 "preface, etc."
-msgstr ""
+msgstr "Un saludo o felicitación prefijada a un prefacio, epístola dedicatoria, u otra división de un texto, o el saludo al cierre de una carta, prefacio, etc."
 
 #: ../dispspecs/teixlite.xds.in.h:37
 msgid "A second-level subdivision of the front, body, or back of a text"
@@ -1486,13 +1498,17 @@ msgstr "Una división tipo frase de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:39
 msgid "A seventh-level subdivision of the front, body, or back of a text"
-msgstr "Una subdivisión de séptimo nivel de la portada, cuerpo o contraportada de un texto"
+msgstr ""
+"Una subdivisión de séptimo nivel de la portada, cuerpo o contraportada de un "
+"texto"
 
 #: ../dispspecs/teixlite.xds.in.h:40
 msgid ""
 "A short fragment of code in some formal language (often a programming "
 "language)"
-msgstr "Un fragmento corto de código en algún lenguaje formal (a menudo un lenguaje de programación)"
+msgstr ""
+"Un fragmento corto de código en algún lenguaje formal (a menudo un lenguaje "
+"de programación)"
 
 #: ../dispspecs/teixlite.xds.in.h:41
 msgid "A single example demonstrating the use of an element or attribute"
@@ -1502,7 +1518,10 @@ msgstr "Una muestra sencilla demostrando el uno de un elemento o atributo"
 msgid ""
 "A single text of any kind, whether unitary or composite, for example a poem "
 "or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
-msgstr "Un texto sencillo de cualquier clase, ya sea unitario o compuesto, por ejemplo un poema o drama, una colección de ensayos, una novela, un diccionario o una muestra de corpus"
+msgstr ""
+"Un texto sencillo de cualquier clase, ya sea unitario o compuesto, por "
+"ejemplo un poema o drama, una colección de ensayos, una novela, un "
+"diccionario o una muestra de corpus"
 
 #: ../dispspecs/teixlite.xds.in.h:43
 msgid "A single, possibly incomplete, line of verse"
@@ -1512,55 +1531,67 @@ msgstr "Una línea de verso única, posiblemente incompleta"
 msgid ""
 "A single-word, multi-word, or symbolic designation which is regarded as a "
 "technical term"
-msgstr "Una palabra simple, múlti-palabra, o designación simbólica que se reconoce como un término técnico"
+msgstr ""
+"Una palabra simple, múlti-palabra, o designación simbólica que se reconoce "
+"como un término técnico"
 
 #: ../dispspecs/teixlite.xds.in.h:45
 msgid "A sixth-level subdivision of the front, body, or back of a text"
-msgstr "Una división de sexto nivel de la cubierta, cuerpo o contracubierta de un texto"
+msgstr ""
+"Una división de sexto nivel de la cubierta, cuerpo o contracubierta de un "
+"texto"
 
 #: ../dispspecs/teixlite.xds.in.h:46
 msgid ""
 "A specialized form of heading or label, giving the name of one or more "
 "speakers in a dramatic text or fragment"
-msgstr "Una forma especializada de cabecera o etiqueta, dándo el nombre a uno o más intérpretes en un texto dramático o fragmento."
+msgstr ""
+"Una forma especializada de cabecera o etiqueta, dándo el nombre a uno o más "
+"intérpretes en un texto dramático o fragmento."
 
 #: ../dispspecs/teixlite.xds.in.h:47
 msgid ""
 "A statement of responsibility for someone responsible for the intellectual "
 "content of a text, edition, recording, or series, where the specialized "
 "elements for authors, editors, etc. do not suffice or do not apply"
-msgstr "Una declaración de responsabilidad de alguien responsable del contenido intelectual de un texto, edición, grabación, o serie, donde los elementos especializados para los autores, editores, etc. no son suficientes o no se aplican"
+msgstr ""
+"Una declaración de responsabilidad de alguien responsable del contenido "
+"intelectual de un texto, edición, grabación, o serie, donde los elementos "
+"especializados para los autores, editores, etc. no son suficientes o no se "
+"aplican"
 
 #: ../dispspecs/teixlite.xds.in.h:48
 msgid "A subdivision of the front, body, or back of a text"
-msgstr ""
+msgstr "Una subdivisión de la cubierta, cuerpo o contracubierta de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:49
 msgid ""
 "A subsection or division of the title of a work, as indicated on a title page"
-msgstr ""
+msgstr "Una subsección o división en el título de una obra, tal como se indicaba en una página de título"
 
 #: ../dispspecs/teixlite.xds.in.h:50
 msgid "A third-level subdivision of the front, body, or back of a text"
-msgstr ""
+msgstr "Una subdivisión de tercer nivel de la cubierta, cuerpo o contracubierta de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:51
 msgid ""
 "A word or phrase belonging to some language other than that of the "
 "surrounding text"
-msgstr ""
+msgstr "Una palabra o frase perteneciente a algún idioma distinto del idioma del texto circundante"
 
 #: ../dispspecs/teixlite.xds.in.h:52
 msgid ""
 "A word or phrase for which the author or narrator indicates a disclaiming of "
 "responsibility, for example by the use of scare quotes or italics"
-msgstr ""
+msgstr "Una palabra o frase por la cual el autor o narrador indica una renuncia de responsbilidad, por ejemplo por el uso de comillas «» o itálicas"
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid ""
 "A word, phrase, or passage which cannot be transcribed with certainty "
 "because it is illegible or inaudible in the source"
-msgstr "Una palabra, frase o pasage que puede transcribirse con certeza porque es ilegible o inaudible en la fuente original"
+msgstr ""
+"Una palabra, frase o pasage que puede transcribirse con certeza porque es "
+"ilegible o inaudible en la fuente original"
 
 #: ../dispspecs/teixlite.xds.in.h:54
 msgid "Abbr"
@@ -1580,29 +1611,32 @@ msgstr "Una abreviatura de cualquier clase"
 
 #: ../dispspecs/teixlite.xds.in.h:59
 msgid "An edition statement as presented on a title page of a document"
-msgstr "Una declaración de edición tal como se presenta en una página de título de un documento"
+msgstr ""
+"Una declaración de edición tal como se presenta en una página de título de "
+"un documento"
 
 #: ../dispspecs/teixlite.xds.in.h:60
 msgid ""
 "An identifier of some kind, e.g. a variable name or the name of an SGML "
 "element or attribute"
-msgstr ""
+msgstr "Un identificador de alguna clase, por ejemplo un nombre de variable o el nombre de un elemento SGML o atributo"
 
 #: ../dispspecs/teixlite.xds.in.h:61
 msgid ""
 "An individual descriptive category, possibly nested within a superordinate "
 "category, within a user-defined taxonomy"
-msgstr ""
+msgstr "Una categoría descriptiva individual, posiblemente anidada dentro de una categoría de mayor orden, dentro de una taxonomía definida por el usuario"
 
 #: ../dispspecs/teixlite.xds.in.h:62
 msgid ""
 "An individual speech in a performance text, or a passage presented as such "
 "in a prose or verse text"
-msgstr ""
+msgstr "Un discurso individual en un texto representado, o un pasage presentada como tal en un texto de prosa o verso"
 
 #: ../dispspecs/teixlite.xds.in.h:63
 msgid "An interpretative annotation which can be linked to a span of text"
-msgstr "Una anotación interpretativa quepuede enlazarse a una expansión de texto"
+msgstr ""
+"Una anotación interpretativa quepuede enlazarse a una expansión de texto"
 
 #: ../dispspecs/teixlite.xds.in.h:65
 msgid "Anonymous Block (&lt;ab&gt;)"
@@ -1612,36 +1646,36 @@ msgstr "Bloque anónimo (&lt;ab&gt;)"
 msgid ""
 "Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
 "elements)"
-msgstr ""
+msgstr "Una unidad arbitraria de nivel de frase de texto (incluyendo otros elementos  &lt;seg&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:67
 msgid ""
 "Any heading, for example, the title of a section, or the heading of a list "
 "or glossary"
-msgstr ""
+msgstr "Cualquier cabecera, por ejemplo, el título de una sección, o la cabecera de una lista o glosario"
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
-msgstr ""
+msgstr "Cualquier clase de indicación de escena dentro de un texto dramático o fragmento"
 
 #: ../dispspecs/teixlite.xds.in.h:69
 msgid ""
 "Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
 "found at the start of a document, before the main body"
-msgstr ""
+msgstr "Cualquier materia preparatoria (cabeceras, página de título, prefacios, dedicatorias, etc) encontradas al inicio de un documento antes del cuerpo principal."
 
 #: ../dispspecs/teixlite.xds.in.h:70
 msgid "Any sequence of items organized as a list"
-msgstr ""
+msgstr "Cualquier secuencia de elementos organizada como una lista"
 
 #: ../dispspecs/teixlite.xds.in.h:71
 msgid ""
 "Any standard or non-standard number used to identify a bibliographic item"
-msgstr ""
+msgstr "Cualquier número estándar o no estándar usado para identificar un elemento bibliográfico"
 
 #: ../dispspecs/teixlite.xds.in.h:72
 msgid "Arbitrary Segment (&lt;seg&gt;)"
-msgstr ""
+msgstr "Segmento arbitrario (&lt;seg&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:73
 msgid "Argument"
@@ -1651,7 +1685,7 @@ msgstr "Argumento"
 msgid ""
 "Attaches an identifier to a point within a text, whether or not it "
 "corresponds with a textual element"
-msgstr ""
+msgstr "Adjunta un identificador a un apuntador dentro de un texto, tanto como si no corresponde con un elemento textual"
 
 #: ../dispspecs/teixlite.xds.in.h:76
 msgid "Authority"
@@ -1723,7 +1757,7 @@ msgstr "Más cerca"
 
 #: ../dispspecs/teixlite.xds.in.h:94
 msgid "Collects together &lt;interp&gt; tags"
-msgstr ""
+msgstr "Recoge juntas las etiquetas  &lt;interp&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:95
 msgid ""
@@ -1756,15 +1790,15 @@ msgid ""
 "Contains any arbitrary component-level unit of text, acting as an anonymous "
 "container for phrase or inter level elements analogous to, but without the "
 "semantic baggage of, a paragraph"
-msgstr ""
+msgstr "Contiene una unidad arbitraria a nivel de componente del texto, actuando como un contenedor anónimo para frases o elementos internivel análogos a, pero sin la carga semántica de, un párrafo"
 
 #: ../dispspecs/teixlite.xds.in.h:100
 msgid "Contains text displayed in tabular form, in rows and columns"
-msgstr ""
+msgstr "Contiene texto mostrado en forma tabulada, en filas y columnas"
 
 #: ../dispspecs/teixlite.xds.in.h:101
 msgid "Correct Form"
-msgstr "Formulario de corrección"
+msgstr "Forma correcta"
 
 #: ../dispspecs/teixlite.xds.in.h:102
 msgid "Creation"
@@ -1778,13 +1812,16 @@ msgstr "Línea de fecha"
 msgid ""
 "Defines a typology used to classify texts either implicitly, by means of a "
 "bibliographic citation, or explicitly by a structured taxonomy"
-msgstr "Define una tipología usada para clasificar textos bien implícitamente, por medio de una cita bibliográfica, o explícitamente por una taxonomía estructurada"
+msgstr ""
+"Define una tipología usada para clasificar textos bien implícitamente, por "
+"medio de una cita bibliográfica, o explícitamente por una taxonomía "
+"estructurada"
 
 #: ../dispspecs/teixlite.xds.in.h:106
 msgid ""
 "Defines the scope of a bibliographic reference, for example as a list of "
 "pagenumbers, or a named subdivision of a larger work"
-msgstr ""
+msgstr "Describe en detalle la intención o propósito para la que se codificó un archivo electrónico, junto con cualquier otra información relevante concerniente al proceso por el cual fue ensamblado o reunido"
 
 #: ../dispspecs/teixlite.xds.in.h:107
 msgid "Del"
@@ -1795,7 +1832,7 @@ msgid ""
 "Describes in detail the aim or purpose for which an electronic file was "
 "encoded, together with any other relevant information concerning the process "
 "by which it was assembled or collected"
-msgstr ""
+msgstr "Describe en detalle la intención o propósito por el que un archivo electrónico fue codificado, junto con cualquier otra información relevante concerniente al proceso por el cual fue ensamblado o recogido"
 
 #: ../dispspecs/teixlite.xds.in.h:109
 msgid ""
@@ -1873,7 +1910,7 @@ msgstr "Edición del documento"
 
 #: ../dispspecs/teixlite.xds.in.h:125
 msgid "Document Imprint"
-msgstr ""
+msgstr "Pie de imprenta del documento"
 
 #: ../dispspecs/teixlite.xds.in.h:126
 msgid "Document Title"
@@ -1917,7 +1954,7 @@ msgstr "Referencia extendida (&lt;xref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
-msgstr ""
+msgstr "Amplitud"
 
 #: ../dispspecs/teixlite.xds.in.h:140
 msgid "Figure Description"
@@ -1994,13 +2031,13 @@ msgstr ""
 msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a final group at the end of a division, especially of a letter"
-msgstr ""
+msgstr "Agrupa juntas la línea de fecha, por línea, saludo y frases similares que aparecen como un grupo final al fin de una división, especialmente en una carta"
 
 #: ../dispspecs/teixlite.xds.in.h:156
 msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a preliminary group at the start of a division, especially of a letter"
-msgstr ""
+msgstr "Agrupa juntas la línea de fecha, por línea, saludo y frases similares que aparecen como un grupo preliminar al inicio de una división, especialmente en una carta"
 
 #: ../dispspecs/teixlite.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:29
 msgid "Head"
@@ -2027,7 +2064,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:162
 msgid "Imprint"
-msgstr ""
+msgstr "Pie de imprenta"
 
 #: ../dispspecs/teixlite.xds.in.h:163
 msgid "Index"
@@ -2142,7 +2179,9 @@ msgstr "Marca un lugar para que sea indexado para cualquier propósito"
 msgid ""
 "Marks a word or phrase as graphically distinct from the surrounding text, "
 "for reasons concerning which no claim is made"
-msgstr "Marca una palabra o frase como gráficamente distinta del texto circundante, por razones concernientes a las cuales no se hace mención"
+msgstr ""
+"Marca una palabra o frase como gráficamente distinta del texto circundante, "
+"por razones concernientes a las cuales no se hace mención"
 
 #: ../dispspecs/teixlite.xds.in.h:186
 msgid "Marks paragraphs in prose"
@@ -2321,7 +2360,10 @@ msgid ""
 "Secondary statement of responsibility for a bibliographic item, for example "
 "the name of an individual, institution or organization, (or of several such) "
 "acting as editor, compiler, translator, etc."
-msgstr "Declaración de responsabilidad secundaria para un elemento bibliográfico, por ejemplo, el nombre de un individuo, institución u organización, (o de varias de ellas) actuando como editor, compilador, traductor, etc..."
+msgstr ""
+"Declaración de responsabilidad secundaria para un elemento bibliográfico, "
+"por ejemplo, el nombre de un individuo, institución u organización, (o de "
+"varias de ellas) actuando como editor, compilador, traductor, etc..."
 
 #: ../dispspecs/teixlite.xds.in.h:228
 msgid "Sentence"
@@ -2457,7 +2499,9 @@ msgstr ""
 msgid ""
 "The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
 "other division of a text"
-msgstr "El saludo de cierre, etc., anexado a un prefacio, epistola dedicatoria, u otra división de un texto"
+msgstr ""
+"El saludo de cierre, etc., anexado a un prefacio, epistola dedicatoria, u "
+"otra división de un texto"
 
 #: ../dispspecs/teixlite.xds.in.h:258
 msgid "The correct form of a passage apparently erroneous in the copy text"
@@ -2473,13 +2517,13 @@ msgstr ""
 msgid ""
 "The descriptive and declarative information making up an ‘electronic title "
 "page’ prefixed to every TEI-conformant text"
-msgstr ""
+msgstr "La información descriptiva y declarativa que marcan una «página de título electrónica» prefijada en cada texto conforme TEI"
 
 #: ../dispspecs/teixlite.xds.in.h:261
 msgid ""
 "The imprint statement (place and date of publication, publisher name), as "
 "given (usually) at the foot of a title page"
-msgstr ""
+msgstr "La frase de pie de imprenta (lugar y fecha de publicación, nombre del editor), tal como se dan (normalmente) en el pie de una página de título"
 
 #: ../dispspecs/teixlite.xds.in.h:262
 msgid ""
@@ -2553,13 +2597,17 @@ msgstr ""
 msgid ""
 "The name of the author(s), personal or corporate, of a work; the primary "
 "statement of responsibility for any bibliographic item"
-msgstr "El nombre de los autores, personales o corporativos, de una obra; la declaración de responsabilidad primaria para cualquier elemento bibliográfico"
+msgstr ""
+"El nombre de los autores, personales o corporativos, de una obra; la "
+"declaración de responsabilidad primaria para cualquier elemento bibliográfico"
 
 #: ../dispspecs/teixlite.xds.in.h:273
 msgid ""
 "The name of the organization responsible for the publication or distribution "
 "of a bibliographic item"
-msgstr "El nombre de la organización responsable de la publicación o distribución de un elemento bibliográfico"
+msgstr ""
+"El nombre de la organización responsable de la publicación o distribución de "
+"un elemento bibliográfico"
 
 #: ../dispspecs/teixlite.xds.in.h:274
 msgid "The name of the place where a bibliographic item was published"
@@ -2720,7 +2768,7 @@ msgstr "Base"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:8
 msgid "Bidirectional Override"
-msgstr ""
+msgstr "Override bidireccional"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:9
 msgid "Big"
@@ -3043,55 +3091,55 @@ msgstr "_Asociar esta DTD"
 
 #: ../glade/cong-file-properties.glade.h:21
 msgid "label_dtd_external_id"
-msgstr ""
+msgstr "label_dtd_external_id"
 
 #: ../glade/cong-file-properties.glade.h:22
 msgid "label_dtd_notes"
-msgstr ""
+msgstr "label_dtd_notes"
 
 #: ../glade/cong-file-properties.glade.h:23
 msgid "label_dtd_system_id"
-msgstr ""
+msgstr "label_dtd_system_id"
 
 #: ../glade/cong-file-properties.glade.h:24
 msgid "label_elements"
-msgstr ""
+msgstr "label_elements"
 
 #: ../glade/cong-file-properties.glade.h:25
 msgid "label_location"
-msgstr ""
+msgstr "label_location"
 
 #: ../glade/cong-file-properties.glade.h:26
 msgid "label_modified"
-msgstr ""
+msgstr "label_modified"
 
 #: ../glade/cong-file-properties.glade.h:27
 msgid "label_name"
-msgstr ""
+msgstr "label_name"
 
 #: ../glade/cong-file-properties.glade.h:28
 msgid "label_typedesc"
-msgstr ""
+msgstr "label_typedesc"
 
 #: ../glade/cong-file-properties.glade.h:29
 msgid "label_typename"
-msgstr ""
+msgstr "label_typename"
 
 #: ../glade/cong-file-properties.glade.h:30
 msgid "label_words"
-msgstr ""
+msgstr "label_words"
 
 #: ../glade/cong-file-properties.glade.h:31
 msgid "label_xml_encoding"
-msgstr ""
+msgstr "label_xml_encoding"
 
 #: ../glade/cong-file-properties.glade.h:32
 msgid "label_xml_standalone"
-msgstr ""
+msgstr "label_xml_standalone"
 
 #: ../glade/cong-file-properties.glade.h:33
 msgid "label_xml_version"
-msgstr ""
+msgstr "label_xml_version"
 
 #: ../glade/cong-find-replace.glade.h:1 ../glade/custom-element.glade.h:1
 #: ../glade/plugin-arbitrary.glade.h:1
@@ -3312,7 +3360,7 @@ msgstr "diálogo_selección_cadena"
 msgid ""
 "Unit test: quit immediately (after loading any files specified on the "
 "command-line)"
-msgstr ""
+msgstr "Unidad de test: sale inmediatamente (después de cargar cualquier archivo especificado en la línea de órdenes)"
 
 #: ../src/cong-app.c:1021
 msgid "XML Editor"
@@ -3477,7 +3525,7 @@ msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
-msgstr ""
+msgstr "Los tokens de nombres xml sólo pueden contener caracteres alfanuméricos o ideográficos y las marcas de puntuación _,-, ., y :. No puede contener espacios en blanco."
 
 #: ../src/cong-attribute-editor.c:249 ../src/cong-attribute-wrapper.c:232
 #: ../src/cong-node-properties-dialog.c:424
