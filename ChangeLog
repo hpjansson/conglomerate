@@ -1,3 +1,7 @@
+2005-12-06  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Added nb to ALL_LINGUAS.
+
 2005-08-15  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.spec.in: sync with Dag Wiers
