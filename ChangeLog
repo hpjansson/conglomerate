@@ -1,3 +1,9 @@
+2006-01-18  Stephane Loeullet <bugs@leroutier.net>
+
+	* doc/reference/Makefile.am:
+	
+	Install devhelp file. Fix for the bug 321964.
+
 2006-01-09  Alexander Shopov  <ash@contact.bg>
 
 	* configure.in: Added "bg" (Bulgarian) to ALL_LINGUAS
