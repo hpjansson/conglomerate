@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-20 14:01+0200\n"
-"PO-Revision-Date: 2005-05-20 14:00+0200\n"
+"PO-Revision-Date: 2006-03-11 19:24+0100\n"
 "Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid ""
 "for in these directories, and the first matching dispspec file is used."
 msgstr ""
 "Eine Liste von Verzeichnissen, in denen Conglomerate nach "
-"Anzeigespezifikationen (»dispspec« oder ».xds« genannt) zusätzlich zum "
+"Anzeigespezifikationsdateien (»dispspec« oder ».xds« genannt) zusätzlich zum "
 "Installationspfad suchen soll. Sobald ein Dokument geladen wird, wird nach "
 "einer passenden Anzeigespezifikation in diesen Verzeichnissen gesucht und "
 "die erste passende Spezifikation genutzt."
@@ -213,7 +213,7 @@ msgstr "Erweiterungen"
 
 #: ../glade/custom-element.glade.h:2
 msgid "Adhoc Element"
-msgstr "Ad-hoc Element"
+msgstr "Ad-hoc-Element"
 
 #: ../glade/custom-element.glade.h:3
 msgid "Element Name"
@@ -266,7 +266,7 @@ msgstr ""
 "Dies ist ein Platzhalter. Hier wird es Ihnen möglicherweise einmal möglich "
 "sein, DocBook-Informationen zur einfachen Versionsverfolgung zu bearbeiten.\n"
 "\n"
-"Dies ist im Bugzilla als Fehler #122538 aufgeführt"
+"Dies ist in Bugzilla als Fehler #122538 aufgeführt"
 
 #: ../glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -405,7 +405,6 @@ msgstr "Conglomerate konnte keine xds-Dateien laden"
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate konnte keine Dokumenttypbeschreibungen finden."
 
-# CHECK
 #: ../src/cong-app.c:1162
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
@@ -413,7 +412,7 @@ msgid ""
 "the display spec path, please double check that as well."
 msgstr ""
 "Falls Sie diesen Fehler sehen, ist es wahrscheinlich, dass Sie Conglomerate "
-"kompiliert, jedoch nicht installiert haben. Versuchen Sie, es zu "
+"kompiliert, jedoch nicht installiert haben. Versuchen Sie es zu "
 "installieren. Falls Sie die Vorgabeeinstellung für den Display-Spec-Pfad "
 "verändert haben, so überprüfen Sie diese bitte ebenfalls gewissenhaft."
 
@@ -550,7 +549,7 @@ msgstr "Attribut »%s« konnte nicht auf »%s« gesetzt werden"
 
 #: ../src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
-msgstr "Der Inhalt des Attributs muss ein XML Name Token sein."
+msgstr "Der Inhalt des Attributs muss ein XML-Name-Token sein."
 
 #: ../src/cong-attribute-editor-nmtoken.c:237
 msgid ""
@@ -558,7 +557,7 @@ msgid ""
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
 msgstr ""
-"XML Name Token dürfen nur alphanumerische und/oder symbolische Zeichen sowie "
+"XML-Name-Token dürfen nur alphanumerische und/oder symbolische Zeichen sowie "
 "die Satzzeichen _, -, . und : enthalten. Leerzeichen sind nicht erlaubt."
 
 #: ../src/cong-attribute-editor.c:249 ../src/cong-attribute-wrapper.c:232
@@ -721,7 +720,7 @@ msgstr "Attributdeklaration"
 
 #: ../src/cong-document.c:1012
 msgid "Entity Declaration"
-msgstr "Enititätsdeklaration"
+msgstr "Entitätsdeklaration"
 
 #: ../src/cong-document.c:1015
 msgid "Namespace Declaration"
@@ -774,7 +773,7 @@ msgstr "Wort markieren"
 
 #: ../src/cong-editor-node-text.c:923
 msgid "Move cursor"
-msgstr "Caret verschieben"
+msgstr "Cursor verschieben"
 
 #: ../src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
@@ -799,7 +798,7 @@ msgstr "Eingabe"
 
 #: ../src/cong-editor-widget3.c:1310
 msgid "Cursor Movement"
-msgstr "Caretbewegung"
+msgstr "Cursorbewegung"
 
 #: ../src/cong-editor-widget3.c:1350 ../src/cong-editor-widget3.c:1363
 msgid "Delete Selection"
@@ -810,7 +809,7 @@ msgstr "Auswahl löschen"
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
 msgstr ""
-"Falls Sie ein Programmierer sind, das Problem befindet sich in Datei %s in "
+"Falls Sie ein Programmierer sind: Das Problem befindet sich in Datei %s in "
 "Zeile %i\n"
 
 #: ../src/cong-error-dialog.c:235
@@ -882,6 +881,7 @@ msgstr "%s konnte »%s« nicht von %s lesen."
 msgid "An unexpected internal error occurred."
 msgstr "Es ist ein unerwarteter interner Fehler aufgetreten."
 
+# CHECK FIXME: with the maintainer?? => to the maintainer
 #: ../src/cong-error-file-open.c:265 ../src/cong-error-file-save.c:93
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
@@ -1055,10 +1055,9 @@ msgstr ""
 "Versuchen Sie es nochmal. Kontaktieren Sie Ihren Systemadministrator, falls "
 "es erneut fehlschlägt."
 
-# CHECK
 #: ../src/cong-error-file-open.c:455 ../src/cong-error-file-save.c:338
 msgid "The location was too busy."
-msgstr "Der Speicherort war belegt."
+msgstr "Der Speicherort war momentan nicht zugänglich."
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-file-open.c:505
@@ -1329,7 +1328,7 @@ msgstr "Bitte einen Dateinamen angeben."
 
 #: ../src/cong-file-import.c:80
 msgid "Import file..."
-msgstr "Datei importieren…"
+msgstr "Datei importieren …"
 
 #: ../src/cong-file-new.c:169
 #, c-format
@@ -1492,7 +1491,7 @@ msgstr "Mit DTD assoziieren"
 
 #: ../src/cong-file-save.c:75
 msgid "Save XML as..."
-msgstr "XML speichern unter..."
+msgstr "XML speichern unter …"
 
 #: ../src/cong-file-save.c:110
 #, c-format
@@ -1622,15 +1621,15 @@ msgstr "span-Tag entfernen"
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1495
 msgid "_New..."
-msgstr "_Neu…"
+msgstr "_Neu …"
 
 #: ../src/cong-menus.c:1496
 msgid "_Open..."
-msgstr "Ö_ffnen…"
+msgstr "Ö_ffnen …"
 
 #: ../src/cong-menus.c:1497
 msgid "_Import..."
-msgstr "_Importieren…"
+msgstr "_Importieren …"
 
 #: ../src/cong-menus.c:1498
 msgid "_Close"
@@ -1669,15 +1668,15 @@ msgstr "_Speichern"
 
 #: ../src/cong-menus.c:1529
 msgid "Save _as..."
-msgstr "Speichern _unter..."
+msgstr "Speichern _unter …"
 
 #: ../src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
-msgstr "_Kopie speichern…"
+msgstr "_Kopie speichern …"
 
 #: ../src/cong-menus.c:1532
 msgid "Print Previe_w..."
-msgstr "Druck_vorschau"
+msgstr "Druck_vorschau …"
 
 #: ../src/cong-menus.c:1533
 msgid "_Print"
@@ -1689,7 +1688,7 @@ msgstr "_Zurücksetzen"
 
 #: ../src/cong-menus.c:1538
 msgid "_Export..."
-msgstr "_Exportieren..."
+msgstr "_Exportieren …"
 
 #: ../src/cong-menus.c:1539
 msgid "Proper_ties"
@@ -1718,7 +1717,7 @@ msgstr "Ein_fügen"
 
 #: ../src/cong-menus.c:1548
 msgid "_Find..."
-msgstr "_Suchen…"
+msgstr "_Suchen …"
 
 #: ../src/cong-menus.c:1549
 msgid "Find Ne_xt"
@@ -1730,11 +1729,11 @@ msgstr "Rüc_kwärts suchen"
 
 #: ../src/cong-menus.c:1551
 msgid "R_eplace..."
-msgstr "Er_setzen..."
+msgstr "Er_setzen …"
 
 #: ../src/cong-menus.c:1553
 msgid "_Insert..."
-msgstr "Ein_fügen..."
+msgstr "Ein_fügen …"
 
 #: ../src/cong-menus.c:1554
 msgid "View _Source"
@@ -1933,7 +1932,7 @@ msgstr "(keine Beschreibung verfügbar)"
 
 #: ../src/cong-util.c:1625
 msgid "DTD files"
-msgstr "DTD Dateien"
+msgstr "DTD-Dateien"
 
 #: ../src/cong-util.c:1628
 msgid "Select a DTD"
@@ -1989,7 +1988,7 @@ msgstr "Den XML-Quelltext be_reinigen"
 msgid "Export as \"lower case\" XML"
 msgstr "Als »kleingeschriebenes« XML exportieren"
 
-# CHECK - legacy => verblieben?
+# CHECK - legacy => verblieben? Jens: Glaube ich nicht, evtl. altertümlich?
 #: ../src/plugin-convert-case.c:126
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
@@ -2053,8 +2052,8 @@ msgid ""
 "XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
 "information on catalogs)."
 msgstr ""
-"Stellen Sie sicher, dass Norman Walsh's DocBook XSL Stylesheets,·verfügbar "
-"unter http://docbook.sourceforge.net/projects/xsl/,·installiert und in Ihrer "
+"Stellen Sie sicher, dass Norman Walsh's DocBook-XSL-Stylesheets, verfügbar "
+"unter http://docbook.sourceforge.net/projects/xsl/, installiert und in Ihrer "
 "XML-Katalogdatei eingetragen sind (siehe http://www.xmlsoft.org/catalog.html "
 "für weitere Informationen zu Katalogen)."
 
@@ -2067,8 +2066,7 @@ msgid ""
 msgstr ""
 "%s-Konvertierung abgeschlossen.\n"
 "\n"
-"%s zu %s konvertiert und\n"
-"unter %s gespeichert"
+"%s zu %s konvertiert und unter %s gespeichert"
 
 #: ../src/plugin-docbook.c:1268
 msgid "Exporting PDF file"
@@ -2298,7 +2296,7 @@ msgstr "Listenmitgliedelement"
 
 #: ../src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
-msgstr "Ein Editorknoten zum Visualisieren eines Listenmiglieds"
+msgstr "Ein Editorknoten zum Visualisieren eines Listenmitglieds"
 
 #: ../src/plugin-paragraph.c:68
 msgid "Paragraph"
@@ -2335,11 +2333,11 @@ msgstr "Kompakte Syntax-Ansicht"
 
 #: ../src/plugin-relaxng.c:146 ../src/plugin-relaxng.c:149
 msgid "View as Compact RELAX NG"
-msgstr "Ansicht als kompakter RELAX NG Syntax"
+msgstr "Ansicht als kompaktes RELAX NG"
 
 #: ../src/plugin-relaxng.c:147
 msgid "Display the compact syntax form of a RELAX NG schema"
-msgstr "Anzeige der kompakten Syntaxform eines RELAX NG Schemas"
+msgstr "Anzeige der kompakten Syntaxform eines RELAX-NG-Schemas"
 
 #: ../src/plugin-save-dispspec.c:155
 msgid "Dump Display Spec"
@@ -2391,7 +2389,7 @@ msgstr "SGML importieren"
 
 #: ../src/plugin-sgml.c:210
 msgid "Import an SGML file, converting to XML."
-msgstr "Eine SGML Datei importieren und in XML umwandeln"
+msgstr "Eine SGML-Datei importieren und in XML umwandeln"
 
 #: ../src/plugin-table.c:405
 msgid "Table Group"
@@ -2558,7 +2556,7 @@ msgstr "_Ausschneiden"
 
 #: ../src/popup.c:989
 msgid "Other XML element..."
-msgstr "Anderes XML-Element…"
+msgstr "Anderes XML-Element …"
 
 # CHECK
 #: ../src/popup.c:1083
