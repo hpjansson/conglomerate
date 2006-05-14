@@ -1,5 +1,12 @@
 2006-05-14  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
+	* src/cong-document-traversal.c: (should_have_traversal_node):
+	
+	Make assertion weaker since there is some inconsitency in 
+	libxml. See bug #150368 for details.
+
+2006-05-14  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
 	* doc/reference/conglomerate-sections.txt:
 	* src/cong-document.c:
 	* src/cong-document.h:

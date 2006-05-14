@@ -797,7 +797,7 @@ should_have_traversal_node (CongNodePtr node)
 	if (node->parent) {
 		return should_have_traversal_node (node->parent);
 	} else {
-		return cong_node_type(node)==CONG_NODE_TYPE_DOCUMENT;
+		return cong_node_type(node)==CONG_NODE_TYPE_DOCUMENT || cong_node_type(node)==CONG_NODE_TYPE_DTD;
 	}
 }
 
