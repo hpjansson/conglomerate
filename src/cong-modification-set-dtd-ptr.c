@@ -90,13 +90,14 @@ cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification
 {
 	cong_modification_construct (CONG_MODIFICATION(modification_set_dtd_ptr),
 				     doc);
+	
+	cong_document_node_unref (doc, (CongNodePtr)PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr);
+	cong_document_node_ref (doc, (CongNodePtr)cong_document_get_xml (doc)->extSubset);
+	PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr = cong_document_get_xml (doc)->extSubset;
 
-	cong_document_set_with_ref (doc,
-				    (CongNodePtr*)&PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
-				    (CongNodePtr)cong_document_get_xml (doc)->extSubset);
-	cong_document_set_with_ref (doc,
-				    (CongNodePtr*)&PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
-				    (CongNodePtr)dtd_ptr);
+	cong_document_node_unref (doc, (CongNodePtr)PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr);
+	cong_document_node_ref (doc, (CongNodePtr)dtd_ptr);
+	PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr = dtd_ptr;
 
 	return modification_set_dtd_ptr;
 }
@@ -153,12 +154,10 @@ dispose (GObject *object)
 	g_assert (modification_set_dtd_ptr->private);
 	
 	/* Cleanup: */
-	cong_document_set_with_ref (doc,
-				    (CongNodePtr*)&PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
-				    NULL);
-	cong_document_set_with_ref (doc,
-				    (CongNodePtr*)&PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
-				    NULL);
+	cong_document_node_unref (doc, (CongNodePtr)PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr);
+	PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr = NULL;
+	cong_document_node_unref (doc, (CongNodePtr)PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr);
+	PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr = NULL;
 
 	/* Call the parent method: */		
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));

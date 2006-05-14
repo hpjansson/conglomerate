@@ -112,7 +112,7 @@ G_STMT_START {                                                                \
  */
 #define CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL(class_pointer, prefix, signal)        \
                                                                               \
-* (void (**)(void)) & (class_pointer)->signal = prefix##_unimplemented_##signal
+memcpy (&class_pointer->signal, &prefix##_unimplemented_##signal, sizeof (prefix##_unimplemented_##signal));
 
 /* Provide a debug-only implementation of a signal that must be implemented
  * by subclasses. The debug-only implementation fires a warning if it is called.

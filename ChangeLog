@@ -1,3 +1,16 @@
+2006-05-14  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* doc/reference/conglomerate-sections.txt:
+	* src/cong-document.c:
+	* src/cong-document.h:
+	* src/cong-editor-area-composer.c:
+	(cong_editor_area_composer_pack_after):
+	* src/cong-eel.h:
+	* src/cong-modification-set-dtd-ptr.c:
+	(cong_modification_set_dtd_ptr_construct), (dispose):
+	
+	Fix build with gcc 4.0
+
 2006-04-17  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove obsolete entry for Norwegian.

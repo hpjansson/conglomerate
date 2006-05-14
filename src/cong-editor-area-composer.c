@@ -285,6 +285,7 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 				      guint extra_padding)
 {
 	GList *position = NULL;
+	GList *dummy;
 	CongEditorAreaComposerChildDetails *child_details;
 	
 	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
@@ -312,9 +313,9 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 	child_details->extra_padding = extra_padding;
 
 	/* Don't store result; we don't need to update the head of the list: */
-	g_list_insert_before (PRIVATE(area_composer)->list_of_child_details,
-			      position->next,
-			      child_details);
+	dummy = g_list_insert_before (PRIVATE(area_composer)->list_of_child_details,
+				      position->next,
+			    	      child_details);
 	
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
 										 new_child);

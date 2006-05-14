@@ -221,12 +221,7 @@ cong_document_node_ref (CongDocument *doc,
 void 
 cong_document_node_unref (CongDocument *doc,
 			  CongNodePtr node);
-
-void
-cong_document_set_with_ref (CongDocument *doc,
-			    CongNodePtr *node_ptr,
-			    CongNodePtr node);
-
+			  
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
 			     const gchar *description,

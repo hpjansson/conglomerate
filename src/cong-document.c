@@ -1095,37 +1095,6 @@ cong_document_node_unref (CongDocument *doc,
 }
 
 /**
- * cong_document_set_with_ref:
- * @doc:
- * @node_ptr: A pointer to a #CongNodePtr
- * @node: a ptr to a node, or NULL
- * 
- * Sets @node_ptr to @node, doing any necessary reference count modifications to the old and new value
- *
- */
-void
-cong_document_set_with_ref (CongDocument *doc,
-			    CongNodePtr *node_ptr,
-			    CongNodePtr node)
-{
-	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (node_ptr);
-	
-	/* re the new value first in case they are equal: */
-	if (node) {
-		cong_document_node_ref (doc,
-					node);
-	}
-
-	if (*node_ptr) {
-		cong_document_node_unref (doc,
-					  *node_ptr);
-	}
-	
-	*node_ptr = node;
-}
-
-/**
  * cong_document_begin_command:
  * @doc: The #CongDocument upon which the command is to act.
  * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history

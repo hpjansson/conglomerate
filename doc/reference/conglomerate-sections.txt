@@ -324,7 +324,6 @@ cong_document_get_node_name
 cong_document_get_num_nodes
 cong_document_node_ref
 cong_document_node_unref
-cong_document_set_with_ref
 cong_document_begin_command
 cong_document_end_command
 cong_document_abort_command
