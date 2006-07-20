@@ -135,6 +135,7 @@ binary-indep: build-indep install-indep
 conglomerate: build-arch install-arch
 	dh_testdir -p $@
 	dh_testroot -p $@
+	dh_installdocs -p $@
 	dh_strip -p $@
 	dh_compress -p $@
 	dh_fixperms -p $@

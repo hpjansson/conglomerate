@@ -2,16 +2,16 @@ Source: conglomerate
 Section: editors
 Priority: optional
 Maintainer: Geert Stappers <stappers@debian.org>
-Build-Depends: debhelper (>> 4.1.51), dpatch, gnome-common, libbonobo2-dev, libbonoboui2-dev, libenchant-dev, libgnomeui-dev (>= 2.6.1.1-4), libgnomeprintui2.2-dev, libgtksourceview-dev, libxslt1-dev, scrollkeeper
-Standards-Version: 3.6.1
+Build-Depends: debhelper (>> 4.1.51), dpatch, libxml-parser-perl, libbonobo2-dev, libbonoboui2-dev, libenchant-dev, libgnomeui-dev (>= 2.6.1.1-4), libgnomeprintui2.2-dev, libgtksourceview-dev, libxslt1-dev, scrollkeeper
+Standards-Version: 3.7.2
 
 Package: conglomerate
 Architecture: any
 Depends: conglomerate-common (>= ${Upstream-Version}), ${shlibs:Depends}
 Recommends: xml-core
 Suggests: docbook-xml, docbook-xsl
-Description: userfriendly XML editor
- Conglomerate is a free, as in GPL, userfriendly XML-file editor,
+Description: user-friendly XML editor
+ Conglomerate is a free, as in GPL, user-friendly XML-file editor,
  for DocBook and other document types.
  It aims to hide the complexity and jargon of XML behind a friendly GUI.
  .
@@ -19,10 +19,10 @@ Description: userfriendly XML editor
 
 Package: conglomerate-common
 Architecture: all
-Depends: conglomerate, ${misc:Depends}
+Depends: ${misc:Depends}
 Conflicts: conglomerate (<< 0.7.14-4)
-Description: common files for the userfriendly XML editor
- Conglomerate is a free, as in GPL, userfriendly XML-file editor,
+Description: common files for the user-friendly XML editor
+ Conglomerate is a free, as in GPL, user-friendly XML-file editor,
  for DocBook and other document types.
  In this package documentation, PO files, examples
  and other files that are architecture independent.
@@ -32,5 +32,5 @@ Description: common files for the userfriendly XML editor
 Package: conglomerate-dbg
 Architecture: any
 Depends: conglomerate-common (>= ${Upstream-Version}), ${shlibs:Depends}
-Description: userfriendly XML editor, with debug symbols
+Description: user-friendly XML editor, with debug symbols
  Unstripped version of the executable
