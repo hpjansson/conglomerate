@@ -1,0 +1,5741 @@
+# Arabic translations for PACKAGE package.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Project\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-17 21:14+0000\n"
+"PO-Revision-Date: 2006-11-18 00:06+0100\n"
+"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n >= 3 && n <= 10 ? 3 : n >= 11 && n <= 99 ? 4 : 5;\n"
+"X-Poedit-Language: Arabic\n"
+
+#: ../dispspecs/cnxml.xds.in.h:1
+#, fuzzy
+msgid "Experimental \"cnxml\" format"
+msgstr "تهيئة توقيع غير مدعومة"
+
+#: ../dispspecs/cnxml.xds.in.h:2
+#, fuzzy
+msgid "Test CNXML ds"
+msgstr "إختبار طباعة المراسَل"
+
+#: ../dispspecs/cnxml.xds.in.h:3
+#, fuzzy
+msgid "cite"
+msgstr "قائمة المراجع (استشهاد)"
+
+#: ../dispspecs/cnxml.xds.in.h:4
+msgid "cnxn"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:5
+msgid "codeblock"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:6
+msgid "codeline"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:7
+#, fuzzy
+msgid "content"
+msgstr "المحتويات:"
+
+#: ../dispspecs/cnxml.xds.in.h:8
+#, fuzzy
+msgid "emphasis"
+msgstr "تشديد"
+
+#: ../dispspecs/cnxml.xds.in.h:9
+#, fuzzy
+msgid "equation"
+msgstr "_نسخ المعادلة"
+
+#: ../dispspecs/cnxml.xds.in.h:10
+#, fuzzy
+msgid "item"
+msgstr "عنصر"
+
+#: ../dispspecs/cnxml.xds.in.h:11
+#, fuzzy
+msgid "link"
+msgstr "وصلة"
+
+#: ../dispspecs/cnxml.xds.in.h:12
+#, fuzzy
+msgid "list"
+msgstr "سرد"
+
+#: ../dispspecs/cnxml.xds.in.h:13
+msgid "metadata"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:14
+#, fuzzy
+msgid "module"
+msgstr "وحدة"
+
+#: ../dispspecs/cnxml.xds.in.h:15
+#, fuzzy
+msgid "note"
+msgstr "ملاحظة: %s"
+
+#: ../dispspecs/cnxml.xds.in.h:16
+msgid "para"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:17
+msgid "proof"
+msgstr ""
+
+#: ../dispspecs/cnxml.xds.in.h:18
+#, fuzzy
+msgid "rule"
+msgstr "الدور"
+
+#: ../dispspecs/cnxml.xds.in.h:19
+#, fuzzy
+msgid "section"
+msgstr "فصل"
+
+#: ../dispspecs/cnxml.xds.in.h:20
+#, fuzzy
+msgid "statement"
+msgstr "بيان"
+
+#: ../dispspecs/cnxml.xds.in.h:21
+#, fuzzy
+msgid "term"
+msgstr "عبارة"
+
+#: ../dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr ""
+
+#: ../dispspecs/dispspec.xds.in.h:2
+#, fuzzy
+msgid "Conglomerate Display Specification"
+msgstr "دلائل خصائص اللغة"
+
+#: ../dispspecs/dispspec.xds.in.h:3
+#: ../glade/cong-file-properties.glade.h:3
+#: ../src/cong-dispspec-registry.c:355
+#: ../src/cong-edit-preferences.c:250
+#: ../src/cong-file-export.c:339
+#: ../src/cong-file-new.c:363
+#: ../src/cong-file-print.c:250
+#: ../src/cong-parser-error.c:320
+#, fuzzy
+msgid "Description"
+msgstr "الوصف"
+
+#: ../dispspecs/dispspec.xds.in.h:4
+#, fuzzy
+msgid "Document Models"
+msgstr "إغلاق ال_مستند"
+
+#: ../dispspecs/dispspec.xds.in.h:5
+#, fuzzy
+msgid "External Document Model"
+msgstr "نموذج مبني على الكلمات"
+
+#: ../dispspecs/dispspec.xds.in.h:6
+#, fuzzy
+msgid "Format"
+msgstr "التهيئة"
+
+#: ../dispspecs/dispspec.xds.in.h:7
+#, fuzzy
+msgid "GUI"
+msgstr "الواجهة الرسومية"
+
+#: ../dispspecs/dispspec.xds.in.h:8
+#, fuzzy
+msgid "Header Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/dispspec.xds.in.h:9
+msgid "Information that tells Conglomerate how to display a particular type of file."
+msgstr ""
+
+#: ../dispspecs/dispspec.xds.in.h:10
+#, fuzzy
+msgid "List of XML Elements"
+msgstr "شبه العناصر للمنتقي "
+
+#: ../dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr ""
+
+#: ../dispspecs/dispspec.xds.in.h:12
+#: ../dispspecs/docbook.xds.in.h:95
+#: ../dispspecs/website-webpage.xds.in.h:55
+msgid "Metadata"
+msgstr ""
+
+#: ../dispspecs/dispspec.xds.in.h:13
+#: ../dispspecs/docbook.xds.in.h:97
+#: ../dispspecs/teixlite.xds.in.h:194
+#: ../dispspecs/website-webpage.xds.in.h:57
+#: ../glade/cong-file-properties.glade.h:10
+#: ../src/cong-edit-preferences.c:154
+#: ../src/cong-edit-preferences.c:242
+#: ../src/cong-file-export.c:338
+#: ../src/cong-file-print.c:249
+#: ../src/cong-node-properties-dialog.c:609
+#, fuzzy
+msgid "Name"
+msgstr "اسم"
+
+#: ../dispspecs/dispspec.xds.in.h:14
+#, fuzzy
+msgid "Name of an XML element"
+msgstr "لا صفة \"اسم\" على العنصر <%s>"
+
+#: ../dispspecs/dispspec.xds.in.h:15
+#, fuzzy
+msgid "Serialisation Type List"
+msgstr "list_type غير صالح \"%s\" في <%s>"
+
+#: ../dispspecs/dispspec.xds.in.h:16
+#, fuzzy
+msgid "Short Description"
+msgstr "وصف قصير:"
+
+#: ../dispspecs/dispspec.xds.in.h:17
+#, fuzzy
+msgid "Short Description of an XML element"
+msgstr "وصف XML مشوه لواجهة المستخدم"
+
+#: ../dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr ""
+
+#: ../dispspecs/dispspec.xds.in.h:19
+#: ../dispspecs/relax-ng.xds.in.h:15
+#, fuzzy
+msgid "XML Element"
+msgstr "رقم تعريف العنصر"
+
+#: ../dispspecs/docbook.xds.in.h:1
+#: ../dispspecs/website-webpage.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:2
+msgid "A book, with a title, and perhaps with some bibliographical material, in addition to the actual content of the book."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:3
+#: ../dispspecs/website-webpage.xds.in.h:2
+msgid "A brief description of the version of a document."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:4
+#, fuzzy
+msgid "A collection of books."
+msgstr "كتب فكاهية"
+
+#: ../dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:6
+#: ../dispspecs/website-webpage.xds.in.h:3
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:7
+#: ../dispspecs/website-webpage.xds.in.h:4
+#, fuzzy
+msgid "A subsection within a section"
+msgstr "توسيع الحيز بين الخلايا"
+
+#: ../dispspecs/docbook.xds.in.h:8
+#, fuzzy
+msgid "A summary."
+msgstr "الملخّص:"
+
+#: ../dispspecs/docbook.xds.in.h:9
+#: ../dispspecs/website-webpage.xds.in.h:6
+#, fuzzy
+msgid "A top-level section of document"
+msgstr "ليس للمستند `%s' عقدة مستوا اعلى <%s>\n"
+
+#: ../dispspecs/docbook.xds.in.h:10
+#: ../dispspecs/forrest-document.xds.in.h:1
+#: ../dispspecs/website-webpage.xds.in.h:7
+msgid "Abstract"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:11
+#: ../dispspecs/forrest-document.xds.in.h:2
+#: ../dispspecs/website-webpage.xds.in.h:8
+#: ../dispspecs/xhtml1-strict.xds.in.h:2
+#, fuzzy
+msgid "Acronym"
+msgstr "اختصار"
+
+#: ../dispspecs/docbook.xds.in.h:12
+#: ../dispspecs/website-webpage.xds.in.h:9
+#, fuzzy
+msgid "Additional metadata"
+msgstr "بروتوكولات آمنة اضافية"
+
+#: ../dispspecs/docbook.xds.in.h:13
+#: ../dispspecs/teixlite.xds.in.h:56
+#: ../dispspecs/website-webpage.xds.in.h:10
+#: ../dispspecs/xhtml1-strict.xds.in.h:3
+#, fuzzy
+msgid "Address"
+msgstr "العنوان"
+
+#: ../dispspecs/docbook.xds.in.h:14
+#: ../dispspecs/website-webpage.xds.in.h:11
+#, fuzzy
+msgid "An email address"
+msgstr "عنوان البريد الإلكتروني"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: ../dispspecs/docbook.xds.in.h:16
+#, fuzzy
+msgid "Anchor Point"
+msgstr "نقطة المرساة للنص"
+
+#: ../dispspecs/docbook.xds.in.h:17
+#, fuzzy
+msgid "Answer"
+msgstr "إجابة آلية"
+
+#: ../dispspecs/docbook.xds.in.h:18
+#: ../dispspecs/website-webpage.xds.in.h:12
+#, fuzzy
+msgid "Appendix"
+msgstr "ملحق الترويسات"
+
+#: ../dispspecs/docbook.xds.in.h:19
+#: ../dispspecs/website-webpage.xds.in.h:13
+#, fuzzy
+msgid "Application"
+msgstr "تطبيق"
+
+#: ../dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:21
+#, fuzzy
+msgid "Article Header"
+msgstr "التّرويسة/الهامش"
+
+#: ../dispspecs/docbook.xds.in.h:22
+#, fuzzy
+msgid "Article Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/docbook.xds.in.h:23
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:3
+#: ../dispspecs/teixlite.xds.in.h:75
+#: ../dispspecs/website-webpage.xds.in.h:14
+#, fuzzy
+msgid "Author"
+msgstr "<b>المؤلف:</b>"
+
+#: ../dispspecs/docbook.xds.in.h:24
+#, fuzzy
+msgid "Author Initials"
+msgstr "معلموات المؤلف"
+
+#: ../dispspecs/docbook.xds.in.h:25
+#: ../dispspecs/website-webpage.xds.in.h:15
+#, fuzzy
+msgid "Authorship Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/docbook.xds.in.h:26
+#: ../dispspecs/website-webpage.xds.in.h:16
+#, fuzzy
+msgid "Bibliographic Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/docbook.xds.in.h:27
+#: ../dispspecs/website-webpage.xds.in.h:17
+#, fuzzy
+msgid "Bibliography"
+msgstr "المراجع"
+
+#: ../dispspecs/docbook.xds.in.h:28
+#, fuzzy
+msgid "Book"
+msgstr "كتاب"
+
+#: ../dispspecs/docbook.xds.in.h:29
+#, fuzzy
+msgid "Book Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/docbook.xds.in.h:30
+#: ../dispspecs/forrest-document.xds.in.h:6
+#: ../dispspecs/xhtml1-strict.xds.in.h:14
+#, fuzzy
+msgid "Caption"
+msgstr "عنوان"
+
+#: ../dispspecs/docbook.xds.in.h:31
+#, fuzzy
+msgid "Caution"
+msgstr "إنتباه"
+
+#: ../dispspecs/docbook.xds.in.h:32
+#: ../dispspecs/website-webpage.xds.in.h:18
+#, fuzzy
+msgid "Chapter"
+msgstr "ترويسة 0 (فصل)"
+
+#: ../dispspecs/docbook.xds.in.h:33
+#: ../dispspecs/website-webpage.xds.in.h:19
+#, fuzzy
+msgid "City"
+msgstr "المدينة:"
+
+#: ../dispspecs/docbook.xds.in.h:34
+#: ../dispspecs/website-webpage.xds.in.h:20
+#, fuzzy
+msgid "Colophon"
+msgstr "الورقة الأخيرة المحتوية على معلومات حول الناشر و الكاتب"
+
+#: ../dispspecs/docbook.xds.in.h:35
+#, fuzzy
+msgid "Command"
+msgstr "الأمر"
+
+#: ../dispspecs/docbook.xds.in.h:36
+#: ../dispspecs/website-webpage.xds.in.h:21
+#, fuzzy
+msgid "Command Synopsis"
+msgstr "سطر الأوامر"
+
+#: ../dispspecs/docbook.xds.in.h:37
+#, fuzzy
+msgid "Computer Output"
+msgstr "جهاز الخرج:"
+
+#: ../dispspecs/docbook.xds.in.h:38
+#: ../dispspecs/website-layout.xds.in.h:4
+#: ../dispspecs/website-webpage.xds.in.h:22
+#, fuzzy
+msgid "Copyright"
+msgstr "حقوق النسخ:"
+
+#: ../dispspecs/docbook.xds.in.h:39
+#: ../dispspecs/website-webpage.xds.in.h:23
+#, fuzzy
+msgid "Copyright Holder"
+msgstr "نصّ حقوق الطبع"
+
+#: ../dispspecs/docbook.xds.in.h:40
+#, fuzzy
+msgid "Corporate Name"
+msgstr "اسم الموصول"
+
+#: ../dispspecs/docbook.xds.in.h:41
+#: ../dispspecs/website-webpage.xds.in.h:24
+#, fuzzy
+msgid "Cross-reference"
+msgstr "علامة المرجع"
+
+#: ../dispspecs/docbook.xds.in.h:42
+#: ../dispspecs/teixlite.xds.in.h:103
+#, fuzzy
+msgid "Date"
+msgstr "التاريخ"
+
+#: ../dispspecs/docbook.xds.in.h:43
+#: ../dispspecs/website-webpage.xds.in.h:25
+#, fuzzy
+msgid "Date of Publication"
+msgstr "تاريخ آخر"
+
+#: ../dispspecs/docbook.xds.in.h:44
+#, fuzzy
+msgid "Defined terms"
+msgstr "معَرّف من طرف المستخدم"
+
+#: ../dispspecs/docbook.xds.in.h:45
+#: ../dispspecs/forrest-document.xds.in.h:9
+#: ../dispspecs/website-webpage.xds.in.h:26
+#: ../dispspecs/xhtml1-strict.xds.in.h:19
+#, fuzzy
+msgid "Definition"
+msgstr "وصف التعريف"
+
+#: ../dispspecs/docbook.xds.in.h:46
+msgid "DocBook"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:47
+msgid "DocBook is a document type that broadly corresponds to what most people think of as \"a book\"; it is well-suited for writing books and articles, for both print and web-based publication."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:48
+#: ../dispspecs/teixlite.xds.in.h:128
+#: ../dispspecs/website-webpage.xds.in.h:27
+msgid "Edition"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:49
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:11
+#: ../dispspecs/teixlite.xds.in.h:130
+#: ../dispspecs/website-webpage.xds.in.h:28
+#, fuzzy
+msgid "Editor"
+msgstr "المحرر"
+
+#: ../dispspecs/docbook.xds.in.h:50
+#, fuzzy
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: ../dispspecs/docbook.xds.in.h:51
+#: ../dispspecs/forrest-document.xds.in.h:13
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: ../dispspecs/readme.xds.in.h:5
+#: ../dispspecs/teixlite.xds.in.h:132
+#: ../dispspecs/website-webpage.xds.in.h:29
+#: ../dispspecs/xhtml1-strict.xds.in.h:24
+#, fuzzy
+msgid "Emphasis"
+msgstr "تشديد"
+
+#: ../dispspecs/docbook.xds.in.h:52
+#: ../dispspecs/website-webpage.xds.in.h:30
+#, fuzzy
+msgid "Entry"
+msgstr "خانة"
+
+#: ../dispspecs/docbook.xds.in.h:53
+#, fuzzy
+msgid "Environment Variable"
+msgstr "عرض _قابل للتغيير:"
+
+#: ../dispspecs/docbook.xds.in.h:54
+#, fuzzy
+msgid "Example (formal)"
+msgstr "مثال: *.o; *.bak"
+
+#: ../dispspecs/docbook.xds.in.h:55
+#: ../dispspecs/website-webpage.xds.in.h:31
+#, fuzzy
+msgid "Example (informal)"
+msgstr "مثال: *.o; *.bak"
+
+#: ../dispspecs/docbook.xds.in.h:56
+#: ../dispspecs/forrest-document.xds.in.h:14
+#: ../dispspecs/teixlite.xds.in.h:139
+#, fuzzy
+msgid "Figure"
+msgstr "شكل"
+
+#: ../dispspecs/docbook.xds.in.h:57
+#, fuzzy
+msgid "Figure (informal)"
+msgstr "إ_عداد"
+
+#: ../dispspecs/docbook.xds.in.h:58
+#: ../dispspecs/website-webpage.xds.in.h:32
+#, fuzzy
+msgid "Filename"
+msgstr "اسم الملف"
+
+#: ../dispspecs/docbook.xds.in.h:59
+#: ../dispspecs/website-webpage.xds.in.h:33
+#, fuzzy
+msgid "First Name"
+msgstr "الاسم الأول"
+
+#: ../dispspecs/docbook.xds.in.h:60
+#: ../dispspecs/website-webpage.xds.in.h:34
+#, fuzzy
+msgid "First Term"
+msgstr "مفرد التعريف"
+
+#: ../dispspecs/docbook.xds.in.h:61
+#, fuzzy
+msgid "Footnote"
+msgstr "حاشية سفلية"
+
+#: ../dispspecs/docbook.xds.in.h:62
+#: ../dispspecs/website-webpage.xds.in.h:35
+#, fuzzy
+msgid "Free-floating Heading"
+msgstr "شريط طائف علوي"
+
+#: ../dispspecs/docbook.xds.in.h:63
+#: ../dispspecs/website-webpage.xds.in.h:36
+#, fuzzy
+msgid "Function"
+msgstr "الوظيفة"
+
+#. various related localNames need to be added
+#: ../dispspecs/docbook.xds.in.h:65
+#, fuzzy
+msgid "Function Synopsis"
+msgstr "دالة جيب التمام"
+
+#: ../dispspecs/docbook.xds.in.h:66
+#: ../dispspecs/website-webpage.xds.in.h:37
+#, fuzzy
+msgid "GUI Button"
+msgstr "رسم الزّر"
+
+#: ../dispspecs/docbook.xds.in.h:67
+#: ../dispspecs/website-webpage.xds.in.h:38
+#, fuzzy
+msgid "GUI Label"
+msgstr "نص العلامة."
+
+#: ../dispspecs/docbook.xds.in.h:68
+#: ../dispspecs/website-webpage.xds.in.h:39
+#, fuzzy
+msgid "GUI Menu"
+msgstr "مخطط القائمة"
+
+#: ../dispspecs/docbook.xds.in.h:69
+#: ../dispspecs/website-webpage.xds.in.h:40
+#, fuzzy
+msgid "GUI Menu Item"
+msgstr "خصائص عنصر القائمة"
+
+#: ../dispspecs/docbook.xds.in.h:70
+#: ../dispspecs/website-webpage.xds.in.h:41
+#, fuzzy
+msgid "GUI Submenu"
+msgstr "الواجهة الرسومية لإكيجا"
+
+#: ../dispspecs/docbook.xds.in.h:71
+#: ../dispspecs/website-webpage.xds.in.h:42
+#, fuzzy
+msgid "Glossary"
+msgstr "المَسْرَد"
+
+#: ../dispspecs/docbook.xds.in.h:72
+#: ../dispspecs/website-webpage.xds.in.h:43
+#, fuzzy
+msgid "Glossary Entry"
+msgstr "إدخال مباشر"
+
+#: ../dispspecs/docbook.xds.in.h:73
+msgid "Graphic"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:74
+#: ../dispspecs/website-webpage.xds.in.h:44
+msgid "ISBN"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:75
+#: ../dispspecs/website-webpage.xds.in.h:45
+msgid "ISSN"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:76
+#, fuzzy
+msgid "Image Data"
+msgstr "بيانات الصّورة"
+
+#: ../dispspecs/docbook.xds.in.h:77
+#, fuzzy
+msgid "Image Object"
+msgstr "مميّز الجسم (%s)"
+
+#: ../dispspecs/docbook.xds.in.h:78
+#, fuzzy
+msgid "Important"
+msgstr "مهم"
+
+#: ../dispspecs/docbook.xds.in.h:79
+#: ../dispspecs/website-webpage.xds.in.h:46
+#, fuzzy
+msgid "Index Term"
+msgstr "مفرد التعريف"
+
+#: ../dispspecs/docbook.xds.in.h:80
+#: ../dispspecs/forrest-document.xds.in.h:21
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
+#: ../dispspecs/readme.xds.in.h:9
+#, fuzzy
+msgid "Introduction"
+msgstr "انتهى تقديم الزميل"
+
+#: ../dispspecs/docbook.xds.in.h:81
+#: ../dispspecs/website-webpage.xds.in.h:47
+#, fuzzy
+msgid "Key Caption"
+msgstr "نعقيب الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:82
+#: ../dispspecs/website-webpage.xds.in.h:48
+#, fuzzy
+msgid "Legal Notice"
+msgstr "ملاحظة قانونية"
+
+#: ../dispspecs/docbook.xds.in.h:83
+#: ../dispspecs/website-webpage.xds.in.h:49
+#, fuzzy
+msgid "List (itemised)"
+msgstr "قائمة الحسابات"
+
+#: ../dispspecs/docbook.xds.in.h:84
+#: ../dispspecs/forrest-document.xds.in.h:26
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: ../dispspecs/website-webpage.xds.in.h:50
+#: ../dispspecs/xhtml1-strict.xds.in.h:47
+#, fuzzy
+msgid "List (ordered)"
+msgstr "قائمة مرتبة"
+
+#: ../dispspecs/docbook.xds.in.h:85
+#: ../dispspecs/website-webpage.xds.in.h:51
+#, fuzzy
+msgid "List (simple)"
+msgstr "قائمة الحسابات"
+
+#: ../dispspecs/docbook.xds.in.h:86
+msgid "List (terms and definitions)"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:87
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: ../dispspecs/xhtml1-strict.xds.in.h:49
+#, fuzzy
+msgid "List Item"
+msgstr "جرد العناصر"
+
+#: ../dispspecs/docbook.xds.in.h:88
+#, fuzzy
+msgid "List Member"
+msgstr "قائمة الحسابات"
+
+#: ../dispspecs/docbook.xds.in.h:89
+#: ../dispspecs/website-webpage.xds.in.h:52
+#, fuzzy
+msgid "Literal"
+msgstr "رمز حرفي"
+
+#: ../dispspecs/docbook.xds.in.h:90
+#, fuzzy
+msgid "Media Object"
+msgstr "مميّز الجسم (%s)"
+
+#: ../dispspecs/docbook.xds.in.h:91
+#: ../dispspecs/website-webpage.xds.in.h:53
+#, fuzzy
+msgid "Menu Choice"
+msgstr "مخطط القائمة"
+
+#: ../dispspecs/docbook.xds.in.h:92
+#: ../dispspecs/website-webpage.xds.in.h:54
+msgid "Meta-information about a Reference Page"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:93
+#, fuzzy
+msgid "Meta-information for a book"
+msgstr "سطر لعرض المعلومات"
+
+#: ../dispspecs/docbook.xds.in.h:94
+#, fuzzy
+msgid "Meta-information for an article"
+msgstr "سطر لعرض المعلومات"
+
+#: ../dispspecs/docbook.xds.in.h:96
+#: ../dispspecs/website-webpage.xds.in.h:56
+#, fuzzy
+msgid "Miscellaneous Bibliographic Information"
+msgstr "جاري جلب معلومات على %s"
+
+#: ../dispspecs/docbook.xds.in.h:98
+#: ../dispspecs/website-webpage.xds.in.h:58
+msgid "Name, purpose and classification about a Reference Page"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:99
+#: ../dispspecs/website-webpage.xds.in.h:59
+msgid "Naming"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:100
+#: ../dispspecs/forrest-document.xds.in.h:29
+#: ../dispspecs/teixlite.xds.in.h:195
+#, fuzzy
+msgid "Note"
+msgstr "ملاحظة"
+
+#: ../dispspecs/docbook.xds.in.h:101
+#: ../dispspecs/forrest-document.xds.in.h:31
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: ../dispspecs/readme.xds.in.h:11
+#: ../dispspecs/teixlite.xds.in.h:206
+#: ../dispspecs/website-webpage.xds.in.h:60
+#: ../dispspecs/xhtml1-strict.xds.in.h:55
+#: ../src/plugin-paragraph.c:68
+#, fuzzy
+msgid "Paragraph"
+msgstr "فقرة"
+
+#: ../dispspecs/docbook.xds.in.h:102
+#, fuzzy
+msgid "Paragraph (titled)"
+msgstr "صنف الفقرة"
+
+#: ../dispspecs/docbook.xds.in.h:103
+#: ../dispspecs/website-webpage.xds.in.h:61
+#, fuzzy
+msgid "Part"
+msgstr "ليس جزءا من الشهادة"
+
+#: ../dispspecs/docbook.xds.in.h:104
+#: ../dispspecs/website-webpage.xds.in.h:63
+#, fuzzy
+msgid "Preface"
+msgstr "مقدّمة"
+
+#: ../dispspecs/docbook.xds.in.h:105
+#: ../dispspecs/website-webpage.xds.in.h:64
+#, fuzzy
+msgid "Printing History"
+msgstr "م_سح التاريخ"
+
+#: ../dispspecs/docbook.xds.in.h:106
+#: ../dispspecs/website-webpage.xds.in.h:65
+msgid "Procedure"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:107
+#: ../dispspecs/website-webpage.xds.in.h:66
+#, fuzzy
+msgid "Product Name"
+msgstr "اسم الموصول"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: ../dispspecs/docbook.xds.in.h:116
+#, fuzzy
+msgid "Program Listing"
+msgstr "جرد مسبق التشكل"
+
+#: ../dispspecs/docbook.xds.in.h:117
+#, fuzzy
+msgid "Prompt"
+msgstr "رسالة دعوة"
+
+#: ../dispspecs/docbook.xds.in.h:118
+#: ../dispspecs/teixlite.xds.in.h:214
+#: ../dispspecs/website-webpage.xds.in.h:67
+msgid "Publisher"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:119
+#: ../dispspecs/website-webpage.xds.in.h:68
+#, fuzzy
+msgid "Publisher Name"
+msgstr "اسم الموصول"
+
+#: ../dispspecs/docbook.xds.in.h:120
+#: ../dispspecs/website-webpage.xds.in.h:69
+#, fuzzy
+msgid "Purpose"
+msgstr "غرض غير سليم"
+
+#: ../dispspecs/docbook.xds.in.h:121
+#, fuzzy
+msgid "Question"
+msgstr "سؤال"
+
+#: ../dispspecs/docbook.xds.in.h:122
+#, fuzzy
+msgid "Question-and-Answer"
+msgstr "نفاذ وقت عدم الردّ"
+
+#: ../dispspecs/docbook.xds.in.h:123
+#, fuzzy
+msgid "Question-and-Answer Set"
+msgstr "اختر و حدّد خيار البحث \"%s\""
+
+#: ../dispspecs/docbook.xds.in.h:124
+msgid "Question-and-Answer Subset"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:125
+#: ../dispspecs/readme.xds.in.h:12
+#, fuzzy
+msgid "Quote"
+msgstr "اقتباس"
+
+#: ../dispspecs/docbook.xds.in.h:126
+#: ../dispspecs/relax-ng.xds.in.h:10
+#: ../dispspecs/website-webpage.xds.in.h:70
+#, fuzzy
+msgid "Reference"
+msgstr "علامة المرجع"
+
+#: ../dispspecs/docbook.xds.in.h:127
+#: ../dispspecs/website-webpage.xds.in.h:71
+#, fuzzy
+msgid "Reference Page"
+msgstr "<b>الصفحة الرئيسية</b>"
+
+#: ../dispspecs/docbook.xds.in.h:128
+#: ../dispspecs/website-webpage.xds.in.h:72
+#, fuzzy
+msgid "Release Information"
+msgstr "بيانات سيّئة"
+
+#: ../dispspecs/docbook.xds.in.h:129
+#: ../dispspecs/website-webpage.xds.in.h:73
+#, fuzzy
+msgid "Replaceable Text"
+msgstr "نص العلامة."
+
+#: ../dispspecs/docbook.xds.in.h:130
+#, fuzzy
+msgid "Revision"
+msgstr "تاريخ التنقيح"
+
+#: ../dispspecs/docbook.xds.in.h:131
+#, fuzzy
+msgid "Revision History"
+msgstr "تاريخ التنقيح"
+
+#: ../dispspecs/docbook.xds.in.h:132
+#, fuzzy
+msgid "Revision Remark"
+msgstr "تاريخ التنقيح"
+
+#: ../dispspecs/docbook.xds.in.h:133
+#: ../dispspecs/website-webpage.xds.in.h:74
+#, fuzzy
+msgid "SGML Tag"
+msgstr "قائمة"
+
+#: ../dispspecs/docbook.xds.in.h:134
+#: ../dispspecs/website-webpage.xds.in.h:75
+#, fuzzy
+msgid "Screen"
+msgstr "الشاشة"
+
+#: ../dispspecs/docbook.xds.in.h:135
+#, fuzzy
+msgid "Screenshot"
+msgstr "حفظ صورة الشاشة"
+
+#: ../dispspecs/docbook.xds.in.h:136
+#: ../dispspecs/forrest-document.xds.in.h:33
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
+#: ../dispspecs/readme.xds.in.h:13
+#: ../dispspecs/website-webpage.xds.in.h:76
+#, fuzzy
+msgid "Section"
+msgstr "الفصل 2"
+
+#: ../dispspecs/docbook.xds.in.h:137
+#: ../dispspecs/website-webpage.xds.in.h:77
+#, fuzzy
+msgid "Section (level 5)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/docbook.xds.in.h:138
+#, fuzzy
+msgid "Set"
+msgstr "ضبط الحالة"
+
+#: ../dispspecs/docbook.xds.in.h:139
+#: ../dispspecs/website-webpage.xds.in.h:78
+#, fuzzy
+msgid "Step"
+msgstr "تدريج شدّة الصوت"
+
+#: ../dispspecs/docbook.xds.in.h:140
+#: ../dispspecs/website-webpage.xds.in.h:79
+#, fuzzy
+msgid "Structure Name"
+msgstr "اسم الموصول"
+
+#: ../dispspecs/docbook.xds.in.h:141
+#: ../dispspecs/website-webpage.xds.in.h:80
+#, fuzzy
+msgid "Subsection"
+msgstr "ترويسة 0 (قسم فرعي)"
+
+#: ../dispspecs/docbook.xds.in.h:142
+#: ../dispspecs/website-webpage.xds.in.h:81
+#, fuzzy
+msgid "Subsection (level 3)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/docbook.xds.in.h:143
+#: ../dispspecs/website-webpage.xds.in.h:82
+#, fuzzy
+msgid "Subsection (level 4)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/docbook.xds.in.h:144
+#: ../dispspecs/website-webpage.xds.in.h:83
+msgid "Substeps"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:145
+#: ../dispspecs/website-webpage.xds.in.h:84
+#, fuzzy
+msgid "Subsubsection"
+msgstr "ترويسة 0 (قسم فرعي فرعي)"
+
+#: ../dispspecs/docbook.xds.in.h:146
+#: ../dispspecs/forrest-document.xds.in.h:37
+#: ../dispspecs/website-webpage.xds.in.h:85
+#, fuzzy
+msgid "Subtitle"
+msgstr "تشفير السكريبت"
+
+#: ../dispspecs/docbook.xds.in.h:147
+#: ../dispspecs/website-webpage.xds.in.h:86
+#, fuzzy
+msgid "Surname"
+msgstr "ادخل لقبك"
+
+#: ../dispspecs/docbook.xds.in.h:148
+#: ../dispspecs/website-webpage.xds.in.h:87
+#, fuzzy
+msgid "Symbol"
+msgstr "رمز <<"
+
+#: ../dispspecs/docbook.xds.in.h:149
+#: ../dispspecs/website-webpage.xds.in.h:88
+#, fuzzy
+msgid "Synopsis (syntax)"
+msgstr "إبراز التراكيب"
+
+#: ../dispspecs/docbook.xds.in.h:150
+#: ../dispspecs/website-webpage.xds.in.h:89
+#, fuzzy
+msgid "Table (informal)"
+msgstr "جسم الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:151
+#: ../dispspecs/xhtml1-strict.xds.in.h:68
+#, fuzzy
+msgid "Table Body"
+msgstr "جسم الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:152
+#, fuzzy
+msgid "Table Column Specification"
+msgstr "خواص عمود الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:153
+#: ../src/plugin-table.c:417
+#, fuzzy
+msgid "Table Entry"
+msgstr "إدخال مباشر"
+
+#: ../dispspecs/docbook.xds.in.h:154
+#, fuzzy
+msgid "Table Entry (subtable)"
+msgstr "ادخال كتابة تنبئيا"
+
+#: ../dispspecs/docbook.xds.in.h:155
+#: ../dispspecs/xhtml1-strict.xds.in.h:71
+#, fuzzy
+msgid "Table Footer"
+msgstr "تذييل الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:156
+#: ../src/plugin-table.c:405
+#, fuzzy
+msgid "Table Group"
+msgstr "خواص مجموعة أعمدة الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:157
+#: ../dispspecs/xhtml1-strict.xds.in.h:72
+#, fuzzy
+msgid "Table Header"
+msgstr "ترويسة الجدول"
+
+#: ../dispspecs/docbook.xds.in.h:158
+#: ../dispspecs/xhtml1-strict.xds.in.h:73
+#: ../src/plugin-table.c:411
+#, fuzzy
+msgid "Table Row"
+msgstr "سطر جدول"
+
+#: ../dispspecs/docbook.xds.in.h:159
+#: ../dispspecs/teixlite.xds.in.h:250
+#: ../dispspecs/website-webpage.xds.in.h:90
+#, fuzzy
+msgid "Term"
+msgstr "عبارة"
+
+#: ../dispspecs/docbook.xds.in.h:160
+#, fuzzy
+msgid "Text Object"
+msgstr "مميّز الجسم (%s)"
+
+#: ../dispspecs/docbook.xds.in.h:161
+#: ../dispspecs/website-webpage.xds.in.h:91
+msgid "The International Standard Book Number of a document."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:162
+#: ../dispspecs/website-webpage.xds.in.h:92
+msgid "The International Standard Serial Number of a periodical."
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:163
+#: ../dispspecs/website-webpage.xds.in.h:93
+msgid "The first place where a word or term occurs in a particular context"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:164
+#: ../dispspecs/website-webpage.xds.in.h:94
+msgid "The name of a function, subroutine or procedure"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:165
+#: ../dispspecs/website-webpage.xds.in.h:95
+msgid "The printed text on a particular key on a keyboard"
+msgstr ""
+
+#: ../dispspecs/docbook.xds.in.h:166
+#, fuzzy
+msgid "Tip"
+msgstr "تلميحة"
+
+#: ../dispspecs/docbook.xds.in.h:167
+#: ../dispspecs/forrest-document.xds.in.h:44
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: ../dispspecs/readme.xds.in.h:16
+#: ../dispspecs/teixlite.xds.in.h:284
+#: ../dispspecs/website-webpage.xds.in.h:96
+#: ../dispspecs/xhtml1-strict.xds.in.h:76
+#, fuzzy
+msgid "Title"
+msgstr "العنوان"
+
+#: ../dispspecs/docbook.xds.in.h:168
+#: ../dispspecs/website-webpage.xds.in.h:97
+#, fuzzy
+msgid "Title Citation"
+msgstr "عنوان ال_صفحة"
+
+#: ../dispspecs/docbook.xds.in.h:169
+#: ../dispspecs/website-webpage.xds.in.h:98
+#, fuzzy
+msgid "URL Link"
+msgstr "وصلة التنزيل"
+
+#: ../dispspecs/docbook.xds.in.h:170
+#, fuzzy
+msgid "User Input"
+msgstr "<b>جهاز الإدخال</b>"
+
+#: ../dispspecs/docbook.xds.in.h:171
+#: ../dispspecs/forrest-document.xds.in.h:47
+#, fuzzy
+msgid "Warning"
+msgstr "تحذير"
+
+#: ../dispspecs/docbook.xds.in.h:172
+#: ../dispspecs/website-layout.xds.in.h:10
+#: ../dispspecs/website-webpage.xds.in.h:101
+#, fuzzy
+msgid "Year"
+msgstr "السّنة"
+
+#: ../dispspecs/forrest-document.xds.in.h:3
+#: ../dispspecs/teixlite.xds.in.h:64
+#: ../dispspecs/xhtml1-strict.xds.in.h:5
+#, fuzzy
+msgid "Anchor"
+msgstr "مرساة"
+
+#: ../dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr ""
+
+#: ../dispspecs/forrest-document.xds.in.h:5
+#, fuzzy
+msgid "Authors"
+msgstr "الكتاب:"
+
+#: ../dispspecs/forrest-document.xds.in.h:7
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: ../dispspecs/teixlite.xds.in.h:93
+#: ../dispspecs/xhtml1-strict.xds.in.h:16
+#, fuzzy
+msgid "Code"
+msgstr "رقم رمز الدولة"
+
+#: ../dispspecs/forrest-document.xds.in.h:8
+#, fuzzy
+msgid "Defined term"
+msgstr "مفرد التعريف"
+
+#: ../dispspecs/forrest-document.xds.in.h:10
+#, fuzzy
+msgid "Definition list"
+msgstr "قائمة التعريف"
+
+#: ../dispspecs/forrest-document.xds.in.h:11
+#: ../dispspecs/readme.xds.in.h:4
+#: ../src/cong-document.c:988
+#, fuzzy
+msgid "Document"
+msgstr "مستند"
+
+#: ../dispspecs/forrest-document.xds.in.h:12
+#, fuzzy
+msgid "Document body"
+msgstr "جسم المستند"
+
+#: ../dispspecs/forrest-document.xds.in.h:15
+#, fuzzy
+msgid "Fixme"
+msgstr "خطأ GConf (FIXME):·%s\n"
+
+#: ../dispspecs/forrest-document.xds.in.h:16
+#, fuzzy
+msgid "Footer"
+msgstr "الهامش:"
+
+#: ../dispspecs/forrest-document.xds.in.h:17
+#, fuzzy
+msgid "Fork"
+msgstr "%s: فشل fork () !"
+
+#: ../dispspecs/forrest-document.xds.in.h:18
+#, fuzzy
+msgid "Header"
+msgstr "التّرويسة"
+
+#: ../dispspecs/forrest-document.xds.in.h:19
+#, fuzzy
+msgid "Icon"
+msgstr "أيقونة."
+
+#: ../dispspecs/forrest-document.xds.in.h:20
+#, fuzzy
+msgid "Img"
+msgstr "IMG"
+
+#: ../dispspecs/forrest-document.xds.in.h:22
+#, fuzzy
+msgid "Jump"
+msgstr "قفز إلى"
+
+#: ../dispspecs/forrest-document.xds.in.h:23
+#, fuzzy
+msgid "Legal info"
+msgstr "معلومات التّرتيب"
+
+#: ../dispspecs/forrest-document.xds.in.h:24
+#, fuzzy
+msgid "Line break"
+msgstr "كسر سطر مجبر"
+
+#: ../dispspecs/forrest-document.xds.in.h:25
+#: ../dispspecs/xhtml1-strict.xds.in.h:46
+#: ../glade/docbook-ulink-properties.glade.h:2
+#, fuzzy
+msgid "Link"
+msgstr "وصلة"
+
+#: ../dispspecs/forrest-document.xds.in.h:27
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: ../dispspecs/xhtml1-strict.xds.in.h:48
+#, fuzzy
+msgid "List (unordered)"
+msgstr "قائمة غير مرتّبة"
+
+#: ../dispspecs/forrest-document.xds.in.h:28
+#, fuzzy
+msgid "List item"
+msgstr "جرد العناصر"
+
+#: ../dispspecs/forrest-document.xds.in.h:30
+#, fuzzy
+msgid "Notice"
+msgstr "تنبيه أمني"
+
+#: ../dispspecs/forrest-document.xds.in.h:32
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:27
+#, fuzzy
+msgid "Person"
+msgstr "شخص مجهول"
+
+#: ../dispspecs/forrest-document.xds.in.h:34
+#, fuzzy
+msgid "Source"
+msgstr "المصدر"
+
+#: ../dispspecs/forrest-document.xds.in.h:35
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: ../dispspecs/xhtml1-strict.xds.in.h:63
+#, fuzzy
+msgid "Strong"
+msgstr "مشفّرة، بقوّة"
+
+#: ../dispspecs/forrest-document.xds.in.h:36
+#: ../dispspecs/xhtml1-strict.xds.in.h:65
+#, fuzzy
+msgid "Subscript"
+msgstr "مخطوط فرعي"
+
+#: ../dispspecs/forrest-document.xds.in.h:38
+#: ../dispspecs/xhtml1-strict.xds.in.h:66
+#, fuzzy
+msgid "Superscript"
+msgstr "مخطوط عالي"
+
+#: ../dispspecs/forrest-document.xds.in.h:39
+#: ../dispspecs/teixlite.xds.in.h:245
+#: ../dispspecs/xhtml1-strict.xds.in.h:67
+#, fuzzy
+msgid "Table"
+msgstr "جدول"
+
+#: ../dispspecs/forrest-document.xds.in.h:40
+#, fuzzy
+msgid "Table cell"
+msgstr "خلية جدول"
+
+#: ../dispspecs/forrest-document.xds.in.h:41
+#, fuzzy
+msgid "Table header cell"
+msgstr "خلية ترويسة الجدول"
+
+#: ../dispspecs/forrest-document.xds.in.h:42
+#, fuzzy
+msgid "Table row"
+msgstr "سطر جدول"
+
+#: ../dispspecs/forrest-document.xds.in.h:43
+msgid "This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://forrest.apache.org ."
+msgstr ""
+
+#: ../dispspecs/forrest-document.xds.in.h:45
+#: ../glade/cong-file-properties.glade.h:17
+#: ../glade/docbook-ulink-properties.glade.h:5
+#, fuzzy
+msgid "Type"
+msgstr "النّوع"
+
+#: ../dispspecs/forrest-document.xds.in.h:46
+#: ../glade/cong-file-properties.glade.h:18
+#, fuzzy
+msgid "Version"
+msgstr "إصدار"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid "A newsletter tracking the technical development of a project within the Free/Open Source Software world"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:4
+#, fuzzy
+msgid "Block Quote"
+msgstr "علامة اﻹقتباس اليسرى"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: ../dispspecs/xhtml1-strict.xds.in.h:12
+#, fuzzy
+msgid "Bold"
+msgstr "سميك"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:6
+#, fuzzy
+msgid "Break (manual)"
+msgstr "فتح الدليل"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:7
+#, fuzzy
+msgid "Centered"
+msgstr "موسّط"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:8
+#, fuzzy
+msgid "Cite"
+msgstr "قائمة المراجع (استشهاد)"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:14
+#, fuzzy
+msgid "Font"
+msgstr "خط"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: ../dispspecs/xhtml1-strict.xds.in.h:30
+#, fuzzy
+msgid "Heading (level 1)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: ../dispspecs/xhtml1-strict.xds.in.h:31
+#, fuzzy
+msgid "Heading (level 2)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: ../dispspecs/xhtml1-strict.xds.in.h:32
+#, fuzzy
+msgid "Heading (level 3)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr ""
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:22
+#, fuzzy
+msgid "Kernel Cousin Newsletter"
+msgstr "اختر صورة النواة"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:28
+#, fuzzy
+msgid "Quotation"
+msgstr "اقتباس طويل"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:30
+#: ../glade/cong-file-properties.glade.h:15
+#, fuzzy
+msgid "Statistics"
+msgstr "الإحصائيات"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:33
+#, fuzzy
+msgid "Topic"
+msgstr "موضوع سريع"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:35
+#, fuzzy
+msgid "Translator"
+msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:36
+#, fuzzy
+msgid "Underlined"
+msgstr "نمط نص مسطر"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:37
+#, fuzzy
+msgid "Version Control Activity"
+msgstr "حالة نشاط مراقب الشبكة"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:38
+#, fuzzy
+msgid "Version Control Statistics"
+msgstr "إحصائيّات اللّعب الملعوبة"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:39
+#, fuzzy
+msgid "Version Control Tree"
+msgstr "مشهد شجرة GTK"
+
+#: ../dispspecs/opml.xds.in.h:1
+msgid "Apple OPML dispspec"
+msgstr ""
+
+#: ../dispspecs/opml.xds.in.h:2
+#, fuzzy
+msgid "Experimental \"opml\" format"
+msgstr "تهيئة توقيع غير مدعومة"
+
+#: ../dispspecs/readme.xds.in.h:1
+msgid "Admission"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:2
+msgid "Corp jargon"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:3
+msgid "Disclaimer"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:6
+msgid "Excuse"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:7
+#, fuzzy
+msgid "Experimental \"readme\" format"
+msgstr "تهيئة توقيع غير مدعومة"
+
+#: ../dispspecs/readme.xds.in.h:8
+msgid "Inspirational"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:10
+msgid "Optimistic"
+msgstr ""
+
+#: ../dispspecs/readme.xds.in.h:14
+#: ../dispspecs/teixlite.xds.in.h:231
+#, fuzzy
+msgid "Signature"
+msgstr "التّوقيع (أو التّواقيع)"
+
+#: ../dispspecs/readme.xds.in.h:15
+msgid "This is a document type associated with the \"readme\" file distributed with the initial prototype of Conglomerate."
+msgstr ""
+
+#: ../dispspecs/relax-ng.xds.in.h:1
+#: ../src/cong-node-properties-dialog.c:879
+#, fuzzy
+msgid "Choice"
+msgstr "اختيار"
+
+#: ../dispspecs/relax-ng.xds.in.h:2
+#, fuzzy
+msgid "Define"
+msgstr "تعريف المشاهد..."
+
+#: ../dispspecs/relax-ng.xds.in.h:3
+#, fuzzy
+msgid "Empty"
+msgstr "فارغ"
+
+#: ../dispspecs/relax-ng.xds.in.h:4
+#: ../dispspecs/teixlite.xds.in.h:149
+#, fuzzy
+msgid "Group"
+msgstr "مجموعة"
+
+#: ../dispspecs/relax-ng.xds.in.h:5
+msgid "OneOrMore"
+msgstr ""
+
+#: ../dispspecs/relax-ng.xds.in.h:6
+#: ../src/cong-node-properties-dialog.c:914
+#, fuzzy
+msgid "Optional"
+msgstr "المشاركون الإختياريّون"
+
+#: ../dispspecs/relax-ng.xds.in.h:7
+msgid "RELAX NG"
+msgstr ""
+
+#: ../dispspecs/relax-ng.xds.in.h:8
+msgid "RELAX NG Grammar"
+msgstr ""
+
+#: ../dispspecs/relax-ng.xds.in.h:9
+msgid "RELAX NG is a schema language i.e. a language for describing the structure of an XML document."
+msgstr ""
+
+#: ../dispspecs/relax-ng.xds.in.h:11
+#, fuzzy
+msgid "Start"
+msgstr "إبدأ"
+
+#: ../dispspecs/relax-ng.xds.in.h:12
+#: ../dispspecs/teixlite.xds.in.h:251
+#: ../src/cong-node-properties-dialog.c:827
+#, fuzzy
+msgid "Text"
+msgstr "النّص"
+
+#: ../dispspecs/relax-ng.xds.in.h:13
+#: ../src/cong-node-properties-dialog.c:621
+#, fuzzy
+msgid "Value"
+msgstr "القيمة"
+
+#: ../dispspecs/relax-ng.xds.in.h:14
+#, fuzzy
+msgid "XML Attribute"
+msgstr "معيار البحث:"
+
+#: ../dispspecs/relax-ng.xds.in.h:16
+msgid "ZeroOrMore"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:1
+msgid "A bibliographic description of the copy text(s) from which an electronic text was derived or generated"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:2
+msgid "A brief description of the place, date, time, etc. of production of a letter, newspaper story, or other work, prefixed or suffixed to it as a kind of heading or trailer"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:3
+msgid "A brief prose description of the appearance or content of a graphic figure, for use when documenting an image without displaying it"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:4
+msgid "A closing title or footer appearing at the end of a division of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:5
+#, fuzzy
+msgid "A date in any format"
+msgstr ""
+"يجب·إدخال التّاريخ بهذه الصّيغة: \n"
+"\n"
+"%s"
+
+#: ../dispspecs/teixlite.xds.in.h:6
+msgid "A detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:7
+msgid "A fifth-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:8
+msgid "A first-level subdivision of the front, body, or back of a text (the largest, if &lt;div0&gt; is not used, the second largest if it is)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:9
+msgid "A formal list or prose description of the topics addressed by a subdivision of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:10
+msgid "A fourth-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:11
+msgid "A full bibliographic description of an electronic file"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:12
+msgid "A fully-structured bibliographic citation, in which all components of the TEI file description are present"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:13
+msgid "A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, verse paragraph, etc."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:14
+msgid "A keyword in some formal language"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:15
+msgid "A letter, word or passage deleted, marked as deleted, or otherwise indicated as superfluous or spurious in the copy text by an author, scribe, annotator, or corrector"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:16
+msgid "A list of bibliographic citations of any kind"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:17
+msgid "A list of keywords or phrases identifying the topic or nature of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:18
+msgid "A loosely-structured bibliographic citation of which the sub-components may or may not be explicitly localNameged"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:19
+msgid "A mathematical or other formula"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:20
+#, fuzzy
+msgid "A note of any type"
+msgstr "أيّة فئة اتّصال"
+
+#: ../dispspecs/teixlite.xds.in.h:21
+msgid "A number, written in any form"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:22
+msgid "A phrase defining a time of day in any format"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:23
+msgid "A phrase describing the nature of a person's intellectual responsibility"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:24
+msgid "A phrase or word used to provide a gloss or definition for some other word or phrase"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:25
+msgid "A pointer to another location in the current document in terms of one or more identifiable elements"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:26
+msgid "A pointer to another location in the current document or an external document"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:27
+msgid "A postal or other address, for example of a publisher, an organization, or an individual"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:28
+#, fuzzy
+msgid "A proper noun or noun phrase"
+msgstr "بحث عن كلمة أو نص في الصفحة"
+
+#: ../dispspecs/teixlite.xds.in.h:29
+msgid "A prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:30
+msgid "A quotation from some other document, together with a bibliographic reference to its source"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:31
+msgid "A quotation or apparent quotation — a representation of speech or thought marked as being quoted from someone else (whether in fact quoted or not); in narrative, the words are usually those of of a character or speaker; in dictionaries, &lt;q&gt; may be used to mark real or contrived examples of usage"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:32
+msgid "A quotation, anonymous or attributed, appearing at the start of a section or chapter, or on a title page"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:33
+msgid "A reading which has been regularized or normalized in some sense"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:34
+msgid "A reference to another location in the current document, in terms of one or more identifiable elements, possibly modified by additional text or comment"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:35
+msgid "A reference to another location in the current document, or an external document, using an extended pointer notation, possibly modified by additional text or comment"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:36
+msgid "A salutation or greeting prefixed to a foreword, dedicatory epistle, or other division of a text, or the salutation in the closing of a letter, preface, etc."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:37
+msgid "A second-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:38
+msgid "A sentence-like division of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:39
+msgid "A seventh-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:40
+msgid "A short fragment of code in some formal language (often a programming language)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:41
+msgid "A single example demonstrating the use of an element or attribute"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:42
+msgid "A single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:43
+msgid "A single, possibly incomplete, line of verse"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:44
+msgid "A single-word, multi-word, or symbolic designation which is regarded as a technical term"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:45
+msgid "A sixth-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:46
+msgid "A specialized form of heading or label, giving the name of one or more speakers in a dramatic text or fragment"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:47
+msgid "A statement of responsibility for someone responsible for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:48
+msgid "A subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:49
+msgid "A subsection or division of the title of a work, as indicated on a title page"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:50
+msgid "A third-level subdivision of the front, body, or back of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:51
+msgid "A word or phrase belonging to some language other than that of the surrounding text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:52
+msgid "A word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:53
+msgid "A word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:54
+msgid "Abbr"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:55
+#, fuzzy
+msgid "Add"
+msgstr "اضافة"
+
+#: ../dispspecs/teixlite.xds.in.h:57
+#, fuzzy
+msgid "Address Line"
+msgstr "لف السّطور"
+
+#: ../dispspecs/teixlite.xds.in.h:58
+#, fuzzy
+msgid "An abbreviation of any sort"
+msgstr "ترتيب بحسب الإسم"
+
+#: ../dispspecs/teixlite.xds.in.h:59
+msgid "An edition statement as presented on a title page of a document"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:60
+msgid "An identifier of some kind, e.g. a variable name or the name of an SGML element or attribute"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:61
+msgid "An individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:62
+msgid "An individual speech in a performance text, or a passage presented as such in a prose or verse text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:63
+msgid "An interpretative annotation which can be linked to a span of text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:65
+msgid "Anonymous Block (&lt;ab&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:66
+msgid "Any arbitrary phrase-level unit of text (including other &lt;seg&gt; elements)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:67
+msgid "Any heading, for example, the title of a section, or the heading of a list or glossary"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:68
+msgid "Any kind of stage direction within a dramatic text or fragment"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:69
+msgid "Any prefatory matter (headers, title page, prefaces, dedications, etc.) found at the start of a document, before the main body"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:70
+msgid "Any sequence of items organized as a list"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:71
+msgid "Any standard or non-standard number used to identify a bibliographic item"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:72
+msgid "Arbitrary Segment (&lt;seg&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:73
+#, fuzzy
+msgid "Argument"
+msgstr "متغير غير صحيح: \"%s\"\n"
+
+#: ../dispspecs/teixlite.xds.in.h:74
+msgid "Attaches an identifier to a point within a text, whether or not it corresponds with a textual element"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:76
+#, fuzzy
+msgid "Authority"
+msgstr "إتّحاد سلطات الشّهادات"
+
+#: ../dispspecs/teixlite.xds.in.h:77
+msgid "Availability"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:78
+#, fuzzy
+msgid "Back Matter"
+msgstr "التاريخ السابق"
+
+#: ../dispspecs/teixlite.xds.in.h:79
+msgid "BiblFull"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:80
+msgid "Bibliographic Citation (&lt;bibl&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:81
+#, fuzzy
+msgid "Bibliographic Scope"
+msgstr "مجال البحث:"
+
+#: ../dispspecs/teixlite.xds.in.h:82
+#: ../dispspecs/xhtml1-strict.xds.in.h:11
+#, fuzzy
+msgid "Body"
+msgstr "الجسم"
+
+#: ../dispspecs/teixlite.xds.in.h:83
+msgid "Byline"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:84
+#, fuzzy
+msgid "Category"
+msgstr "الصنف"
+
+#: ../dispspecs/teixlite.xds.in.h:85
+#, fuzzy
+msgid "Category Description"
+msgstr "الوصف يحتوي على"
+
+#: ../dispspecs/teixlite.xds.in.h:86
+#, fuzzy
+msgid "Category Reference"
+msgstr "علامة المرجع"
+
+#: ../dispspecs/teixlite.xds.in.h:87
+#, fuzzy
+msgid "Cell"
+msgstr "خلية"
+
+#: ../dispspecs/teixlite.xds.in.h:88
+#, fuzzy
+msgid "Change"
+msgstr "تغيير كلمة المرور"
+
+#: ../dispspecs/teixlite.xds.in.h:89
+#: ../dispspecs/xhtml1-strict.xds.in.h:15
+#, fuzzy
+msgid "Citation"
+msgstr "اقتباس"
+
+#: ../dispspecs/teixlite.xds.in.h:90
+msgid "ClassCode"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:91
+msgid "Classification Declaration"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:92
+msgid "Closer"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:94
+msgid "Collects together &lt;interp&gt; tags"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:95
+msgid "Collects together any notes providing information about a text additional to that recorded in other parts of the bibliographic description"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:96
+msgid "Contains a general purpose name or referring string"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:97
+msgid "Contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a &lt;teiCorpus&gt; element"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:98
+msgid "Contains any appendixes, etc. following the main part of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:99
+msgid "Contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:100
+msgid "Contains text displayed in tabular form, in rows and columns"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:101
+#, fuzzy
+msgid "Correct Form"
+msgstr "شكل الاختصارات"
+
+#: ../dispspecs/teixlite.xds.in.h:102
+#, fuzzy
+msgid "Creation"
+msgstr "وقت الإنشاء"
+
+#: ../dispspecs/teixlite.xds.in.h:104
+msgid "Dateline"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:105
+msgid "Defines a typology used to classify texts either implicitly, by means of a bibliographic citation, or explicitly by a structured taxonomy"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:106
+msgid "Defines the scope of a bibliographic reference, for example as a list of pagenumbers, or a named subdivision of a larger work"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:107
+#, fuzzy
+msgid "Del"
+msgstr "حذف"
+
+#: ../dispspecs/teixlite.xds.in.h:108
+msgid "Describes in detail the aim or purpose for which an electronic file was encoded, together with any other relevant information concerning the process by which it was assembled or collected"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:109
+msgid "Describes some category within a taxonomy or text typology, either in the form of a brief prose description or in terms of the situational parameters used by the TEI formal &lt;textDesc&gt;"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:110
+msgid "Details of editorial principles and practices applied during the encoding of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:111
+#, fuzzy
+msgid "Distributor"
+msgstr "الموزّع"
+
+#: ../dispspecs/teixlite.xds.in.h:112
+#, fuzzy
+msgid "Div"
+msgstr "محتو DIV"
+
+#: ../dispspecs/teixlite.xds.in.h:113
+msgid "Div0"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:114
+msgid "Div1"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:115
+msgid "Div2"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:116
+msgid "Div3"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:117
+msgid "Div4"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:118
+msgid "Div5"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:119
+msgid "Div6"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:120
+msgid "Div7"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:121
+msgid "DivGen"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:122
+#, fuzzy
+msgid "Document Author"
+msgstr "معلموات المؤلف"
+
+#: ../dispspecs/teixlite.xds.in.h:123
+#, fuzzy
+msgid "Document Date"
+msgstr "تاريخ آخر"
+
+#: ../dispspecs/teixlite.xds.in.h:124
+#, fuzzy
+msgid "Document Edition"
+msgstr "إغلاق ال_مستند"
+
+#: ../dispspecs/teixlite.xds.in.h:125
+#, fuzzy
+msgid "Document Imprint"
+msgstr "إغلاق ال_مستند"
+
+#: ../dispspecs/teixlite.xds.in.h:126
+#, fuzzy
+msgid "Document Title"
+msgstr "عنوان المستند"
+
+#: ../dispspecs/teixlite.xds.in.h:127
+msgid "Documents the relationship between an electronic text and the source or sources from which it was derived"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:129
+msgid "Edition Statement"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:131
+msgid "Editorial Declaration"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:133
+#, fuzzy
+msgid "Encoding Description"
+msgstr "الوصف يحتوي على"
+
+#: ../dispspecs/teixlite.xds.in.h:134
+msgid "Epigraph"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:135
+#, fuzzy
+msgid "Example"
+msgstr "مثال: *.o; *.bak"
+
+#: ../dispspecs/teixlite.xds.in.h:136
+#, fuzzy
+msgid "Extended Pointer (xptr)"
+msgstr "المؤشر الإفتراضي - الحالي"
+
+#: ../dispspecs/teixlite.xds.in.h:137
+msgid "Extended Reference (&lt;xref&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:138
+msgid "Extent"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:140
+#, fuzzy
+msgid "Figure Description"
+msgstr "الوصف يحتوي على"
+
+#: ../dispspecs/teixlite.xds.in.h:141
+#, fuzzy
+msgid "File Description (fileDesc)"
+msgstr "لا وجود لوصف."
+
+#: ../dispspecs/teixlite.xds.in.h:142
+msgid "Foreign"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:143
+msgid "Formula"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:144
+#, fuzzy
+msgid "Front Matter"
+msgstr "الصدر اﻷيسر"
+
+#: ../dispspecs/teixlite.xds.in.h:145
+msgid "Funder"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:146
+msgid "Gap"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:147
+msgid "Generic Identifier (&lt;gi&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:148
+msgid "Gloss"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:150
+msgid "Groups information about the series, if any, to which a publication belongs"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:151
+msgid "Groups information concerning the publication or distribution of an electronic or other text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:152
+msgid "Groups information relating to one edition of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:153
+msgid "Groups information relating to the publication or distribution of a bibliographic item"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:154
+msgid "Groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:155
+msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a final group at the end of a division, especially of a letter"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:156
+msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a preliminary group at the start of a division, especially of a letter"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:157
+#: ../dispspecs/xhtml1-strict.xds.in.h:29
+#, fuzzy
+msgid "Head"
+msgstr "رأس المستند"
+
+#: ../dispspecs/teixlite.xds.in.h:158
+msgid "Highlighted"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:159
+#, fuzzy
+msgid "Id. Number"
+msgstr "رقم ال_حساب:"
+
+#: ../dispspecs/teixlite.xds.in.h:160
+msgid "Ident"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:161
+msgid "Identifies the language being described in the writing system declaration"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:162
+msgid "Imprint"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:163
+#, fuzzy
+msgid "Index"
+msgstr "فهرس"
+
+#: ../dispspecs/teixlite.xds.in.h:164
+msgid "Indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible or inaudible"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:165
+msgid "Indicates the location of a graphic, illustration, or figure"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:166
+msgid "Information about the availability of a text, for example any restrictions on its use or distribution, its copyright status, etc."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:167
+#, fuzzy
+msgid "Information about the creation of a text"
+msgstr "اعرض صندوق حوار معلومات النص"
+
+#: ../dispspecs/teixlite.xds.in.h:168
+msgid "Information about the intended rendition of one or more elements"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:169
+msgid "Information about the title of a work and those responsible for its intellectual content"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:170
+msgid "Information about the usage of a specific element within a &lt;text&gt;"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:171
+#, fuzzy
+msgid "Interpretation"
+msgstr "تأويل القيمة"
+
+#: ../dispspecs/teixlite.xds.in.h:172
+#, fuzzy
+msgid "Interpretation Group"
+msgstr "مجموعة الرُّزنامة"
+
+#: ../dispspecs/teixlite.xds.in.h:173
+#, fuzzy
+msgid "Item"
+msgstr "عنصر"
+
+#: ../dispspecs/teixlite.xds.in.h:174
+#, fuzzy
+msgid "Keywords"
+msgstr "الكلمات المفاتيح"
+
+#: ../dispspecs/teixlite.xds.in.h:175
+msgid "Kw"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:176
+#: ../dispspecs/xhtml1-strict.xds.in.h:44
+#, fuzzy
+msgid "Label"
+msgstr "علامة"
+
+#: ../dispspecs/teixlite.xds.in.h:177
+#: ../glade/docbook-common-properties.glade.h:2
+#: ../src/plugin-docbook.c:2149
+#, fuzzy
+msgid "Language"
+msgstr "لغة"
+
+#: ../dispspecs/teixlite.xds.in.h:178
+#, fuzzy
+msgid "Language Usage"
+msgstr "الاستعمال:·%s:·[-D]·[-E]·[-a·accuracy]·"
+
+#: ../dispspecs/teixlite.xds.in.h:179
+msgid "Letters, words, or phrases inserted in the text by an author, scribe, annotator, or corrector"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:180
+#, fuzzy
+msgid "Line Break"
+msgstr "كسر سطر مجبر"
+
+#: ../dispspecs/teixlite.xds.in.h:181
+#, fuzzy
+msgid "Line Group"
+msgstr "مجموعة الرُّزنامة"
+
+#: ../dispspecs/teixlite.xds.in.h:182
+#, fuzzy
+msgid "List"
+msgstr "قائمة"
+
+#: ../dispspecs/teixlite.xds.in.h:183
+msgid "ListBibl"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:184
+msgid "Marks a location to be indexed for whatever purpose"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:185
+msgid "Marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:186
+msgid "Marks paragraphs in prose"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:187
+msgid "Marks the boundary between one page of a text and the next in a standard reference system"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:188
+msgid "Marks the boundary between sections of a text, as indicated by changes in a standard reference system"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:189
+msgid "Marks the start of a new (typographic) line in some edition or version of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:190
+msgid "Marks words or phrases mentioned, not used"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:191
+msgid "Marks words or phrases which are stressed or emphasized for linguistic or rhetorical effect"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:192
+msgid "Mentioned"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:193
+msgid "Milestone"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:196
+#, fuzzy
+msgid "Notes Statement"
+msgstr "مذكرات لاصقة"
+
+#: ../dispspecs/teixlite.xds.in.h:197
+#, fuzzy
+msgid "Num"
+msgstr "رقمي"
+
+#: ../dispspecs/teixlite.xds.in.h:198
+#, fuzzy
+msgid "One cell of a table"
+msgstr "خلية بيانات الجدول"
+
+#: ../dispspecs/teixlite.xds.in.h:199
+#, fuzzy
+msgid "One component of a list"
+msgstr "لائحة كودكات الصوت"
+
+#: ../dispspecs/teixlite.xds.in.h:200
+msgid "One line of a postal or other address"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:201
+msgid "One or more taxonomies defining any classificatory codes used elsewhere in the text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:202
+#, fuzzy
+msgid "One row of a table"
+msgstr "عنوان سطر الجدول"
+
+#: ../dispspecs/teixlite.xds.in.h:203
+msgid "Opener"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:204
+#, fuzzy
+msgid "Original Form"
+msgstr "شكل الاختصارات"
+
+#: ../dispspecs/teixlite.xds.in.h:205
+#, fuzzy
+msgid "Page Break"
+msgstr "رموز التّوقّف"
+
+#: ../dispspecs/teixlite.xds.in.h:207
+#, fuzzy
+msgid "Pointer"
+msgstr "المؤشر"
+
+#: ../dispspecs/teixlite.xds.in.h:208
+msgid "Principal Researcher"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:209
+#, fuzzy
+msgid "Profile Description"
+msgstr "وصف اللمحة المختصرة:"
+
+#: ../dispspecs/teixlite.xds.in.h:210
+#, fuzzy
+msgid "Project Description"
+msgstr "الوصف يحتوي على"
+
+#: ../dispspecs/teixlite.xds.in.h:211
+msgid "Provides detailed information about the tagging applied to an SGML or XML document"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:212
+#, fuzzy
+msgid "Publication Place"
+msgstr "افتح مكان شبكة %s"
+
+#: ../dispspecs/teixlite.xds.in.h:213
+msgid "Publication Statement"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:215
+#, fuzzy
+msgid "Quotation (&lt;q&gt;)"
+msgstr "اقتباس قصير في الخط"
+
+#: ../dispspecs/teixlite.xds.in.h:216
+#, fuzzy
+msgid "Ref"
+msgstr "مرجع المرجع"
+
+#: ../dispspecs/teixlite.xds.in.h:217
+#, fuzzy
+msgid "References Declaration"
+msgstr "شروحات و مراجع متداخلة"
+
+#: ../dispspecs/teixlite.xds.in.h:218
+msgid "Referencing String (&lt;rs&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:219
+msgid "Reg"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:220
+msgid "Rendition"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:221
+msgid "Resp"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:222
+msgid "Responsibility Statement (respStmt)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:223
+#, fuzzy
+msgid "Revision Description"
+msgstr "الوصف يحتوي على"
+
+#: ../dispspecs/teixlite.xds.in.h:224
+#, fuzzy
+msgid "Row"
+msgstr "صف"
+
+#: ../dispspecs/teixlite.xds.in.h:225
+msgid "Salute"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:226
+msgid "Sampling Declaration"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:227
+msgid "Secondary statement of responsibility for a bibliographic item, for example the name of an individual, institution or organization, (or of several such) acting as editor, compiler, translator, etc."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:228
+msgid "Sentence"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:229
+msgid "Series Statement"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:230
+msgid "Sic"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:232
+#, fuzzy
+msgid "So Called"
+msgstr "ال_صوت:"
+
+#: ../dispspecs/teixlite.xds.in.h:233
+#, fuzzy
+msgid "Source Description"
+msgstr "وصف مصدر القاموس"
+
+#: ../dispspecs/teixlite.xds.in.h:234
+#, fuzzy
+msgid "Speaker"
+msgstr "مكبر صوت"
+
+#: ../dispspecs/teixlite.xds.in.h:235
+msgid "Specifies how canonical references are constructed for this text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:236
+msgid "Specifies one or more defined categories within some taxonomy or text typology"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:237
+msgid "Speech (&lt;sp&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:238
+msgid "Sponsor"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:239
+msgid "Stage Direction (&lt;stage&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:240
+msgid "Summarizes a particular change or correction made to a particular version of an electronic text which is shared between several researchers"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:241
+msgid "Summarizes the revision history for a file"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:242
+msgid "TEI Lite"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:243
+msgid "TEI stands for Text Encoding Initiative, see http://www.tei-c.org/ for more information; the TEI Lite dtd is a subset of the powerful TEI dtds which comprises the most commonly used elements."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:244
+msgid "TEI.2"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:246
+#, fuzzy
+msgid "Tag Usage"
+msgstr "الاستعمال:·%s:·[-D]·[-E]·[-a·accuracy]·"
+
+#: ../dispspecs/teixlite.xds.in.h:247
+msgid "Tagging Declaration"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:248
+msgid "Taxonomy"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:249
+#, fuzzy
+msgid "Tei Header"
+msgstr "التّرويسة/الهامش"
+
+#: ../dispspecs/teixlite.xds.in.h:252
+#, fuzzy
+msgid "Text Classification"
+msgstr "نص العلامة."
+
+#: ../dispspecs/teixlite.xds.in.h:253
+msgid "Text reproduced although apparently incorrect or inaccurate"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:254
+msgid "The approximate size of the electronic text as stored on some carrier medium, specified in any convenient units"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:255
+msgid "The body of a composite text, grouping together a sequence of distinct texts (or groups of such texts) which are regarded as a unit for some purpose, for example the collected works of an author, a sequence of prose essays, etc."
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:256
+msgid "The classification code used for this text in some standard classification system"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:257
+msgid "The closing salutation, etc., appended to a foreword, dedicatory epistle, or other division of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:258
+msgid "The correct form of a passage apparently erroneous in the copy text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:259
+msgid "The date of a document, as given (usually) on a title page"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:260
+msgid "The descriptive and declarative information making up an ‘electronic title page’ prefixed to every TEI-conformant text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:261
+msgid "The imprint statement (place and date of publication, publisher name), as given (usually) at the foot of a title page"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:262
+msgid "The label associated with an item in a list; in glossaries, marks the term being defined"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:263
+msgid "The languages, sublanguages, registers, dialects etc. represented within a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:264
+msgid "The largest possible subdivision of the body of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:265
+msgid "The location at which a textual division generated automatically by a text-processing application is to appear"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:266
+#, fuzzy
+msgid "The name (generic identifier) of an element"
+msgstr "لا صفة \"اسم\" على العنصر <%s>"
+
+#: ../dispspecs/teixlite.xds.in.h:267
+msgid "The name of a person or other agency responsible for making an electronic file available, other than a publisher or distributor"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:268
+msgid "The name of a person or other agency responsible for the distribution of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:269
+msgid "The name of a sponsoring organization or institution"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:270
+msgid "The name of an individual, institution, or organization responsible for the funding of a project or text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:271
+msgid "The name of the author of the document, as given on the title page (often but not always contained in a &lt;byline&gt;)"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:272
+msgid "The name of the author(s), personal or corporate, of a work; the primary statement of responsibility for any bibliographic item"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:273
+msgid "The name of the organization responsible for the publication or distribution of a bibliographic item"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:274
+msgid "The name of the place where a bibliographic item was published"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:275
+msgid "The name of the principal researcher responsible for the creation of an electronic text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:276
+msgid "The original form of a reading, for which a regularized form is given in an attribute value"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:277
+msgid "The particularities of one edition of a text"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:278
+msgid "The primary statement of responsibility given for a work on its title page or at the head or end of the work"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:279
+msgid "The title of a document, including all its constituents, as given on a title page"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:280
+msgid "The title of a work, whether article, book, journal, or series, including any alternative titles or subtitles"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:281
+msgid "The title page of a text, appearing within the front or back matter"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:282
+msgid "The whole body of a single unitary text, excluding any front or back matter"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:283
+#, fuzzy
+msgid "Time"
+msgstr "الوقت"
+
+#: ../dispspecs/teixlite.xds.in.h:285
+#, fuzzy
+msgid "Title Page"
+msgstr "<b>الصفحة الرئيسية</b>"
+
+#: ../dispspecs/teixlite.xds.in.h:286
+#, fuzzy
+msgid "Title Part"
+msgstr "عنوان ال_صفحة"
+
+#: ../dispspecs/teixlite.xds.in.h:287
+#, fuzzy
+msgid "Title Statement"
+msgstr "عنوان ال_صفحة"
+
+#: ../dispspecs/teixlite.xds.in.h:288
+#, fuzzy
+msgid "Trailer"
+msgstr "مقطوعة اذاعية"
+
+#: ../dispspecs/teixlite.xds.in.h:289
+msgid "Unclear"
+msgstr ""
+
+#: ../dispspecs/teixlite.xds.in.h:290
+msgid "Verse Line (&lt;l&gt;)"
+msgstr ""
+
+#: ../dispspecs/website-layout.xds.in.h:1
+#, fuzzy
+msgid "Additional Content"
+msgstr "<b>محتوى الانترنت</b>"
+
+#: ../dispspecs/website-layout.xds.in.h:2
+#, fuzzy
+msgid "Configuration Data"
+msgstr "البيانات الشخصية"
+
+#: ../dispspecs/website-layout.xds.in.h:3
+#, fuzzy
+msgid "Content"
+msgstr "المحتويات:"
+
+#: ../dispspecs/website-layout.xds.in.h:5
+#, fuzzy
+msgid "Header Link"
+msgstr "وصلة التنزيل"
+
+#: ../dispspecs/website-layout.xds.in.h:6
+msgid "Holder"
+msgstr ""
+
+#: ../dispspecs/website-layout.xds.in.h:7
+#: ../dispspecs/xsl.xds.in.h:2
+#, fuzzy
+msgid "Stylesheet"
+msgstr "ت_حرير مستند النسق..."
+
+#: ../dispspecs/website-layout.xds.in.h:8
+#, fuzzy
+msgid "Table of Contents"
+msgstr "جدول المحتويات"
+
+#: ../dispspecs/website-layout.xds.in.h:9
+#, fuzzy
+msgid "Website Layout"
+msgstr "مخطط القائمة"
+
+#: ../dispspecs/website-webpage.xds.in.h:5
+msgid "A sumamry."
+msgstr ""
+
+#: ../dispspecs/website-webpage.xds.in.h:62
+#, fuzzy
+msgid "Part Introduction"
+msgstr "انتهى تقديم الزميل"
+
+#: ../dispspecs/website-webpage.xds.in.h:99
+#, fuzzy
+msgid "Web Page"
+msgstr "_صفحة الإنترنت:"
+
+#: ../dispspecs/website-webpage.xds.in.h:100
+msgid "Webpage"
+msgstr ""
+
+#: ../dispspecs/website-webpage.xds.in.h:102
+#, fuzzy
+msgid "email"
+msgstr "البريد اﻻلكتروني"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:1
+#, fuzzy
+msgid "Abbreviated Form"
+msgstr "شكل الاختصارات"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr ""
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:6
+#, fuzzy
+msgid "Area"
+msgstr "مساحة التبليغ"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:7
+#, fuzzy
+msgid "Base"
+msgstr "أساس DN:"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:8
+#, fuzzy
+msgid "Bidirectional Override"
+msgstr "تجاوز قيود المستند"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:9
+#, fuzzy
+msgid "Big"
+msgstr "بغ بايني"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:10
+#, fuzzy
+msgid "Block Quotation"
+msgstr "اقتباس طويل"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:13
+#, fuzzy
+msgid "Button"
+msgstr "زر"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:17
+#, fuzzy
+msgid "Column"
+msgstr "العمود"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:18
+#, fuzzy
+msgid "Column Group"
+msgstr "خواص مجموعة أعمدة الجدول"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:20
+#, fuzzy
+msgid "Definition List"
+msgstr "قائمة التعريف"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:21
+#, fuzzy
+msgid "Definition Term"
+msgstr "مفرد التعريف"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:22
+#, fuzzy
+msgid "Deleted Text"
+msgstr "النص المحذوف"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr ""
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:25
+#, fuzzy
+msgid "Forced Line Break"
+msgstr "كسر سطر مجبر"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:26
+#, fuzzy
+msgid "Form Control"
+msgstr "مجموعة تحكم الاستمارة"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:27
+#, fuzzy
+msgid "Form Control Group"
+msgstr "مجموعة تحكم الاستمارة"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:28
+#, fuzzy
+msgid "HTML Page"
+msgstr "<b>الصفحة الرئيسية</b>"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:33
+#, fuzzy
+msgid "Heading (level 4)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:34
+#, fuzzy
+msgid "Heading (level 5)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:35
+#, fuzzy
+msgid "Heading (level 6)"
+msgstr "مستوى واحد"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:36
+#, fuzzy
+msgid "Horizontal Rule"
+msgstr "القاعدة الأفقية"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:37
+#, fuzzy
+msgid "Image"
+msgstr "صورة"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:38
+#, fuzzy
+msgid "Image Map"
+msgstr "خارطة صورة"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:39
+#, fuzzy
+msgid "Inline Quotation"
+msgstr "اقتباس قصير في الخط"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:40
+#, fuzzy
+msgid "Inserted Text"
+msgstr "نص مدرج"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:41
+#, fuzzy
+msgid "Interactive Form"
+msgstr "شكل الاختصارات"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:42
+#, fuzzy
+msgid "Italic"
+msgstr "مائل"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:43
+#, fuzzy
+msgid "Keyboard"
+msgstr "لوحة المفاتيح"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr ""
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:50
+#, fuzzy
+msgid "Metainformation"
+msgstr "معلومات عامة عادية"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:51
+#, fuzzy
+msgid "Multi-line Text Field"
+msgstr "حيز نص تعدد السطور"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:52
+#, fuzzy
+msgid "Object"
+msgstr "جسم"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:53
+#, fuzzy
+msgid "Option Group"
+msgstr "مجموعة خيارات"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:54
+#, fuzzy
+msgid "Option Selector"
+msgstr "امتقاء الخيارات"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:56
+#, fuzzy
+msgid "Parameter"
+msgstr "عوامل التنفيذ"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:57
+#, fuzzy
+msgid "Preformatted Text"
+msgstr "نص مسبق التشكل"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:58
+#, fuzzy
+msgid "Sample"
+msgstr "عينة"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:59
+#, fuzzy
+msgid "Script"
+msgstr "الرمز"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:60
+#, fuzzy
+msgid "Selectable Choice"
+msgstr "خيار قابل للانتقاء"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:61
+#, fuzzy
+msgid "Small"
+msgstr "صغير"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:62
+#: ../glade/custom-element.glade.h:6
+#, fuzzy
+msgid "Span"
+msgstr "التوسيع"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:64
+#: ../glade/docbook-orderedlist-properties.glade.h:10
+#, fuzzy
+msgid "Style"
+msgstr "الأسلوب"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:69
+#, fuzzy
+msgid "Table Cell (data)"
+msgstr "خلية بيانات الجدول"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:70
+#, fuzzy
+msgid "Table Cell (header)"
+msgstr "خلية ترويسة الجدول"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr ""
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr ""
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:77
+#, fuzzy
+msgid "Variable"
+msgstr "متغير"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr ""
+
+#: ../dispspecs/xsl.xds.in.h:1
+msgid "An XSL stylesheet describes a way of transforming a document of one type into one in another form. For example, it might describe a way of converting DocBook files into HTML web pages."
+msgstr ""
+
+#: ../dispspecs/xsl.xds.in.h:3
+#, fuzzy
+msgid "Template-matching Rule"
+msgstr "إضافة قاعدة مصفاة"
+
+#: ../dispspecs/xsl.xds.in.h:4
+#, fuzzy
+msgid "XSL stylesheet"
+msgstr "ت_حرير مستند النسق..."
+
+#: ../data/conglomerate.desktop.in.h:1
+#: ../src/cong-menus.c:1444
+#: ../src/cong-primary-window.c:605
+#: ../src/cong-primary-window.c:793
+#: ../src/cong-primary-window.c:795
+#: ../src/cong-primary-window.c:801
+#, fuzzy
+msgid "Conglomerate XML Editor"
+msgstr "محرر قائمة ألاكارت"
+
+#: ../data/conglomerate.desktop.in.h:2
+#, fuzzy
+msgid "Edit XML files"
+msgstr "تحرير ملفات نصية"
+
+#: ../data/conglomerate.schemas.in.h:1
+msgid "A list of custom directories where Conglomerate should look for the display specification (called dispspec, or .xds) files, in addition to the standard installation path. When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used."
+msgstr ""
+
+#: ../data/conglomerate.schemas.in.h:2
+msgid "A list of directories where Conglomerate should look for template xml files. These documents will be used by the new document assistant as types of documents which can be created by the user."
+msgstr ""
+
+#: ../data/conglomerate.schemas.in.h:3
+msgid "Custom locations for display specification files."
+msgstr ""
+
+#: ../data/conglomerate.schemas.in.h:4
+#, fuzzy
+msgid "Locations for template files."
+msgstr "هيكل الدلائل للملفات"
+
+#: ../glade/cong-file-import.glade.h:1
+#, fuzzy
+msgid "File Import Options"
+msgstr "خيارات إنتقاء الملف"
+
+#: ../glade/cong-file-import.glade.h:2
+#, fuzzy
+msgid "Importer"
+msgstr "نوع المستورد"
+
+#: ../glade/cong-file-import.glade.h:3
+#, fuzzy
+msgid "Options"
+msgstr "خيارات"
+
+#: ../glade/cong-file-properties.glade.h:1
+#: ../src/cong-node-properties-dialog.c:1193
+#: ../src/cong-node-properties-dialog.c:1321
+#, fuzzy
+msgid "Advanced"
+msgstr "متقدم"
+
+#: ../glade/cong-file-properties.glade.h:2
+#, fuzzy
+msgid "Basic"
+msgstr "أساسي"
+
+#: ../glade/cong-file-properties.glade.h:4
+#: ../src/cong-document.c:1003
+#, fuzzy
+msgid "Document Type Declaration"
+msgstr "نوع جهاز الخرج"
+
+#: ../glade/cong-file-properties.glade.h:5
+#, fuzzy
+msgid "Encoding"
+msgstr "التشفيرة"
+
+#: ../glade/cong-file-properties.glade.h:6
+#, fuzzy
+msgid "External ID"
+msgstr "هوية البوّاب:"
+
+#: ../glade/cong-file-properties.glade.h:7
+#: ../src/cong-file-export.c:281
+#: ../src/cong-file-print.c:217
+#, fuzzy
+msgid "General"
+msgstr "عامّ"
+
+#: ../glade/cong-file-properties.glade.h:8
+#: ../src/cong-node-properties-dialog.c:247
+#, fuzzy
+msgid "Location"
+msgstr "الموقع"
+
+#: ../glade/cong-file-properties.glade.h:9
+#, fuzzy
+msgid "Modified"
+msgstr "معدّل"
+
+#: ../glade/cong-file-properties.glade.h:11
+#, fuzzy
+msgid "Number of elements:"
+msgstr "XSLT - عناصر"
+
+#: ../glade/cong-file-properties.glade.h:12
+#, fuzzy
+msgid "Number of words :"
+msgstr "كلمات مشابهة"
+
+#: ../glade/cong-file-properties.glade.h:13
+#: ../glade/docbook-common-properties.glade.h:3
+#: ../glade/docbook-orderedlist-properties.glade.h:9
+#: ../glade/docbook-ulink-properties.glade.h:3
+#: ../glade/plugin-arbitrary.glade.h:5
+#: ../glade/plugin-random.glade.h:4
+#: ../src/cong-node-properties-dialog.c:1283
+#, fuzzy
+msgid "Properties"
+msgstr "خصائص"
+
+#: ../glade/cong-file-properties.glade.h:14
+msgid "Standalone"
+msgstr ""
+
+#: ../glade/cong-file-properties.glade.h:16
+#, fuzzy
+msgid "System ID"
+msgstr "هوية البوّاب:"
+
+#: ../glade/cong-file-properties.glade.h:19
+#, fuzzy
+msgid "XML Header"
+msgstr "التّرويسة/الهامش"
+
+#: ../glade/cong-file-properties.glade.h:20
+#: ../src/cong-file-properties.c:279
+#, fuzzy
+msgid "_Associate this DTD"
+msgstr "على هذا الحاسوب"
+
+#: ../glade/cong-file-properties.glade.h:21
+msgid "label_dtd_external_id"
+msgstr ""
+
+#: ../glade/cong-file-properties.glade.h:22
+#, fuzzy
+msgid "label_dtd_notes"
+msgstr "تفضيلات المذكرات اللاصقة"
+
+#: ../glade/cong-file-properties.glade.h:23
+msgid "label_dtd_system_id"
+msgstr ""
+
+#: ../glade/cong-file-properties.glade.h:24
+#, fuzzy
+msgid "label_elements"
+msgstr "XSLT - عناصر"
+
+#: ../glade/cong-file-properties.glade.h:25
+#, fuzzy
+msgid "label_location"
+msgstr "افتح موقع %s"
+
+#: ../glade/cong-file-properties.glade.h:26
+#, fuzzy
+msgid "label_modified"
+msgstr "تاريخ التعديل:"
+
+#: ../glade/cong-file-properties.glade.h:27
+#, fuzzy
+msgid "label_name"
+msgstr "اسم الموصول"
+
+#: ../glade/cong-file-properties.glade.h:28
+#, fuzzy
+msgid "label_typedesc"
+msgstr "نص العلامة."
+
+#: ../glade/cong-file-properties.glade.h:29
+#, fuzzy
+msgid "label_typename"
+msgstr "نص العلامة."
+
+#: ../glade/cong-file-properties.glade.h:30
+#, fuzzy
+msgid "label_words"
+msgstr "كلمات مشابهة"
+
+#: ../glade/cong-file-properties.glade.h:31
+#, fuzzy
+msgid "label_xml_encoding"
+msgstr "<b>ا_ستخدم تشفيرا مغايرا:</b>"
+
+#: ../glade/cong-file-properties.glade.h:32
+#, fuzzy
+msgid "label_xml_standalone"
+msgstr "عدد عشري ل XML"
+
+#: ../glade/cong-file-properties.glade.h:33
+#, fuzzy
+msgid "label_xml_version"
+msgstr "اطبع إصدارة GDM"
+
+#: ../glade/cong-find-replace.glade.h:1
+#: ../glade/custom-element.glade.h:1
+#: ../glade/plugin-arbitrary.glade.h:1
+#, fuzzy
+msgid "*"
+msgstr "*"
+
+#: ../glade/cong-find-replace.glade.h:2
+#, fuzzy
+msgid "Find Next"
+msgstr "ايجاد التالي"
+
+#: ../glade/cong-find-replace.glade.h:3
+#, fuzzy
+msgid "Match _entire word only"
+msgstr "مطابقة لك_امل الكلمة فقط"
+
+#: ../glade/cong-find-replace.glade.h:4
+#: ../src/cong-edit-find-and-replace.c:187
+#: ../src/cong-edit-find-and-replace.c:836
+#: ../src/cong-edit-find-and-replace.c:850
+#, fuzzy
+msgid "Replace"
+msgstr "استبدال"
+
+#: ../glade/cong-find-replace.glade.h:5
+#: ../src/cong-edit-find-and-replace.c:908
+#, fuzzy
+msgid "Replace All"
+msgstr "تبديل الكل"
+
+#: ../glade/cong-find-replace.glade.h:6
+#, fuzzy
+msgid "Replace _with: "
+msgstr "تبديل _بـ: "
+
+#: ../glade/cong-find-replace.glade.h:7
+#, fuzzy
+msgid "Search _backwards"
+msgstr "بحث إلى ال_خلف"
+
+#: ../glade/cong-find-replace.glade.h:8
+#, fuzzy
+msgid "_Match case"
+msgstr "_مطابقة للحالة"
+
+#: ../glade/cong-find-replace.glade.h:9
+#, fuzzy
+msgid "_Search for: "
+msgstr "ال_بحث عن:"
+
+#: ../glade/cong-find-replace.glade.h:10
+#, fuzzy
+msgid "_Wrap around"
+msgstr "_لف حول"
+
+#: ../glade/cong-preferences.glade.h:1
+#, fuzzy
+msgid "Conglomerate Preferences"
+msgstr "خيارات داشر"
+
+#: ../glade/cong-preferences.glade.h:2
+#, fuzzy
+msgid "Document Types"
+msgstr "الأنواع الأساسية"
+
+#: ../glade/cong-preferences.glade.h:3
+#, fuzzy
+msgid "Plugins"
+msgstr "ملحقات"
+
+#: ../glade/custom-element.glade.h:2
+#, fuzzy
+msgid "Adhoc Element"
+msgstr "رقم تعريف العنصر"
+
+#: ../glade/custom-element.glade.h:3
+#, fuzzy
+msgid "Element Name"
+msgstr "اسم الموصول"
+
+#: ../glade/custom-element.glade.h:4
+#, fuzzy
+msgid "Element Type"
+msgstr "نوع مجهول \"%s\" على عنصر <%s>"
+
+#: ../glade/custom-element.glade.h:5
+#, fuzzy
+msgid "I Don't Care"
+msgstr "لا تحفظ"
+
+#: ../glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr ""
+
+#: ../glade/docbook-common-properties.glade.h:1
+msgid "<small>What is the scope of the text? You can use this page to specify the relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+
+#: ../glade/docbook-common-properties.glade.h:4
+#: ../src/plugin-docbook.c:2155
+msgid "Revisions"
+msgstr ""
+
+#: ../glade/docbook-common-properties.glade.h:5
+#: ../src/plugin-docbook.c:2143
+#, fuzzy
+msgid "Scope"
+msgstr "المجال"
+
+#: ../glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+
+#: ../glade/docbook-common-properties.glade.h:9
+msgid "_Architecture"
+msgstr ""
+
+#: ../glade/docbook-common-properties.glade.h:10
+#, fuzzy
+msgid "_Operating System"
+msgstr "_نظام التشغيل:"
+
+#: ../glade/docbook-common-properties.glade.h:11
+#, fuzzy
+msgid "_User Level"
+msgstr "مطلوب مستوى نشاط المستخدم."
+
+#: ../glade/docbook-common-properties.glade.h:12
+#, fuzzy
+msgid "_Vendor"
+msgstr "<b>البائع:</b> %s\n"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:4
+#: ../src/cong-error-dialog.c:337
+#: ../src/cong-error-file-open.c:518
+#, fuzzy
+msgid "Details"
+msgstr "التفاصيل"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:5
+#, fuzzy
+msgid "I, II, III, ..."
+msgstr "خواو باولو الثاني"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:7
+#, fuzzy
+msgid "Minimise vertical space"
+msgstr "المساحة المتوفرة قليلة"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr ""
+
+#: ../glade/docbook-orderedlist-properties.glade.h:12
+#, fuzzy
+msgid "i, ii, iii, ..."
+msgstr "خواو باولو الثاني"
+
+#: ../glade/docbook-ulink-properties.glade.h:1
+msgid "<small>Some DocBook applications allow the behaviour of the link to be customised using this \"type\" attribute. </small>"
+msgstr ""
+
+#: ../glade/docbook-ulink-properties.glade.h:4
+#, fuzzy
+msgid "Target"
+msgstr "الهدف:"
+
+#: ../glade/docbook-ulink-properties.glade.h:6
+#, fuzzy
+msgid "URL"
+msgstr "العنوان"
+
+#: ../glade/docbook-ulink-properties.glade.h:7
+#, fuzzy
+msgid "_Test this Link"
+msgstr "فتح الوصلة في النافذة الحالية"
+
+#: ../glade/plugin-arbitrary.glade.h:2
+#, fuzzy
+msgid "Local Name"
+msgstr "اسم الموصول"
+
+#: ../glade/plugin-arbitrary.glade.h:3
+#, fuzzy
+msgid "Namespace URI"
+msgstr "عنوان غير صحيح"
+
+#: ../glade/plugin-arbitrary.glade.h:4
+#, fuzzy
+msgid "Preview"
+msgstr "لمحة"
+
+#: ../glade/plugin-arbitrary.glade.h:6
+#, fuzzy
+msgid "Top-level Element"
+msgstr "لا  صفة \"أعلى\" على العنصر <%s>"
+
+#: ../glade/plugin-random.glade.h:1
+#, fuzzy
+msgid "Creation Parameters"
+msgstr "باراميترات غير صالحة"
+
+#: ../glade/plugin-random.glade.h:2
+#, fuzzy
+msgid "Depth"
+msgstr "عمق اللون:"
+
+#: ../glade/plugin-random.glade.h:3
+#: ../src/cong-document.c:991
+#, fuzzy
+msgid "Document Type"
+msgstr "نوع المستند"
+
+#: ../glade/string_selection_dialog.glade.h:1
+#, fuzzy
+msgid "string_selection_dialog"
+msgstr "حوار انتقاء الأيقونات"
+
+#: ../src/cong-app.c:960
+msgid "Unit test: quit immediately (after loading any files specified on the command-line)"
+msgstr ""
+
+#: ../src/cong-app.c:1021
+#, fuzzy
+msgid "XML Editor"
+msgstr "<b>خط المحرر:</b>"
+
+#: ../src/cong-app.c:1158
+msgid "Conglomerate could not load any xds files"
+msgstr ""
+
+#: ../src/cong-app.c:1160
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr ""
+
+#: ../src/cong-app.c:1162
+msgid "If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it.  If you have changed the default setting for the display spec path, please double check that as well."
+msgstr ""
+
+#: ../src/cong-attribute-editor-cdata.c:206
+#: ../src/cong-attribute-editor-nmtoken.c:272
+#: ../src/cong-node-properties-dialog.c:470
+#, fuzzy, c-format
+msgid "Add attribute \"%s\""
+msgstr "معيار البحث:"
+
+#: ../src/cong-attribute-editor-cdata.c:232
+#: ../src/cong-attribute-editor-nmtoken.c:298
+#: ../src/cong-attribute-editor.c:253
+#: ../src/cong-attribute-wrapper.c:263
+#: ../src/cong-node-properties-dialog.c:506
+#, fuzzy, c-format
+msgid "Delete attribute \"%s\""
+msgstr "معيار البحث:"
+
+#: ../src/cong-attribute-editor-enumeration.c:122
+msgid "(unspecified)"
+msgstr ""
+
+#: ../src/cong-attribute-editor-lang.c:48
+#, fuzzy
+msgid "Breton"
+msgstr "البريطوني"
+
+#: ../src/cong-attribute-editor-lang.c:49
+#, fuzzy
+msgid "Catalan"
+msgstr "القسطيلي"
+
+#: ../src/cong-attribute-editor-lang.c:50
+#, fuzzy
+msgid "Czech"
+msgstr "التشيكي"
+
+#: ../src/cong-attribute-editor-lang.c:51
+#, fuzzy
+msgid "Danish"
+msgstr "الدنماركية"
+
+#: ../src/cong-attribute-editor-lang.c:52
+#, fuzzy
+msgid "German (Germany)"
+msgstr "الألمانية (ألمانيا)"
+
+#: ../src/cong-attribute-editor-lang.c:53
+#, fuzzy
+msgid "German (Swiss)"
+msgstr "ألمانية (سويسرا)"
+
+#: ../src/cong-attribute-editor-lang.c:54
+#, fuzzy
+msgid "English (American)"
+msgstr "أنكليزية (أمريكية)"
+
+#: ../src/cong-attribute-editor-lang.c:55
+#, fuzzy
+msgid "English (British)"
+msgstr "أنكليزية (بريطانية)"
+
+#: ../src/cong-attribute-editor-lang.c:56
+#, fuzzy
+msgid "English (Canadian)"
+msgstr "أنكليزية (كنديّة)"
+
+#: ../src/cong-attribute-editor-lang.c:57
+#, fuzzy
+msgid "Esperanto"
+msgstr "الاسبيرانتو"
+
+#: ../src/cong-attribute-editor-lang.c:58
+#, fuzzy
+msgid "Spanish"
+msgstr "الاسبانية"
+
+#: ../src/cong-attribute-editor-lang.c:59
+#, fuzzy
+msgid "Faroese"
+msgstr "الفاروزي"
+
+#: ../src/cong-attribute-editor-lang.c:60
+#, fuzzy
+msgid "French (France)"
+msgstr "لفرنسية (فرنسا)"
+
+#: ../src/cong-attribute-editor-lang.c:61
+#, fuzzy
+msgid "French (Swiss)"
+msgstr "الفرنسية (سويسرا)"
+
+#: ../src/cong-attribute-editor-lang.c:62
+#, fuzzy
+msgid "Italian"
+msgstr "الإيطالية"
+
+#: ../src/cong-attribute-editor-lang.c:63
+#, fuzzy
+msgid "Dutch"
+msgstr "الهولندية"
+
+#: ../src/cong-attribute-editor-lang.c:64
+#, fuzzy
+msgid "Norwegian"
+msgstr "النرويجية"
+
+#: ../src/cong-attribute-editor-lang.c:65
+#, fuzzy
+msgid "Polish"
+msgstr "البولندية"
+
+#: ../src/cong-attribute-editor-lang.c:66
+#, fuzzy
+msgid "Portuguese (Portugal)"
+msgstr "البرتغالية (البرتغال)"
+
+#: ../src/cong-attribute-editor-lang.c:67
+#, fuzzy
+msgid "Portuguese (Brazilian)"
+msgstr "البرتغالية (البرازيل)"
+
+#: ../src/cong-attribute-editor-lang.c:68
+#, fuzzy
+msgid "Russian"
+msgstr "الروسية"
+
+#: ../src/cong-attribute-editor-lang.c:69
+#, fuzzy
+msgid "Swedish"
+msgstr "السويدية"
+
+#: ../src/cong-attribute-editor-lang.c:70
+#, fuzzy
+msgid "Ukrainian"
+msgstr "الأكرانية"
+
+#: ../src/cong-attribute-editor-lang.c:157
+#, fuzzy
+msgid "No Language"
+msgstr "لا يوجد لغات"
+
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: ../src/cong-attribute-editor-nmtoken.c:225
+#, fuzzy, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "فشل ضبط تعيينات الإسناد: %d."
+
+#: ../src/cong-attribute-editor-nmtoken.c:236
+msgid "The attribute value must be an XML name token."
+msgstr ""
+
+#: ../src/cong-attribute-editor-nmtoken.c:237
+msgid "XML name tokens can only contain alphanumeric and/or ideographic characters and the punctuation marks _,-, ., and :. It can not contain whitespace characters."
+msgstr ""
+
+#: ../src/cong-attribute-editor.c:249
+#: ../src/cong-attribute-wrapper.c:232
+#: ../src/cong-node-properties-dialog.c:424
+#, fuzzy, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "فشل ضبط تعيينات الإسناد: %d."
+
+#: ../src/cong-dialog.c:301
+#, fuzzy
+msgid "_Close without Saving"
+msgstr "غلق _دون حفظ"
+
+#: ../src/cong-dialog.c:316
+#, fuzzy, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "هل تريد حفظ التّغييرات في المستند \"%s\" قبل غلقه؟"
+
+#: ../src/cong-dialog.c:321
+#, c-format
+msgid "If you close without saving, changes from the past %li hours will be discarded."
+msgstr ""
+
+#: ../src/cong-dialog.c:323
+#, c-format
+msgid "If you close without saving, changes from the past %li minutes will be discarded."
+msgstr ""
+
+#: ../src/cong-dialog.c:325
+msgid "If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+
+#: ../src/cong-dialog.c:379
+#, fuzzy, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "إعادة التعييرات غير المحفوظة للمستند '%s'؟"
+
+#: ../src/cong-dialog.c:384
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr ""
+
+#: ../src/cong-dialog.c:386
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr ""
+
+#: ../src/cong-dialog.c:388
+msgid "Changes from the past minute will be discarded."
+msgstr ""
+
+#: ../src/cong-dispspec-element.c:661
+#: ../src/cong-xpath-expression.c:248
+#, fuzzy
+msgid "(xpath failed)"
+msgstr "فشل الاختبار %d"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: ../src/cong-dispspec-element.c:697
+#, fuzzy
+msgid "<untitled>"
+msgstr "بدون عنوان"
+
+#: ../src/cong-dispspec-registry.c:108
+msgid "Conglomerate could not read its registry of document types."
+msgstr ""
+
+#: ../src/cong-dispspec-registry.c:111
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr ""
+
+#: ../src/cong-dispspec-registry.c:333
+#: ../src/cong-file-new.c:343
+#, fuzzy
+msgid "File Type"
+msgstr "نوع الملف"
+
+#: ../src/cong-dispspec-registry.c:344
+msgid "Coverage"
+msgstr ""
+
+#: ../src/cong-dispspec.c:513
+#, fuzzy
+msgid "unnamed"
+msgstr "غير مسمّى"
+
+#: ../src/cong-dispspec.c:536
+#, fuzzy
+msgid "No description available."
+msgstr "لا وجود لوصف."
+
+#: ../src/cong-document.c:651
+#, fuzzy
+msgid "(Untitled)"
+msgstr "(بدون عنوان)"
+
+#: ../src/cong-document.c:955
+#, fuzzy, c-format
+msgid "Attribute \"%s\""
+msgstr "الصّفة"
+
+#: ../src/cong-document.c:962
+#, fuzzy, c-format
+msgid "Text \"%s\""
+msgstr "النّص"
+
+#: ../src/cong-document.c:968
+#, fuzzy
+msgid "Character Data"
+msgstr "البيانات الشخصية"
+
+#: ../src/cong-document.c:971
+#, fuzzy, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "مرجع كيان غير منتهى منه"
+
+#: ../src/cong-document.c:974
+#, fuzzy, c-format
+msgid "Entity \"%s\""
+msgstr "كيان"
+
+#: ../src/cong-document.c:977
+#, fuzzy
+msgid "XML Processing Instruction"
+msgstr "عدد عشري ل XML"
+
+#: ../src/cong-document.c:982
+#, fuzzy, c-format
+msgid "Comment \"%s\""
+msgstr "تعليق:"
+
+#: ../src/cong-document.c:994
+#, fuzzy
+msgid "Document Fragment"
+msgstr "إغلاق ال_مستند"
+
+#: ../src/cong-document.c:997
+msgid "Notation"
+msgstr ""
+
+#: ../src/cong-document.c:1000
+#, fuzzy
+msgid "HTML Document"
+msgstr "إغلاق ال_مستند"
+
+#: ../src/cong-document.c:1006
+#, fuzzy
+msgid "Element Declaration"
+msgstr "رقم تعريف العنصر"
+
+#: ../src/cong-document.c:1009
+#, fuzzy
+msgid "Attribute Declaration"
+msgstr "معيار البحث:"
+
+#: ../src/cong-document.c:1012
+#, fuzzy
+msgid "Entity Declaration"
+msgstr "عدد عشري ل XML"
+
+#: ../src/cong-document.c:1015
+msgid "Namespace Declaration"
+msgstr ""
+
+#: ../src/cong-document.c:1018
+#, fuzzy
+msgid "XInclude Start"
+msgstr "إبدأ مخفياً"
+
+#: ../src/cong-document.c:1021
+#, fuzzy
+msgid "XInclude End"
+msgstr "نهاية الموعد"
+
+#: ../src/cong-document.c:2163
+#, fuzzy, c-format
+msgid "Select %s"
+msgstr "_إختار"
+
+#: ../src/cong-dom-view.c:225
+#, fuzzy
+msgid "UNKNOWN"
+msgstr "مجهول"
+
+#: ../src/cong-dom-view.c:252
+#, fuzzy
+msgid "Text:"
+msgstr "النّص"
+
+#: ../src/cong-dom-view.c:258
+msgid "CDATA:"
+msgstr ""
+
+#: ../src/cong-edit-find-and-replace.c:98
+#, fuzzy, c-format
+msgid "The text \"%s\" was not found."
+msgstr "حساب المستخدم '%s' غير موجود"
+
+#: ../src/cong-edit-find-and-replace.c:200
+#, fuzzy
+msgid "Replace _All"
+msgstr "استبدال الك_ل"
+
+#: ../src/cong-edit-find-and-replace.c:307
+#: ../src/cong-edit-find-and-replace.c:761
+#: ../src/cong-edit-find-and-replace.c:959
+#: ../src/cong-edit-find-and-replace.c:1000
+#, fuzzy
+msgid "Find"
+msgstr "بحث"
+
+#: ../src/cong-editor-node-text.c:887
+#, fuzzy
+msgid "Select line"
+msgstr "لف السّطور"
+
+#: ../src/cong-editor-node-text.c:911
+#, fuzzy
+msgid "Select word"
+msgstr "اختيار باعتبار رموز ال_كلمات:"
+
+#: ../src/cong-editor-node-text.c:936
+#, fuzzy
+msgid "Move cursor"
+msgstr "موقع المؤشّر"
+
+#: ../src/cong-editor-node-text.c:1022
+#, fuzzy
+msgid "Drag out selection"
+msgstr "اختيار لون المنتقى"
+
+#: ../src/cong-editor-widget3.c:269
+#, fuzzy
+msgid "Expander Size"
+msgstr "حجم الموسّع"
+
+#: ../src/cong-editor-widget3.c:270
+#, fuzzy
+msgid "Size of the expander arrow"
+msgstr "حجم سهم الموسّع"
+
+#: ../src/cong-editor-widget3.c:748
+#, fuzzy
+msgid "Input Method"
+msgstr "طريقة إدخال X"
+
+#: ../src/cong-editor-widget3.c:878
+#: ../src/cong-editor-widget3.c:1409
+#, fuzzy
+msgid "Typing"
+msgstr "إستراحة عن الكتابة"
+
+#: ../src/cong-editor-widget3.c:1310
+#, fuzzy
+msgid "Cursor Movement"
+msgstr "<b>مفتاح الحركة</b>"
+
+#: ../src/cong-editor-widget3.c:1350
+#: ../src/cong-editor-widget3.c:1363
+#, fuzzy
+msgid "Delete Selection"
+msgstr "حذف المنتقى من المحفوظة"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: ../src/cong-error-dialog.c:231
+#: ../src/cong-error-dialog.c:271
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr ""
+
+#: ../src/cong-error-dialog.c:235
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr ""
+
+#: ../src/cong-error-dialog.c:265
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-dialog.c:321
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr ""
+
+#: ../src/cong-error-dialog.c:325
+#, fuzzy
+msgid "A GError occurred; the error report was:"
+msgstr "حدث خطأ عند إنشاء تقرير الخلل\n"
+
+#: ../src/cong-error-dialog.c:335
+#: ../src/cong-error-file-open.c:516
+#, fuzzy
+msgid "An unexpected error occurred."
+msgstr "حدث خطأ غير متوقع"
+
+#: ../src/cong-error-dialog.c:336
+#: ../src/cong-error-file-open.c:517
+msgid "For more information, click on the \"Details\" button."
+msgstr ""
+
+#: ../src/cong-error-dialog.c:386
+msgid "An error occurred whilst running this system command:"
+msgstr ""
+
+#: ../src/cong-error-dialog.c:389
+#, c-format
+msgid "The error number reported was %d.  Below is the error text that was output by the command."
+msgstr ""
+
+#. FIXME: ought to set up the parent window properly
+#: ../src/cong-error-file-open.c:67
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: ../src/cong-error-file-open.c:103
+#, fuzzy, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "لا يمكن قراءة القرص"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-open.c:106
+#, fuzzy, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "لم يمكن قراءة التّحيّة من %s: %s"
+
+#: ../src/cong-error-file-open.c:264
+#: ../src/cong-error-file-save.c:92
+#, fuzzy
+msgid "An unexpected internal error occurred."
+msgstr "حدث خطأ غير متوقع"
+
+#: ../src/cong-error-file-open.c:265
+#: ../src/cong-error-file-save.c:93
+msgid "Try again.  If it fails again, file a bug report with the maintainer of this application."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:291
+msgid "There is no file with that name at that location."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:292
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or \"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:293
+#: ../src/cong-error-file-open.c:302
+#: ../src/cong-error-file-open.c:357
+#: ../src/cong-error-file-open.c:398
+#, fuzzy
+msgid "Search"
+msgstr "بحث"
+
+#: ../src/cong-error-file-open.c:300
+#: ../src/cong-error-file-save.c:110
+#, fuzzy
+msgid "The location does not exist."
+msgstr "الموقع \"%s\" غير موجود."
+
+#: ../src/cong-error-file-open.c:301
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-open.c:314
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:318
+msgid "Try loading a file from a different location.  If you think that you ought to be able to read this file, contact your system administrator."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:328
+msgid "There were problems reading the content of the file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:329
+#: ../src/cong-error-file-open.c:347
+#: ../src/cong-error-file-open.c:386
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:338
+msgid "The contents of the file seem to be corrupt."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:339
+msgid "Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:346
+#: ../src/cong-error-file-open.c:385
+msgid "There were problems reading the contents of the file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:355
+#: ../src/cong-error-file-save.c:251
+msgid "The system does not recognise that as a valid location."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:356
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:367
+#, fuzzy
+msgid "You do not have permission to read that file."
+msgstr "لا تملك التّصاريح لتنميق ذلك الملف (%s)."
+
+#: ../src/cong-error-file-open.c:368
+msgid "Try asking your system administrator to give you permission."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:375
+#: ../src/cong-error-file-save.c:274
+msgid "The system is trying to operate on too many files at once."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:376
+#: ../src/cong-error-file-open.c:410
+#: ../src/cong-error-file-save.c:275
+#: ../src/cong-error-file-save.c:294
+msgid "Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-open.c:393
+#, fuzzy, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "الملف '%s' ليس ملفا أو مجلدا اعتياديا."
+
+#: ../src/cong-error-file-open.c:397
+msgid "Try using the Search Tool to find your file."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:409
+#: ../src/cong-error-file-save.c:293
+#, fuzzy
+msgid "The system ran out of memory."
+msgstr "تسجيل الخروج من النظام الآن؟"
+
+#: ../src/cong-error-file-open.c:418
+#: ../src/cong-error-file-open.c:427
+#: ../src/cong-error-file-open.c:436
+#: ../src/cong-error-file-save.c:302
+#: ../src/cong-error-file-save.c:311
+#: ../src/cong-error-file-save.c:320
+#, fuzzy
+msgid "The server could not be contacted."
+msgstr "لم يمكن إيجاد “%s”"
+
+#: ../src/cong-error-file-open.c:419
+msgid "Try again.  If it fails again, the server may be down."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:428
+#: ../src/cong-error-file-open.c:437
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:445
+#: ../src/cong-error-file-save.c:329
+#, fuzzy
+msgid "The system could not login to the location."
+msgstr "تعذر نقل \"%s\" للموقع الجديد."
+
+#: ../src/cong-error-file-open.c:446
+#: ../src/cong-error-file-open.c:456
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr ""
+
+#: ../src/cong-error-file-open.c:455
+#: ../src/cong-error-file-save.c:338
+msgid "The location was too busy."
+msgstr ""
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-file-open.c:505
+#, fuzzy, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "حصل خطأ عند النفاذ إلى GConf: %s"
+
+#: ../src/cong-error-file-open.c:509
+msgid "The program unexpectedly received an error report from the GNOME Virtual File System."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: ../src/cong-error-file-save.c:61
+#, fuzzy, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "احف_ظ للقرص"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-save.c:64
+#, fuzzy, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "لم يمكن حفظ المستند \"%s\" في \"%s\"."
+
+#: ../src/cong-error-file-save.c:111
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:119
+#: ../src/cong-error-file-save.c:238
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:123
+#: ../src/cong-error-file-save.c:242
+#: ../src/cong-error-file-save.c:350
+#, fuzzy
+msgid "Try saving to a different location."
+msgstr "استخدم المتغيّر البيئي %s لتحديد موقع آخر.\n"
+
+#: ../src/cong-error-file-save.c:134
+msgid "There were problems writing the content of the file."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:135
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:159
+#, c-format
+msgid "The size of the file would be %s, but the device only has a capacity of %s."
+msgstr ""
+
+#. Can't get at the capacity for the device or "volume":
+#. FIXME: This is the workaround:
+#: ../src/cong-error-file-save.c:165
+#: ../src/cong-error-file-save.c:169
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:178
+msgid "The file is too big to fit on the device."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:187
+msgid "Try saving the file to a different location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:208
+#, c-format
+msgid "The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+
+#. Can't get at the free space for the device or "volume":
+#: ../src/cong-error-file-save.c:214
+#, c-format
+msgid "The file is too big to fit in the remaining space on the device (file size would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:222
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:231
+msgid "Try saving the file to a different location, or making more space by moving unwanted files from that device to the trash."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:252
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:266
+msgid "You do not have permission to write to that location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:267
+msgid "Try saving to a different location, or ask your system administrator to give you permission."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-save.c:281
+#, fuzzy, c-format
+msgid "\"%s\" is a directory."
+msgstr "%s دليل"
+
+#: ../src/cong-error-file-save.c:285
+msgid "You must save to a file within a directory, rather than to the directory itself."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:303
+msgid "Try again.  If it fails again, the server may be down; try saving to another location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:312
+#: ../src/cong-error-file-save.c:321
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to another location."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:330
+#: ../src/cong-error-file-save.c:339
+msgid "Try again. If it fails again, try saving to another location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:346
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr ""
+
+#. FIXME: need to think more about these messages
+#: ../src/cong-error-file-save.c:358
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr ""
+
+#: ../src/cong-error-file-save.c:362
+msgid "Try again with a shorter file name."
+msgstr ""
+
+#. 5 megabytes, for a test
+#: ../src/cong-error-tests.c:25
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr ""
+
+#: ../src/cong-error-tests.c:31
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr ""
+
+#: ../src/cong-error-tests.c:37
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr ""
+
+#: ../src/cong-error-tests.c:40
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr ""
+
+#: ../src/cong-error-tests.c:43
+msgid "This dialog was generated by the automated testing routine"
+msgstr ""
+
+#: ../src/cong-file-export.c:153
+#, fuzzy
+msgid "(No description available)"
+msgstr "لا وجود لوصف."
+
+#: ../src/cong-file-export.c:212
+#, fuzzy
+msgid "Select file to export to"
+msgstr "_تصدير علامات المواقع إلى ملف"
+
+#: ../src/cong-file-export.c:260
+#, fuzzy, c-format
+msgid "Export \"%s\""
+msgstr "تصدير علامات المواقع"
+
+#: ../src/cong-file-export.c:265
+#, fuzzy
+msgid "Export"
+msgstr "تصدير علامات المواقع"
+
+#: ../src/cong-file-export.c:317
+msgid "Exporter:"
+msgstr ""
+
+#: ../src/cong-file-export.c:319
+#, fuzzy
+msgid "File:"
+msgstr "الملف"
+
+#: ../src/cong-file-export.c:321
+#, fuzzy
+msgid "Export Options"
+msgstr "<b>خيارات العرض:</b>"
+
+#: ../src/cong-file-export.c:431
+#, fuzzy
+msgid "No output file specified"
+msgstr "لم يحدَّد إسم مجلّد."
+
+#: ../src/cong-file-export.c:432
+#, fuzzy
+msgid "Please specify a file name."
+msgstr "يجب تحديد اسم ملف."
+
+#: ../src/cong-file-import.c:80
+#, fuzzy
+msgid "Import file..."
+msgstr "إستيراد ملف"
+
+#: ../src/cong-file-new.c:169
+#, fuzzy, c-format
+msgid "Creating a new file (%s)"
+msgstr "اسم ملف جديد"
+
+#: ../src/cong-file-new.c:595
+#: ../src/cong-file-new.c:618
+#: ../src/cong-file-new.c:626
+#: ../src/cong-file-new.c:643
+#, fuzzy
+msgid "Creating a new file"
+msgstr "اسم ملف جديد"
+
+#: ../src/cong-file-new.c:619
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system."
+msgstr ""
+
+#: ../src/cong-file-new.c:632
+msgid "What type of file would you like to create?"
+msgstr ""
+
+#: ../src/cong-file-new.c:634
+msgid "Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+
+#: ../src/cong-file-new.c:644
+msgid "Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it."
+msgstr ""
+
+#: ../src/cong-file-open.c:73
+msgid "The internal structure of the document does not match any of the types known to Conglomerate."
+msgstr ""
+
+#: ../src/cong-file-open.c:74
+msgid "You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."
+msgstr ""
+
+#: ../src/cong-file-open.c:75
+#, fuzzy
+msgid "Force"
+msgstr "إجبار الإنهاء"
+
+#: ../src/cong-file-open.c:228
+#, fuzzy
+msgid "Select an XML document"
+msgstr "اختيار كامل المستند"
+
+#: ../src/cong-file-print.c:195
+#, fuzzy, c-format
+msgid "Print \"%s\""
+msgstr "طباعة"
+
+#: ../src/cong-file-print.c:201
+#, fuzzy
+msgid "Print"
+msgstr "طباعة"
+
+#: ../src/cong-file-print.c:233
+#, fuzzy
+msgid "Print Method:"
+msgstr "طريقة NAT"
+
+#: ../src/cong-file-print.c:241
+#, fuzzy
+msgid "Print Options"
+msgstr "<b>خيارات العرض:</b>"
+
+#: ../src/cong-file-print.c:336
+#: ../src/cong-menus.c:727
+#, fuzzy
+msgid "Print Preview"
+msgstr "معاينة الطّباعة."
+
+#: ../src/cong-file-print.c:346
+#, fuzzy, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "غلق لمحة الطباعة"
+
+#: ../src/cong-file-print.c:349
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr ""
+
+#: ../src/cong-file-properties.c:200
+#, fuzzy
+msgid "Yes"
+msgstr "نعم"
+
+#: ../src/cong-file-properties.c:200
+#, fuzzy
+msgid "No"
+msgstr "لا"
+
+#: ../src/cong-file-properties.c:219
+#: ../src/cong-file-properties.c:222
+#, fuzzy
+msgid "None"
+msgstr "لا شيء"
+
+#: ../src/cong-file-properties.c:260
+#, fuzzy
+msgid "_Remove this DTD"
+msgstr "إزالة هذا العمود"
+
+#: ../src/cong-file-properties.c:285
+msgid "The document does not specify an external DTD, but Conglomerate believes the above information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document."
+msgstr ""
+
+#: ../src/cong-file-properties.c:294
+#, fuzzy
+msgid "No External Subset"
+msgstr "مدير الأدوات الخارجية"
+
+#: ../src/cong-file-properties.c:296
+#: ../src/plugin-validate.c:171
+#, fuzzy
+msgid "_Add a DTD"
+msgstr "إضافة تطبيق"
+
+#: ../src/cong-file-properties.c:373
+#: ../src/cong-file-properties.c:375
+#, fuzzy
+msgid "Unknown"
+msgstr "مجهول"
+
+#: ../src/cong-file-properties.c:386
+msgid "Unspecified"
+msgstr ""
+
+#: ../src/cong-file-properties.c:461
+#, fuzzy
+msgid "Remove DTD"
+msgstr "هل أحذف السمة \"%s\" ؟"
+
+#: ../src/cong-file-properties.c:478
+#: ../src/cong-util.c:1636
+#, fuzzy
+msgid "Associate with DTD"
+msgstr "تم الاتصال مع %s باستخدام %s"
+
+#: ../src/cong-file-save.c:75
+#, fuzzy
+msgid "Save XML as..."
+msgstr "حفظ الملف كـ"
+
+#: ../src/cong-file-save.c:110
+#, fuzzy, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "الملف \"%s\" مفتوح للقراءة فقط."
+
+#: ../src/cong-file-save.c:113
+#, fuzzy, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr ""
+"الملف \"%s\" موجود مسبقاً\n"
+".\n"
+"%s"
+
+#: ../src/cong-file-save.c:121
+#, fuzzy
+msgid "_Replace"
+msgstr "است_بدال"
+
+#: ../src/cong-file-save.c:131
+#, fuzzy
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "هل تريد إستبداله بالملف الذي أنت بصدد حفظه؟"
+
+#: ../src/cong-location.c:395
+#: ../src/cong-location.c:416
+#, fuzzy
+msgid "Merge tags"
+msgstr "HTML - إمارات"
+
+#: ../src/cong-location.c:467
+#, fuzzy
+msgid "Delete character"
+msgstr "تشفيرة الرموز"
+
+#: ../src/cong-location.c:1061
+#, fuzzy
+msgid "Calculating previous page"
+msgstr "إظهار الصفحة التالية"
+
+#: ../src/cong-location.c:1084
+#, fuzzy
+msgid "Calculating next page"
+msgstr "إظهار الصفحة السابقة"
+
+#: ../src/cong-menus.c:112
+#: ../src/cong-menus.c:165
+#: ../src/cong-menus.c:199
+msgid "The selected menu item has not yet been implemented."
+msgstr ""
+
+#: ../src/cong-menus.c:463
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr ""
+
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: ../src/cong-menus.c:528
+#: ../src/cong-stylesheet.c:226
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr ""
+
+#: ../src/cong-menus.c:531
+#: ../src/cong-menus.c:555
+#: ../src/cong-stylesheet.c:228
+#: ../src/cong-stylesheet.c:291
+#, fuzzy
+msgid "Conglomerate could not transform the document"
+msgstr "لا يمكن فتح مستند المساعدة"
+
+#: ../src/cong-menus.c:552
+msgid "There was a problem applying the stylesheet file"
+msgstr ""
+
+#: ../src/cong-menus.c:1113
+#, fuzzy
+msgid "Test Progress Checklist"
+msgstr "قيد التحقق..."
+
+#: ../src/cong-menus.c:1117
+#, fuzzy, c-format
+msgid "This is stage %i"
+msgstr "هل هذا العمل مستمر؟"
+
+#: ../src/cong-menus.c:1168
+#, fuzzy
+msgid "Message Log - Conglomerate"
+msgstr "حجم نافذة السجلّ"
+
+#: ../src/cong-menus.c:1187
+#, fuzzy
+msgid "Signal Log - Conglomerate"
+msgstr "حجم نافذة السجلّ"
+
+#: ../src/cong-menus.c:1427
+#, fuzzy
+msgid "translator_credits"
+msgstr "جهاد عفيفي (Djihed Afifi) <djihed@gmail.com> /n عرفات المديني، تونس <lumina@silverpen.de>"
+
+#: ../src/cong-menus.c:1446
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+
+#: ../src/cong-menus.c:1447
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr ""
+
+#. Menus:
+#: ../src/cong-menus.c:1481
+#, fuzzy
+msgid "_File"
+msgstr "_ملف"
+
+#: ../src/cong-menus.c:1482
+#, fuzzy
+msgid "_Edit"
+msgstr "_تحرير"
+
+#: ../src/cong-menus.c:1487
+#, fuzzy
+msgid "_Help"
+msgstr "م_ساعدة"
+
+#. Sub-menus:
+#: ../src/cong-menus.c:1490
+#: ../src/popup.c:1121
+#, fuzzy
+msgid "New sub-element"
+msgstr "عنصر جذري ل HTML"
+
+#: ../src/cong-menus.c:1491
+#: ../src/popup.c:1135
+#, fuzzy
+msgid "New sibling"
+msgstr "متابعة-الأشقاء"
+
+#: ../src/cong-menus.c:1492
+#, fuzzy
+msgid "Remove span tag"
+msgstr "قوائم العلامة المتوفرة"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1495
+#, fuzzy
+msgid "_New..."
+msgstr "جديد"
+
+#: ../src/cong-menus.c:1496
+#, fuzzy
+msgid "_Open..."
+msgstr "_فتح..."
+
+#: ../src/cong-menus.c:1497
+#, fuzzy
+msgid "_Import..."
+msgstr "إ_ستيراد"
+
+#: ../src/cong-menus.c:1498
+#, fuzzy
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: ../src/cong-menus.c:1499
+#, fuzzy
+msgid "_Quit"
+msgstr "إ_نهي"
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1503
+#, fuzzy
+msgid "Pr_eferences"
+msgstr "_تفضيلات"
+
+#. Actions found in Help menu:
+#: ../src/cong-menus.c:1516
+#, fuzzy
+msgid "_Contents"
+msgstr "_المحتويات"
+
+#: ../src/cong-menus.c:1517
+#, fuzzy
+msgid "_Homepage"
+msgstr "صفحة الإنترنت و التبرعات"
+
+#: ../src/cong-menus.c:1518
+#, fuzzy
+msgid "_About"
+msgstr "_حول"
+
+#: ../src/cong-menus.c:1524
+#, fuzzy
+msgid "_Tools"
+msgstr "أد_وات"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1528
+#, fuzzy
+msgid "_Save"
+msgstr "_حفظ"
+
+#: ../src/cong-menus.c:1529
+#, fuzzy
+msgid "Save _as..."
+msgstr "حفظ _بإسم"
+
+#: ../src/cong-menus.c:1530
+#, fuzzy
+msgid "Sa_ve a Copy..."
+msgstr "خيارات الح_فظ"
+
+#: ../src/cong-menus.c:1532
+#, fuzzy
+msgid "Print Previe_w..."
+msgstr "م_عاينة الطبع"
+
+#: ../src/cong-menus.c:1533
+#, fuzzy
+msgid "_Print"
+msgstr "_طبع"
+
+#: ../src/cong-menus.c:1536
+#, fuzzy
+msgid "_Revert"
+msgstr "_استرجاع"
+
+#: ../src/cong-menus.c:1538
+#, fuzzy
+msgid "_Export..."
+msgstr "تصدير علامات المواقع"
+
+#: ../src/cong-menus.c:1539
+msgid "Proper_ties"
+msgstr ""
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1543
+#: ../src/cong-menus.c:1772
+#, fuzzy
+msgid "_Undo"
+msgstr "إ_لغاء"
+
+#: ../src/cong-menus.c:1544
+#: ../src/cong-menus.c:1782
+#, fuzzy
+msgid "_Redo"
+msgstr "_إعادة"
+
+#: ../src/cong-menus.c:1545
+#, fuzzy
+msgid "Cu_t"
+msgstr "_قص"
+
+#: ../src/cong-menus.c:1546
+#: ../src/popup.c:776
+#: ../src/popup.c:1073
+#, fuzzy
+msgid "_Copy"
+msgstr "_نسخ"
+
+#: ../src/cong-menus.c:1547
+#: ../src/popup.c:790
+#, fuzzy
+msgid "_Paste"
+msgstr "_لصق"
+
+#: ../src/cong-menus.c:1548
+#, fuzzy
+msgid "_Find..."
+msgstr "_بحث..."
+
+#: ../src/cong-menus.c:1549
+#, fuzzy
+msgid "Find Ne_xt"
+msgstr "إيجاد الت_الي"
+
+#: ../src/cong-menus.c:1550
+#, fuzzy
+msgid "Find Pre_vious"
+msgstr "إيجاد ال_سابق"
+
+#: ../src/cong-menus.c:1551
+#, fuzzy
+msgid "R_eplace..."
+msgstr "_استبدال..."
+
+#: ../src/cong-menus.c:1553
+#, fuzzy
+msgid "_Insert..."
+msgstr "_ادرج"
+
+#: ../src/cong-menus.c:1554
+#, fuzzy
+msgid "View _Source"
+msgstr "عرض التشفيرة المصدرية لهذه الصفحة"
+
+#: ../src/cong-menus.c:1768
+#, fuzzy, c-format
+msgid "_Undo: %s"
+msgstr "إ_لغاء"
+
+#: ../src/cong-menus.c:1778
+#, fuzzy, c-format
+msgid "_Redo: %s"
+msgstr "تكرار"
+
+#: ../src/cong-menus.c:1972
+#, fuzzy, c-format
+msgid "Open '%s'"
+msgstr "فتح '%s'"
+
+#: ../src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr ""
+
+#: ../src/cong-node-properties-dialog.c:379
+#, fuzzy, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "حفظ الملف كـ"
+
+#: ../src/cong-node-properties-dialog.c:560
+#, fuzzy
+msgid "Namespace"
+msgstr "المجال المجرّد"
+
+#: ../src/cong-node-properties-dialog.c:588
+#, fuzzy
+msgid "Raw Attributes"
+msgstr "اعرض الخواص"
+
+#: ../src/cong-node-properties-dialog.c:713
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr ""
+
+#: ../src/cong-node-properties-dialog.c:930
+#, fuzzy
+msgid "Zero or more"
+msgstr "خمسة أو أكثر"
+
+#: ../src/cong-node-properties-dialog.c:946
+#, fuzzy
+msgid "One or more"
+msgstr "خمسة أو أكثر"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: ../src/cong-node-properties-dialog.c:1013
+#, fuzzy
+msgid "Valid Content"
+msgstr "<b>محتوى الانترنت</b>"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: ../src/cong-node-properties-dialog.c:1038
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr ""
+
+#: ../src/cong-node-properties-dialog.c:1185
+#: ../src/cong-node-properties-dialog.c:1316
+#, fuzzy
+msgid "DTD"
+msgstr "DTD"
+
+#: ../src/cong-overview-view.c:207
+#, fuzzy
+msgid "Unknown data"
+msgstr "البيانات الشخصية"
+
+#: ../src/cong-parser-error.c:228
+#, fuzzy, c-format
+msgid "Parse errors loading %s"
+msgstr "خطأ عند تحميل الرزنامة"
+
+#: ../src/cong-parser-error.c:236
+#, fuzzy
+msgid "_Retry"
+msgstr "_إعادة"
+
+#: ../src/cong-parser-error.c:315
+#, fuzzy
+msgid "Line Number"
+msgstr "رقم ال_حساب:"
+
+#: ../src/cong-parser-error.c:393
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr ""
+
+#: ../src/cong-parser-error.c:401
+msgid "Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."
+msgstr ""
+
+#: ../src/cong-parser-error.c:402
+#, fuzzy
+msgid "Show Details"
+msgstr "اظهر التفاصيل"
+
+#: ../src/cong-plugin.c:515
+#: ../src/cong-plugin.c:580
+msgid "Conglomerate could not find display information for the new file"
+msgstr ""
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: ../src/cong-plugin.c:1004
+#, fuzzy, c-format
+msgid "<%s> property dialog"
+msgstr "غلق الحوار"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: ../src/cong-plugin.c:1007
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr ""
+
+#: ../src/cong-plugin.c:1091
+#, fuzzy, c-format
+msgid "<%s> property page"
+msgstr "<b>الصفحة الرئيسية</b>"
+
+#. Generate a user-visible description for this plugin
+#: ../src/cong-plugin.c:1095
+#, c-format
+msgid "Provides a Properties page for the <%s> element"
+msgstr ""
+
+#: ../src/cong-primary-window.c:415
+#, fuzzy
+msgid "Overview"
+msgstr "نظرة عامة عن النافذة"
+
+#: ../src/cong-primary-window.c:426
+#, fuzzy
+msgid "Bookmarks"
+msgstr "المؤشّرات"
+
+#: ../src/cong-primary-window.c:436
+#, fuzzy
+msgid "Raw XML"
+msgstr "ملفات XML"
+
+#: ../src/cong-primary-window.c:660
+#: ../src/cong-primary-window.c:679
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr ""
+
+#: ../src/cong-primary-window.c:793
+#, fuzzy, c-format
+msgid "%s (modified) - %s"
+msgstr "<b>آخر تعديل:</b>"
+
+#: ../src/cong-source-layout.c:513
+#: ../src/plugin-cleanup-source.c:73
+#, fuzzy
+msgid "Cleanup XML Source"
+msgstr "عنوان مصدر POP"
+
+#: ../src/cong-stylesheet.c:230
+msgid "Since Conglomerate could not read the stylesheet it is possible that your XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog.html for more information on catalogs."
+msgstr ""
+
+#: ../src/cong-stylesheet.c:261
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr ""
+
+#: ../src/cong-stylesheet.c:278
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+
+#: ../src/cong-util.c:321
+#: ../src/plugin-docbook.c:1402
+msgid "Printing XSL Formatting Objects"
+msgstr ""
+
+#: ../src/cong-util.c:365
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr ""
+
+#: ../src/cong-util.c:1437
+#, fuzzy
+msgid "(no description available)"
+msgstr "لا وجود لوصف."
+
+#: ../src/cong-util.c:1625
+#, fuzzy
+msgid "DTD files"
+msgstr "كل الملفّات"
+
+#: ../src/cong-util.c:1628
+#, fuzzy
+msgid "Select a DTD"
+msgstr "إنتقاء ملف"
+
+#: ../src/cursor.c:129
+#, fuzzy, c-format
+msgid "Split <%s> element"
+msgstr "رقم تعريف العنصر"
+
+#: ../src/file.c:106
+#, fuzzy
+msgid "XML Files"
+msgstr "ملفات XML"
+
+#: ../src/file.c:118
+#, fuzzy
+msgid "All Files"
+msgstr "كل الملفّات"
+
+#: ../src/plugin-admonition.c:77
+msgid "Admonition"
+msgstr ""
+
+#: ../src/plugin-admonition.c:78
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr ""
+
+#: ../src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr ""
+
+#: ../src/plugin-arbitrary.c:270
+#, fuzzy
+msgid "Empty XML Document"
+msgstr "المستند فارغ."
+
+#: ../src/plugin-arbitrary.c:271
+msgid "Create an empty XML document of an arbitrary type."
+msgstr ""
+
+#: ../src/plugin-cleanup-source.c:74
+#: ../src/plugin-cleanup-source.c:77
+#: ../src/plugin-cleanup-source.c:78
+msgid "Cleans up the XML source of the document, so that it is easy to read in a code editor."
+msgstr ""
+
+#: ../src/plugin-cleanup-source.c:76
+#, fuzzy
+msgid "_Clean the XML Source"
+msgstr "عنوان مصدر POP"
+
+#: ../src/plugin-convert-case.c:125
+msgid "Export as \"lower case\" XML"
+msgstr ""
+
+#: ../src/plugin-convert-case.c:126
+msgid "Exports as an XML file, converting all the tags and attributes in the document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+
+#: ../src/plugin-docbook.c:225
+#, fuzzy
+msgid "Untitled section"
+msgstr "ترويسة 0 (قسم)"
+
+#: ../src/plugin-docbook.c:232
+#, fuzzy
+msgid "Text of the article goes here"
+msgstr "عنوان النافذة يكون هنا"
+
+#: ../src/plugin-docbook.c:251
+#, fuzzy
+msgid "Untitled Article"
+msgstr "مستند غير مسمّى"
+
+#: ../src/plugin-docbook.c:301
+#, fuzzy
+msgid "Untitled chapter"
+msgstr "ترويسة 0 (فصل)"
+
+#: ../src/plugin-docbook.c:308
+msgid "Text of the first chapter goes here"
+msgstr ""
+
+#: ../src/plugin-docbook.c:327
+#, fuzzy
+msgid "Untitled Book"
+msgstr "دفتر العناوين"
+
+#: ../src/plugin-docbook.c:378
+#, fuzzy
+msgid "Untitled book"
+msgstr "دفتر العناوين"
+
+#: ../src/plugin-docbook.c:397
+#, fuzzy
+msgid "Untitled Set of Documents"
+msgstr "مستندات غير معنونة فقط"
+
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: ../src/plugin-docbook.c:1103
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr ""
+
+#: ../src/plugin-docbook.c:1106
+#, fuzzy
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "لا يمكن موقعة الأمر الذي سينفذ"
+
+#: ../src/plugin-docbook.c:1108
+msgid "Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://docbook.sourceforge.net/projects/xsl/, are installed and are added to your XML catalog file (see http://www.xmlsoft.org/catalog.html for more information on catalogs)."
+msgstr ""
+
+#: ../src/plugin-docbook.c:1144
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+
+#: ../src/plugin-docbook.c:1268
+#, fuzzy
+msgid "Exporting PDF file"
+msgstr "حفظ الملف كـ"
+
+#: ../src/plugin-docbook.c:1272
+#: ../src/plugin-docbook.c:1400
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr ""
+
+#: ../src/plugin-docbook.c:1274
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr ""
+
+#: ../src/plugin-docbook.c:1289
+#: ../src/plugin-fo.c:97
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr ""
+
+#: ../src/plugin-docbook.c:1396
+#, fuzzy
+msgid "Printing DocBook file"
+msgstr "حفظ الملف كـ"
+
+#: ../src/plugin-docbook.c:2060
+msgid "DocBook Article"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2061
+msgid "Create an article, perhaps for a website or a magazine, using the \"DocBook\" format"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2068
+#, fuzzy
+msgid "DocBook Book"
+msgstr "دفتر العناوين"
+
+#: ../src/plugin-docbook.c:2069
+msgid "Create a book, using the \"DocBook\" format"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2076
+#, fuzzy
+msgid "DocBook Set"
+msgstr "ضبط الحالة"
+
+#: ../src/plugin-docbook.c:2077
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2085
+msgid "Import text as a DocBook article"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2086
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr ""
+
+#: ../src/plugin-docbook.c:2104
+#, fuzzy
+msgid "Export DocBook as HTML"
+msgstr "تصدير بصيغة HTML لآخر مجلد"
+
+#: ../src/plugin-docbook.c:2105
+msgid "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook file"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2113
+msgid "Export DocBook as PDF"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2114
+msgid "Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook file"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2122
+msgid "Export DocBook as XSL:FO"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2123
+msgid "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2132
+#, fuzzy
+msgid "Print DocBook"
+msgstr "معاينة الطّباعة."
+
+#: ../src/plugin-docbook.c:2144
+msgid "Provides a Scope properties page for most DocBook nodes"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2150
+msgid "Provides a Language properties page for most DocBook nodes"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2156
+msgid "Provides a Revisions properties page for most DocBook nodes"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2173
+msgid "Generic DocBook property dialog"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2174
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2192
+#: ../src/plugin-docbook.c:2195
+#: ../src/plugin-html.c:137
+#: ../src/plugin-html.c:140
+#, fuzzy
+msgid "Open Link in Browser"
+msgstr "_فتح الوصلة في المتصفّح"
+
+#: ../src/plugin-docbook.c:2204
+#, fuzzy
+msgid "Promote Section"
+msgstr "ترويسة 0 (قسم)"
+
+#: ../src/plugin-docbook.c:2205
+msgid "Promotes a DocBook section to a higher organisational level within the document"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2207
+#: ../src/plugin-html.c:148
+#: ../src/plugin-html.c:151
+msgid "Promote"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2208
+#: ../src/plugin-docbook.c:2209
+msgid "Promote the section to a higher organisational level within the document"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2215
+#, fuzzy
+msgid "Demote Section"
+msgstr "ترويسة 0 (قسم)"
+
+#: ../src/plugin-docbook.c:2216
+msgid "Demotes a DocBook section to a lower organisational level within the document"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2218
+#: ../src/plugin-html.c:159
+#: ../src/plugin-html.c:162
+msgid "Demote"
+msgstr ""
+
+#: ../src/plugin-docbook.c:2219
+#: ../src/plugin-docbook.c:2220
+msgid "Demote the section to a lower organisational level within the document"
+msgstr ""
+
+#: ../src/plugin-dtd.c:93
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr ""
+
+#: ../src/plugin-dtd.c:94
+#, c-format
+msgid "This Conglomerate display specification was automatically generated from %s"
+msgstr ""
+
+#: ../src/plugin-dtd.c:215
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr ""
+
+#: ../src/plugin-dtd.c:216
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr ""
+
+#: ../src/plugin-dtd.c:224
+msgid "Convert DTD into a Relax NG schema"
+msgstr ""
+
+#: ../src/plugin-dtd.c:225
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr ""
+
+#: ../src/plugin-dtd.c:233
+msgid "Convert DTD into W3C XML Schema"
+msgstr ""
+
+#: ../src/plugin-dtd.c:234
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr ""
+
+#: ../src/plugin-dtd.c:242
+msgid "Convert DTD into a Schematron file"
+msgstr ""
+
+#: ../src/plugin-dtd.c:243
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr ""
+
+#: ../src/plugin-dtd.c:251
+msgid "Convert DTD into an Examplotron file"
+msgstr ""
+
+#: ../src/plugin-dtd.c:252
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr ""
+
+#: ../src/plugin-fo.c:152
+msgid "Export XSL-FO as PDF"
+msgstr ""
+
+#: ../src/plugin-fo.c:153
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr ""
+
+#: ../src/plugin-fo.c:162
+#, fuzzy
+msgid "Print XSL:FO"
+msgstr "انشيء _مجلّد"
+
+#: ../src/plugin-lists.c:77
+#, fuzzy
+msgid "List Member Element"
+msgstr "عنصر جذري ل HTML"
+
+#: ../src/plugin-lists.c:78
+msgid "An editor node for visualising a member of a list"
+msgstr ""
+
+#: ../src/plugin-paragraph.c:69
+msgid "An editor node for visualising a paragraph"
+msgstr ""
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: ../src/plugin-print-source.c:73
+#: ../src/plugin-print-source.c:86
+#, fuzzy
+msgid "Print XML source"
+msgstr "عنوان مصدر POP"
+
+#: ../src/plugin-random.c:140
+msgid "What kind of random XML document would you like to create?"
+msgstr ""
+
+#: ../src/plugin-random.c:223
+#, fuzzy
+msgid "Random Document"
+msgstr "إغلاق ال_مستند"
+
+#: ../src/plugin-random.c:224
+msgid "Create an XML document containing random content."
+msgstr ""
+
+#: ../src/plugin-relaxng.c:128
+#, fuzzy
+msgid "Compact Syntax View"
+msgstr "عرض الفيديو الافتراضي"
+
+#: ../src/plugin-relaxng.c:146
+#: ../src/plugin-relaxng.c:149
+msgid "View as Compact RELAX NG"
+msgstr ""
+
+#: ../src/plugin-relaxng.c:147
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr ""
+
+#: ../src/plugin-save-dispspec.c:155
+#, fuzzy
+msgid "Dump Display Spec"
+msgstr "عرض مساعدة المؤشّرات"
+
+#: ../src/plugin-save-dispspec.c:156
+#: ../src/plugin-save-dispspec.c:159
+#: ../src/plugin-save-dispspec.c:160
+msgid "Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"
+msgstr ""
+
+#: ../src/plugin-save-dispspec.c:158
+#, fuzzy
+msgid "_Dump Display Spec"
+msgstr "عرض مساعدة المؤشّرات"
+
+#: ../src/plugin-save-dispspec.c:166
+#, fuzzy
+msgid "Edit Display Spec"
+msgstr "عرض مساعدة المؤشّرات"
+
+#: ../src/plugin-save-dispspec.c:167
+#: ../src/plugin-save-dispspec.c:170
+#: ../src/plugin-save-dispspec.c:171
+msgid "Opens the current display spec as a conglomerate document."
+msgstr ""
+
+#: ../src/plugin-save-dispspec.c:169
+#, fuzzy
+msgid "_Edit Display Spec"
+msgstr "عرض مساعدة المؤشّرات"
+
+#: ../src/plugin-sgml.c:43
+#, fuzzy, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "لم يمكن تفقّد ملف البريد %s: %s"
+
+#: ../src/plugin-sgml.c:135
+msgid "Attempting to run the sgml2xml tool"
+msgstr ""
+
+#: ../src/plugin-sgml.c:190
+msgid "Importing SGML"
+msgstr ""
+
+#: ../src/plugin-sgml.c:209
+#, fuzzy
+msgid "Import SGML"
+msgstr "استيراد مؤشّرات"
+
+#: ../src/plugin-sgml.c:210
+msgid "Import an SGML file, converting to XML."
+msgstr ""
+
+#: ../src/plugin-tests.c:64
+msgid "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"
+msgstr ""
+
+#: ../src/plugin-tests.c:142
+#: ../src/plugin-tests.c:221
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr ""
+
+#: ../src/plugin-tests.c:359
+#, fuzzy
+msgid "Unicode Character Reference"
+msgstr "مرجع حروف اليونيكود"
+
+#: ../src/plugin-tests.c:360
+msgid "Create a table listing a part of the Unicode character set as a DocBook article"
+msgstr ""
+
+#: ../src/plugin-validate.c:163
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr ""
+
+#: ../src/plugin-validate.c:170
+msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr ""
+
+#: ../src/plugin-validate.c:215
+#, fuzzy, c-format
+msgid "The document \"%s\" is valid."
+msgstr "المستند فارغ."
+
+#: ../src/plugin-validate.c:249
+#, fuzzy
+msgid "Validate Document"
+msgstr "إغلاق ال_مستند"
+
+#: ../src/plugin-validate.c:250
+#: ../src/plugin-validate.c:253
+#: ../src/plugin-validate.c:254
+msgid "Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"
+msgstr ""
+
+#: ../src/plugin-validate.c:252
+#, fuzzy
+msgid "_Validate Document"
+msgstr "إغلاق ال_مستند"
+
+#: ../src/plugin-website.c:465
+#, fuzzy
+msgid "Generating website"
+msgstr "موقع عمود المكتب (Deskbar)"
+
+#: ../src/plugin-website.c:472
+#, fuzzy
+msgid "Finished generating website."
+msgstr "جاري احداث مفتاح خاص."
+
+#: ../src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr ""
+
+#: ../src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr ""
+
+#: ../src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr ""
+
+#: ../src/plugin-website.c:480
+#, fuzzy
+msgid "_Details"
+msgstr "_التّفاصيل"
+
+#: ../src/plugin-website.c:508
+#, fuzzy
+msgid "Generate website"
+msgstr "موقع عمود المكتب (Deskbar)"
+
+#: ../src/plugin-website.c:509
+#: ../src/plugin-website.c:512
+#: ../src/plugin-website.c:513
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr ""
+
+#: ../src/plugin-website.c:511
+#, fuzzy
+msgid "Generate _Website"
+msgstr "موقع عمود المكتب (Deskbar)"
+
+#: ../src/plugin-xsl.c:324
+#, fuzzy
+msgid "XSL Template Element"
+msgstr "عنصر جذري ل HTML"
+
+#: ../src/plugin-xsl.c:325
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr ""
+
+#: ../src/popup.c:490
+#, fuzzy, c-format
+msgid "Apply span tag: %s"
+msgstr "قوائم العلامة المتوفرة"
+
+#: ../src/popup.c:561
+#, fuzzy
+msgid "Remove Span Tag"
+msgstr "قوائم العلامة المتوفرة"
+
+#: ../src/popup.c:607
+#, fuzzy
+msgid "Convert to a comment"
+msgstr "لا يمكن تحويل المحارف من %s إلى %s."
+
+#: ../src/popup.c:627
+#: ../src/tree.c:521
+msgid "Uncomment"
+msgstr ""
+
+#: ../src/popup.c:628
+msgid "Convert a comment containing XML source code into the corresponding code"
+msgstr ""
+
+#. FIXME: could do with better text here
+#: ../src/popup.c:648
+#, fuzzy
+msgid "Convert Reference into a Copy"
+msgstr "لا يمكنك نسخ عناصر إلى المهملات"
+
+#. FIXME: could do with better text here
+#: ../src/popup.c:650
+msgid "Convert a reference to an XML entity to an inline copy of that entity's content"
+msgstr ""
+
+#: ../src/popup.c:729
+#: ../src/popup.c:1047
+#, fuzzy
+msgid "_Properties"
+msgstr "_خاصيات"
+
+#: ../src/popup.c:763
+#: ../src/popup.c:1064
+#, fuzzy
+msgid "_Cut"
+msgstr "قص"
+
+#: ../src/popup.c:989
+#, fuzzy
+msgid "Other XML element..."
+msgstr "عنصر جذري ل HTML"
+
+#: ../src/popup.c:1083
+#, fuzzy
+msgid "Paste into"
+msgstr "ال_صق إلى مجلد"
+
+#: ../src/popup.c:1093
+#, fuzzy
+msgid "Paste before"
+msgstr "يقع قبل"
+
+#: ../src/popup.c:1103
+#, fuzzy
+msgid "Paste after"
+msgstr "يقع بعد"
+
+#: ../src/tree.c:104
+#: ../src/tree.c:136
+#, fuzzy, c-format
+msgid "Insert sibling: %s"
+msgstr "متابعة-الأشقاء"
+
+#: ../src/tree.c:188
+#: ../src/tree.c:216
+#, fuzzy, c-format
+msgid "Insert child: %s"
+msgstr "اذهب إلى الابن"
+
+#: ../src/tree.c:311
+#: ../src/xmledit.c:51
+#, fuzzy
+msgid "Cut"
+msgstr "قص"
+
+#: ../src/tree.c:469
+#, fuzzy
+msgid "Convert to comment"
+msgstr "لا يمكن تحويل المحارف من %s إلى %s."
+
+#: ../src/tree.c:585
+#, fuzzy, c-format
+msgid "Convert reference to \"%s\" to copy"
+msgstr "فشل تحويل الـ IOR '%s' الى مرجع جسم"
+
+#. create description for dialog
+#: ../src/xmldata.c:452
+#, c-format
+msgid "The element \"%s\" requires a child to be valid. Please choose one of the following child types."
+msgstr ""
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: ../src/xmldata.c:457
+#, fuzzy
+msgid "Required Children Choices"
+msgstr "صف له أبناء"
+
+#: ../src/xmledit.c:166
+#, fuzzy
+msgid "Paste"
+msgstr "لصق"
+
+#: ../src/xmledit.c:252
+#, fuzzy
+msgid "Paste Under"
+msgstr "لصق الحافظة الوسيطة"
+
+#: ../src/xmledit.c:303
+#, fuzzy
+msgid "Paste Before"
+msgstr "يقع قبل"
+
+#: ../src/xmledit.c:353
+#, fuzzy
+msgid "Paste After"
+msgstr "يقع بعد"
+
+#: ../src/xmledit.c:394
+#, fuzzy
+msgid "Source View - Conglomerate"
+msgstr "عرض التشفيرة المصدرية لهذه الصفحة"
+
