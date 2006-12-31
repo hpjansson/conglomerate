@@ -1,3 +1,28 @@
+2006-12-31  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* Makefile.am:
+	* cong-file-open.c: (open_document_do):
+	* cong-file-save.c: (save_document_as):
+	* cong-menus.c: (recent_open_cb), (compare_recent_items),
+	(get_recent_file_label), (cong_menus_setup_recent_files):
+	* cong-primary-window.c: (cong_primary_window_make_gui),
+	(cong_primary_window_free):
+	* cong-primary-window.h:
+	* recent-files/Makefile.am:
+	* recent-files/egg-recent-item.c:
+	* recent-files/egg-recent-item.h:
+	* recent-files/egg-recent-model.c:
+	* recent-files/egg-recent-model.h:
+	* recent-files/egg-recent-util.c:
+	* recent-files/egg-recent-util.h:
+	* recent-files/egg-recent-view-uimanager.c:
+	* recent-files/egg-recent-view-uimanager.h:
+	* recent-files/egg-recent-view.c:
+	* recent-files/egg-recent-view.h:
+	* recent-files/egg-recent.h:
+	
+	Port to gtk recent code.
+
 2005-06-16  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
     
 	* lots of files:

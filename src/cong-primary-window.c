@@ -638,7 +638,14 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		accel_group = gtk_ui_manager_get_accel_group (primary_window->ui_manager);
 		gtk_window_add_accel_group (GTK_WINDOW (primary_window->window), accel_group);	
 	}
-	
+
+	primary_window->recent_manager = gtk_recent_manager_get_default();
+	primary_window->recent_action_group = NULL;
+	primary_window->recent_ui_id = 0;
+	g_signal_connect_swapped (primary_window->recent_manager,
+				  "changed",
+				  G_CALLBACK (cong_menus_setup_recent_files),
+				  primary_window);
 	cong_menus_setup_recent_files (primary_window);
 
 	/* --- Toolbar --- */
@@ -750,6 +757,21 @@ cong_primary_window_free(CongPrimaryWindow *primary_window)
 		g_signal_handlers_disconnect_by_func (G_OBJECT(primary_window->doc),end_edit_cb, primary_window);
 		g_object_unref(G_OBJECT(primary_window->doc));
 	}
+
+	
+	if (primary_window->recent_action_group) {
+		g_object_unref (primary_window->recent_action_group);
+		primary_window->recent_action_group = NULL;
+	}
+
+	if (primary_window->recent_manager) {
+		g_signal_handlers_disconnect_by_func (primary_window->recent_manager,
+						      cong_menus_setup_recent_files,
+						      primary_window);
+		primary_window->recent_manager = NULL;
+	}
+
+	primary_window->recent_ui_id = 0;
 
 	cong_app_singleton()->primary_windows = g_list_remove(cong_app_singleton()->primary_windows, primary_window);	
 

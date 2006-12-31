@@ -1,8 +1,6 @@
 
 NULL =
 
-SUBDIRS = recent-files
-
 bin_PROGRAMS = conglomerate
 
 ## http://bugzilla.gnome.org/show_bug.cgi?id=137248
@@ -339,11 +337,9 @@ INCLUDES = $(BASE_CFLAGS) \
 	-DSYSCONFDIR=\""$(sysconfdir)/conglomerate"\" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)/conglomerate"\" \
-	-I$(srcdir)/recent-files/ \
 	$(NULL)
 
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
-	recent-files/libeggrecent.la \
 	$(PRINTING_LIBS) \
 	$(LIBFO_LIBS) \
 	$(SEWFOX_LIBS) \

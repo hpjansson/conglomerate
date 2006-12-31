@@ -154,11 +154,7 @@ save_document_as(CongDocument *doc, GtkWindow *parent_window)
 	/* Add recent entry */
 	{
 		CongPrimaryWindow *primary_window = cong_document_get_primary_window(doc);
-		EggRecentItem *item;
-
-		item = egg_recent_item_new_from_uri (new_doc_name);
-		egg_recent_item_add_group (item, "Conglomerate");
-		egg_recent_model_add_full (primary_window->recent_model, item);
+		gtk_recent_manager_add_item (primary_window->recent_manager, new_doc_name);
 	}
 
 	g_free(new_doc_name);

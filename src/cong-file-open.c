@@ -13,7 +13,6 @@
 #include <unistd.h> /* for chdir */
 #include "cong-vfs.h"
 #include "cong-file-selection.h"
-#include "egg-recent-model.h"
 
 /* Data and callback for handling the forced loading of a file, autogenerating a dispspec: */
 struct force_dialog
@@ -202,11 +201,7 @@ open_document_do (const gchar* doc_name,
 	/* Add recent entry */
 	{
 		CongPrimaryWindow *primary_window = cong_document_get_primary_window(cong_doc);
-		EggRecentItem *item;
-
-		item = egg_recent_item_new_from_uri (doc_name);
-		egg_recent_item_add_group (item, "Conglomerate");
-		egg_recent_model_add_full (primary_window->recent_model, item);
+		gtk_recent_manager_add_item (primary_window->recent_manager, doc_name);
 	}
 
 	g_object_unref( G_OBJECT(cong_doc));

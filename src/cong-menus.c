@@ -1948,32 +1948,81 @@ cong_menus_setup_ui_layout (CongPrimaryWindow *primary_window)
 static void
 recent_open_cb (GtkAction *action, CongPrimaryWindow *primary_window)
 {
-	EggRecentItem *item;
-	gchar *uri;
+	GtkRecentInfo *info;
+	const gchar   *uri;
 
-	item = egg_recent_view_uimanager_get_item (primary_window->recent_view,
-						   action);
-	g_return_if_fail (item != NULL);
-
-	uri = egg_recent_item_get_uri (item);
+	info = g_object_get_data (G_OBJECT (action), "gtk-recent-info");
+	g_assert (info != NULL);
+	
+	uri = gtk_recent_info_get_uri (info);
+	
 	open_document_do (uri, GTK_WINDOW (primary_window->window));
-	g_free (uri);
 }
 
-static gchar *
-recent_tooltip_func (EggRecentItem *item, gpointer user_data)
+static gint
+compare_recent_items (GtkRecentInfo *a, GtkRecentInfo *b)
 {
-	char *tip;
-	char *uri_for_display;
+	gboolean     has_ev_a, has_ev_b;
+	const gchar *evince = g_get_application_name ();
 
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
-	g_return_val_if_fail (uri_for_display != NULL, NULL);
+	has_ev_a = gtk_recent_info_has_application (a, evince);
+	has_ev_b = gtk_recent_info_has_application (b, evince);
+	
+	if (has_ev_a && has_ev_b) {
+		time_t time_a, time_b;
 
-	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+		time_a = gtk_recent_info_get_modified (a);
+		time_b = gtk_recent_info_get_modified (b);
 
-	g_free (uri_for_display);
+		return (time_b - time_a);
+	} else if (has_ev_a) {
+		return -1;
+	} else if (has_ev_b) {
+		return 1;
+	}
 
-	return tip;
+	return 0;
+}
+
+/*
+ * Doubles underscore to avoid spurious menu accels.
+ */
+static gchar * 
+get_recent_file_label (gint index, const gchar *filename)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+	const gchar *end;
+ 
+	g_return_val_if_fail (filename != NULL, NULL);
+	
+	length = strlen (filename);
+	str = g_string_sized_new (length + 10);
+	g_string_printf (str, "_%d.  ", index);
+
+	p = filename;
+	end = filename + length;
+ 
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
+ 
+		switch (*p)
+		{
+			case '_':
+				g_string_append (str, "__");
+				break;
+			default:
+				g_string_append_len (str, p, next - p);
+				break;
+		}
+ 
+		p = next;
+	}
+ 
+	return g_string_free (str, FALSE);
 }
 
 /**
@@ -1985,27 +2034,77 @@ recent_tooltip_func (EggRecentItem *item, gpointer user_data)
 void
 cong_menus_setup_recent_files (CongPrimaryWindow *primary_window)
 {
-       EggRecentModel *model;
-       EggRecentViewUIManager *view;
+	GList        *items, *l;
+	guint         n_items = 0;
+	const gchar  *app_name = g_get_application_name ();
+	static guint  i = 0;
 
-	model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
+	if (primary_window->recent_ui_id > 0) {
+		gtk_ui_manager_remove_ui (primary_window->ui_manager,
+					  primary_window->recent_ui_id);
+		gtk_ui_manager_ensure_update (primary_window->ui_manager);
+	}
+	primary_window->recent_ui_id = gtk_ui_manager_new_merge_id (primary_window->ui_manager);
 
-	egg_recent_model_set_limit (model, 5);
-	egg_recent_model_set_filter_groups (model, "Conglomerate", NULL);
+	if (primary_window->recent_action_group) {
+		gtk_ui_manager_remove_action_group (primary_window->ui_manager,
+						    primary_window->recent_action_group);
+		g_object_unref (primary_window->recent_action_group);
+	}
+	primary_window->recent_action_group = gtk_action_group_new ("RecentFilesActions");
+	gtk_ui_manager_insert_action_group (primary_window->ui_manager,
+					    primary_window->recent_action_group, 0);
 
-	view = egg_recent_view_uimanager_new (primary_window->ui_manager,
-					      "/MainMenuBar/FileMenu/FileRecentsPlaceholder",
-					      G_CALLBACK (recent_open_cb),
-					      primary_window);
-	egg_recent_view_uimanager_set_tooltip_func (view,
-						    recent_tooltip_func,
-						    NULL);
-       egg_recent_view_uimanager_show_icons (view, FALSE);
-	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
-	primary_window->recent_view = view;
-	primary_window->recent_model = model;
+	items = gtk_recent_manager_get_items (primary_window->recent_manager);
+	items = g_list_sort (items, (GCompareFunc) compare_recent_items);
 
+	for (l = items; l && l->data; l = g_list_next (l)) {
+		GtkRecentInfo *info;
+		GtkAction     *action;
+		gchar         *action_name;
+		gchar         *label;
+
+		info = (GtkRecentInfo *) l->data;
+
+		if (!gtk_recent_info_has_application (info, app_name))
+			continue;
+
+		action_name = g_strdup_printf ("RecentFile%u", i++);
+		label = get_recent_file_label (
+			n_items + 1, gtk_recent_info_get_display_name (info));
+		
+		action = g_object_new (GTK_TYPE_ACTION,
+				       "name", action_name,
+				       "label", label,
+				       NULL);
+
+		g_object_set_data_full (G_OBJECT (action),
+					"gtk-recent-info",
+					gtk_recent_info_ref (info),
+					(GDestroyNotify) gtk_recent_info_unref);
+		
+		g_signal_connect (G_OBJECT (action), "activate",
+    				  G_CALLBACK (recent_open_cb),
+				  primary_window);
+
+		gtk_action_group_add_action (primary_window->recent_action_group,
+					     action);
+		g_object_unref (action);
+
+		gtk_ui_manager_add_ui (primary_window->ui_manager,
+				       primary_window->recent_ui_id,
+				      "/MainMenuBar/FileMenu/FileRecentsPlaceholder",
+				       label,
+				       action_name,
+				       GTK_UI_MANAGER_MENUITEM,
+				       FALSE);
+		g_free (action_name);
+		g_free (label);
+
+		if (++n_items == 5)
+			break;
+	}
 	
-	return;
+	g_list_foreach (items, (GFunc) gtk_recent_info_unref, NULL);
+	g_list_free (items);
 }
-
