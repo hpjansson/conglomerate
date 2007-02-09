@@ -1,0 +1,5135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-01-18 03:25+0000\n"
+"PO-Revision-Date: 2007-02-09 03:04+0530\n"
+"Last-Translator: yangka <yanang_ka@hotmail.com>\n"
+"Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2;plural=(n!=1);\n"
+"X-Poedit-Language: Dzongkha\n"
+"X-Poedit-Country: BHUTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../dispspecs/cnxml.xds.in.h:1
+msgid "Experimental \"cnxml\" format"
+msgstr "མོ་བཏབ་ཀྱི་ \"cnxml\" རྩ་སྒྲིག"
+
+#: ../dispspecs/cnxml.xds.in.h:2
+msgid "Test CNXML ds"
+msgstr "སི་ཨེན་ཨེགསི་ཨེམ་ཨེལ་ ཌི་ཨེསི་བརྟག་ཞིབའབད།"
+
+#: ../dispspecs/cnxml.xds.in.h:3
+msgid "cite"
+msgstr "བརྗོད་པ།"
+
+#: ../dispspecs/cnxml.xds.in.h:4
+msgid "cnxn"
+msgstr "སི་ཨེན་ཨེགསི་ཨེན།"
+
+#: ../dispspecs/cnxml.xds.in.h:5
+msgid "codeblock"
+msgstr "ཨང་རྟགས་ལེབ་དུམ།"
+
+#: ../dispspecs/cnxml.xds.in.h:6
+msgid "codeline"
+msgstr "ཨང་རྟགས་གྱལ།"
+
+#: ../dispspecs/cnxml.xds.in.h:7
+msgid "content"
+msgstr "ནང་དོན།"
+
+#: ../dispspecs/cnxml.xds.in.h:8
+msgid "emphasis"
+msgstr "གཙོ་བཏོན།"
+
+#: ../dispspecs/cnxml.xds.in.h:9
+msgid "equation"
+msgstr "སྙོམ་རྟགས།"
+
+#: ../dispspecs/cnxml.xds.in.h:10
+msgid "item"
+msgstr "རྣམ་གྲངས།"
+
+#: ../dispspecs/cnxml.xds.in.h:11
+msgid "link"
+msgstr "འབྲེལ་མཐུད།"
+
+#: ../dispspecs/cnxml.xds.in.h:12
+msgid "list"
+msgstr "ཐོ་ཡིག"
+
+#: ../dispspecs/cnxml.xds.in.h:13
+msgid "metadata"
+msgstr "མི་ཊི་གནས་སྡུད།"
+
+#: ../dispspecs/cnxml.xds.in.h:14
+msgid "module"
+msgstr "ཚད་གཞི།"
+
+#: ../dispspecs/cnxml.xds.in.h:15
+msgid "note"
+msgstr "དྲན་འཛིན།"
+
+#: ../dispspecs/cnxml.xds.in.h:16
+msgid "para"
+msgstr "པེ་ར།"
+
+#: ../dispspecs/cnxml.xds.in.h:17
+msgid "proof"
+msgstr "ཞུན་ལྷག"
+
+#: ../dispspecs/cnxml.xds.in.h:18
+msgid "rule"
+msgstr "ལམ་ལུགས།"
+
+#: ../dispspecs/cnxml.xds.in.h:19
+msgid "section"
+msgstr "དབྱེ་ཚན།"
+
+#: ../dispspecs/cnxml.xds.in.h:20
+msgid "statement"
+msgstr "གསལ་བཤད།"
+
+#: ../dispspecs/cnxml.xds.in.h:21
+msgid "term"
+msgstr "དོན་ཚིག"
+
+#: ../dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr "ལུ་རམ་ནི།"
+
+#: ../dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "ཀོང་ལོ་མི་རེཊ་བཀྲམ་སྟོན་གསལ་བཀོད།"
+
+#: ../dispspecs/dispspec.xds.in.h:3
+#: ../glade/cong-file-properties.glade.h:3
+#: ../src/cong-dispspec-registry.c:355
+#: ../src/cong-edit-preferences.c:250
+#: ../src/cong-file-export.c:339
+#: ../src/cong-file-new.c:363
+#: ../src/cong-file-print.c:250
+#: ../src/cong-parser-error.c:320
+msgid "Description"
+msgstr "འགྲེལ་བཤད།"
+
+#: ../dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "ཡིག་དཔེ་ཚུ།"
+
+#: ../dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "ཕྱིའི་ཡིག་ཆའི་དཔེ།"
+
+#: ../dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "རྩ་སྒྲིག"
+
+#: ../dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "ཇི་ཡུ་ཨའི།"
+
+#: ../dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "མགོ་ཡིག་བརྡ་དོན།"
+
+#: ../dispspecs/dispspec.xds.in.h:9
+msgid "Information that tells Conglomerate how to display a particular type of file."
+msgstr "ཀོང་ལོ་མི་རེཊི་ལུ་བྱེ་བྲག་དབྱེ་བའི་ཡིག་སྣོད་ཅིག་བཀྲམ་སྟོན་ག་དེ་འབད་ནི་ཨིན་སླབ་མི་བརྡ་དོན།"
+
+#: ../dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་རྣམ་གྲངས་ཚུ་གི་ཐོ་ཡིག"
+
+#: ../dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "ཡིག་ཆ་འདི་གི་དབྱེ་བ་དོན་ལུ་ཡིག་སྣོད་དབྱེ་བ་ཚུ་གི་ཐོ་ཡིག"
+
+#: ../dispspecs/dispspec.xds.in.h:12
+#: ../dispspecs/docbook.xds.in.h:95
+#: ../dispspecs/website-webpage.xds.in.h:55
+msgid "Metadata"
+msgstr "མི་ཊ་གནས་སྡུད།"
+
+#: ../dispspecs/dispspec.xds.in.h:13
+#: ../dispspecs/docbook.xds.in.h:97
+#: ../dispspecs/teixlite.xds.in.h:194
+#: ../dispspecs/website-webpage.xds.in.h:57
+#: ../glade/cong-file-properties.glade.h:10
+#: ../src/cong-edit-preferences.c:154
+#: ../src/cong-edit-preferences.c:242
+#: ../src/cong-file-export.c:338
+#: ../src/cong-file-print.c:249
+#: ../src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "མིང་།"
+
+#: ../dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་རྣམ་གྲངས་ཅིག་གི་མིང་།"
+
+#: ../dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "ཨང་རིམ་འགྱུར་ནི་དབྱེ་བའི་ཐོ་ཡིག"
+
+#: ../dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "འགྲེལ་བཤད་ཐུང་ཀུ།"
+
+#: ../dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་རྣམ་གྲངས་ཅིག་གི་འགྲེལ་བཤད་ཐུང་ཀུ།"
+
+#: ../dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "ཡིག་ཆ་དབྱེ་བ་འདི་གི་འགྲེལ་བཤད་ཐུང་ཀུ།"
+
+#: ../dispspecs/dispspec.xds.in.h:19
+#: ../dispspecs/relax-ng.xds.in.h:15
+msgid "XML Element"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་རྣམ་གྲངས།"
+
+#: ../dispspecs/docbook.xds.in.h:1
+#: ../dispspecs/website-webpage.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "ཡུ་ཨར་ཨེལ་འབྲེལ་ལམ་ཅིག(ཡང་ཅིན་ཝེབ་ས་ཁོངས་ཅིག་ལུ)"
+
+#: ../dispspecs/docbook.xds.in.h:2
+msgid "A book, with a title, and perhaps with some bibliographical material, in addition to the actual content of the book."
+msgstr "མགོ་མིང་ཡོད་མི་དེབ་ཅིག་དང་ཡང་ཅིན་དེབ་འདི་གི་ནང་དོན་ངོ་མ་འདི་ལུ་ཁ་སྐོང་ནང་དཔེ་དེབ་རིག་པའི་ཅ་ཆས་ལ་ལོ་དང་གཅིག་ཁར།"
+
+#: ../dispspecs/docbook.xds.in.h:3
+#: ../dispspecs/website-webpage.xds.in.h:2
+msgid "A brief description of the version of a document."
+msgstr "ཡིག་ཆ་ཅིག་གི་ཐོན་རིམ་གྱི་འགྲེལ་བཤད་མདོར་བསྡུས་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "དེབ་ཚུ་གི་བསྡུ་གསོག་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "དེབ་ཅིག་གི་གནས་རིམ་མཐོ་བའི་སྡེ་ཚན་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:6
+#: ../dispspecs/website-webpage.xds.in.h:3
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "གློག་རིག་རིམ་ལུགས་ཅིག་ལས་གནས་སྡུད་ཀྱི་གསལ་བཀོད་པིསི་ཅིག་གི་ཐད་དོན་ལུ་ཐོབ་དགོཔ་ཨིནམ།"
+
+#: ../dispspecs/docbook.xds.in.h:7
+#: ../dispspecs/website-webpage.xds.in.h:4
+msgid "A subsection within a section"
+msgstr "དབྱེ་ཚན་ཅིག་གི་ནང་འཁོད་དབྱེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "བཅུད་དོན་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:9
+#: ../dispspecs/website-webpage.xds.in.h:6
+msgid "A top-level section of document"
+msgstr "ཡིག་ཆ་གི་དབྱེ་ཚན་གནས་རིམ་སྤྱི་ཏོག་ཅིག"
+
+#: ../dispspecs/docbook.xds.in.h:10
+#: ../dispspecs/forrest-document.xds.in.h:1
+#: ../dispspecs/website-webpage.xds.in.h:7
+msgid "Abstract"
+msgstr "སྙིང་བཅུད།"
+
+#: ../dispspecs/docbook.xds.in.h:11
+#: ../dispspecs/forrest-document.xds.in.h:2
+#: ../dispspecs/website-webpage.xds.in.h:8
+#: ../dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "བསྡུ་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:12
+#: ../dispspecs/website-webpage.xds.in.h:9
+msgid "Additional metadata"
+msgstr "མི་ཊ་གནས་སྡུད་ཁ་སྐོང་བརྐྱབ་ནི།"
+
+#: ../dispspecs/docbook.xds.in.h:13
+#: ../dispspecs/teixlite.xds.in.h:56
+#: ../dispspecs/website-webpage.xds.in.h:10
+#: ../dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "ཁ་བྱང་།"
+
+#: ../dispspecs/docbook.xds.in.h:14
+#: ../dispspecs/website-webpage.xds.in.h:11
+msgid "An email address"
+msgstr "གློག་འཕྲིན་ཁ་བྱང་ཅིག"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: ../dispspecs/docbook.xds.in.h:16
+msgid "Anchor Point"
+msgstr "ཨེན་ཀོར་རྩེ།"
+
+#: ../dispspecs/docbook.xds.in.h:17
+msgid "Answer"
+msgstr "ལན་གསལ།"
+
+#: ../dispspecs/docbook.xds.in.h:18
+#: ../dispspecs/website-webpage.xds.in.h:12
+msgid "Appendix"
+msgstr "ཟུར་དེབ།"
+
+#: ../dispspecs/docbook.xds.in.h:19
+#: ../dispspecs/website-webpage.xds.in.h:13
+msgid "Application"
+msgstr "གློག་རིམ།"
+
+#: ../dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr "རྩོམ་བྲིས།"
+
+#: ../dispspecs/docbook.xds.in.h:21
+msgid "Article Header"
+msgstr "རྩོམ་བྲིས་པའི་མགོ་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:22
+msgid "Article Information"
+msgstr "རྩོམ་བྲིས་པའི་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:23
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:3
+#: ../dispspecs/teixlite.xds.in.h:75
+#: ../dispspecs/website-webpage.xds.in.h:14
+msgid "Author"
+msgstr "རྩོམ་པ་པོ།"
+
+#: ../dispspecs/docbook.xds.in.h:24
+msgid "Author Initials"
+msgstr "རྩོམ་པ་པོའི་འགོ་ཐོག་ཚུ།"
+
+#: ../dispspecs/docbook.xds.in.h:25
+#: ../dispspecs/website-webpage.xds.in.h:15
+msgid "Authorship Information"
+msgstr "རྩོམ་པ་པོའི་གོ་འཕང་གི་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:26
+#: ../dispspecs/website-webpage.xds.in.h:16
+msgid "Bibliographic Information"
+msgstr "དཔེ་དེབ་རིག་པའི་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:27
+#: ../dispspecs/website-webpage.xds.in.h:17
+msgid "Bibliography"
+msgstr "དཔེ་དེབ་རིག་པ།"
+
+#: ../dispspecs/docbook.xds.in.h:28
+msgid "Book"
+msgstr "དེབ།"
+
+#: ../dispspecs/docbook.xds.in.h:29
+msgid "Book Information"
+msgstr "དེབ་ཀྱི་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:30
+#: ../dispspecs/forrest-document.xds.in.h:6
+#: ../dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "དཔར་བཤད།"
+
+#: ../dispspecs/docbook.xds.in.h:31
+msgid "Caution"
+msgstr "དྲནམ་བཏོན།"
+
+#: ../dispspecs/docbook.xds.in.h:32
+#: ../dispspecs/website-webpage.xds.in.h:18
+msgid "Chapter"
+msgstr "ལེའུ།"
+
+#: ../dispspecs/docbook.xds.in.h:33
+#: ../dispspecs/website-webpage.xds.in.h:19
+msgid "City"
+msgstr "གྲོང་སྡེ།"
+
+#: ../dispspecs/docbook.xds.in.h:34
+#: ../dispspecs/website-webpage.xds.in.h:20
+msgid "Colophon"
+msgstr "ཀོ་ལོ་ཕཱོན།"
+
+#: ../dispspecs/docbook.xds.in.h:35
+msgid "Command"
+msgstr "བརྡ་བཀོད།"
+
+#: ../dispspecs/docbook.xds.in.h:36
+#: ../dispspecs/website-webpage.xds.in.h:21
+msgid "Command Synopsis"
+msgstr "བརྡ་བཀོད་བཅུད་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "གློག་རིག་གི་ཨའུཊི་པུཊི།"
+
+#: ../dispspecs/docbook.xds.in.h:38
+#: ../dispspecs/website-layout.xds.in.h:4
+#: ../dispspecs/website-webpage.xds.in.h:22
+msgid "Copyright"
+msgstr "འདྲ་བཤུས་དབང་ཆ།"
+
+#: ../dispspecs/docbook.xds.in.h:39
+#: ../dispspecs/website-webpage.xds.in.h:23
+msgid "Copyright Holder"
+msgstr "འདྲ་བཤུས་དབང་ཆ་འཛིན་མི།"
+
+#: ../dispspecs/docbook.xds.in.h:40
+msgid "Corporate Name"
+msgstr "ལས་ཁང་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:41
+#: ../dispspecs/website-webpage.xds.in.h:24
+msgid "Cross-reference"
+msgstr "ཕན་ཚུན་གཞི་བསྟུན།"
+
+#: ../dispspecs/docbook.xds.in.h:42
+#: ../dispspecs/teixlite.xds.in.h:103
+msgid "Date"
+msgstr "ཚེས་གྲངས།"
+
+#: ../dispspecs/docbook.xds.in.h:43
+#: ../dispspecs/website-webpage.xds.in.h:25
+msgid "Date of Publication"
+msgstr "དཔར་འགྲེམས་ཀྱི་ཚེས་གྲངས།"
+
+#: ../dispspecs/docbook.xds.in.h:44
+msgid "Defined terms"
+msgstr "དོན་ཚིག་ཚུ་ངེས་འཛིན་འབད་ཡོདཔ།"
+
+#: ../dispspecs/docbook.xds.in.h:45
+#: ../dispspecs/forrest-document.xds.in.h:9
+#: ../dispspecs/website-webpage.xds.in.h:26
+#: ../dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "ངེས་ཚིག"
+
+#: ../dispspecs/docbook.xds.in.h:46
+msgid "DocBook"
+msgstr "ཌོ་ཨོ་སི་དེབ།"
+
+#: ../dispspecs/docbook.xds.in.h:47
+msgid "DocBook is a document type that broadly corresponds to what most people think of as \"a book\"; it is well-suited for writing books and articles, for both print and web-based publication."
+msgstr "མི་མང་མང་ཤོས་ཀྱིས་མནོ་མི་བཟུམ་\"a book\"རྒྱ་ཆེན་སྦེ་ཆ་མཉམ་པ་དེ་ཡིག་ཆའི་དབྱེ་བ་ཡིག་ཆའི་དེབ་ཅིག་དེབ་ཚུ་འབྲི་ནི་དང་རྩོམ་བྲིས་ཚུ་ དཔར་བསྐྲུན་དང་པར་འགྲེམས་ཝེབ་གཞི་རྟེན་གཉིས་ཆའི་དོན་ལུ་ལེགས་སྒྲིག་འོས་འབབ་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/docbook.xds.in.h:48
+#: ../dispspecs/teixlite.xds.in.h:128
+#: ../dispspecs/website-webpage.xds.in.h:27
+msgid "Edition"
+msgstr "དཔར་ཐེངས།"
+
+#: ../dispspecs/docbook.xds.in.h:49
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:11
+#: ../dispspecs/teixlite.xds.in.h:130
+#: ../dispspecs/website-webpage.xds.in.h:28
+msgid "Editor"
+msgstr "ཞུན་དགཔ།"
+
+#: ../dispspecs/docbook.xds.in.h:50
+msgid "Email Address"
+msgstr "གློག་འཕྲིན་གྱི་ཁ་བྱང་།"
+
+#: ../dispspecs/docbook.xds.in.h:51
+#: ../dispspecs/forrest-document.xds.in.h:13
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: ../dispspecs/readme.xds.in.h:5
+#: ../dispspecs/teixlite.xds.in.h:132
+#: ../dispspecs/website-webpage.xds.in.h:29
+#: ../dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "གཙོ་བཏོན།"
+
+#: ../dispspecs/docbook.xds.in.h:52
+#: ../dispspecs/website-webpage.xds.in.h:30
+msgid "Entry"
+msgstr "ཐོ་བཀོད།"
+
+#: ../dispspecs/docbook.xds.in.h:53
+msgid "Environment Variable"
+msgstr "འགྱུར་ཅན་གྱི་མཐའ་འཁོར།"
+
+#: ../dispspecs/docbook.xds.in.h:54
+msgid "Example (formal)"
+msgstr "དཔེར་བརྗོད (formal)"
+
+#: ../dispspecs/docbook.xds.in.h:55
+#: ../dispspecs/website-webpage.xds.in.h:31
+msgid "Example (informal)"
+msgstr "དཔེར་བརྗོད (སྒྲིགས་མིན།)།"
+
+#: ../dispspecs/docbook.xds.in.h:56
+#: ../dispspecs/forrest-document.xds.in.h:14
+#: ../dispspecs/teixlite.xds.in.h:139
+msgid "Figure"
+msgstr "དཔར་རིས།"
+
+#: ../dispspecs/docbook.xds.in.h:57
+msgid "Figure (informal)"
+msgstr "དཔར་རིས (སྒྲིགས་མིན)།"
+
+#: ../dispspecs/docbook.xds.in.h:58
+#: ../dispspecs/website-webpage.xds.in.h:32
+msgid "Filename"
+msgstr "ཡིག་སྣོད་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:59
+#: ../dispspecs/website-webpage.xds.in.h:33
+msgid "First Name"
+msgstr "མིང་དང་པམ།"
+
+#: ../dispspecs/docbook.xds.in.h:60
+#: ../dispspecs/website-webpage.xds.in.h:34
+msgid "First Term"
+msgstr "ཐ་སྙད་དང་པམ།"
+
+#: ../dispspecs/docbook.xds.in.h:61
+msgid "Footnote"
+msgstr "མཇུག་གི་དྲན་ཐོ།"
+
+#: ../dispspecs/docbook.xds.in.h:62
+#: ../dispspecs/website-webpage.xds.in.h:35
+msgid "Free-floating Heading"
+msgstr "རང་དབང་འཕུར་ལྡིང་གི་མགུ་རྒྱན།"
+
+#: ../dispspecs/docbook.xds.in.h:63
+#: ../dispspecs/website-webpage.xds.in.h:36
+msgid "Function"
+msgstr "ལས་འགན།"
+
+#. various related localNames need to be added
+#: ../dispspecs/docbook.xds.in.h:65
+msgid "Function Synopsis"
+msgstr "ལས་འགན་བཅུད་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:66
+#: ../dispspecs/website-webpage.xds.in.h:37
+msgid "GUI Button"
+msgstr "ཇི་ཡུ་ཨའི་ཨེབ་རྟ།"
+
+#: ../dispspecs/docbook.xds.in.h:67
+#: ../dispspecs/website-webpage.xds.in.h:38
+msgid "GUI Label"
+msgstr "ཇི་ཡུ་ཨའི་ཁ་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:68
+#: ../dispspecs/website-webpage.xds.in.h:39
+msgid "GUI Menu"
+msgstr "ཇི་ཡུ་ཨའི་དཀར་ཆག"
+
+#: ../dispspecs/docbook.xds.in.h:69
+#: ../dispspecs/website-webpage.xds.in.h:40
+msgid "GUI Menu Item"
+msgstr "ཇི་ཡུ་ཨའི་དཀར་ཆག་གི་རྣམ་གྲངས།"
+
+#: ../dispspecs/docbook.xds.in.h:70
+#: ../dispspecs/website-webpage.xds.in.h:41
+msgid "GUI Submenu"
+msgstr "ཇི་ཡུ་ཨའི་དཀར་ཆག་་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:71
+#: ../dispspecs/website-webpage.xds.in.h:42
+msgid "Glossary"
+msgstr "ཚིག་ཐོ།"
+
+#: ../dispspecs/docbook.xds.in.h:72
+#: ../dispspecs/website-webpage.xds.in.h:43
+msgid "Glossary Entry"
+msgstr "ཚིག་ཐོ་འཛུལ་སྒོ།"
+
+#: ../dispspecs/docbook.xds.in.h:73
+msgid "Graphic"
+msgstr "ཚད་རིས།"
+
+#: ../dispspecs/docbook.xds.in.h:74
+#: ../dispspecs/website-webpage.xds.in.h:44
+msgid "ISBN"
+msgstr "ཨའི་ཨེསི་བི་ཨེན།"
+
+#: ../dispspecs/docbook.xds.in.h:75
+#: ../dispspecs/website-webpage.xds.in.h:45
+msgid "ISSN"
+msgstr "ཨའི་ཨེསི་ཨེསི་ཨེན།"
+
+#: ../dispspecs/docbook.xds.in.h:76
+msgid "Image Data"
+msgstr "གཟུགས་བརྙན་གནས་སྡུད།"
+
+#: ../dispspecs/docbook.xds.in.h:77
+msgid "Image Object"
+msgstr "གཟུགས་བརྙན་དངོས་པོ།"
+
+#: ../dispspecs/docbook.xds.in.h:78
+msgid "Important"
+msgstr "གལ་ཅན།"
+
+#: ../dispspecs/docbook.xds.in.h:79
+#: ../dispspecs/website-webpage.xds.in.h:46
+msgid "Index Term"
+msgstr "ཟུར་ཐོའི་ཐ་སྙད།"
+
+#: ../dispspecs/docbook.xds.in.h:80
+#: ../dispspecs/forrest-document.xds.in.h:21
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
+#: ../dispspecs/readme.xds.in.h:9
+msgid "Introduction"
+msgstr "འགོ་འཛུགས།"
+
+#: ../dispspecs/docbook.xds.in.h:81
+#: ../dispspecs/website-webpage.xds.in.h:47
+msgid "Key Caption"
+msgstr "ལྡེ་མིག་གི་འགོ་བརྗོད།"
+
+#: ../dispspecs/docbook.xds.in.h:82
+#: ../dispspecs/website-webpage.xds.in.h:48
+msgid "Legal Notice"
+msgstr "ལི་གཱལ་གྱི་བརྡ་བསྐུལ།"
+
+#: ../dispspecs/docbook.xds.in.h:83
+#: ../dispspecs/website-webpage.xds.in.h:49
+msgid "List (itemised)"
+msgstr "ཐོ་ཡིག་(རྣམ་གྲངས་བཟོ་ཡོདཔ།)"
+
+#: ../dispspecs/docbook.xds.in.h:84
+#: ../dispspecs/forrest-document.xds.in.h:26
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: ../dispspecs/website-webpage.xds.in.h:50
+#: ../dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "ཐོ་ཡིག (གོ་རིམ་སྒྲིག་ཡོདཔ།)"
+
+#: ../dispspecs/docbook.xds.in.h:85
+#: ../dispspecs/website-webpage.xds.in.h:51
+msgid "List (simple)"
+msgstr "ཐོ་ཡིག(འཇམ་སམ།)"
+
+#: ../dispspecs/docbook.xds.in.h:86
+msgid "List (terms and definitions)"
+msgstr "ཐོ་ཡིག(དོན་ཚིག་ཚུ་དང་ངེས་ཚིག་ཚུ།)"
+
+#: ../dispspecs/docbook.xds.in.h:87
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: ../dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "ཐོ་ཡིག་གི་རྣམ་གྲངས།"
+
+#: ../dispspecs/docbook.xds.in.h:88
+msgid "List Member"
+msgstr "ཐོ་ཡིག་གི་འཐུས་མི།"
+
+#: ../dispspecs/docbook.xds.in.h:89
+#: ../dispspecs/website-webpage.xds.in.h:52
+msgid "Literal"
+msgstr "ཐད་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:90
+msgid "Media Object"
+msgstr "བརྡ་བརྒྱུད་ཀྱི་དངོས་པོ།"
+
+#: ../dispspecs/docbook.xds.in.h:91
+#: ../dispspecs/website-webpage.xds.in.h:53
+msgid "Menu Choice"
+msgstr "དཀར་ཆག་གི་གདམ་ཁ།"
+
+#: ../dispspecs/docbook.xds.in.h:92
+#: ../dispspecs/website-webpage.xds.in.h:54
+msgid "Meta-information about a Reference Page"
+msgstr "གཞི་བསྟུན་ཤོག་ལེབ་ཅིག་གི་སྐོར་ལས་མི་ཊ་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:93
+msgid "Meta-information for a book"
+msgstr "དེབ་ཅིག་གི་དོན་ལུ་མི་ཊ་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:94
+msgid "Meta-information for an article"
+msgstr "རྩོམ་བྲིས་ཅིག་གི་དོན་ལུ་མི་ཊ་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:96
+#: ../dispspecs/website-webpage.xds.in.h:56
+msgid "Miscellaneous Bibliographic Information"
+msgstr "སྣ་ཚོགས་དཔེ་དེབ་རིག་པའི་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:98
+#: ../dispspecs/website-webpage.xds.in.h:58
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "གཞི་བསྟུན་ཤོག་ལེབ་ཅིག་གི་སྐོར་ལས་མིང་ དགོས་དོན་དང་དབྱེ་བཟོ།"
+
+#: ../dispspecs/docbook.xds.in.h:99
+#: ../dispspecs/website-webpage.xds.in.h:59
+msgid "Naming"
+msgstr "མིང་བཏགས་ནི།"
+
+#: ../dispspecs/docbook.xds.in.h:100
+#: ../dispspecs/forrest-document.xds.in.h:29
+#: ../dispspecs/teixlite.xds.in.h:195
+msgid "Note"
+msgstr "དྲན་འཛིན།"
+
+#: ../dispspecs/docbook.xds.in.h:101
+#: ../dispspecs/forrest-document.xds.in.h:31
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: ../dispspecs/readme.xds.in.h:11
+#: ../dispspecs/teixlite.xds.in.h:206
+#: ../dispspecs/website-webpage.xds.in.h:60
+#: ../dispspecs/xhtml1-strict.xds.in.h:55
+#: ../src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "མཚམས་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:102
+msgid "Paragraph (titled)"
+msgstr "མཚམས་དོན(མགོ་མིང་བཏགས་ཡོདཔ)།"
+
+#: ../dispspecs/docbook.xds.in.h:103
+#: ../dispspecs/website-webpage.xds.in.h:61
+msgid "Part"
+msgstr "ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:104
+#: ../dispspecs/website-webpage.xds.in.h:63
+msgid "Preface"
+msgstr "སྔོན་བརྗོད།"
+
+#: ../dispspecs/docbook.xds.in.h:105
+#: ../dispspecs/website-webpage.xds.in.h:64
+msgid "Printing History"
+msgstr "ལོ་རྒྱུས་དཔར་བསྐྲུན་འབད་དོ།"
+
+#: ../dispspecs/docbook.xds.in.h:106
+#: ../dispspecs/website-webpage.xds.in.h:65
+msgid "Procedure"
+msgstr "བྱ་སྒོའི་ལམ་ལུགས།"
+
+#: ../dispspecs/docbook.xds.in.h:107
+#: ../dispspecs/website-webpage.xds.in.h:66
+msgid "Product Name"
+msgstr "ཐོན་རྐྱེན་མིང་།"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: ../dispspecs/docbook.xds.in.h:116
+msgid "Program Listing"
+msgstr "ལས་རིམ་ཐོ་ཡིག་བཀོད་དོ།"
+
+#: ../dispspecs/docbook.xds.in.h:117
+msgid "Prompt"
+msgstr "ནུས་སྤེལ།"
+
+#: ../dispspecs/docbook.xds.in.h:118
+#: ../dispspecs/teixlite.xds.in.h:214
+#: ../dispspecs/website-webpage.xds.in.h:67
+msgid "Publisher"
+msgstr "དཔེ་བསྐྲུན་པ།"
+
+#: ../dispspecs/docbook.xds.in.h:119
+#: ../dispspecs/website-webpage.xds.in.h:68
+msgid "Publisher Name"
+msgstr "དཔེ་བསྐྲུན་པའི་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:120
+#: ../dispspecs/website-webpage.xds.in.h:69
+msgid "Purpose"
+msgstr "དགོས་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:121
+msgid "Question"
+msgstr "དྲི་བ།"
+
+#: ../dispspecs/docbook.xds.in.h:122
+msgid "Question-and-Answer"
+msgstr "དྲི་བ་དང་ལན་གསལ།"
+
+#: ../dispspecs/docbook.xds.in.h:123
+msgid "Question-and-Answer Set"
+msgstr "དྲི་བ་དང་ལན་གསལ་གཞི་སྒྲིག"
+
+#: ../dispspecs/docbook.xds.in.h:124
+msgid "Question-and-Answer Subset"
+msgstr "དྲི་བ་དང་ལན་གསལ་གཞི་སྒྲིག་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:125
+#: ../dispspecs/readme.xds.in.h:12
+msgid "Quote"
+msgstr "འདྲེན་ཚིག་བཀོད།"
+
+#: ../dispspecs/docbook.xds.in.h:126
+#: ../dispspecs/relax-ng.xds.in.h:10
+#: ../dispspecs/website-webpage.xds.in.h:70
+msgid "Reference"
+msgstr "གཞི་བསྟུན།"
+
+#: ../dispspecs/docbook.xds.in.h:127
+#: ../dispspecs/website-webpage.xds.in.h:71
+msgid "Reference Page"
+msgstr "གཞི་བསྟུན་ཤོག་ལེབ།"
+
+#: ../dispspecs/docbook.xds.in.h:128
+#: ../dispspecs/website-webpage.xds.in.h:72
+msgid "Release Information"
+msgstr "འཛིན་གྲོལ་བརྡ་དོན།"
+
+#: ../dispspecs/docbook.xds.in.h:129
+#: ../dispspecs/website-webpage.xds.in.h:73
+msgid "Replaceable Text"
+msgstr "ཚབ་བཙུགས་བཏུབ་པའི་ཚིག་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:130
+msgid "Revision"
+msgstr "བསྐྱར་སྦྱོང་།"
+
+#: ../dispspecs/docbook.xds.in.h:131
+msgid "Revision History"
+msgstr "ལོ་རྒྱུས་བསྐྱར་སྦྱོང་།"
+
+#: ../dispspecs/docbook.xds.in.h:132
+msgid "Revision Remark"
+msgstr "བསྐྱར་སྦྱོང་དྲན་གསོ།"
+
+#: ../dispspecs/docbook.xds.in.h:133
+#: ../dispspecs/website-webpage.xds.in.h:74
+msgid "SGML Tag"
+msgstr "ཨེསི་ཇི་ཨེམ་ཨེལ་གྱི་ངོ་རྟགས།"
+
+#: ../dispspecs/docbook.xds.in.h:134
+#: ../dispspecs/website-webpage.xds.in.h:75
+msgid "Screen"
+msgstr "གསལ་གཞི།"
+
+#: ../dispspecs/docbook.xds.in.h:135
+msgid "Screenshot"
+msgstr "གསལ་གཞིའི་པར།"
+
+#: ../dispspecs/docbook.xds.in.h:136
+#: ../dispspecs/forrest-document.xds.in.h:33
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
+#: ../dispspecs/readme.xds.in.h:13
+#: ../dispspecs/website-webpage.xds.in.h:76
+msgid "Section"
+msgstr "དབྱེ་ཚན།"
+
+#: ../dispspecs/docbook.xds.in.h:137
+#: ../dispspecs/website-webpage.xds.in.h:77
+msgid "Section (level 5)"
+msgstr "དབྱེ་ཚན(གནས་རིམ་༥)།"
+
+#: ../dispspecs/docbook.xds.in.h:138
+msgid "Set"
+msgstr "གཞི་སྒྲིག"
+
+#: ../dispspecs/docbook.xds.in.h:139
+#: ../dispspecs/website-webpage.xds.in.h:78
+msgid "Step"
+msgstr "རིམ་པ།"
+
+#: ../dispspecs/docbook.xds.in.h:140
+#: ../dispspecs/website-webpage.xds.in.h:79
+msgid "Structure Name"
+msgstr "གཞི་བཀོད་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:141
+#: ../dispspecs/website-webpage.xds.in.h:80
+msgid "Subsection"
+msgstr "དབྱེ་ཚན་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:142
+#: ../dispspecs/website-webpage.xds.in.h:81
+msgid "Subsection (level 3)"
+msgstr "དབྱེ་ཚན་ཡན་ལག(གནས་རིམ་ ༣)"
+
+#: ../dispspecs/docbook.xds.in.h:143
+#: ../dispspecs/website-webpage.xds.in.h:82
+msgid "Subsection (level 4)"
+msgstr "དབྱེ་ཚན་ཡན་ལག (གནས་རིམ་ ༤)"
+
+#: ../dispspecs/docbook.xds.in.h:144
+#: ../dispspecs/website-webpage.xds.in.h:83
+msgid "Substeps"
+msgstr "རིམ་པ་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:145
+#: ../dispspecs/website-webpage.xds.in.h:84
+msgid "Subsubsection"
+msgstr "དབྱེ་ཚན་ཡན་ལག་གི་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:146
+#: ../dispspecs/forrest-document.xds.in.h:37
+#: ../dispspecs/website-webpage.xds.in.h:85
+msgid "Subtitle"
+msgstr "མགོ་མིང་ཡན་ལག"
+
+#: ../dispspecs/docbook.xds.in.h:147
+#: ../dispspecs/website-webpage.xds.in.h:86
+msgid "Surname"
+msgstr "རུས་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:148
+#: ../dispspecs/website-webpage.xds.in.h:87
+msgid "Symbol"
+msgstr "བརྡ་མཚོན།"
+
+#: ../dispspecs/docbook.xds.in.h:149
+#: ../dispspecs/website-webpage.xds.in.h:88
+msgid "Synopsis (syntax)"
+msgstr "བཅུད་དོན(ཚིག་སྦྱོར།)"
+
+#: ../dispspecs/docbook.xds.in.h:150
+#: ../dispspecs/website-webpage.xds.in.h:89
+msgid "Table (informal)"
+msgstr "ཐིག་ཁྲམ(སྒྲིགས་མིན)།"
+
+#: ../dispspecs/docbook.xds.in.h:151
+#: ../dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "ཐིག་ཁྲམ་གྱི་མ་གཟུགས།"
+
+#: ../dispspecs/docbook.xds.in.h:152
+msgid "Table Column Specification"
+msgstr "ཐིག་ཁྲམ་ཀེར་ཐིག་གི་གསལ་བཀོད།"
+
+#: ../dispspecs/docbook.xds.in.h:153
+#: ../src/plugin-table.c:417
+msgid "Table Entry"
+msgstr "ཐིག་ཁྲམ་གྱི་འཛུལ་སྒོ།"
+
+#: ../dispspecs/docbook.xds.in.h:154
+msgid "Table Entry (subtable)"
+msgstr "ཐིག་ཁྲམ་གྱི་འཛུལ་སྒོ(ཐིག་ཁྲམ་ཡན་ལག)"
+
+#: ../dispspecs/docbook.xds.in.h:155
+#: ../dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "ཐིག་ཁྲམ་གྱི་མཇུག་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:156
+#: ../src/plugin-table.c:405
+msgid "Table Group"
+msgstr "ཐིག་ཁྲམ་གྱི་སྡེ་ཚན།"
+
+#: ../dispspecs/docbook.xds.in.h:157
+#: ../dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "ཐིག་ཁྲམ་གྱི་མགོ་ཡིག"
+
+#: ../dispspecs/docbook.xds.in.h:158
+#: ../dispspecs/xhtml1-strict.xds.in.h:73
+#: ../src/plugin-table.c:411
+msgid "Table Row"
+msgstr "ཐིག་ཁྲམ་གྱི་གྱལ།"
+
+#: ../dispspecs/docbook.xds.in.h:159
+#: ../dispspecs/teixlite.xds.in.h:250
+#: ../dispspecs/website-webpage.xds.in.h:90
+msgid "Term"
+msgstr "ཐ་སྙད།"
+
+#: ../dispspecs/docbook.xds.in.h:160
+msgid "Text Object"
+msgstr "ཚིག་ཡིག་དངོས་པོ།"
+
+#: ../dispspecs/docbook.xds.in.h:161
+#: ../dispspecs/website-webpage.xds.in.h:91
+msgid "The International Standard Book Number of a document."
+msgstr "རྒྱལ་སྤྱི་ཚད་ལྡན་དེབ་ཨང་གི་ཡིག་ཆ་ཅིག་འདི་"
+
+#: ../dispspecs/docbook.xds.in.h:162
+#: ../dispspecs/website-webpage.xds.in.h:92
+msgid "The International Standard Serial Number of a periodical."
+msgstr "རྒྱལ་སྤྱི་ཚད་ལྡན་ཨང་རིམ་ཨང་གི་འཕྲལ་འཕྲལ་སྦེ་ཅིག་འདི།"
+
+#: ../dispspecs/docbook.xds.in.h:163
+#: ../dispspecs/website-webpage.xds.in.h:93
+msgid "The first place where a word or term occurs in a particular context"
+msgstr "བྱེ་བྲག་གི་སྐབས་དོན་ཅིག་ནང་མིང་ཚིག་ཡང་ན་དོན་ཚིག་འབྱུང་མི་ས་གནས་དང་པམ་འདི།"
+
+#: ../dispspecs/docbook.xds.in.h:164
+#: ../dispspecs/website-webpage.xds.in.h:94
+msgid "The name of a function, subroutine or procedure"
+msgstr "ལས་འགན་ རྒྱུན་ལས་ཡན་ལག་ཡང་ན་བྱ་སྒོའི་ལམ་ལུགས་ཅིག་གི་་མིང་འདི།"
+
+#: ../dispspecs/docbook.xds.in.h:165
+#: ../dispspecs/website-webpage.xds.in.h:95
+msgid "The printed text on a particular key on a keyboard"
+msgstr "ལྡེ་སྒྲོམ་ཅིག་གུ་བྱེ་བྲག་ལྡེ་མིག་ཅིག་གུ་དཔར་བསྐྲུན་འབད་ཡོད་མི་ཚིག་ཡིག་འདི།"
+
+#: ../dispspecs/docbook.xds.in.h:166
+msgid "Tip"
+msgstr "ཊི་ཨའི་པི།"
+
+#: ../dispspecs/docbook.xds.in.h:167
+#: ../dispspecs/forrest-document.xds.in.h:44
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: ../dispspecs/readme.xds.in.h:16
+#: ../dispspecs/teixlite.xds.in.h:284
+#: ../dispspecs/website-webpage.xds.in.h:96
+#: ../dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "མགོ་མིང་།"
+
+#: ../dispspecs/docbook.xds.in.h:168
+#: ../dispspecs/website-webpage.xds.in.h:97
+msgid "Title Citation"
+msgstr "མགོ་མིང་ལུང་འདྲེན།"
+
+#: ../dispspecs/docbook.xds.in.h:169
+#: ../dispspecs/website-webpage.xds.in.h:98
+msgid "URL Link"
+msgstr "ཡུ་ཨར་ཨེལ་འབྲེལ་ལམ།"
+
+#: ../dispspecs/docbook.xds.in.h:170
+msgid "User Input"
+msgstr "ལག་ལེན་པའི་ཨིན་པུཊི།"
+
+#: ../dispspecs/docbook.xds.in.h:171
+#: ../dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "ཉེན་བརྡ།"
+
+#: ../dispspecs/docbook.xds.in.h:172
+#: ../dispspecs/website-layout.xds.in.h:10
+#: ../dispspecs/website-webpage.xds.in.h:101
+msgid "Year"
+msgstr "ལོ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:3
+#: ../dispspecs/teixlite.xds.in.h:64
+#: ../dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "ཨེན་ཀོར།"
+
+#: ../dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "ཨེ་པིཆི་ཡིག་ཐོག་བཀོད་པ་ཌི་ཊི་ཌི་ཝི་༡.༢"
+
+#: ../dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "རྩོམ་པ་པོ་ཚུ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:7
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: ../dispspecs/teixlite.xds.in.h:93
+#: ../dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "ཨང་རྟགས།"
+
+#: ../dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "དོན་ཚིག་ངེས་འཛིན་འབད་ཡོདཔ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "ངེས་ཚིག་ཐོ་ཡིག"
+
+#: ../dispspecs/forrest-document.xds.in.h:11
+#: ../dispspecs/readme.xds.in.h:4
+#: ../src/cong-document.c:988
+msgid "Document"
+msgstr "ཡིག་ཆ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "ཡིག་ཆ་མ་གཟུགས།"
+
+#: ../dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "ཕིགསི་མི།"
+
+#: ../dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "མཇུག་ཡིག"
+
+#: ../dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "ཁ་སྤེལ་ནི།"
+
+#: ../dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "མགོ་ཡིག"
+
+#: ../dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "ངོས་དཔར།"
+
+#: ../dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "ཨའི་ཨེམ་ཇི།"
+
+#: ../dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "མཆོང་།"
+
+#: ../dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "ལི་གཱལ་བརྡ་དོན།"
+
+#: ../dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "གྱལ་མཚམས།"
+
+#: ../dispspecs/forrest-document.xds.in.h:25
+#: ../dispspecs/xhtml1-strict.xds.in.h:46
+#: ../glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "འབྲེལ་ལམ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:27
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: ../dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "ཐོ་ཡིག(གོ་རིམ་མ་སྒྲིག་པར་ཡོད་མི།)"
+
+#: ../dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "ཐོ་ཡིག་རྣམ་གྲངས།"
+
+#: ../dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "བརྡ་བསྐུལ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:32
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "གང་ཟག"
+
+#: ../dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "འབྱུང་ཁུངས།"
+
+#: ../dispspecs/forrest-document.xds.in.h:35
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: ../dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "སྒྲིང་སྒྲིང་།"
+
+#: ../dispspecs/forrest-document.xds.in.h:36
+#: ../dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "ཡིག་ཚུགས་ཡན་ལག"
+
+#: ../dispspecs/forrest-document.xds.in.h:38
+#: ../dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "ཡིག་ཚུགས་ཡང་དག"
+
+#: ../dispspecs/forrest-document.xds.in.h:39
+#: ../dispspecs/teixlite.xds.in.h:245
+#: ../dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "ཐིག་ཁྲམ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "ཐིག་ཁྲམ་གྱི་ནང་ཐིག"
+
+#: ../dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "ཐིག་ཁྲམ་མགོ་ཡིག་གི་ནང་ཐིག"
+
+#: ../dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "ཐིག་ཁྲམ་གྱི་གྱལ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:43
+msgid "This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://forrest.apache.org ."
+msgstr "ཌི་ཊི་ཌི་འདི་ཨེ་པེ་ཆི་ལས་འགུལ་ཚུ་དང་གཅིག་ཁར་ལག་ལེན་འཐབ་ནི་དོན་ལུ་མཉེན་ཆས་ཡིག་ཐོག་བཀོད་ནི་དོན་ལུ་ནུས་ཤུགས་ཅན་གྱི་ཡིག་ཆའི་དབྱེ་བ་འཇམ་སམ་ཅིག་གསར་བསྐྲུན་འབད་ནི་ལུ་བཟོ་ཡོདཔ་ཨིན། འདི་ཌི་ཊི་ཌི་ཨེགསི་ཨེམ་ཨེལ་རྙོག་བཤད་ཅིག་ཨིནམ་དང་འདི་ཡང་ཨེ་པེཆི་ཨེགསི་ཨེམ་ཨེལ་ལས་འགུལ་གྱིས་རྒྱུན་སྐྱོང་འབད་ཡོདཔ་ཨིན། http://forrest.apache.org ནང་བལྟ་གནང་།"
+
+#: ../dispspecs/forrest-document.xds.in.h:45
+#: ../glade/cong-file-properties.glade.h:17
+#: ../glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "དབྱེ་བ།"
+
+#: ../dispspecs/forrest-document.xds.in.h:46
+#: ../glade/cong-file-properties.glade.h:18
+msgid "Version"
+msgstr "ཐོན་རིམ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "ལུང་འདྲེན་ ཀར་ནེལ་ འགྲུལ་ལམ་ལུང་འདྲེན་ གསར་དེབ།(&q)(&q)"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid "A newsletter tracking the technical development of a project within the Free/Open Source Software world"
+msgstr "ཀུན་གྱི་མཉེན་ཆས་འཛམ་གླིང་འབྱུང་ཁུངས་/རང་དབང་ནང་འཁོད་ལས་འགུལ་ཅིག་གི་ཐབས་རིག་གོང་འཕེལ་འདི་རྗེས་འཚོལ་འབད་བའི་གསར་དེབ་ཅིག"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "འདྲེན་ཚིག་བཀོད་ནི་འགག"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: ../dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "རྒྱགས་པ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "མཚམས(ལག་དེབ།)"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "དབུས་སྒྲིག"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "བརྗོད་པ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "ནོར་བཅོས་འབད་ནི།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "ཞུན་དག་པ་ལུ་འགྱུར་ནི།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "ཡིག་གཟུགས།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: ../dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "མགོ་རྒྱན(གནས་རིམ་ ༡)།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: ../dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "མགུ་རྒྱན་(གནས་རིམ་ ༢)།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: ../dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "མགུ་རྒྱན(གནས་རིམ་ ༣)།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "ཚད་བརྒལ་འབྲེལ་མཐུད།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "སྤྲོད།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "ཨི་ཊ་ལིསིཌི།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "ཀར་ནེལ་ཀོ་སིན་གསར་དེབ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "འདྲེན་ཚིག"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:30
+#: ../glade/cong-file-properties.glade.h:15
+msgid "Statistics"
+msgstr "ཚད་རྩིས།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "གནད་དོན།"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Translator"
+msgstr "སྐད་བསྒྱུར་པ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Underlined"
+msgstr "འོག་ཐིག་ཐེན་ཡོདཔ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Activity"
+msgstr "ཐོན་རིམ་ཚད་འཛིན་གྱི་ལཱ།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Statistics"
+msgstr "ཐོན་རིམ་ཚད་འཛིན་གྱི་ཚད་རྩིས།"
+
+#: ../dispspecs/kernel-traffic-newsletter.xds.in.h:39
+msgid "Version Control Tree"
+msgstr "ཐོན་རིམ་ཚད་འཛིན་གྱི་རྩ་འབྲེལ།"
+
+#: ../dispspecs/opml.xds.in.h:1
+msgid "Apple OPML dispspec"
+msgstr "ཨེ་པལ་ཨོ་པི་ཨེམ་ཨེལ་ཌིསིཔ་པེཀ།"
+
+#: ../dispspecs/opml.xds.in.h:2
+msgid "Experimental \"opml\" format"
+msgstr "མོ་བཏབ་ཀྱི་ \"opml\" རྩ་སྒྲིག"
+
+#: ../dispspecs/readme.xds.in.h:1
+msgid "Admission"
+msgstr "འཛུལ་ཞུགས།"
+
+#: ../dispspecs/readme.xds.in.h:2
+msgid "Corp jargon"
+msgstr "ཀོརཔ་ཇར་གཱོན།"
+
+#: ../dispspecs/readme.xds.in.h:3
+msgid "Disclaimer"
+msgstr "ཌིསི་ཀེལེ་མར།"
+
+#: ../dispspecs/readme.xds.in.h:6
+msgid "Excuse"
+msgstr "བཟོད་པ་བཞེས་ནི།"
+
+#: ../dispspecs/readme.xds.in.h:7
+msgid "Experimental \"readme\" format"
+msgstr "མོ་བཏབ་ཀྱི་ \"readme\" རྩ་སྒྲིག"
+
+#: ../dispspecs/readme.xds.in.h:8
+msgid "Inspirational"
+msgstr "སྤྲོ་བ་ཅན།"
+
+#: ../dispspecs/readme.xds.in.h:10
+msgid "Optimistic"
+msgstr "རེ་བ་བཟང་པོ།"
+
+#: ../dispspecs/readme.xds.in.h:14
+#: ../dispspecs/teixlite.xds.in.h:231
+msgid "Signature"
+msgstr "མིང་རྟགས།"
+
+#: ../dispspecs/readme.xds.in.h:15
+msgid "This is a document type associated with the \"readme\" file distributed with the initial prototype of Conglomerate."
+msgstr "ཀོང་ལོ་མི་རེཊི་གི་གནད་སྤེལ་ལམ་ལུགས་འགོ་ཐོག་འདི་དང་གཅིག་ཁར་བགོ་བཀྲམ་ཡོད་མི་ཡིག་སྣོད་འདི་དང་\"readme\"གཅིག་ཁར་འབྲེལ་བ་ཡོད་མི་ཡིག་ཆའི་དབྱེ་བ་ཅིག་འདི་ཨིན།"
+
+#: ../dispspecs/relax-ng.xds.in.h:1
+#: ../src/cong-node-properties-dialog.c:879
+msgid "Choice"
+msgstr "གདམ་ཁ།"
+
+#: ../dispspecs/relax-ng.xds.in.h:2
+msgid "Define"
+msgstr "ངེས་འཛིན།"
+
+#: ../dispspecs/relax-ng.xds.in.h:3
+msgid "Empty"
+msgstr "སྟོངམ།"
+
+#: ../dispspecs/relax-ng.xds.in.h:4
+#: ../dispspecs/teixlite.xds.in.h:149
+msgid "Group"
+msgstr "སྡེ་ཚན།"
+
+#: ../dispspecs/relax-ng.xds.in.h:5
+msgid "OneOrMore"
+msgstr "གཅིག་ཡང་ན་ཧེང་བཀེལ།"
+
+#: ../dispspecs/relax-ng.xds.in.h:6
+#: ../src/cong-node-properties-dialog.c:914
+msgid "Optional"
+msgstr "གདམ་ཁ་ཅན་གྱི།"
+
+#: ../dispspecs/relax-ng.xds.in.h:7
+msgid "RELAX NG"
+msgstr "ལྷོད་ཉམས་ཨེན་ཇི།"
+
+#: ../dispspecs/relax-ng.xds.in.h:8
+msgid "RELAX NG Grammar"
+msgstr "ལྷོད་ཉམས་ཨེན་ཇི་བརྡ་ཡིག"
+
+#: ../dispspecs/relax-ng.xds.in.h:9
+msgid "RELAX NG is a schema language i.e. a language for describing the structure of an XML document."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆའི་ཅིག་གི་གཞི་བཀོད་འདི་འགྲེལ་བཤད་འབད་ནི་དོན་ལུ་སྐད་ཡིག་ཅིག་ཨིནམ་ལས་ལྷོད་ཉམས་ཨེན་ཇི་འདི་ལས་འཆར་སྐད་ཡིག་ཨིན།"
+
+#: ../dispspecs/relax-ng.xds.in.h:11
+msgid "Start"
+msgstr "འགོ་བཙུགས།"
+
+#: ../dispspecs/relax-ng.xds.in.h:12
+#: ../dispspecs/teixlite.xds.in.h:251
+#: ../src/cong-node-properties-dialog.c:827
+msgid "Text"
+msgstr "ཚིག་ཡིག"
+
+#: ../dispspecs/relax-ng.xds.in.h:13
+#: ../src/cong-node-properties-dialog.c:621
+msgid "Value"
+msgstr "གནས་གོང་།"
+
+#: ../dispspecs/relax-ng.xds.in.h:14
+msgid "XML Attribute"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་གྱི་ཁྱད་ཆོས།"
+
+#: ../dispspecs/relax-ng.xds.in.h:16
+msgid "ZeroOrMore"
+msgstr "ཀླད་ཀོར་ཡང་ན་ཧེང་བཀེལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:1
+msgid "A bibliographic description of the copy text(s) from which an electronic text was derived or generated"
+msgstr "གློག་ཆས་ཚིག་ཡིག་ཅིག་བཟོ་བཏོན་འབད་ཡོད་མི་ལས་ཚིག་ཡིག་འདྲ་བཤུས་(ཨེསི)གི་དཔེ་དེབ་རིག་པའི་འགྲེལ་བཤད་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:2
+msgid "A brief description of the place, date, time, etc. of production of a letter, newspaper story, or other work, prefixed or suffixed to it as a kind of heading or trailer"
+msgstr " "
+
+#: ../dispspecs/teixlite.xds.in.h:3
+msgid "A brief prose description of the appearance or content of a graphic figure, for use when documenting an image without displaying it"
+msgstr "བཀྲམ་སྟོན་མ་འབད་བར་གཟུགས་བརྙན་ཅིག་ཡིག་ཐོག་བཀོད་པའི་སྐབས་ལག་ལེན་འཐབ་ནི་དོན་ལུ་ཚད་རིས་དཔར་རིས་ཅིག་གི་ནང་དོན་ཡང་ན་འབྱུང་སྣང་འདི་གི་ཚིག་རྐང་འགྲེལ་བཤད་མདོར་བསྡུ་ཅིག་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:4
+msgid "A closing title or footer appearing at the end of a division of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་སྡེ་ཚན་ཅིག་གི་མཇུག་ལུ་འབྱུང་མི་ཁ་བསྡམ་ནིའི་མགོ་ཡིག་ཡང་ན་མཇུག་ཡིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:5
+msgid "A date in any format"
+msgstr "རྩ་སྒྲིག་གང་རུང་ནང་ཚེས་གྲངས་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:6
+msgid "A detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting"
+msgstr "ཚིག་ཡིག་ཅིག་གི་དཔེ་དེབ་རིག་པ་མེན་པའི་རྣམ་པ་ཚུ་གི་འགྲེལ་བཤད་རྒྱས་བཤད་ཡོད་མི་ཅིག་ སྐད་ཡིག་ཚུ་དང་ལག་ལེན་འཐབ་ཡོད་མི་སྐད་ཡིག་འོགམ་ཚུ་ འདི་བཟོ་སྟོན་འབད་སའི་དུས་སྐབས་ བཅའ་མར་གཏོགས་མི་ཚུ་དང་དེ་ཚུའི་སྒྲིག་སྟངས་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:7
+msgid "A fifth-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གདོང་ མ་གཟུགས་ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་ལྔ་པའི་སྡེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:8
+msgid "A first-level subdivision of the front, body, or back of a text (the largest, if &lt;div0&gt; is not used, the second largest if it is)"
+msgstr "ཚིག་ཡིག་གི་གདོང་ མ་གཟུགས་ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་དང་པའི་སྡེ་ཚན་ཡན་ལག་ཅིག(་སྦོམ་ཤོས་འདི་if &lt;div0&gt ལག་ལེན་མ་འཐབ་པ་ཅིན དང་ལག་ལེན་འཐབ་ཡོད་པ་ཅིན་འདིའི་སྦོམ་ཤོས་གཉིས་པམ་འདི་)"
+
+#: ../dispspecs/teixlite.xds.in.h:9
+msgid "A formal list or prose description of the topics addressed by a subdivision of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་སྡེ་ཚན་འོག་མ་ཅིག་གིས་ཁ་བྱང་བཏགས་ཡོད་མི་གནད་དོན་ཚུ་གི་ཚིག་རྐང་འགྲེལ་བཤད་ཡང་ན་སྒྲིགས་ཡོད་མི་ཐོ་ཡིག་ཅིག་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:10
+msgid "A fourth-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིིག་ཅིག་གི་རྒྱབ་ཡང་ན་མ་གཟུགས་ཡིག་གཟུགས་ཀྱི་གནས་རིམ་བཞི་པའི་སྡེ་ཚན་ཡན་ལག་་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:11
+msgid "A full bibliographic description of an electronic file"
+msgstr "གློག་ཆས་ཡིག་སྣོད་ཅིག་གི་དཔེ་དེབ་རིག་པའི་འགྲེལ་བཤད་གངམ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:12
+msgid "A fully-structured bibliographic citation, in which all components of the TEI file description are present"
+msgstr "དེཔ་དེབ་རི་པའི་ལུང་འདྲེན་གངམ་སྦེ་གཞི་བཀོད་འབད་ཡོད་མི་ ཊི་ཨི་ཨའི་ཡིག་སྣོད་འགྲེལ་བཤད་ཚུ་གི་ཆ་ཤས་ཚུ་ཆ་མཉམ་ཡོད་མི་ཅིག་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:13
+msgid "A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, verse paragraph, etc."
+msgstr "སྒྲིགས་ཡོད་མི་ཆ་འཕྲན་ཅིག་བཟུམ་ལས་འགན་འབད་མི་ཚིག་ལྷུག་གི་གྱལ་ཚུ་གི་སྡེ་ཚན་ཅིག་ དཔེར་ན་ཚིག་བཅད་ཅིག་ རི་ཕེརེན་ ཚིག་ལྷུག་མཚམས་དོན་ལ་སོགས་པ་བཟུམ།"
+
+#: ../dispspecs/teixlite.xds.in.h:14
+msgid "A keyword in some formal language"
+msgstr "སྒྲིགས་ཡོད་པའི་སྐད་ཡིག་ལ་ལོ་ནང་གཙོ་ཚིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:15
+msgid "A letter, word or passage deleted, marked as deleted, or otherwise indicated as superfluous or spurious in the copy text by an author, scribe, annotator, or corrector"
+msgstr "རྩོམ་པ་པོ་ མངགས་མི་ ཨེན་ནོ་ཊེ་ཊར་ ཡང་ན་ནོར་བཅོས་འབད་མི་གིས་ཚིག་ཡིག་འདྲ་བཤུས་ནང་ ཡི་གུ་ མིང་ཚིག་ཡང་ན་ཡིག་རྒྱུགས་བཏོན་གཏང་ཡོད་མི་ བཏོན་གཏང་ཡོདཔ་སྦེ་རྟགས་བཀོད་ཡོད་མི་ ཡང་ན་དེ་མེན་པ་ཅིན་སུ་མར་ཕུལུ་འསི་ཡང་ན་རྫུས་མ་ཅིག་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:16
+msgid "A list of bibliographic citations of any kind"
+msgstr "དབྱེ་ཁག་གང་རུང་གི་དཔེ་དེབ་རིག་པའི་ལུང་འདྲེན་ཚུ་གི་ཐོ་ཡིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:17
+msgid "A list of keywords or phrases identifying the topic or nature of a text"
+msgstr "གཙོ་ཚིག་ཚུ་ཡང་ན་གནད་དོན་འདི་ངོས་འཛིན་འབད་མི་ཚིག་ཚོགས་ཚུ་ཡང་ན་ཚིག་ཡིག་ཅིག་གི་རང་བཞིན་གྱི་ཐོ་ཡིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:18
+msgid "A loosely-structured bibliographic citation of which the sub-components may or may not be explicitly localNameged"
+msgstr "ཆ་ཤས་འོག་མ་ཚུ་གི་ལྷོད་ལྷོད་སྦེ་གཞི་བཀོད་འབད་ཡོད་མི་དཔེ་དེབ་རིག་པའི་ལུང་འདྲེན་ཅིག་ཡང་ན་ཁ་གསལ་སྦེ་localNameged་མེདཔ་འོང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:19
+msgid "A mathematical or other formula"
+msgstr "ཨང་རྩིས་ཅིག་ཡང་ན་གཞན་མན་ངག"
+
+#: ../dispspecs/teixlite.xds.in.h:20
+msgid "A note of any type"
+msgstr "འདྲེན་འཛིན་གྱི་དབྱེ་བ་གང་རུང་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:21
+msgid "A number, written in any form"
+msgstr "རྣམ་པ་གང་རུང་ནང་འབྲི་ཡོད་མི་ཨང་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:22
+msgid "A phrase defining a time of day in any format"
+msgstr "རྩ་སྒྲིག་གང་རུང་ནང་ཉིནམ་གྱི་དུས་ཚོད་ཅིག་ངེས་འཛིན་འབད་མི་ཚིག་ཚོགས་ཆིག"
+
+#: ../dispspecs/teixlite.xds.in.h:23
+msgid "A phrase describing the nature of a person's intellectual responsibility"
+msgstr "གང་ཟག་ཅིག་གི་བློ་རིག་གི་འགན་ཁག་གི་རང་བཞིན་ཚིག་ཚོགས་འགྲེལ་བཤད་བརྐྱབ་མི་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:24
+msgid "A phrase or word used to provide a gloss or definition for some other word or phrase"
+msgstr "གཞན་མིང་ཚིག་ལ་ལོ་ཡང་ན་ཚིག་ཚོགས་ཀྱི་དོན་ལུ་གོལོསི་ཅིག་ཡང་ན་ངེས་ཚིག་བྱིན་ནི་ལུ་ལག་ལེན་འཐབ་ཡོད་མི་ཚིག་ཚོགས་ཡང་ན་མིང་ཚིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:25
+msgid "A pointer to another location in the current document in terms of one or more identifiable elements"
+msgstr "ད་ལྟོའི་ཡིག་ཆ་འདི་ནང་ངོས་འཛིན་འབད་བཏུབ་མི་རྣམ་གྲངས་ཚུ་མངམ་ཡང་ན་གཅིག་གི་དོན་ཚིག་ནང་གཞན་གནས་ཁོངས་ལུ་དཔག་བྱེད་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:26
+msgid "A pointer to another location in the current document or an external document"
+msgstr "ད་ལྟོའི་ཡིག་ཡང་ན་ཕྱིའི་ཡིག་ཆ་ཅིག་ནང་གཞན་གནས་ཁོངས་ལུ་དཔག་བྱེད་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:27
+msgid "A postal or other address, for example of a publisher, an organization, or an individual"
+msgstr "འགྲེམ་ཁང་ཡང་ན་གཞན་ཁ་བྱང་ཅིག་ དཔེར་ན་དཔར་བསྐྲུན་པ་ཅིག་ ཚོགས་སྡེ་ ཡང་ན་ངོ་རྐྱང་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:28
+msgid "A proper noun or noun phrase"
+msgstr "དངོས་མིང་་ཡང་ན་མིང་ཚིག་ཚོགས་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:29
+msgid "A prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection"
+msgstr "ཀོར་པསི་ཡང་ན་བསྡུ་གསོག་ཅིག་གི་གསར་བསྐྲུན་འབད་ནི་ནང་ཚིག་ཡིག་ཚུ་དཔེ་ཚད་བཀོད་ནི་ནང་ལག་ལེན་འཐབ་ཡོད་མི་ཐབས་ལམ་ཚུ་དང་མཚུངས་གྲངས་འདི་གི་ཚིག་རྐང་འགྲེལ་བཤད་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:30
+msgid "A quotation from some other document, together with a bibliographic reference to its source"
+msgstr "འདིའི་འབྱུང་ཁུངས་ལུ་དཔེ་དེབ་རིག་པའི་གཞི་བསྟུན་ཅིག་དང་གཅིག་ཁར་གཞན་ཡིག་ཆ་ལ་ལོ་ལས་འདྲེན་ཚིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:31
+msgid "A quotation or apparent quotation — a representation of speech or thought marked as being quoted from someone else (whether in fact quoted or not); in narrative, the words are usually those of of a character or speaker; in dictionaries, &lt;q&gt; may be used to mark real or contrived examples of usage"
+msgstr "འདྲེན་ཚིག་ཡང་ན་སྣང་བརྙན་འདྲེན་ཚིག་ཅིག་ གསུང་བཤད་ཀྱི་ཁྱད་ཚབ་ཅིག་ཡང་ན་ མི་ཅིག་ལས་འདྲེན་ཚིག་སྦེ་དྲན་གསོ་བཀོད་་ནི་མནོ་མི་(འདྲེན་ཚིག་བཀོད་མི་ངོ་མ་ཨིན་རུང་མེན་རུང་) འགྲེལ་བཤད་ནང་ མིང་ཚིག་ཚུ་སྤྱིར་བཏང་འཁྲབ་རྩེད་པ་ཡང་ན་གསལ་བཤད་པ་ཅིག་གི་འོངམ་ཨིན་ སྣོད་ཐོ་ཚུ་ནང་ &lt;q&gt ཡང་ན་ངོ་མ་དྲན་གསོ་འབད་ཡོདཔ་ཡང་ན་བེད་སྤྱོད་ཀྱི་དཔེར་བརྗོད་ཚུ་གཞི་བསྒྱུར་འབད་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:32
+msgid "A quotation, anonymous or attributed, appearing at the start of a section or chapter, or on a title page"
+msgstr "དབྱེ་ཚན་ཅིག་ཡང་ན་ལེའུ་ ཡང་ན་མགོ་མིང་གི་ཤོག་ལེབ་ཅིག་གུ་འགོ་བཙུགསཔ་ད་ལུ་འབྱུང་མི་འདྲེན་ཚིག་ མིང་མེདཔ་ཡང་ན་ཁྱད་ཆོས་ཡོད་མི་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:33
+msgid "A reading which has been regularized or normalized in some sense"
+msgstr "ལྷག་ནི་ཅིག་གོ་དོན་ལ་ལོ་ནང་དུས་རྒྱུན་བཟོ་ཡོད་མི་ཡང་ན་སྤྱིར་བཏང་བཟོ་ཡོད་མི་གོཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:34
+msgid "A reference to another location in the current document, in terms of one or more identifiable elements, possibly modified by additional text or comment"
+msgstr "ད་ལྟོའི་ཡིག་ཆ་ནང་ ཚིག་ཡིག་ཁ་སྐོང་ཡང་ན་བསམ་བཀོད་ཀྱིས་ལེགས་བཅོས་འབད་སྲིད་པའི་་ངོས་འཛིན་འབད་བཏུབ་པའི་རྣམ་གྲངས་ཚུ་ མངམ་ཡང་ན་གཅིག་གི་དོན་ཚིག་ཚུ་ནང་གཞན་གནས་ཁོངས་ལུ་གཞི་བསྟུན་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:35
+msgid "A reference to another location in the current document, or an external document, using an extended pointer notation, possibly modified by additional text or comment"
+msgstr "ད་ལྟོའི་ཡིག་ཆ་ཡང་ན་ཕྱིའི་ཡིག་ཆ་ཅིག་ནང་ ཚིག་ཡིག་ཁ་སྐོང་ཡང་ན་བསམ་བཀོད་ཀྱིས་ལེགས་བཅོས་འབད་སྲིད་པའི་རྒྱ་བསྐྱེད་གཏང་ཡོད་མི་དཔག་བྱེད་དབྱངས་རྟགས་ཅིག་ལག་ལེན་འཐབ་དེ་གཞན་གནས་ཁོངས་ལུ་གཞི་བསྟུན་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:36
+msgid "A salutation or greeting prefixed to a foreword, dedicatory epistle, or other division of a text, or the salutation in the closing of a letter, preface, etc."
+msgstr "གུས་བཏུད་་ཡང་ན་གདོང་བསྐྱོད་ཅིག་ལུ་སྔོན་ཚིག་ཡོད་མི་ལེགས་སྨོན་ ཐ་དམ་ཚིག་གི་ཨི་པིསི་ཊེལ་ ཡང་ན་ཚིག་ཡིག་ཅིག་གི་གཞན་སྡེ་ཚན་ ཡང་ན་ཡིག་གུ་ཅིག་གི་ཁ་བསྡམ་ནི་ནང་གུས་བཏུད་ སྔོན་བརྗོད་ ལ་སོགས་པ།"
+
+#: ../dispspecs/teixlite.xds.in.h:37
+msgid "A second-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་གི་གདོང་ མ་གཟུགས་ ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་གཉིས་པའི་སྡེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:38
+msgid "A sentence-like division of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་སྡེ་ཚན་བཟུམ་གྱི་བརྗོད་ཚིག་་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:39
+msgid "A seventh-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གདོང་ མ་གཟུགས་ ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་བདུན་པའི་སྡེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:40
+msgid "A short fragment of code in some formal language (often a programming language)"
+msgstr "སྒྲིགས་ཡོད་མི་སྐད་ཡིག་ལ་ལོ་ནང་ཨང་རྟགས་ཀྱི་ཆག་དུམ་ཐུང་ཀུ་ཅིག(འཕྲལ་འཕྲལ་ལས་རིམ་གྱི་སྐད་ཡིག་ཅིག)"
+
+#: ../dispspecs/teixlite.xds.in.h:41
+msgid "A single example demonstrating the use of an element or attribute"
+msgstr "རྣམ་གྲངས་ཡང་ན་ཁྱད་ཆོས་ཅིག་གི་ལག་ལེན་གྱི་འགྲེམས་སྟོན་དཔེར་བརྗོད་རྐྱང་པ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:42
+msgid "A single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
+msgstr "ཚིག་ཡིག་རྐྱང་པ་དབྱེ་ཁག་གང་རུང་ ཡུ་ནི་ཊ་རི་ཨིན་རུང་ཡང་ན་སྣ་སྡིད་ཅན་ དཔེར་ན་ ཀོར་པསི་དཔེ་ཚད་ཅིག་ཡང་ན་ ཚིག་མཛོད་ཅིག་ ནོ་བལ་ཅིག་ འབྲི་རྩོམ་ཚུ་གི་བསྡུ་གསོག་ཅིག་ རྩོམ་ཅིག་ཡང་ན་འཁྲབ་སྟོན་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:43
+msgid "A single, possibly incomplete, line of verse"
+msgstr "ཚིག་ལྷུག་གི་རྐྱང་པ་ སྲུད་པའི་མཇུག་མ་བསྡུ་བའི་གྱལ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:44
+msgid "A single-word, multi-word, or symbolic designation which is regarded as a technical term"
+msgstr "ཐབས་རིག་དོན་ཚིག་ཅིག་བཟུམ་སྦེ་དབྱེ་བ་ཕྱེ་ཡོད་མི་་བརྡ་མཚོན་པའི་གོ་གནས་ཡང་ན་སྣ་མང་མིང་ཚིག་ མིང་ཚིག་རྐྱང་པ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:45
+msgid "A sixth-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གདོང་ མ་གཟུགས་ ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་དྲུག་པའི་སྡེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:46
+msgid "A specialized form of heading or label, giving the name of one or more speakers in a dramatic text or fragment"
+msgstr "ཆག་དུམ་ཡང་ན་ཚིག་ཡིག་འཁྲབ་སྟོན་པ་ཅིག་ནང་གསལ་བཤད་པ་ཚུ་མངམ་ཡང་ན་གཅིག་གི་མིང་འདི་བྱིན་དེ་ ཁ་ཡིག་བཏགས་ནི་ཡང་ན་མགུ་རྒྱུན་གྱི་དམིགས་བསལ་བཟོ་ཡོད་མི་འབྲི་ཤོག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:47
+msgid "A statement of responsibility for someone responsible for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply"
+msgstr "མི་ཅིག་ལུ་འགན་ཁག་ཕོག་པའི་ཚིག་ཡིག་ཅིག་གི་བློ་རིག་གི་ནང་དོན་ དཔར་ཐེངས་ སྒྲ་བཟུང་ནི་ ཡང་ན་རྒྱུན་རིམ་ རྩོམ་པ་པོ་ཚུ་ངི་དོན་ལུ་མཆོག་གྱུར་བཟོ་ཡོད་མི་རྣམ་གྲངས་ཚུ་ ཞུན་དགཔ་ཚུ་་ལ་སོགས་པ་་མ་བཏུབ་མི་ཡང་ན་འཇུག་སྤྱོད་མ་འབད་མི་ གི་དོན་ལུ་འགན་ཁག་གི་གསལ་བཤད་ཅིག་"
+
+#: ../dispspecs/teixlite.xds.in.h:48
+msgid "A subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གདོང་ མ་གཟུགས་ ཡང་ན་རྒྱབ་ཀྱི་སྡེ་ཚན་ཡན་ལག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:49
+msgid "A subsection or division of the title of a work, as indicated on a title page"
+msgstr "མགོ་མིང་ཤོག་ལེབ་ཅིག་གུ་བརྡ་སྟོན་ཡོད་མི་བཟུམ་ལཱ་གཡོག་ཅིག་གི་མགོ་མིང་འདི་གི་སྡེ་ཚན་ཡང་ན་དབྱེ་ཚན་འོགམ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:50
+msgid "A third-level subdivision of the front, body, or back of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གདོང་ མ་གཟུགས་ ཡང་ན་རྒྱབ་ཀྱི་གནས་རིམ་གསུམ་པའི་སྡེ་ཚན་འོགམ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:51
+msgid "A word or phrase belonging to some language other than that of the surrounding text"
+msgstr "མཐའ་འཁོར་གྱི་ཚིག་ཡིག་དེ་ལས་གཞན་སྐད་ཡིག་ལ་ལོ་ལུ་བང་མི་ཚིག་ཚོགས་ཡང་་ན་མིང་ཚིག་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:52
+msgid "A word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics"
+msgstr "རྩོམ་པ་པོ་ཡང་ན་འགྲེལ་བཤད་རྐྱབ་མི་གིས་འགན་ཁག་གི་ཌིསི་ཀེལེ་མིང་ཅིག་བརྡ་སྟོན་ནི་དོན་ལུ་ཚིག་ཚོགས་ཡང་ན་མིང་ཚིག་ཅིག་ དཔེར་ན་བརྗེད་མ་བཏུབ་མི་འདྲེན་ཚིག་ཚུ་ཡང་ན་ཨའི་ཊ་ལིཀསི་གི་ལག་ལེན་འཐབ་ནི་གིས།"
+
+#: ../dispspecs/teixlite.xds.in.h:53
+msgid "A word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source"
+msgstr "མིང་ཚིག་ ཡང་ན་ཡིག་རྒྱུགས་ངེས་ཅན་སྦེ་ཡི་གུ་ལུ་ཕབ་མ་བཏུབ་མི་ག་ཅི་འབད་ཟེར་བ་ཅིན་འདི་འབྱུང་ཁུངས་འདི་ནང་ཚུལ་མིན་ཨིནམ་ཡང་ན་ རྣར་ཉན་མི་བཏུབ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:54
+msgid "Abbr"
+msgstr "ཨེབ་བིརི།"
+
+#: ../dispspecs/teixlite.xds.in.h:55
+msgid "Add"
+msgstr "ཁ་སྐོང་བརྐྱབ་ནི།"
+
+#: ../dispspecs/teixlite.xds.in.h:57
+msgid "Address Line"
+msgstr "ཁ་བྱང་གྱལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:58
+msgid "An abbreviation of any sort"
+msgstr "སྡུད་ཚིག་གི་དབྱེ་སེལ་གང་རུང་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:59
+msgid "An edition statement as presented on a title page of a document"
+msgstr "ཡིག་ཆ་ཅིག་གི་མགོ་མིང་ཤོག་ལེབ་ཅིག་གུ་གསལ་སྟོན་འབད་ཡོད་མི་བཟུམ་དཔར་ཐེངས་གསལ་བཤད་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:60
+msgid "An identifier of some kind, e.g. a variable name or the name of an SGML element or attribute"
+msgstr "དབྱེ་ཁག་ལ་ལོ་གི་ངོས་འཛིན་པ་ཅིག་ དཔེར་ན་འགྱུར་ཅན་གྱི་མིང་ཡང་ན་ཨེསི་ཇི་ཨེམ་ཨེལ་རྣམ་གྲངས་ཅིག་གི་མིང་ཡང་ན་ཁྱད་ཆོས་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:61
+msgid "An individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy"
+msgstr "ལག་ལེན་པའི་ངེས་འཛིན་འབད་ཡོད་མི་དབྱེ་བསལ་ལམ་ལུགས་ཅིག་གི་ནང་འཁོད་ དབྱེ་རིམ་མཐོ་ཤོས་ཅིག་གི་ནང་འཁོད་སྲིད་པའི་ནེསིཊི་ཌི་ འགྲེལ་བཤད་ཀྱི་དབྱེ་རིམ་ངོ་རྐྱང་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:62
+msgid "An individual speech in a performance text, or a passage presented as such in a prose or verse text"
+msgstr "ཚིག་ཡིག་ལཱ་ཤུགས་ཅིག་ནང་གསུང་བཤད་ངོ་རྐྱང་ཅིག་ཡང་ན་ཚིག་རྐང་ཡང་ན་ཚིག་ཡིག་ཚིག་ལྷུག་ཅིག་ནང་བཟུམ་སྦེ་ཡིག་རྒྱུགས་ཅིག་ཡོད་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:63
+msgid "An interpretative annotation which can be linked to a span of text"
+msgstr "ཚིག་ཡིག་གི་འཕར་ཚད་ཅིག་ལུ་འབྲེལ་མཐུད་འབད་བཏུབ་མི་ཁ་བསྒྱུར་་བའི་མཆན་འགྲེལ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:65
+msgid "Anonymous Block (&lt;ab&gt;)"
+msgstr "མིང་མེདཔ་ལེབ་དུམ (&lt;ab&gt;)"
+
+#: ../dispspecs/teixlite.xds.in.h:66
+msgid "Any arbitrary phrase-level unit of text (including other &lt;seg&gt; elements)"
+msgstr "ཚིག་ཡིག་གི་མཐུན་སྒྲིག་ཚིག་ཚོགས་གནས་རིམ་ཆ་འཕྲན་གང་རུང(གཞན་རྣམ་གྲངས་ཚུ་ &lt;seg&gt; གྲངས་སུ་བཙུགས་དེ)"
+
+#: ../dispspecs/teixlite.xds.in.h:67
+msgid "Any heading, for example, the title of a section, or the heading of a list or glossary"
+msgstr "མགུ་རྒྱན་གང་རུང་ དཔེར་ན་དབྱེ་ཚན་ཅིག་གི་མགོ་མིང་འདི་ ཡང་ན་ ཐོ་ཡིག་ཅིག་གི་མགུ་རྒྱན་འདི་ཡང་ན་ཚིག་ཐོ།"
+
+#: ../dispspecs/teixlite.xds.in.h:68
+msgid "Any kind of stage direction within a dramatic text or fragment"
+msgstr "འཁྲབ་སྟོན་པ་གི་ཚིག་ཡིག་ཡང་ན་ཆག་དུམ་ནང་འཁོད་གོ་རིམ་བཀོད་རྒྱ་གི་དབྱེ་ཁག་གང་རུང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:69
+msgid "Any prefatory matter (headers, title page, prefaces, dedications, etc.) found at the start of a document, before the main body"
+msgstr "པིརི་ཕེ་ཊོ་རི་བྱེད་མཁན་གང་རུང་(མགོ་ཡིག་ཚུ་ མགོ་མིང་ཤོག་ལེབ་ སྔོན་བརྗོད་ཚུ་ ཐ་དམ་ཚིག་ཚུ་ ལ་སོགས་པ་ )མ་གཟུགས་གཙོ་བོ་གི་ཧེ་མ་ ཡིག་ཆ་ཅིག་གི་འགོ་བཙུགསཔ་ད་ལུ་ཐོབ་ཡོདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:70
+msgid "Any sequence of items organized as a list"
+msgstr "ཐོ་ཡིག་ཅིག་བཟུམ་སྦེ་རྣམ་གྲངས་ཚུ་འགོ་འདྲེན་འཐབ་ཡོད་མི་གི་འབྱུང་རིམ་གང་རུང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:71
+msgid "Any standard or non-standard number used to identify a bibliographic item"
+msgstr "དཔེ་དེབ་རིང་པའི་རྣམ་གྲངས་ཅིག་ངོས་འཛིན་འབད་ནི་ལུ་ལག་ལེན་འཐབ་ཡོད་མི་ཚད་ལྡན་ཡང་ན་ཚད་ལྡན་མེན་མི་ཨང་གང་རུང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:72
+msgid "Arbitrary Segment (&lt;seg&gt;)"
+msgstr "མཐུན་སྒྲིག་ཆ་བགོས (&lt;seg&gt;)"
+
+#: ../dispspecs/teixlite.xds.in.h:73
+msgid "Argument"
+msgstr "སྒྲུབ་རྟགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:74
+msgid "Attaches an identifier to a point within a text, whether or not it corresponds with a textual element"
+msgstr "ཚིག་ཡིག་གི་རྣམ་གྲངས་ཅིག་དང་གཅིག་ཁར་ཆ་མཉམ་པའི་ཨིན་རུང་མེན་རུང་ཚིག་ཡིག་ཅིག་གི་ནང་འཁོད་རྩེ་གཅིག་ལུ་ངོས་འཛིན་པ་ཅིག་སྦྱརཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:76
+msgid "Authority"
+msgstr "དབང་འཛིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:77
+msgid "Availability"
+msgstr "ཐོབ་ཚུགསཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:78
+msgid "Back Matter"
+msgstr "རྒྱབ་བྱེད་མཁན།"
+
+#: ../dispspecs/teixlite.xds.in.h:79
+msgid "BiblFull"
+msgstr "བི་ཨའི་བི་ཨེལ་གངམ།"
+
+#: ../dispspecs/teixlite.xds.in.h:80
+msgid "Bibliographic Citation (&lt;bibl&gt;)"
+msgstr "དཔེ་དེབ་རིག་པའི་ལུང་འདྲེན (&lt;bibl&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:81
+msgid "Bibliographic Scope"
+msgstr "དཔེ་དེབ་རིག་པའི་འོས་སྐབས།"
+
+#: ../dispspecs/teixlite.xds.in.h:82
+#: ../dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "མ་གཟུགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:83
+msgid "Byline"
+msgstr "གྱལ་གྱིས་"
+
+#: ../dispspecs/teixlite.xds.in.h:84
+msgid "Category"
+msgstr "དབྱེ་རིམ།"
+
+#: ../dispspecs/teixlite.xds.in.h:85
+msgid "Category Description"
+msgstr "དབྱེ་རིམ་གྱི་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:86
+msgid "Category Reference"
+msgstr "དབྱེ་རིམ་གྱི་གཞི་བསྟུན།"
+
+#: ../dispspecs/teixlite.xds.in.h:87
+msgid "Cell"
+msgstr "ནང་ཐིག"
+
+#: ../dispspecs/teixlite.xds.in.h:88
+msgid "Change"
+msgstr "བསྒྱུར་བཅོས།"
+
+#: ../dispspecs/teixlite.xds.in.h:89
+#: ../dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "ལུང་འདྲེན།"
+
+#: ../dispspecs/teixlite.xds.in.h:90
+msgid "ClassCode"
+msgstr "དབྱེ་རིགས་ཨང་རྟགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:91
+msgid "Classification Declaration"
+msgstr "དབྱེ་བཟོ་གསལ་བསྒྲགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:92
+msgid "Closer"
+msgstr "ཐག་ཉེ་ས།"
+
+#: ../dispspecs/teixlite.xds.in.h:94
+msgid "Collects together &lt;interp&gt; tags"
+msgstr "ཡོངས་སྡོམ &lt;interp&gt; ངོ་རྟགས་ཚུ་བསྡུ་གསོག་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:95
+msgid "Collects together any notes providing information about a text additional to that recorded in other parts of the bibliographic description"
+msgstr "དཔེ་དེབ་རིག་པའི་འགྲེལ་བཤད་འདི་གི་ཡན་ལག་གཞན་ཚུ་ནང་སྒྲ་བཟུང་ཡོད་མི་དེ་ལུ་ཚིག་ཡིག་ཁ་སྐོང་བརྐྱབ་ནི་སྐོར་ལས་བརྡ་དོན་འདྲེན་འཛིན་ཚུ་གང་རུང་བྱིན་ནི་ཡོངས་སྡོམ་བསྡུ་གསགོ་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:96
+msgid "Contains a general purpose name or referring string"
+msgstr "ཡོངས་ཁྱབ་དགོས་དོན་མིང་ཡང་ན་ཡིག་རྒྱུན་གཞི་བསྟུན་འབད་ནི་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:97
+msgid "Contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a &lt;teiCorpus&gt; element"
+msgstr "ཊི་ཨི་ཨའི་ཀོན་ཕོ་མེནཊི་ཡིག་ཆ་རྐྱང་པ་ ཊི་ཨི་ཨའི་མགོ་ཡིག་དང་ཚིག་ཡིག་ཅིག་ཨེབ་བཙུགས་མི་ ཟུར་གནས་ཡང་ན་ &lt;ཊི་ཨི་ཨའི་ཀོར་པསི་&gt; རྣམ་གྲངས་ཅིག་གི་ཡན་ལག་བཟུམ་སྦེ་ནང་ཨིན་རུང་ ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:98
+msgid "Contains any appendixes, etc. following the main part of a text"
+msgstr "ཟུར་དེབ་ཚུ་ལ་སོགས་པ་གང་རུང་ ཚིག་ཡིག་ཅིག་གི་གཙོ་བོའི་ཡན་ལག་རྗེས་སུ་འབྲང་དེ་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:99
+msgid "Contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph"
+msgstr "ཚིག་གི་མཐུན་སྒྲིག་ཆ་་ཤས་གནས་རིམ་ཆ་འཕྲན་ ཚིག་ཚོགས་ཡང་ན་ནང་འཁོད་ཀྱི་གནས་རིམ་རྣམ་གྲངས་ཨེ་ན་ལོ་གསི་་ལུ་གི་དོན་ལུ་མིང་མདེཔ་ཅིག་བཟུམ་སྦེ་འབད་མི་ ཨིན་རུང་མཚམས་དོན་ཅིག་གི་སི་མེན་ཊིཀ་དོས་ཆས་མེདཔ་སྦེ་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:100
+msgid "Contains text displayed in tabular form, in rows and columns"
+msgstr "རེའུ་མིག་ཅན་གྱི་འབྲི་ཤོག་ གྱལ་ཚུ་དང་ཀེར་ཐིག་ཚུ་ནང་བཀྲམ་སྟོན་འབད་ཡོད་མི་ཚིག་ཡིག་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:101
+msgid "Correct Form"
+msgstr "ངེས་བདེན་གཞི་སྒྲུབ།"
+
+#: ../dispspecs/teixlite.xds.in.h:102
+msgid "Creation"
+msgstr "གསར་བསྐྲུན་འབད་ནི།"
+
+#: ../dispspecs/teixlite.xds.in.h:104
+msgid "Dateline"
+msgstr "ཚེས་གྲངས་ཀྱི་གྱལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:105
+msgid "Defines a typology used to classify texts either implicitly, by means of a bibliographic citation, or explicitly by a structured taxonomy"
+msgstr "དབྱེ་སེལ་ལམ་ལུགས་གཞི་བཀོད་ཡོད་མི་ཅིག་གིས་གཏན་ཁེལ་སྦེ་ཡང་ན་དཔེ་དེབ་རིག་པའི་ལུང་འདྲེན་ཅིག་གིས་གཏན་ཁེལ་མ་འབད་བར་ཚིག་ཡིག་དབྱེ་བ་བཟོ་ནི་ལུ་ལག་ལེན་འཐབ་ཡོད་མི་ཊའི་པོ་ལོ་ཇི་ཅིག་ངེས་འཛིན་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:106
+msgid "Defines the scope of a bibliographic reference, for example as a list of pagenumbers, or a named subdivision of a larger work"
+msgstr "དཔེ་དེབ་རིག་པའི་གཞི་བསྟུན་ཅིག་གི་འོས་སྐབས་འདི་ངེས་འཛིན་འབདཝ་ཨིན་ དཔེར་ན་ཤོག་ལེབ་ཨང་ཚུ་གི་ཐོ་ཡིག་ཅིག་བཟུམ་སྦེ་ ཡང་ན་མིང་བཏགས་ཡོད་མི་ལཱ་གཡོག་སྦོམ་མི་ཅིག་གི་སྡེ་ཚན་འོགམ།"
+
+#: ../dispspecs/teixlite.xds.in.h:107
+msgid "Del"
+msgstr "ཌེལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:108
+msgid "Describes in detail the aim or purpose for which an electronic file was encoded, together with any other relevant information concerning the process by which it was assembled or collected"
+msgstr "མཉམ་སྒྲིག་འབད་ཡོད་མི་ཡང་ན་བསྡུ་གསོག་འབད་ཡོད་མི་གིས་དགོས་དོན་འདི་འབྲེལ་བའི་བརྡ་དོན་འབྲེལ་བ་གཞན་གང་རུང་་དང་གཅིག་ཁར་ཡོད་མི་ གློ་ཆས་ཡིག་སྣོད་ཅིག་ཨིན་ཌིཌི་འབད་མི་གི་དོན་ལུ་དགོས་དོན་ཡང་དམིགས་དོན་འདི་རྒྱས་བཤད་ནང་འགྲེལ་བཤད་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:109
+msgid "Describes some category within a taxonomy or text typology, either in the form of a brief prose description or in terms of the situational parameters used by the TEI formal &lt;textDesc&gt;"
+msgstr "དབྱེ་བསལ་ལམ་ལུགས་ཅིག་ཡང་ན་ཚིག་ཡིག་དབྱེ་ལུགས་ནང་འཁོད་དབྱེ་རིམ་ལ་ལོ་ ཚིག་རྐང་འགྲེལ་བཤད་མདོར་བསྡུས་ཅིག་ ཡང་ན་ཊི་ཨི་ཨའི་སྒྲིགས་ཡོད་མི་&lt;ཚིག་ཡིག་ཌིསི་&gtའདི་གིས་ལག་ལེན་འཐབ་ཡོད་མི་དུས་སྐབས་ཀྱི་ཚད་བཟུང་ཚུ་གི་དོན་ཚིག་ནང་ཨིན་རུང་འགྲེལ་བཤད་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:110
+msgid "Details of editorial principles and practices applied during the encoding of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་ཨིན་ཀོ་ཌིང་སྐབས་འཇུག་སྤྱོད་འབད་ཡོད་མི་སྦྱང་བ་ཚུ་དང་དཔར་ཐེངས་རྩ་དོན་གྱི་རྒྱས་བཤད་ཚུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:111
+msgid "Distributor"
+msgstr "འགོ་འགྲེམ་པ།"
+
+#: ../dispspecs/teixlite.xds.in.h:112
+msgid "Div"
+msgstr "ཌི་ཨའི་ཝི།"
+
+#: ../dispspecs/teixlite.xds.in.h:113
+msgid "Div0"
+msgstr "ཌི་ཨའི་ཝི་༠"
+
+#: ../dispspecs/teixlite.xds.in.h:114
+msgid "Div1"
+msgstr "ཌི་ཨའི་ཝི་༡"
+
+#: ../dispspecs/teixlite.xds.in.h:115
+msgid "Div2"
+msgstr "ཌི་ཨའི་ཝི་༢"
+
+#: ../dispspecs/teixlite.xds.in.h:116
+msgid "Div3"
+msgstr "ཌི་ཨའི་ཝི་༣"
+
+#: ../dispspecs/teixlite.xds.in.h:117
+msgid "Div4"
+msgstr "ཌི་ཨའི་ཝི་༤"
+
+#: ../dispspecs/teixlite.xds.in.h:118
+msgid "Div5"
+msgstr "ཌི་ཨའི་ཝི་༥"
+
+#: ../dispspecs/teixlite.xds.in.h:119
+msgid "Div6"
+msgstr "ཌི་ཨའི་ཝི་༦"
+
+#: ../dispspecs/teixlite.xds.in.h:120
+msgid "Div7"
+msgstr "ཌི་ཨའི་ཝི་༧"
+
+#: ../dispspecs/teixlite.xds.in.h:121
+msgid "DivGen"
+msgstr "ཌི་ཨའི་ཝི་ཇེན།"
+
+#: ../dispspecs/teixlite.xds.in.h:122
+msgid "Document Author"
+msgstr "ཡིག་ཆའི་རྩོམ་པ་པོ།"
+
+#: ../dispspecs/teixlite.xds.in.h:123
+msgid "Document Date"
+msgstr "ཡིག་ཆའི་ཚེས་གྲངས།"
+
+#: ../dispspecs/teixlite.xds.in.h:124
+msgid "Document Edition"
+msgstr "ཡིག་ཆའི་དཔར་ཐེངས།"
+
+#: ../dispspecs/teixlite.xds.in.h:125
+msgid "Document Imprint"
+msgstr "ཡིག་ཆ་དཔར་བསྐྲུན་མ་འབད་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:126
+msgid "Document Title"
+msgstr "ཡིག་ཆའི་མགོ་མིང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:127
+msgid "Documents the relationship between an electronic text and the source or sources from which it was derived"
+msgstr "ཡིག་ཆས་ཚུ་གློག་ཆས་ཚིག་ཡིག་དང་འབྱུང་ཁུངས་ཡང་ན་འདི་ག་སྟེ་ལས་འབྱུང་་ཡོད་མི་འབྱུང་ཁུངས་ཚུའི་བར་ནའི་མཐུན་ལམ།"
+
+#: ../dispspecs/teixlite.xds.in.h:129
+msgid "Edition Statement"
+msgstr "དཔར་ཐེངས་གསལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:131
+msgid "Editorial Declaration"
+msgstr "དཔར་ཐེངས་གསལ་བསྒྲགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:133
+msgid "Encoding Description"
+msgstr "ཨིན་ཀོ་ཌིང་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:134
+msgid "Epigraph"
+msgstr "ཨི་པི་ཚད་རིས།"
+
+#: ../dispspecs/teixlite.xds.in.h:135
+msgid "Example"
+msgstr "དཔེར་བརྗོད།"
+
+#: ../dispspecs/teixlite.xds.in.h:136
+msgid "Extended Pointer (xptr)"
+msgstr "དཔག་བྱེད་རྒྱ་བསྐྱེད་གཏང་ཡོདཔ (xptr)།"
+
+#: ../dispspecs/teixlite.xds.in.h:137
+msgid "Extended Reference (&lt;xref&gt;)"
+msgstr "གཞི་བསྟུན་རྒྱ་བསྐྱེད་གཏང་ཡོདཔ (&lt;xref&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:138
+msgid "Extent"
+msgstr "ཁྱབ་ཚད།"
+
+#: ../dispspecs/teixlite.xds.in.h:140
+msgid "Figure Description"
+msgstr "དཔར་རིས་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:141
+msgid "File Description (fileDesc)"
+msgstr "ཡིག་སྣོད་འགྲེལ་བཤད (fileDesc)།"
+
+#: ../dispspecs/teixlite.xds.in.h:142
+msgid "Foreign"
+msgstr "ཕྱི་རྒྱལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:143
+msgid "Formula"
+msgstr "མན་ངག"
+
+#: ../dispspecs/teixlite.xds.in.h:144
+msgid "Front Matter"
+msgstr "གདོང་ཁ་བྱེད་མཁན།"
+
+#: ../dispspecs/teixlite.xds.in.h:145
+msgid "Funder"
+msgstr "མ་དངུལ་བྱིན་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:146
+msgid "Gap"
+msgstr "བར་སྟོང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:147
+msgid "Generic Identifier (&lt;gi&gt;)"
+msgstr "རིགས་བརྒྱུད་ངོས་འཛིན་པ (&lt;gi&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:148
+msgid "Gloss"
+msgstr "གོལོསི།"
+
+#: ../dispspecs/teixlite.xds.in.h:150
+msgid "Groups information about the series, if any, to which a publication belongs"
+msgstr "ཨང་རིམ་ཚུ་གི་སྐོར་ལས་སྡེ་ཚན་བརྡ་དོན་ པར་འགྲེམས་ཅིག་བང་མི་ཚུ་ལུ་གང་རུང་ཨིན་པ་ཅིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:151
+msgid "Groups information concerning the publication or distribution of an electronic or other text"
+msgstr "པར་འགྲེམས་ཡང་ན་གློག་ཆས་ཅིག་ཡང་ན་གཞན་ཚིག་ཡིག་གི་བགོ་བཀྲམ་འབྲེལ་བའི་སྡེ་ཚན་ཚུ་གི་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:152
+msgid "Groups information relating to one edition of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་དཔར་ཐེངས་གཅིག་ལུ་འབྲེལ་བའི་སྡེ་ཚན་ཚུ་གི་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:153
+msgid "Groups information relating to the publication or distribution of a bibliographic item"
+msgstr "པར་འགྲེམས་ཡང་ན་དཔེ་དེབ་རིག་པའི་རྣམ་གྲངས་ཅིག་གི་བགོ་བཀྲམ་འདི་ལུ་འབྲེལ་བའི་སྡེ་ཚན་ཚུ་གི་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:154
+msgid "Groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc"
+msgstr "རང་བཞིན་ཡང་ན་འོས་ལྡན་དབྱེ་བཟོས་ལས་འཆར་ མངོན་བརྗོད་ ལ་སོགས་པ་ཅིག་གི་དོན་ཚིག་ནང་ཚིག་ཡིག་གི་གནད་དོན་འགྲེལ་བཤད་བརྐྱབ་མི་སྡེ་ཚན་ཚུ་གི་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:155
+msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a final group at the end of a division, especially of a letter"
+msgstr "སྡེ་ཚན་ཚུ་གཅིག་ཁར་ཚེས་གྲངས་ཀྱི་གྱལ་ གྱལ་གྱི་ གུས་བཏུད་ དང་སྡེ་ཅིག་གི་མཇུག་་ལུ་མཐའ་མཇུག་སྡེ་ཚན་ཅིག་བཟུམ་སྦེ་འབྱུང་མི་ཆ་འདྲ་བའི་ཚིག་ཚོགས་ ལྷག་པར་དུ་ཡི་གུ་ཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:156
+msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a preliminary group at the start of a division, especially of a letter"
+msgstr "སྡེ་ཚན་ཅིག་གི་འགོ་བཙུགསཔ་ལུ་པིརི་ལའི་མི་ནརི་ཅིག་བཟུམ་སྦེ་འབྱུང་མི་ཆ་འདྲ་བའི་ཚིག་ཚོགས་ ལྷག་པར་དུ་ཡི་གུ་ཅིག་ དང་གུས་བཏུད་ གྱལ་གྱི་ ཚེས་གྲངས་ཀྱི་གྱལ་གཅིག་ཁར་་གྱི་སྡེ་ཚན་ཚུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:157
+#: ../dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "མགུ་ཏོག"
+
+#: ../dispspecs/teixlite.xds.in.h:158
+msgid "Highlighted"
+msgstr "གཙོ་དམིགས་བཀོད་ཡོདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:159
+msgid "Id. Number"
+msgstr "ཨའི་ཌི་ཨང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:160
+msgid "Ident"
+msgstr "མཁོ་མངགས་ཡི་གུ"
+
+#: ../dispspecs/teixlite.xds.in.h:161
+msgid "Identifies the language being described in the writing system declaration"
+msgstr "འབྲི་ནི་རིམ་ལུགས་གསལ་བསྒྲགས་འདི་ནང་འགྲེལ་བཤད་འབད་ཡོད་མི་སྐད་ཡིག་འདི་ངོས་འཛིན་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:162
+msgid "Imprint"
+msgstr "དཔར་བསྐྲུན་མ་འབད་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:163
+msgid "Index"
+msgstr "ཟུར་ཐོ།"
+
+#: ../dispspecs/teixlite.xds.in.h:164
+msgid "Indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible or inaudible"
+msgstr "ཚུལ་མིན་ཡང་ན་རྣར་་ཉན་མ་བཏུབ་མི་ཅ་ཆས་ཀྱི་རྒྱུ་མཚན་ལས་ཡང་ན་ དཔེ་ཚད་སྦྱོང་བ་གི་ཡན་ལག་བཟུམ་སྦེ་ ཊི་ཨི་ཨའི་མགོ་ཡིག་ནང་འགྲེལ་བཤད་འབད་ཡོད་མི་དཔར་ཐེངས་རྒྱུ་མཚན་ཚུ་གི་དོན་ལུ་ཨིན་རུང་ ཡིག་ཕབ་ཅིག་ནང་བསྐྱུར་བཞག་ཡོད་མི་ཅ་ཆས་ཡོད་སའི་རྩེ་ཅིག་བརྡ་སྟོནམ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:165
+msgid "Indicates the location of a graphic, illustration, or figure"
+msgstr "ཚད་རིས་ རི་མོ་ ཡང་ན་དཔར་རིས་ཅིག་གི་གནས་ཁོངས་འདི་ངོས་འཛིན་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:166
+msgid "Information about the availability of a text, for example any restrictions on its use or distribution, its copyright status, etc."
+msgstr "ཚིག་ཡིག་ཅིག་གི་ཐོབ་ཚུགས་པའི་བརྡ་དོན་སྐོར་ལས་ དཔེར་ན་འདིའི་ལག་ལེན་འཐབ་ནིའི་བཀག་སྡམ་ཡང་ན་བཀོ་བཀྲམ་ འདིའི་འདྲ་བཤུས་དབང་ཆ་གནས་ཚད་ལ་སོགས་པ་གང་རུང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:167
+msgid "Information about the creation of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་གསར་བསྐྲུན་འདིའི་སྐོར་ལས་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:168
+msgid "Information about the intended rendition of one or more elements"
+msgstr "རྣམ་གྲངས་ཚུ་མངམ་ཡང་ན་གཅིག་གི་འདུན་པ་བསྐྱེད་ཡོད་མི་རིན་ཌི་ཤེན་འདིའི་སྐོར་ལས་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:169
+msgid "Information about the title of a work and those responsible for its intellectual content"
+msgstr "འདིའི་བློ་རིག་ནང་དོན་གྱི་དོན་ལུ་འགན་ཁག་དེ་ཚུ་དང་ལཱ་གཡོག་ཅིག་གི་མགོ་མིང་སྐོར་ལས་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:170
+msgid "Information about the usage of a specific element within a &lt;text&gt;"
+msgstr "གསལ་བཀོད་རྣམ་གྲངས་ཅིག་ &lt;text&gt ནང་འཁོད་ཀྱི་བེད་སྤྱོད་འདི་གི་སྐོར་ལས་བརྡ་དོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:171
+msgid "Interpretation"
+msgstr "ཁ་བསྒྱུར།"
+
+#: ../dispspecs/teixlite.xds.in.h:172
+msgid "Interpretation Group"
+msgstr "ཁ་བསྒྱུར་སྡེ་ཚན།"
+
+#: ../dispspecs/teixlite.xds.in.h:173
+msgid "Item"
+msgstr "རྣམ་གྲངས།"
+
+#: ../dispspecs/teixlite.xds.in.h:174
+msgid "Keywords"
+msgstr "གཙོ་ཚིག་ཚུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:175
+msgid "Kw"
+msgstr "ཀེ་ཌབ་ལུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:176
+#: ../dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "ཁ་ཡིག"
+
+#: ../dispspecs/teixlite.xds.in.h:177
+#: ../glade/docbook-common-properties.glade.h:2
+#: ../src/plugin-docbook.c:2149
+msgid "Language"
+msgstr "སྐད་ཡིག"
+
+#: ../dispspecs/teixlite.xds.in.h:178
+msgid "Language Usage"
+msgstr "སྐད་ཡིག་བེད་སྤྱོད།"
+
+#: ../dispspecs/teixlite.xds.in.h:179
+msgid "Letters, words, or phrases inserted in the text by an author, scribe, annotator, or corrector"
+msgstr "ཚིག་ཡིག་ནང་རྩོམ་པ་པོ་གིསབཙུགས་ཡོད་མི་མངགས་བཤོལ་ མཆན་འགྲེལ་ ཡང་ན་ནོར་བཅོས་འབད་མི་ཚིག་ཚོགས་ཚུ་ཡང་ན་མིང་ཚིག་ཚུ་ཡི་གུ་ཚུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:180
+msgid "Line Break"
+msgstr "གྱལ་མཚམས།"
+
+#: ../dispspecs/teixlite.xds.in.h:181
+msgid "Line Group"
+msgstr "གྱལ་སྡེ་ཚན།"
+
+#: ../dispspecs/teixlite.xds.in.h:182
+msgid "List"
+msgstr "ཐོ་ཡིག"
+
+#: ../dispspecs/teixlite.xds.in.h:183
+msgid "ListBibl"
+msgstr "ཐོ་ཡིག་བི་ཨའི་བི་ཨེལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:184
+msgid "Marks a location to be indexed for whatever purpose"
+msgstr "ཟུར་ཐོ་འབད་ནི་ཡང་ན་དགོས་དོན་ག་ཅིག་གི་དོན་ལུ་གནས་ཁོངས་ཅིག་རྟགས་བཀལཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:185
+msgid "Marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made"
+msgstr "ཀེ་ལེམ་འདི་མ་བཟོ་མི་རྒྱུ་མཚན་ཚུ་འབྲེལ་བའི་དོན་ལུ་མཐའ་འཁོར་་གྱི་ཚིག་ཡིག་འདི་ལས་ཚད་ཡིས་ཀྱི་ཁྱད་རྟགས་ཅན་བཟུམ་སྦེ་མིང་ཚིག་ཡང་ན་ཚིག་ཚོགས་ཅིག་རྟགས་བཀོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:186
+msgid "Marks paragraphs in prose"
+msgstr "ཚིག་ལྷུག་ནང་མཚམས་དོན་ཚུ་བཏགསཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:187
+msgid "Marks the boundary between one page of a text and the next in a standard reference system"
+msgstr "ཚིག་ཡིག་གི་ཤོག་ལེབ་གཅིག་དང་ཤུལ་མམ་གྱི་འོས་ལྡན་གཞི་བསྟུན་རིམ་ལུགས་ཅིག་གི་བར་ན་མཐའ་མཚམས་འདི་རྟགས་བཀལཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:188
+msgid "Marks the boundary between sections of a text, as indicated by changes in a standard reference system"
+msgstr "དང་འོས་ལྡན་གཞི་བསྟུན་རིམ་ལུགས་ཅིག་ནང་བསྒྱུར་བཅོས་ཚུ་གིས་བརྡ་སྟོན་འབད་ཡོད་མི་བཟུམ་སྦེ་ ཚིག་ཡིག་ཅིག་གི་དབྱེ་ཚན་ཚུ་གི་བར་ན་མཐའ་མཚམས་འདི་རྟགས་བཀལཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:189
+msgid "Marks the start of a new (typographic) line in some edition or version of a text"
+msgstr "དཔར་ཐེངས་ལ་ལོ་ཡང་ན་ཚིག་ཡིག་ཅིག་གི་ཐོན་རིམ་ནང་གྱལ་གསརཔ་(དཔར་བསྐྲུན་རིག་པ)ཅིག་གི་འགོ་བཙུགས་ནི་འདི་རྟགས་བཀལཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:190
+msgid "Marks words or phrases mentioned, not used"
+msgstr "ལག་ལེན་མ་འཐབ་མི་མིང་ཚིག་ཚུ་ཡང་ན་ཚིག་ཚོགས་བཀོད་ཡོད་མི་རྟགས་བཀོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:191
+msgid "Marks words or phrases which are stressed or emphasized for linguistic or rhetorical effect"
+msgstr "སྐད་ཡིག་གི་ཡང་ན་ཚིག་རྒྱན་རིག་པའི་ནུས་པ་གི་དོན་ལུ་སྒྲ་དྲག་པ་བཏོན་ནི་ཡང་ན་གཙོ་བོར་བཏོན་ནིའི་ཚིག་ཚོགས་ཚུ་ཡང་ན་མིང་ཚིག་ཚུ་རྟགས་བཀོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:192
+msgid "Mentioned"
+msgstr "བཀོད་ཡོདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:193
+msgid "Milestone"
+msgstr "མའིལ་སི་ཊོན།"
+
+#: ../dispspecs/teixlite.xds.in.h:196
+msgid "Notes Statement"
+msgstr "འདྲེན་འཛིན་ཚུ་གི་གསལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:197
+msgid "Num"
+msgstr "ཨང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:198
+msgid "One cell of a table"
+msgstr "ཐིག་ཁྲམ་ཅིག་གི་ནང་ཐིག"
+
+#: ../dispspecs/teixlite.xds.in.h:199
+msgid "One component of a list"
+msgstr "ཐོ་ཡིག་ཅིག་གི་ཆ་ཤས་གཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:200
+msgid "One line of a postal or other address"
+msgstr "འགྲེམ་ཡང་ན་གཞན་ཁ་བྱང་ཅིག་གི་གྱལ་གཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:201
+msgid "One or more taxonomies defining any classificatory codes used elsewhere in the text"
+msgstr "ཚིག་ཡིག་འདི་ནང་ག་སྟེ་ཅིག་ལག་ལེན་འཐབ་ཡོད་མི་དབྱེ་རིམ་གྱི་ཨང་རྟགས་གང་རུང་ཚུ་ངེས་འཛིན་འབད་མི་དབྱེ་བསལ་ལམ་ལུགས་ཚུ་མངམ་ཡང་ན་གཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:202
+msgid "One row of a table"
+msgstr "ཐིག་ཁྲམ་ཅིག་གི་གྱལ་གཅིག"
+
+#: ../dispspecs/teixlite.xds.in.h:203
+msgid "Opener"
+msgstr "ཁ་ཕྱེ་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:204
+msgid "Original Form"
+msgstr "འབྲི་ཤོག་ངོ་མ།"
+
+#: ../dispspecs/teixlite.xds.in.h:205
+msgid "Page Break"
+msgstr "ཤོག་ལེབ་མཚམས།"
+
+#: ../dispspecs/teixlite.xds.in.h:207
+msgid "Pointer"
+msgstr "དཔག་བྱེད།"
+
+#: ../dispspecs/teixlite.xds.in.h:208
+msgid "Principal Researcher"
+msgstr "མ་རྩ་ཞིབ་འཚོལ་པ།"
+
+#: ../dispspecs/teixlite.xds.in.h:209
+msgid "Profile Description"
+msgstr "གསལ་སྡུད་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:210
+msgid "Project Description"
+msgstr "ལས་འགུལ་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:211
+msgid "Provides detailed information about the tagging applied to an SGML or XML document"
+msgstr "ཨེསི་ཇི་ཨེམ་ཨེལ་ཡང་ན་ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་ཅིག་ལུ་ངོ་རྟགས་བཏགས་ནི་འཇུག་སྤྱོད་འབད་མི་སྐོར་ལས་བརྡ་དོན་རྒྱས་བཤད་ཡོད་མི་བྱིན་མི་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:212
+msgid "Publication Place"
+msgstr "པར་འགྲེམས་ས་གནས།"
+
+#: ../dispspecs/teixlite.xds.in.h:213
+msgid "Publication Statement"
+msgstr "པར་འགྲེམས་གསལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:215
+msgid "Quotation (&lt;q&gt;)"
+msgstr "འདྲེན་ཚིག (&lt;q&gt;)"
+
+#: ../dispspecs/teixlite.xds.in.h:216
+msgid "Ref"
+msgstr "གཞི་བསྟུན།"
+
+#: ../dispspecs/teixlite.xds.in.h:217
+msgid "References Declaration"
+msgstr "གཞི་བསྟུན་གསལ་བསྒྲགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:218
+msgid "Referencing String (&lt;rs&gt;)"
+msgstr "གཞི་བསྟུན་ཡིག་རྒྱུན (&lt;rs&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:219
+msgid "Reg"
+msgstr "ཨར་ཨི་ཇི།"
+
+#: ../dispspecs/teixlite.xds.in.h:220
+msgid "Rendition"
+msgstr "རེན་ཌིཀ་ཤེན།"
+
+#: ../dispspecs/teixlite.xds.in.h:221
+msgid "Resp"
+msgstr "འགན་ཁག"
+
+#: ../dispspecs/teixlite.xds.in.h:222
+msgid "Responsibility Statement (respStmt)"
+msgstr "འགན་ཁག་གསལ་བཤད (འགན་ཁག་གསལ་བཤད)"
+
+#: ../dispspecs/teixlite.xds.in.h:223
+msgid "Revision Description"
+msgstr "བསྐྱར་སྦྱོང་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:224
+msgid "Row"
+msgstr "གྱལ།"
+
+#: ../dispspecs/teixlite.xds.in.h:225
+msgid "Salute"
+msgstr "གུས་བཏུད།"
+
+#: ../dispspecs/teixlite.xds.in.h:226
+msgid "Sampling Declaration"
+msgstr "གསལ་བསྒྲགས་དཔེ་ཚད་སྟོན་དོ།"
+
+#: ../dispspecs/teixlite.xds.in.h:227
+msgid "Secondary statement of responsibility for a bibliographic item, for example the name of an individual, institution or organization, (or of several such) acting as editor, compiler, translator, etc."
+msgstr "དཔེ་དེབ་རིག་པའི་རྣམ་གྲངས་ཅིག་གི་དོན་ལུ་འགན་ཁག་གི་གལ་གནད་ཆུང་བ་ དཔེར་ན་ ཞུན་དགཔ་ ཕྱོགས་སྒྲིག་འབད་མི་ སྐད་བསྒྱུར་པ་ ལ་སོགས་པ་བཟུམ་སྦེ་འབད་མི་(ཡང་ན་གི་ལེ་ཤ་ཅིག་བཟུམ་)ཚོགས་སྡེ་ཡང་ན་སྤེལ་ཁང་ངོ་རྐྱང་ཅིག་གི་མིང་།"
+
+#: ../dispspecs/teixlite.xds.in.h:228
+msgid "Sentence"
+msgstr "བརྗོད་ཚིག"
+
+#: ../dispspecs/teixlite.xds.in.h:229
+msgid "Series Statement"
+msgstr "རྒྱུན་རིམ་གསལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:230
+msgid "Sic"
+msgstr "ཨེསི་ཨའི་ཨེསི།"
+
+#: ../dispspecs/teixlite.xds.in.h:232
+msgid "So Called"
+msgstr "དེ་ལས་འབོད་ཡོདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:233
+msgid "Source Description"
+msgstr "འབྱུང་ཁུངས་འགྲེལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:234
+msgid "Speaker"
+msgstr "གསལ་བཤདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:235
+msgid "Specifies how canonical references are constructed for this text"
+msgstr "ཀེ་ནོ་ནི་ཀཱེལ་གཞི་བསྟུན་ཚུ་གེ་དེ་ཚིག་ཡིག་འདིའི་དོན་ལུ་གཞི་བཀོད་འབད་ཡོདཔ་ཨིན་ན་གསལ་བཀོད་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:236
+msgid "Specifies one or more defined categories within some taxonomy or text typology"
+msgstr "དབྱེ་བསལ་ལམ་ལུགས་ཡང་ན་ཚིག་ཡིག་ཊའི་པོ་ལོ་ཇི་ལ་ལོའི་ནང་འཁོད་ངེས་འཛིན་འབད་ཡོད་མི་དབྱེ་རིམ་ཚུ་མངམ་ཡང་ན་གཅིག་གསལ་བཀོད་འབདཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:237
+msgid "Speech (&lt;sp&gt;)"
+msgstr "གསུང་བཤད (&lt;sp&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:238
+msgid "Sponsor"
+msgstr "ཟད་འགྲོའི་སྦྱིན་བདག་འབད་མི།"
+
+#: ../dispspecs/teixlite.xds.in.h:239
+msgid "Stage Direction (&lt;stage&gt;)"
+msgstr "གོ་རིམ་བཀོད་རྒྱ། (&lt;stage&gt;)"
+
+#: ../dispspecs/teixlite.xds.in.h:240
+msgid "Summarizes a particular change or correction made to a particular version of an electronic text which is shared between several researchers"
+msgstr "ཞིབ་འཚོལ་པ་ཚུ་ལེ་ཤ་ཅིག་གི་བར་ན་བགོ་བཤའ་བརྐྱབ་ཡོད་མི་གློག་ཆས་ཚིག་ཡིག་ཅིག་གི་ཐོན་རིམ་བྱེ་བྲག་ཅིག་ལུ་ངེས་བདེན་བཟོ་ཡོད་མི་ཡང་ན་བྱེ་བྲག་བསྒྱུར་བཅོས་ཅིག་བཅུད་དོན་བཟོཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:241
+msgid "Summarizes the revision history for a file"
+msgstr "ཡིག་སྣོད་ཅིག་གི་དོན་ལུ་བསྐྱར་སྦྱོང་ལོ་རྒྱུས་འདི་བསྡུཝ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:242
+msgid "TEI Lite"
+msgstr "ཊི་ཨི་ཨའི་ལིཊི།"
+
+#: ../dispspecs/teixlite.xds.in.h:243
+msgid "TEI stands for Text Encoding Initiative, see http://www.tei-c.org/ for more information; the TEI Lite dtd is a subset of the powerful TEI dtds which comprises the most commonly used elements."
+msgstr "ཊི་ཨི་ཨའི་ཟེར་མི་དེ་ ཚིག་ཡིག་ཨིན་ཀོ་ཌིང་འགོ་ཐོག་གཞི་བཙུགས་འབད་བའི་དོན་ བརྡ་དོན་རྒྱས་བཤད་ཀྱི་དོན་ལུ་ http://www.tei-c.org/ ནང་བལྟ་ ཊི་ཨི་ཨའི་ལིཊི་ཌི་ཊི་ཌི་འདི་མཐུན་མོང་མང་ཤོས་ལག་ལེན་འཐབ་ཡོད་མི་རྣམ་གྲངསའདི་འདུས་མི་ཊི་ཨི་ཨའི་ཌི་ཊི་ཌི་ཨེསི་ནུས་ཤུགས་ཅན་འདི་གི་གཞི་སྒྲིག་འོགམ་ཅིག་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:244
+msgid "TEI.2"
+msgstr "ཊི་ཨི་ཨའི་༢"
+
+#: ../dispspecs/teixlite.xds.in.h:246
+msgid "Tag Usage"
+msgstr "ངོ་རྟགས་བེད་སྤྱོད།"
+
+#: ../dispspecs/teixlite.xds.in.h:247
+msgid "Tagging Declaration"
+msgstr "གསལ་བསྒྲགས་ངོ་རྟགས་བཀོད་ནི།"
+
+#: ../dispspecs/teixlite.xds.in.h:248
+msgid "Taxonomy"
+msgstr "དབྱེ་སེལ་ལམ་ལུགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:249
+msgid "Tei Header"
+msgstr "ཊི་ཨི་ཨའི་མགོ་ཡིག"
+
+#: ../dispspecs/teixlite.xds.in.h:252
+msgid "Text Classification"
+msgstr "ཚིག་ཡིག་དབྱེ་བཟོ།"
+
+#: ../dispspecs/teixlite.xds.in.h:253
+msgid "Text reproduced although apparently incorrect or inaccurate"
+msgstr "ཚིག་ཡིག་བསྐྱར་བཟོ་སྟོན་ཡོད་རུང་སྣང་བརྙན་བདེན་མེད་ཡང་ན་ཀྲིག་ཀྲི་མེདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:254
+msgid "The approximate size of the electronic text as stored on some carrier medium, specified in any convenient units"
+msgstr "ཆ་འཕྲན་ཚུ་སྟབས་བདེ་ཏོག་ཏོགང་རུང་ནང་གསལ་བཀོད་འབད་ཡོད་མི་སྐྱེལ་འདྲེན་པ་བར་མ་ལ་ལོ་གུ་གསོག་འཇོག་འབད་ཡོད་མི་བཟུམ་སྦེ་གློག་ཆས་ཚིག་ཡིག་འདི་གི་ཚད་ཧ་ལམ་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:255
+msgid "The body of a composite text, grouping together a sequence of distinct texts (or groups of such texts) which are regarded as a unit for some purpose, for example the collected works of an author, a sequence of prose essays, etc."
+msgstr "དགོས་དོན་ལ་ལོའི་དོན་ལུ་ཆ་འཕྲན་ཅིག་བཟུམ་སྦེ་ཞིབ་ལྟ་འབད་ཡོད་མི་(ཡང་ན་ཚིག་ཡིག་ཚུ་གི་སྡེ་ཚན་བཟུམ་)ཁྱད་རྟགས་ཅན་གྱི་ཚིག་ཡིག་ཚུ་གི་འབྱུང་རིམ་ཅིག་གཅིག་ཁར་སྡེ་ཚན་བཟོ་མི་ སྣ་སྡུད་ཅན་གྱི་ཚིག་ཡིག་ཅིག་གི་མ་གཟུགས་འདི་ དཔེར་ན་ རྩོམ་པ་པོ་ཅིག་གི་ལཱ་ཚུ་བསྡུ་གསོག་འབད་ཡོད་མི་ ཚིག་རྐང་འབྲི་རྩོམ་ཚུ་གི་འབྱུང་རིམ་ཅིག་ ལ་སོགས་པ།"
+
+#: ../dispspecs/teixlite.xds.in.h:256
+msgid "The classification code used for this text in some standard classification system"
+msgstr "འོས་ལྡན་དབྱོ་བཟོ་རིམ་ལུགས་ལ་ལོ་ནང་ཚིག་ཡིག་འདིའི་དོན་ལུ་ལག་ལེན་འཐབ་ཡོད་མི་དབྱེ་བཟོ་ཨང་རྟགས་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:257
+msgid "The closing salutation, etc., appended to a foreword, dedicatory epistle, or other division of a text"
+msgstr "ཁ་བསྡམ་ནའི་གུས་བཏུད་ལ་སོགས་པ་འདི་ གདོང་བསྐྱོད་ཅིག་ལུ་མཇུག་བསྣོད་འབད་ཡོད་མི་ ཐ་དམ་ཚིག་གི་ཨི་པིསི་ཊེལ་ ཡང་ན་གཞན་ཚིག་ཡིག་ཅིག་གི་སྡེ་ཚན་།"
+
+#: ../dispspecs/teixlite.xds.in.h:258
+msgid "The correct form of a passage apparently erroneous in the copy text"
+msgstr "ཚིག་ཡིག་འདྲ་བཤུས་ནང་ཡིག་རྒྱུགས་མངོན་གསལ་འཛོལ་བ་ཚུ་གི་རྣམ་པ་ངེས་བདེན་འདི་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:259
+msgid "The date of a document, as given (usually) on a title page"
+msgstr "མགོ་མིང་ཤོག་ལེབ་ཅིག་གུ་བྱིན་ཡོད་མི་(སྤྱིར་བཏང་ལུ་)ཡིག་ཆ་ཅིག་གི་ཚེས་གྲངས་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:260
+msgid "The descriptive and declarative information making up an ‘electronic title page’ prefixed to every TEI-conformant text"
+msgstr "ཊི་ཨི་ཨའི་ཀན་ཕོ་མེནཊི་ཚིག་ཡིག་ག་ར་ལུ་སྔོན་ཚིག་ཡོད་མི་་ ‘electronic title page’ ཅིག་བཟོ་མི་འགྲེལ་བཤད་བརྐྱབ་མི་དང་གསལ་བསྒྲགས་འབད་མི་བརྡ་དོན་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:261
+msgid "The imprint statement (place and date of publication, publisher name), as given (usually) at the foot of a title page"
+msgstr "མགོ་མིང་ཤོག་ལེབ་ཅིག་གི་མཇུག་ཡིག་འདི་ལུ་(སྤྱིར་བཏང་ལུ་)བྱིན་ཡོད་མི་བཟུམ་སྦེ་(པར་འགྲེམས་ཀྱི་ཚེས་གྲངས་དང་ས་གནས་ དཔར་བསྐྲུན་པའི་མིང་)དཔར་བསྐྲུན་མ་འབད་མི་གསལ་བཤད་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:262
+msgid "The label associated with an item in a list; in glossaries, marks the term being defined"
+msgstr "དོན་ཚིག་ངེས་འཛིན་འབད་ཡོད་མི་རྟགས་ཚུ་ ཚིག་ཐོ་ཚུ་ནང་ ཐོ་ཡིག་ཅིག་ནང་དོན་ཚིག་དང་གཅིག་ཁར་འབྲེལ་བའི་ཁ་ཡིག་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:263
+msgid "The languages, sublanguages, registers, dialects etc. represented within a text"
+msgstr "ཁ་སྐད་ཚུ་ ཐོ་དེབ་ཚུ་ སྐད་ཡིག་ཡན་ལག་ཚུ་ སྐད་ཡིག་ཚུ་ཚིག་ཡིག་ཅིག་གི་ནང་འཁོད་ཁྱད་ཚབ་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:264
+msgid "The largest possible subdivision of the body of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་མ་གཟུགས་འདི་གི་སྦོམ་སྲིད་པའི་སྡེ་ཚན་འོགམ་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:265
+msgid "The location at which a textual division generated automatically by a text-processing application is to appear"
+msgstr "ཚིག་ཡིག་བཟོ་སྦྱོར་གྱི་གློག་རིམ་འབྱུང་ནི་ཨིན་མི་གིས་རང་བཞིན་གྱིས་བཟོ་སཝབཏོན་འབད་ཡོད་མི་ཚིག་ཡིག་གི་སྡེ་ཚན་གྱི་གནས་ཁོངས་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:266
+msgid "The name (generic identifier) of an element"
+msgstr "རྣམ་གྲངས་ཅིག་གི་(རིགས་བརྒྱུད་ངོས་འཛིན་པ་)མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:267
+msgid "The name of a person or other agency responsible for making an electronic file available, other than a publisher or distributor"
+msgstr "དཔར་བསྐྲུན་པ་ཡང་ན་བགོ་བཀྲམ་པ་ཅིག་ལས་གཞན་གློག་ཆས་ཡིག་སྣོད་ཐོབ་ཚུགསཔ་ཅིག་བཟོ་མི་དོན་ལུ་གཞན་ལས་སྡེ་འགན་ཁག་ཡང་ན་གང་ཟག་ཅིག་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:268
+msgid "The name of a person or other agency responsible for the distribution of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་བགོ་བཀྲམ་དོན་ལུ་འགན་ཁག་ཡོད་མི་གཞན་ལས་སྡེ་ཡང་ན་མིང་ཅིག་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:269
+msgid "The name of a sponsoring organization or institution"
+msgstr "ཚོགས་སྡེ་ཡང་ན་སྤེལ་ཁང་གི་ཟད་འགྲོའི་སབྱིན་བདག་འབད་མི་ཅིག་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:270
+msgid "The name of an individual, institution, or organization responsible for the funding of a project or text"
+msgstr "ཚིག་ཡིག་ཡང་ན་ལས་འགུལ་ཅིག་གི་མ་དངུལ་འདི་གི་དོན་ལུ་འགན་ཁག་ཡོད་མི་ཚོགས་སྡེ་ཡང་ན་སྤེལ་ཁང་ ངོ་རྐྱང་ཅིག་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:271
+msgid "The name of the author of the document, as given on the title page (often but not always contained in a &lt;byline&gt;)"
+msgstr "མགོ་མིང་ཤོག་ལེབ་འདི་གུ་བྱིན་ཡོད་མི་བཟུམ་སྦེ་ཡིག་ཆ་འདི་གི་རྩོམ་པ་པོའི་མིང་འདི་ (འཕྲལ་འཕྲལ་ཨིན་རུང་ཨ་རྟག་རང་ &lt;གྱལ་གི་ནང་མེདཔ་ཨིན&gt;)།"
+
+#: ../dispspecs/teixlite.xds.in.h:272
+msgid "The name of the author(s), personal or corporate, of a work; the primary statement of responsibility for any bibliographic item"
+msgstr "དཔེ་དེབ་རིག་པའི་རྣམ་གྲངས་གང་རུང་ག་དོན་ལུ་འགན་ཁག་གི་གཞི་རིམ་གསལ་བཤད་་འདི་ལཱ་གཡོག་ཅིག་གི་ལས་ཁང་ཡང་ན་རང་དོན་རྩོམ་པ་པོའི(ཨེསི)འདི་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:273
+msgid "The name of the organization responsible for the publication or distribution of a bibliographic item"
+msgstr "དཔེ་དེབ་རིག་པའི་རྣམ་གྲངས་ཅིག་གི་པར་འགྲེམས་ཡང་ན་བགོ་བཀྲམ་འདི་གི་དོན་ལུ་ཚོགས་སྡེའི་འགན་ཁག་འདི་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:274
+msgid "The name of the place where a bibliographic item was published"
+msgstr "དཔེ་དེབ་རིག་པའི་རྣམ་གྲངས་དེ་དཔེ་བསྐྲུན་འབད་ཡོད་སའི་ས་གནས་འདི་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:275
+msgid "The name of the principal researcher responsible for the creation of an electronic text"
+msgstr "གློག་ཆས་ཚིག་ཡིག་ཅིག་གི་གསར་བསྐྲུན་འབད་ནི་དོན་ལུ་ཞིབ་འཚོལ་བ་འགན་ཁག་མ་རྩ་འདི་གི་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:276
+msgid "The original form of a reading, for which a regularized form is given in an attribute value"
+msgstr "དུས་རྒྱུན་བཟོ་ཡོད་མི་འབྲི་ཤོག་ཅིག་གི་དོན་ལུ་ལྷག་ནི་ཅིག་གི་འབྲི་ཤོག་ངོ་མ་འདི་ཁྱད་ཆོས་གནས་གོང་ཅིག་ནང་བྱིན་ཡོདཔ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:277
+msgid "The particularities of one edition of a text"
+msgstr "ཚིག་ཡིག་ཅིག་གི་དཔར་ཐེངས་གཅིག་གི་བྱེ་བྲག་འདི་ཚུ།"
+
+#: ../dispspecs/teixlite.xds.in.h:278
+msgid "The primary statement of responsibility given for a work on its title page or at the head or end of the work"
+msgstr "ལཱ་འདིའི་གུའི་མགོ་མིང་ཤོག་ལེབ་ཡང་ན་ལཱ་འདི་གི་མགུ་ཏོག་་ཡང་ན་མཇུག་ལུ་བྱིན་ཡོད་མི་འགན་ཁག་གི་གཞི་རིམ་གསལ་བཤད་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:279
+msgid "The title of a document, including all its constituents, as given on a title page"
+msgstr "མགོ་མིང་ཤོག་ལེབ་ཅིག་གུ་བྱིན་ཡོད་མི་བཟུམ་སྦེ་འདིའི་ཡན་ལག་ཚུ་ཆ་མཉམ་གྲངས་སུ་མ་རྩིས་བར་ཡིག་ཆ་ཅིག་གི་མགོ་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:280
+msgid "The title of a work, whether article, book, journal, or series, including any alternative titles or subtitles"
+msgstr "ལཱ་གཡོག་ཅིག་གི་མགོ་མིང་ ཐབས་གཞན་མགོ་མིང་ཚུ་ཡང་ན་མགོ་མིང་འོགམ་ཚུ་གང་རུང་གྲངས་སུ་རྩིས་བའི་རྩོམ་བྲིས་ དེབ་ གསར་དེབ་ ཡང་ན་རྒྱུན་རིམ་ཚུ་ཨིན་རུང་བཏུབ་ཨིན།"
+
+#: ../dispspecs/teixlite.xds.in.h:281
+msgid "The title page of a text, appearing within the front or back matter"
+msgstr "གདོང་་ཡང་ན་རྒྱབ་བྱེད་མཁན་འདིའི་ནང་འཁོད་འབྱུང་མི་ཚིག་ཡིག་ཅིག་གི་ཤོག་ལེབ་མགོ་མིང་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:282
+msgid "The whole body of a single unitary text, excluding any front or back matter"
+msgstr "གདོང་ཡང་ན་རྒྱབ་བྱེད་མཁན་གང་རུང་གྲངས་སུ་མ་རྩིས་བར་ཚིག་ཡིག་ཡུ་ནི་ཊ་རི་རྐྱང་པ་ཅིག་གི་མ་གཟུགས་ཧྲིལ་བུམ་འདི།"
+
+#: ../dispspecs/teixlite.xds.in.h:283
+msgid "Time"
+msgstr "དུས་ཚོད།"
+
+#: ../dispspecs/teixlite.xds.in.h:285
+msgid "Title Page"
+msgstr "མགོ་མིང་ཤོག་ལེབ།"
+
+#: ../dispspecs/teixlite.xds.in.h:286
+msgid "Title Part"
+msgstr "མགོ་མིང་ཡན་ལག"
+
+#: ../dispspecs/teixlite.xds.in.h:287
+msgid "Title Statement"
+msgstr "མགོ་མིང་གསལ་བཤད།"
+
+#: ../dispspecs/teixlite.xds.in.h:288
+msgid "Trailer"
+msgstr "དོན་སྙིང་གསལ་བསྒྲགས།"
+
+#: ../dispspecs/teixlite.xds.in.h:289
+msgid "Unclear"
+msgstr "བསལ་ཏོག་ཏོ་མེདཔ།"
+
+#: ../dispspecs/teixlite.xds.in.h:290
+msgid "Verse Line (&lt;l&gt;)"
+msgstr "ཐོན་རིམ་གྱལ་ (&lt;l&gt;)"
+
+#: ../dispspecs/website-layout.xds.in.h:1
+msgid "Additional Content"
+msgstr "ནང་དོན་ཁ་སྐོང་བརྐྱབ་ནི།"
+
+#: ../dispspecs/website-layout.xds.in.h:2
+msgid "Configuration Data"
+msgstr "རིམ་སྒྲིག་གནས་སྡུད།"
+
+#: ../dispspecs/website-layout.xds.in.h:3
+msgid "Content"
+msgstr "ནང་དོན།"
+
+#: ../dispspecs/website-layout.xds.in.h:5
+msgid "Header Link"
+msgstr "མགོ་ཡིག་འབྲེལ་མཐུད།"
+
+#: ../dispspecs/website-layout.xds.in.h:6
+msgid "Holder"
+msgstr "འཛིན་མི།"
+
+#: ../dispspecs/website-layout.xds.in.h:7
+#: ../dispspecs/xsl.xds.in.h:2
+msgid "Stylesheet"
+msgstr "སི་ཊ་ཡེལ་ཤིཊི"
+
+#: ../dispspecs/website-layout.xds.in.h:8
+msgid "Table of Contents"
+msgstr "ཐིག་ཁྲམ་གྱི་ནང་དོན་ཚུ།"
+
+#: ../dispspecs/website-layout.xds.in.h:9
+msgid "Website Layout"
+msgstr "ཝེབ་ས་ཁོངས་སྒྲིག་བཀོད།"
+
+#: ../dispspecs/website-webpage.xds.in.h:5
+msgid "A sumamry."
+msgstr "བཅུད་དོན་ཅིག"
+
+#: ../dispspecs/website-webpage.xds.in.h:62
+msgid "Part Introduction"
+msgstr "ཡན་ལག་འགོ་འཛུགས།"
+
+#: ../dispspecs/website-webpage.xds.in.h:99
+msgid "Web Page"
+msgstr "ཝེབ་ཤོག་ལེབ།"
+
+#: ../dispspecs/website-webpage.xds.in.h:100
+msgid "Webpage"
+msgstr "ཝེབ་ཤོག་ལེབ།"
+
+#: ../dispspecs/website-webpage.xds.in.h:102
+msgid "email"
+msgstr "གློག་འཕྲིན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "བཅུད་སྡུད་གཞི་སྒྲུབ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr "ཡིག་ཚུགས་མེན་མི་ནང་དོན་ཐབས་གཞན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "མངའ་ཁོངས།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "གཞི་རྟེན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr "བི་བཀོད་རྒྱ་མེདཔ་གཏང་ནི།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "བིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "འདྲེན་ཚིག་འགག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "ཨེབ་རྟ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "ཀེར་ཐིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "ཀེར་ཐིག་གི་སྡེ་ཚན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "ངེས་ཚིག་ཐོ་ཡིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "ངེས་ཚིག་གི་ཐ་སྙད།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "བཏོན་གཏང་ཡོད་མི་ཚིག་ཡིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "སྡེ་ཚན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "བང་བཙོང་ཡོད་མི་གྱལ་མཚམས།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "གཞི་སྒྲུབ་ཚད་འཛིན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "གཞི་སྒྲུབ་ཚད་འཛིན་གྱི་སྡེ་ཚན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "ཨེཆ་ཊི་ཨེམ་ཨེལ་གྱི་ཤོག་ལེབ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "མགུ་རྒྱན(གནས་རིམ་ ༤)"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "མགུ་རྒྱན(གནས་རིམ་ ༥)།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "མགུ་རྒྱན(གནས་རིམ་ ༦)།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "ཐད་སྙོམས་པའི་ལམ་ལུགས།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "གཟུགས་བརྙན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "གཟུགས་བརྙན་གྱི་ས་ཁྲ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "གྱལ་རིམ་ནང་འདྲེན་ཚིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "བཙུགས་ཡོད་མི་ཚིག་ཡིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "ཕན་ཚུན་འབྲེལ་ལྡན་གྱི་འབྲི་ཤོག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "ཨི་ཊ་ལིཀ"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "ལྡེ་སྒྲོམ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "གཞམ་རྒྱུད།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "མེ་ཊ་བརྡ་དོན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "ཐིག་མང་ཚིག་ཡིག་གི་ས་སྒོ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "དངོས་པོ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "གདམ་ཁའི་སྡེ་ཚན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "གདམ་སེལ་འཐུ་འབད་མི།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "ཚད་བཟུང་།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "སྔ་གོང་ཚད་སྒྲིག་ཡོད་མི་ཚིག་ཡིག"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "དཔེ་ཚད།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "ཡིག་ཚུགས།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "སེལ་འཐུ་འབད་བཏུབ་མི་གདམ་ཁ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "ཆུང་ཀུ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:62
+#: ../glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "འཕར་ཚད།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:64
+#: ../glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "བཟོ་རྣམ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "ཐིག་ཁྲམ་གྱི་ནང་ཐིག(གནས་སྡུད)།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "ཐིག་ཁྲམ་གྱི་ནང་ཐིག(མགོ་ཡིག)།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "ཊེ་ལི་ཊའིབ།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "ཨེཆ་ཊི་ཨེམ་ཨེལ་གྱི་ཨེགསི་ཨེམ་ཨེལ་ཐོན་རིམ་དམ་དྲགས་འདི།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "འགྱུར་ཅན།"
+
+#: ../dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "ཨེགསི་ཨེཆ་ཊི་ཨེམ་ཨེལ་ ༡.༠(དམ་དྲགས)།"
+
+#: ../dispspecs/xsl.xds.in.h:1
+msgid "An XSL stylesheet describes a way of transforming a document of one type into one in another form. For example, it might describe a way of converting DocBook files into HTML web pages."
+msgstr "ཨེགསི་ཨེསི་ཨེལ་སི་ཊ་ཡེལ་ཤིཊི་ཅིག་གིས་ཡིག་ཆ་གཅིག་གི་གཞན་འབྲི་ཤོག་གཅིག་ནང་བཟོ་བསྒྱུར་འབད་ནི་གི་ཐབས་ལམ་ཅིག་འགྲེལ་བཤད་འབདཝ་ཨིན། དཔེར་ན་ ཡིག་ཆའི་དེབ་ཡིག་སྣོད་ཚུ་ཨེཆ་ཊི་ཨེམ་ཨེལ་ཝེབ་ཤོག་ལེབ་ཚུ་ནང་ན་གཞི་བསྒྱུར་འབད་ནི་གི་ཐབས་ལམ་ཅིག་འགྲེལ་བཤད་འབད་འོང་།"
+
+#: ../dispspecs/xsl.xds.in.h:3
+msgid "Template-matching Rule"
+msgstr "མཐུན་སྒྲིག་འབད་མི་ལམ་ལུགས་ཊེམ་པེལེཊི།"
+
+#: ../dispspecs/xsl.xds.in.h:4
+msgid "XSL stylesheet"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་སི་ཊ་ཡེལ་ཤིཊི།"
+
+#: ../data/conglomerate.desktop.in.h:1
+#: ../src/cong-menus.c:1444
+#: ../src/cong-primary-window.c:605
+#: ../src/cong-primary-window.c:815
+#: ../src/cong-primary-window.c:817
+#: ../src/cong-primary-window.c:823
+msgid "Conglomerate XML Editor"
+msgstr "ཀོང་ལོ་མི་རེཊི་ཨེགསི་ཨེམ་ཨེལ་་ཞུན་དགཔ།"
+
+#: ../data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་སྣོད་ཚུ་ཞུན་དག་འབད།"
+
+#: ../data/conglomerate.schemas.in.h:1
+msgid "A list of custom directories where Conglomerate should look for the display specification (called dispspec, or .xds) files, in addition to the standard installation path. When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used."
+msgstr "འོས་ལྡན་གཞི་བཙུགས་འགྲུལ་ལམ་འདི་ལུ་ཁ་སྐོང་བརྐྱབ་ནི་ནང་ཡིག་སྣོད་ཚུ་(ཌིསིཔ་པེཀ་ ཡང་ན་ཨེགསི་ཌི་ཨེསི་ཟེར་མི་)བཀྲམ་སྟོན་གསལ་བཀོད་འདི་གི་དོན་ལུ་བལྟ་དགོ་མི་ཀོང་ལོ་མི་རེཊི་ཡོད་སའི་སྲོལ་སྒྲིག་སྣོད་ཐོ་ཚུ་གི་ཐོ་ཡིག་ཅིག ཡིག་ཆ་ཚུ་མངོན་གསལ་འབད་ཡོདཔ་ད་་མཐུན་སྒྲིག་འབད་བའི་ཌིསིཔ་པེཀ་འདི་སྣོད་ཐོ་དེ་ཚུ་ནང་་གི་དོན་ལུ་འཚོལ་ཞིབ་འབད་ཡོདཔ་ དང་དང་པ་མཐུན་སྒྲིག་འབད་མི་ཌིསིཔ་པེཀ་ཡིག་སྣོད་འདི་ལག་ལེན་འཐབ་ཡོདཔ་ཨིན།"
+
+#: ../data/conglomerate.schemas.in.h:2
+msgid "A list of directories where Conglomerate should look for template xml files. These documents will be used by the new document assistant as types of documents which can be created by the user."
+msgstr "ཊེམ་པེ་ལེཊི་ཨེགསི་ཨེམ་ཨེལ་ཡིག་སྣོད་ཚུ་གི་དོན་ལུ་ཀོང་ལོ་མི་རེཊི་བལྟ་དགོཔ་ཡོད་ས་སྣོད་ཐོ་ཚུ་གི་ཐོ་ཡིག་ཅིག ཡིག་ཆ་དེ་ཚུ་ལག་ལེན་པ་གིས་གསར་བསྐྲུན་འབད་བཏུབ་པའི་ཡིག་ཆ་ཚུའི་དབྱེ་བ་བཟུམ་སྦེ་ཡིག་ཆ་ལས་རོགས་གསརཔ་འདི་གིས་ལག་ལེན་འཐབ་བཏུབ་ཨིན།"
+
+#: ../data/conglomerate.schemas.in.h:3
+msgid "Custom locations for display specification files."
+msgstr "གསལ་བཀོད་ཡིག་སྣོད་ཚུ་བཀྲམ་སྟོན་འབད་ནི་དོན་ལུ་སྲོལ་སྒྲིག་གནས་ཁོངས་ཚུ།"
+
+#: ../data/conglomerate.schemas.in.h:4
+msgid "Locations for template files."
+msgstr "ཊེམ་པེལེཊི་ཡིག་སྣོད་ཚུའི་དོན་ལུ་གནས་ཁོངས་ཚུ།"
+
+#: ../glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "ཡིག་སྣོད་ནང་འདྲེན་འབད་ནི་གདམ་ཁ་ཚུ།"
+
+#: ../glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "ནང་འདྲེན་པ།"
+
+#: ../glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "གདམ་ཁ་ཚུ།"
+
+#: ../glade/cong-file-properties.glade.h:1
+#: ../src/cong-node-properties-dialog.c:1193
+#: ../src/cong-node-properties-dialog.c:1321
+msgid "Advanced"
+msgstr "ཡར་བསྐྱོད་འབད་ཡོདཔ།"
+
+#: ../glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "གཞི་རིམ།"
+
+#: ../glade/cong-file-properties.glade.h:4
+#: ../src/cong-document.c:1003
+msgid "Document Type Declaration"
+msgstr "ཡིག་ཆའི་དབྱེ་བ་གསལ་བསྒྲགས།"
+
+#: ../glade/cong-file-properties.glade.h:5
+msgid "Encoding"
+msgstr "ཨིན་ཀོ་ཌིང་།"
+
+#: ../glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr "ཕྱིའི་ཨའི་ཌི།"
+
+#: ../glade/cong-file-properties.glade.h:7
+#: ../src/cong-file-export.c:281
+#: ../src/cong-file-print.c:217
+msgid "General"
+msgstr "ཡོངས་ཁྱབ།"
+
+#: ../glade/cong-file-properties.glade.h:8
+#: ../src/cong-node-properties-dialog.c:247
+msgid "Location"
+msgstr "གནས་ཁོངས།"
+
+#: ../glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr "ལེགས་བཅོས་འབད་ཡོདཔ།"
+
+#: ../glade/cong-file-properties.glade.h:11
+msgid "Number of elements:"
+msgstr "རྣམ་གྲངས་ཚུ་གི་ཨང་།:"
+
+#: ../glade/cong-file-properties.glade.h:12
+msgid "Number of words :"
+msgstr "མིང་ཚིག་ཚུ་གི་ཨང་། :"
+
+#: ../glade/cong-file-properties.glade.h:13
+#: ../glade/docbook-common-properties.glade.h:3
+#: ../glade/docbook-orderedlist-properties.glade.h:9
+#: ../glade/docbook-ulink-properties.glade.h:3
+#: ../glade/plugin-arbitrary.glade.h:5
+#: ../glade/plugin-random.glade.h:4
+#: ../src/cong-node-properties-dialog.c:1283
+msgid "Properties"
+msgstr "རྒྱུ་དངོས་ཚུ།"
+
+#: ../glade/cong-file-properties.glade.h:14
+msgid "Standalone"
+msgstr "རང་དབང་།"
+
+#: ../glade/cong-file-properties.glade.h:16
+msgid "System ID"
+msgstr "རིམ་ལུགས་ཀྱི་ཨའི་ཌི།"
+
+#: ../glade/cong-file-properties.glade.h:19
+msgid "XML Header"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་གྱི་མགོ་ཡིག"
+
+#: ../glade/cong-file-properties.glade.h:20
+#: ../src/cong-file-properties.c:279
+msgid "_Associate this DTD"
+msgstr "ཌི་ཊི་ཌི་འདི་འབྲེལ་བ་འཐབ།(_A)"
+
+#: ../glade/cong-file-properties.glade.h:21
+msgid "label_dtd_external_id"
+msgstr "ཌི་ཊི་ཌི་ཕྱིའི་ཨའི་ཌི་ཁ་ཡིག་བཏགས།(_d)(_e)(_i)"
+
+#: ../glade/cong-file-properties.glade.h:22
+msgid "label_dtd_notes"
+msgstr "ཌི་ཊི་ཌི་དྲན་འཛིན་ཚུ་ཁ་ཡིག་བཏགས།(_d)(_n)"
+
+#: ../glade/cong-file-properties.glade.h:23
+msgid "label_dtd_system_id"
+msgstr "ཌི་ཊི་ཌི་རིམ་ལུགས་ཨའི་ཌི་ཁ་ཡིག་བཏགས།(_d)(_s)(_i)"
+
+#: ../glade/cong-file-properties.glade.h:24
+msgid "label_elements"
+msgstr "རྣམ་གྲངས་ཚུ་ཁ་ཡིག་བཏགས།(_e)"
+
+#: ../glade/cong-file-properties.glade.h:25
+msgid "label_location"
+msgstr "གནས་ཁོངས་ཁ་ཡིག་བཏགས།(_l)"
+
+#: ../glade/cong-file-properties.glade.h:26
+msgid "label_modified"
+msgstr "ལེགས་བཅོས་འབད་ཡོད་མི་ཁ་ཡིག་བཏགས།(_m)"
+
+#: ../glade/cong-file-properties.glade.h:27
+msgid "label_name"
+msgstr "མིང་ཁ་ཡིག་བཏགས།(_n)"
+
+#: ../glade/cong-file-properties.glade.h:28
+msgid "label_typedesc"
+msgstr "དབྱེ་བ་མར་འབབ་ཁ་ཡིག་བཏགས།(_t)"
+
+#: ../glade/cong-file-properties.glade.h:29
+msgid "label_typename"
+msgstr "དབྱེ་བ་མིང་ཁ་ཡིག་བཏགས།(_t)"
+
+#: ../glade/cong-file-properties.glade.h:30
+msgid "label_words"
+msgstr "མིང་ཚིག་ཚུ་ཁ་ཡིག་བཏགས།(_w)"
+
+#: ../glade/cong-file-properties.glade.h:31
+msgid "label_xml_encoding"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཨིན་ཀོ་ཌིང་ཁ་ཡིག་བཏགས།(_x)(_e)"
+
+#: ../glade/cong-file-properties.glade.h:32
+msgid "label_xml_standalone"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་རང་དབང་ཁ་ཡིག་བཏགས།(_x)(_s)"
+
+#: ../glade/cong-file-properties.glade.h:33
+msgid "label_xml_version"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཐོན་རིམ་ཁ་ཡིག་བཏགས།(_x)(_v)"
+
+#: ../glade/cong-find-replace.glade.h:1
+#: ../glade/custom-element.glade.h:1
+#: ../glade/plugin-arbitrary.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../glade/cong-find-replace.glade.h:2
+msgid "Find Next"
+msgstr "ཤུལ་མམ་གྱི་འཚོལ།"
+
+#: ../glade/cong-find-replace.glade.h:3
+msgid "Match _entire word only"
+msgstr "མིང་ཚིག་རྐྱངམ་ཅིག་ཧྲིལ་བུ་མཐུན་སྒྲིག་འབད།(_e)"
+
+#: ../glade/cong-find-replace.glade.h:4
+#: ../src/cong-edit-find-and-replace.c:187
+#: ../src/cong-edit-find-and-replace.c:836
+#: ../src/cong-edit-find-and-replace.c:850
+msgid "Replace"
+msgstr "ཚབ་བཙུགས།"
+
+#: ../glade/cong-find-replace.glade.h:5
+#: ../src/cong-edit-find-and-replace.c:908
+msgid "Replace All"
+msgstr "ཆ་མཉམ་ཚབ་བཙུགས།"
+
+#: ../glade/cong-find-replace.glade.h:6
+msgid "Replace _with: "
+msgstr "དང་གཅིག་ཁར་ཚབ་བཙུགས།(_w): "
+
+#: ../glade/cong-find-replace.glade.h:7
+msgid "Search _backwards"
+msgstr "རྒྱབ་བསྐྱོད་འཚོལ་ཞིབ་འབད།(_b)"
+
+#: ../glade/cong-find-replace.glade.h:8
+msgid "_Match case"
+msgstr "ཡི་གུ་མཐུན་སྒྲིག་འབད།(_M)"
+
+#: ../glade/cong-find-replace.glade.h:9
+msgid "_Search for: "
+msgstr "དོན་ལུ་འཚོལ་ཞིབ་འབད།(_S): "
+
+#: ../glade/cong-find-replace.glade.h:10
+msgid "_Wrap around"
+msgstr "མཐའ་སྐོར་ལོག་མཚམས་བཟོ་ནི།(_W)"
+
+#: ../glade/cong-preferences.glade.h:1
+msgid "Conglomerate Preferences"
+msgstr "ཀོང་ལོ་མི་རེཊི་དགའ་གདམ་ཚུ།"
+
+#: ../glade/cong-preferences.glade.h:2
+msgid "Document Types"
+msgstr "ཡིག་ཆ་དབྱེ་བ་ཚུ།"
+
+#: ../glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "པ་ལག་ཨིནསི།"
+
+#: ../glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "རྣམ་གྲངས་ནམ་དགོས།"
+
+#: ../glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "རྣམ་གྲངས་མིང་།"
+
+#: ../glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "རྣམ་གྲངས་དབྱེ་བ།"
+
+#: ../glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "ང་ལུ་སྣང་དག་མེད།"
+
+#: ../glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "གཞི་བཀོད།"
+
+#: ../glade/docbook-common-properties.glade.h:1
+msgid "<small>What is the scope of the text? You can use this page to specify the relevancy of the text to different  types of computer system.</small>"
+msgstr "<small>ཚིག་ཡིག་འདི་གི་འོས་སྐབས་ག་ཅི་སྨོ? ཁྱོད་རང་གློག་རིག་རིམ་ལུགས་ཀྱི་དབྱེ་བ་སོ་སོ་ལུ་ཚིག་ཡིག་འདི་གི་འབྲེལ་བ་ལུ་གསལ་བཀོད་འབད་ནི་ལུ་ཤོག་ལེབ་འདི་ལག་ལེན་འཐབ།</small>"
+
+#: ../glade/docbook-common-properties.glade.h:4
+#: ../src/plugin-docbook.c:2155
+msgid "Revisions"
+msgstr "བསྐྱར་སྦྱོང་ཚུ།"
+
+#: ../glade/docbook-common-properties.glade.h:5
+#: ../src/plugin-docbook.c:2143
+msgid "Scope"
+msgstr "འོས་སྐབས།"
+
+#: ../glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"ས་གནས་འཛིན་མི་ཤོག་ལེབ་ཅིག་ཨིན། མཐར་ཐུག་ལུ་ཁྱོད་ཀྱིས་ལག་ལེན་བསྟར་བའི་ཡིག་ཆའི་དེབ་ཀྱི་ཐོན་རིམ་རྗེས་འཚོལ་བརྡ་དོན་འཇམ་སམ་ལུ་ཤོག་ལེབ་འདི་ལག་ལེན་འཐབ་བཏུབ་ཨིན།\n"
+"\n"
+"འདི་#༡༢༢༥༣༨་ དཀའ་ངལ་བཟུམ་སྦེ་བག་ཛི་ལ་ནང་ཐོ་བཀོད་འབད་ཡོདཔ་ཨིན།"
+
+#: ../glade/docbook-common-properties.glade.h:9
+msgid "_Architecture"
+msgstr "བཟོ་བཀོད།(_A)"
+
+#: ../glade/docbook-common-properties.glade.h:10
+msgid "_Operating System"
+msgstr "རིམ་ལུགས་བཀོལ་སྤྱོད་འབད་དོ།(_O)"
+
+#: ../glade/docbook-common-properties.glade.h:11
+msgid "_User Level"
+msgstr "ལག་ལེན་པའི་གནས་རིམ།(_U)"
+
+#: ../glade/docbook-common-properties.glade.h:12
+msgid "_Vendor"
+msgstr "བཅོང་མི།(_V)"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "༡ ༢ ༣ ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "ཨེ་ བི་ སི ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr "ཧེ་མམ་གྱི་ཐོ་ཡིག་ལས་ཨང་བཏགས་ནི་འཕྲོ་མཐུད།"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:4
+#: ../src/cong-error-dialog.c:337
+#: ../src/cong-error-file-open.c:518
+msgid "Details"
+msgstr "རྒྱས་བཤད།"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr "མཐའ་འཁོར་གྱི་ཐོ་ཡིག་ཚུ་ལས་ཨང་བཏགས་ནི་བརྒྱུད།"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr "ཀེར་ཕྲང་བར་སྟོང་ཆུང་ཀུ་བཟོ།"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "ཨང་བཏགས་ནི།"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: ../glade/docbook-ulink-properties.glade.h:1
+msgid "<small>Some DocBook applications allow the behaviour of the link to be customised using this \"type\" attribute. </small>"
+msgstr "<small> ཡིག་ཆའི་དེབ་གློག་རིམ་ཚུ་ལ་ལོ་གིས་\"type\" ཁྱད་ཆོས་འདི་ </small>ལག་ལེན་འཐབ་འབྲེལ་ལམ་གྱི་སྤྱོད་ལམ་འདི་་སྲོལ་སྒྲིག་བཟོ་བཅུགཔ་ཨིན།"
+
+#: ../glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "དམིགས་གཏད།"
+
+#: ../glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "ཡུ་ཨར་ཨེལ།"
+
+#: ../glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr "འབྲེལ་ལམ་འདི་བརྟག་ཞིབ་འབད།(_T)"
+
+#: ../glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr "ཉེ་གནས།"
+
+#: ../glade/plugin-arbitrary.glade.h:3
+msgid "Namespace URI"
+msgstr "མིང་གི་བར་སྟོང་ཡུ་ཨར་ཨའི།"
+
+#: ../glade/plugin-arbitrary.glade.h:4
+msgid "Preview"
+msgstr "སྔོན་ལྟ།"
+
+#: ../glade/plugin-arbitrary.glade.h:6
+msgid "Top-level Element"
+msgstr "ཆེ་རིམ་རྣམ་གྲངས།"
+
+#: ../glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "གསར་བསྐྲུན་ཚད་བཟུང་ཚུ།"
+
+#: ../glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "གཏིང་ཚད།"
+
+#: ../glade/plugin-random.glade.h:3
+#: ../src/cong-document.c:991
+msgid "Document Type"
+msgstr "ཡིག་ཆའི་དབྱེ་བ།"
+
+#: ../glade/string_selection_dialog.glade.h:1
+msgid "string_selection_dialog"
+msgstr "ཡིག་རྒྱུན་སེལ་འཐུ་ཌའི་ལོག(_s)(_d)"
+
+#: ../src/cong-app.c:960
+msgid "Unit test: quit immediately (after loading any files specified on the command-line)"
+msgstr "ཆ་འཕྲན་བརྟག་ཞིབ:དེ་འཕྲལ་ལས་སྤང་(བརྡ་བཀོད་གྱལ་འདི་གུ་ཡིག་སྣོད་ཚུ་གསལ་བཀོད་འབད་ཡོད་མི་གང་རུང་མངོན་གསལ་འབད་ཚར་བའི་ཤུལ་ལུ།)"
+
+#: ../src/cong-app.c:1021
+msgid "XML Editor"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཞུན་དག་པ།"
+
+#: ../src/cong-app.c:1158
+msgid "Conglomerate could not load any xds files"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ཨེགསི་ཌི་ཨེསི་ཡིག་སྣོད་ཚུ་གང་རུང་མངོན་གསལ་འབད་མ་ཚུགསཔ།"
+
+#: ../src/cong-app.c:1160
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ཡིག་ཆའི་དབྱེ་བ་ཚུ་གི་འགྲེལ་བཤད་གང་རུང་ཚུ་འཚོལ་མ་ཐོབ་པར་ཡོདཔ།"
+
+#: ../src/cong-app.c:1162
+msgid "If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it.  If you have changed the default setting for the display spec path, please double check that as well."
+msgstr "ཁྱོད་ཀྱིས་འཛོལ་བ་འདི་མཐོང་པ་ཅིན་ ཁྱོད་ཀྱིས་ཀོང་ལོ་མི་རེཊི་སྦྲགས་ཡོདཔ་བཟུམ་ ཨིན་རུང་གཞི་བཙུགས་མ་འབད་བར་ཡོདཔ་ཨིན། གཞི་བཙུགས་འབད་ནི་འབད་རྩོལ་བསྐྱེད། ཁྱོད་ཀྱིས་བཀྲམ་སྟོན་སི་པེཀ་འགྲུལ་ལམ་འདི་གི་དོན་ལུ་སྔོན་སྒྲིག་སྒྲིག་སྟངས་འདི་བསྒྱུར་བཅོས་འབད་ཡོད་པ་ཅིན་ དེ་ཡང་བརྟག་ཞིབ་ཚར་གཉིས་འབད་གནང་།"
+
+#: ../src/cong-attribute-editor-cdata.c:206
+#: ../src/cong-attribute-editor-nmtoken.c:272
+#: ../src/cong-node-properties-dialog.c:470
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "ཁྱད་ཆོས་ཁ་སྐོང་བརྐྱབ \"%s\"།"
+
+#: ../src/cong-attribute-editor-cdata.c:232
+#: ../src/cong-attribute-editor-nmtoken.c:298
+#: ../src/cong-attribute-editor.c:253
+#: ../src/cong-attribute-wrapper.c:263
+#: ../src/cong-node-properties-dialog.c:506
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "ཁྱད་ཆོས་བཏོན་གཏང་ \"%s\"།"
+
+#: ../src/cong-attribute-editor-enumeration.c:122
+msgid "(unspecified)"
+msgstr "(གསལ་བཀོད་བཤོལ་ཡོད་མི)།"
+
+#: ../src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr "བིརི་ཊཱོན།"
+
+#: ../src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr "ཀེ་ཊ་ལཱན།"
+
+#: ../src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr "ཅེཛི།"
+
+#: ../src/cong-attribute-editor-lang.c:51
+msgid "Danish"
+msgstr "ཌེ་ནིཤ།"
+
+#: ../src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr "ཇར་མཱན།(ཇར་མ་ནི)།"
+
+#: ../src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr "ཇར་མཱན། (སུའིསི)།"
+
+#: ../src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr "ཨིང་ལིཤ(ཨ་མི་རི་ཀཱན)།"
+
+#: ../src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr "ཨིང་ལིཤ(བིརི་ཊིཤ)"
+
+#: ../src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr "ཨིང་ལིཤ(ཀེ་ན་ཌི་ཡཱན)།"
+
+#: ../src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr "ཨིསི་པེ་རེན་ཊོ།"
+
+#: ../src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr "སིཔེ་ནིཤི།"
+
+#: ../src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr "ཕ་རོ་སི།"
+
+#: ../src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr "ཕིརེནཆི(ཕརཱནསི)།"
+
+#: ../src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr "ཕིརེནཆི(སུའིསི)།"
+
+#: ../src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr "ཨི་ཊ་ལི་ཡཱན།"
+
+#: ../src/cong-attribute-editor-lang.c:63
+msgid "Dutch"
+msgstr "ཌཆ།"
+
+#: ../src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr "ནོར་ཝི་ཇི་ཡཱན།"
+
+#: ../src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr "པོ་ལིཤ།"
+
+#: ../src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr "པོར་ཊུ་གེསི(པོར་ཊུ་གཱལ)།"
+
+#: ../src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr "པོར་ཊུ་གིསི(བ་ར་ཛི་ལི་ཡཱན)།"
+
+#: ../src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr "ར་ཤི་ཡཱན།"
+
+#: ../src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr "སུའི་ཌིཤི།"
+
+#: ../src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr "ཡུཀ་རའི་ནི་ཡཱན།"
+
+#: ../src/cong-attribute-editor-lang.c:157
+msgid "No Language"
+msgstr "ཁ་སྐད་མེདཔ།"
+
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: ../src/cong-attribute-editor-nmtoken.c:225
+#, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "ཁྱད་ཆོས་གཞི་སྒྲིག་ \"%s\" ལུ་ \"%s\"མི་བཏུབ།"
+
+#: ../src/cong-attribute-editor-nmtoken.c:236
+msgid "The attribute value must be an XML name token."
+msgstr "ཁྱད་ཆོས་གནས་གོང་འདི་ཨེགསི་ཨེམ་ཨེལ་མིང་ངོ་རྟགས་ཅིག་དགོ།"
+
+#: ../src/cong-attribute-editor-nmtoken.c:237
+msgid "XML name tokens can only contain alphanumeric and/or ideographic characters and the punctuation marks _,-, ., and :. It can not contain whitespace characters."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་མིང་ངོ་རྟགས་ཚུ་རྐྱངམ་ཅིག་ནང་ཀ་ཁ་ཨང་ཡིག་ཡོདཔ་དང་/ཡང་ན་འདྲ་ཡིག་གི་ཡིག་འབྲུ་ཚུ་དང་ཡིག་རྟགས་ཀྱི་རྟགས་ཚུ་_,-, .,དང་:.འདི་ནང་བར་སྟོང་དཀརཔོ་གི་ཡིག་འབྲུ་ཚུ་མེདཔ་ཨིན།"
+
+#: ../src/cong-attribute-editor.c:249
+#: ../src/cong-attribute-wrapper.c:232
+#: ../src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "ཁྱད་ཆོས་ \"%s\" ལུ་ \"%s\"གཞི་སྒྲིག་འབད།"
+
+#: ../src/cong-dialog.c:301
+msgid "_Close without Saving"
+msgstr "སྲུང་བཞག་མ་འབད་བར་་ཁ་བསྡམ།"
+
+#: ../src/cong-dialog.c:316
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "ཁ་བསྡམས་པའི་ཧེ་མ་ \"%s\" ཡིག་ཆ་ལུ་བསྒྱུར་བཅོས་ཚུ་སྲུང་བཞག་འབད་ནི་ཨིན་ན?"
+
+#: ../src/cong-dialog.c:321
+#, c-format
+msgid "If you close without saving, changes from the past %li hours will be discarded."
+msgstr "ཁྱོད་ཀྱིས་སྲུང་བཞག་མ་འབད་བར་ཁ་བསྡམ་པ་ཅིན་%li འདས་པའི་དུས་ཚོད་ཚུ་ལས་བསྒྱུར་བཅོས་ཚུ་བཏོན་མཀོག་འོང་།"
+
+#: ../src/cong-dialog.c:323
+#, c-format
+msgid "If you close without saving, changes from the past %li minutes will be discarded."
+msgstr "ཁྱོད་ཀྱིས་སྲུང་བཞག་མ་འབད་བར་ཁ་བསྡམ་པ་ཅིན་%li འདས་པའི་སྐར་མ་ཚུ་ལས་བསྒྱུར་བཅོས་ཚུ་བཏོན་བཀོག་འོང་།"
+
+#: ../src/cong-dialog.c:325
+msgid "If you close without saving, changes from the past minute will be discarded."
+msgstr "ཁྱོད་ཀྱིས་སྲུང་བཞག་མ་འབད་བར་ཁ་བསྡམ་པ་ཅིན་འདས་པའི་སྐར་མ་ལས་བསྒྱུར་བཅོས་ཚུ་བཏོན་བཀོག་འོང་།"
+
+#: ../src/cong-dialog.c:379
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "སྲུང་བཞག་མ་འབད་མི་བསྒྱུར་བཅོས་ཚུ་ཡིག་ཆ་ལུ་རྒྱབ་ལོག་ནི་ཨིན་ན \"%s\"?"
+
+#: ../src/cong-dialog.c:384
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "འདས་པའི་དུས་ཚོད་ཚུ་ལས %li་བསྒྱུར་བཅོས་ཚུ་ བཏོན་བཀོག་འོང་།"
+
+#: ../src/cong-dialog.c:386
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "འདས་པའི་སྐར་མ་ཚུ་ལས་ %li བསྒྱུར་བཅོས་ཚུ་བཏོན་བཀོག་འོང་།"
+
+#: ../src/cong-dialog.c:388
+msgid "Changes from the past minute will be discarded."
+msgstr "འདས་པའི་སྐར་མ་འདི་ལས་བསྒྱུར་བཅོས་ཚུ་བཏོན་བཀོག་འོང་།"
+
+#: ../src/cong-dispspec-element.c:661
+#: ../src/cong-xpath-expression.c:248
+msgid "(xpath failed)"
+msgstr "(ཨེགསི་འགྲུལ་ལམ་འཐུས་ཤོར་ཡོདཔ།)"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: ../src/cong-dispspec-element.c:697
+msgid "<untitled>"
+msgstr "<untitled>"
+
+#: ../src/cong-dispspec-registry.c:108
+msgid "Conglomerate could not read its registry of document types."
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་འདིའི་ཡིག་ཆའི་དབྱེ་བ་ཚུ་གི་ཐོ་མཛོད་ལྷག་མ་ཚུགསཔ།"
+
+#: ../src/cong-dispspec-registry.c:111
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་གནས་ཁོངས་འདི་ནང་གི་ཡིག་སྣོད་ཚུ་ཆ་མཉམ་ལུ་བལྟ་ནི་དཔའ་བཅམ་ཡོདཔ།"
+
+#: ../src/cong-dispspec-registry.c:333
+#: ../src/cong-file-new.c:343
+msgid "File Type"
+msgstr "ཡིག་སྣོད་ཀྱི་དབྱེ་བ།"
+
+#: ../src/cong-dispspec-registry.c:344
+msgid "Coverage"
+msgstr "ཁྱབ་ཁོངས།"
+
+#: ../src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "མིང་མ་བཏགས་མི།"
+
+#: ../src/cong-dispspec.c:536
+msgid "No description available."
+msgstr "འགྲེལ་བཤད་ཐོབ་མ་ཚུགསཔ།"
+
+#: ../src/cong-document.c:651
+msgid "(Untitled)"
+msgstr "(Untitled)"
+
+#: ../src/cong-document.c:955
+#, c-format
+msgid "Attribute \"%s\""
+msgstr "ཁྱད་ཆོས།\"%s\"།"
+
+#: ../src/cong-document.c:962
+#, c-format
+msgid "Text \"%s\""
+msgstr "ཚིག་ཡིག \"%s\"།"
+
+#: ../src/cong-document.c:968
+msgid "Character Data"
+msgstr "ཡིག་འབྲུའི་གནས་སྡུད།"
+
+#: ../src/cong-document.c:971
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "ངོ་བོ་ལུ་གཞི་བསྟུན \"%s\"།"
+
+#: ../src/cong-document.c:974
+#, c-format
+msgid "Entity \"%s\""
+msgstr "ངོ་བོ \"%s\"།"
+
+#: ../src/cong-document.c:977
+msgid "XML Processing Instruction"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་བཟོ་སྦྱོར་གྱི་བསླབ་སྟོན།"
+
+#: ../src/cong-document.c:982
+#, c-format
+msgid "Comment \"%s\""
+msgstr "བསམ་བཀོད\"%s\"།"
+
+#: ../src/cong-document.c:994
+msgid "Document Fragment"
+msgstr "ཡིག་ཆའི་ཆག་དུམ།"
+
+#: ../src/cong-document.c:997
+msgid "Notation"
+msgstr "དབྱངས་རྟགས།"
+
+#: ../src/cong-document.c:1000
+msgid "HTML Document"
+msgstr "ཨེཆ་ཊི་ཨེམ་ཨེལ་གྱི་ཡིག་ཆ།"
+
+#: ../src/cong-document.c:1006
+msgid "Element Declaration"
+msgstr "རྣམ་གྲངས་གསལ་བསྒྲགས།"
+
+#: ../src/cong-document.c:1009
+msgid "Attribute Declaration"
+msgstr "ཁྱད་ཆོས་གསལ་བསྒྲགས།"
+
+#: ../src/cong-document.c:1012
+msgid "Entity Declaration"
+msgstr "ངོ་བོ་གསལ་བསྒྲགས།"
+
+#: ../src/cong-document.c:1015
+msgid "Namespace Declaration"
+msgstr "མིང་གི་བར་སྟོང་གསལ་བསྒྲགས།"
+
+#: ../src/cong-document.c:1018
+msgid "XInclude Start"
+msgstr "ཨེགསི་གྲངས་སུ་བཙུགས་འགོ་བཙུགས།"
+
+#: ../src/cong-document.c:1021
+msgid "XInclude End"
+msgstr "ཨེགསི་གྲངས་སུ་བཙུགས་མཇུག"
+
+#: ../src/cong-document.c:2163
+#, c-format
+msgid "Select %s"
+msgstr "སེལ་འཐུ %s།"
+
+#: ../src/cong-dom-view.c:225
+msgid "UNKNOWN"
+msgstr "མ་ཤེསཔ།"
+
+#: ../src/cong-dom-view.c:252
+msgid "Text:"
+msgstr "ཚིག་ཡིག:"
+
+#: ../src/cong-dom-view.c:258
+msgid "CDATA:"
+msgstr "སི་གནས་སྡུད།:"
+
+#: ../src/cong-edit-find-and-replace.c:98
+#, c-format
+msgid "The text \"%s\" was not found."
+msgstr "ཚིག་ཡིག་འདི་ \"%s\" འཚོལ་མ་ཐོབ་པར་ཡོདཔ།"
+
+#: ../src/cong-edit-find-and-replace.c:200
+msgid "Replace _All"
+msgstr "ཆ་མཉམ་ཚབ་བཙུགས།(_A)"
+
+#: ../src/cong-edit-find-and-replace.c:307
+#: ../src/cong-edit-find-and-replace.c:761
+#: ../src/cong-edit-find-and-replace.c:959
+#: ../src/cong-edit-find-and-replace.c:1000
+msgid "Find"
+msgstr "འཚོལ།"
+
+#: ../src/cong-editor-node-text.c:887
+msgid "Select line"
+msgstr "གྱལ་སེལ་འཐུ་འབད།"
+
+#: ../src/cong-editor-node-text.c:911
+msgid "Select word"
+msgstr "མིང་ཚིག་སེལ་འཐུ་འབད།"
+
+#: ../src/cong-editor-node-text.c:936
+msgid "Move cursor"
+msgstr "འོད་རྟགས་སྤོ།"
+
+#: ../src/cong-editor-node-text.c:1022
+msgid "Drag out selection"
+msgstr "སེལ་འཐུ་ཕྱི་ཁར་འདྲུད།"
+
+#: ../src/cong-editor-widget3.c:269
+msgid "Expander Size"
+msgstr "ཚད་རྒྱ་འཕར་མི།"
+
+#: ../src/cong-editor-widget3.c:270
+msgid "Size of the expander arrow"
+msgstr "རྒྱ་འཕར་མི་མདའ་རྟགས་འདི་གི་ཚད།"
+
+#: ../src/cong-editor-widget3.c:748
+msgid "Input Method"
+msgstr "ཨིན་པུཊི་ཐབས་ལམ།"
+
+#: ../src/cong-editor-widget3.c:878
+#: ../src/cong-editor-widget3.c:1409
+msgid "Typing"
+msgstr "ཡིག་དཔར་བརྐྱབ་དོ།"
+
+#: ../src/cong-editor-widget3.c:1310
+msgid "Cursor Movement"
+msgstr "འོད་རྟགས་འགུལ་བསྐྱོད།"
+
+#: ../src/cong-editor-widget3.c:1350
+#: ../src/cong-editor-widget3.c:1363
+msgid "Delete Selection"
+msgstr "སེལ་འཐུ་བཏོན་གཏང་།"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: ../src/cong-error-dialog.c:231
+#: ../src/cong-error-dialog.c:271
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "ཁྱོད་ལས་རིམ་བཟོ་མི་ཨིན་པ་ཅིན་ དཀའ་ངལ་འདི་ཡིག་སྣོད་ %s གྱལ་ལུ་ནང་ཡོདཔ་ཨིན།  %i\n"
+
+#: ../src/cong-error-dialog.c:235
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "ཁྱད་རྣམ་དེ་བསྟར་སྤྱོད་མ་འབད་བར་ཡོདཔ་ལས་དགོངསམ་ཁྲེལ།"
+
+#: ../src/cong-error-dialog.c:265
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+"ཁྱད་རྣམ་དེ་བསྟར་སྤྱོད་མ་འབད་བར་ཡོདཔ་ལས་དགོངས་མ་ཁྲེལ།\n"
+"\n"
+"འདི་ཤེས་པའི་དཀའ་ངལ་ཅིག་ འདི་རྐྱེན་རྗེས་འཚོལ་རིམ་ལུགས་ནང་འཁོད་ #%i ལུ་རྐྱེན་ཨིན། %s"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-dialog.c:321
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "བཀོལ་སྤྱོད་འདི་དཔའ་བཅམ་པའི་སྐབས་འཛོལ་བའི་སྙན་ཞུ་ཅིག་ཡོདཔ། \"%s\""
+
+#: ../src/cong-error-dialog.c:325
+msgid "A GError occurred; the error report was:"
+msgstr "ཇི་འཛོལ་བ་ཅིག་འབྱུང་ཡོདཔ་ལས་འཛོལ་བའི་སྙན་ཞུ་ཕུལ་ཡོདཔ།:"
+
+#: ../src/cong-error-dialog.c:335
+#: ../src/cong-error-file-open.c:516
+msgid "An unexpected error occurred."
+msgstr "རེ་བ་མེད་པའི་འཛོལ་བ་འབྱུང་ཡོདཔ།"
+
+#: ../src/cong-error-dialog.c:336
+#: ../src/cong-error-file-open.c:517
+msgid "For more information, click on the \"Details\" button."
+msgstr "བརྡ་དོན་ཧེང་བཀེལ་་དོན་ལུ་ \"Details\" ཨེབ་རྟ་འདི་གུ་ཨེབ་གཏང་འབད།"
+
+#: ../src/cong-error-dialog.c:386
+msgid "An error occurred whilst running this system command:"
+msgstr "རིམ་ལུགས་བརྡ་བཀོད་འདི་གཡོག་བཀོལ་བའི་སྐབས་འཛོལ་བ་ཅིག་འབྱུང་ཡོདཔ།:"
+
+#: ../src/cong-error-dialog.c:389
+#, c-format
+msgid "The error number reported was %d.  Below is the error text that was output by the command."
+msgstr "སྙན་ཞུ་འབད་ཡོད་མི་ཨང་འཛོལ་བ་དེ་%d འོག་གི་འདི་བརྡ་བཀོད་ཀྱིས་ཨའུཊི་པུཊི་འབད་ཡོད་མི་ཚིག་ཡིག་འཛོལ་བ་འདི་ཨིན།"
+
+#. FIXME: ought to set up the parent window properly
+#: ../src/cong-error-file-open.c:67
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་འཚོལ་ཞིབ་ལག་ཆས་གཡོག་བཀོལ་མ་ཚུགསཔ།\n"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: ../src/cong-error-file-open.c:103
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%s ལས་ \"%s\" ལྷག་མི་བཏུབ %s།"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-open.c:106
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%s ལས་ \"%s\" ལྷག་མི་བཏུབ %s།"
+
+#: ../src/cong-error-file-open.c:264
+#: ../src/cong-error-file-save.c:92
+msgid "An unexpected internal error occurred."
+msgstr "རེ་བ་མེད་པའི་ནང་འཁོད་འཛོལ་བ་འབྱུང་ཡོདཔ།"
+
+#: ../src/cong-error-file-open.c:265
+#: ../src/cong-error-file-save.c:93
+msgid "Try again.  If it fails again, file a bug report with the maintainer of this application."
+msgstr "ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་གློག་རིམ་འདིའི་རྒྱུན་སྐྱོང་པ་འདི་དང་གཅིག་ཁར་རྐྱེན་སྙན་ཞུ་ཅིག་བཙུགས།"
+
+#: ../src/cong-error-file-open.c:291
+msgid "There is no file with that name at that location."
+msgstr "གནས་ཁོངས་དེ་ལུ་མིང་དེ་དང་གཅིག་ཁར་འབད་མི་ཡིག་སྣོད་མིན་འདུག"
+
+#: ../src/cong-error-file-open.c:292
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or \"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(༡)  ཁྱོད་ཀྱིས་ཡིག་སྣོད་མིང་འདིའི་སྡེབ་དེ་ངེས་བདེན་སྦེ་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།  སེམ་ས་ཁར་བཞག་དགོཔ་ཚུགས་ཡིག་བཟོ་ཡོད་མི་དེ་རྩ་ཅན་ཨིན་མི་  (\"MyFile\" འདི་ \"MYFILE\" ཡང་ན་ \"myfile\")བཟུམ་སྦེ་ཅོག་མི་འཐདཔ་ཨིན།\n"
+"(༢) ཁྱོད་རའི་ཡིག་སྣོད་འཚོལ་ནི་ལུ་འཚོལ་ཞིབ་ལག་ཆས་འདི་ལག་ལེན་འཐབ་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-open.c:293
+#: ../src/cong-error-file-open.c:302
+#: ../src/cong-error-file-open.c:357
+#: ../src/cong-error-file-open.c:398
+msgid "Search"
+msgstr "འཚོལ་ཞིབ་འབད།"
+
+#: ../src/cong-error-file-open.c:300
+#: ../src/cong-error-file-save.c:110
+msgid "The location does not exist."
+msgstr "གནས་ཁོངས་འདི་མིན་འདུག"
+
+#: ../src/cong-error-file-open.c:301
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་འདིའི་སྡེབ་་ངེས་བདེན་སྦེ་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།   སེམས་ཁར་བཞག་དགོཔ་ཚུགས་ཡིག་བཟོ་ཡོད་མི་དེ་རྩ་ཅན་ཨིན་མི་  (\"MyDirectory\" འདི་  \"mydirectory\" ཡང་ན་ \"MYDIRECTORY\")བཟུམ་སྦེ་ཅོག་མི་འཐདཔ་ཨིན།\n"
+"(༢)ཁྱོད་རའི་ཡིག་སྣོད་འཚོལ་ནི་ལུ་འཚོལ་ཞིབ་ལག་ཆས་འདི་ལག་ལེན་འཐབ་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-open.c:314
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "གནས་ཁོངས་འདི་གིས་ \"%s\" ཡིག་སྣོད་ཚུ་ལྷག་ནི་འདི་རྒྱབ་སྐྱོར་མི་འབད།"
+
+#: ../src/cong-error-file-open.c:318
+msgid "Try loading a file from a different location.  If you think that you ought to be able to read this file, contact your system administrator."
+msgstr "གནས་ཁོངས་སོ་སོ་ལས་ཡིག་སྣོད་ཅིག་མངོན་གསལ་འབད་ནི་འབད་རྩོལ་བསྐྱེད། ཁྱོད་ཀྱིས་ཡིག་སྣོད་འདི་ལྷག་ཚུགས་མནོ་བ་ཅིན་ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་འབྲེལ་བ་འཐབ།"
+
+#: ../src/cong-error-file-open.c:328
+msgid "There were problems reading the content of the file."
+msgstr "ཡིག་སྣོད་འདི་གི་ནང་དོན་འདི་ལྷག་ནི་དཀའ་ངལ་ཚུ་ཡོདཔ།"
+
+#: ../src/cong-error-file-open.c:329
+#: ../src/cong-error-file-open.c:347
+#: ../src/cong-error-file-open.c:386
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr "ལོག་རྩོལ་འབད། འདི་ལོག་འདི་འཏཐུས་ཤོར་ཝ་ཅིན་ ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་འབྲེལ་བ་འཐབ།"
+
+#: ../src/cong-error-file-open.c:338
+msgid "The contents of the file seem to be corrupt."
+msgstr "ཡིག་སྣོད་འདི་གི་ནང་དོན་ཚུ་ངན་ཅན་བཟོ་ཡོདཔ་བཟུམ་འདུག"
+
+#: ../src/cong-error-file-open.c:339
+msgid "Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr "ལོག་རྩོལ་འབད། འདི་ལོག་འཐུས་ཤོར་ཝ་ཅིན་ ཡིག་སྣོད་འདི་གི་རྒྱབ་ཐག་འདྲ་བཤུས་ཅིག་གི་དོན་ལུ་བལྟ་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-open.c:346
+#: ../src/cong-error-file-open.c:385
+msgid "There were problems reading the contents of the file."
+msgstr "ཡིག་སྣོད་འདི་གི་ནང་དོན་ཚུ་ལྷག་ནི་དཀའ་ངལ་ཚུ་ཡོདཔ།"
+
+#: ../src/cong-error-file-open.c:355
+#: ../src/cong-error-file-save.c:251
+msgid "The system does not recognise that as a valid location."
+msgstr "རིམ་ལུགས་འདི་གིས་ནུས་ཅན་གནས་ཁོངས་ཅིག་བཟུམ་སྦེ་ངོ་མི་ཤེས་པས།"
+
+#: ../src/cong-error-file-open.c:356
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་འདིའི་སྡེབ་་ངེས་བདེན་སྦེ་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།   སེམས་ཁར་བཞག་དགོཔ་ཚུགས་ཡིག་བཟོ་ཡོད་མི་དེ་རྩ་ཅན་ཨིན་མི་ (\"http\" འདི་ \"Http\" ཡང་ན་ \"HTTP\")ཅོག་མི་འཐད།\n"
+"(༢) ཁྱོད་རའི་ཡིག་སྣོད་འཚོལ་ནི་ལུ་འཚོལ་ཞིབ་ལག་ཆས་འདི་ལག་ལེན་འཐབ་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-open.c:367
+msgid "You do not have permission to read that file."
+msgstr "ཁྱོད་ལུ་ཡིག་སྣོད་དེ་ལྷག་ནི་ལུ་གནང་བ་མིན་འདུག"
+
+#: ../src/cong-error-file-open.c:368
+msgid "Try asking your system administrator to give you permission."
+msgstr "ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་ལུ་ཁྱོད་ལུ་གནང་བ་བྱིན་ནི་དྲི་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-open.c:375
+#: ../src/cong-error-file-save.c:274
+msgid "The system is trying to operate on too many files at once."
+msgstr "རིམ་ལུགས་འདི་གིས་ཡིག་སྣོད་ཚུ་ལེ་ཤ་གུ་ཚར་གཅིག་ལུ་བཀོལ་སྤྱོད་འབད་ནི་ལུ་འབད་རྩོལ་བསྐྱེདཝ་ཨིན།"
+
+#: ../src/cong-error-file-open.c:376
+#: ../src/cong-error-file-open.c:410
+#: ../src/cong-error-file-save.c:275
+#: ../src/cong-error-file-save.c:294
+msgid "Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."
+msgstr "ལོག་རྩོལ་འབད། འདི་ལོག་འཐུས་ཤོར་ཝ་ཅིན་ གློག་རིག་མ་དགོ་མི་ཚུ་ཁ་བསྡམ་ནི་འབད་རྩོལ་བསྐྱེད་ཡང་ན་ ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་འབྲེལ་བ་འཐབ།"
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-open.c:393
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\" ཡིག་སྣོད་ཅིག་ལས་སྣོད་ཐོ་ཅིག་ཨིན།"
+
+#: ../src/cong-error-file-open.c:397
+msgid "Try using the Search Tool to find your file."
+msgstr "ཁྱོད་རའི་ཡིག་སྣོད་འཚོལ་ནི་ལུ་འཚོལ་ཞིབ་ལག་ཆས་་འདི་ལག་ལེན་འཐབ་དེ་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-open.c:409
+#: ../src/cong-error-file-save.c:293
+msgid "The system ran out of memory."
+msgstr "རིམ་ལུགས་དྲན་ཚད་ཀྱི་ཕྱི་ཁ་ཐོན་ཡོདཔ།"
+
+#: ../src/cong-error-file-open.c:418
+#: ../src/cong-error-file-open.c:427
+#: ../src/cong-error-file-open.c:436
+#: ../src/cong-error-file-save.c:302
+#: ../src/cong-error-file-save.c:311
+#: ../src/cong-error-file-save.c:320
+msgid "The server could not be contacted."
+msgstr "སར་བར་འདི་ཁག་འབག་མི་བཏུབ་ཨིན།"
+
+#: ../src/cong-error-file-open.c:419
+msgid "Try again.  If it fails again, the server may be down."
+msgstr "ལོག་རྩོལ་འབད། འདི་ལོག་འཐུས་ཤོར་ཝ་ཅིན་ སར་བར་འདི་མར་ཡོདཔ་འོང་།"
+
+#: ../src/cong-error-file-open.c:428
+#: ../src/cong-error-file-open.c:437
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་འདིའི་སྡེབ་ངེས་བདེན་སྦེ་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།\n"
+"(༢) ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་སར་བར་འདི་མར་ཨིནམ་འོང་།"
+
+#: ../src/cong-error-file-open.c:445
+#: ../src/cong-error-file-save.c:329
+msgid "The system could not login to the location."
+msgstr "རིམ་ལུགས་འདི་གནས་ཁོངས་འདི་ལུ་ནང་བསྐྱོད་འབད་མི་བཏུབ་ཨིན།"
+
+#: ../src/cong-error-file-open.c:446
+#: ../src/cong-error-file-open.c:456
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr "ལོག་རྩོལ་འབད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་འབྲེལ་བ་འཐབ།"
+
+#: ../src/cong-error-file-open.c:455
+#: ../src/cong-error-file-save.c:338
+msgid "The location was too busy."
+msgstr "གནས་ཁོངས་འདི་རྩ་ལས་དལ་ཁོམ་མེད་མེད།"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-file-open.c:505
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "འཛོལ་བ་འདི་ \"%s\" འཛུལ་སྤྱོད་འབད་བའི་སྐབས་སྙན་ཞུ་འབད་ཡོདཔ། \"%s\""
+
+#: ../src/cong-error-file-open.c:509
+msgid "The program unexpectedly received an error report from the GNOME Virtual File System."
+msgstr "ལས་རིམ་འདི་གིས་ཇི་ནོམ་བར་ཅུ་ཡལ་ཡིག་སྣོད་རིམ་ལུགས་འདི་ལས་སྙན་ཞུ་འཛོལ་བ་ཅིག་རེ་བ་མེད་པར་ཐོབ་ཡོདཔ་ཨིན།"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: ../src/cong-error-file-save.c:61
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%s ལུ་ \"%s\" སྲུང་བཞག་འབད་མི་ཚུགས %s."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-save.c:64
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%s ལུ་ \"%s\" སྲུང་བཞག་འབད་མ་ཚུགས། %s."
+
+#: ../src/cong-error-file-save.c:111
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་ཀྱི་མིང་སྡེབ་འདི་་ངེས་བདེན་སྦེ་ིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།   སེམས་ཁར་འདྲེན་དགོཔ་ཚུགས་ཡིག་བཟོ་ཡོད་མི་འདི་རྩ་ཅན་ཨིན་མི་ (\"MyDirectory\" འདི་ \"MYDIRECTORY\" ཡང་ན་ \"mydirectory\")ཅོག་མི་འཐདཔ་ཨིན།\n"
+"(༢) སོ་སོ་གནས་ཁོངས་ཅིག་ལུ་སྲུང་བཞག་འབད་ནི་ལུ་འབད་རྩོལ་བསྐྱེད།"
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:119
+#: ../src/cong-error-file-save.c:238
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "གནས་ཁོངས་འདི་ \"%s\" གིས་ཡིག་སྣོད་ཚུ་འབྲི་ནི་འདི་རྒྱབ་སྐྱོར་མི་འབད།"
+
+#: ../src/cong-error-file-save.c:123
+#: ../src/cong-error-file-save.c:242
+#: ../src/cong-error-file-save.c:350
+msgid "Try saving to a different location."
+msgstr "གནས་ཁོངས་སོ་སོ་ཅིག་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:134
+msgid "There were problems writing the content of the file."
+msgstr "ཡིག་སྣོད་འདི་གི་ནང་དོན་འདི་འབྲི་ནི་དཀའ་ངལ་ཚུ་ཡོདཔ།"
+
+#: ../src/cong-error-file-save.c:135
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr "ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་ གནས་ཁོངས་སོ་སོ་ཅིག་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:159
+#, c-format
+msgid "The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "ཡིག་སྣོད་འདི་གི་ཚད་འདི་ཨིནམ་འོང་ %s,ཨིན་རུང་ཐབས་འཕྲུལ་འདི་ལུ་ཤོང་ཚད་ཀྱི་ཡོདཔ་ཨིན། %s."
+
+#. Can't get at the capacity for the device or "volume":
+#. FIXME: This is the workaround:
+#: ../src/cong-error-file-save.c:165
+#: ../src/cong-error-file-save.c:169
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr "ཡིག་སྣོད་འདི་ཐབས་འཕྲུལ་འདི་གུ་ཚུད་སྒྲིག་འབད་ནི་ལུ་གནམ་མེད་ས་མེད་སྦོམ་(ཡིག་སྣོད་ཀྱི་ཚད་འདི་ %s)"
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:178
+msgid "The file is too big to fit on the device."
+msgstr "ཡིག་སྣོད་འདི་ཐབས་འཕྲུལ་འདི་གུ་ཚུད་སྒྲིག་འབད་ནི་ལུ་གནམ་མེད་ས་མེད་སྦོམ་ཨིན་མས།"
+
+#: ../src/cong-error-file-save.c:187
+msgid "Try saving the file to a different location."
+msgstr "ཡིག་སྣོད་འདི་གནས་ཁོངས་སོ་སོ་ཅིག་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:208
+#, c-format
+msgid "The size of the file would be %s, but you only have %s free on that device."
+msgstr "ཡིག་སྣོད་འདི་གི་ཚད་འདི་ %s,ཨིན་རུང་ཁྱོད་ལུ་ %s ཐབས་འཕྲུལ་དེ་གུ་རང་དབང་ཡོདཔ་ཨིན།"
+
+#. Can't get at the free space for the device or "volume":
+#: ../src/cong-error-file-save.c:214
+#, c-format
+msgid "The file is too big to fit in the remaining space on the device (file size would be %s)."
+msgstr "ཡིག་སྣོད་འདི་ཐབས་འཕྲུལ་འདི་གུ་བར་སྟོང་ལྷག་ལུས་མི་ནང་ཚུད་སྒྲིག་འབད་ནི་ལུ་གནམ་མེད་ས་མེད་སྦོམ་ཨིན། (ཡིག་སྣོད་ཀྱི་ཚད་འདི་ %s)."
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:222
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "ཡིག་སྣོད་འདི་ཐབས་འཕྲུལ་འདི་གུ་བར་སྟོང་ལྷག་ལུས་མི་འདི་ནང་ཚུད་སྒྲིག་འབད་ནི་ལུ་གནམ་མེད་ས་མེད་སྦོམ་ཨིན་མས།"
+
+#: ../src/cong-error-file-save.c:231
+msgid "Try saving the file to a different location, or making more space by moving unwanted files from that device to the trash."
+msgstr "ཡིག་སྣོད་འདི་གནས་ཁོངས་སོ་སོ་ལུ་སྲུང་བཞག་འབད་ནི་ ཡང་ན་ཐབས་འཕྲུལ་ལས་མ་དགོ་པའི་ཡིག་སྣོད་ཚུ་ཕྱགས་ལྷོད་འདི་ལུ་སྤོ་དེ་བར་སྟོང་མངམ་བཟོ་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:252
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་ཀྱི་སྡེབ་འདི་ངེས་བདེན་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།   སེམས་ཁར་བཞག་དགོཔ་ཚུགས་ཡིག་བཟོ་ཡོད་མི་འདི་རྩ་ཅན་ཨིན་མི་ (\"http\" འདི་དང་ \"Http\" ཡང་ན་ \"HTTP\")ཅོག་མི་འཐད།\n"
+"(༢) སོ་སོ་གནས་ཁོངས་ཅིག་ལུ་སྲུང་བཞག་འབད་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:266
+msgid "You do not have permission to write to that location."
+msgstr "ཁྱོད་ལུ་གནས་ཁོངས་དེ་ལུ་འབྲི་ནི་ལུ་གནང་བ་མིན་འདུག"
+
+#: ../src/cong-error-file-save.c:267
+msgid "Try saving to a different location, or ask your system administrator to give you permission."
+msgstr "གནས་ཁོངས་སོ་སོ་ཅིག་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད་ ཡང་ན་ཁྱོད་རའི་རིམ་ལུགས་བདག་སྐྱོང་པ་ལུ་གནང་བ་གནང་ནི་ལུ་དྲི་བ་བཀོད།"
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-save.c:281
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\" འདི་སྣོད་ཅིག་ཨིན།"
+
+#: ../src/cong-error-file-save.c:285
+msgid "You must save to a file within a directory, rather than to the directory itself."
+msgstr "ཁྱོད་ཀྱིས་སྣོད་ཐོ་ནང་འཁོད་སྣོད་ཐོ་རྐྱངམ་ཅིག་ལས་ཡིག་སྣོད་ཅིག་སྲུང་བཞག་འབད་དགོཔ་ཨིན།"
+
+#: ../src/cong-error-file-save.c:303
+msgid "Try again.  If it fails again, the server may be down; try saving to another location."
+msgstr "ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་ སར་བར་འདི་མར་ཨིནམ་འོང་ གནས་ཁོངས་གཞན་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:312
+#: ../src/cong-error-file-save.c:321
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to another location."
+msgstr ""
+"(༡) ཁྱོད་ཀྱིས་གནས་ཁོངས་འདིའི་སྡེབ་ངེས་བདེན་སྦེ་ཨིན་ན་བརྟག་ཞིབ་འབད་ནི་འབད་རྩོལ་བསྐྱེད།\n"
+"(༢) ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་ སར་བར་འདི་མར་ཨིནམ་འོང་ གཞན་གནས་ཁོངས་ལུ་སྲུང་བཞག་འབད་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#: ../src/cong-error-file-save.c:330
+#: ../src/cong-error-file-save.c:339
+msgid "Try again. If it fails again, try saving to another location."
+msgstr "ལོག་འབད་རྩོལ་བསྐྱེད། འདི་ལོག་འཐུས་ཤོར་བ་ཅིན་གནས་ཁོངས་གཞན་ལུ་སྲུང་ནི་འབད་རྩོལ་བསྐྱེད།"
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:346
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr "གནས་ཁོངས་འདི་གིས་ \"%s\" ཡིག་སྣོད་ཚུ་འབྲི་ནི་མེད་པ་ལྷག་ནི་ལུ་རྐྱངམ་ཅིག་འབད་བཅུགཔ་ཨིན།"
+
+#. FIXME: need to think more about these messages
+#: ../src/cong-error-file-save.c:358
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "མིང་འདི་ \"%s\" གནས་ཁོངས་འདི་གི་དོན་ལུ་འཛིན་སྐྱོང་འབད་ནི་ལུ་གནམ་མེད་ས་མེད་རིངམ་ཨིན་མས།"
+
+#: ../src/cong-error-file-save.c:362
+msgid "Try again with a shorter file name."
+msgstr "ཡིག་སྣོད་མིང་ཐུང་མི་ཅིག་དང་གཅིག་ཁར་ལོག་འབད་རྩོལ་བསྐྱེད།"
+
+#. 5 megabytes, for a test
+#: ../src/cong-error-tests.c:25
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "Testing File->གི་འཐུས་ཤོར་མི་ཁ་ཕྱེ \"%s\" དང་གཅིག་ཁར་འགྲུབ་འབྲས།%s"
+
+#: ../src/cong-error-tests.c:31
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "Testing File->གི་འཐུས་ཤོར་མི་སྲུང་བཞག་འབད \"%s\" དང་གཅིག་ཁར་འགྲུབ་འབྲས། %s"
+
+#: ../src/cong-error-tests.c:37
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "གི་འཐུས་ཤོར་མི་རིགས་རྒྱུད་ \"%s\" དང་གཅིག་ཁར་བརྟག་ཞིབ་འབད་དོ། %s"
+
+#: ../src/cong-error-tests.c:40
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་རིགས་བརྒྱུད་ཡིག་སྣོད་བཀོལ་སྤྱོད་ཅིག་གི་འཐུས་ཤོར་འདི་མཚུངས་བཟོ་འབད་དོ།"
+
+#: ../src/cong-error-tests.c:43
+msgid "This dialog was generated by the automated testing routine"
+msgstr "ཌའི་ལོག་འདི་བརྟག་ཞིབ་རྒྱུན་ལས་རང་བཞིན་ཡོད་མི་འདི་གིས་བཟོ་བཏོན་འབད་ཡོདཔ།"
+
+#: ../src/cong-file-export.c:153
+msgid "(No description available)"
+msgstr "(འགྲེལ་བཤད་ཐོབ་ཚུགསཔ་མེད།)"
+
+#: ../src/cong-file-export.c:212
+msgid "Select file to export to"
+msgstr "ལུ་ཕྱིར་འདྲེན་ལུ་ཡིག་སྣོད་སེལ་འཐུ་འབད།"
+
+#: ../src/cong-file-export.c:260
+#, c-format
+msgid "Export \"%s\""
+msgstr "ཕྱིར་འདྲེན། \"%s\""
+
+#: ../src/cong-file-export.c:265
+msgid "Export"
+msgstr "ཕྱིར་འདྲེན་"
+
+#: ../src/cong-file-export.c:317
+msgid "Exporter:"
+msgstr "ཕྱིར་འདྲེན་པ་:"
+
+#: ../src/cong-file-export.c:319
+msgid "File:"
+msgstr "ཡིག་སྣོད་:"
+
+#: ../src/cong-file-export.c:321
+msgid "Export Options"
+msgstr "ཕྱིར་འདྲེན་གདམ་ཁ་ཚུ་"
+
+#: ../src/cong-file-export.c:431
+msgid "No output file specified"
+msgstr "ཨའུཊི་པུཊི་ཡིག་སྣོད་གསལ་བཀོད་འབད་མེདཔ།"
+
+#: ../src/cong-file-export.c:432
+msgid "Please specify a file name."
+msgstr "ཡིག་སྣོད་མིང་ཅིག་གསལ་བཀོད་འབད་གནང་།"
+
+#: ../src/cong-file-import.c:80
+msgid "Import file..."
+msgstr "ནང་འདྲེན་ཡིག་སྣོད་་་"
+
+#: ../src/cong-file-new.c:169
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "ཡིག་སྣོད་གསརཔ་ཅིག་གསར་བསྐྲུན་འབད་དོ། (%s)"
+
+#: ../src/cong-file-new.c:595
+#: ../src/cong-file-new.c:618
+#: ../src/cong-file-new.c:626
+#: ../src/cong-file-new.c:643
+msgid "Creating a new file"
+msgstr "ཡིག་སྣོད་གསརཔ་ཅིག་གསརབསྐྲུན་འབད་དོ།"
+
+#: ../src/cong-file-new.c:619
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system."
+msgstr ""
+"ལས་རོགས་འདི་གིས་ཁྱོད་ལུ་ཡིག་སྣོད་གསརཔ་གསར་བསྐྲུན་འབད་ནི་ལམ་སྟོན་འབད་འོང་།\n"
+"\n"
+"ཡིག་སྣོད་ཀྱི་འདྲ་མིན་སྣ་ཚོགས་ཀྱི་དབྱེ་བ་ཚུ་ཐོབ་ཚུགསཔ་ལས་ ཀོང་ལོ་མི་རེཊི་གིས་ཁྱོད་ལུ་་ \"boilerplate\" ལ་ལོ་བཀྲམ་སྤེལ་འབད་ཚུགསཔ་འོང་། \n"
+"\n"
+"མ་འོངས་པའི་ཀོང་ལོ་མི་རེཊི་གི་ཐོན་རིམ་ཚུ་ནང་ཁྱོད་ཀྱིས་ \"template documents\" འདི་ལུ་རིམ་ལུགས་འདི་ཁ་སྐོང་འབད་ཚུགས་པའི་རེ་སྨོན་ང་བཅས་ཀྱིས་བསྐྱེད་ཡོད།"
+
+#: ../src/cong-file-new.c:632
+msgid "What type of file would you like to create?"
+msgstr "ཁྱོད་ཀྱིས་ཡིག་སྣོད་ཀྱི་དབྱེ་བ་ག་ཅིག་བཟུམ་གསར་བསྐྲུན་འབད་ནི་ཨིན?"
+
+#: ../src/cong-file-new.c:634
+msgid "Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr "ཐོ་ཡིག་ནང་རྣམ་གྲངས་ཚུ་གཅིག་གཙོ་དམིགས་བཀོད་ནི་དང་འཕྲོ་མཐུད་ནི་ལུ་ \"Forward\" སེལ་འཐུ་འབད།"
+
+#: ../src/cong-file-new.c:644
+msgid "Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it."
+msgstr "ཀོང་ལོ་མི་རེཊི་འདི་ལུ་ཡིག་ཆ་འདི་གསར་བསྐྲུན་འབད་ནི་ལུ་དགོ་པའི་བརྡ་དོན་འདི་ཡོདཔ་ཨིན། འདི་གསར་བསྐྲུན་འབད་ནི་ལུ་\"Apply\"ཨེབ། ཁྱོད་ཀྱིས་འདི་བཞག་ནི་ཨིན་པ་ཅིན་ཡིག་ཆ་འདི་སྲུང་བཞག་འབད་དགོཔ་ཨིན།"
+
+#: ../src/cong-file-open.c:72
+msgid "The internal structure of the document does not match any of the types known to Conglomerate."
+msgstr "ཀོང་ལོ་མི་རེཊི་ལུ་ཡིག་ཆ་འདི་གི་ནང་གི་གི་བཀོད་ཤེས་པའི་དབྱེ་བ་ཚུ་གང་རུང་མཐུན་སྒྲིག་མ་འབད་བས།"
+
+#: ../src/cong-file-open.c:73
+msgid "You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."
+msgstr "ཁྱོད་རང་ཀོང་ལོ་མི་རེཊི་ལུ་\"Force\"ཨེབ་རྟ་འདི་གུ་ཨེབ་གཏང་འབད་དེ་གིས་ཡིག་ཆ་མངོན་གསལ་འབད་ནི་ལུ་བང་བཙོང་ཨིན་རུང་འགྲུབ་འབྲས་འདི་ལས་མེདཔ་འོང་།"
+
+#: ../src/cong-file-open.c:74
+msgid "Force"
+msgstr "བང་བཙོང་།"
+
+#: ../src/cong-file-open.c:223
+msgid "Select an XML document"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་ཅིག་སེལ་འཐུ་འབད།"
+
+#: ../src/cong-file-print.c:195
+#, c-format
+msgid "Print \"%s\""
+msgstr "དཔར་བསྐྲུན་འབད \"%s\"།"
+
+#: ../src/cong-file-print.c:201
+msgid "Print"
+msgstr "དཔར་བསྐྲུན་འབད་ནི།"
+
+#: ../src/cong-file-print.c:233
+msgid "Print Method:"
+msgstr "ཐབས་ལམ་དཔར་བསྐྲུན་འབད།:"
+
+#: ../src/cong-file-print.c:241
+msgid "Print Options"
+msgstr "དགམ་ཁ་ཚུ་དཔར་བསྐྲུན་འབད།"
+
+#: ../src/cong-file-print.c:336
+#: ../src/cong-menus.c:727
+msgid "Print Preview"
+msgstr "སྔོན་ལྟ་དཔར་བསྐྲུན་འབད།"
+
+#: ../src/cong-file-print.c:346
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་དཔར་བསྐྲུན་འབད་མ་ཚུགསཔ། \"%s\""
+
+#: ../src/cong-file-print.c:349
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr "ཀོང་ལོ་མི་རེཊི་གི་པ་ལག་ཨིནསི་གཅིག་གིས་ཡང་དེ་བཟུམ་མའི་ཡིག་སྣོད་ཚུའི་དབྱེ་བདཔར་བསྐྲུན་ག་དེ་འབད་ནི་ཨིན་ན་མི་ཤེས་པས།"
+
+#: ../src/cong-file-properties.c:200
+msgid "Yes"
+msgstr "ཨིན།"
+
+#: ../src/cong-file-properties.c:200
+msgid "No"
+msgstr "མེན།"
+
+#: ../src/cong-file-properties.c:219
+#: ../src/cong-file-properties.c:222
+msgid "None"
+msgstr "ཅི་མེད།"
+
+#: ../src/cong-file-properties.c:260
+msgid "_Remove this DTD"
+msgstr "ཌི་ཊི་ཌི་འདི་རྩ་བསྐྲད་གཏང་།(_R)"
+
+#: ../src/cong-file-properties.c:285
+msgid "The document does not specify an external DTD, but Conglomerate believes the above information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document."
+msgstr "ཡིག་ཆ་འདི་གིས་ཕྱིའི་ཌི་ཊི་ཌི་ཅིག་གསལ་བཀོད་མི་འབད་ ཨིན་རུང་ཀོང་ལོ་མི་རེཊི་གིས་ལྟག་གི་བརྡ་དོན་འདི་འོས་འབབ་ཨིནམ་བདེན་འཛིན་རེདཔ་ཨིན། ཡིག་ཆ་འདི་ནང་བརྡ་དོན་འདི་གཏན་ཁེལ་སྦེ་གསལ་བཀོད་འབད་ནི་ལུ་ \"Associate this DTD\"གུ་ཨེབ།"
+
+#: ../src/cong-file-properties.c:294
+msgid "No External Subset"
+msgstr "ཕྱིའི་གཞི་སྒྲིག་ཡན་ལག་མེདཔ།"
+
+#: ../src/cong-file-properties.c:296
+#: ../src/plugin-validate.c:171
+msgid "_Add a DTD"
+msgstr "ཌི་ཊི་ཌི་ཅིག་ཁ་སྐོང་བརྐྱབ།(_A)"
+
+#: ../src/cong-file-properties.c:373
+#: ../src/cong-file-properties.c:375
+msgid "Unknown"
+msgstr "མ་ཤེསཔ།"
+
+#: ../src/cong-file-properties.c:386
+msgid "Unspecified"
+msgstr "གསལ་བཀོད་མ་འབད་བར་ཡོདཔ།"
+
+#: ../src/cong-file-properties.c:461
+msgid "Remove DTD"
+msgstr "ཌི་ཊི་ཌི་རྩ་བསྐྲད་གཏང་།"
+
+#: ../src/cong-file-properties.c:478
+#: ../src/cong-util.c:1636
+msgid "Associate with DTD"
+msgstr "ཌི་ཊི་ཌི་དང་གཅིག་ཁར་འབྲེལ་འཐབ།"
+
+#: ../src/cong-file-save.c:75
+msgid "Save XML as..."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་བཟུམ་སྦེ་སྲུང་བཞག་འབད་་་"
+
+#: ../src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "ཡིག་སྣོད་འདི་ \"%s\" ལྷག་ནི་རྐྱངམ་ཅིག་ཨིན།\n"
+
+#: ../src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "མིང་བཏགས་ཡོད་མི་ཡིག་སྣོད་ཅིག་ \"%s\" ཧེ་མ་ལས་ཡོདཔ་ཨིན།\n"
+
+#: ../src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "ཚབ་བཙུགས།(_R)"
+
+#: ../src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "ཁྱོད་ཀྱིས་སྲུང་བཞག་འབད་མི་གཅིགཔ་་དང་གཅིག་ཁར་འདིའི་ཚབ་བཙུགས་ནི་ཨིན་ན?"
+
+#: ../src/cong-location.c:395
+#: ../src/cong-location.c:416
+msgid "Merge tags"
+msgstr "མཉམ་བསྡོམས་འབད་ནི་ངོ་རྟགས་ཚུ།"
+
+#: ../src/cong-location.c:467
+msgid "Delete character"
+msgstr "ཡིག་འབྲུ་བཏོན་གཏང་།"
+
+#: ../src/cong-location.c:1061
+msgid "Calculating previous page"
+msgstr "ཧེ་མམ་གྱི་ཤོག་ལེབ་རྩིས་སྟོན་དོ།"
+
+#: ../src/cong-location.c:1084
+msgid "Calculating next page"
+msgstr "ཤུལ་མམ་གྱི་ཤོག་ལེབ་རྩིས་སྟོན་དོ།"
+
+#: ../src/cong-menus.c:112
+#: ../src/cong-menus.c:165
+#: ../src/cong-menus.c:199
+msgid "The selected menu item has not yet been implemented."
+msgstr "སེལ་འཐུ་འབད་ཡོད་མི་དཀར་ཆག་རྣམ་གྲངས་འདི་ད་ལྟོ་ཚུན་ཚོད་བསྟར་སྤྱོད་མ་འབད་བར་ཡོདཔ།"
+
+#: ../src/cong-menus.c:463
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་བཟོ་བསྒྱུར་འདི་གི་འགྲུབ་འབྲས་འདི་ཁ་ཕྱེ་མ་ཚུགསཔ།"
+
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: ../src/cong-menus.c:528
+#: ../src/cong-stylesheet.c:226
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "སི་ཊ་ཡེལ་ཤིཊི་ཡིག་སྣོད་འདི་ལྷག་ནི་དཀའ་ངལ་ཅིག་འབྱུང་ཡོདཔ། \"%s\""
+
+#: ../src/cong-menus.c:531
+#: ../src/cong-menus.c:555
+#: ../src/cong-stylesheet.c:228
+#: ../src/cong-stylesheet.c:291
+msgid "Conglomerate could not transform the document"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ཡིག་ཆ་འདི་བཟོ་བསྒྱུར་འབད་མ་ཚུགསཔ།"
+
+#: ../src/cong-menus.c:552
+msgid "There was a problem applying the stylesheet file"
+msgstr "སི་ཊ་ཡེལ་ཤིཊི་ཡིག་སྣོད་འདི་འཇུག་སྤྱོད་འབད་ནི་དཀའ་ངལ་ཅིག་འབྱུང་ཡོདཔ།"
+
+#: ../src/cong-menus.c:1113
+msgid "Test Progress Checklist"
+msgstr "ཡར་་འཕེལ་ངེས་ཐོ་བརྟག་ཞིབ་འབད།"
+
+#: ../src/cong-menus.c:1117
+#, c-format
+msgid "This is stage %i"
+msgstr "འདི་གོ་རིམ་ཨིན། %i"
+
+#: ../src/cong-menus.c:1168
+msgid "Message Log - Conglomerate"
+msgstr "འཕྲིན་དོན་དེབ་-ཀོང་ལོ་མི་རེཊི།"
+
+#: ../src/cong-menus.c:1187
+msgid "Signal Log - Conglomerate"
+msgstr "བརྡ་རྟགས་དེབ་-ཀོང་ལོ་མི་རེཊི།"
+
+#: ../src/cong-menus.c:1427
+msgid "translator_credits"
+msgstr "སྐད་བསྒྱུར་པའི་ངོ་བསྟོད་ཚུ།(_c)"
+
+#: ../src/cong-menus.c:1446
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+"(C) ༡༩༩༩ ཧེནསི་པི་ཊར་ཇེནསི་སོན།\n"
+"(C) ༢༠༠༤ ཌེ་ཝིཌི་མེལ་ཀོལམ།"
+
+#: ../src/cong-menus.c:1447
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "ཀོང་ལོ་མི་རེཊི་ ལག་ལེན་པ་མཛའ་ཨེགསི་ཨེམ་ཨེལ་ཞུན་དགཔ་་རང་དབང་ཅིག"
+
+#. Menus:
+#: ../src/cong-menus.c:1481
+msgid "_File"
+msgstr "ཡིག་སྣོད།(_F)"
+
+#: ../src/cong-menus.c:1482
+msgid "_Edit"
+msgstr "ཞུན་དག(_E)"
+
+#: ../src/cong-menus.c:1487
+msgid "_Help"
+msgstr "གྲོགས་རམ།(_H)"
+
+#. Sub-menus:
+#: ../src/cong-menus.c:1490
+#: ../src/popup.c:1121
+msgid "New sub-element"
+msgstr "རྣམ་གྲངས་ཡན་ལག་གསརཔ།"
+
+#: ../src/cong-menus.c:1491
+#: ../src/popup.c:1135
+msgid "New sibling"
+msgstr "སྤུན་ཆ་གསརཔ།"
+
+#: ../src/cong-menus.c:1492
+msgid "Remove span tag"
+msgstr "འཕར་ཚད་ངོ་རྟགས་རྩ་བསྐྲད་གཏང་།"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1495
+msgid "_New..."
+msgstr "གསརཔ(_N)་་་"
+
+#: ../src/cong-menus.c:1496
+msgid "_Open..."
+msgstr "ཁ་ཕྱེད(_O)་་་"
+
+#: ../src/cong-menus.c:1497
+msgid "_Import..."
+msgstr "ནང་འདྲེན(_I)་་་"
+
+#: ../src/cong-menus.c:1498
+msgid "_Close"
+msgstr "ཁ་བསྡམ(_C)"
+
+#: ../src/cong-menus.c:1499
+msgid "_Quit"
+msgstr "སྤང་།(_Q)"
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1503
+msgid "Pr_eferences"
+msgstr "དགའ་གདམ་ཚུ།(_e)"
+
+#. Actions found in Help menu:
+#: ../src/cong-menus.c:1516
+msgid "_Contents"
+msgstr "ནང་དོན་ཚུ།(_C)"
+
+#: ../src/cong-menus.c:1517
+msgid "_Homepage"
+msgstr "ཁྱིམ་ཤོག་ལེབ།(_H)"
+
+#: ../src/cong-menus.c:1518
+msgid "_About"
+msgstr "སྐོར་ལས།(_A)"
+
+#: ../src/cong-menus.c:1524
+msgid "_Tools"
+msgstr "ལག་ཆས་ཚུ།(_T)"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1528
+msgid "_Save"
+msgstr "སྲུངས།(_S)"
+
+#: ../src/cong-menus.c:1529
+msgid "Save _as..."
+msgstr "བཟུམ་སྦེ་སྲུང་བཞག་འབད(_a)་་་"
+
+#: ../src/cong-menus.c:1530
+msgid "Sa_ve a Copy..."
+msgstr "འདྲ་བཤུས་ཅིག་སྲུང་བཞག་འབད(_v)་་་"
+
+#: ../src/cong-menus.c:1532
+msgid "Print Previe_w..."
+msgstr "སྔོན་ལྟ་དཔར་བསྐྲུན་འབད(_w)་་་"
+
+#: ../src/cong-menus.c:1533
+msgid "_Print"
+msgstr "དཔར་བསྐྲུན(_P)"
+
+#: ../src/cong-menus.c:1536
+msgid "_Revert"
+msgstr "རྒྱབ་ལོག(_R)"
+
+#: ../src/cong-menus.c:1538
+msgid "_Export..."
+msgstr "ཕྱིར་འདྲེན(_E)་་་"
+
+#: ../src/cong-menus.c:1539
+msgid "Proper_ties"
+msgstr "རྒྱུ་དངོས་ཚུ(_t)"
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1543
+#: ../src/cong-menus.c:1772
+msgid "_Undo"
+msgstr "འབད་བཤོལ(_U)"
+
+#: ../src/cong-menus.c:1544
+#: ../src/cong-menus.c:1782
+msgid "_Redo"
+msgstr "ལོག་འབད།(_R)"
+
+#: ../src/cong-menus.c:1545
+msgid "Cu_t"
+msgstr "བཏོག(_t)"
+
+#: ../src/cong-menus.c:1546
+#: ../src/popup.c:776
+#: ../src/popup.c:1073
+msgid "_Copy"
+msgstr "འདྲ་བཤུས།(_C)"
+
+#: ../src/cong-menus.c:1547
+#: ../src/popup.c:790
+msgid "_Paste"
+msgstr "སྦྱར(_P)"
+
+#: ../src/cong-menus.c:1548
+msgid "_Find..."
+msgstr "འཚོལ(_F)་་་"
+
+#: ../src/cong-menus.c:1549
+msgid "Find Ne_xt"
+msgstr "ཤེལ་མམ་གྱི་འཚོལ(_x)"
+
+#: ../src/cong-menus.c:1550
+msgid "Find Pre_vious"
+msgstr "ཧེ་མམ་གྱི་འཚོལ།(_v)"
+
+#: ../src/cong-menus.c:1551
+msgid "R_eplace..."
+msgstr "ཚབ་བཙུགས(_e)་་་"
+
+#: ../src/cong-menus.c:1553
+msgid "_Insert..."
+msgstr "བཙུགས(_I)་་་"
+
+#: ../src/cong-menus.c:1554
+msgid "View _Source"
+msgstr "འབྱུང་ཁུངས་བལྟ།(_S)"
+
+#: ../src/cong-menus.c:1768
+#, c-format
+msgid "_Undo: %s"
+msgstr "འབད་བཤོལ།(_U): %s"
+
+#: ../src/cong-menus.c:1778
+#, c-format
+msgid "_Redo: %s"
+msgstr "ལོག་འབད(_R): %s"
+
+#: ../src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr "ཨེགསི་འགྲུལ་ལམ།"
+
+#: ../src/cong-node-properties-dialog.c:379
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "ཁྱད་ཆོས་བཟུམ་སྦེ་ \"%s\" བསྐྱར་མིང་བཏགས། \"%s\""
+
+#: ../src/cong-node-properties-dialog.c:560
+msgid "Namespace"
+msgstr "མིང་གི་བར་སྟོང་།"
+
+#: ../src/cong-node-properties-dialog.c:588
+msgid "Raw Attributes"
+msgstr "རགས་པ་ཁྱད་ཆོས་ཚུ།"
+
+#: ../src/cong-node-properties-dialog.c:713
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "རྣམ་གྲངས་ཚུ་གི་དོན་ལུ་ <tt>%s</tt> ཁྱད་ཆོས་ཚུ།"
+
+#: ../src/cong-node-properties-dialog.c:930
+msgid "Zero or more"
+msgstr "ཀླད་ཀོར་ཡང་ན་མངམ།"
+
+#: ../src/cong-node-properties-dialog.c:946
+msgid "One or more"
+msgstr "གཅིག་ཡང་ན་མངམ།"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: ../src/cong-node-properties-dialog.c:1013
+msgid "Valid Content"
+msgstr "ནུས་ཅན་གྱི་ནང་དོན།"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: ../src/cong-node-properties-dialog.c:1038
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "རྣམ་གྲངས་ཚུ་གི་དོན་ལུ་ <tt>%s</tt> ནང་དོན་དཔེ།"
+
+#: ../src/cong-node-properties-dialog.c:1185
+#: ../src/cong-node-properties-dialog.c:1316
+msgid "DTD"
+msgstr "ཌི་ཊི་ཌི།"
+
+#: ../src/cong-overview-view.c:207
+msgid "Unknown data"
+msgstr "མ་ཤེས་པའི་གནས་སྡུད།"
+
+#: ../src/cong-parser-error.c:228
+#, c-format
+msgid "Parse errors loading %s"
+msgstr "མིང་དཔྱད་འབད་ནི་འཛོལ་བ་ཚུ་མངོན་གསལ་འབད་དོ། %s"
+
+#: ../src/cong-parser-error.c:236
+msgid "_Retry"
+msgstr "སླར་རྩོལ།(_R)"
+
+#: ../src/cong-parser-error.c:315
+msgid "Line Number"
+msgstr "གྱལ་ཨང་།"
+
+#: ../src/cong-parser-error.c:393
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "%s ཡིག་སྣོད་འདི་གི་ནང་འཁོད་རྩ་སྒྲིག་འདི་ཧ་གོ་མ་ཚུགས།"
+
+#: ../src/cong-parser-error.c:401
+msgid "Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."
+msgstr "གཞན་ཝེབ་བརའུ་ཟར་ཚུ་ལས་ལམ་ལུགས་ཚུ་མང་ཤོས་དམ་དྲགས་ཡོདཔ་ལས་ ད་ལྟོ་ཀོང་ལོ་མི་རེཊི་ལུ་ཡིག་ཆ་ཚུ་\"well-formed\"དགོཔ་ཨིན། འདི་གིས་ད་ལྟོ་ཚུན་ཚོད་ཨེསི་ཇི་ཨེམ་ཨེལ་རྒྱབ་སྐྱོར་མི་འབད། ག་བཅས་ཀྱིས་དཀའ་ངལ་དེ་ཚུ་ཤུལ་མམ་གྱི་གསར་བཏོན་ཅིག་ནང་ཚུད་སྒྲིག་བཟོ་ཚུགས་པའི་རེ་བ་ཡོད།"
+
+#: ../src/cong-parser-error.c:402
+msgid "Show Details"
+msgstr "རྒྱ་བཤད་ཚུ་སྟོན།"
+
+#: ../src/cong-plugin.c:515
+#: ../src/cong-plugin.c:580
+msgid "Conglomerate could not find display information for the new file"
+msgstr "ཡིག་སྣོད་གསརཔ་འདི་གི་དོན་ལུ་ཀོང་ལོ་མི་རེཊི་གིས་བཀྲམ་སྟོན་བརྡ་དོན་འཚོལ་མ་ཐོབ།"
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: ../src/cong-plugin.c:1004
+#, c-format
+msgid "<%s> property dialog"
+msgstr "<%s> རྒྱུ་དངོས་ཌའི་ལོག"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: ../src/cong-plugin.c:1007
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr "རྣམ་གྲངས་འདི་གི་དོན་ལུ་ <%s>རྒྱུ་དངོས་ཌའི་ལོག་ཅིག་བྱིནམ་ཨིན།"
+
+#: ../src/cong-plugin.c:1091
+#, c-format
+msgid "<%s> property page"
+msgstr "<%s>རྒྱུ་དངོས་ཤོག་ལེབ།"
+
+#. Generate a user-visible description for this plugin
+#: ../src/cong-plugin.c:1095
+#, c-format
+msgid "Provides a Properties page for the <%s> element"
+msgstr "རྣམ་གྲངས་འདི་གི་དོན་ལུ་ <%s> རྒྱུ་དངོས་ཤོག་ལེབ་ཅིག་བྱིནམ་ཨིན།"
+
+#: ../src/cong-primary-window.c:415
+msgid "Overview"
+msgstr "སྤྱི་མཐོང་།"
+
+#: ../src/cong-primary-window.c:426
+msgid "Bookmarks"
+msgstr "དེབ་རྟགས་ཚུ།"
+
+#: ../src/cong-primary-window.c:436
+msgid "Raw XML"
+msgstr "རགས་པ་ཨེགསི་ཨེམ་ཨེལ།"
+
+#: ../src/cong-primary-window.c:667
+#: ../src/cong-primary-window.c:686
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "གནམ་མེད་ས་མེད་ཕྱིར་འགྱངས་ཡོད་མི་ཀོང་ལོ་མི་རེཊི་ཞུན་དགཔ་འདི་ལུ་བྱོན་པ་ལེགས་སོ།"
+
+#: ../src/cong-primary-window.c:815
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s (ལེགས་བཅོས་འབད་ཡོདཔ།) - %s"
+
+#: ../src/cong-source-layout.c:513
+#: ../src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་འབྱུང་ཁུངས་བསལ་གཏང་།"
+
+#: ../src/cong-stylesheet.c:230
+msgid "Since Conglomerate could not read the stylesheet it is possible that your XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog.html for more information on catalogs."
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་སི་ཊ་ཡེལ་ཤིཊི་ལྷག་མ་ཚུགསཔ་ལས་ཚུར་ ཁྱོད་ཀྱི་ཨེགསི་ཨེམ་ཨེལ་ཐོ་གཞུང་ཡིག་སྣོད་འདི་བདེན་མེད་སྦེ་གཞི་སྒྲིག་འབད་མི་དེ་སྲིད་པར་ཨིན། ཐོ་གཞུང་ཚུ་གུ་བརྡ་དོན་རྒྱས་བཤད་དོན་ལུ་ http://www.xmlsoft.org/catalog.html ནང་བལྟ་།"
+
+#: ../src/cong-stylesheet.c:261
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "སི་ཊ་ཡེལ་ཤིཊི་ཡིག་སྣོད་འདི་\"%s\"ལུ་\"%s\"་འཇུག་སྤྱོད་འབད་ནི་དཀའ་ངལ་ཅིག་འབྱུང་ཡོདཔ།"
+
+#: ../src/cong-stylesheet.c:278
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"འོག་གི་སི་ཊ་ཡེལ་ཤིཊི་ཚད་བཟུང་ཚུ་ལག་ལེན་འཐབ་ཡོདཔ།:\n"
+
+#: ../src/cong-util.c:321
+#: ../src/plugin-docbook.c:1402
+msgid "Printing XSL Formatting Objects"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་རྩ་སྒྲིག་འབད་ནི་དངོས་པོ་ཚུ་དཔར་བསྐྲུན་འབད་དོ།"
+
+#: ../src/cong-util.c:365
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "འདི་མཐར་ཐུག་ལུ་ ཀོང་ལོ་མི་རེཊི་ ཡུ་ཊི་ཨའི་ཨེལ་ དཔར་བསྐྲུན་ ཨེགསི་ཨེསི་ཨེལ་ཨེཕ་ཨོ་ལས་ འགྲུབ་འབྲས་འདི་འོང་།"
+
+#: ../src/cong-util.c:1437
+msgid "(no description available)"
+msgstr "(འགྲེལ་བཤད་ཐོབ་ཚུགསཔ་མེད།)"
+
+#: ../src/cong-util.c:1625
+msgid "DTD files"
+msgstr "ཌི་ཊི་ཌི་ཡིག་སྣོད་ཚུ།"
+
+#: ../src/cong-util.c:1628
+msgid "Select a DTD"
+msgstr "ཌི་ཊི་ཌི་ཅིག་སེལ་འཐུ་འབད།"
+
+#: ../src/cursor.c:129
+#, c-format
+msgid "Split <%s> element"
+msgstr "རྣམ་གྲངས་ <%s> གཤག"
+
+#: ../src/file.c:106
+msgid "XML Files"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་སྣོད་ཚུ།"
+
+#: ../src/file.c:118
+msgid "All Files"
+msgstr "ཡིག་སྣོད་ཚུ་ཆ་མཉམ།"
+
+#: ../src/plugin-admonition.c:77
+msgid "Admonition"
+msgstr "བསླབ་བྱ་དྲག་པོ།"
+
+#: ../src/plugin-admonition.c:78
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "མཐོང་བའི་ཕན་བསླབ་ཚུ་ ཉེན་བརྡ་ཚུ་ལ་སོགས་པ་གི་དོན་ལུ་ཞུན་དགཔ་ཅིག"
+
+#: ../src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་འདི་ལུ་གནས་རིམ་རྣམ་གྲངས་མགོ་ཅིག་དགོཔ་ཨིན།"
+
+#: ../src/plugin-arbitrary.c:270
+msgid "Empty XML Document"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་སྟོངམ་བཏོན།"
+
+#: ../src/plugin-arbitrary.c:271
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་སྟོངམ་གྱི་མཐུན་སྒྲིག་དབྱེ་བ་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-cleanup-source.c:74
+#: ../src/plugin-cleanup-source.c:77
+#: ../src/plugin-cleanup-source.c:78
+msgid "Cleans up the XML source of the document, so that it is easy to read in a code editor."
+msgstr "ཨང་རྟགས་ཞུན་དགཔ་ཅིག་ནང་ལྷག་ནི་ལུ་འཇམ་ཏོང་ཏོ་འོང་ནི་ལུ་ཡིག་ཆའི་ཨེགསི་ཨེམ་ཨེལ་འབྱུང་ཁུངས་འདི་བསལཝ་ཨིན།"
+
+#: ../src/plugin-cleanup-source.c:76
+msgid "_Clean the XML Source"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་འབྱུང་ཁུངས་འདི་བསལ།(_C)"
+
+#: ../src/plugin-convert-case.c:125
+msgid "Export as \"lower case\" XML"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་\"lower case\"བཟུམ་སྦེ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-convert-case.c:126
+msgid "Exports as an XML file, converting all the tags and attributes in the document to lowercase.  Useful when working with legacy SGML documents."
+msgstr "ཡིག་ཆ་འདི་ནང་ངོ་རྟགས་ཚུ་དང་ཁྱད་ཆོས་ཚུ་ཆ་མཉམ་མགྱོགས་ཡིག་ལུ་གཞི་བསྒྱུར་འབད་དེ་ཨེགསི་ཨེམ་ཨེལ་ཡིག་བཟུམ་སྦེ་ཕྱིར་འདྲེན་འབདཝ་ཨིན། སྔོན་བཤུལ་ཨེསི་ཇི་ཨེམ་ཨེལ་ཡིག་ཆ་ཚུ་དང་གཅིག་ཁར་ལག་ལཱ་འབད་བའི་སྐབས་ཕན་ཐོགས་ཅན་ཨིན།"
+
+#: ../src/plugin-docbook.c:225
+msgid "Untitled section"
+msgstr "མགོ་མིང་མ་བཏགས་མི་དབྱེ་ཚན།"
+
+#: ../src/plugin-docbook.c:232
+msgid "Text of the article goes here"
+msgstr "རྩོམ་བྲིས་པའི་ཚིག་ཡིག་འདི་ཁར་འགྱོཝ་ཨིན།"
+
+#: ../src/plugin-docbook.c:251
+msgid "Untitled Article"
+msgstr "མགོ་མིང་མ་བཏགས་མི་རྩོམ་བྲིས།"
+
+#: ../src/plugin-docbook.c:301
+msgid "Untitled chapter"
+msgstr "མགོ་མིང་མ་བཏགས་མི་ལེའུ།"
+
+#: ../src/plugin-docbook.c:308
+msgid "Text of the first chapter goes here"
+msgstr "ལེའུ་དང་པའི་ཚིག་ཡིག་འདི་ཁར་འགྱོཝ་ཨིན།"
+
+#: ../src/plugin-docbook.c:327
+msgid "Untitled Book"
+msgstr "མགོ་མིང་མ་བཏགས་མི་དེབ།"
+
+#: ../src/plugin-docbook.c:378
+msgid "Untitled book"
+msgstr "མགོ་མིང་མ་བཏགས་མི་དེབ།"
+
+#: ../src/plugin-docbook.c:397
+msgid "Untitled Set of Documents"
+msgstr "མགོ་མིང་མ་བཏགས་པའི་ཡིག་ཆ་ཚུ་གི་ཆ་ཚན་།"
+
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: ../src/plugin-docbook.c:1103
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ལུ་ཡིག་ཆའི་དེབ་གཞི་བསྒྱུར་འབད་ནི་ལུ་ལག་ལེན་འཐབ་ཡོད་མི་སི་ཊ་ཡེལ་སི་ཤིཊི་འདི་འཚོལ་མི་ཐོབ%s"
+
+#: ../src/plugin-docbook.c:1106
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "ཡིག་ཆའི་དེབ་སི་ཊ་ཡེལ་ཤིཊིསི་འདི་ག་ཡོད་འཚོལ་མ་ཐོབ།"
+
+#: ../src/plugin-docbook.c:1108
+msgid "Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://docbook.sourceforge.net/projects/xsl/, are installed and are added to your XML catalog file (see http://www.xmlsoft.org/catalog.html for more information on catalogs)."
+msgstr "ནོར་མཱན་ཝལསིཤ་གི་ཡིག་ཆའི་དེབ་ཨེགསི་ཨེསི་ཨེལ་སི་ཊ་ཡེལ་་ཤིཊིསི་་དེ་ http://docbook.sourceforge.net/projects/xsl/་ལུ་ཐོབ་ཚུགསཔ་ངེས་གཏན་བཟོ་དགོཔ་དང་དེ་ཚུ་གཞི་བཙུགས་འབད་ཡོདཔ་དང་ཆ་མཉམ་ཁྱོད་རའི་ཨེགསི་ཨེམ་ཨེལ་ཐོ་གཞུང་ཡིག་སྣོད་ལུ་ཁ་སྐོང་བརྐྱབས་ཡོདཔ་ཨིན།   (ཐོ་གཞུང་ཚེ་གུ་བརྡ་དོན་རྒྱས་བཤད་དོན་ལུ་ http://www.xmlsoft.org/catalog.html གཟིགས་ནགང་།)."
+
+#: ../src/plugin-docbook.c:1144
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"%s གཞི་བསྒྱུར་མཇུག་བསྡུ།\n"
+"\n"
+" %s ནང་ %s ནང་ %s གཞི་བསྒྱུར་འབད་ཡོདཔ།"
+
+#: ../src/plugin-docbook.c:1268
+msgid "Exporting PDF file"
+msgstr "པི་ཌི་ཨེཕ་ཡིག་སྣོད་ཕྱིར་འདྲེན་འབད་དོ།"
+
+#: ../src/plugin-docbook.c:1272
+#: ../src/plugin-docbook.c:1400
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr "ཡིག་ཆའི་དེབ་ཨེགསི་ཨེསི་ཨེལ་རྩ་སྒྲིག་འབད་ནི་དངོས་པོ་ཚུའི་ནང་ན་བཟོ་བསྒྱུར་འབད་དོ།"
+
+#: ../src/plugin-docbook.c:1274
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "པི་ཌི་ཨེཕ་ཡིག་སྣོད་བཟུམ་སྦེ་ཨེགསི་ཨེསི་ཨེལ་རྩ་སྒྲིག་འབད་ནི་དངོས་པོ་ཚུ་ཕྱི་བཤམ་དོ།"
+
+#: ../src/plugin-docbook.c:1289
+#: ../src/plugin-fo.c:97
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་རྩ་སྒྲིག་འབད་ནི་དངོས་པོ་ཚུ་པི་ཌི་ཨེཕ་ལུ་གཞི་བསྒྱུར་འབད་དོ།"
+
+#: ../src/plugin-docbook.c:1396
+msgid "Printing DocBook file"
+msgstr "ཡིག་ཆའི་དེབ་ཡིག་སྣོད་དཔར་བསྐྲུན་འབད་དོ།"
+
+#: ../src/plugin-docbook.c:2060
+msgid "DocBook Article"
+msgstr "ཡིག་ཆའི་དེབ་རྩོམ་བྲིས།"
+
+#: ../src/plugin-docbook.c:2061
+msgid "Create an article, perhaps for a website or a magazine, using the \"DocBook\" format"
+msgstr "རྩ་སྒྲིག་འདི་\"DocBook\"ལག་ལེན་འཐབ་དེ་ ཝེབ་ས་ཁོངས་ཅིག་ཡང་ན་དུས་དེབ་ཅིག་གི་དོན་ལུ་ཡང་ན་རྩོམ་བྲིས་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-docbook.c:2068
+msgid "DocBook Book"
+msgstr "ཡིག་ཆའི་དེབ་ཀྱི་དེབ།"
+
+#: ../src/plugin-docbook.c:2069
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "རྩ་སྒྲིག་ \"DocBook\" འདི་ལག་ལེན་འཐབ་སྟེ་དེབ་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-docbook.c:2076
+msgid "DocBook Set"
+msgstr "ཡིག་ཆའི་དེབ་གཞི་སྒྲིག་འབད།"
+
+#: ../src/plugin-docbook.c:2077
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "རྩ་སྒྲིག་\"DocBook\"འདི་ལག་ལེན་འཐབ་སྟེ་འབྲེལ་བ་ཡོད་པའི་དེབ་ཚུ་གི་ཆ་ཚན་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-docbook.c:2085
+msgid "Import text as a DocBook article"
+msgstr "ཡིག་ཆའི་དེབ་རྩོམ་བྲིས་ཅིག་བཟུམ་སྦེ་ཚིག་ཡིག་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-docbook.c:2086
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr "རྩོམ་བྲིས་ཅིག་བཟུམ་སྦེ་རྩ་སྒྲིག་འདི་ནང་ན་ \"DocBook\"ཡིག་ཚིག་ཡིག་སྣོད་ཉག་རྐྱང་ཅིག་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-docbook.c:2104
+msgid "Export DocBook as HTML"
+msgstr "ཨེཆ་ཊི་ཨེམ་ཨེལ་བཟུམ་སྦེ་ཡིག་ཆའི་དེབ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-docbook.c:2105
+msgid "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook file"
+msgstr "ཡིག་ཆའི་དེབ་ཡིག་སྣོད་འདི་ལས་ཝེབ་ཤོག་ལེབ་ཅིག་གསར་བསྐྲུན་འབད་ནི་ལུ་ནོ་མཱེན་ཝལཤི་གི་ཡིག་ཆའི་དེབ་སི་ཊ་ཡེལ་ཤིཊིསི་ལག་ལེན་འཐབ།"
+
+#: ../src/plugin-docbook.c:2113
+msgid "Export DocBook as PDF"
+msgstr "པི་ཌི་ཨེཕ་བཟུམ་སྦེ་ཡིག་ཆའི་དེབ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-docbook.c:2114
+msgid "Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook file"
+msgstr "ཡིག་ཆའི་དེབ་ཡིག་སྣོད་འདི་ལས་པི་ཌི་ཨེཕ་ཅིག་གསར་བསྐྲུན་འབད་ནི་ལུ་ནོ་མཱེན་ཝལཤི་གི་ཡིག་ཆའི་དེབ་སི་ཊ་ཡེལ་ཤིཊིསི་ལག་ལེན་འཐབ།"
+
+#: ../src/plugin-docbook.c:2122
+msgid "Export DocBook as XSL:FO"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་:ཨེཕ་ཨོ་བཟུམ་སྦེ་ཡིག་ཆའི་དེབ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-docbook.c:2123
+msgid "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this DocBook file that can be printed or converted to PDF at a later date"
+msgstr "ཤུལ་མའི་ཚེས་གྲངས་ཅིག་ལུ་པི་ཌི་ཨེཕ་ལུ་གཞི་བསྒྱུར་འབད་བཏུབ་ཡང་ན་དཔར་བསྐྲུན་འབད་བཏུབ་མི་ཡིག་ཆའི་དེབ་ཡིག་སྣོད་འདི་ལས་ཨེགསི་ཨེསི་ཨེལ་ཨེཕ་ཨོ་ཡིག་སྣོད་ཅིག་གསར་བསྐྲུན་འབད་ནི་ལུ་ནོ་མཱེན་ཝལཤི་གི་ཡིག་ཆའི་དེབ་སི་ཊ་ཡེལ་ཤིཊིསི་ལག་ལེན་འཐབ།"
+
+#: ../src/plugin-docbook.c:2132
+msgid "Print DocBook"
+msgstr "ཡིག་ཆའི་དེབ་དཔར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-docbook.c:2144
+msgid "Provides a Scope properties page for most DocBook nodes"
+msgstr "ཡིག་ཆའི་དེབ་ནོཌིསི་མང་ཤོས་ཀྱི་དོན་ལུ་འོས་སྐབས་རྒྱུ་དངོས་ཤོག་ལེབ་ཅིག་བྱིནམ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2150
+msgid "Provides a Language properties page for most DocBook nodes"
+msgstr "ཡིག་ཆའི་དེབ་ནོཌིསི་མང་ཤོས་ཀྱི་དོན་ལུ་སྐད་ཡིག་རྒྱུ་དངོས་ཤོག་ལེབ་ཅིག་བྱིནམ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2156
+msgid "Provides a Revisions properties page for most DocBook nodes"
+msgstr "ཡིག་ཆའི་དེབ་ནོཊིསི་མང་ཤོས་ཀྱི་དོན་ལུ་བསྐྱར་སྦྱོང་རྒྱུ་དངོས་ཚུ་བྱིནམ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2173
+msgid "Generic DocBook property dialog"
+msgstr "རིགས་རྒྱུད་ཡིག་ཆའི་དེབ་རྒྱུ་དངོས་ཌའི་ལོག"
+
+#: ../src/plugin-docbook.c:2174
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr "ཡིག་ཆའི་དེབ་ནོཌིསི་མང་ཤོས་ཀྱི་དོན་ལུ་ཌའི་ལོག་རྒྱུ་དངོས་ཚུ་ཅིག་བྱིནམ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2192
+#: ../src/plugin-docbook.c:2195
+#: ../src/plugin-html.c:137
+#: ../src/plugin-html.c:140
+msgid "Open Link in Browser"
+msgstr "བརའུ་ཟར་ནང་འབྲེལ་ལམ་ཁ་ཕྱེ།"
+
+#: ../src/plugin-docbook.c:2204
+msgid "Promote Section"
+msgstr "དབྱེ་ཚན་ཡར་བསྐྱེད་འབད།"
+
+#: ../src/plugin-docbook.c:2205
+msgid "Promotes a DocBook section to a higher organisational level within the document"
+msgstr "ཡིག་ཆའི་ནང་འཁོད་ཡིག་ཆའི་དེབ་དབྱེ་ཚན་ཅིག་ཚོགས་སྡེའི་གནས་རིམ་མཐོ་མི་ཅིག་ལུ་ཡར་བསྐྱེད་བརྐྱབ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2207
+#: ../src/plugin-html.c:148
+#: ../src/plugin-html.c:151
+msgid "Promote"
+msgstr "ཡར་བསྐྱེད།"
+
+#: ../src/plugin-docbook.c:2208
+#: ../src/plugin-docbook.c:2209
+msgid "Promote the section to a higher organisational level within the document"
+msgstr "ཡིག་ཆའི་ནང་འཁོད་དབྲེ་ཚན་འདི་ཚོགས་སྡེའི་གནས་རིམ་མཐོ་མི་ཅིག་ལུ་ཡར་བསྐྱེད་བརྐྱབ།"
+
+#: ../src/plugin-docbook.c:2215
+msgid "Demote Section"
+msgstr "དབྱེ་ཚན་མར་ཕབ་འབད་ནི།"
+
+#: ../src/plugin-docbook.c:2216
+msgid "Demotes a DocBook section to a lower organisational level within the document"
+msgstr "ཡིག་ཆའི་ནང་འཁོད་ཡིག་ཆའི་དེབ་དབྱེ་ཚན་ཅིག་ཚོགས་སྡེའི་གནས་རིམ་འོག་མ་ཅིག་ལུ་མར་ཕབ་འབདཝ་ཨིན།"
+
+#: ../src/plugin-docbook.c:2218
+#: ../src/plugin-html.c:159
+#: ../src/plugin-html.c:162
+msgid "Demote"
+msgstr "མར་ཕབ་འབད་ནི།"
+
+#: ../src/plugin-docbook.c:2219
+#: ../src/plugin-docbook.c:2220
+msgid "Demote the section to a lower organisational level within the document"
+msgstr "ཡིག་ཆའི་ནང་འཁོད་ཚོགས་སྡེའི་གནས་རིམ་དམའ་མི་ཅིག་ལུ་དབྲེ་ཚན་འདི་མར་ཕབ་བརྐྱབ།"
+
+#: ../src/plugin-dtd.c:93
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "གུ་གཞི་རྟེན་འབད་ཡོད་མི་ཡིག་ཆ་དབྱེ་བ་རང་བཞིན་བཟོ་བཏོན་འབད་ཡོདཔ། %s"
+
+#: ../src/plugin-dtd.c:94
+#, c-format
+msgid "This Conglomerate display specification was automatically generated from %s"
+msgstr "ཀོང་ལོ་མི་རེཊི་འདིའི་བཀྲམ་སྟོན་གསལ་བཀོད་འབད་ནི་དེ་རང་བཞིན་གྱིས་བཟོ་བཏོན་འབད་ཡོདཔ་ལས་ %s"
+
+#: ../src/plugin-dtd.c:215
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "ཌི་ཊི་ཌི་ཀོང་ལོ་མི་རེཊི་བཀྲམ་སྟོན་གསལ་བཀོད་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/plugin-dtd.c:216
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "ཀོང་ལོ་མི་རེཊི་བཀྲམ་སྟོན་གསལ་བཀོད་ཡིག་སྣོད་གསར་བསྐྲུན་འབད་དེ་ཌི་ཊི་ཌི་ཡིག་སྣོད་ཅིག་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-dtd.c:224
+msgid "Convert DTD into a Relax NG schema"
+msgstr "ལྷོད་ཉམས་ཨེན་ཇི་ལས་འཆར་ཅིག་ནང་ན་ཌི་ཊི་ཌི་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/plugin-dtd.c:225
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "ལྷོད་ཉམས་ཨེན་ཇི་ལས་འཆར་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད་དེ་ཌི་ཊི་ཌི་ཡིག་སྣོད་ཅིག་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-dtd.c:233
+msgid "Convert DTD into W3C XML Schema"
+msgstr "ཌབ་ལུ་༣་སི་ཨེགསི་ཨེམ་ཨེལ་ལས་འཆར་ནང་ན་ཌི་ཊི་ཌི་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/plugin-dtd.c:234
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "ཌབ་ལུ་༣་སི་ཨེགསི་ཨེམ་ཨེལ་ལས་འཆར་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད་ནི་ཌི་ཊི་ཌི་ཡིག་སྣོད་ཅིག་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-dtd.c:242
+msgid "Convert DTD into a Schematron file"
+msgstr "ལས་འཆར་ཡིག་སྣོད་ཅིག་ནང་ན་ཌི་ཊི་ཌི་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/plugin-dtd.c:243
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "སིཀི་མེ་ཊོན་ལས་འཆར་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད་དེ་ ཌི་ཊི་ཌི་་ཡིག་སྣོད་ཅིག་ནང་འདྲེན་འབད། "
+
+#: ../src/plugin-dtd.c:251
+msgid "Convert DTD into an Examplotron file"
+msgstr "ཌི་ཊི་ཌི་ཨེ་ཟམ་པལ་ཊོན་ཡིག་སྣོད་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/plugin-dtd.c:252
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "ཌི་ཊི་ཌི་ཡིག་སྣོད་ཅིག་ཨེ་ཟམ་པལ་ཊོན་ལས་འཆར་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-fo.c:152
+msgid "Export XSL-FO as PDF"
+msgstr "པི་ཌི་ཨེཕ་བཟུམ་སྦེ་ཨེགསི་ཨེསི་ཨེལ་-ཨེཕ་ཨོ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-fo.c:153
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་འདི་ལས་པི་ཌི་ཨེཕ་ཡིག་སྣོད་ཅིག་བཟོ་བཏོན་འབད:ཨེཕ་ཨོ་བརྡ་དོན།"
+
+#: ../src/plugin-fo.c:162
+msgid "Print XSL:FO"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་:ཨེཕ་ཨོ་ཕྱིར་འདྲེན་འབད།"
+
+#: ../src/plugin-lists.c:77
+msgid "List Member Element"
+msgstr "ཐོ་ཡིག་འཐུས་མི་རྣམ་གྲངས།"
+
+#: ../src/plugin-lists.c:78
+msgid "An editor node for visualising a member of a list"
+msgstr "འཐུས་མི་ཐོ་ཡིག་ཅིག་མཐོང་བའི་དོན་ལུ་ཞུན་དག་པའི་མཐུད་མཚམས་ཅིག"
+
+#: ../src/plugin-paragraph.c:69
+msgid "An editor node for visualising a paragraph"
+msgstr "མཚམས་དོན་ཅིག་མཐོང་བའི་དོན་ལུ་ཞུན་དག་པའི་མཐུད་མཚམས་ཅིག"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: ../src/plugin-print-source.c:73
+#: ../src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "ཨེགསི་ཨེམ་ཨེལ་འབྱུང་ཁུངས་དཔར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-random.c:140
+msgid "What kind of random XML document would you like to create?"
+msgstr "ཁྱོད་ཀྱིས་གང་འབྱུང་ཨེགསི་ཨེམ་ཨེལ་གྱི་ཡིག་ཆ་དབྱེ་ཁག་ག་བཟུམ་གསར་བསྐྲུན་འབད་ནི?"
+
+#: ../src/plugin-random.c:223
+msgid "Random Document"
+msgstr "གང་འབྱུང་ཡིག་ཆ།"
+
+#: ../src/plugin-random.c:224
+msgid "Create an XML document containing random content."
+msgstr "ཨེགསི་ཨེམ་ཨེལ་ཡིག་ཆ་གང་འབྱུང་ནང་དོན་ཡོད་མི་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-relaxng.c:128
+msgid "Compact Syntax View"
+msgstr "ཚབ་སྲུང་ཚིག་སྦྱོར་མཐོང་སྣང་།"
+
+#: ../src/plugin-relaxng.c:146
+#: ../src/plugin-relaxng.c:149
+msgid "View as Compact RELAX NG"
+msgstr "སྲབ་ཆུང་ལྷོད་ཉམས་ཨེན་ཇི་བཟུམ་སྦེ་བལྟ།"
+
+#: ../src/plugin-relaxng.c:147
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr "ལྷོད་ཉམས་ཨེན་ཇི་ལས་འཆར་ཅིག་གི་སྲབ་ཆུང་ཚིག་སྦྱོར་འབྲི་ཤོག་འདི་བཀྲམ་སྟོན་འབད།"
+
+#: ../src/plugin-save-dispspec.c:155
+msgid "Dump Display Spec"
+msgstr "བཀྲམ་སྟོན་སིཔེཀ་བཀོག་བཞག"
+
+#: ../src/plugin-save-dispspec.c:156
+#: ../src/plugin-save-dispspec.c:159
+#: ../src/plugin-save-dispspec.c:160
+msgid "Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"
+msgstr "ད་ལྟོའི་སི་པེཀ་བཀྲམ་སྟོན་སི་པེཀ་ཨེགསི་ཨེམ་ཨེལ་ཡིག་སྣོད་ནང་ན་འབྲིཝ་ཨིན། ཡིག་སྣོད་འདི་དེ་ལས་ཀོང་ལོ་མི་རེཊི་ལག་ལེན་པ་གིས་སྲོལ་སྒྲིག་འབད་བཏུབ་ཨིན།"
+
+#: ../src/plugin-save-dispspec.c:158
+msgid "_Dump Display Spec"
+msgstr "བཀྲམ་སྟོད་སི་པེཀ་བཀོག་བཞག(_D)"
+
+#: ../src/plugin-save-dispspec.c:166
+msgid "Edit Display Spec"
+msgstr "བཀྲམ་སྟོན་སི་པེཀ་ཞུན་དག་འབད།"
+
+#: ../src/plugin-save-dispspec.c:167
+#: ../src/plugin-save-dispspec.c:170
+#: ../src/plugin-save-dispspec.c:171
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "ད་ལྟོའི་བཀྲམ་སྟོན་སི་པེཀ་ཀོང་ལོ་མི་རེཊི་ཡིག་ཆ་བཟུམ་སྦེ་ཁ་ཕྱེཝ་ཨིན།"
+
+#: ../src/plugin-save-dispspec.c:169
+msgid "_Edit Display Spec"
+msgstr "བཀྲམ་སྟོན་སི་པེཀ་ཞུན་དག་འབད།(_E)"
+
+#: ../src/plugin-sgml.c:43
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ཡིག་སྣོད་འདི་ནང་འདྲེན་འབད་མ་ཚུགསཔ། \"%s\""
+
+#: ../src/plugin-sgml.c:135
+msgid "Attempting to run the sgml2xml tool"
+msgstr "ཨེསི་ཇི་ཨེམ་༡༢xཨེམ་ཨེལ་ལག་ཆས་འདི་གཡོག་བཀོལ་ནི་དཔའ་བཅམ་དོ།"
+
+#: ../src/plugin-sgml.c:190
+msgid "Importing SGML"
+msgstr "ཨེསི་ཇི་ཨེམ་ཨེལ་ནང་འདྲེན་འབད་དོ།"
+
+#: ../src/plugin-sgml.c:209
+msgid "Import SGML"
+msgstr "ཨེསི་ཇི་ཨེམ་ཨེལ་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-sgml.c:210
+msgid "Import an SGML file, converting to XML."
+msgstr "ཨེསི་ཇི་ཨེམ་ཨེལ་ཡིག་སྣོད་ཅིག་ཨེགསི་ཨེམ་ཨེལ་ལུ་གཞི་བསྒྱུར་འབད་དེ་ནང་འདྲེན་འབད།"
+
+#: ../src/plugin-tests.c:64
+msgid "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"
+msgstr "འདི་དཔེ་གཟུགས་ཟླ་ཐོ་ཚད་འཛིན་ཅིག་ཨིན་ འདི་ས་གནས་འཛིན་མི་དང་མཐར་ཐུག་ལུ་ཕན་ཐོགས་ཅན་གྱི་གདམ་ཁ་ལ་ལོ་ཚུ་དང་གཅིག་ཁར་ཚབ་བཙུགས་ཡོདཔ་ཨིན།"
+
+#: ../src/plugin-tests.c:142
+#: ../src/plugin-tests.c:221
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr "ཡུ་ནི་ཀོཌི་ཡིག་འབྲུ་ཚུ 0x%04X-0x%04X"
+
+#: ../src/plugin-tests.c:359
+msgid "Unicode Character Reference"
+msgstr "ཡུ་ནི་ཀོཌི་ཡིག་འབྲུ་གཞི་བསྟུན།"
+
+#: ../src/plugin-tests.c:360
+msgid "Create a table listing a part of the Unicode character set as a DocBook article"
+msgstr "ཡིག་ཆའི་དེབ་རྩོམ་བྲིས་ཅིག་བཟུམ་སྦེ་གཞི་སྒྲིག་འབད་ནི་ཡུ་ནི་ཀོཌི་ཡིག་འབྲུ་འདི་གི་ཡན་ལག་ཅིག་ཐོ་ཡིག་བཀོད་མི་ཐིག་ཁྲམ་ཅིག་གསར་བསྐྲུན་འབད།"
+
+#: ../src/plugin-validate.c:163
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "ཡིག་ཆ་འདི་ \"%s\" ནུས་ལྡན་དུས་ཚོད་ཀྱི་དོན་ལུ་བརྟག་ཞིབ་འབད་མི་ཚུགསཔ།"
+
+#: ../src/plugin-validate.c:170
+msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr "ཁྱོད་ཀྱིས་ཡིག་ཆའི་དབྱེ་བ་གསལ་བསྒྲགས་ཅིག་(ཌི་ཊི་ཌི)འིག་ཆ་འདི་ལུ་ཁ་སྐོང་བརྐྱབ་སྟེ་ཚུད་སྒྲིག་འབད་བཏུབ་ཨིན།"
+
+#: ../src/plugin-validate.c:215
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr "ཡིག་ཆ་འདི་ \"%s\" ནུས་ཅན་ཨིན།"
+
+#: ../src/plugin-validate.c:249
+msgid "Validate Document"
+msgstr "ནུས་ལྡན་གྱི་ཡིག་ཆ།"
+
+#: ../src/plugin-validate.c:250
+#: ../src/plugin-validate.c:253
+#: ../src/plugin-validate.c:254
+msgid "Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"
+msgstr "ཡིག་ཆ་ཆ་མཉམ་པའི་དབྱེ་བ་ཡང་ན་ལས་འཆར་གྱིས་བྱིན་ཡོད་མི་ལམ་ལུགས་ཚུ་གི་ཆ་ཚན་ཅིག་མཐུན་སྒྲིག་འབདཝ་ལས་ ཡིག་ཆ་འདི་ \"valid\" ཨིན་པ་ཅིན་བརྟག་ཞིབ་འབད་ནི་ལུ་བལྟཝ་ཨིན།"
+
+#: ../src/plugin-validate.c:252
+msgid "_Validate Document"
+msgstr "ནུས་ལྡན་གྱི་ཚེས་གྲངས་ཡིག་ཆ།(_V)"
+
+#: ../src/plugin-website.c:465
+msgid "Generating website"
+msgstr "ཝེབ་ས་ཁོངས་བཟོ་བཏོན་འབད་དོ།"
+
+#: ../src/plugin-website.c:472
+msgid "Finished generating website."
+msgstr "ཝེབ་ས་ཁོངས་བཟོ་བཏོན་འབད་ནི་མཇུག་བསྡུ་ཡོདཔ།"
+
+#: ../src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr "ཀོང་ལོ་མི་རེཊི་གིས་ཝེབ་ས་ཁོངས་འདི་བཟོ་བཏོན་འབད་མ་ཚ་བར་ཡོདཔ།"
+
+#: ../src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr "གོ་རིམ་ཚུ་གཅིག་འཛོལ་བ་ཅིག་ཡོད་པའི་སྙན་ཞུ་འབད་ཡོདཔ།"
+
+#: ../src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr "བརྡ་དོན་ཧེང་བཀེལ་དོན་ལུ་\"Details\"ཨེབ་རྟ་འདི་གུ་ཨེབ་གཏང་འབད།"
+
+#: ../src/plugin-website.c:480
+msgid "_Details"
+msgstr "རྒྱས་བཤད་ཚུ།(_D)"
+
+#: ../src/plugin-website.c:508
+msgid "Generate website"
+msgstr "ཝེབ་ས་ཁོངས་བཟོ་བཏོན་འབད།"
+
+#: ../src/plugin-website.c:509
+#: ../src/plugin-website.c:512
+#: ../src/plugin-website.c:513
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "ཝེབ་ས་ཁོངས་ཨེགསི་ཨེམ་ཨེལ་འགྲེལ་བཤད་འདི་ལས་ཨེཆ་ཊི་ཨེམ་ཨེལ་ཤོག་ལེབ་ཚུ་གི་བསྡུ་གསོག་ཅིག་བཟོ་བཏོན་འབདཝ་ཨིན།"
+
+#: ../src/plugin-website.c:511
+msgid "Generate _Website"
+msgstr "ཝེབ་ས་ཁོངས་བཟོ་བཏོན་འབད།(_W)"
+
+#: ../src/plugin-xsl.c:324
+msgid "XSL Template Element"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་ཊེམ་པེལེཊི་རྣམ་གྲངས།"
+
+#: ../src/plugin-xsl.c:325
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "ཨེགསི་ཨེསི་ཨེལ་སི་ཊ་ཡེལ་ཤིཊི་ཅིག་ནང་ཊེམ་པེ་ལེཊིསི་ལམ་ལུགས་ཚུ་མཐོང་བའི་དོན་ལུ་རྣམ་གྲངས་ཅིག"
+
+#: ../src/popup.c:490
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "ཡར་བསྐྱེད་ངོ་རྟགས་འཇུག་སྤྱོད་འབད།: %s"
+
+#: ../src/popup.c:561
+msgid "Remove Span Tag"
+msgstr "ཡར་བསྐྱེད་ངོ་རྟགས་རྩ་བསྐྲད་གཏང་།"
+
+#: ../src/popup.c:607
+msgid "Convert to a comment"
+msgstr "བསམ་བཀོད་ཅིག་ལུ་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/popup.c:627
+#: ../src/tree.c:521
+msgid "Uncomment"
+msgstr "བསམ་བཀོད་བཤོལ།"
+
+#: ../src/popup.c:628
+msgid "Convert a comment containing XML source code into the corresponding code"
+msgstr "ཆ་མཉམ་པའི་ཨང་རྟགས་འདིའི་ནང་ན་ཨེགསི་ཨེམ་ཨེལ་འབྱུང་ཁུངས་ཨང་རྟགས་ཡོད་མི་བསམ་བཀོད་ཅིག་གཞི་བསྒྱུར་འབད།"
+
+#. FIXME: could do with better text here
+#: ../src/popup.c:648
+msgid "Convert Reference into a Copy"
+msgstr "གཞི་བསྟུན་འདྲ་བཤུས་ཅིག་ནང་ན་གཞི་བསྒྱུར་འབད།"
+
+#. FIXME: could do with better text here
+#: ../src/popup.c:650
+msgid "Convert a reference to an XML entity to an inline copy of that entity's content"
+msgstr "ཨིན་ཊི་ཊི་གི་ནང་དོན་དེ་གི་གྱལ་རིམ་ནང་གི་འདྲ་བཤུས་ཅིག་ལུ་ཨེགསི་ཨེམ་ཨེལ་ཨིན་ཊི་ཊི་ཅིག་ལུ་གཞི་བསྟུན་ཅིག་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/popup.c:729
+#: ../src/popup.c:1047
+msgid "_Properties"
+msgstr "རྒྱུ་དངོས་ཚུ།(_P)"
+
+#: ../src/popup.c:763
+#: ../src/popup.c:1064
+msgid "_Cut"
+msgstr "བཏོག(_C)"
+
+#: ../src/popup.c:989
+msgid "Other XML element..."
+msgstr "གཞནཨེགསི་ཨེམ་ཨེལ་རྣམ་གྲངས་་་"
+
+#: ../src/popup.c:1083
+msgid "Paste into"
+msgstr "ནང་ན་སྦྱར།"
+
+#: ../src/popup.c:1093
+msgid "Paste before"
+msgstr "ཧེ་མ་སྦྱར།"
+
+#: ../src/popup.c:1103
+msgid "Paste after"
+msgstr "ཤུལ་མ་སྦྱར།"
+
+#: ../src/tree.c:104
+#: ../src/tree.c:136
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "སྤུན་ཆ་བཙུགས།: %s"
+
+#: ../src/tree.c:188
+#: ../src/tree.c:216
+#, c-format
+msgid "Insert child: %s"
+msgstr "ཆ་ལག་བཙུགས།: %s"
+
+#: ../src/tree.c:311
+#: ../src/xmledit.c:51
+msgid "Cut"
+msgstr "བཏོག"
+
+#: ../src/tree.c:469
+msgid "Convert to comment"
+msgstr "བསམ་བཀོད་ལུ་གཞི་བསྒྱུར་འབད།"
+
+#: ../src/tree.c:585
+#, c-format
+msgid "Convert reference to \"%s\" to copy"
+msgstr "འདྲ་བཤུས་འབད་ནི་ལུ་ \"%s\" གཞི་བསྟུན་གཞི་བསྒྱུར་འབད།"
+
+#. create description for dialog
+#: ../src/xmldata.c:452
+#, c-format
+msgid "The element \"%s\" requires a child to be valid. Please choose one of the following child types."
+msgstr "རྣམ་གྲངས་ \"%s\" འདི་ལུ་ནུས་ཅན་བཟོ་ནི་ལུ་ཆ་ལག་ཅིག་དགོས་མཁོ་ཡོདཔ་ལས་ འོག་གི་ཆ་ལག་དབྱེ་བ་ཚུ་གཅིག་གདམ་གནང་།"
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: ../src/xmldata.c:457
+msgid "Required Children Choices"
+msgstr "ཆ་ལག་ཚུ་གི་གདམ་ཁ་ཚུ་དགོས་མཁོ་ཡོདཔ།"
+
+#: ../src/xmledit.c:166
+msgid "Paste"
+msgstr "སྦྱར།"
+
+#: ../src/xmledit.c:252
+msgid "Paste Under"
+msgstr "འོག་ལུ་སྦྱར།"
+
+#: ../src/xmledit.c:303
+msgid "Paste Before"
+msgstr "ཧེ་མ་སྦྱར།"
+
+#: ../src/xmledit.c:353
+msgid "Paste After"
+msgstr "ཤུལ་མ་སྦྱར།"
+
+#: ../src/xmledit.c:394
+msgid "Source View - Conglomerate"
+msgstr "འབྱུང་ཁུངས་ཀོང་ལོ་མི་རེཊི་སྟོན།"
+
