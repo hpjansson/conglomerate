@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-22 17:41+0200\n"
+"POT-Creation-Date: 2007-03-08 09:14+0200\n"
 "PO-Revision-Date: 2006-01-22 12:50+0200\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -189,7 +189,7 @@ msgstr "Елемент на XML"
 
 #: ../dispspecs/docbook.xds.in.h:1 ../dispspecs/website-webpage.xds.in.h:1
 msgid "A URL link (perhaps to a web site)"
-msgstr "Адрес-УРЛ (вероятно то уеб сайт)"
+msgstr "Адрес (вероятно то уеб сайт)"
 
 #: ../dispspecs/docbook.xds.in.h:2
 msgid ""
@@ -877,7 +877,7 @@ msgstr "Заглавие на цитиран източник"
 
 #: ../dispspecs/docbook.xds.in.h:169 ../dispspecs/website-webpage.xds.in.h:98
 msgid "URL Link"
-msgstr "Хипервръзка към УРЛ"
+msgstr "Хипервръзка към адрес"
 
 #: ../dispspecs/docbook.xds.in.h:170
 msgid "User Input"
@@ -2982,8 +2982,8 @@ msgid "XSL stylesheet"
 msgstr "Таблица със стилове във формат XSL"
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
-#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:793
-#: ../src/cong-primary-window.c:795 ../src/cong-primary-window.c:801
+#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:815
+#: ../src/cong-primary-window.c:817 ../src/cong-primary-window.c:823
 msgid "Conglomerate XML Editor"
 msgstr "Редактор на XML - Conglomerate"
 
@@ -3330,7 +3330,7 @@ msgstr "Цел"
 
 #: ../glade/docbook-ulink-properties.glade.h:6
 msgid "URL"
-msgstr "УРЛ"
+msgstr "Адрес"
 
 #: ../glade/docbook-ulink-properties.glade.h:7
 msgid "_Test this Link"
@@ -3342,7 +3342,7 @@ msgstr "Локално име"
 
 #: ../glade/plugin-arbitrary.glade.h:3
 msgid "Namespace URI"
-msgstr "Адрес-УРИ на пространство от имена"
+msgstr "Адрес на пространство от имена"
 
 #: ../glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
@@ -3709,7 +3709,7 @@ msgstr "Начало на XInclude"
 msgid "XInclude End"
 msgstr "Край на XInclude"
 
-#: ../src/cong-document.c:2194
+#: ../src/cong-document.c:2163
 #, c-format
 msgid "Select %s"
 msgstr "Избор на %s"
@@ -4322,7 +4322,7 @@ msgstr ""
 "документа. Натиснете „Използване“, за да го създадете. Ако искате да "
 "съхраните документа, ще трябва да го запазите."
 
-#: ../src/cong-file-open.c:73
+#: ../src/cong-file-open.c:72
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
@@ -4330,7 +4330,7 @@ msgstr ""
 "Вътрешната структура на документа не съвпада с никоя от познатите на "
 "Conglomerate."
 
-#: ../src/cong-file-open.c:74
+#: ../src/cong-file-open.c:73
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
@@ -4338,11 +4338,11 @@ msgstr ""
 "Можете да накарате Conglomerate да зареди документа като натиснете бутона "
 "„Принудително зареждане“, но резултатите може да не са идеални."
 
-#: ../src/cong-file-open.c:75
+#: ../src/cong-file-open.c:74
 msgid "Force"
 msgstr "Принудително зареждане"
 
-#: ../src/cong-file-open.c:228
+#: ../src/cong-file-open.c:223
 msgid "Select an XML document"
 msgstr "Избор на документ с XML"
 
@@ -4689,11 +4689,6 @@ msgstr "_Отмяна: %s"
 msgid "_Redo: %s"
 msgstr "_Повтаряне: %s"
 
-#: ../src/cong-menus.c:1972
-#, c-format
-msgid "Open '%s'"
-msgstr "Отваряне на „%s“"
-
 #: ../src/cong-node-properties-dialog.c:254
 msgid "XPath"
 msgstr "XPath"
@@ -4818,11 +4813,11 @@ msgstr "Отметки"
 msgid "Raw XML"
 msgstr "Код на XML"
 
-#: ../src/cong-primary-window.c:660 ../src/cong-primary-window.c:679
+#: ../src/cong-primary-window.c:667 ../src/cong-primary-window.c:686
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Добре дошли в дългоочаквания редактор на XML - Conglomerate."
 
-#: ../src/cong-primary-window.c:793
+#: ../src/cong-primary-window.c:815
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (променен) - %s"
@@ -5560,3 +5555,6 @@ msgstr "Поставяне след"
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Изходен код - Conglomerate"
+
+#~ msgid "Open '%s'"
+#~ msgstr "Отваряне на „%s“"
