@@ -1,3 +1,9 @@
+2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* .cvsignore:
+
+	Removed cvsignore, not required anymore.
+
 2005-06-02  Geert Stappers  <stappers@stappers.nl>
 
 	* started with the Links file

@@ -1,7 +1,42 @@
 
 NEWS: In this file the announce messages of recent releases.
 
-Conglomerate 0.9.1 (codenamed "Destroy All Bugs!) Released
+Conglomerate 0.9.2 (codenamed "Good Day Today") Released
+==========================================================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly aimed at DocBook, but should be able to handle any XML document type.
+
+This is another 0.9 release. It's just supposed to make at least one man happy (me). But probably there is sense to use updated translation as well.
+
+Conglomerate requires GTK+ version 2.10.0 or later
+
+You can download it from the usual place: http://sourceforge.net/project/showfiles.php?group_id=82766 
+
+Many thanks to everyone who contributed to this release; my apologies if I missed anyone from the credits below.
+
+Fixes
+	* Build with gcc 4.0
+	* Annoying assertion about traversal node
+Translations
+	* Alexander Shopov (bg)
+	* Daniel Nylander (sv)
+	* David Lodge (en_GB)
+	* Djihed Afifi (ar)
+	* Francisco Javier F. Serrador (es)
+	* Hendrik Richter (de)
+	* João Emanuel (pt_BR)
+	* Jonathan Ernst (fr)
+	* Kjartan Maraas (nb)
+	* Kostas (el)
+	* Lukas Novotny (cs)
+	* Mahesh subedi (ne)
+	* Kjartan Maraas (no)
+	* Ryoichi Inagaki (ja)
+	* Vincent van Adrighem (nl)
+	* Yangka (dz)
+Thanks
+
+Conglomerate 0.9.1 (codenamed "Destroy All Bugs!") Released
 ==========================================================
 
 Conglomerate is a free, user-friendly XML editor. It is particularly aimed at DocBook, but should be able to handle any XML document type.
@@ -58,9 +93,6 @@ Thanks
       * Michèle Garoche
       * Marcus Meissner
 
-David Malcolm
-
-13-02-05
 Conglomerate 0.9.0 Released - Widget Rewrite #4 - Now with Interestingly Different Bugs!
 ========================================================================================
 
@@ -119,6 +151,3 @@ Thanks
       * Alan Horkan
       * Geert Stappers
       * Marcel Telka
-
-David Malcolm
-

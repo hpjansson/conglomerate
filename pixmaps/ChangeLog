@@ -1,3 +1,9 @@
+2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* .cvsignore:
+
+	Removed cvsignore, not required anymore.
+
 2004-10-14 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* Makefile.am, ilogo100.xpm, conglomerate-logo.png :
