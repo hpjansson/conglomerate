@@ -19,3 +19,5 @@ EXTRA_DIST = BUGS	\
 ##   grep -v '^\./var/scrollkeeper' | \
 ##   grep -v '^\./share/gnome/help/conglomerate/C/faq.xml'
 ## # but it will need more to get a fine `make distcheck`
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --disable-scrollkeeper --enable-gtk-doc

@@ -1,5 +1,11 @@
 2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
+	* Makefile.am:
+
+	Moved to gtk-doc.make
+
+2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
 	* .cvsignore:
 	* tmpl/.cvsignore:
 
