@@ -861,7 +861,7 @@ msgstr ""
 #: ../dispspecs/website-webpage.xds.in.h:96
 #: ../dispspecs/xhtml1-strict.xds.in.h:76
 msgid "Title"
-msgstr "Titol"
+msgstr "Títol"
 
 #: ../dispspecs/docbook.xds.in.h:168 ../dispspecs/website-webpage.xds.in.h:97
 msgid "Title Citation"
@@ -1004,11 +1004,11 @@ msgstr "Suscrich"
 #: ../dispspecs/forrest-document.xds.in.h:39
 #: ../dispspecs/teixlite.xds.in.h:245 ../dispspecs/xhtml1-strict.xds.in.h:67
 msgid "Table"
-msgstr "Taula"
+msgstr "Tablèu"
 
 #: ../dispspecs/forrest-document.xds.in.h:40
 msgid "Table cell"
-msgstr "Cellula de la taula"
+msgstr "Cellula del tablèu"
 
 #: ../dispspecs/forrest-document.xds.in.h:41
 msgid "Table header cell"
@@ -1016,7 +1016,7 @@ msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:42
 msgid "Table row"
-msgstr "Renguièra de la taula"
+msgstr "Linha del tablèu"
 
 #: ../dispspecs/forrest-document.xds.in.h:43
 msgid ""
@@ -3212,7 +3212,7 @@ msgstr "Breton"
 
 #: ../src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr "Catalàn"
+msgstr "Catalan"
 
 #: ../src/cong-attribute-editor-lang.c:50
 msgid "Czech"
@@ -4216,9 +4216,7 @@ msgstr ""
 
 #: ../src/cong-menus.c:1427
 msgid "translator_credits"
-msgstr ""
-"La còla occitana de revirada d'Ubuntu, 2006 - ubuntu-l10n-"
-"oci@lists.ubuntu.com"
+msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org)"
 
 #: ../src/cong-menus.c:1446
 msgid ""
