@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0.9.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-25 15:55+0200\n"
+"POT-Creation-Date: 2007-10-13 17:46+0200\n"
 "PO-Revision-Date: 2007-08-19 16:52+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
@@ -913,6 +913,7 @@ msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:11 ../dispspecs/readme.xds.in.h:4
 #: ../src/cong-document.c:988
+#, c-format
 msgid "Document"
 msgstr "Document"
 
@@ -2791,8 +2792,8 @@ msgid "XSL stylesheet"
 msgstr ""
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
-#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:793
-#: ../src/cong-primary-window.c:795 ../src/cong-primary-window.c:801
+#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:815
+#: ../src/cong-primary-window.c:817 ../src/cong-primary-window.c:823
 msgid "Conglomerate XML Editor"
 msgstr ""
 
@@ -2846,6 +2847,7 @@ msgid "Basic"
 msgstr "Basic"
 
 #: ../glade/cong-file-properties.glade.h:4 ../src/cong-document.c:1003
+#, c-format
 msgid "Document Type Declaration"
 msgstr ""
 
@@ -3155,6 +3157,7 @@ msgid "Depth"
 msgstr "Prigondor"
 
 #: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
+#, c-format
 msgid "Document Type"
 msgstr ""
 
@@ -3173,6 +3176,7 @@ msgid "XML Editor"
 msgstr ""
 
 #: ../src/cong-app.c:1158
+#, c-format
 msgid "Conglomerate could not load any xds files"
 msgstr ""
 
@@ -3359,6 +3363,7 @@ msgid ""
 msgstr ""
 
 #: ../src/cong-dialog.c:325
+#, c-format
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
@@ -3379,6 +3384,7 @@ msgid "Changes from the past %li minutes will be discarded."
 msgstr ""
 
 #: ../src/cong-dialog.c:388
+#, c-format
 msgid "Changes from the past minute will be discarded."
 msgstr ""
 
@@ -3430,6 +3436,7 @@ msgid "Text \"%s\""
 msgstr ""
 
 #: ../src/cong-document.c:968
+#, c-format
 msgid "Character Data"
 msgstr ""
 
@@ -3444,6 +3451,7 @@ msgid "Entity \"%s\""
 msgstr ""
 
 #: ../src/cong-document.c:977
+#, c-format
 msgid "XML Processing Instruction"
 msgstr ""
 
@@ -3453,38 +3461,47 @@ msgid "Comment \"%s\""
 msgstr ""
 
 #: ../src/cong-document.c:994
+#, c-format
 msgid "Document Fragment"
 msgstr ""
 
 #: ../src/cong-document.c:997
+#, c-format
 msgid "Notation"
 msgstr ""
 
 #: ../src/cong-document.c:1000
+#, c-format
 msgid "HTML Document"
 msgstr ""
 
 #: ../src/cong-document.c:1006
+#, c-format
 msgid "Element Declaration"
 msgstr ""
 
 #: ../src/cong-document.c:1009
+#, c-format
 msgid "Attribute Declaration"
 msgstr ""
 
 #: ../src/cong-document.c:1012
+#, c-format
 msgid "Entity Declaration"
 msgstr ""
 
 #: ../src/cong-document.c:1015
+#, c-format
 msgid "Namespace Declaration"
 msgstr ""
 
 #: ../src/cong-document.c:1018
+#, c-format
 msgid "XInclude Start"
 msgstr ""
 
 #: ../src/cong-document.c:1021
+#, c-format
 msgid "XInclude End"
 msgstr ""
 
@@ -3837,6 +3854,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:178
+#, c-format
 msgid "The file is too big to fit on the device."
 msgstr ""
 
@@ -3860,6 +3878,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:222
+#, c-format
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
 
@@ -4034,23 +4053,23 @@ msgid ""
 "keep it."
 msgstr ""
 
-#: ../src/cong-file-open.c:73
+#: ../src/cong-file-open.c:72
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
 msgstr ""
 
-#: ../src/cong-file-open.c:74
+#: ../src/cong-file-open.c:73
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 msgstr ""
 
-#: ../src/cong-file-open.c:75
+#: ../src/cong-file-open.c:74
 msgid "Force"
 msgstr ""
 
-#: ../src/cong-file-open.c:228
+#: ../src/cong-file-open.c:223
 msgid "Select an XML document"
 msgstr ""
 
@@ -4194,6 +4213,7 @@ msgid "Conglomerate could not transform the document"
 msgstr ""
 
 #: ../src/cong-menus.c:552
+#, c-format
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 
@@ -4385,11 +4405,6 @@ msgstr "_Anullar : %s"
 msgid "_Redo: %s"
 msgstr ""
 
-#: ../src/cong-menus.c:1972
-#, c-format
-msgid "Open '%s'"
-msgstr "Dobrir '%s'"
-
 #: ../src/cong-node-properties-dialog.c:254
 msgid "XPath"
 msgstr ""
@@ -4508,11 +4523,11 @@ msgstr "Favorits"
 msgid "Raw XML"
 msgstr ""
 
-#: ../src/cong-primary-window.c:660 ../src/cong-primary-window.c:679
+#: ../src/cong-primary-window.c:667 ../src/cong-primary-window.c:686
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr ""
 
-#: ../src/cong-primary-window.c:793
+#: ../src/cong-primary-window.c:815
 #, c-format
 msgid "%s (modified) - %s"
 msgstr ""
@@ -5194,3 +5209,5 @@ msgstr ""
 msgid "Source View - Conglomerate"
 msgstr ""
 
+#~ msgid "Open '%s'"
+#~ msgstr "Dobrir '%s'"
