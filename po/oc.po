@@ -1,21 +1,24 @@
+# translation of oc.po to Occitan
 # Occitan translation of conglomerate
 # Copyright (C) 2004-2006 Conglomerate developers
 # This file is distributed under the GPL license.
 #
 # Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
 #
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: conglomerate 0.9.2\n"
+"Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-13 17:46+0200\n"
-"PO-Revision-Date: 2007-08-19 16:52+0200\n"
+"PO-Revision-Date: 2007-11-20 14:29+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
-"Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
+"Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
@@ -55,7 +58,7 @@ msgstr ""
 
 #: ../dispspecs/cnxml.xds.in.h:10
 msgid "item"
-msgstr ""
+msgstr "element"
 
 #: ../dispspecs/cnxml.xds.in.h:11
 msgid "link"
@@ -137,8 +140,7 @@ msgid "Header Information"
 msgstr ""
 
 #: ../dispspecs/dispspec.xds.in.h:9
-msgid ""
-"Information that tells Conglomerate how to display a particular type of file."
+msgid "Information that tells Conglomerate how to display a particular type of file."
 msgstr ""
 
 #: ../dispspecs/dispspec.xds.in.h:10
@@ -344,7 +346,7 @@ msgstr ""
 #: ../dispspecs/docbook.xds.in.h:38 ../dispspecs/website-layout.xds.in.h:4
 #: ../dispspecs/website-webpage.xds.in.h:22
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "Copyright :"
 
 #: ../dispspecs/docbook.xds.in.h:39 ../dispspecs/website-webpage.xds.in.h:23
 msgid "Copyright Holder"
@@ -437,7 +439,7 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:58 ../dispspecs/website-webpage.xds.in.h:32
 msgid "Filename"
-msgstr "Nom del fichièr"
+msgstr "Nom de fichièr"
 
 #: ../dispspecs/docbook.xds.in.h:59 ../dispspecs/website-webpage.xds.in.h:33
 msgid "First Name"
@@ -486,7 +488,7 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:71 ../dispspecs/website-webpage.xds.in.h:42
 msgid "Glossary"
-msgstr ""
+msgstr "Glossari"
 
 #: ../dispspecs/docbook.xds.in.h:72 ../dispspecs/website-webpage.xds.in.h:43
 msgid "Glossary Entry"
@@ -524,7 +526,7 @@ msgstr ""
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
 #: ../dispspecs/readme.xds.in.h:9
 msgid "Introduction"
-msgstr ""
+msgstr "Introduccion"
 
 #: ../dispspecs/docbook.xds.in.h:81 ../dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
@@ -724,7 +726,7 @@ msgstr "Ecran"
 
 #: ../dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
-msgstr ""
+msgstr "Ecran"
 
 #: ../dispspecs/docbook.xds.in.h:136 ../dispspecs/forrest-document.xds.in.h:33
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
@@ -1017,7 +1019,7 @@ msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:42
 msgid "Table row"
-msgstr "Linha del tablèu"
+msgstr "Renguièra de la taula"
 
 #: ../dispspecs/forrest-document.xds.in.h:43
 msgid ""
@@ -1363,8 +1365,7 @@ msgid "A phrase defining a time of day in any format"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:23
-msgid ""
-"A phrase describing the nature of a person's intellectual responsibility"
+msgid "A phrase describing the nature of a person's intellectual responsibility"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:24
@@ -1380,8 +1381,7 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:26
-msgid ""
-"A pointer to another location in the current document or an external document"
+msgid "A pointer to another location in the current document or an external document"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:27
@@ -1505,8 +1505,7 @@ msgid "A subdivision of the front, body, or back of a text"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:49
-msgid ""
-"A subsection or division of the title of a work, as indicated on a title page"
+msgid "A subsection or division of the title of a work, as indicated on a title page"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:50
@@ -1604,8 +1603,7 @@ msgid "Any sequence of items organized as a list"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:71
-msgid ""
-"Any standard or non-standard number used to identify a bibliographic item"
+msgid "Any standard or non-standard number used to identify a bibliographic item"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:72
@@ -1861,7 +1859,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:135
 msgid "Example"
-msgstr ""
+msgstr "Exemple"
 
 #: ../dispspecs/teixlite.xds.in.h:136
 msgid "Extended Pointer (xptr)"
@@ -1912,8 +1910,7 @@ msgid "Gloss"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:150
-msgid ""
-"Groups information about the series, if any, to which a publication belongs"
+msgid "Groups information about the series, if any, to which a publication belongs"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:151
@@ -1967,8 +1964,7 @@ msgid "Ident"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:161
-msgid ""
-"Identifies the language being described in the writing system declaration"
+msgid "Identifies the language being described in the writing system declaration"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:162
@@ -2495,8 +2491,7 @@ msgid "The title page of a text, appearing within the front or back matter"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:282
-msgid ""
-"The whole body of a single unitary text, excluding any front or back matter"
+msgid "The whole body of a single unitary text, excluding any front or back matter"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:283
@@ -2589,7 +2584,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:6
 msgid "Area"
-msgstr "Zòna"
+msgstr "Crear"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:7
 msgid "Base"
@@ -2721,7 +2716,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:56
 msgid "Parameter"
-msgstr ""
+msgstr "Paramètre"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:57
 msgid "Preformatted Text"
@@ -2729,7 +2724,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:58
 msgid "Sample"
-msgstr ""
+msgstr "Mòstra"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:59
 msgid "Script"
@@ -2840,7 +2835,7 @@ msgstr "Opcions"
 #: ../src/cong-node-properties-dialog.c:1193
 #: ../src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
-msgstr "Avançat"
+msgstr "A_vançat"
 
 #: ../glade/cong-file-properties.glade.h:2
 msgid "Basic"
@@ -2965,7 +2960,7 @@ msgstr "*"
 
 #: ../glade/cong-find-replace.glade.h:2
 msgid "Find Next"
-msgstr ""
+msgstr "Recercar lo seguent"
 
 #: ../glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
@@ -3013,7 +3008,7 @@ msgstr ""
 
 #: ../glade/cong-preferences.glade.h:3
 msgid "Plugins"
-msgstr "Greffons"
+msgstr "Ajustons"
 
 #: ../glade/custom-element.glade.h:2
 msgid "Adhoc Element"
@@ -3104,7 +3099,7 @@ msgstr ""
 
 #: ../glade/docbook-orderedlist-properties.glade.h:8
 msgid "Numbering"
-msgstr ""
+msgstr "Numeracion"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
@@ -3159,7 +3154,7 @@ msgstr "Prigondor"
 #: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
 #, c-format
 msgid "Document Type"
-msgstr ""
+msgstr "Mena de document"
 
 #: ../glade/string_selection_dialog.glade.h:1
 msgid "string_selection_dialog"
@@ -3364,8 +3359,7 @@ msgstr ""
 
 #: ../src/cong-dialog.c:325
 #, c-format
-msgid ""
-"If you close without saving, changes from the past minute will be discarded."
+msgid "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
 
 #: ../src/cong-dialog.c:379
@@ -3707,8 +3701,7 @@ msgid "The contents of the file seem to be corrupt."
 msgstr ""
 
 #: ../src/cong-error-file-open.c:339
-msgid ""
-"Try again.  If it fails again, try looking for a backup copy of the file."
+msgid "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 
 #: ../src/cong-error-file-open.c:346 ../src/cong-error-file-open.c:385
@@ -3841,8 +3834,7 @@ msgstr ""
 
 #: ../src/cong-error-file-save.c:159
 #, c-format
-msgid ""
-"The size of the file would be %s, but the device only has a capacity of %s."
+msgid "The size of the file would be %s, but the device only has a capacity of %s."
 msgstr ""
 
 #. Can't get at the capacity for the device or "volume":
@@ -3864,8 +3856,7 @@ msgstr ""
 
 #: ../src/cong-error-file-save.c:208
 #, c-format
-msgid ""
-"The size of the file would be %s, but you only have %s free on that device."
+msgid "The size of the file would be %s, but you only have %s free on that device."
 msgstr ""
 
 #. Can't get at the free space for the device or "volume":
@@ -4042,8 +4033,7 @@ msgid "What type of file would you like to create?"
 msgstr ""
 
 #: ../src/cong-file-new.c:634
-msgid ""
-"Highlight one of the items in the list and select \"Forward\" to continue"
+msgid "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr ""
 
 #: ../src/cong-file-new.c:644
@@ -4819,8 +4809,7 @@ msgid "Promote"
 msgstr ""
 
 #: ../src/plugin-docbook.c:2208 ../src/plugin-docbook.c:2209
-msgid ""
-"Promote the section to a higher organisational level within the document"
+msgid "Promote the section to a higher organisational level within the document"
 msgstr ""
 
 #: ../src/plugin-docbook.c:2215
@@ -4828,8 +4817,7 @@ msgid "Demote Section"
 msgstr ""
 
 #: ../src/plugin-docbook.c:2216
-msgid ""
-"Demotes a DocBook section to a lower organisational level within the document"
+msgid "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 
 #: ../src/plugin-docbook.c:2218 ../src/plugin-html.c:159
@@ -4848,8 +4836,7 @@ msgstr ""
 
 #: ../src/plugin-dtd.c:94
 #, c-format
-msgid ""
-"This Conglomerate display specification was automatically generated from %s"
+msgid "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 
 #: ../src/plugin-dtd.c:215
@@ -5025,8 +5012,7 @@ msgid "The document \"%s\" cannot be checked for validity."
 msgstr ""
 
 #: ../src/plugin-validate.c:170
-msgid ""
-"You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
 
 #: ../src/plugin-validate.c:215
@@ -5112,8 +5098,7 @@ msgid "Uncomment"
 msgstr ""
 
 #: ../src/popup.c:628
-msgid ""
-"Convert a comment containing XML source code into the corresponding code"
+msgid "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 
 #. FIXME: could do with better text here
@@ -5209,5 +5194,3 @@ msgstr ""
 msgid "Source View - Conglomerate"
 msgstr ""
 
-#~ msgid "Open '%s'"
-#~ msgstr "Dobrir '%s'"
