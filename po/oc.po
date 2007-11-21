@@ -11,14 +11,13 @@ msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-13 17:46+0200\n"
-"PO-Revision-Date: 2007-11-20 14:29+0100\n"
+"PO-Revision-Date: 2007-11-21 18:45+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
@@ -620,7 +619,7 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:103 ../dispspecs/website-webpage.xds.in.h:61
 msgid "Part"
-msgstr ""
+msgstr "Camin"
 
 #: ../dispspecs/docbook.xds.in.h:104 ../dispspecs/website-webpage.xds.in.h:63
 msgid "Preface"
@@ -3070,11 +3069,11 @@ msgstr ""
 
 #: ../glade/docbook-orderedlist-properties.glade.h:1
 msgid "1, 2, 3, ..."
-msgstr ""
+msgstr "1, 2, 3, ..."
 
 #: ../glade/docbook-orderedlist-properties.glade.h:2
 msgid "A, B, C, ..."
-msgstr ""
+msgstr "A, B, C, ..."
 
 #: ../glade/docbook-orderedlist-properties.glade.h:3
 msgid "Continue numbering from previous list"
@@ -3103,7 +3102,7 @@ msgstr "Numeracion"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
-msgstr ""
+msgstr "a, b, c, ..."
 
 #: ../glade/docbook-orderedlist-properties.glade.h:12
 msgid "i, ii, iii, ..."
@@ -4122,7 +4121,7 @@ msgstr ""
 
 #: ../src/cong-file-properties.c:296 ../src/plugin-validate.c:171
 msgid "_Add a DTD"
-msgstr ""
+msgstr "_Apondre un DTD"
 
 #: ../src/cong-file-properties.c:373 ../src/cong-file-properties.c:375
 msgid "Unknown"
@@ -4314,7 +4313,7 @@ msgstr "_Enregistrar"
 
 #: ../src/cong-menus.c:1529
 msgid "Save _as..."
-msgstr ""
+msgstr "Enregistrar _coma..."
 
 #: ../src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
