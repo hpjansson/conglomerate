@@ -1,9 +1,7 @@
-# translation of oc.po to Occitan
+# Translation of oc.po to Occitan
 # Occitan translation of conglomerate
 # Copyright (C) 2004-2006 Conglomerate developers
 # This file is distributed under the GPL license.
-#
-# Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
 #
 # Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
 msgid ""
@@ -11,7 +9,7 @@ msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-13 17:46+0200\n"
-"PO-Revision-Date: 2007-11-21 18:45+0100\n"
+"PO-Revision-Date: 2007-12-28 10:28+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +43,7 @@ msgstr ""
 
 #: ../dispspecs/cnxml.xds.in.h:7
 msgid "content"
-msgstr ""
+msgstr "Alinèa"
 
 #: ../dispspecs/cnxml.xds.in.h:8
 msgid "emphasis"
@@ -345,7 +343,7 @@ msgstr ""
 #: ../dispspecs/docbook.xds.in.h:38 ../dispspecs/website-layout.xds.in.h:4
 #: ../dispspecs/website-webpage.xds.in.h:22
 msgid "Copyright"
-msgstr "Copyright :"
+msgstr "Copyright"
 
 #: ../dispspecs/docbook.xds.in.h:39 ../dispspecs/website-webpage.xds.in.h:23
 msgid "Copyright Holder"
@@ -854,7 +852,7 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:166
 msgid "Tip"
-msgstr ""
+msgstr "Astúcia"
 
 #: ../dispspecs/docbook.xds.in.h:167 ../dispspecs/forrest-document.xds.in.h:44
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:32
@@ -1018,7 +1016,7 @@ msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:42
 msgid "Table row"
-msgstr "Renguièra de la taula"
+msgstr "Linha del tablèu"
 
 #: ../dispspecs/forrest-document.xds.in.h:43
 msgid ""
@@ -1625,7 +1623,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:77
 msgid "Availability"
-msgstr ""
+msgstr "Disponibilitat"
 
 #: ../dispspecs/teixlite.xds.in.h:78
 msgid "Back Matter"
@@ -1645,7 +1643,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:82 ../dispspecs/xhtml1-strict.xds.in.h:11
 msgid "Body"
-msgstr ""
+msgstr "Còs"
 
 #: ../dispspecs/teixlite.xds.in.h:83
 msgid "Byline"
@@ -3335,7 +3333,7 @@ msgstr ""
 
 #: ../src/cong-dialog.c:301
 msgid "_Close without Saving"
-msgstr "_Barra sens enregistrar"
+msgstr "_Tampar sens enregistrar"
 
 #: ../src/cong-dialog.c:316
 #, c-format
@@ -3412,7 +3410,7 @@ msgstr "sens nom"
 
 #: ../src/cong-dispspec.c:536
 msgid "No description available."
-msgstr ""
+msgstr "Pas cap de descripcion disponibla."
 
 #: ../src/cong-document.c:651
 msgid "(Untitled)"
@@ -4225,7 +4223,7 @@ msgstr ""
 
 #: ../src/cong-menus.c:1427
 msgid "translator_credits"
-msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org)"
+msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>"
 
 #: ../src/cong-menus.c:1446
 msgid ""
@@ -4292,7 +4290,7 @@ msgstr "Pr_eferéncias"
 #. Actions found in Help menu:
 #: ../src/cong-menus.c:1516
 msgid "_Contents"
-msgstr "_Somari"
+msgstr "_Ensenhador"
 
 #: ../src/cong-menus.c:1517
 msgid "_Homepage"
@@ -4362,7 +4360,7 @@ msgstr "_Pegar"
 
 #: ../src/cong-menus.c:1548
 msgid "_Find..."
-msgstr "_Recercar"
+msgstr "_Recercar..."
 
 #: ../src/cong-menus.c:1549
 msgid "Find Ne_xt"
