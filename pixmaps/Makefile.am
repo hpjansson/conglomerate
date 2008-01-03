@@ -1,7 +1,3 @@
-## desk top icon
-dtidir = $(datadir)/pixmaps
-dti_DATA = conglomerate-icon-16.png
-
 # application icons
 appiconsdir = $(datadir)/pixmaps/conglomerate
 appicons_DATA = \
@@ -44,5 +40,8 @@ appicons_DATA = \
 	conglomerate-logo.png
 
 
-EXTRA_DIST = $(dti_DATA) $(appicons_DATA)
+EXTRA_DIST = $(appicons_DATA)
 ## End of Makefile.am
+
+SUBDIRS = icons
+
