@@ -1,3 +1,9 @@
+2008-01-03  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* configure.in: 
+	
+	Ported to new icons framework.
+
 2007-10-14  Yannig Marchegay  <yannig@marchegay.org>
 
 	* configure.in: Added 'oc' to ALL_LINGUAS.

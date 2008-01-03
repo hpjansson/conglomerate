@@ -303,6 +303,15 @@ AC_CONFIG_FILES(Makefile
 	        doc/reference/version.xml
 	        glade/Makefile
 	        pixmaps/Makefile
+	        pixmaps/icons/Makefile
+		pixmaps/icons/16x16/Makefile
+		pixmaps/icons/16x16/apps/Makefile
+		pixmaps/icons/32x32/Makefile
+		pixmaps/icons/32x32/apps/Makefile
+		pixmaps/icons/48x48/Makefile
+		pixmaps/icons/48x48/apps/Makefile
+		pixmaps/icons/scalable/Makefile
+		pixmaps/icons/scalable/apps/Makefile
 	        examples/Makefile 
 	        templates/Makefile 
                 src/Makefile)
