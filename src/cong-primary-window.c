@@ -608,12 +608,7 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	primary_window->window = gnome_app_new(PACKAGE_NAME,
 					       title);
 
-	gtk_window_set_default_icon_from_file(
-		gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-					   GNOME_FILE_DOMAIN_APP_PIXMAP,
-					   "conglomerate/conglomerate-icon-32.png", FALSE, 
-					   NULL), 
-		NULL);
+	gtk_window_set_default_icon_name("conglomerate");
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",
 			   GTK_SIGNAL_FUNC(delete_event), primary_window);

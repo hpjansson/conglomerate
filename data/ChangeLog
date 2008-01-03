@@ -1,3 +1,9 @@
+2008-01-03  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* conglomerate.desktop.in:
+	
+	Use installed icon
+
 2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* .cvsignore:
