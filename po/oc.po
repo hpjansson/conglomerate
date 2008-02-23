@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-19 20:17+0100\n"
-"PO-Revision-Date: 2007-12-28 10:28+0100\n"
+"PO-Revision-Date: 2008-02-20 00:11+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
@@ -704,7 +704,7 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:130
 msgid "Revision"
-msgstr ""
+msgstr "Revision"
 
 #: ../dispspecs/docbook.xds.in.h:131
 msgid "Revision History"
@@ -1214,7 +1214,7 @@ msgstr ""
 
 #: ../dispspecs/relax-ng.xds.in.h:6 ../src/cong-node-properties-dialog.c:914
 msgid "Optional"
-msgstr ""
+msgstr "Opcional"
 
 #: ../dispspecs/relax-ng.xds.in.h:7
 msgid "RELAX NG"
@@ -3173,7 +3173,7 @@ msgstr ""
 
 #: ../src/cong-app.c:1021
 msgid "XML Editor"
-msgstr ""
+msgstr "Editor XML"
 
 #: ../src/cong-app.c:1158
 #, c-format
@@ -3576,7 +3576,7 @@ msgstr ""
 
 #: ../src/cong-editor-widget3.c:1350 ../src/cong-editor-widget3.c:1363
 msgid "Delete Selection"
-msgstr ""
+msgstr "Suprimir la seleccion"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: ../src/cong-error-dialog.c:231 ../src/cong-error-dialog.c:271
@@ -4582,7 +4582,7 @@ msgstr ""
 
 #: ../src/file.c:106
 msgid "XML Files"
-msgstr ""
+msgstr "Fichièrs XML"
 
 #: ../src/file.c:118
 msgid "All Files"
@@ -5208,3 +5208,4 @@ msgstr ""
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr ""
+
