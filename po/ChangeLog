@@ -1,3 +1,8 @@
+2008-03-13  Andre Klapper  <a9016009@gmx.de>
+
+	* cs.po: Fixed Czech translation on behalf of Lucas Lommer.
+	See bug #517758.
+
 2008-02-14  Pawan Chitrakar <chautari@gmail.com>
 
 	* ne.po: Updated Nepali Translation.
