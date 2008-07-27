@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<article>
+	<title>Conglomerate FAQ</title>
+	<para>This is a list of frequently asked questions for the Conglomerate XML editor.</para>
+	
+		<sect1 id="generalfaq">
+			<title>General questions</title>
+			<sect2>
+				
+					<title>Why not just use XXX xml editor?</title>
+				
+				
+					<para>Conglomerate is usable for editing all XML documents but it is not always the ideal editor. Conglomerate really comes into its own when dealing with documents which are content based rather than attribute based. Therefore it is much better for editing documents types traditionally handled in word processors rather than configuration files which require a more traditional tree structure. </para>
+				
+			</sect2>
+		</sect1>
+		<sect1 id="docfaq">
+			<title>Document questions</title>
+			<sect2>
+				
+					<title>Can Conglomerate edit an XML document of type XXX?</title>
+				
+				
+					<para>Yes, conglomerate will allow you to edit any "well-formed" XML document. Although having a "Display Specification" for the document will make it better. </para>
+				
+			</sect2>
+			<sect2>
+				
+					<title>What specific XML document types does Conglomerate support?</title>
+				
+				
+					<para>In theory, Conglomerate can load and save any well-formed XML document, but it is much happier if it can find a Display Specification for the document type. The following document types are currently supported:</para>
+					<itemizedlist>
+						<listitem>
+							<para>DocBook 4.1.2</para>
+						</listitem>
+						<listitem>
+							<para>XHTML (strict)</para>
+						</listitem>
+						<listitem>
+							<para>"Kernel Traffic" newsetter format</para>
+						</listitem>
+					</itemizedlist>
+					<para>The following document types are partially supported:</para>
+					<itemizedlist>
+						<listitem>
+							<para>RELAX NG schema files</para>
+						</listitem>
+						<listitem>
+							<para>XSL-FO files</para>
+						</listitem>
+					</itemizedlist>
+					<para>The following document types are unsupported, though we hope to add support in the future (patches welcome!):</para>
+					<itemizedlist>
+						<listitem>
+							<para>CSS</para>
+						</listitem>
+						<listitem>
+							<para>OpenOffice.org file format</para>
+						</listitem>
+						<listitem>
+							<para>Open eBook format</para>
+						</listitem>
+						<listitem>
+							<para>TEI format</para>
+						</listitem>
+					</itemizedlist>
+				
+			</sect2>
+			<sect2>
+				
+					<title>Can Conglomerate edit non-XML documents?</title>
+				
+				
+					<para>Yes and no. You can edit non XML documents but only if the appropriate document plugin is present. The internals of conglomerate are designed to work with XML documents so to allow a non XML document to be handled it requires a plugin to convert the document to XML and back again. </para>
+				
+			</sect2>
+			<sect2>
+				
+					<title>What is a "Display Specification"?</title>
+				
+				
+					<para>A display specification is an XML document used by Conglomerate to hold information about how Conglomerate should display a document and how elements are to be edited. </para>
+					<para>It is designed to work alongside DTDs or XSchema files to provide information which is more specific to Conglomerate. For example, it can suggest icons that should be used for a particular XML tag. </para>
+					<para>The Conglomerate website has a <ulink url="http://www.conglomerate.org/xds/index.html">list of display specifications</ulink>. This list is generated from a recent version of the data in CVS.</para>
+				
+			</sect2>
+			<sect2>
+				
+					<title>How do I add support for a new type of document to Conglomerate?</title>
+				
+				
+					<para>You will need to create a display specification to tell how to display the various elements of that type. </para>
+					<para>The easiest way to do this is to let Conglomerate create the display specification itself. Load an example document of the type you wish to support, ideally one with a Document Type Declaration referencing a PUBLIC ID with a SYSTEM ID referencing the document type definition via http .</para>
+					<para>Conglomerate will complain that it doesn't recognise the document type, and ask if you wish to load it anyway. Click on the <guibutton moreinfo="none">Force</guibutton> button, and Conglomerate will generate a display specification as it loads the file. You can then go to the <guimenu moreinfo="none">Tools</guimenu> menu and select <guimenuitem moreinfo="none">Dump Display Spec</guimenuitem>. You should save the file into the <filename moreinfo="none">examples</filename> subdirectory, giving it a ".xds" extension. You should then edit <filename moreinfo="none">examples/Makefile.am</filename> and add the filename of the new display specification to <symbol>dispspec_DATA</symbol>. You should then re-run <userinput moreinfo="none">make</userinput>, then (possibly as root) <userinput moreinfo="none">make install</userinput>, and restart <application moreinfo="none">conglomerate</application>. Try loading your document; Conglomerate should now handle it without complaining. Please email the conglomerate-devel mailing list with a patch that adds the document type, so that we can add it to CVS, and into the next release.</para>
+					<para>Once you have a working xds file for a document type, you can fine-tune it in some of these ways:</para>
+					<itemizedlist>
+						<listitem>
+							<para>Change whether elements are "structural" or "span" elements. The display specification generation routine tries to guess this based upon the example document and on the DTD, but it sometimes makes mistakes.</para>
+						</listitem>
+						<listitem>
+							<para>Set up human-readable names for elements, together with descriptions of what they do. Currently this is in English only, though we plan to allow localisable versions of these strings (patches welcome!)</para>
+						</listitem>
+						<listitem>
+							<para>Set up icons for elements, for use in the menus and in the main widget.</para>
+						</listitem>
+						<listitem>
+							<para>Write custom XPath rules for generating the title string to be used for an element.</para>
+						</listitem>
+						<listitem>
+							<para>Use plugins to better represent an element. For example, there are already plugins aimed at rendering paragraphs, and items within lists. You can even create custom property dialogs for an element type, those this requires writing some code.</para>
+						</listitem>
+					</itemizedlist>
+					<para>The best thing to do is to look through the <filename moreinfo="none">examples/docbook.xds</filename> file, which has examples of how to do these things, and to ask on the conglomerate-devel mailing list.</para>
+				
+			</sect2>
+			<sect2>
+				
+					<title>What custom element renderers already exist?</title>
+				
+				
+					<itemizedlist>
+						<listitem>
+							<formalpara>
+								<title><literal moreinfo="none">paragraph</literal></title>
+								<para>This is used by the DocBook <sgmltag>para</sgmltag> element and should be used by any other document type to represent a typical paragraph-level element. Currently it renders itself as a dashed rectangle surrounding the element's content. We might add a "pilcrow" symbol (a little q) as an extra refinement at some point.</para>
+							</formalpara>
+						</listitem>
+						<listitem>
+							<formalpara>
+								<title><literal moreinfo="none">admonition</literal></title>
+								<para>This is used by DocBook's admonition elements: <sgmltag>note</sgmltag>, <sgmltag>tip</sgmltag>, <sgmltag>caution</sgmltag> etc. It renders itself as an icon on the left, with the element's content presented in an indented form to the right. It could be used by any other element that would be well-presented as a icon labelling the content. The key-value pair "icon" should be used to specify which icon to use for each particular element.</para>
+							</formalpara>
+						</listitem>
+						<listitem>
+							<formalpara>
+								<title><literal moreinfo="none">listitem</literal></title>
+								<para>This is used by DocBook's <sgmltag>listitem</sgmltag> element. It renders itself as a textual label, with the content indented on the right-hand side. Currently the code has hardcoded logic that generates the label according to DocBook's semantics; it looks to see if its inside an <sgmltag>orderedlist</sgmltag> or an <sgmltag>itemizedlist</sgmltag>, and what position it occupies in that list etc to generate either a bullet or a numbering. This could be generalised if people want to reuse the code for other DTDs.</para>
+							</formalpara>
+						</listitem>
+					</itemizedlist>
+				
+			</sect2>
+			<sect2>
+				
+					<title>How do I set up a custom element renderer inside an xds file?</title>
+				
+				
+					<para>The xds file should use the value "<literal moreinfo="none">plugin</literal>" for the element's "<literal moreinfo="none">type</literal>" attribute. The element will need to have an additional attribute "<literal moreinfo="none">service-id</literal>", which should have a value corresponding to the string ID that the service is registered with inside the plugin. </para>
+					<para>This affects how elements of that type are rendered in the main editor widget. For other purposes (such as XML Source cleanup, handling the Overview sidebar, etc), such elements are, in general, treated like structural elements (as opposed to span ones).</para>
+					<para>Some plugin element types need additional information in the xds file; this is done by having a <sgmltag>key-value-list</sgmltag> element below the <sgmltag>element</sgmltag> element; the <sgmltag>key-value-list</sgmltag> should contain <sgmltag>key-value-pair</sgmltag> elements. Each <sgmltag>key-value-pair</sgmltag> element should contain a "<literal moreinfo="none">key</literal>" and "<literal moreinfo="none">value</literal>" attribute. See DocBook's <sgmltag>caution</sgmltag> element for an example.</para>
+				
+			</sect2>
+			<sect2>
+				
+					<title>How do I customise the Property dialog for an element within my DTD?</title>
+				
+				
+					<para>You can improve support for a DTD by creating a plugin node property dialog. To do this, edit the xds file for the document type, and add a <sgmltag>property-dialog</sgmltag> element inside the main <sgmltag>element</sgmltag>, with a "<literal moreinfo="none">service-id</literal>" attribute giving the registered ID of the code providing the GtkWidget for elements of that type.</para>
+					<para>FIXME: write information on how to actually create the plugin</para>
+					<para>For example for the DocBook <sgmltag>orderedlist</sgmltag> element; the xds file gives an ID of "<literal moreinfo="none">docbook-orderedlist-properties</literal>". This is hooked up in the source code in <filename moreinfo="none">src/plugin-docbook.c</filename> to a routine (the C function "<function moreinfo="none">docbook_orderedlist_properties_factory_method</function>") which loads a GUI from a Glade file, and uses a set of utility functions that bind the widgets in the glade file to attributes of the XML element. For example, the radio buttons are linked to the various valid values of the "<literal moreinfo="none">numeration</literal>" attribute.</para>
+				
+			</sect2>
+		</sect1>
+		<sect1 id="gnomefaq">
+			<title>Gnome questions</title>
+			<sect2>
+				
+					<title>I use the KDE desktop. Do I have to install Gnome instead, to be able to run Conglomerate?</title>
+				
+				
+					<para>No. Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
+				
+			</sect2>
+		</sect1>
+		<sect1 id="building">
+			<title>Building Conglomerate</title>
+			<sect2>
+				
+					<title>How do I build Conglomerate from CVS?</title>
+				
+				
+					<para>The latest version of Conglomerate is stored on GNOME's CVS server as module <filename moreinfo="none">conglomerate</filename>. Detailed instructions for doing this can be found <ulink url="http://developer.gnome.org/tools/cvs.html">here</ulink>. </para>
+					<para>You'll need Gnome 2.0 installed (or a more recent version) to build on top of. You will also need the <filename moreinfo="none">gnome-common</filename>module from GNOME CVS. </para>
+					<para>Bear in mind that you will be playing with the raw code that the developers use, and it might be temporarily broken. Also, there can be a delay of anything up to 24 hours between the time changes happen on the main CVS server and the time they appear on the anonymous CVS server.</para>
+					<para>The CVS tree can be browsed <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;amp;cvsroot=/cvs/gnome&amp;amp;module=default">here</ulink>.</para>
+				
+			</sect2>
+		</sect1>
+	
+</article>

@@ -1,3 +1,19 @@
+2008-07-28  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* C/Makefile.am:
+	* C/README:
+	* C/conglomerate-C.omf:
+	* C/conglomerate.1:
+	* C/conglomerate.xml:
+	* C/faq-hack.xsl:
+	* C/faq.xml:
+	* C/faq.xml.qna:
+	* C/manpage.make:
+	* Makefile.am:
+	* conglomerate.omf.in:
+	
+	Moved to gnome-doc-utils to fix distcheck issues.
+
 2007-06-05  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* .cvsignore:

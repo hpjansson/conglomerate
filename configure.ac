@@ -23,6 +23,8 @@ AM_DISABLE_STATIC
 AM_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.35.0])
 
+GNOME_DOC_INIT
+
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
@@ -298,7 +300,6 @@ AC_CONFIG_FILES(Makefile
 	        dispspecs/Makefile
 	        doc/Makefile
 	        doc/devel/Makefile
-	        doc/C/Makefile
 	        doc/reference/Makefile
 	        doc/reference/version.xml
 	        glade/Makefile

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
+<omf>
+  <resource>
+    <subject category="GNOME|Applications"/>
+    <type>
+      user's guide
+    </type>
+    <relation seriesid="f5d6fa86-81fc-11d7-8b4e-e2011117e491"/>
+    <rights type="GNU FDL" license.version="1.1" holder="Free Software Foundation Inc."/>
+  </resource>        
+</omf>

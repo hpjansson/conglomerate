@@ -1,26 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 <!ENTITY % global_entities SYSTEM "global.ent">
-%global_entities;
+<!-- everything internal to Conglomerate goes here --><!ENTITY appversion "V0.7.10">
+<!ENTITY manrevision "V0.0.1">
+<!ENTITY date "January 2004">
+<!ENTITY app "Conglomerate">
+<!ENTITY appfull "Conglomerate XML Editor">
+<!ENTITY bugs "http://www.conglomerate.org/bugs.php">
+<!ENTITY apphome "http://www.conglomerate.org/">
+<!ENTITY appdownload "http://www.conglomerate.org/download.php/">
+<!ENTITY cvshome "http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;module=default">
+<!ENTITY tarball "http://sourceforge.net/project/showfiles.php?group_id=82766">
+<!ENTITY devmail "http://lists.copyleft.no/mailman/listinfo/conglomerate-devel/">
+<!ENTITY bugmail "http://lists.copyleft.no/mailman/listinfo/conglomerate-auto/">
+<!-- start resources --><!ENTITY noticefdl SYSTEM "notice_fdl.xml">
+<!ENTITY noticegpl SYSTEM "notice_gpl.xml">
+<!ENTITY conventions SYSTEM "conventions.xml">
+<!ENTITY faq SYSTEM "faq.xml">
+<!-- end resources --><!-- start reusable instances --><!ENTITY tbl_element_attrib SYSTEM "tbl_element_attrib.xml">
+<!ENTITY row_xml_lang_attrib SYSTEM "row_xml_lang_attrib.xml">
+<!-- end reusable instances --><!-- start appendixes --><!ENTITY doctype_supp SYSTEM "doc_type_support.xml">
+<!ENTITY xds_ele_ref SYSTEM "cong_element_map_ref.xml">
+<!ENTITY xds_dtd_def SYSTEM "xds_dtd_def.xml">
+<!-- end appendixes --><!-- everything external to Conglomerate goes here --><!ENTITY i10n "http://developer.gnome.org/projects/gtp/">
+<!ENTITY gplhome "http://www.gnu.org/copyleft/gpl.html">
+<!ENTITY gfdlhome "http://www.gnu.org/licenses/fdl.html">
+<!ENTITY freesw "http://www.gnu.org/philosophy/free-sw.html">
+<!ENTITY gnomehome "http://www.gnome.org">
+<!ENTITY kdehome "http://www.kde.org">
+<!ENTITY docbook "http://www.docbook.org">
+<!ENTITY docbooktdg "http://www.docbook.org/tdg/en/html/docbook.html">
+<!ENTITY docbookxsl "http://www.sagehill.net/docbookxsl/index.html">
+<!ENTITY docbookdev "http://docbook.sourceforge.net">
+<!ENTITY oasisopen "http://www.oasis-open.org/">
+<!ENTITY sfnet "http://www.sourceforge.net/">
+<!ENTITY kerneltraffic "http://kt.zork.net/">
+<!ENTITY w3c "http://www.w3.org/">
+<!ENTITY w3cxhtml "http://www.w3.org/TR/xhtml1/">
+<!ENTITY w3cxml "http://www.w3.org/TR/xhtml1/">
+<!ENTITY w3cxsl "http://www.w3.org/Style/XSL/">
+<!ENTITY relaxng "http://www.relaxng.org/">
+<!ENTITY relaxngtc "http://www.oasis-open.org/committees/relax-ng/">
+<!ENTITY oo "http://www.openoffice.org/">
+<!ENTITY ooxmlform "http://xml.openoffice.org/">
+<!ENTITY ooxmlformtc "http://xml.openoffice.org/">
+<!ENTITY w3schools "http://www.w3schools.com/">
+<!ENTITY zvonorg "http://www.zvon.org/">
 ]>
 <!-- PROCESSING INSTRUCTION FOR GNOME YELP  -->
 <!-- comment in order to validate, uncomment for use in Yelp -->
 <?yelp:chunk-depth 4?>
-<book id="index">
-    <title>&appfull;</title>
-    <subtitle>User Manual</subtitle>
+<book id="index" lang="C">
+    <title>Conglomerate XML Editor</title>
     <bookinfo>
-        <title>&appfull; Manual &manrevision;</title>
+        <title>Conglomerate XML Editor Manual V0.0.1</title>
+        <abstract role="description">
+          <para> 
+           User manual for the conglomerate XML editor. 
+          </para>
+        </abstract>
         <abstract>
-            <simpara>This is the User Manual &manrevision; to the
-                <application>&appfull;</application> &appversion;, a free software that
-                provides a user-friendly tool for editing <ulink
-                url="&oasisopen;">DocBook</ulink> and other document types created in the
+            <simpara>This is the User Manual V0.0.1 to the
+                <application>Conglomerate XML Editor</application> V0.7.10, a free software that
+                provides a user-friendly tool for editing <ulink url="http://www.oasis-open.org/">DocBook</ulink> and other document types created in the
                     <glossterm>Extensible Markup Language Format</glossterm>
                 (<acronym>XML</acronym>). It aims to hide the complexity and jargon of
                 <acronym>XML</acronym> behind a friendly Graphical User Interface (<acronym>GUI</acronym>).</simpara>
         </abstract>
+        <author>
+            <firstname>Sean</firstname>
+            <surname>Wheller</surname>
+        </author>
+        <author role="maintainer">
+            <firstname>Geert</firstname>
+            <surname>Stappers</surname>
+            <affiliation> 
+	  	  <orgname>GNOME Documentation Project</orgname> 
+		  <address> <email>stappers@stappers.nl</email> </address> 
+	    </affiliation>
+        </author>
         <author>
             <firstname>Sean</firstname>
             <surname>Wheller</surname>
@@ -40,24 +98,47 @@
             </revision>
         </revhistory>
         <releaseinfo>
-            <remark>This manual describes version &appversion; of <application>&app;</application>.</remark>
-        </releaseinfo> &noticefdl; &noticegpl; </bookinfo>
+            <remark>This manual describes version V0.7.10 of <application>Conglomerate</application>.</remark>
+        </releaseinfo> 
+<legalnotice id="notice_fdl">
+    <title>Documentation License</title>
+    <para>Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License (GFDL), Version
+        1.1 or any later version published by the Free Software Foundation with
+        no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+        You can find a copy of the GFDL at this <ulink url="http://www.gnu.org/licenses/fdl.html">link</ulink>.</para>
+</legalnotice>
+ 
+<legalnotice id="notice_gpl">
+    <title>Source License</title>
+    <para>This library is <ulink url="http://www.gnu.org/philosophy/free-sw.html">Free Software</ulink>; you
+        can redistribute it and/or modify it under the terms of the GNU Lesser
+        General Public License as published by the Free Software Foundation;
+        either version 2.1 of the License, or (at your option) any later version.</para>
+    <para>This library is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+        General Public License for more details. You can find a copy of the GPL
+        at this <ulink url="http://www.gnu.org/copyleft/gpl.html">link</ulink>.</para>
+    <para>You should have received a copy of the GNU Lesser General Public
+        License along with this library; if not, write to the Free Software
+        Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.</para>
+</legalnotice>
+ </bookinfo>
     <preface id="preface">
         <title>Preface</title>
         <sect1 id="about_the_project">
-            <title>About the &app; Project</title>
+            <title>About the Conglomerate Project</title>
             <para>text</para>
         </sect1>
         <sect1 id="get_involved">
             <title>Getting Involved</title>
-            <para>The <application>&app;</application> project is managed as an open source
+            <para>The <application>Conglomerate</application> project is managed as an open source
                 initiative to develop the ultimate user-friendly <acronym>XML</acronym> editing
                 system. As such, help in the form of productive contribution is always welcomed.</para>
-            <para>The first step in joining the project, is to join the <ulink
-                    url="&devmail;">conglomerate-devel mailing list</ulink>. This is where our
+            <para>The first step in joining the project, is to join the <ulink url="http://lists.copyleft.no/mailman/listinfo/conglomerate-devel/">conglomerate-devel mailing list</ulink>. This is where our
                 development discussion happens.</para>
-            <para>Next, it is recommended that you join the <ulink
-                    url="&bugmail;">conglomerate-auto mailing list</ulink>, which receives email
+            <para>Next, it is recommended that you join the <ulink url="http://lists.copyleft.no/mailman/listinfo/conglomerate-auto/">conglomerate-auto mailing list</ulink>, which receives email
                 every time something changes in our bug database.</para>
             <para>Then proceed to download a copy of the latest source code as described in <xref linkend="installation"/>.</para>
             <itemizedlist>
@@ -74,19 +155,19 @@
                     <para>
                         <emphasis role="bold">Testing:</emphasis> Test the various functions of the
                         editor, report replicable bugs not already listed in the bug tracking
-                        system, please refer to the <ulink url="&bugs;">list of things</ulink>
+                        system, please refer to the <ulink url="http://www.conglomerate.org/bugs.php">list of things</ulink>
                         we already know about.</para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis role="bold">Localization (I10n):</emphasis> Localize
-                        <application>&app;</application> into your own language. Localization is
-                        being co-ordinated by the <ulink url="&i10n;">Gnome Translation Project</ulink>.</para>
+                        <application>Conglomerate</application> into your own language. Localization is
+                        being co-ordinated by the <ulink url="http://developer.gnome.org/projects/gtp/">Gnome Translation Project</ulink>.</para>
                 </listitem>
                 <listitem>
                     <para>
                         <emphasis role="bold">Translation (I18n):</emphasis> Translate the
-                        <application>&app;</application> User Manual and other documents into
+                        <application>Conglomerate</application> User Manual and other documents into
                         your own language.</para>
                 </listitem>
                 <listitem>
@@ -104,27 +185,165 @@
         <sect1 id="acknowledgements">
             <title>Acknowledgments</title>
             <para>Text</para>
-        </sect1> &conventions; </preface>
+        </sect1> 
+<!--<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "/home/sean/apps/oxygen/docbook/dtd/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<sect1 id="conventions">
+    <title>Conventions</title>
+    <para>This book is most effective when used in conjunction with the
+        Conglomerate XML Editor V0.7.10.</para>
+    <para>Throughout this book the <ulink url="http://www.oasis-open.org/">Docbook
+        XML</ulink> document type will be used to explain and illustrate the
+        functionality of the Conglomerate XML Editor.</para>
+    <para>Familiarity with the standard controls and Notations provided by the
+        Window Manager and Linux File System is assumed.</para>
+    <para>
+        <emphasis role="bold">The following admonitions will be found throughout
+            the book:</emphasis>
+    </para>
+    <note>
+        <para>A note presents interesting, sometimes technical, pieces of
+            information related to the surrounding discussion.</para>
+    </note>
+    <tip>
+        <para>A tip offers advice or an easier way of doing something.</para>
+    </tip>
+    <caution>
+        <para>A caution advises you of potential problems and helps you to steer
+            clear thereof.</para>
+    </caution>
+    <warning>
+        <para>A warning advises you of a hazard condition that may be created in
+            a given scenario.</para>
+    </warning>
+    <para>
+        <emphasis role="bold">Type conventions will be shown as follows:</emphasis>
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>File names or paths to directories will be shown in
+                <filename>monospace</filename> type.</para>
+        </listitem>
+        <listitem>
+            <para>Commands that you type at a prompt will be shown in <command>
+                bold</command> type.</para>
+        </listitem>
+        <listitem>
+            <para>Options that you click, select or choose in the user interface
+                will be shown in <filename>monospace</filename> type.</para>
+        </listitem>
+        <listitem>
+            <para>When variables, parameters, sgmltags etc. are contained within
+                a paragraph of text will be shown in
+                <command>monospaced</command> type, otherwise they will use the
+                normal type.</para>
+        </listitem>
+    </itemizedlist>
+    <para>
+        <emphasis role="bold">Menu selections, mouse actions, and keyboard short-cuts:</emphasis>
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>A sequence of menu selections will be shown as follows:<menuchoice>
+                    <guimenu>
+                        <accel>F</accel>ile</guimenu>
+                    <guimenuitem>
+                        <accel>O</accel>pen</guimenuitem>
+                </menuchoice>
+            </para>
+        </listitem>
+        <listitem>
+            <para>Mouse actions shall assume a right-handed mouse configuration.
+                The terms "<mousebutton>click</mousebutton>"
+                and "<mousebutton>double-click</mousebutton>"
+                refers to using the left-hand mouse button. The term
+                "<mousebutton>right-click</mousebutton>"
+                refers to using the right-hand button.</para>
+        </listitem>
+        <listitem>
+            <para>Keyboard short-cut combinations will be shown as follows: <keycombo>
+                    <keysym>Ctrl+N</keysym>
+                </keycombo>. Where the convention for
+                "Control", "Shift", and
+                "Alternate" keys will be
+                <keysym>Ctrl</keysym>, <keysym>Shift</keysym>,
+                <keysym>Alt</keysym> respectively and shall mean to hold down
+                the first key while pressing the second key.</para>
+        </listitem>
+    </itemizedlist>
+    <para>
+        <emphasis role="bold">Cross reference conventions for pint will be shown
+            as follows:</emphasis>
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>Internal references will look like this: <xref linkend="introduction"/>. The numeral contained by square braces
+                is the [page number].</para>
+        </listitem>
+        <listitem>
+            <para>External reference, say to a Web Site, will look like <ulink url="http://www.somedomain.com">this</ulink>.</para>
+        </listitem>
+    </itemizedlist>
+    <note>
+        <para>PDF, HTML or XHTML versions of this document will use hyper-links
+            to denote cross-references.</para>
+    </note>
+    <para>
+        <emphasis role="bold">Code conventions:</emphasis>
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>Code and mark-up samples will be formatted in a Grey block.</para>
+        </listitem>
+        <listitem>
+            <para>Sometimes lines of code or mark-up examples will be longer
+                than the page width. To avoid from them running off the page,
+                the slash character "\" is used to denote a
+                soft line break. This means that the line of code is in reality
+                meant to be on one line, but for print formatting it has been
+                broken into two lines. For the example below, the line starting
+                with msgbox has been cut so that the comment will not run off
+                the right-side of the page.</para>
+        </listitem>
+    </itemizedlist>
+    <programlisting>
+Dim uid, Encore
+Set Encore = createobject("Encore.Utilities")
+uid = Encore.logon("ADMIN","" ,"0" ,"", "00", 0, 0,"")
+
+<emphasis>msgbox uid, , "The GUID created by login and  \
+    used for all method calls"</emphasis>
+
+Set Encore = CreateObject("Encore.Query")
+
+Set Encore = createobject("Encore.Utilities")
+Encore.logoff(uid)
+Set Encore = Nothing
+    </programlisting>
+</sect1>
+ </preface>
     <chapter id="introduction">
         <title>Introduction</title>
-        <para>The <application>&appfull;</application> is a free, user-friendly XML editor, for
-                <ulink url="&oasisopen;">DocBook</ulink> and other XML document types. It aims
+        <para>The <application>Conglomerate XML Editor</application> is a free, user-friendly XML editor, for
+                <ulink url="http://www.oasis-open.org/">DocBook</ulink> and other XML document types. It aims
             to hide the complexity and jargon of XML behind a friendly GUI.</para>
         <para>
-            <application>&appfull;</application> is one part of the
-            <application>&app;</application> project to create a complete structured information
+            <application>Conglomerate XML Editor</application> is one part of the
+            <application>Conglomerate</application> project to create a complete structured information
             authoring, management, archival, revision control and transformation system. The
-            <application>&appfull;</application> uses XML semantics and powerful graphical
+            <application>Conglomerate XML Editor</application> uses XML semantics and powerful graphical
             editing, coupled with a centralised storage model and a flexible transformation language
             to create an environment that is easy to use, produces high-quality structured output,
             and lets the user target several formatted output file types from a single XML source.</para>
         <sect1 id="requirements">
             <title id="requirements.title">Requirements</title>
-            <para>The <application>&appfull;</application> can be run on any Linux system that
-                has Gnome 2.4 or higher installed. When this condition is met &app; can be run
-                under the <ulink url="&gnomehome;">Gnome</ulink> or <ulink
-                url="&kdehome;">KDE</ulink> desktops.</para>
-            <para>&app; is dependant of the following libraries and their development versions:</para>
+            <para>The <application>Conglomerate XML Editor</application> can be run on any Linux system that
+                has Gnome 2.4 or higher installed. When this condition is met Conglomerate can be run
+                under the <ulink url="http://www.gnome.org">Gnome</ulink> or <ulink url="http://www.kde.org">KDE</ulink> desktops.</para>
+            <para>Conglomerate is dependant of the following libraries and their development versions:</para>
             <itemizedlist>
                 <listitem>
                     <para>libxml-2.0 &gt;= 2.0.0</para>
@@ -150,22 +369,20 @@
             </itemizedlist>
             <warning>
                 <para>
-                    <application>&app;</application> &appversion; is an unstable release.
+                    <application>Conglomerate</application> V0.7.10 is an unstable release.
                     Current releases are intended as previews that some people may find useful.</para>
             </warning>
         </sect1>
         <sect1 id="installation">
             <title>Installation</title>
-            <para>If <application>&app;</application> was shipped with your distro then you
+            <para>If <application>Conglomerate</application> was shipped with your distro then you
                 should be able to install it from the distibution source using a Software Installer.
                 Please refer to your distro documentation for information on how to install new packages.</para>
-            <para>Alternative methods of installation include installation from <link
-                    linkend="installation_from_tarball" endterm="installation_from_tarball.title"/>
+            <para>Alternative methods of installation include installation from <link linkend="installation_from_tarball" endterm="installation_from_tarball.title"/>
                 or <link linkend="installation_from_cvs" endterm="installation_from_cvs.title"/>.</para>
             <sect2 id="installation_from_tarball">
                 <title id="installation_from_tarball.title">Installation from tarball</title>
-                <para>Releases are frequently packaged into tarballs and placed on the <ulink
-                        url="&tarball;">project CVS</ulink> at SourceForge.</para>
+                <para>Releases are frequently packaged into tarballs and placed on the <ulink url="http://sourceforge.net/project/showfiles.php?group_id=82766">project CVS</ulink> at SourceForge.</para>
                 <note>
                     <para>When a new release is announced the tarball may take upto 24 hours to
                         display in the Web based CVS interface.</para>
@@ -181,8 +398,7 @@
                     </step>
                     <step>
                         <para>
-                            <action>Copy</action> the tarball to a location such as <filename
-                            class="directory">/usr/src/packages/</filename>. </para>
+                            <action>Copy</action> the tarball to a location such as <filename class="directory">/usr/src/packages/</filename>. </para>
                         <para>
                             <command>cp filename-0.2.3.tar.gz /usr/src/packages/</command>
                         </para>
@@ -231,8 +447,7 @@
                         <para>
                             <command>make install</command>
                         </para>
-                        <para>This will install to the default path <filename
-                            class="directory">/usr/local/bin</filename> which should already be in
+                        <para>This will install to the default path <filename class="directory">/usr/local/bin</filename> which should already be in
                             your environment <varname>PATH</varname>, type <command>echo
                             $PATH</command> to view your <varname>PATH</varname> if you are not sure.</para>
                     </step>
@@ -240,10 +455,10 @@
             </sect2>
             <sect2 id="installation_from_cvs">
                 <title id="installation_from_cvs.title">Installation from CVS</title>
-                <para>If you don't mind running on the &quot;bleeding-edge&quot; of
+                <para>If you don't mind running on the "bleeding-edge" of
                     development, you may also run your installation from the project
                         <glossterm>Concurrent Versioning System</glossterm> (<acronym>CVS</acronym>)
-                    located at <ulink url="&cvshome;">Gnome</ulink>.</para>
+                    located at <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;module=default">Gnome</ulink>.</para>
                 <note>
                     <para>As a result of the ongoing application of patches and addition of new
                         components to the source, installation from CVS is not guaranteed to work.</para>
@@ -252,7 +467,7 @@
         </sect1>
         <sect1 id="getting_started">
             <title>Getting Started</title>
-            <para>You can start <application>&app;</application> in the following ways: </para>
+            <para>You can start <application>Conglomerate</application> in the following ways: </para>
             <!-- This procedure is different under various desktops -->
             <variablelist>
                 <varlistentry>
@@ -273,39 +488,38 @@
                         <emphasis role="bold">From the Command Prompt</emphasis>
                     </term>
                     <listitem>
-                        <para>To start <application>&app;</application> from the command prompt,
+                        <para>To start <application>Conglomerate</application> from the command prompt,
                             type <command>conglomerate</command>, then press <keycap>Enter</keycap>.</para>
                         <para>You can also open an XML file directly from the command by passing the
-                            name of the XML file to open when <application>&app;</application>
+                            name of the XML file to open when <application>Conglomerate</application>
                             starts, like this <command>conglomerate filename.xml</command>.</para>
                     </listitem>
                 </varlistentry>
             </variablelist>
-            <para>When you start <application>&app;</application>, the following window is displayed.</para>
+            <para>When you start <application>Conglomerate</application>, the following window is displayed.</para>
             <figure id="fig_mainwindow">
-                <title>&app; Start Up Window</title>
+                <title>Conglomerate Start Up Window</title>
                 <screenshot>
                     <mediaobject>
                         <imageobject>
-                            <imagedata fileref="figures/cong_start_window.png" format="PNG"
-                                depth="6cm" scalefit="1"/>
+                            <imagedata fileref="figures/cong_start_window.png" format="PNG" depth="6cm" scalefit="1"/>
                         </imageobject>
                     </mediaobject>
                 </screenshot>
             </figure>
-            <para>This is the main window of the <application>&appfull;</application>. It
+            <para>This is the main window of the <application>Conglomerate XML Editor</application>. It
                 provides basic options that can be used to create, open and import files when the
-                <application>&app;</application> is first started. It also provides options to
-                close the main window, exit the <application>&app;</application> and to access
+                <application>Conglomerate</application> is first started. It also provides options to
+                close the main window, exit the <application>Conglomerate</application> and to access
                 the user manual and about dialog which displays version and related information
-                about the <application>&app;</application>. The main window becomes the editing
+                about the <application>Conglomerate</application>. The main window becomes the editing
                 interface when a new document is created or an exiting document is opened. New
                 options will then be displayed, they are described in <xref linkend="editor_window"/>.</para>
             <para>If you want to quickly get a glimpse of the editor window, create a new document
                 as follows. Documents are create with the help of templates, skeleton files that
                 provide a basic structure from which to start documenting.
-                <application>&app;</application> provides several templates, to get us started
-                we will use the &quot;Docbook Article&quot; template.</para>
+                <application>Conglomerate</application> provides several templates, to get us started
+                we will use the "Docbook Article" template.</para>
             <procedure id="proc_create_new_document">
                 <title id="proc_create_new_document.title">Create a new document</title>
                 <step>
@@ -329,26 +543,22 @@
                     <para>
                         <action>Select</action> the <option>Docbook Article</option>, then <action>click</action>
                         <guibutton>Forward</guibutton>. The wizard now has all the information
-                        required to create a new Docbook XML Document of the type &quot;Article&quot;.</para>
+                        required to create a new Docbook XML Document of the type "Article".</para>
                 </step>
                 <step>
                     <para>
                         <action>Click</action>
-                        <guibutton>Apply</guibutton> to create the Article. This will open the <link
-                            linkend="editor_window" endterm="editor_window.title"/>.</para>
+                        <guibutton>Apply</guibutton> to create the Article. This will open the <link linkend="editor_window" endterm="editor_window.title"/>.</para>
                 </step>
             </procedure>
             <para>Congratulations you have just created your first document with
-                <application>&app;</application>. Now you will have to learn to get arround the
+                <application>Conglomerate</application>. Now you will have to learn to get arround the
                     <link linkend="editor_window" endterm="editor_window.title"/> and perform common
-                operations such as <link linkend="save_a_document"
-                endterm="save_a_document.title"/>, <link linkend="inspect_document_properties"
-                endterm="inspect_document_properties.title"/>, and generally <link linkend="markup"
-                endterm="markup.title"/> your text.</para>
+                operations such as <link linkend="save_a_document" endterm="save_a_document.title"/>, <link linkend="inspect_document_properties" endterm="inspect_document_properties.title"/>, and generally <link linkend="markup" endterm="markup.title"/> your text.</para>
         </sect1>
         <sect1 id="supported_document_types">
             <title>Supported XML Document Types</title>
-            <para>Ulimately the <application>&appfull;</application> is being developed to
+            <para>Ulimately the <application>Conglomerate XML Editor</application> is being developed to
                 support creation and editing of any XML wide variety of data or document orientated
                 XML instances.</para>
             <para>The following XML document types are currently supported, with time more will be added:</para>
@@ -360,8 +570,7 @@
                 </listitem>
             </itemizedlist>
             <note>
-                <para>A full list of the the XML Document Types supported can be found in <xref
-                    linkend="doc_type_support"/>. This document also provides an introduction to
+                <para>A full list of the the XML Document Types supported can be found in <xref linkend="doc_type_support"/>. This document also provides an introduction to
                     each of the document types and references where you can find more information.</para>
             </note>
         </sect1>
@@ -371,9 +580,9 @@
         <para>As the name implies, the editor window is used to edit documents. This window is
             displayed when a new document is created or an exiting document is opened and has more
             options than the main window. The figure below shows the editor window after a new
-            &quot;Docbook Article&quot; has been created.</para>
+            "Docbook Article" has been created.</para>
         <figure id="fig_editorwindow">
-            <title>&app; Editor window</title>
+            <title>Conglomerate Editor window</title>
             <screenshot>
                 <mediaobject>
                     <imageobject>
@@ -408,7 +617,7 @@
                 </term>
                 <listitem>
                     <para>The Menubar provides menus that arrange and provide access to all the
-                        functional operations of the <application>&appfull;</application>. The
+                        functional operations of the <application>Conglomerate XML Editor</application>. The
                         menu options are described in the <link linkend="editor_window_menus" endterm="editor_window_menus.title"/>.</para>
                     <screenshot>
                         <mediaobject>
@@ -425,7 +634,7 @@
                 </term>
                 <listitem>
                     <para>The Toolbar provides quick access to the most commonly used operations of
-                        the <application>&appfull;</application>. The menu options are described
+                        the <application>Conglomerate XML Editor</application>. The menu options are described
                         in the <link linkend="editor_window_toolbar" endterm="editor_window_toolbar.title"/>.</para>
                     <screenshot>
                         <mediaobject>
@@ -456,8 +665,8 @@
                     <emphasis role="bold">Status bar</emphasis>
                 </term>
                 <listitem>
-                    <para>The Status Bar shows the &quot;Document Type&quot; of the open
-                        document and provides a window &quot;Resize&quot; control with which
+                    <para>The Status Bar shows the "Document Type" of the open
+                        document and provides a window "Resize" control with which
                         to increase or decrease the size of the editor window.</para>
                     <screenshot>
                         <mediaobject>
@@ -472,7 +681,7 @@
         <sect1 id="editor_window_menus">
             <title id="editor_window_menus.title">Editor Window Menus</title>
             <para>The Menubar provides menus that arrange and provide access to all the functional
-                operations of the <application>&appfull;</application>. The following options
+                operations of the <application>Conglomerate XML Editor</application>. The following options
                 are available:</para>
             <variablelist>
                 <title>Editor Window Menus and Options</title>
@@ -614,7 +823,7 @@
                     </term>
                     <listitem>
                         <para>Use the <guimenu>Help</guimenu> menu, to display the
-                            <application>&appfull;</application> &quot;About&quot;
+                            <application>Conglomerate XML Editor</application> "About"
                             dialog and access the Online Help.</para>
                     </listitem>
                 </varlistentry>
@@ -623,7 +832,7 @@
         <sect1 id="editor_window_toolbar">
             <title id="editor_window_toolbar.title">Editor Window Toolbar</title>
             <para>The Toolbar provides quick access to the most commonly used operations of the
-                <application>&appfull;</application>. The following options are available:</para>
+                <application>Conglomerate XML Editor</application>. The following options are available:</para>
             <variablelist>
                 <title>Editor Window Toolbar Options</title>
                 <varlistentry>
@@ -631,8 +840,7 @@
                         <emphasis role="bold">Open</emphasis>
                     </term>
                     <listitem>
-                        <para>Use the <guibutton>Open</guibutton> button, to <link
-                                linkend="open_a_document" endterm="open_a_document.title"/> that
+                        <para>Use the <guibutton>Open</guibutton> button, to <link linkend="open_a_document" endterm="open_a_document.title"/> that
                             already exists.</para>
                     </listitem>
                 </varlistentry>
@@ -641,8 +849,7 @@
                         <emphasis role="bold">Save</emphasis>
                     </term>
                     <listitem>
-                        <para>Use the <guibutton>Save</guibutton> button, to <link
-                                linkend="save_a_document" endterm="save_a_document.title"/> that is
+                        <para>Use the <guibutton>Save</guibutton> button, to <link linkend="save_a_document" endterm="save_a_document.title"/> that is
                             already save to a new file with a different filename.</para>
                     </listitem>
                 </varlistentry>
@@ -675,8 +882,7 @@
                         <emphasis role="bold">Copy</emphasis>
                     </term>
                     <listitem>
-                        <para>Use the <guibutton>Copy</guibutton> button, to <link
-                                linkend="copy_text" endterm="copy_text.title"/>.</para>
+                        <para>Use the <guibutton>Copy</guibutton> button, to <link linkend="copy_text" endterm="copy_text.title"/>.</para>
                     </listitem>
                 </varlistentry>
                 <varlistentry>
@@ -684,8 +890,7 @@
                         <emphasis role="bold">Paste</emphasis>
                     </term>
                     <listitem>
-                        <para>Use the <guibutton>Paste</guibutton> button, to <link
-                                linkend="paste_text" endterm="paste_text.title"/>.</para>
+                        <para>Use the <guibutton>Paste</guibutton> button, to <link linkend="paste_text" endterm="paste_text.title"/>.</para>
                     </listitem>
                 </varlistentry>
             </variablelist>
@@ -707,7 +912,7 @@
                 adjust how much of the document area is taken up by each of the views.</para>
             <sect2 id="outline_view">
                 <title id="outline_view.title">Outline view</title>
-                <para>Shows the structure of the document in a &quot;Tree View&quot;
+                <para>Shows the structure of the document in a "Tree View"
                     control. The outline view provides two XML tree perspectives of the open document:</para>
                 <itemizedlist>
                     <listitem>
@@ -721,7 +926,7 @@
                 </itemizedlist>
                 <para>Both perspectives enable the tree structure of the open document to be
                     navigated. Starting from the root node of the tree, elements that have
-                    &quot;child&quot; or &quot;sibling-elements&quot; can be
+                    "child" or "sibling-elements" can be
                     expanded and collapsed.</para>
                 <para>A context-sensitive pop-up menu is available when a selected node is
                     <action>right-clicked</action> with the mouse.</para>
@@ -732,16 +937,15 @@
                         <guimenuitem>Paste into</guimenuitem>, <guimenuitem>Paste
                     before</guimenuitem>, and <guimenuitem>Paste after</guimenuitem> options are not
                     displayed. When nodes that are representative of an <acronym>XML</acronym>
-                    element that forms part of the vocabulary of the &quot;Document
-                    Type&quot; are selected, these options will be available as shown in the
+                    element that forms part of the vocabulary of the "Document
+                    Type" are selected, these options will be available as shown in the
                     figure below.</para>
                 <figure id="fig_outline_view_popup_menu">
                     <title>Outline view pop-up menu</title>
                     <screenshot>
                         <mediaobject>
                             <imageobject>
-                                <imagedata fileref="figures/cong_editor_outlineview_popup_menu.png"
-                                    format="PNG" depth="5cm" scalefit="1"/>
+                                <imagedata fileref="figures/cong_editor_outlineview_popup_menu.png" format="PNG" depth="5cm" scalefit="1"/>
                             </imageobject>
                         </mediaobject>
                     </screenshot>
@@ -779,12 +983,10 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>Insert a <link linkend="insert_sibling_elements"
-                            endterm="insert_sibling_elements.title"/> after the current element.</para>
+                        <para>Insert a <link linkend="insert_sibling_elements" endterm="insert_sibling_elements.title"/> after the current element.</para>
                     </listitem>
                     <listitem>
-                        <para>Insert a <link linkend="insert_sub_elements"
-                            endterm="insert_sub_elements.title"/> directly under the current element.</para>
+                        <para>Insert a <link linkend="insert_sub_elements" endterm="insert_sub_elements.title"/> directly under the current element.</para>
                     </listitem>
                 </itemizedlist>
                 <note>
@@ -800,14 +1002,14 @@
                         be expanded.</para>
                     <para>The element name shown in the tree view is not always the same as that
                         shown in the <link linkend="page_view" endterm="page_view.title"/>. This is
-                        because &app; renames elements according to the information provided by
-                        a &quot;Display Specification&quot; which can define an alternate
+                        because Conglomerate renames elements according to the information provided by
+                        a "Display Specification" which can define an alternate
                         bame for any element type. These names are not valid element names and are
                         therefore not used to created <acronym>XML</acronym> elements within the
                         <acronym>XML</acronym> source file. Instead they are mapped to valid Docbook
                         elements which are what is created in the open <acronym>XML</acronym> source
                         file or document. If they were to be inserted using the names provided by
-                        <application>&app;</application>, the document would be invalid against
+                        <application>Conglomerate</application>, the document would be invalid against
                         the rules specified by the documents <glossterm>Document Type
                         Definition</glossterm> (<acronym>DTD</acronym>). A listing of the mappings
                         for various document types is provided in <xref linkend="display_spec_element_map_ref"/>.</para>
@@ -816,9 +1018,7 @@
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
-                                    <imagedata
-                                        fileref="figures/cong_editor_outlineview_overview.png"
-                                        format="PNG" depth="5cm" scalefit="1"/>
+                                    <imagedata fileref="figures/cong_editor_outlineview_overview.png" format="PNG" depth="5cm" scalefit="1"/>
                                 </imageobject>
                             </mediaobject>
                         </screenshot>
@@ -827,8 +1027,8 @@
                 <sect3 id="raw_xml">
                     <title id="raw_xml.title">Raw XML tree perspective</title>
                     <para>In Raw XML perspective the tree nodes of the open document are shown using
-                        the full XML syntax, so the &quot;greater-than&quot; (&lt;) and
-                        &quot;less-than&quot; (&gt;) characters the surround element
+                        the full XML syntax, so the "greater-than" (&lt;) and
+                        "less-than" (&gt;) characters the surround element
                         names are shown. The value of the element, the tagged text, is also shown
                         alongside the element in inverted commas (see <xref linkend="fig_outline_raw_xml"/>).</para>
                     <figure id="fig_outline_raw_xml">
@@ -836,8 +1036,7 @@
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
-                                    <imagedata fileref="figures/cong_editor_outlineview_raw.png"
-                                        format="PNG" depth="5cm" scalefit="1"/>
+                                    <imagedata fileref="figures/cong_editor_outlineview_raw.png" format="PNG" depth="5cm" scalefit="1"/>
                                 </imageobject>
                             </mediaobject>
                         </screenshot>
@@ -848,46 +1047,40 @@
                 <title id="page_view.title">Page view</title>
                 <para>The page view shows the content of the open document and the elements in which
                     various content typesare tagged.</para>
-                <para>Block elements such as <sgmltag class="starttag">article</sgmltag>, <sgmltag
-                    class="starttag">sect1</sgmltag>, <sgmltag class="starttag">sect2</sgmltag>, and
-                        <sgmltag class="starttag">figure</sgmltag> are shown in &quot;structural
-                    element borders&quot; and inline elements are displayed with a line beneath
+                <para>Block elements such as <sgmltag class="starttag">article</sgmltag>, <sgmltag class="starttag">sect1</sgmltag>, <sgmltag class="starttag">sect2</sgmltag>, and
+                        <sgmltag class="starttag">figure</sgmltag> are shown in "structural
+                    element borders" and inline elements are displayed with a line beneath
                     the tagged text (see <xref linkend="fig_page_view_doc_edit"/>).</para>
-                <para>The &quot;structural element borders&quot; for nested block structures
+                <para>The "structural element borders" for nested block structures
                     are alternately colored to help readability. The captions used, correspond to
-                    the <application>&app;</application> equivalent of the Document Type
+                    the <application>Conglomerate</application> equivalent of the Document Type
                     elements. For example, in the following figure the
-                    <application>&app;</application> &quot;Paragraph&quot; caption will
+                    <application>Conglomerate</application> "Paragraph" caption will
                     correspond with the Docbook <literal>&lt;para&gt;</literal> element. For
                     inline elements the caption name is written in the center of the line beneath
-                    the tagged text. A listing of the <application>&app;</application> names is
-                    provided in <xref linkend="display_spec_element_map_ref"/> for each of the <link
-                        linkend="doc_type_support" endterm="doc_type_support.title"/>.</para>
+                    the tagged text. A listing of the <application>Conglomerate</application> names is
+                    provided in <xref linkend="display_spec_element_map_ref"/> for each of the <link linkend="doc_type_support" endterm="doc_type_support.title"/>.</para>
                 <figure id="fig_page_view_doc_edit">
                     <title>Page view display of elements</title>
                     <screenshot>
                         <mediaobject>
                             <imageobject>
-                                <imagedata fileref="figures/cong_editor_window_doc_edit.png"
-                                    format="PNG" depth="5cm" scalefit="1"/>
+                                <imagedata fileref="figures/cong_editor_window_doc_edit.png" format="PNG" depth="5cm" scalefit="1"/>
                             </imageobject>
                         </mediaobject>
                     </screenshot>
                 </figure>
                 <para>Wrapped captions can be expanded or collapsed by <action>clicking</action> the
                     mouse on the caption label. In <xref linkend="fig_wrapped_caption_states"/> both
-                    states are shown. Notice that the content for &quot;Subtitle&quot;,
-                    &quot;Title&quot; under the <sgmltag
-                    class="starttag">articleinfo</sgmltag>, and the &quot;Author&quot; has
+                    states are shown. Notice that the content for "Subtitle",
+                    "Title" under the <sgmltag class="starttag">articleinfo</sgmltag>, and the "Author" has
                     been hidden. Inline elements cannot be collapsed.</para>
                 <figure id="fig_wrapped_caption_states">
                     <title>Wrapped caption states - expanded and collapsed</title>
                     <screenshot>
                         <mediaobject>
                             <imageobject>
-                                <imagedata
-                                    fileref="figures/cong_editor_window_doc_edit_collapse.png"
-                                    format="PNG" depth="5cm" scalefit="1"/>
+                                <imagedata fileref="figures/cong_editor_window_doc_edit_collapse.png" format="PNG" depth="5cm" scalefit="1"/>
                             </imageobject>
                         </mediaobject>
                     </screenshot>
@@ -901,8 +1094,7 @@
                         </term>
                         <listitem>
                             <para>This is the same menu that is available when an XML element is
-                                <action>right-clicked</action> in the <link linkend="outline_view"
-                                endterm="outline_view.title"/>, only this time the menu is displayed
+                                <action>right-clicked</action> in the <link linkend="outline_view" endterm="outline_view.title"/>, only this time the menu is displayed
                                 when the caption label is <action>right-clicked</action>. Use the
                                 block element menu to:</para>
                             <itemizedlist>
@@ -937,12 +1129,10 @@
                                     </para>
                                 </listitem>
                                 <listitem>
-                                    <para>Insert a <link linkend="insert_sibling_elements"
-                                        endterm="insert_sibling_elements.title"/> after the current element.</para>
+                                    <para>Insert a <link linkend="insert_sibling_elements" endterm="insert_sibling_elements.title"/> after the current element.</para>
                                 </listitem>
                                 <listitem>
-                                    <para>Insert a <link linkend="insert_sub_elements"
-                                        endterm="insert_sub_elements.title"/> directly under the
+                                    <para>Insert a <link linkend="insert_sub_elements" endterm="insert_sub_elements.title"/> directly under the
                                         current element.</para>
                                 </listitem>
                             </itemizedlist>
@@ -985,18 +1175,17 @@
         </sect1>
         <sect1 id="window_management">
             <title>Window Management</title>
-            <para>The <application>&appfull;</application> uses your chosen <application>Window
+            <para>The <application>Conglomerate XML Editor</application> uses your chosen <application>Window
                 Manager</application> to create the main and editor windows. Multiple instances of
-                <application>&app;</application> can be run at the same time and multiple editor
+                <application>Conglomerate</application> can be run at the same time and multiple editor
                 windows can be opened, each editor window displaying a single document. With so many
                 windows open, window management can become a problem. Fortunately, most desktops
-                like <ulink url="&gnomehome;">GNOME</ulink> and <ulink
-                url="&kdehome;">KDE</ulink> have a <application>Taskbar</application> with
+                like <ulink url="http://www.gnome.org">GNOME</ulink> and <ulink url="http://www.kde.org">KDE</ulink> have a <application>Taskbar</application> with
                 powerful desktop management features. These should enable you to maximize the usage
                 of your screen real-estate. The standard window controls of your desktop environment
                 will also help you to define the behavior of your
-                <application>&app;</application> windows.</para>
-            <para>Within <application>&app;</application> there are two options for window and
+                <application>Conglomerate</application> windows.</para>
+            <para>Within <application>Conglomerate</application> there are two options for window and
                 application management:</para>
             <itemizedlist>
                 <listitem>
@@ -1024,8 +1213,8 @@
                     </keycombo>.</para>
                 <caution>
                     <para>This option should not be confused with the <option>Exit</option> option,
-                        which will close all <application>&app;</application> windows associated
-                        with a <application>&app;</application> instance and terminate the application.</para>
+                        which will close all <application>Conglomerate</application> windows associated
+                        with a <application>Conglomerate</application> instance and terminate the application.</para>
                 </caution>
             </sect2>
             <sect2 id="exit_cong">
@@ -1039,7 +1228,7 @@
                         <keycap>Ctrl</keycap>
                         <keycap>Q</keycap>
                     </keycombo> on the main window and any editor window will close all windows
-                    associated with the <application>&app;</application> instance and exit the application.</para>
+                    associated with the <application>Conglomerate</application> instance and exit the application.</para>
             </sect2>
         </sect1>
     </chapter>
@@ -1049,9 +1238,8 @@
             <title>File Management</title>
             <sect2 id="create_a_document">
                 <title id="create_a_document.title">Create a document</title>
-                <para>When <application>&app;</application> is first started main window does
-                    not provide editing functionality. To display the editor window Create or <link
-                        linkend="open_a_document" endterm="open_a_document.title"/>.</para>
+                <para>When <application>Conglomerate</application> is first started main window does
+                    not provide editing functionality. To display the editor window Create or <link linkend="open_a_document" endterm="open_a_document.title"/>.</para>
                 <procedure>
                     <title>Creating a Document</title>
                     <step>
@@ -1063,8 +1251,7 @@
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
-                                    <imagedata fileref="figures/cong_create_new_file_wiz1.png"
-                                        depth="5cm" scalefit="1"/>
+                                    <imagedata fileref="figures/cong_create_new_file_wiz1.png" depth="5cm" scalefit="1"/>
                                 </imageobject>
                             </mediaobject>
                         </screenshot>
@@ -1076,8 +1263,7 @@
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
-                                    <imagedata fileref="figures/cong_create_new_file_wiz2.png"
-                                        depth="5cm" scalefit="1"/>
+                                    <imagedata fileref="figures/cong_create_new_file_wiz2.png" depth="5cm" scalefit="1"/>
                                 </imageobject>
                             </mediaobject>
                         </screenshot>
@@ -1138,8 +1324,7 @@
             <sect2 id="save_a_document">
                 <title id="save_a_document.title">Save a document</title>
                 <para>The first time you save a document you will be required to provide a file name
-                    and select a location where the file will be written to disk (see <xref
-                    linkend="save_as_document"/>). Once a document is saved to disk, the save
+                    and select a location where the file will be written to disk (see <xref linkend="save_as_document"/>). Once a document is saved to disk, the save
                     operation will write directly to the open file.</para>
                 <tip>
                     <para>Save your document before you start and regularly there after to avoid
@@ -1165,8 +1350,7 @@
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
-                                    <imagedata fileref="figures/cong_save_as_dialog.png" depth="5cm"
-                                        scalefit="1" format="PNG"/>
+                                    <imagedata fileref="figures/cong_save_as_dialog.png" depth="5cm" scalefit="1" format="PNG"/>
                                 </imageobject>
                             </mediaobject>
                         </screenshot>
@@ -1310,14 +1494,14 @@
         <title id="design_display_definitions.title">Designing Display Definitions</title>
         <para>Display specifications are <acronym>XML</acronym> files saved with the extension
                 <filename>XDS</filename>. They hold various types of information,
-            that annotate a one or more Document Types that may be edited with the &appfull;.</para>
+            that annotate a one or more Document Types that may be edited with the Conglomerate XML Editor.</para>
         <para>Display specifications do not take the place of <acronym>DTD</acronym>, XML Schema, or
             <acronym>XSL</acronym> files. Their function is only to provide information to
-            <application>&app;</application> when editing a given <acronym>XML</acronym> instance.</para>
+            <application>Conglomerate</application> when editing a given <acronym>XML</acronym> instance.</para>
         <para>Because display specifications are <acronym>XML</acronym>, they can be easily modified
-            in order to customize the <application>&app;</application> editing environment to
+            in order to customize the <application>Conglomerate</application> editing environment to
             the particluar requirements of a user or a specific <acronym>XML</acronym> file.</para>
-        <para>A complete definition of the &app; XDS DTD is available in <xref linkend="xds_dtd_def"/>.</para>
+        <para>A complete definition of the Conglomerate XDS DTD is available in <xref linkend="xds_dtd_def"/>.</para>
         <para>The following operations can be performed on XDS files:</para>
         <itemizedlist>
             <listitem>
@@ -1339,7 +1523,1377 @@
             <title id="dump_xds.title">Dump a Display Spec</title>
             <para>text</para>
         </sect1>
-    </chapter> <!--&faq;--> &doctype_supp; &xds_ele_ref; &xds_dtd_def; <glossary role="auto">
+    </chapter> <!--&faq;--> 
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<appendix id="doc_type_support">
+    <title id="doc_type_support.title">Supported XML Document Types</title>
+    <para>The Conglomerate project aims to provide support for the editing of a wide range of XML
+        documents. During developed three levels of support are recognized:</para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link linkend="supported_docs" endterm="supported_docs.title"/>. </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>. </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>. We hope to add
+                support in the future (patches welcome!). </para>
+        </listitem>
+    </itemizedlist>
+    <table id="tbl_doc_support">
+        <title>Summary of Supported XML Document Types</title>
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Document Type</entry>
+                    <entry>Status</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <link linkend="docbook_xml" endterm="docbook_xml.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="xhtml_strict" endterm="xhtml_strict.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="kernel_traffic" endterm="kernel_traffic.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="relax_ng" endterm="relax_ng.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="xslfo" endterm="xslfo.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="css" endterm="css.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="openoffice" endterm="openoffice.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="openebook" endterm="openebook.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect1 id="supported_docs">
+        <title id="supported_docs.title">Supported</title>
+        <para>Following is an introduction to the XML Document Types "supported"
+            by the Conglomerate XML Editor.</para>
+        <sect2 id="docbook_xml">
+            <title id="docbook_xml.title">Docbook XML 4.1.2</title>
+            <para>The first XML document type to be supported by
+                <application>Conglomerate</application> is Docbook XML. Docbook XML is a standards
+                based application of XML that offers a markup vocabulary that is particularly well
+                suited to the semantic description of content related computer hardware and software.</para>
+            <para>Numerous free and open source software projects have adopted Docbook XML as their
+                standard for content authoring and storage. Most significantly the two leading free
+                desktop environments <ulink url="http://www.gnome.org">GNOME</ulink> and <ulink url="http://www.kde.org">KDE</ulink>.</para>
+            <para>The official release of the Docbook XML Document Type Definition (DTD) is
+                available at <ulink url="http://www.oasis-open.org/">OASIS</ulink>. Development is conducted at
+                the <ulink url="http://docbook.sourceforge.net">Docbook Open Repository</ulink>.</para>
+            <para>There are two references of note that will get you started with Docbook and its usage:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.docbook.org/tdg/en/html/docbook.html">Docbook: The Definitive Guide</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.sagehill.net/docbookxsl/index.html">Docbook XSL: The Complete Guide</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>Docbook is used throughout the user manual to explain and illustrate the
+                functionality of the <application>Conglomerate XML Editor</application>.</para>
+        </sect2>
+        <sect2 id="xhtml_strict">
+            <title id="xhtml_strict.title">XHTML (strict)</title>
+            <para>
+                <acronym>XHTML</acronym> stands for EXtensible HyperText Markup Language which is
+                aimed to replace HTML. It looks almost identical to HTML 4.01, but is stricter and
+                cleaner because XHTML is HTML defined as an XML application.</para>
+            <para>
+                <acronym>XHTML</acronym> is a <ulink url="http://www.w3.org/TR/xhtml1/">W3C Recommendation</ulink>.</para>
+            <para>The following online resource will be helpful in geting you started with <acronym>XHTML</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.w3schools.com/">W3 Schools</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2 id="kernel_traffic">
+            <title id="kernel_traffic.title">"Kernel Traffic" newsetter format</title>
+            <para>The "Kernel Trafffic" news letter is a HTML format used by the
+                    <ulink url="http://kt.zork.net/">Kernel Traffic Web Site</ulink>. The news
+                letter tracks the technical development of various projects of the <ulink url="http://www.gnu.org/philosophy/free-sw.html">Free</ulink> and Open Source world.</para>
+        </sect2>
+    </sect1>
+    <sect1 id="partial_supported_docs">
+        <title id="partial_supported_docs.title">Partially Supported</title>
+        <para>Following is an introduction to the XML Document Types "partially
+            supported" by the Conglomerate XML Editor.</para>
+        <sect2 id="relax_ng">
+            <title id="relax_ng.title">Relax NG</title>
+            <para>RELAX NG is a schema language for <acronym>XML</acronym>. The RELAX NG
+                specifications have been developed within <ulink url="http://www.oasis-open.org/">OASIS</ulink>
+                by the <ulink url="http://www.oasis-open.org/committees/relax-ng/">RELAX NG Technical Committee</ulink>.</para>
+            <para>The following online resources will be helpful in geting you started with
+                    <acronym>Relax NG</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.relaxng.org/">relaxng.org</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.zvon.org/">zvon.org</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2 id="xslfo">
+            <title id="xslfo.title">XSL-FO</title>
+            <para>
+                <acronym>XSL-FO</acronym> is a language for formatting <acronym>XML</acronym> data.
+                The acronym stands for Extensible Stylesheet Language Formatting Objects.
+                <acronym>XSL-FO</acronym> is a part of the the Extensible Stylesheet Language Family
+                (<acronym>XSL</acronym>) of <ulink url="http://www.w3.org/Style/XSL/">W3C Recommendations</ulink>.</para>
+            <para>The following online resources will be helpful in geting you started with <acronym>XSL-FO</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.w3schools.com/">W3 Schools</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.zvon.org/">zvon.org</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+    <sect1 id="unsupported_docs">
+        <title id="unsupported_docs.title">Unsupported</title>
+        <para>Following is an introduction to the XML Document Types "unsupported"
+            by the Conglomerate XML Editor.</para>
+        <sect2 id="css">
+            <title id="css.title">Cascading Style Sheets</title>
+            <para> Text</para>
+        </sect2>
+        <sect2 id="openoffice">
+            <title id="openoffice.title">OpenOffice.org File Format</title>
+            <para>
+                <ulink url="http://www.openoffice.org/">OpenOffice.org</ulink> is both an open-source application and
+                project. It is <ulink url="http://www.gnu.org/philosophy/free-sw.html">free</ulink>. The product is a
+                multi-platform office productivity suite compatible with all major file formats. The
+                    <ulink url="http://xml.openoffice.org/">OpenOffice.org XML project</ulink> develops the
+                OpenOffice.org XML File Format, as well as the necessary implementation for the
+                OpenOffice.org application.</para>
+            <para>The OpenOffice.org XML project has contributed the OpenOffice.org XML File Format
+                to <ulink url="http://www.oasis-open.org/">OASIS</ulink> where the <ulink url="http://xml.openoffice.org/">OASIS Open Office XML Format Technical Committee</ulink>
+                works on creating an open XML file format for office documents, using the
+                OpenOffice.org format as a base. The best way to get started with this format is by
+                visiting the <ulink url="http://xml.openoffice.org/">OpenOffice.org XML project</ulink>.</para>
+        </sect2>
+        <sect2 id="openebook">
+            <title id="openebook.title">Open eBook Publication Structure</title>
+            <para>text</para>
+        </sect2>
+    </sect1>
+</appendix>
+ 
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "/home/sean/apps/oxygen/docbook/dtd/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "resources/global.ent">
+%global_entities;
+]>-->
+<appendix id="display_spec_element_map_ref">
+    <title id="display_spec_element_map_ref.title">XDS Element Mapping Reference</title>
+    <para>text</para>
+    <sect1 id="map_to_docbook">
+        <title id="map_to_docbook.title">Map to Docbook</title>
+        <para>
+            <xref linkend="tbl_cong2dbmap"/> describes the name mapping used by
+            Conglomerate Display Specification for Docbook V4.1.2 XML Documents.</para>
+        <para>Only names that are different to those commonly recognised as
+            elements in Docbook are listed. All other elements are considered
+            unaltered by Conglomerate.</para>
+        <table id="tbl_cong2dbmap">
+            <title>title</title>
+            <tgroup cols="2">
+                <thead>
+                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                </thead>
+                
+                <tbody>
+                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                </tbody>
+            </tgroup>
+            
+        </table>
+        
+    </sect1>
+    <sect1 id="map_to_relaxng">
+        <title id="map_to_relaxng.title">Map to Relax NG</title>
+        <para>text</para>
+    </sect1>
+</appendix>
+ 
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<appendix id="xds_dtd_def">
+    <title id="xds_dtd_def.title">Display Specification DTD</title>
+    <para>The Display Specification DTD (<filename>xds.dtd</filename>) specifies the kinds of tags
+        that can be included in your XDS document. In addition, the DTD tells a validating parser
+        which tags are valid, and in what arrangements. A DTD tells both validating and
+        non-validating parsers where text is expected. This lets the parser determine whether the
+        whitespace it sees is significant or ignorable.</para>
+    <para>When creating or editing an XDS, the XML tags used, their attributes and arrangement must
+        conform to <filename>xds.dtd</filename>. If the XDS is invalid,
+        <application>Conglomerate</application> may throw an exception and exit.</para>
+    <sect1 id="xds_anatomy">
+        <title>Anatomy of a Display Specification</title>
+        <para>A display specification is an XML file, it therefore has an XML prolog like such.</para>
+        <para>
+            <programlisting><![CDATA[<?xml version="1.0"?>]]></programlisting>
+        </para>
+        <para>When creating or editing an XDS the Display Specification DTD
+            (<filename>xds.dtd</filename>) should be declared so that your custom XDS may be
+            validated against it. The Document Type Declaration of a display specification always
+            defines the "root" as <sgmltag class="starttag">dispspec</sgmltag>.</para>
+        <para>The Document Type Declaration does not have a PUBLIC Identifier as they are not
+            strictly required for <acronym>XML</acronym> documents. The DTD location is therefore
+            specified using the SYSTEM Identifier as shown in the following example.</para>
+        <para>
+            <programlisting><![CDATA[<!DOCTYPE dispspec SYSTEM "xds.dtd">]]></programlisting>
+        </para>
+        <note>
+            <para>
+                <application>Conglomerate</application> does currently validate XDS files at run-time.</para>
+        </note>
+    </sect1>
+    <sect1 id="display_spec_element_reference">
+        <title id="display_spec_element_reference.title">Element Reference</title>
+        <sect2 id="collapseto">
+            <title id="collapseto.title">collapseto</title>
+            <para>The <sgmltag class="starttag">collapseto</sgmltag> element is currently unsupported.</para>
+            <para>When supported, setting <sgmltag class="starttag">collapseto</sgmltag> causes the
+                element wrapper to become part of the parent node element wrapper. The vertical line
+                of the parent element wrapper is punctuated or outdented at the point where the
+                element with <sgmltag class="starttag">collapseto</sgmltag> set is located.</para>
+            <sect3 id="collapseto_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="collapseto_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>
+                </para>
+            </sect3>
+            <sect3 id="collapseto_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="collapseto_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>.</para>
+            </sect3>
+        </sect2>
+        <sect2 id="description">
+            <title id="description.title">description</title>
+            <para>A paragraph describing the Document Type annoted by the XDS.</para>
+            <sect3 id="description_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            
+<!--<!DOCTYPE row PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table row that defines the xml:lang attribute used by:
+ description, name, short-desc -->
+<!-- Reuse by inclusion with &row_xml_lang_attrib; entity reference -->
+<row>
+    <entry>xml:lang</entry>
+    <entry>en</entry>
+    <entry>Language localization</entry>
+</row>
+
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="description_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="metadata.title" linkend="metadata"/>
+                </para>
+            </sect3>
+            <sect3 id="description_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="description_example">
+                <title>Example</title>
+                <para>See <link endterm="metadata.title" linkend="metadata"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="dispspec">
+            <title id="dispspec.title">dispspec</title>
+            <para>This is the root element of the Conglomerate Display Specification Document Type.</para>
+            <sect3 id="dispspec_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="dispspec_parents">
+                <title>Parents</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="dispspec_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="metadata.title" linkend="metadata"/>, <link endterm="serialisation.title" linkend="serialisation"/>, <link endterm="document-models.title" linkend="document-models"/>, <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="dispspec_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<dispspec>
+    <metadata>
+        . . .
+    </metadata>
+    <serialisation>
+        . . .
+    </serialisation>
+    <document-models>
+        . . .
+    </document-models>
+    <element-list>
+        . . .
+    </element-list>
+</dispspec>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="document-models">
+            <title id="document-models.title">document-models</title>
+            <para>A wrapper element for <sgmltag class="starttag">external-document-model</sgmltag>.
+                Mutiple <sgmltag class="starttag">external-document-model</sgmltag> elements may be specified.</para>
+            <sect3 id="document-models_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="document-models_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="document-models_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="external-document-model.title" linkend="external-document-model"/>
+                </para>
+            </sect3>
+            <sect3 id="document-models_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    . . .
+    <document-models>
+        <external-document-model type="dtd" public-id="" system-id=""/>
+    </document-models>
+    . . .
+</dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="element">
+            <title id="element.title">element</title>
+            <para>An XML element.</para>
+            <sect3 id="element_attributes">
+                <title>Attributes</title>
+                
+<!--<!DOCTYPE informaltable PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table that defines the attributes for:
+  element, plugin-element, span-element, structural-element.-->
+<!-- Reuse by inclusion with &tbl_element_attrib; entity reference -->
+<informaltable>
+    <tgroup cols="3">
+        <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+                <entry>Description</entry>
+            </row>
+        </thead>
+        <tbody>
+            <row>
+                <entry>color</entry>
+                <entry>Hex Value</entry>
+                <entry>Use hexadecimal notation for the combination of Red, Green, and Blue color
+                    values (<acronym>RGB</acronym>). The lowest value that can be given to one light
+                    source is 0 (hex #00). The highest value is 255 (hex #FF).</entry>
+            </row>
+            <row>
+                <entry>filename-xpath</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>icon</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>ns</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>plugin-id</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>tag</entry>
+                <entry>external element name</entry>
+                <entry>The name of an element declared by the DTD specified in <link endterm="external-document-model.title" linkend="external-document-model"/>.</entry>
+            </row>
+            <row>
+                <entry>type</entry>
+                <entry>
+                    <para>embedded-external-file</para>
+                    <para>paragraph</para>
+                    <para>plugin</para>
+                    <para>span</para>
+                    <para>structural</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>whitepace</entry>
+                <entry>
+                    <para>normalize</para>
+                    <para>preserve</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>
+
+            </sect3>
+            <sect3 id="element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link endterm="key-value-list.title" linkend="key-value-list"/>, <link endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title" linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="element-list">
+            <title id="element-list.title">element-list</title>
+            <para>A wrapper element for element types.</para>
+            <sect3 id="element-list_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="element-list_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="element-list_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="element-list_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<dispspec>
+    <element-list> 
+        <element tag="" type="" color="" filename-xpath="" icon="" \
+            ns="" plugin-id="" whitespace="normalize">
+            . . .
+        </element>
+        <plugin-element tag="" color="" filename-xpath="" icon="" \
+            ns="" plugin-id="" whitespace="normalize">
+            . . .
+        </plugin-element>
+        <span-element tag="" color="" filename-xpath="" icon="" \
+            ns="" whitespace="normalize">
+            . . .
+        </span-element>
+        <structural-element tag="" color="" filename-xpath="" icon="" \
+            ns="" whitespace="normalize">
+            . . .
+        </structural-element>
+    </element-list>
+<dispspec>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="external-document-model">
+            <title id="external-document-model.title">external-document-model</title>
+            <para>Specifies the Document Type Definition (DTD) annotated by this Display
+                Specification (XDS).</para>
+            <sect3 id="external-document-model_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>type</entry>
+                                <entry>
+                                    <para>dtd</para>
+                                    <para>relax-ng-schema</para>
+                                    <para>w3c-schema</para>
+                                </entry>
+                                <entry>text</entry>
+                            </row>
+                            <row>
+                                <entry>public-id</entry>
+                                <entry>value</entry>
+                                <entry>The PUBLIC Identifier by which the Documen Type is recognized.</entry>
+                            </row>
+                            <row>
+                                <entry>system-id</entry>
+                                <entry>value</entry>
+                                <entry>The SYSTEM Indentifier by which the Document Type is to be recognized.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="external-document-model_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="document-models.title" linkend="document-models"/>
+                </para>
+            </sect3>
+            <sect3 id="external-document-model_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="external-document-model_example">
+                <title>Example</title>
+                <para>See <link endterm="document-models.title" linkend="document-models"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="format">
+            <title id="format.title">format</title>
+            <para>text</para>
+            <sect3 id="format_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="format_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="serialisation.title" linkend="serialisation"/>
+                </para>
+            </sect3>
+            <sect3 id="format_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="format_example">
+                <title>Example</title>
+                <para>See <link linkend="serialisation" endterm="serialisation.title"/>.</para>
+            </sect3>
+        </sect2>
+        <sect2 id="header-info">
+            <title id="header-info.title">header-info</title>
+            <para>Defines title content for nodes shown in the outline tree view and the element
+                wrappers shown in the page view. Node content is comprised of two parts [element
+                name] : [title] where:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="bold">[name]</emphasis> is derived from <sgmltag class="starttag">name</sgmltag>.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="bold">[title]</emphasis> is derived from either the value of
+                            <sgmltag class="attribute">tag</sgmltag> or the result of <sgmltag class="attribute">xpath</sgmltag>.</para>
+                </listitem>
+            </itemizedlist>
+            <sect3 id="header-info_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>tag</entry>
+                                <entry>An element name from the anotated Document Type.</entry>
+                                <entry>When an element name is provided Conglomerate will search for a
+                                    child node whose name corrsponds to the value of <sgmltag class="attribute">tag</sgmltag> and return the value of the next
+                                    child node for [title].</entry>
+                            </row>
+                            <row>
+                                <entry>xpath</entry>
+                                <entry>value</entry>
+                                <entry>An XPath expression that can be used to return a string. The
+                                    resulting string is used for [title].</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="header-info_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>
+                </para>
+            </sect3>
+            <sect3 id="header-info_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="header-info_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>. </para>
+            </sect3>
+        </sect2>
+        <sect2 id="key-value-list">
+            <title id="key-value-list.title">key-value-list</title>
+            <para>text</para>
+            <sect3 id="key-value-list_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="key-value-list_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-list_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="key-value-pair.title" linkend="key-value-pair"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-list_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+</structural-element>
+    . . .
+    <key-value-list>
+       <key-value-pair key="" value=""/>
+    </key-value-list>
+    . . .
+</structural-element>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="key-value-pair">
+            <title id="key-value-pair.title">key-value-pair</title>
+            <para>text</para>
+            <sect3 id="key-value-pair_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="key-value-pair_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="key-value-list.title" linkend="key-value-list"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-pair_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="key-value-pair_example">
+                <title>Example</title>
+                <para>See <link endterm="key-value-list.title" linkend="key-value-list"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="metadata">
+            <title id="metadata.title">metadata</title>
+            <para>A wrapper for elements that provide data about the Document Type which the XDS annotates.</para>
+            <sect3 id="metadata_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="metadata_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="metadata_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="name.title" linkend="name"/>, <link endterm="description.title" linkend="description"/>
+                </para>
+            </sect3>
+            <sect3 id="metadata_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    <metadata>
+        <name xml:lang=""> . . . </name>
+        <description xml:lang=""> . . . </description>
+    </metadata>
+    . . .
+<dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="name">
+            <title id="name.title">name</title>
+            <para>The displayed name of an object.</para>
+            <sect3 id="name_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            
+<!--<!DOCTYPE row PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table row that defines the xml:lang attribute used by:
+ description, name, short-desc -->
+<!-- Reuse by inclusion with &row_xml_lang_attrib; entity reference -->
+<row>
+    <entry>xml:lang</entry>
+    <entry>en</entry>
+    <entry>Language localization</entry>
+</row>
+
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="name_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link endterm="metadata.title" linkend="metadata"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="name_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="name_example">
+                <title>Example</title>
+                <para>See <link endterm="element.title" linkend="element"/>, <link endterm="metadata.title" linkend="metadata"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="plugin-element">
+            <title id="plugin-element.title">plugin-element</title>
+            <para>text</para>
+            <sect3 id="plugin-element_attributes">
+                <title>Attributes</title>
+                
+<!--<!DOCTYPE informaltable PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table that defines the attributes for:
+  element, plugin-element, span-element, structural-element.-->
+<!-- Reuse by inclusion with &tbl_element_attrib; entity reference -->
+<informaltable>
+    <tgroup cols="3">
+        <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+                <entry>Description</entry>
+            </row>
+        </thead>
+        <tbody>
+            <row>
+                <entry>color</entry>
+                <entry>Hex Value</entry>
+                <entry>Use hexadecimal notation for the combination of Red, Green, and Blue color
+                    values (<acronym>RGB</acronym>). The lowest value that can be given to one light
+                    source is 0 (hex #00). The highest value is 255 (hex #FF).</entry>
+            </row>
+            <row>
+                <entry>filename-xpath</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>icon</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>ns</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>plugin-id</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>tag</entry>
+                <entry>external element name</entry>
+                <entry>The name of an element declared by the DTD specified in <link endterm="external-document-model.title" linkend="external-document-model"/>.</entry>
+            </row>
+            <row>
+                <entry>type</entry>
+                <entry>
+                    <para>embedded-external-file</para>
+                    <para>paragraph</para>
+                    <para>plugin</para>
+                    <para>span</para>
+                    <para>structural</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>whitepace</entry>
+                <entry>
+                    <para>normalize</para>
+                    <para>preserve</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>
+
+            </sect3>
+            <sect3 id="plugin-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="plugin-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link endterm="key-value-list.title" linkend="key-value-list"/>, <link endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title" linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="plugin-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <plugin-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </plugin-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="property-dialog">
+            <title id="property-dialog.title">property-dialog</title>
+            <para>text</para>
+            <sect3 id="property-dialog_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>plugin-id</entry>
+                                <entry>value</entry>
+                                <entry>text</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="property-dialog_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="property-dialog_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="property-dialog_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="serialisation">
+            <title id="serialisation.title">serialisation</title>
+            <para>text</para>
+            <sect3 id="serialisation_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="serialisation_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="serialisation_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="format.title" linkend="format"/>
+                </para>
+            </sect3>
+            <sect3 id="serialisation_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    . . .
+    <serialisation>
+        <format extension=""/>
+    </serialisation>
+    . . .
+</dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="short-desc">
+            <title id="short-desc.title">short-desc</title>
+            <para>A short description of the element specified in <sgmltag class="attribute">tag</sgmltag>.</para>
+            <sect3 id="short-desc_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            
+<!--<!DOCTYPE row PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table row that defines the xml:lang attribute used by:
+ description, name, short-desc -->
+<!-- Reuse by inclusion with &row_xml_lang_attrib; entity reference -->
+<row>
+    <entry>xml:lang</entry>
+    <entry>en</entry>
+    <entry>Language localization</entry>
+</row>
+
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="short-desc_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="short-desc_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="short-desc_example">
+                <title>Example</title>
+                <para>See <link endterm="element.title" linkend="element"/>, <link endterm="plugin-element.title" linkend="plugin-element"/>, <link endterm="span-element.title" linkend="span-element"/>, <link endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="span-element">
+            <title id="span-element.title">span-element</title>
+            <para>text</para>
+            <sect3 id="span-element_attributes">
+                <title>Attributes</title>
+                
+<!--<!DOCTYPE informaltable PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table that defines the attributes for:
+  element, plugin-element, span-element, structural-element.-->
+<!-- Reuse by inclusion with &tbl_element_attrib; entity reference -->
+<informaltable>
+    <tgroup cols="3">
+        <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+                <entry>Description</entry>
+            </row>
+        </thead>
+        <tbody>
+            <row>
+                <entry>color</entry>
+                <entry>Hex Value</entry>
+                <entry>Use hexadecimal notation for the combination of Red, Green, and Blue color
+                    values (<acronym>RGB</acronym>). The lowest value that can be given to one light
+                    source is 0 (hex #00). The highest value is 255 (hex #FF).</entry>
+            </row>
+            <row>
+                <entry>filename-xpath</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>icon</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>ns</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>plugin-id</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>tag</entry>
+                <entry>external element name</entry>
+                <entry>The name of an element declared by the DTD specified in <link endterm="external-document-model.title" linkend="external-document-model"/>.</entry>
+            </row>
+            <row>
+                <entry>type</entry>
+                <entry>
+                    <para>embedded-external-file</para>
+                    <para>paragraph</para>
+                    <para>plugin</para>
+                    <para>span</para>
+                    <para>structural</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>whitepace</entry>
+                <entry>
+                    <para>normalize</para>
+                    <para>preserve</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>
+
+            </sect3>
+            <sect3 id="span-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="span-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link endterm="key-value-list.title" linkend="key-value-list"/>, <link endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title" linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="span-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <span-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </span-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="structural-element">
+            <title id="structural-element.title">structural-element</title>
+            <para>text</para>
+            <sect3 id="structural-element_attributes">
+                <title>Attributes</title>
+                
+<!--<!DOCTYPE informaltable PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table that defines the attributes for:
+  element, plugin-element, span-element, structural-element.-->
+<!-- Reuse by inclusion with &tbl_element_attrib; entity reference -->
+<informaltable>
+    <tgroup cols="3">
+        <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+                <entry>Description</entry>
+            </row>
+        </thead>
+        <tbody>
+            <row>
+                <entry>color</entry>
+                <entry>Hex Value</entry>
+                <entry>Use hexadecimal notation for the combination of Red, Green, and Blue color
+                    values (<acronym>RGB</acronym>). The lowest value that can be given to one light
+                    source is 0 (hex #00). The highest value is 255 (hex #FF).</entry>
+            </row>
+            <row>
+                <entry>filename-xpath</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>icon</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>ns</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>plugin-id</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>tag</entry>
+                <entry>external element name</entry>
+                <entry>The name of an element declared by the DTD specified in <link endterm="external-document-model.title" linkend="external-document-model"/>.</entry>
+            </row>
+            <row>
+                <entry>type</entry>
+                <entry>
+                    <para>embedded-external-file</para>
+                    <para>paragraph</para>
+                    <para>plugin</para>
+                    <para>span</para>
+                    <para>structural</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>whitepace</entry>
+                <entry>
+                    <para>normalize</para>
+                    <para>preserve</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>
+
+            </sect3>
+            <sect3 id="structural-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="structural-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link endterm="key-value-list.title" linkend="key-value-list"/>, <link endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title" linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="structural-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <structural-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </structural-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+    </sect1>
+</appendix>
+ <glossary role="auto">
         <glossentry>
             <glossterm>Dummy</glossterm>
             <glossdef>
