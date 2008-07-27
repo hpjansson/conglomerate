@@ -1,5 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
+# We require automake 1.6 at least.
+AUTOMAKE_OPTIONS = 1.6
+
 # See the GTK+ Makefiles in gtk+/docs/reference for examples
 # of using the various options.
 
@@ -48,9 +51,6 @@ GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src
 GTKDOC_LIBS = $(CONGLOMERATE_LIBS) \
 	      	$(GTKSOURCEVIEW_LIBS) $(ENCHANT_LIBS) $(PRINTING_LIBS) \
 		$(filter-out ../../src/main.o,$(wildcard ../../src/*.o))
-
-GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
-GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 
 # If you need to override some of the declarations, place them in the
 # $(DOC_MODULE)-overrides.txt file and uncomment the second line here.

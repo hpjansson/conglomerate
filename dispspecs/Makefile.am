@@ -43,4 +43,9 @@ EXTRA_DIST = \
 	$(dtd_DATA) \
 	$(NULL)
 
+DISTCLEANFILES = \
+	$(dispspec_DATA) \
+	$(dtd_DATA) \
+	$(NULL)
+
 ## end of this Makefile.am

@@ -1,3 +1,10 @@
+2008-07-28  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am:
+	* configure.ac:
+	
+	Patch on the way to make distcheck.
+
 2008-01-18  Gil Forcada  <gforcada@gnome.org>
 
 	* configure.in: Added 'tr' to ALL_LINGUAS.

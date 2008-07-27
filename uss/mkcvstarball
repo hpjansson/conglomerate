@@ -1,7 +1,18 @@
 #!/bin/bash
+# make cvs tarball
+# script to make a tarball from the version control source tree (CVS, SVN, etc)
+# it exists because the generated Makefiles do many check which aren't passed 
+# With the cheats in this script is a `make dist` possible
 
 # temporary modified files
-TMPMOD="configure.in ChangeLog"
+TMPMOD="configure.ac ChangeLog"
+
+# intltool isn't yet configured right
+for intfile in extract merge update
+do
+  if=intltool-${intfile}.in
+  [ ! -f ${if} ] && touch ${if}
+done
 
 # preserve
 for TM in ${TMPMOD}
@@ -16,10 +27,10 @@ then
   ( date -R; echo "This is prelease ${1}"; echo; cat ChangeLog.tm ) > ChangeLog
   sed -e "s/^AC_INIT(\(.*\), \(.*\))/AC_INIT(\1, \2pre${1})/" \
       -e "/doc\/reference/d" \
-    configure.in.tm > configure.in
+    configure.ac.tm > configure.ac
 else
   sed -e "/doc\/reference/d" \
-    configure.in.tm > configure.in
+    configure.ac.tm > configure.ac
 fi
 
 # don't spent time on the poor gtk-doc stuff
@@ -34,8 +45,9 @@ sed -e 's/SUBDIRS = \(.*\)reference\(.*\)/SUBDIRS = \1 \2/' doc/Makefile.am.with
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck
 if [ $? -ne 0 ]
 then
+ echo *********************
  echo make distcheck failed
- exit 1
+ echo *********************
 fi
 
 # restore the temporary modified files

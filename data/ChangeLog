@@ -1,3 +1,9 @@
+2008-07-28  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am:
+
+	Patch on the way to make distcheck.
+
 2008-01-03  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* conglomerate.desktop.in:

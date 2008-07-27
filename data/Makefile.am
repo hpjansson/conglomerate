@@ -45,3 +45,9 @@ EXTRA_DIST = $(desktop_in_files)	\
 	$(schema_DATA)			\
 	$(schema_in_files)		\
 	$(NULL)
+
+DISTCLEANFILES = \
+	$(desktop_DATA)	\
+	$(schema_DATA) \
+	$(keys_DATA)
+
