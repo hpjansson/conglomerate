@@ -1499,7 +1499,7 @@ set_editor_node_selection (CongEditorWidget3 *widget,
 			   gpointer user_data)
 {
 	cong_editor_node_private_set_selected (editor_node,
-					       (gboolean)user_data);
+					       GPOINTER_TO_UINT(user_data));
 }
 
 static void on_signal_selection_change_notify_after (CongDocument *doc, 

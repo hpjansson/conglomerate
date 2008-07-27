@@ -1,3 +1,9 @@
+2008-07-28  Geert Stappers  <stappers@stappers.nl>
+
+	* cong-editor-widget3.c (set_editor_node_selection):
+	
+	Fixes warning
+
 2008-01-03  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* cong-primary-window.c: (cong_primary_window_make_gui):
