@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Arabic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-21 12:55+0100\n"
+"POT-Creation-Date: 2008-07-31 11:06+0100\n"
 "PO-Revision-Date: 2007-04-14 18:49+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabeyes <doc@arabeyes.org>\n"
@@ -1062,6 +1062,7 @@ msgstr "قائمة التعريف"
 
 #: ../dispspecs/forrest-document.xds.in.h:11 ../dispspecs/readme.xds.in.h:4
 #: ../src/cong-document.c:988
+#, c-format
 msgid "Document"
 msgstr "مستند"
 
@@ -3150,8 +3151,8 @@ msgid "XSL stylesheet"
 msgstr "اختر Stylesheet"
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
-#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:815
-#: ../src/cong-primary-window.c:817 ../src/cong-primary-window.c:823
+#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:810
+#: ../src/cong-primary-window.c:812 ../src/cong-primary-window.c:818
 #, fuzzy
 msgid "Conglomerate XML Editor"
 msgstr "محرّر قائمة المراسَلين"
@@ -3211,7 +3212,7 @@ msgid "Basic"
 msgstr "بسيط"
 
 #: ../glade/cong-file-properties.glade.h:4 ../src/cong-document.c:1003
-#, fuzzy
+#, fuzzy, c-format
 msgid "Document Type Declaration"
 msgstr "أقسام المستند"
 
@@ -3561,7 +3562,7 @@ msgid "Depth"
 msgstr "العمق"
 
 #: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
-#, fuzzy
+#, fuzzy, c-format
 msgid "Document Type"
 msgstr "نوع المستند"
 
@@ -3582,7 +3583,7 @@ msgid "XML Editor"
 msgstr "محرر القوائم"
 
 #: ../src/cong-app.c:1158
-#, fuzzy
+#, fuzzy, c-format
 msgid "Conglomerate could not load any xds files"
 msgstr "لم أتمكن من تحميل ملف glade"
 
@@ -3788,7 +3789,7 @@ msgid ""
 msgstr "إذا لم تحفظ ستُتجاهل التغييرات."
 
 #: ../src/cong-dialog.c:325
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr "إذا لم تحفظ ستُتجاهل التغييرات."
@@ -3809,7 +3810,7 @@ msgid "Changes from the past %li minutes will be discarded."
 msgstr "ستضيع التّغييرات المحدثة على المستند في الدّقيقة الأخيرة نهائيّاً."
 
 #: ../src/cong-dialog.c:388
-#, fuzzy
+#, fuzzy, c-format
 msgid "Changes from the past minute will be discarded."
 msgstr "ستضيع التّغييرات المحدثة على المستند في الدّقيقة الأخيرة نهائيّاً."
 
@@ -3867,7 +3868,7 @@ msgid "Text \"%s\""
 msgstr "ادرج  \"%s\""
 
 #: ../src/cong-document.c:968
-#, fuzzy
+#, fuzzy, c-format
 msgid "Character Data"
 msgstr "خريطة المحارف"
 
@@ -3882,7 +3883,7 @@ msgid "Entity \"%s\""
 msgstr "كيان"
 
 #: ../src/cong-document.c:977
-#, fuzzy
+#, fuzzy, c-format
 msgid "XML Processing Instruction"
 msgstr "خطأ معالجة"
 
@@ -3892,47 +3893,47 @@ msgid "Comment \"%s\""
 msgstr "_تعليقات:"
 
 #: ../src/cong-document.c:994
-#, fuzzy
+#, fuzzy, c-format
 msgid "Document Fragment"
 msgstr "إطار المستند"
 
 #: ../src/cong-document.c:997
-#, fuzzy
+#, fuzzy, c-format
 msgid "Notation"
 msgstr "الإلتفاف:"
 
 #: ../src/cong-document.c:1000
-#, fuzzy
+#, fuzzy, c-format
 msgid "HTML Document"
 msgstr "مستند نصي"
 
 #: ../src/cong-document.c:1006
-#, fuzzy
+#, fuzzy, c-format
 msgid "Element Declaration"
 msgstr "وصف الحدث"
 
 #: ../src/cong-document.c:1009
-#, fuzzy
+#, fuzzy, c-format
 msgid "Attribute Declaration"
 msgstr "تعريفات الصّفات"
 
 #: ../src/cong-document.c:1012
-#, fuzzy
+#, fuzzy, c-format
 msgid "Entity Declaration"
 msgstr "الإعلانات"
 
 #: ../src/cong-document.c:1015
-#, fuzzy
+#, fuzzy, c-format
 msgid "Namespace Declaration"
 msgstr "الإعلانات"
 
 #: ../src/cong-document.c:1018
-#, fuzzy
+#, fuzzy, c-format
 msgid "XInclude Start"
 msgstr "تضمّن خيوط المناقشة"
 
 #: ../src/cong-document.c:1021
-#, fuzzy
+#, fuzzy, c-format
 msgid "XInclude End"
 msgstr "تضمين"
 
@@ -4327,7 +4328,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:178
-#, fuzzy
+#, fuzzy, c-format
 msgid "The file is too big to fit on the device."
 msgstr "لا يوجد مساحة على القرص."
 
@@ -4352,6 +4353,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:222
+#, c-format
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
 
@@ -4723,7 +4725,7 @@ msgid "Conglomerate could not transform the document"
 msgstr "لا يمكن فتح مستند المساعدة"
 
 #: ../src/cong-menus.c:552
-#, fuzzy
+#, fuzzy, c-format
 msgid "There was a problem applying the stylesheet file"
 msgstr "حدث خطأ عند عرض محتويات المساعدة: %s."
 
@@ -5071,11 +5073,11 @@ msgstr "علامات المواقع"
 msgid "Raw XML"
 msgstr "XML"
 
-#: ../src/cong-primary-window.c:667 ../src/cong-primary-window.c:686
+#: ../src/cong-primary-window.c:662 ../src/cong-primary-window.c:681
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr ""
 
-#: ../src/cong-primary-window.c:815
+#: ../src/cong-primary-window.c:810
 #, fuzzy, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (مُرَاقَبَة) - %s"
@@ -5831,4 +5833,3 @@ msgstr "لصق الحاجز"
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr ""
-
