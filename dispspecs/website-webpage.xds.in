@@ -73,7 +73,7 @@
 		</element>
 		<element localName="abstract" type="structural" color="a0b0c0">
 			<_name>Abstract</_name>
-			<_short-desc>A sumamry.</_short-desc>
+			<_short-desc>A summary.</_short-desc>
 		</element>
 		<element localName="para" type = "structural">
 			<_name>Paragraph</_name>
