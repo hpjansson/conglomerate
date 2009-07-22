@@ -1,3 +1,9 @@
+2009-06-23  Andrew Clayton  <andrew@digital-domain.net>
+
+	* cong-location.c:
+	
+	Fixes crash
+
 2008-07-28  Geert Stappers  <stappers@stappers.nl>
 
 	* cong-editor-widget3.c (set_editor_node_selection):

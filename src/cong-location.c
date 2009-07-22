@@ -458,6 +458,8 @@ cong_location_del_next_char (CongDocument *doc,
 		char_after_next = g_utf8_find_next_char(next_char, NULL);
 		if (char_after_next) {
 			CONG_VALIDATE_UTF8(char_after_next);
+			new_text = g_realloc(new_text, strlen(new_text) + 
+						strlen(char_after_next) + 1); 
 			new_text = strcat (new_text, char_after_next);
 			CONG_VALIDATE_UTF8(new_text);
 		}
