@@ -1469,7 +1469,7 @@ action_callback_help (GtkAction *action,
 
 	if(error!=NULL)
 	{
-		g_warning(error->message);
+		g_warning("%s", error->message);
 		g_error_free(error);
 	}
 }

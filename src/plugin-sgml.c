@@ -166,7 +166,7 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 		return;		
 	}
 
-	g_message(standard_error);
+	g_message("%s", standard_error);
 
 	/* Attempt to parse the stdout into an xmlDocPtr: */
 	{
