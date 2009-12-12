@@ -71,4 +71,4 @@ figures/quote.png \
 figures/tip.png \
 figures/warning.png
 
-DOC_LINGUAS = C
+DOC_LINGUAS = C de
