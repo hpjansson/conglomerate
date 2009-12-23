@@ -1154,6 +1154,7 @@ cong_ui_popup_init (CongDocument *doc,
 		callback_data.doc = doc;
 		callback_data.node = node;
 		callback_data.parent_window = parent_window;
+		callback_data.primary_window = primary_window;
 
 		cong_plugin_manager_for_each_node_tool (cong_app_get_plugin_manager (cong_app_singleton()), 
 							add_node_tool_callback,
