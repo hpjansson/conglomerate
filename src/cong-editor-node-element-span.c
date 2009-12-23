@@ -127,16 +127,19 @@ cong_editor_node_element_span_create_areas (CongEditorNode *editor_node,
 
 	/* Create no areas; the children will add their areas via our LineManager, and this will create the wrapper areas */
 
-	/* Need to set up the line manager though: */
-	line_manager = cong_editor_line_manager_span_wrapper_new (cong_editor_node_get_widget (editor_node),
-								  editor_node,
-								  creation_info->line_manager,
-								  creation_info->creation_record,
-								  creation_info->line_iter);
+	if (!cong_editor_node_get_line_manager_for_children (editor_node)) {
+		/* Need to set up the line manager though: */
+		line_manager = cong_editor_line_manager_span_wrapper_new
+			(cong_editor_node_get_widget (editor_node),
+			 editor_node,
+			 creation_info->line_manager,
+			 creation_info->creation_record,
+			 creation_info->line_iter);
 
-	cong_editor_node_set_line_manager_for_children (editor_node,
-							line_manager);
-	g_object_unref (G_OBJECT (line_manager));
+		cong_editor_node_set_line_manager_for_children (editor_node,
+								line_manager);
+		g_object_unref (G_OBJECT (line_manager));
+	}
 }
 
 static gboolean
