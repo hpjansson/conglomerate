@@ -1,13 +1,15 @@
+# Slovenian translation of conglomerate.
 # Copyright (C) 2009 conglomerate's COPYRIGHT HOLDER
 # This file is distributed under the same license as the conglomerate package.
-# Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009.
+#
+# Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009 - 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=conglomerate&component=general\n"
 "POT-Creation-Date: 2009-09-17 06:03+0000\n"
-"PO-Revision-Date: 2010-01-06 12:50+0100\n"
+"PO-Revision-Date: 2010-02-18 11:37+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1283,7 +1285,6 @@ msgid "Admission"
 msgstr "Sprejem"
 
 #: ../dispspecs/readme.xds.in.h:2
-#, fuzzy
 msgid "Corp jargon"
 msgstr "Podjetniški žargon"
 
@@ -1597,7 +1598,7 @@ msgstr "Beseda ali fraza za katero avtor ali pripovedovalec določi izjavo odgov
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid "A word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source"
-msgstr "Beseda, fraza ali odlomek ki ne more biti z gotovostjo kopiran ker je le to nelegalno ali pa vira ni mogoče urejati"
+msgstr "Beseda, fraza ali odlomek, ki ne more biti z gotovostjo kopiran ker je le to nelegalno ali pa vira ni mogoče urejati"
 
 #: ../dispspecs/teixlite.xds.in.h:54
 msgid "Abbr"
@@ -1649,7 +1650,7 @@ msgstr "Kakršnakoli glava, na primer naslov odseka ali glave seznama ali slovar
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
-msgstr "Kakršna koli smer odra znotraj dramatskega besedila ali delčka"
+msgstr "Kakršnakoli opomba znotraj dramatskega besedila ali delčka"
 
 #: ../dispspecs/teixlite.xds.in.h:69
 msgid "Any prefatory matter (headers, title page, prefaces, dedications, etc.) found at the start of a document, before the main body"
@@ -1688,8 +1689,9 @@ msgid "Back Matter"
 msgstr "Gradivo ozadja"
 
 #: ../dispspecs/teixlite.xds.in.h:79
+#, fuzzy
 msgid "BiblFull"
-msgstr ""
+msgstr "BiblFull"
 
 #: ../dispspecs/teixlite.xds.in.h:80
 msgid "Bibliographic Citation (&lt;bibl&gt;)"
@@ -1989,7 +1991,7 @@ msgstr "Id. številka"
 
 #: ../dispspecs/teixlite.xds.in.h:160
 msgid "Ident"
-msgstr "Določ"
+msgstr "Določilo"
 
 #: ../dispspecs/teixlite.xds.in.h:161
 msgid "Identifies the language being described in the writing system declaration"
@@ -2049,7 +2051,7 @@ msgstr "Ključne besede"
 
 #: ../dispspecs/teixlite.xds.in.h:175
 msgid "Kw"
-msgstr "Kb"
+msgstr "kb"
 
 #: ../dispspecs/teixlite.xds.in.h:176
 #: ../dispspecs/xhtml1-strict.xds.in.h:44
@@ -2092,9 +2094,8 @@ msgid "Marks a location to be indexed for whatever purpose"
 msgstr "Označi mesto za indeksiranje za katerikoli namen"
 
 #: ../dispspecs/teixlite.xds.in.h:185
-#, fuzzy
 msgid "Marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made"
-msgstr "Označi besedo ali frazo, ki je grafično drugačna od obdajajočega besedila za razloge za katere ni narejena nobena trditev"
+msgstr "Oblikovno označi besedo ali reklo, ki je drugačno od preostalega besedila, za katerega ni določena nobena zahteva"
 
 #: ../dispspecs/teixlite.xds.in.h:186
 msgid "Marks paragraphs in prose"
@@ -2213,16 +2214,19 @@ msgid "Referencing String (&lt;rs&gt;)"
 msgstr "Referenčna nit (&lt;rn&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:219
+#, fuzzy
 msgid "Reg"
-msgstr ""
+msgstr "Reg"
 
 #: ../dispspecs/teixlite.xds.in.h:220
+#, fuzzy
 msgid "Rendition"
-msgstr ""
+msgstr "Rendition"
 
 #: ../dispspecs/teixlite.xds.in.h:221
+#, fuzzy
 msgid "Resp"
-msgstr ""
+msgstr "Resp"
 
 #: ../dispspecs/teixlite.xds.in.h:222
 msgid "Responsibility Statement (respStmt)"
@@ -2318,7 +2322,7 @@ msgstr "Uporaba oznake"
 
 #: ../dispspecs/teixlite.xds.in.h:247
 msgid "Tagging Declaration"
-msgstr "Izpoved označevanja"
+msgstr "Določilo označevanja"
 
 #: ../dispspecs/teixlite.xds.in.h:248
 msgid "Taxonomy"
@@ -2735,7 +2739,7 @@ msgstr "XSL slogovna predloga opisuje način pretvorbe ene vrste dokumenta v dru
 
 #: ../dispspecs/xsl.xds.in.h:3
 msgid "Template-matching Rule"
-msgstr "S predlogo ujemajoče pravilo"
+msgstr "S predlogo ujemajoče se pravilo"
 
 #: ../dispspecs/xsl.xds.in.h:4
 msgid "XSL stylesheet"
@@ -2760,7 +2764,7 @@ msgstr "Seznam map po meri kjer bo Conglomerate iskal datoteke specifikacij prik
 
 #: ../data/conglomerate.schemas.in.h:2
 msgid "A list of directories where Conglomerate should look for template xml files. These documents will be used by the new document assistant as types of documents which can be created by the user."
-msgstr "Seznam map, kamor naj Conglomerate gleda za predloge datotek xml. Te dokumente bodo uporabljali novi pomočniki dokumentov kot vrste dokumentov, ki jih lahko ustvari uporabnik."
+msgstr "Seznam map kamor naj Conglomerate gleda za predloge datotek xml. Te dokumente bodo uporabljali novi pomočniki dokumentov kot vrste dokumentov, ki jih lahko ustvari uporabnik."
 
 #: ../data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
@@ -2916,11 +2920,11 @@ msgstr "*"
 
 #: ../glade/cong-find-replace.glade.h:2
 msgid "Find Next"
-msgstr "Poišči naslednje"
+msgstr "Najdi naslednje"
 
 #: ../glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
-msgstr "Skladanje le _celih besed"
+msgstr "Upoštevaj le _cele besede"
 
 #: ../glade/cong-find-replace.glade.h:4
 #: ../src/cong-edit-find-and-replace.c:187
@@ -2940,7 +2944,7 @@ msgstr "Zamenjaj _z:"
 
 #: ../glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
-msgstr "Išči _nazaj"
+msgstr "Poišči _nazaj"
 
 #: ../glade/cong-find-replace.glade.h:8
 msgid "_Match case"
@@ -2948,11 +2952,11 @@ msgstr "_Skladanje velikosti črk"
 
 #: ../glade/cong-find-replace.glade.h:9
 msgid "_Search for: "
-msgstr "_Išči za:"
+msgstr "_Poišči za:"
 
 #: ../glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
-msgstr "_Oblij okoli"
+msgstr "_Prelomi besedilo"
 
 #: ../glade/cong-preferences.glade.h:1
 msgid "Conglomerate Preferences"
@@ -3006,7 +3010,7 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
-"To je stran držala. Slednjič boste lahko to stran uporabili za upravljanje podatkov preprostega sledenja različicam DocBook.\n"
+"To je stran držala. To stran bo mogoče uporabiti za upravljanje podatkov preprostega sledenja različicam DocBook.\n"
 "\n"
 "To je navedeno v Bugzilli kot hrošč št. 122538"
 
@@ -3129,15 +3133,15 @@ msgstr "Urejevalnik XML"
 #: ../src/cong-app.c:1158
 #, c-format
 msgid "Conglomerate could not load any xds files"
-msgstr "Conglomerate ne more naložiti nobenih datotek xds"
+msgstr "S programom Conglomerate ni mogoče naložiti nobenih datotek xds"
 
 #: ../src/cong-app.c:1160
 msgid "Conglomerate could not find any descriptions of document types."
-msgstr "Conglomerate ne more najti nobenih opisov vrst dokumentov."
+msgstr "S programom Conglomerate ni mogoče najti nobenih opisov vrst dokumentov."
 
 #: ../src/cong-app.c:1162
 msgid "If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it.  If you have changed the default setting for the display spec path, please double check that as well."
-msgstr "V primeru da vidite to napako, ste verjetno izgradili Conglomerate, vendar ga niste namestili. Poskusite ga namestiti. V primeru da ste spremenili privzeto nastavitev za pot specifikacij prikaza, preverite tudi to pot."
+msgstr "V primeru, da vidite to napako, ste verjetno izgradili Conglomerate, vendar ga niste namestili. Poskusite ga namestiti. V kolikor ste medtem spremenili privzete nastavitve poti specifikacij prikaza, preverite tudi to."
 
 #: ../src/cong-attribute-editor-cdata.c:206
 #: ../src/cong-attribute-editor-nmtoken.c:272
@@ -3277,7 +3281,7 @@ msgstr "Vrednost atributa mora biti žeton imena XML."
 
 #: ../src/cong-attribute-editor-nmtoken.c:237
 msgid "XML name tokens can only contain alphanumeric and/or ideographic characters and the punctuation marks _,-, ., and :. It can not contain whitespace characters."
-msgstr "Žetoni imen XML lahko vsebujejo alfanumerične in/ali ideografske znake ter znake _,-,. in :. Ne morejo vsebovati preslednih znakov."
+msgstr "Žetoni imen XML lahko vsebujejo alfanumerične in/ali ideografske znake ter znake _,-,. in :. Presledni znaki niso dovoljeni."
 
 #: ../src/cong-attribute-editor.c:249
 #: ../src/cong-attribute-wrapper.c:232
@@ -3298,17 +3302,17 @@ msgstr "Ali želite shraniti spremembe v dokumentu \"%s\" pred zapiranjem?"
 #: ../src/cong-dialog.c:321
 #, c-format
 msgid "If you close without saving, changes from the past %li hours will be discarded."
-msgstr "V primeru da zaprete brez shranjevanja bodo spremembe zadnjih %li ur zavržene."
+msgstr "V primeru, da zaprete okno brez shranjevanja, bodo spremembe zadnjih %li ur zavržene."
 
 #: ../src/cong-dialog.c:323
 #, c-format
 msgid "If you close without saving, changes from the past %li minutes will be discarded."
-msgstr "V primeru da zaprete brez shranjevanja bodo spremembe zadnjih %li minut zavržene."
+msgstr "V primeru, da zaprete okno brez shranjevanja, bodo spremembe zadnjih %li minut zavržene."
 
 #: ../src/cong-dialog.c:325
 #, c-format
 msgid "If you close without saving, changes from the past minute will be discarded."
-msgstr "V primeru da zaprete brez shranjevanja bodo spremembe zadnje minute zavržene."
+msgstr "V primeru, da zaprete okno brez shranjevanja, bodo spremembe zadnje minute zavržene."
 
 #: ../src/cong-dialog.c:379
 #, c-format
@@ -3342,11 +3346,11 @@ msgstr "<brez naslova>"
 
 #: ../src/cong-dispspec-registry.c:108
 msgid "Conglomerate could not read its registry of document types."
-msgstr "Conglomerate ne more brati svojega registra vrst dokumentov."
+msgstr "S programom Conglomerate ni mogoče prebrati vpisnika vrst dokumentov."
 
 #: ../src/cong-dispspec-registry.c:111
 msgid "Conglomerate attempted to look at all the files in the location."
-msgstr "Conglomerate je poskusil pogledati vse datoteke na tem mestu."
+msgstr "Program Conglomerate je poskusil pogledati vse datoteke na tem mestu."
 
 #: ../src/cong-dispspec-registry.c:333
 #: ../src/cong-file-new.c:343
@@ -3387,7 +3391,7 @@ msgstr "Podatki znaka"
 #: ../src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
-msgstr "Referenca do entitete \"%s\""
+msgstr "Referenca entitete \"%s\""
 
 #: ../src/cong-document.c:974
 #, c-format
@@ -3779,7 +3783,7 @@ msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Preverite če ste pravilno črkovali ime mesta. Zapomnite si, da je velikost črk pomembna (\"MojaMapa\" ni enako kot \"MOJAMAPA\" ali \"mojamapa\").\n"
+"(i) Preverite, če ste pravilno črkovali ime mesta. Zapomnite si, da je velikost črk pomembna (\"MojaMapa\" ni enako kot \"MOJAMAPA\" ali \"mojamapa\").\n"
 "(ii) Poskusite shraniti na drugo mesto."
 
 #. FIXME: need some thought about the messages for this
@@ -3883,13 +3887,13 @@ msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to another location."
 msgstr ""
-"(i) Preverite da ste pravilno črkovali mesto.\n"
-"(ii) Poskusite ponovno. V primeru da shranjevanje ponovno spodleti, je strežnik morda nedostopen; poskusite shraniti na drugo mesto."
+"(i) Preverite, da ste pravilno črkovali mesto.\n"
+"(ii) Poskusite znova. V primeru, da shranjevanje ponovno spodleti, je strežnik morda nedostopen; poskusite shraniti na drugo mesto."
 
 #: ../src/cong-error-file-save.c:330
 #: ../src/cong-error-file-save.c:339
 msgid "Try again. If it fails again, try saving to another location."
-msgstr "Poskusite ponovno. V primeru da shranjevanje ponovno spodleti poskusite shraniti na drugo mesto."
+msgstr "Poskusite znova. V primeru, da shranjevanje ponovno spodleti poskusite shraniti na drugo mesto."
 
 #. FIXME: need some thought about the messages for this
 #: ../src/cong-error-file-save.c:346
@@ -4017,11 +4021,11 @@ msgstr "Notranja struktura dokumenta se ne sklada z nobeno od vrst, ki jih pozna
 
 #: ../src/cong-file-open.c:73
 msgid "You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."
-msgstr "Conglomerate lahko prisilite v nalaganje dokumenta s klikom na gumb \"Prisili\" spodaj, toda rezultati morda ne bodo idealni."
+msgstr "Conglomerate lahko vsilite nalaganje dokumenta s klikom na gumb \"Vsili\" spodaj, toda rezultati morda ne bodo idealni."
 
 #: ../src/cong-file-open.c:74
 msgid "Force"
-msgstr "Prisili"
+msgstr "Vsili"
 
 #: ../src/cong-file-open.c:223
 msgid "Select an XML document"
@@ -4056,7 +4060,7 @@ msgstr "\"%s\" ni mogoče natisniti"
 
 #: ../src/cong-file-print.c:349
 msgid "None of Conglomerate's plugins know how to print files of that type."
-msgstr "Noben od vstavkov Conglomerate ne ve kako natisniti datoteke te vrste."
+msgstr "Ni mogoče najti vstavka za tiskanje datotek te vrste."
 
 #: ../src/cong-file-properties.c:200
 msgid "Yes"
@@ -4239,7 +4243,7 @@ msgstr "Nov sorodni element"
 #: ../src/cong-menus.c:1492
 #, fuzzy
 msgid "Remove span tag"
-msgstr "Odstranitev značk iz izbora"
+msgstr "<span weight=\"bold\">Oznaka:</span>"
 
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1495
@@ -4646,7 +4650,7 @@ msgstr "Slogovnih predlog DocBook ni mogoče najti"
 
 #: ../src/plugin-docbook.c:1108
 msgid "Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://docbook.sourceforge.net/projects/xsl/, are installed and are added to your XML catalog file (see http://www.xmlsoft.org/catalog.html for more information on catalogs)."
-msgstr "Prepričajte se da so DocBook XSL slogovne predloge Normana Walsha dostopne na http://docbook.sourceforge.net/projects/xsl/ nameščene in dodane v vašo kataloško datoteko XML (za več podrobnosti o katalogih si oglejte http://www.xmlsoft.org/catalog.html)"
+msgstr "Prepričajte se, da so DocBook XSL slogovne predloge Normana Walsha dostopne na http://docbook.sourceforge.net/projects/xsl/ nameščene in dodane v vašo kataloško datoteko XML (za več podrobnosti o katalogih si oglejte http://www.xmlsoft.org/catalog.html)"
 
 #: ../src/plugin-docbook.c:1144
 #, c-format
@@ -4814,7 +4818,7 @@ msgstr "Samodejno ustvarjena vrsta dokumenta osnovana na %s"
 #: ../src/plugin-dtd.c:94
 #, c-format
 msgid "This Conglomerate display specification was automatically generated from %s"
-msgstr "Ta specifikacija prikaza Conglomerate je bila samodejno ustvarjena iz %s"
+msgstr "Določilo prikaza Conglomerate so bila samodejno ustvarjena iz %s"
 
 #: ../src/plugin-dtd.c:215
 msgid "Convert DTD into a Conglomerate Display Specification"
@@ -4918,31 +4922,31 @@ msgstr "Prikaže skrčeno obliko skladnje sheme RELAX NG"
 
 #: ../src/plugin-save-dispspec.c:155
 msgid "Dump Display Spec"
-msgstr "Izpiši specifikacije prikaza"
+msgstr "Izpiši določil prikaza"
 
 #: ../src/plugin-save-dispspec.c:156
 #: ../src/plugin-save-dispspec.c:159
 #: ../src/plugin-save-dispspec.c:160
 msgid "Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"
-msgstr "Zapiše trenutno specifikacijo prikaza v xml datoteko specifikacije prikaza. To datoteko lahko uporabnik prilagodi po meri"
+msgstr "Zapiše trenutna določila prikaza v xml datoteko določil. To datoteko lahko uporabnik prilagodi po meri."
 
 #: ../src/plugin-save-dispspec.c:158
 msgid "_Dump Display Spec"
-msgstr "_Izpiši specifikacije prikaza"
+msgstr "_Izpiši določila prikaza"
 
 #: ../src/plugin-save-dispspec.c:166
 msgid "Edit Display Spec"
-msgstr "Uredi specifikacije prikaza"
+msgstr "Uredi določila prikaza"
 
 #: ../src/plugin-save-dispspec.c:167
 #: ../src/plugin-save-dispspec.c:170
 #: ../src/plugin-save-dispspec.c:171
 msgid "Opens the current display spec as a conglomerate document."
-msgstr "Odpre trenutno specifikacijo prikaza kot dokument conglomerate."
+msgstr "Odpre trenutna določila prikaza kot dokument conglomerate."
 
 #: ../src/plugin-save-dispspec.c:169
 msgid "_Edit Display Spec"
-msgstr "_Uredi specifikacije prikaza"
+msgstr "_Uredi določila prikaza"
 
 #: ../src/plugin-sgml.c:43
 #, c-format
@@ -5005,7 +5009,7 @@ msgstr "Potrdi dokument"
 #: ../src/plugin-validate.c:253
 #: ../src/plugin-validate.c:254
 msgid "Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"
-msgstr "Preveri, če je dokument \"veljaven\", torej da se sklada z nizom pravil odgovarjajoče sheme ali vrste dokumenta."
+msgstr "Preveri, če je dokument \"veljaven\" in da se sklada z nizom pravil odgovarjajoče sheme ali vrste dokumenta."
 
 #: ../src/plugin-validate.c:252
 msgid "_Validate Document"
@@ -5025,7 +5029,7 @@ msgstr "Program Conglomerate ni končal ustvarjanja spletišča"
 
 #: ../src/plugin-website.c:478
 msgid "One of the stages reported an error."
-msgstr "Eden od korakov je vrnil napako."
+msgstr "Pri enem izmed korakov je prišlo do napake."
 
 #: ../src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
@@ -5060,12 +5064,11 @@ msgstr "Element za predočitev pravil predlog v slogovni predlogi XSL"
 #: ../src/popup.c:490
 #, fuzzy, c-format
 msgid "Apply span tag: %s"
-msgstr "Uporabi oznako dosega: %s"
+msgstr "<span weight=\"bold\">Oznaka:</span>"
 
 #: ../src/popup.c:561
-#, fuzzy
 msgid "Remove Span Tag"
-msgstr "Odstranitev značk iz izbora"
+msgstr "Odstrani oznako span"
 
 #: ../src/popup.c:607
 msgid "Convert to a comment"
