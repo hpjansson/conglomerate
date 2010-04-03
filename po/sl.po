@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=conglomerate&component=general\n"
 "POT-Creation-Date: 2009-09-17 06:03+0000\n"
-"PO-Revision-Date: 2010-02-18 11:37+0100\n"
-"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"PO-Revision-Date: 2010-04-02 19:03+0100\n"
+"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -141,7 +141,7 @@ msgstr "Zapis"
 
 #: ../dispspecs/dispspec.xds.in.h:7
 msgid "GUI"
-msgstr "Grafični uporabniški vmesnik"
+msgstr "Grafični vmesnik"
 
 #: ../dispspecs/dispspec.xds.in.h:8
 msgid "Header Information"
@@ -222,9 +222,8 @@ msgid "A collection of books."
 msgstr "Zbirka knjig."
 
 #: ../dispspecs/docbook.xds.in.h:5
-#, fuzzy
 msgid "A high-level division of a book."
-msgstr "Deljenje knjige na visoki ravni."
+msgstr "Razdelek knjige visoke ravni."
 
 #: ../dispspecs/docbook.xds.in.h:6
 #: ../dispspecs/website-webpage.xds.in.h:3
@@ -1400,9 +1399,8 @@ msgid "A date in any format"
 msgstr "Datum v katerikoli obliki"
 
 #: ../dispspecs/teixlite.xds.in.h:6
-#, fuzzy
 msgid "A detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting"
-msgstr "Podroben opis ne-bibliografskih vidikov besedila, določi uporabljene jezike in podjezike, stanje v katerem je bilo proizvedeno, sodelujoče in njihovo nastavitev"
+msgstr "Podroben opis ne-bibliografskih vidikov besedila, posebno uporabljene jezike in podjezike, stanje v katerem je bilo besedilo proizvedeno, sodelujoče in njihovo nastavitev"
 
 #: ../dispspecs/teixlite.xds.in.h:7
 msgid "A fifth-level subdivision of the front, body, or back of a text"
@@ -1437,9 +1435,8 @@ msgid "A keyword in some formal language"
 msgstr "Ključna beseda v nekem formalnem jeziku"
 
 #: ../dispspecs/teixlite.xds.in.h:15
-#, fuzzy
 msgid "A letter, word or passage deleted, marked as deleted, or otherwise indicated as superfluous or spurious in the copy text by an author, scribe, annotator, or corrector"
-msgstr "Izbrisano pismo, beseda ali odlomek, označeno kot izbrisano ali drugače določeno kot odvečno ali napačno v kopiji besedila s strani avtorja, pisca, ??opomnika ali popravljalca"
+msgstr "Izbrisano pismo, beseda ali odlomek, označeno kot izbrisano ali drugače določeno kot odvečno ali napačno v kopiji besedila s strani avtorja, pisca, pripisovalca ali popravljalca"
 
 #: ../dispspecs/teixlite.xds.in.h:16
 msgid "A list of bibliographic citations of any kind"
@@ -1592,9 +1589,8 @@ msgstr "Beseda ali faza, ki pripada drugemu jeziku kot obkrožajoče besedilo"
 # Ne vem kako naj prevedem scare quotes
 # http://en.wikipedia.org/wiki/Scare_quotes
 #: ../dispspecs/teixlite.xds.in.h:52
-#, fuzzy
 msgid "A word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics"
-msgstr "Beseda ali fraza za katero avtor ali pripovedovalec določi izjavo odgovornosti, na primer uporabo ali poševnice"
+msgstr "Beseda ali fraza za katero avtor ali pripovedovalec določi izjavo odgovornosti, na primer uporabo dvojnih narekovajev ali poševnice"
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid "A word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source"
@@ -2069,9 +2065,8 @@ msgid "Language Usage"
 msgstr "Uporaba jezika"
 
 #: ../dispspecs/teixlite.xds.in.h:179
-#, fuzzy
 msgid "Letters, words, or phrases inserted in the text by an author, scribe, annotator, or corrector"
-msgstr "Črke, besede ali fraze vstavljene v besedilo s strani avtorja, pisatelja, opomnivalca ali popravljalca"
+msgstr "Črke, besede ali fraze vstavljene v besedilo s strani avtorja, pisatelja, pripisovalca ali popravljalca"
 
 #: ../dispspecs/teixlite.xds.in.h:180
 msgid "Line Break"
@@ -2535,7 +2530,7 @@ msgstr "E-pošta"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:1
 msgid "Abbreviated Form"
-msgstr "Skrajšan obrazec"
+msgstr "Skrajšana oblika"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:4
 msgid "Alternative Non-Scripted Content"
@@ -4875,7 +4870,7 @@ msgstr "Natisni XSL:FO"
 #: ../src/plugin-lists.c:77
 #, fuzzy
 msgid "List Member Element"
-msgstr "Razvrsti elemente članov"
+msgstr "Razmerje velikosti elementa"
 
 #: ../src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
@@ -5121,7 +5116,7 @@ msgstr "Prilepi za"
 
 #: ../src/tree.c:104
 #: ../src/tree.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Insert sibling: %s"
 msgstr "Vstavi sorodnika: %s"
 
