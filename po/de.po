@@ -4,15 +4,15 @@
 # Christian Neumair <chris@gnome-de.org>, 2003, 2004.
 # Geert Stappers <stappers@stappers.nl>, 2004.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2004, 2005.
-# Mario Blättermann <mariobl@gnome.org>, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=conglomerate&component=general\n"
-"POT-Creation-Date: 2009-04-16 18:22+0000\n"
-"PO-Revision-Date: 2009-12-12 10:27+0100\n"
+"POT-Creation-Date: 2009-12-12 09:30+0000\n"
+"PO-Revision-Date: 2010-04-10 13:49+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,6 @@ msgid "Test CNXML ds"
 msgstr ""
 
 #: ../dispspecs/cnxml.xds.in.h:3
-#| msgid "Cite"
 msgid "cite"
 msgstr "cite"
 
@@ -41,53 +40,43 @@ msgid "codeblock"
 msgstr "codeblock"
 
 #: ../dispspecs/cnxml.xds.in.h:6
-#| msgid "Underlined"
 msgid "codeline"
 msgstr "codeline"
 
 #: ../dispspecs/cnxml.xds.in.h:7
-#| msgid "_Contents"
 msgid "content"
 msgstr "content"
 
 #: ../dispspecs/cnxml.xds.in.h:8
-#| msgid "Emphasis"
 msgid "emphasis"
 msgstr "emphasis"
 
 #: ../dispspecs/cnxml.xds.in.h:9
-#| msgid "Quotation"
 msgid "equation"
 msgstr "equation"
 
 #: ../dispspecs/cnxml.xds.in.h:10
-#| msgid "Cite"
 msgid "item"
 msgstr "item"
 
 #: ../dispspecs/cnxml.xds.in.h:11
-#| msgid "Link"
 msgid "link"
 msgstr "link"
 
 #: ../dispspecs/cnxml.xds.in.h:12
-#| msgid "Polish"
 msgid "list"
 msgstr "list"
 
 #: ../dispspecs/cnxml.xds.in.h:13
-#| msgid "Metadata"
 msgid "metadata"
 msgstr "metadata"
 
 #: ../dispspecs/cnxml.xds.in.h:14
-#| msgid "Code"
 msgid "module"
 msgstr "module"
 
 # ~ Kennung
 #: ../dispspecs/cnxml.xds.in.h:15
-#| msgid "Note"
 msgid "note"
 msgstr "note"
 
@@ -104,7 +93,6 @@ msgid "rule"
 msgstr "rule"
 
 #: ../dispspecs/cnxml.xds.in.h:19
-#| msgid "Section"
 msgid "section"
 msgstr "section"
 
@@ -113,7 +101,6 @@ msgid "statement"
 msgstr "statement"
 
 #: ../dispspecs/cnxml.xds.in.h:21
-#| msgid "Term"
 msgid "term"
 msgstr "term"
 
@@ -1047,11 +1034,6 @@ msgid "Table row"
 msgstr "Tabellenzeile"
 
 #: ../dispspecs/forrest-document.xds.in.h:43
-#| msgid ""
-#| "This DTD was developed to create a simple yet powerful document type for "
-#| "software documentation for use with the Apache projects. It is an XML-"
-#| "compliant DTD and it's maintained by the Apache XML project. See http://"
-#| "xml.apache.org/forrest ."
 msgid ""
 "This DTD was developed to create a simple yet powerful document type for "
 "software documentation for use with the Apache projects. It is an XML-"
@@ -1229,7 +1211,6 @@ msgid "Optimistic"
 msgstr "Statistik"
 
 #: ../dispspecs/readme.xds.in.h:14 ../dispspecs/teixlite.xds.in.h:231
-#| msgid "Figure"
 msgid "Signature"
 msgstr "Signatur"
 
@@ -1238,6 +1219,8 @@ msgid ""
 "This is a document type associated with the \"readme\" file distributed with "
 "the initial prototype of Conglomerate."
 msgstr ""
+"Dies ist ein Dokumenttyp, welcher der »readme«-Datei zugeordnet ist, die mit "
+"dem ursprünglichen Prototypen von Conglomerate geliefert wurde."
 
 #: ../dispspecs/relax-ng.xds.in.h:1 ../src/cong-node-properties-dialog.c:879
 msgid "Choice"
@@ -1250,18 +1233,15 @@ msgid "Define"
 msgstr "Definitionsausdruck"
 
 #: ../dispspecs/relax-ng.xds.in.h:3
-#| msgid "Entry"
 msgid "Empty"
 msgstr "Leer"
 
 #: ../dispspecs/relax-ng.xds.in.h:4 ../dispspecs/teixlite.xds.in.h:149
-#| msgid "Table Group"
 msgid "Group"
 msgstr "Gruppe"
 
 # CHECK
 #: ../dispspecs/relax-ng.xds.in.h:5
-#, fuzzy
 #| msgid "One or more"
 msgid "OneOrMore"
 msgstr "Eines oder mehr"
@@ -1272,7 +1252,7 @@ msgstr "Optional"
 
 #: ../dispspecs/relax-ng.xds.in.h:7
 msgid "RELAX NG"
-msgstr ""
+msgstr "RELAX NG"
 
 #: ../dispspecs/relax-ng.xds.in.h:8
 msgid "RELAX NG Grammar"
@@ -1285,7 +1265,6 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/relax-ng.xds.in.h:11
-#| msgid "Part"
 msgid "Start"
 msgstr "Start"
 
@@ -1299,12 +1278,10 @@ msgid "Value"
 msgstr "Wert"
 
 #: ../dispspecs/relax-ng.xds.in.h:14
-#| msgid "Raw Attributes"
 msgid "XML Attribute"
 msgstr "XML-Attribut"
 
 #: ../dispspecs/relax-ng.xds.in.h:16
-#, fuzzy
 #| msgid "Zero or more"
 msgid "ZeroOrMore"
 msgstr "Null oder mehr"
@@ -1314,6 +1291,8 @@ msgid ""
 "A bibliographic description of the copy text(s) from which an electronic text "
 "was derived or generated"
 msgstr ""
+"Eine bibliografische Beschreibung des/der kopierten Text(e), aus welchen der "
+"elekronische Text abgeleitet oder erstellt wurde."
 
 #: ../dispspecs/teixlite.xds.in.h:2
 msgid ""
@@ -1331,6 +1310,8 @@ msgstr ""
 #: ../dispspecs/teixlite.xds.in.h:4
 msgid "A closing title or footer appearing at the end of a division of a text"
 msgstr ""
+"Ein schließender Titel oder eine Fußzeile, welche am Ende der Unterteilung "
+"eines Texts angezeigt wird"
 
 #: ../dispspecs/teixlite.xds.in.h:5
 msgid "A date in any format"
@@ -1382,7 +1363,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:14
 msgid "A keyword in some formal language"
-msgstr ""
+msgstr "Ein Schlüsselwort in einer formellen Sprache"
 
 #: ../dispspecs/teixlite.xds.in.h:15
 msgid ""
@@ -1393,11 +1374,13 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:16
 msgid "A list of bibliographic citations of any kind"
-msgstr ""
+msgstr "Eine Liste bibliografischer Zitate jeglicher Art"
 
 #: ../dispspecs/teixlite.xds.in.h:17
 msgid "A list of keywords or phrases identifying the topic or nature of a text"
 msgstr ""
+"Eine Liste aus Schlüsselwörtern oder Phrasen, welche das Thema oder die Art "
+"eines Textes angeben"
 
 #: ../dispspecs/teixlite.xds.in.h:18
 msgid ""
@@ -1419,7 +1402,7 @@ msgstr "Eine Zahl beliebiger Form"
 
 #: ../dispspecs/teixlite.xds.in.h:22
 msgid "A phrase defining a time of day in any format"
-msgstr ""
+msgstr "Eine Phrase für die Angabe des Tages in einem beliebigen Format"
 
 #: ../dispspecs/teixlite.xds.in.h:23
 msgid "A phrase describing the nature of a person's intellectual responsibility"
@@ -1430,23 +1413,31 @@ msgid ""
 "A phrase or word used to provide a gloss or definition for some other word or "
 "phrase"
 msgstr ""
+"Eine Phrase oder ein Wort, welches eine Erklärung oder Definition für andere "
+"Wörter oder Phrasen bereitstellt."
 
 #: ../dispspecs/teixlite.xds.in.h:25
 msgid ""
 "A pointer to another location in the current document in terms of one or more "
 "identifiable elements"
 msgstr ""
+"Ein Verweis auf einen anderen Ort im aktuellen Dokument, angegeben als eines "
+"oder mehrere identifizierbare Elemente"
 
 #: ../dispspecs/teixlite.xds.in.h:26
 msgid ""
 "A pointer to another location in the current document or an external document"
 msgstr ""
+"Ein Verweis auf einen anderen Ort im aktuellen Dokument oder einem externen "
+"Dokument"
 
 #: ../dispspecs/teixlite.xds.in.h:27
 msgid ""
 "A postal or other address, for example of a publisher, an organization, or an "
 "individual"
 msgstr ""
+"Eine Post-oder andere Adresse, beispielsweise eines Herausgebers, einer "
+"Organisation oder einer Einzelperson"
 
 #: ../dispspecs/teixlite.xds.in.h:28
 msgid "A proper noun or noun phrase"
@@ -1490,6 +1481,9 @@ msgid ""
 "A reference to another location in the current document, in terms of one or "
 "more identifiable elements, possibly modified by additional text or comment"
 msgstr ""
+"Eine Referenz zu einem anderen Ort im aktuellen Dokument, angegeben als eines "
+"oder mehrere identifizierbare Elemente, möglicherweise durch zusätzlichen "
+"Text oder Kommentar erweitert."
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid ""
@@ -1497,6 +1491,9 @@ msgid ""
 "document, using an extended pointer notation, possibly modified by additional "
 "text or comment"
 msgstr ""
+"Eine Referenz zu einem anderen Ort im aktuellen Dokument oder einem externen "
+"Dokument, mit einer erweiterten Verweisnotierung, möglicherweise durch "
+"zusätzlichen Text oder Kommentar erweitert."
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid ""
@@ -1601,12 +1598,10 @@ msgid "Abbr"
 msgstr "Abbr"
 
 #: ../dispspecs/teixlite.xds.in.h:55
-#| msgid "Address"
 msgid "Add"
 msgstr "Hinzufügen"
 
 #: ../dispspecs/teixlite.xds.in.h:57
-#| msgid "Address"
 msgid "Address Line"
 msgstr "Adresszeile"
 
@@ -1644,7 +1639,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:65
 msgid "Anonymous Block (&lt;ab&gt;)"
-msgstr ""
+msgstr "Anonymer Block (&lt;ab&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:66
 msgid ""
@@ -1683,7 +1678,6 @@ msgid "Arbitrary Segment (&lt;seg&gt;)"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:73
-#| msgid "Document"
 msgid "Argument"
 msgstr "Argument"
 
@@ -1712,10 +1706,9 @@ msgid "BiblFull"
 msgstr "BiblFull"
 
 #: ../dispspecs/teixlite.xds.in.h:80
-#, fuzzy
 #| msgid "Bibliographic Information"
 msgid "Bibliographic Citation (&lt;bibl&gt;)"
-msgstr "Bibliographische Information"
+msgstr "Bibliografisches Zitat (&lt;bibl&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:81
 #, fuzzy
@@ -1732,17 +1725,14 @@ msgid "Byline"
 msgstr "Byline"
 
 #: ../dispspecs/teixlite.xds.in.h:84
-#| msgid "Chapter"
 msgid "Category"
 msgstr "Kategorie"
 
 #: ../dispspecs/teixlite.xds.in.h:85
-#| msgid "Short Description"
 msgid "Category Description"
 msgstr "Kategoriebeschreibung"
 
 #: ../dispspecs/teixlite.xds.in.h:86
-#| msgid "Unicode Character Reference"
 msgid "Category Reference"
 msgstr "Kategoriereferenz"
 
@@ -1751,7 +1741,6 @@ msgid "Cell"
 msgstr "Cell"
 
 #: ../dispspecs/teixlite.xds.in.h:88
-#| msgid "Chapter"
 msgid "Change"
 msgstr "Ändern"
 
@@ -1799,7 +1788,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:98
 msgid "Contains any appendixes, etc. following the main part of a text"
-msgstr ""
+msgstr "Enthält irgendwelche Anhänge, folgt dem Hauptteil des Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:99
 msgid ""
@@ -1810,7 +1799,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:100
 msgid "Contains text displayed in tabular form, in rows and columns"
-msgstr ""
+msgstr "Enthält in Tabellenform angezeigten Text, in Zeilen und Spalten"
 
 #: ../dispspecs/teixlite.xds.in.h:101
 #, fuzzy
@@ -1819,7 +1808,6 @@ msgid "Correct Form"
 msgstr "Korrektur"
 
 #: ../dispspecs/teixlite.xds.in.h:102
-#| msgid "Caption"
 msgid "Creation"
 msgstr "Erstellung"
 
@@ -1912,17 +1900,14 @@ msgid "DivGen"
 msgstr "DivGen"
 
 #: ../dispspecs/teixlite.xds.in.h:122
-#| msgid "Document body"
 msgid "Document Author"
 msgstr "Autor des Dokuments"
 
 #: ../dispspecs/teixlite.xds.in.h:123
-#| msgid "Document Type"
 msgid "Document Date"
 msgstr "Datum des Dokuments"
 
 #: ../dispspecs/teixlite.xds.in.h:124
-#| msgid "Document body"
 msgid "Document Edition"
 msgstr "Herausgabe des Dokuments"
 
@@ -1933,7 +1918,6 @@ msgid "Document Imprint"
 msgstr "Dokumentenfragment"
 
 #: ../dispspecs/teixlite.xds.in.h:126
-#| msgid "Document Type"
 msgid "Document Title"
 msgstr "Dokumententitel"
 
@@ -1950,12 +1934,10 @@ msgid "Edition Statement"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:131
-#| msgid "Entity Declaration"
 msgid "Editorial Declaration"
 msgstr "Deklaration des Herausgebers"
 
 #: ../dispspecs/teixlite.xds.in.h:133
-#| msgid "Description"
 msgid "Encoding Description"
 msgstr "Beschreibung der Kodierung"
 
@@ -1966,29 +1948,26 @@ msgid "Epigraph"
 msgstr "Quellverzeichnis"
 
 #: ../dispspecs/teixlite.xds.in.h:135
-#| msgid "Sample"
 msgid "Example"
 msgstr "Beispiel"
 
 #: ../dispspecs/teixlite.xds.in.h:136
 msgid "Extended Pointer (xptr)"
-msgstr ""
+msgstr "Erweiterter Verweis (xptr)"
 
 #: ../dispspecs/teixlite.xds.in.h:137
 msgid "Extended Reference (&lt;xref&gt;)"
-msgstr ""
+msgstr "Erweiterte Referenz (&lt;xref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:140
-#| msgid "Description"
 msgid "Figure Description"
 msgstr "Bildbeschreibung"
 
 #: ../dispspecs/teixlite.xds.in.h:141
-#| msgid "(No description available)"
 msgid "File Description (fileDesc)"
 msgstr "Dateibeschreibung (fileDesc)"
 
@@ -1999,7 +1978,6 @@ msgid "Foreign"
 msgstr "Erzwingen"
 
 #: ../dispspecs/teixlite.xds.in.h:143
-#| msgid "Format"
 msgid "Formula"
 msgstr "Formel"
 
@@ -2098,7 +2076,6 @@ msgid "Imprint"
 msgstr "Wichtig"
 
 #: ../dispspecs/teixlite.xds.in.h:163
-#| msgid "Index Term"
 msgid "Index"
 msgstr "Index"
 
@@ -2120,7 +2097,6 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:167
-#| msgid "Meta-information about a Reference Page"
 msgid "Information about the creation of a text"
 msgstr "Information über die Erstellung des Textes"
 
@@ -2139,7 +2115,6 @@ msgid "Information about the usage of a specific element within a &lt;text&gt;"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:171
-#| msgid "Introduction"
 msgid "Interpretation"
 msgstr "Interpretation"
 
@@ -2150,12 +2125,10 @@ msgid "Interpretation Group"
 msgstr "Optionsgruppe"
 
 #: ../dispspecs/teixlite.xds.in.h:173
-#| msgid "List Item"
 msgid "Item"
 msgstr "Listenpunkt"
 
 #: ../dispspecs/teixlite.xds.in.h:174
-#| msgid "Keyboard"
 msgid "Keywords"
 msgstr "Schlüsselwörter"
 
@@ -2185,7 +2158,6 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:180
-#| msgid "Line break"
 msgid "Line Break"
 msgstr "Zeilenumbruch"
 
@@ -2196,7 +2168,6 @@ msgid "Line Group"
 msgstr "Optionsgruppe"
 
 #: ../dispspecs/teixlite.xds.in.h:182
-#| msgid "List Item"
 msgid "List"
 msgstr "Liste"
 
@@ -2297,7 +2268,6 @@ msgid "Original Form"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:205
-#| msgid "Paste Before"
 msgid "Page Break"
 msgstr "Seitenumbruch"
 
@@ -2312,12 +2282,10 @@ msgid "Principal Researcher"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:209
-#| msgid "Description"
 msgid "Profile Description"
 msgstr "Profilbeschreibung"
 
 #: ../dispspecs/teixlite.xds.in.h:210
-#| msgid "Short Description"
 msgid "Project Description"
 msgstr "Projektbeschreibung"
 
@@ -2328,7 +2296,6 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:212
-#| msgid "Date of Publication"
 msgid "Publication Place"
 msgstr "Ort der Veröffentlichung"
 
@@ -2347,13 +2314,12 @@ msgid "Ref"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:217
-#| msgid "Element Declaration"
 msgid "References Declaration"
 msgstr "Deklaration der Referenzen"
 
 #: ../dispspecs/teixlite.xds.in.h:218
 msgid "Referencing String (&lt;rs&gt;)"
-msgstr ""
+msgstr "Referenzierende Zeichenkette (&lt;rs&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:219
 msgid "Reg"
@@ -2374,7 +2340,6 @@ msgid "Responsibility Statement (respStmt)"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:223
-#| msgid "Description"
 msgid "Revision Description"
 msgstr "Beschreibung der Revision"
 
@@ -2420,7 +2385,6 @@ msgid "So Called"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:233
-#| msgid "Short Description"
 msgid "Source Description"
 msgstr "Quellenbeschreibung"
 
@@ -2483,7 +2447,6 @@ msgid "Tag Usage"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:247
-#| msgid "Entity Declaration"
 msgid "Tagging Declaration"
 msgstr "Deklaration der Schlagwörter"
 
@@ -2666,12 +2629,10 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:283
-#| msgid "Title"
 msgid "Time"
 msgstr "Zeit"
 
 #: ../dispspecs/teixlite.xds.in.h:285
-#| msgid "Title"
 msgid "Title Page"
 msgstr "Titelseite"
 
@@ -2702,7 +2663,6 @@ msgid "Verse Line (&lt;l&gt;)"
 msgstr ""
 
 #: ../dispspecs/website-layout.xds.in.h:1
-#| msgid "Additional metadata"
 msgid "Additional Content"
 msgstr "Zusätzlicher Inhalt"
 
@@ -2711,7 +2671,6 @@ msgid "Configuration Data"
 msgstr "Konfigurationsdaten"
 
 #: ../dispspecs/website-layout.xds.in.h:3
-#| msgid "_Contents"
 msgid "Content"
 msgstr "Inhalt"
 
@@ -2728,12 +2687,10 @@ msgid "Holder"
 msgstr "Kopfzeilen"
 
 #: ../dispspecs/website-layout.xds.in.h:7 ../dispspecs/xsl.xds.in.h:2
-#| msgid "Style"
 msgid "Stylesheet"
 msgstr "Stilvorlage"
 
 #: ../dispspecs/website-layout.xds.in.h:8
-#| msgid "Table Footer"
 msgid "Table of Contents"
 msgstr "Inhaltsverzeichnis"
 
@@ -2752,12 +2709,10 @@ msgid "Web Page"
 msgstr "Webseite"
 
 #: ../dispspecs/website-webpage.xds.in.h:100
-#| msgid "_Homepage"
 msgid "Webpage"
 msgstr "Webseite"
 
 #: ../dispspecs/website-webpage.xds.in.h:102
-#| msgid "Details"
 msgid "email"
 msgstr "E-Mail"
 
@@ -3067,7 +3022,6 @@ msgid "Modified"
 msgstr "Geändert"
 
 #: ../glade/cong-file-properties.glade.h:11
-#| msgid "Name of an XML element"
 msgid "Number of elements:"
 msgstr "Anzahl der Elemente"
 
@@ -3117,17 +3071,14 @@ msgid "label_elements"
 msgstr "label_elements"
 
 #: ../glade/cong-file-properties.glade.h:25
-#| msgid "Location"
 msgid "label_location"
 msgstr "label_location"
 
 #: ../glade/cong-file-properties.glade.h:26
-#| msgid "Modified"
 msgid "label_modified"
 msgstr "label_modified"
 
 #: ../glade/cong-file-properties.glade.h:27
-#| msgid "Filename"
 msgid "label_name"
 msgstr "label_name"
 
@@ -3148,7 +3099,6 @@ msgid "label_xml_encoding"
 msgstr "label_xml_encoding"
 
 #: ../glade/cong-file-properties.glade.h:32
-#| msgid "Standalone"
 msgid "label_xml_standalone"
 msgstr "label_xml_standalone"
 
@@ -3763,7 +3713,6 @@ msgid "Find"
 msgstr "Suchen"
 
 #: ../src/cong-editor-node-text.c:887
-#| msgid "Select %s"
 msgid "Select line"
 msgstr "Zeile auswählen"
 
@@ -4511,15 +4460,15 @@ msgstr "Soll sie durch diejenige ersetzt werden, die Sie gerade speichern?"
 msgid "Merge tags"
 msgstr "Tags zusammenführen"
 
-#: ../src/cong-location.c:467
+#: ../src/cong-location.c:469
 msgid "Delete character"
 msgstr "Zeichen löschen"
 
-#: ../src/cong-location.c:1061
+#: ../src/cong-location.c:1063
 msgid "Calculating previous page"
 msgstr "Vorherige Seite wird berechnet"
 
-#: ../src/cong-location.c:1084
+#: ../src/cong-location.c:1086
 msgid "Calculating next page"
 msgstr "Nächste Seite wird berechnet"
 
@@ -4848,14 +4797,12 @@ msgstr "Stellt einen Eigenschaftsdialog für das <%s>-Element bereit"
 
 #: ../src/cong-plugin.c:1091
 #, c-format
-#| msgid "<%s> property dialog"
 msgid "<%s> property page"
 msgstr "<%s>-Eigenschaftsdialog"
 
 #. Generate a user-visible description for this plugin
 #: ../src/cong-plugin.c:1095
 #, c-format
-#| msgid "Provides a Properties dialog for the <%s> element"
 msgid "Provides a Properties page for the <%s> element"
 msgstr "Stellt einen Eigenschaftsdialog für das <%s>-Element bereit"
 
