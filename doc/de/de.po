@@ -1,11 +1,11 @@
 # German translation of the Conglomerate manual.
-# Mario Blättermann <mariobl@gnome.org>, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate docs\n"
-"POT-Creation-Date: 2009-12-12 10:32+0100\n"
-"PO-Revision-Date: 2009-12-12 11:04+0100\n"
+"POT-Creation-Date: 2010-03-12 20:06+0000\n"
+"PO-Revision-Date: 2010-07-02 23:21+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,14 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:505(None)
+#: C/conglomerate.xml:505(None)
 msgid ""
 "@@image: 'figures/cong_start_window.png'; md5=93a8ff7594ce5170b21b9c33a52b9aad"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:589(None) conglomerate.xml:1284(None)
+#: C/conglomerate.xml:589(None) C/conglomerate.xml:1284(None)
 msgid ""
 "@@image: 'figures/cong_editor_window.png'; "
 "md5=620dd87aad04f7c3739008f23ae1d3f4"
@@ -31,7 +31,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:608(None)
+#: C/conglomerate.xml:608(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_titlebar.png'; "
 "md5=185bab93418e51a9f138aba9d195d4b5"
@@ -39,7 +39,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:625(None)
+#: C/conglomerate.xml:625(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_menubar.png'; "
 "md5=f239cb84ee9ef7cee26583db1d812745"
@@ -47,7 +47,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:642(None)
+#: C/conglomerate.xml:642(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_toolbar.png'; "
 "md5=44333e3e2aad87a74cba75089aea8ec6"
@@ -55,7 +55,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:657(None)
+#: C/conglomerate.xml:657(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_doc_area.png'; "
 "md5=8f32feb281deafbba932f9b928b00021"
@@ -63,7 +63,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:674(None)
+#: C/conglomerate.xml:674(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_statusbar.png'; "
 "md5=041633d6c3f52676972d123b313b8da5"
@@ -71,7 +71,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:948(None)
+#: C/conglomerate.xml:948(None)
 msgid ""
 "@@image: 'figures/cong_editor_outlineview_popup_menu.png'; "
 "md5=cc02078f5ea283a3ccafe0202023b494"
@@ -79,7 +79,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1021(None)
+#: C/conglomerate.xml:1021(None)
 msgid ""
 "@@image: 'figures/cong_editor_outlineview_overview.png'; "
 "md5=dfaede4160542333ece572999e35f65b"
@@ -87,7 +87,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1039(None)
+#: C/conglomerate.xml:1039(None)
 msgid ""
 "@@image: 'figures/cong_editor_outlineview_raw.png'; "
 "md5=1dcf596561333d270c24c8c76de5ea4f"
@@ -95,7 +95,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1068(None)
+#: C/conglomerate.xml:1068(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_doc_edit.png'; "
 "md5=67922048751e4c8864f6a1e74ae960fe"
@@ -103,7 +103,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1083(None)
+#: C/conglomerate.xml:1083(None)
 msgid ""
 "@@image: 'figures/cong_editor_window_doc_edit_collapse.png'; "
 "md5=4ffd250889a0dfdfbc1289dd5cb3c3a0"
@@ -111,7 +111,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1254(None)
+#: C/conglomerate.xml:1254(None)
 msgid ""
 "@@image: 'figures/cong_create_new_file_wiz1.png'; "
 "md5=950904d27b441f9a6fa48b051196bc9e"
@@ -119,7 +119,7 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1266(None)
+#: C/conglomerate.xml:1266(None)
 msgid ""
 "@@image: 'figures/cong_create_new_file_wiz2.png'; "
 "md5=ff886ef90828475cd58928f1a380a5f0"
@@ -127,32 +127,32 @@ msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1306(None)
+#: C/conglomerate.xml:1306(None)
 msgid ""
 "@@image: 'figures/cong_open_dialog.png'; md5=af23dc4f1e8d4b90340d956103dd6a4e"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: conglomerate.xml:1353(None)
+#: C/conglomerate.xml:1353(None)
 msgid ""
 "@@image: 'figures/cong_save_as_dialog.png'; "
 "md5=8a8a0c9d3813205388a56058657936b6"
 msgstr ""
 
-#: conglomerate.xml:54(title)
+#: C/conglomerate.xml:54(title)
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-Editor"
 
-#: conglomerate.xml:56(title)
+#: C/conglomerate.xml:56(title)
 msgid "Conglomerate XML Editor Manual V0.0.1"
 msgstr "Conglomerate XML-Editor-Handbuch V0.0.1"
 
-#: conglomerate.xml:58(para)
+#: C/conglomerate.xml:58(para)
 msgid "User manual for the conglomerate XML editor."
 msgstr "Benutzerhandbuch für den Conglomerate XML-Editor."
 
-#: conglomerate.xml:63(simpara)
+#: C/conglomerate.xml:63(simpara)
 msgid ""
 "This is the User Manual V0.0.1 to the <application>Conglomerate XML Editor</"
 "application> V0.7.10, a free software that provides a user-friendly tool for "
@@ -163,67 +163,67 @@ msgid ""
 "(<acronym>GUI</acronym>)."
 msgstr ""
 
-#: conglomerate.xml:71(firstname) conglomerate.xml:83(firstname)
+#: C/conglomerate.xml:71(firstname) C/conglomerate.xml:83(firstname)
 msgid "Sean"
 msgstr "Sean"
 
-#: conglomerate.xml:72(surname) conglomerate.xml:84(surname)
+#: C/conglomerate.xml:72(surname) C/conglomerate.xml:84(surname)
 msgid "Wheller"
 msgstr "Wheller"
 
-#: conglomerate.xml:75(firstname)
+#: C/conglomerate.xml:75(firstname)
 msgid "Geert"
 msgstr "Geert"
 
-#: conglomerate.xml:76(surname)
+#: C/conglomerate.xml:76(surname)
 msgid "Stappers"
 msgstr "Stappers"
 
-#: conglomerate.xml:78(orgname)
+#: C/conglomerate.xml:78(orgname)
 msgid "GNOME Documentation Project"
 msgstr "GNOME-Dokumentationsprojekt"
 
-#: conglomerate.xml:79(email)
+#: C/conglomerate.xml:79(email)
 msgid "stappers@stappers.nl"
 msgstr "stappers@stappers.nl"
 
-#: conglomerate.xml:87(year)
+#: C/conglomerate.xml:87(year)
 msgid "1999-2004"
 msgstr "1999-2004"
 
-#: conglomerate.xml:88(holder)
+#: C/conglomerate.xml:88(holder)
 msgid "The Conglomerate Team"
 msgstr "Das Conglomerate-Team"
 
-#: conglomerate.xml:92(revnumber)
+#: C/conglomerate.xml:92(revnumber)
 msgid "0.1"
 msgstr "0.1"
 
-#: conglomerate.xml:93(date)
+#: C/conglomerate.xml:93(date)
 msgid "2003-12-30"
 msgstr "30. Dezember 2003"
 
-#: conglomerate.xml:94(authorinitials)
+#: C/conglomerate.xml:94(authorinitials)
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
-#: conglomerate.xml:96(remark)
+#: C/conglomerate.xml:96(remark)
 msgid "Manual V0.0.1 correlates to software V0.7.10"
 msgstr "Die Handbuchversion 0.0.1 bezieht sich auf die Programmversion 0.7.10"
 
-#: conglomerate.xml:101(application)
+#: C/conglomerate.xml:101(application)
 msgid "Conglomerate"
 msgstr "Conglomerate"
 
-#: conglomerate.xml:101(remark)
+#: C/conglomerate.xml:101(remark)
 msgid "This manual describes version V0.7.10 of <placeholder-1/>."
 msgstr "Dieses Handbuch beschreibt Version V0.7.10 von <placeholder-1/>."
 
-#: conglomerate.xml:104(title)
+#: C/conglomerate.xml:104(title)
 msgid "Documentation License"
 msgstr "Dokumentationslizenz"
 
-#: conglomerate.xml:105(para)
+#: C/conglomerate.xml:105(para)
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document under "
 "the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
@@ -233,11 +233,11 @@ msgid ""
 "ulink>."
 msgstr ""
 
-#: conglomerate.xml:113(title)
+#: C/conglomerate.xml:113(title)
 msgid "Source License"
 msgstr "Lizenz des Quellcodes"
 
-#: conglomerate.xml:114(para)
+#: C/conglomerate.xml:114(para)
 msgid ""
 "This library is <ulink url=\"http://www.gnu.org/philosophy/free-sw.html"
 "\">Free Software</ulink>; you can redistribute it and/or modify it under the "
@@ -246,7 +246,7 @@ msgid ""
 "any later version."
 msgstr ""
 
-#: conglomerate.xml:118(para)
+#: C/conglomerate.xml:118(para)
 msgid ""
 "This library is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -255,83 +255,97 @@ msgid ""
 "org/copyleft/gpl.html\">link</ulink>."
 msgstr ""
 
-#: conglomerate.xml:123(para)
+#: C/conglomerate.xml:123(para)
 msgid ""
 "You should have received a copy of the GNU Lesser General Public License "
 "along with this library; if not, write to the Free Software Foundation, Inc., "
 "59 Temple Place, Suite 330, Boston, MA 02111-1307 USA."
 msgstr ""
 
-#: conglomerate.xml:129(title)
+#: C/conglomerate.xml:129(title)
 msgid "Preface"
-msgstr ""
+msgstr "Vorbetrachtung"
 
-#: conglomerate.xml:131(title)
+#: C/conglomerate.xml:131(title)
 msgid "About the Conglomerate Project"
 msgstr "Info zum Conglomerate-Projekt"
 
-#: conglomerate.xml:132(para) conglomerate.xml:1374(para)
-#: conglomerate.xml:1378(para) conglomerate.xml:1382(para)
-#: conglomerate.xml:1389(para) conglomerate.xml:1401(para)
-#: conglomerate.xml:1405(para) conglomerate.xml:1409(para)
-#: conglomerate.xml:1413(para) conglomerate.xml:1417(para)
-#: conglomerate.xml:1421(para) conglomerate.xml:1425(para)
-#: conglomerate.xml:1430(para) conglomerate.xml:1433(para)
-#: conglomerate.xml:1436(para) conglomerate.xml:1440(para)
-#: conglomerate.xml:1444(para) conglomerate.xml:1448(para)
-#: conglomerate.xml:1453(para) conglomerate.xml:1457(para)
-#: conglomerate.xml:1460(para) conglomerate.xml:1464(para)
-#: conglomerate.xml:1468(para) conglomerate.xml:1472(para)
-#: conglomerate.xml:1476(para) conglomerate.xml:1482(para)
-#: conglomerate.xml:1485(para) conglomerate.xml:1489(para)
-#: conglomerate.xml:1520(para) conglomerate.xml:1524(para)
-#: conglomerate.xml:1755(para) conglomerate.xml:1767(para)
-#: conglomerate.xml:1793(para) conglomerate.xml:2170(entry)
-#: conglomerate.xml:2204(para) conglomerate.xml:2286(para)
-#: conglomerate.xml:2322(para) conglomerate.xml:2431(para)
-#: conglomerate.xml:2544(para) conglomerate.xml:2560(entry)
-#: conglomerate.xml:2584(para) conglomerate.xml:2670(para)
-#: conglomerate.xml:2783(para)
+#: C/conglomerate.xml:132(para) C/conglomerate.xml:1374(para)
+#: C/conglomerate.xml:1378(para) C/conglomerate.xml:1382(para)
+#: C/conglomerate.xml:1389(para) C/conglomerate.xml:1401(para)
+#: C/conglomerate.xml:1405(para) C/conglomerate.xml:1409(para)
+#: C/conglomerate.xml:1413(para) C/conglomerate.xml:1417(para)
+#: C/conglomerate.xml:1421(para) C/conglomerate.xml:1425(para)
+#: C/conglomerate.xml:1430(para) C/conglomerate.xml:1433(para)
+#: C/conglomerate.xml:1436(para) C/conglomerate.xml:1440(para)
+#: C/conglomerate.xml:1444(para) C/conglomerate.xml:1448(para)
+#: C/conglomerate.xml:1453(para) C/conglomerate.xml:1457(para)
+#: C/conglomerate.xml:1460(para) C/conglomerate.xml:1464(para)
+#: C/conglomerate.xml:1468(para) C/conglomerate.xml:1472(para)
+#: C/conglomerate.xml:1476(para) C/conglomerate.xml:1482(para)
+#: C/conglomerate.xml:1485(para) C/conglomerate.xml:1489(para)
+#: C/conglomerate.xml:1520(para) C/conglomerate.xml:1524(para)
+#: C/conglomerate.xml:1755(para) C/conglomerate.xml:1767(para)
+#: C/conglomerate.xml:1793(para) C/conglomerate.xml:2170(entry)
+#: C/conglomerate.xml:2204(para) C/conglomerate.xml:2286(para)
+#: C/conglomerate.xml:2322(para) C/conglomerate.xml:2431(para)
+#: C/conglomerate.xml:2544(para) C/conglomerate.xml:2560(entry)
+#: C/conglomerate.xml:2584(para) C/conglomerate.xml:2670(para)
+#: C/conglomerate.xml:2783(para)
 msgid "text"
-msgstr ""
+msgstr "text"
 
-#: conglomerate.xml:135(title)
+#: C/conglomerate.xml:135(title)
 msgid "Getting Involved"
 msgstr "Mithelfen"
 
-#: conglomerate.xml:136(para)
+#: C/conglomerate.xml:136(para)
 msgid ""
 "The <application>Conglomerate</application> project is managed as an open "
 "source initiative to develop the ultimate user-friendly <acronym>XML</"
 "acronym> editing system. As such, help in the form of productive contribution "
 "is always welcomed."
 msgstr ""
+"Das <application>Conglomerate</application>-Projekt wird als Initiative der "
+"freien Software verwaltet, um ein benutzerfreundliches <acronym>XML</acronym>-"
+"Bearbeitungsssystem zu schaffen. Hilfe in Form produktiver Beiträge ist stets "
+"willkommen."
 
-#: conglomerate.xml:139(para)
+#: C/conglomerate.xml:139(para)
 msgid ""
 "The first step in joining the project, is to join the <ulink url=\"http://"
 "lists.copyleft.no/mailman/listinfo/conglomerate-devel/\">conglomerate-devel "
 "mailing list</ulink>. This is where our development discussion happens."
 msgstr ""
+"Der erste Schritt zur Beteiligung am Projekt ist, der <ulink url=\"http://"
+"lists.copyleft.no/mailman/listinfo/conglomerate-devel/\">Mailingliste der "
+"Conglomerate-Entwickler</ulink> beizutreten. Dort wird über unsere "
+"Entwicklungsarbeit diskutiert."
 
-#: conglomerate.xml:141(para)
+#: C/conglomerate.xml:141(para)
 msgid ""
 "Next, it is recommended that you join the <ulink url=\"http://lists.copyleft."
 "no/mailman/listinfo/conglomerate-auto/\">conglomerate-auto mailing list</"
 "ulink>, which receives email every time something changes in our bug database."
 msgstr ""
+"Danach ist es empfehlenswert, außerdem die <ulink url=\"http://lists.copyleft."
+"no/mailman/listinfo/conglomerate-auto/\">conglomerate-auto-Mailingliste</"
+"ulink> zu abonnieren, die über Änderungen in der Fehlererfassungs-Datenbank "
+"informiert."
 
-#: conglomerate.xml:143(para)
+#: C/conglomerate.xml:143(para)
 msgid ""
 "Then proceed to download a copy of the latest source code as described in "
 "<xref linkend=\"installation\"/>."
 msgstr ""
+"Weiterhin sollten Sie sich eine Kopie des neuesten Quellcodes herunterladen, "
+"wie in <xref linkend=\"installation\"/> beschrieben."
 
-#: conglomerate.xml:145(title)
+#: C/conglomerate.xml:145(title)
 msgid "Things you can do to help:"
 msgstr "Dies können Sie tun, um zu helfen:"
 
-#: conglomerate.xml:147(para)
+#: C/conglomerate.xml:147(para)
 msgid ""
 "<emphasis role=\"bold\">Development:</emphasis> Add support for new XML "
 "document types, fix bugs and implement new features. If you're a programmer, "
@@ -340,7 +354,7 @@ msgid ""
 "look at all of it at once."
 msgstr ""
 
-#: conglomerate.xml:155(para)
+#: C/conglomerate.xml:155(para)
 msgid ""
 "<emphasis role=\"bold\">Testing:</emphasis> Test the various functions of the "
 "editor, report replicable bugs not already listed in the bug tracking system, "
@@ -348,7 +362,7 @@ msgid ""
 "of things</ulink> we already know about."
 msgstr ""
 
-#: conglomerate.xml:162(para)
+#: C/conglomerate.xml:162(para)
 msgid ""
 "<emphasis role=\"bold\">Localization (I10n):</emphasis> Localize "
 "<application>Conglomerate</application> into your own language. Localization "
@@ -356,124 +370,131 @@ msgid ""
 "gtp/\">Gnome Translation Project</ulink>."
 msgstr ""
 
-#: conglomerate.xml:168(para)
+#: C/conglomerate.xml:168(para)
 msgid ""
 "<emphasis role=\"bold\">Translation (I18n):</emphasis> Translate the "
 "<application>Conglomerate</application> User Manual and other documents into "
 "your own language."
 msgstr ""
 
-#: conglomerate.xml:174(para)
+#: C/conglomerate.xml:174(para)
 msgid ""
 "<emphasis role=\"bold\">Documentation:</emphasis> Write articles, add new "
 "sections, and improve on exiting sections within the documentation."
 msgstr ""
 
-#: conglomerate.xml:179(para)
+#: C/conglomerate.xml:179(para)
 msgid ""
 "<emphasis role=\"bold\">General:</emphasis> Suggest new features that would "
 "make it easier to use get your work done - or are just simply cool!"
 msgstr ""
 
-#: conglomerate.xml:186(title)
+#: C/conglomerate.xml:186(title)
 msgid "Acknowledgments"
 msgstr "Danksagungen"
 
-#: conglomerate.xml:187(para) conglomerate.xml:1393(para)
-#: conglomerate.xml:1397(para) conglomerate.xml:1736(para)
+#: C/conglomerate.xml:187(para) C/conglomerate.xml:1393(para)
+#: C/conglomerate.xml:1397(para) C/conglomerate.xml:1736(para)
 msgid "Text"
 msgstr "Text"
 
-#: conglomerate.xml:195(title)
+#: C/conglomerate.xml:195(title)
 msgid "Conventions"
 msgstr "Konventionen"
 
-#: conglomerate.xml:196(para)
+#: C/conglomerate.xml:196(para)
 msgid ""
 "This book is most effective when used in conjunction with the Conglomerate "
 "XML Editor V0.7.10."
 msgstr ""
+"Dieses Handbuch ist am effektivsten, wenn Sie es in Verbindung mit der "
+"Version 0.7.10 des Conglomerate XML-Editors verwenden."
 
-#: conglomerate.xml:198(para)
+#: C/conglomerate.xml:198(para)
 msgid ""
 "Throughout this book the <ulink url=\"http://www.oasis-open.org/\">Docbook "
 "XML</ulink> document type will be used to explain and illustrate the "
 "functionality of the Conglomerate XML Editor."
 msgstr ""
+"In diesem Buch wird der Dokumenttyp <ulink url=\"http://www.oasis-open.org/"
+"\">Docbook XML</ulink> verwendet, um die Funktion des Conglomerate XML-"
+"Editors zu erklären und zu verdeutlichen."
 
-#: conglomerate.xml:201(para)
+#: C/conglomerate.xml:201(para)
 msgid ""
 "Familiarity with the standard controls and Notations provided by the Window "
 "Manager and Linux File System is assumed."
 msgstr ""
+"Vertrautheit mit den vom Fensterverwalter und Linux-Dateisystem "
+"bereitgestellten Standard-Steuerungen und -Anzeigen wird dabei vorausgesetzt."
 
-#: conglomerate.xml:204(emphasis)
+#: C/conglomerate.xml:204(emphasis)
 msgid "The following admonitions will be found throughout the book:"
 msgstr ""
 
-#: conglomerate.xml:208(para)
+#: C/conglomerate.xml:208(para)
 msgid ""
 "A note presents interesting, sometimes technical, pieces of information "
 "related to the surrounding discussion."
 msgstr ""
 
-#: conglomerate.xml:212(para)
+#: C/conglomerate.xml:212(para)
 msgid "A tip offers advice or an easier way of doing something."
 msgstr ""
 
-#: conglomerate.xml:215(para)
+#: C/conglomerate.xml:215(para)
 msgid ""
 "A caution advises you of potential problems and helps you to steer clear "
 "thereof."
 msgstr ""
 
-#: conglomerate.xml:219(para)
+#: C/conglomerate.xml:219(para)
 msgid ""
 "A warning advises you of a hazard condition that may be created in a given "
 "scenario."
 msgstr ""
 
-#: conglomerate.xml:223(emphasis)
+#: C/conglomerate.xml:223(emphasis)
 msgid "Type conventions will be shown as follows:"
 msgstr ""
 
-#: conglomerate.xml:227(para)
+#: C/conglomerate.xml:227(para)
 msgid ""
 "File names or paths to directories will be shown in <filename>monospace</"
 "filename> type."
 msgstr ""
 
-#: conglomerate.xml:231(para)
+#: C/conglomerate.xml:231(para)
 msgid ""
 "Commands that you type at a prompt will be shown in <command> bold</command> "
 "type."
 msgstr ""
 
-#: conglomerate.xml:235(para)
+#: C/conglomerate.xml:235(para)
 msgid ""
 "Options that you click, select or choose in the user interface will be shown "
 "in <filename>monospace</filename> type."
 msgstr ""
 
-#: conglomerate.xml:239(para)
+#: C/conglomerate.xml:239(para)
 msgid ""
 "When variables, parameters, sgmltags etc. are contained within a paragraph of "
 "text will be shown in <command>monospaced</command> type, otherwise they will "
 "use the normal type."
 msgstr ""
 
-#: conglomerate.xml:246(emphasis)
+#: C/conglomerate.xml:246(emphasis)
 msgid "Menu selections, mouse actions, and keyboard short-cuts:"
-msgstr ""
+msgstr "Menüauswahlen, Mausaktionen und Tastenkürzel:"
 
-#: conglomerate.xml:250(para)
+#: C/conglomerate.xml:250(para)
 msgid ""
 "A sequence of menu selections will be shown as follows:"
 "<menuchoice><guimenu><accel>F</accel>ile</guimenu><guimenuitem><accel>O</"
 "accel>pen</guimenuitem></menuchoice>"
 msgstr ""
 
-#: conglomerate.xml:259(para)
+#: C/conglomerate.xml:259(para)
 msgid ""
 "Mouse actions shall assume a right-handed mouse configuration. The terms "
 "\"<mousebutton>click</mousebutton>\" and \"<mousebutton>double-click</"
@@ -482,7 +503,7 @@ msgid ""
 "button."
 msgstr ""
 
-#: conglomerate.xml:267(para)
+#: C/conglomerate.xml:267(para)
 msgid ""
 "Keyboard short-cut combinations will be shown as follows: "
 "<keycombo><keysym>Ctrl+N</keysym></keycombo>. Where the convention for "
@@ -491,37 +512,38 @@ msgid ""
 "hold down the first key while pressing the second key."
 msgstr ""
 
-#: conglomerate.xml:278(emphasis)
+#: C/conglomerate.xml:278(emphasis)
 msgid "Cross reference conventions for pint will be shown as follows:"
 msgstr ""
 
-#: conglomerate.xml:283(para)
+#: C/conglomerate.xml:283(para)
 msgid ""
 "Internal references will look like this: <xref linkend=\"introduction\"/>. "
 "The numeral contained by square braces is the [page number]."
 msgstr ""
 
-#: conglomerate.xml:287(para)
+#: C/conglomerate.xml:287(para)
 msgid ""
 "External reference, say to a Web Site, will look like <ulink url=\"http://www."
 "somedomain.com\">this</ulink>."
 msgstr ""
 
-#: conglomerate.xml:291(para)
+#: C/conglomerate.xml:291(para)
 msgid ""
 "PDF, HTML or XHTML versions of this document will use hyper-links to denote "
 "cross-references."
 msgstr ""
 
-#: conglomerate.xml:295(emphasis)
+#: C/conglomerate.xml:295(emphasis)
 msgid "Code conventions:"
-msgstr ""
+msgstr "Code-Konventionen:"
 
-#: conglomerate.xml:299(para)
+#: C/conglomerate.xml:299(para)
 msgid "Code and mark-up samples will be formatted in a Grey block."
 msgstr ""
+"Code und Beispiele zur Hervorhebung werden in grauen Blöcken formatiert."
 
-#: conglomerate.xml:302(para)
+#: C/conglomerate.xml:302(para)
 msgid ""
 "Sometimes lines of code or mark-up examples will be longer than the page "
 "width. To avoid from them running off the page, the slash character \"\\\" is "
@@ -531,7 +553,7 @@ msgid ""
 "cut so that the comment will not run off the right-side of the page."
 msgstr ""
 
-#: conglomerate.xml:312(programlisting)
+#: C/conglomerate.xml:312(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -549,20 +571,39 @@ msgid ""
 "Set Encore = Nothing\n"
 "    "
 msgstr ""
+"\n"
+"Dim uid, Encore\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"uid = Encore.logon(\"ADMIN\",\"\" ,\"0\" ,\"\", \"00\", 0, 0,\"\")\n"
+"\n"
+"<emphasis>msgbox uid, , \"The GUID created by login and  \\\n"
+"    used for all method calls\"</emphasis>\n"
+"\n"
+"Set Encore = CreateObject(\"Encore.Query\")\n"
+"\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"Encore.logoff(uid)\n"
+"Set Encore = Nothing\n"
+"    "
 
-#: conglomerate.xml:329(title)
+#: C/conglomerate.xml:329(title)
 msgid "Introduction"
 msgstr "Einführung"
 
-#: conglomerate.xml:330(para)
+#: C/conglomerate.xml:330(para)
 msgid ""
 "The <application>Conglomerate XML Editor</application> is a free, user-"
 "friendly XML editor, for <ulink url=\"http://www.oasis-open.org/\">DocBook</"
 "ulink> and other XML document types. It aims to hide the complexity and "
 "jargon of XML behind a friendly GUI."
 msgstr ""
+"Der <application>Conglomerate XML-Editor</application> ist ein freier, "
+"benutzerfreundlicher XML-Editor für <ulink url=\"http://www.oasis-open.org/"
+"\">DocBook</ulink> und andere auf XML basierende Dokumenttypen. Ziel ist es, "
+"die Komplexität und Sprache von XML über eine ansprechende Oberfläche "
+"zugänglich zu machen."
 
-#: conglomerate.xml:333(para)
+#: C/conglomerate.xml:333(para)
 msgid ""
 "<application>Conglomerate XML Editor</application> is one part of the "
 "<application>Conglomerate</application> project to create a complete "
@@ -574,11 +615,11 @@ msgid ""
 "user target several formatted output file types from a single XML source."
 msgstr ""
 
-#: conglomerate.xml:342(title)
+#: C/conglomerate.xml:342(title)
 msgid "Requirements"
 msgstr "Voraussetzungen"
 
-#: conglomerate.xml:343(para)
+#: C/conglomerate.xml:343(para)
 msgid ""
 "The <application>Conglomerate XML Editor</application> can be run on any "
 "Linux system that has Gnome 2.4 or higher installed. When this condition is "
@@ -586,51 +627,51 @@ msgid ""
 "\">Gnome</ulink> or <ulink url=\"http://www.kde.org\">KDE</ulink> desktops."
 msgstr ""
 
-#: conglomerate.xml:346(para)
+#: C/conglomerate.xml:346(para)
 msgid ""
 "Conglomerate is dependant of the following libraries and their development "
 "versions:"
 msgstr ""
 
-#: conglomerate.xml:349(para)
+#: C/conglomerate.xml:349(para)
 msgid "libxml-2.0 &gt;= 2.0.0"
 msgstr "libxml-2.0 &gt;= 2.0.0"
 
-#: conglomerate.xml:352(para)
+#: C/conglomerate.xml:352(para)
 msgid "libxslt &gt;= 2.0.0"
 msgstr "libxslt &gt;= 2.0.0"
 
-#: conglomerate.xml:355(para)
+#: C/conglomerate.xml:355(para)
 msgid "libbonobo-2.0 &gt;= 2.0.0"
 msgstr "libbonobo-2.0 &gt;= 2.0.0"
 
-#: conglomerate.xml:358(para)
+#: C/conglomerate.xml:358(para)
 msgid "libbonoboui-2.0 &gt;= 2.0.0"
 msgstr "libbonoboui-2.0 &gt;= 2.0.0"
 
-#: conglomerate.xml:361(para)
+#: C/conglomerate.xml:361(para)
 msgid "libgnomeui-2.0 &gt; 2.0.0"
 msgstr "libgnomeui-2.0 &gt; 2.0.0"
 
-#: conglomerate.xml:364(para)
+#: C/conglomerate.xml:364(para)
 msgid "libglade-2.0 &gt;= 2.0.0"
 msgstr "libglade-2.0 &gt;= 2.0.0"
 
-#: conglomerate.xml:367(para)
+#: C/conglomerate.xml:367(para)
 msgid "intltool-0.2.8 &gt; 0.2.8"
 msgstr "intltool-0.2.8 &gt; 0.2.8"
 
-#: conglomerate.xml:371(para)
+#: C/conglomerate.xml:371(para)
 msgid ""
 "<application>Conglomerate</application> V0.7.10 is an unstable release. "
 "Current releases are intended as previews that some people may find useful."
 msgstr ""
 
-#: conglomerate.xml:377(title)
+#: C/conglomerate.xml:377(title)
 msgid "Installation"
 msgstr "Installation"
 
-#: conglomerate.xml:378(para)
+#: C/conglomerate.xml:378(para)
 msgid ""
 "If <application>Conglomerate</application> was shipped with your distro then "
 "you should be able to install it from the distibution source using a Software "
@@ -638,7 +679,7 @@ msgid ""
 "to install new packages."
 msgstr ""
 
-#: conglomerate.xml:381(para)
+#: C/conglomerate.xml:381(para)
 msgid ""
 "Alternative methods of installation include installation from <link linkend="
 "\"installation_from_tarball\" endterm=\"installation_from_tarball.title\"/> "
@@ -646,37 +687,37 @@ msgid ""
 "title\"/>."
 msgstr ""
 
-#: conglomerate.xml:384(title)
+#: C/conglomerate.xml:384(title)
 msgid "Installation from tarball"
 msgstr "Installation aus einem Tar-Archiv"
 
-#: conglomerate.xml:385(para)
+#: C/conglomerate.xml:385(para)
 msgid ""
 "Releases are frequently packaged into tarballs and placed on the <ulink url="
 "\"http://sourceforge.net/project/showfiles.php?group_id=82766\">project CVS</"
 "ulink> at SourceForge."
 msgstr ""
 
-#: conglomerate.xml:387(para)
+#: C/conglomerate.xml:387(para)
 msgid ""
 "When a new release is announced the tarball may take upto 24 hours to display "
 "in the Web based CVS interface."
 msgstr ""
 
-#: conglomerate.xml:391(title)
+#: C/conglomerate.xml:391(title)
 msgid "General installation overview"
 msgstr "Allgemeiner Überblick über die Installation"
 
-#: conglomerate.xml:393(para)
+#: C/conglomerate.xml:393(para)
 msgid "<action>Start</action> a <application>Bash</application> session."
 msgstr ""
 "<action>Starten Sie</action> eine <application>Bash</application>-Sitzung."
 
-#: conglomerate.xml:397(para)
+#: C/conglomerate.xml:397(para)
 msgid "Login as root."
 msgstr "Melden Sie sich als Root an."
 
-#: conglomerate.xml:400(para)
+#: C/conglomerate.xml:400(para)
 msgid ""
 "<action>Copy</action> the tarball to a location such as <filename class="
 "\"directory\">/usr/src/packages/</filename>."
@@ -684,19 +725,19 @@ msgstr ""
 "<action>Kopieren Sie</action> das Tar-Archiv an einen Ort wie <filename class="
 "\"directory\">/usr/src/packages/</filename>."
 
-#: conglomerate.xml:403(command)
+#: C/conglomerate.xml:403(command)
 msgid "cp filename-0.2.3.tar.gz /usr/src/packages/"
 msgstr "cp filename-0.2.3.tar.gz /usr/src/packages/"
 
-#: conglomerate.xml:407(para)
+#: C/conglomerate.xml:407(para)
 msgid "<action>Change</action> to this directory."
 msgstr "<action>Wechseln Sie</action> in diesen Ordner."
 
-#: conglomerate.xml:410(command)
+#: C/conglomerate.xml:410(command)
 msgid "cd /usr/src/packages/"
 msgstr "cd /usr/src/packages/"
 
-#: conglomerate.xml:414(para)
+#: C/conglomerate.xml:414(para)
 msgid ""
 "<action>Extract</action> the tarball. This will create a new folder <filename "
 "class=\"directory\">filename-0.2.3</filename>"
@@ -704,29 +745,29 @@ msgstr ""
 "<action>Entpacken Sie</action> das Tar-Archiv. Dadurch wird ein neuer Ordner "
 "namens <filename class=\"directory\">filename-0.2.3</filename> erstellt."
 
-#: conglomerate.xml:419(command)
+#: C/conglomerate.xml:419(command)
 msgid "tar xzvf filename-0.2.3.tar.gz"
 msgstr "tar xzvf filename-0.2.3.tar.gz"
 
-#: conglomerate.xml:423(para)
+#: C/conglomerate.xml:423(para)
 msgid "<action>Change</action> to the new folder."
 msgstr "<action>Wechseln Sie</action> in den neuen Ordner."
 
-#: conglomerate.xml:426(command)
+#: C/conglomerate.xml:426(command)
 msgid "cd filename-0.2.3"
 msgstr "cd filename-0.2.3"
 
-#: conglomerate.xml:430(para) conglomerate.xml:445(para)
+#: C/conglomerate.xml:430(para) C/conglomerate.xml:445(para)
 msgid "<action>Type</action> the following, followed by <keycap>Enter</keycap>."
 msgstr ""
 "<action>Geben Sie</action> Folgendes ein und schließen Sie mit der "
 "<keycap>Eingabetaste</keycap> ab."
 
-#: conglomerate.xml:433(command)
+#: C/conglomerate.xml:433(command)
 msgid "./configure"
 msgstr "./configure"
 
-#: conglomerate.xml:437(para)
+#: C/conglomerate.xml:437(para)
 msgid ""
 "If there are no errors, <action>type</action> the following, followed by "
 "<keycap>Enter</keycap>."
@@ -734,19 +775,19 @@ msgstr ""
 "Falls keine Fehler angezeigt werden, <action>geben Sie</action> Folgendes ein "
 "und schließen Sie mit der <keycap>Eingabetaste</keycap> ab."
 
-#: conglomerate.xml:440(command)
+#: C/conglomerate.xml:440(command)
 msgid "make"
 msgstr "make"
 
-#: conglomerate.xml:442(para)
+#: C/conglomerate.xml:442(para)
 msgid "If there are errors, resolve them if required."
 msgstr "Falls Fehler auftreten, beseitigen Sie diese, falls nötig."
 
-#: conglomerate.xml:448(command)
+#: C/conglomerate.xml:448(command)
 msgid "make install"
 msgstr "make install"
 
-#: conglomerate.xml:450(para)
+#: C/conglomerate.xml:450(para)
 msgid ""
 "This will install to the default path <filename class=\"directory\">/usr/"
 "local/bin</filename> which should already be in your environment "
@@ -759,11 +800,11 @@ msgstr ""
 "ein, um die <varname>PATH</varname>-Variable anzuzeigen, falls Sie nicht "
 "sicher sind."
 
-#: conglomerate.xml:457(title)
+#: C/conglomerate.xml:457(title)
 msgid "Installation from CVS"
 msgstr "Installation aus dem CVS"
 
-#: conglomerate.xml:458(para)
+#: C/conglomerate.xml:458(para)
 msgid ""
 "If you don't mind running on the \"bleeding-edge\" of development, you may "
 "also run your installation from the project <glossterm>Concurrent Versioning "
@@ -772,64 +813,77 @@ msgid ""
 "module=default\">Gnome</ulink>."
 msgstr ""
 
-#: conglomerate.xml:463(para)
+#: C/conglomerate.xml:463(para)
 msgid ""
 "As a result of the ongoing application of patches and addition of new "
 "components to the source, installation from CVS is not guaranteed to work."
 msgstr ""
 
-#: conglomerate.xml:469(title)
+#: C/conglomerate.xml:469(title)
 msgid "Getting Started"
 msgstr "Erste Schritte"
 
-#: conglomerate.xml:470(para)
+#: C/conglomerate.xml:470(para)
 msgid ""
 "You can start <application>Conglomerate</application> in the following ways:"
 msgstr ""
+"Sie können <application>Conglomerate</application> auf folgende Arten starten:"
 
-#: conglomerate.xml:475(guimenu)
+#: C/conglomerate.xml:475(guimenu)
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: conglomerate.xml:475(emphasis)
+#: C/conglomerate.xml:475(emphasis)
 msgid "From the <placeholder-1/> menu"
 msgstr "Aus dem Menü <placeholder-1/>"
 
-#: conglomerate.xml:478(para)
+#: C/conglomerate.xml:478(para)
 msgid ""
 "Choose <menuchoice><guimenu>Main Menu</guimenu><guisubmenu>Utilities</"
 "guisubmenu><guisubmenu>Texteditor</guisubmenu><guimenuitem>Conglomerate XML "
 "Editor</guimenuitem></menuchoice>."
 msgstr ""
+"Wählen Sie <menuchoice><guimenu>Anwendungen</guimenu><guisubmenu>Zubehör</"
+"guisubmenu><guisubmenu>Texteditor</guisubmenu><guimenuitem>Conglomerate XML "
+"Editor</guimenuitem></menuchoice>."
 
-#: conglomerate.xml:488(emphasis)
+#: C/conglomerate.xml:488(emphasis)
 msgid "From the Command Prompt"
 msgstr "Aus einer Befehlszeile"
 
-#: conglomerate.xml:491(para)
+#: C/conglomerate.xml:491(para)
 msgid ""
 "To start <application>Conglomerate</application> from the command prompt, "
 "type <command>conglomerate</command>, then press <keycap>Enter</keycap>."
 msgstr ""
+"Um <application>Conglomerate</application> in einer Befehlszeile zu starten, "
+"geben Sie den Befehl <command>conglomerate</command> ein und drücken Sie die "
+"<keycap>Eingabetaste</keycap>."
 
-#: conglomerate.xml:493(para)
+#: C/conglomerate.xml:493(para)
 msgid ""
 "You can also open an XML file directly from the command by passing the name "
 "of the XML file to open when <application>Conglomerate</application> starts, "
 "like this <command>conglomerate filename.xml</command>."
 msgstr ""
+"Sie können auch eine XML-Datei direkt in der Befehlszeile öffnen, indem Sie "
+"den Namen der XML-Datei übergeben, wenn <application>Conglomerate</"
+"application> startet, wie beispielsweise <command>conglomerate dateiname.xml</"
+"command>."
 
-#: conglomerate.xml:499(para)
+#: C/conglomerate.xml:499(para)
 msgid ""
 "When you start <application>Conglomerate</application>, the following window "
 "is displayed."
 msgstr ""
+"Wenn Sie <application>Conglomerate</application> starten, wird folgendes "
+"Fenster angezeigt."
 
-#: conglomerate.xml:501(title)
+#: C/conglomerate.xml:501(title)
 msgid "Conglomerate Start Up Window"
 msgstr "Startfenster von Conglomerate"
 
-#: conglomerate.xml:510(para)
+#: C/conglomerate.xml:510(para)
 msgid ""
 "This is the main window of the <application>Conglomerate XML Editor</"
 "application>. It provides basic options that can be used to create, open and "
@@ -843,7 +897,7 @@ msgid ""
 "\"editor_window\"/>."
 msgstr ""
 
-#: conglomerate.xml:518(para)
+#: C/conglomerate.xml:518(para)
 msgid ""
 "If you want to quickly get a glimpse of the editor window, create a new "
 "document as follows. Documents are create with the help of templates, "
@@ -852,11 +906,11 @@ msgid ""
 "templates, to get us started we will use the \"Docbook Article\" template."
 msgstr ""
 
-#: conglomerate.xml:524(title)
+#: C/conglomerate.xml:524(title)
 msgid "Create a new document"
 msgstr "Ein neues Dokument erstellen"
 
-#: conglomerate.xml:526(para)
+#: C/conglomerate.xml:526(para)
 msgid ""
 "Choose <menuchoice><guimenu><accel>F</accel>ile</"
 "guimenu><guimenuitem><accel>N</accel>ew</guimenuitem></menuchoice> "
@@ -864,14 +918,21 @@ msgid ""
 "dialog is displayed. This will assist you in selecting a template to start "
 "your document."
 msgstr ""
+"Wählen Sie <menuchoice><guimenu><accel>D</accel>atei</"
+"guimenu><guimenuitem><accel>N</accel>eu</guimenuitem></menuchoice> "
+"(<keycombo><keycap>Strg</keycap><keycap>N</keycap></keycombo>). Ein "
+"dialogbasierter Assistent wird angezeigt. Dieser hilft Ihnen bei der Auswahle "
+"einer Vorlage, um mit Ihrem Dokument beginnen zu können."
 
-#: conglomerate.xml:538(para)
+#: C/conglomerate.xml:538(para)
 msgid ""
 "<action>Click</action><guibutton>Forward</guibutton> to display the list of "
 "available templates."
 msgstr ""
+"<action>Klicken Sie</action> auf <guibutton>Weiter</guibutton>, um eine Liste "
+"der verfügbaren Vorlagen anzuzeigen."
 
-#: conglomerate.xml:543(para)
+#: C/conglomerate.xml:543(para)
 msgid ""
 "<action>Select</action> the <option>Docbook Article</option>, then "
 "<action>click</action><guibutton>Forward</guibutton>. The wizard now has all "
@@ -879,14 +940,14 @@ msgid ""
 "\"Article\"."
 msgstr ""
 
-#: conglomerate.xml:549(para)
+#: C/conglomerate.xml:549(para)
 msgid ""
 "<action>Click</action><guibutton>Apply</guibutton> to create the Article. "
 "This will open the <link linkend=\"editor_window\" endterm=\"editor_window."
 "title\"/>."
 msgstr ""
 
-#: conglomerate.xml:554(para)
+#: C/conglomerate.xml:554(para)
 msgid ""
 "Congratulations you have just created your first document with "
 "<application>Conglomerate</application>. Now you will have to learn to get "
@@ -898,56 +959,67 @@ msgid ""
 "text."
 msgstr ""
 
-#: conglomerate.xml:560(title) conglomerate.xml:1533(title)
+#: C/conglomerate.xml:560(title) C/conglomerate.xml:1533(title)
 msgid "Supported XML Document Types"
 msgstr "Unterstützte XML-Dokumenttypen"
 
-#: conglomerate.xml:561(para)
+#: C/conglomerate.xml:561(para)
 msgid ""
 "Ulimately the <application>Conglomerate XML Editor</application> is being "
 "developed to support creation and editing of any XML wide variety of data or "
 "document orientated XML instances."
 msgstr ""
 
-#: conglomerate.xml:564(para)
+#: C/conglomerate.xml:564(para)
 msgid ""
 "The following XML document types are currently supported, with time more will "
 "be added:"
 msgstr ""
+"Die folgenden XML-Dokumenttypen werden derzeit unterstützt, wobei in Zukunft "
+"weiter folgen werden:"
 
-#: conglomerate.xml:573(para)
+#: C/conglomerate.xml:573(para)
 msgid ""
 "A full list of the the XML Document Types supported can be found in <xref "
 "linkend=\"doc_type_support\"/>. This document also provides an introduction "
 "to each of the document types and references where you can find more "
 "information."
 msgstr ""
+"Eine vollständige Liste der unterstützten XML-Dokumenttypen finden Sie in "
+"<xref linkend=\"doc_type_support\"/>. Dieses Deokument bietet auch eine "
+"Einführung in jeden der Dokumenttypen sowie Referenzen, wo Sie weitere "
+"Informationen beziehen können."
 
-#: conglomerate.xml:579(title)
+#: C/conglomerate.xml:579(title)
 msgid "Editor Window"
 msgstr "Editorfenster"
 
-#: conglomerate.xml:580(para)
+#: C/conglomerate.xml:580(para)
 msgid ""
 "As the name implies, the editor window is used to edit documents. This window "
 "is displayed when a new document is created or an exiting document is opened "
 "and has more options than the main window. The figure below shows the editor "
 "window after a new \"Docbook Article\" has been created."
 msgstr ""
+"Wie der Name bereits andeutet, wird das Bearbeitungsfenster zum Bearbeiten "
+"von Dokumenten verwendet. Dieses Fenster wird angezeigt, wenn ein neues "
+"Dokument erstellt oder ein vorhandenes Dokument geöffnet wird. Es bietet mehr "
+"Optionen als das Hauptfenster. Die nachfolgende Abbildung zeigt das "
+"Bearbeitungsfenster, nachdem ein neuer »DecBook-Artikel« erstellt wurde."
 
-#: conglomerate.xml:585(title)
+#: C/conglomerate.xml:585(title)
 msgid "Conglomerate Editor window"
 msgstr "Editorfenster von Conglomerate"
 
-#: conglomerate.xml:594(para)
+#: C/conglomerate.xml:594(para)
 msgid "The editor window is comprise of the following elements:"
 msgstr "Das Editorfenster besteht aus den folgenden Elementen:"
 
-#: conglomerate.xml:598(emphasis)
+#: C/conglomerate.xml:598(emphasis)
 msgid "Window titlebar"
 msgstr "Titelleiste des Fensters"
 
-#: conglomerate.xml:601(para)
+#: C/conglomerate.xml:601(para)
 msgid ""
 "The window titlebar shows the filename of the document being edited. If the "
 "document has not been saved to a file the default document name will be "
@@ -955,11 +1027,11 @@ msgid ""
 "menus and controls of the <application>Window Manager</application>."
 msgstr ""
 
-#: conglomerate.xml:616(emphasis)
+#: C/conglomerate.xml:616(emphasis)
 msgid "Menubar"
 msgstr "Menüleiste"
 
-#: conglomerate.xml:619(para)
+#: C/conglomerate.xml:619(para)
 msgid ""
 "The Menubar provides menus that arrange and provide access to all the "
 "functional operations of the <application>Conglomerate XML Editor</"
@@ -967,11 +1039,11 @@ msgid ""
 "\"editor_window_menus\" endterm=\"editor_window_menus.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:633(emphasis)
+#: C/conglomerate.xml:633(emphasis)
 msgid "Toolbar"
 msgstr "Werkzeugleiste"
 
-#: conglomerate.xml:636(para)
+#: C/conglomerate.xml:636(para)
 msgid ""
 "The Toolbar provides quick access to the most commonly used operations of the "
 "<application>Conglomerate XML Editor</application>. The menu options are "
@@ -979,234 +1051,249 @@ msgid ""
 "\"editor_window_toolbar.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:650(emphasis)
+#: C/conglomerate.xml:650(emphasis)
 msgid "Document Area"
 msgstr "Dokumentenbereich"
 
-#: conglomerate.xml:653(para)
+#: C/conglomerate.xml:653(para)
 msgid "The Document Area is the main workspace."
-msgstr ""
+msgstr "Der Dokumentbereich ist Ihr Hauptarbeitsplatz."
 
-#: conglomerate.xml:665(emphasis)
+#: C/conglomerate.xml:665(emphasis)
 msgid "Status bar"
 msgstr "Statuszeile"
 
-#: conglomerate.xml:668(para)
+#: C/conglomerate.xml:668(para)
 msgid ""
 "The Status Bar shows the \"Document Type\" of the open document and provides "
 "a window \"Resize\" control with which to increase or decrease the size of "
 "the editor window."
 msgstr ""
 
-#: conglomerate.xml:682(title)
+#: C/conglomerate.xml:682(title)
 msgid "Editor Window Menus"
 msgstr "Menüs des Editorfensters"
 
-#: conglomerate.xml:683(para)
+#: C/conglomerate.xml:683(para)
 msgid ""
 "The Menubar provides menus that arrange and provide access to all the "
 "functional operations of the <application>Conglomerate XML Editor</"
 "application>. The following options are available:"
 msgstr ""
 
-#: conglomerate.xml:687(title)
+#: C/conglomerate.xml:687(title)
 msgid "Editor Window Menus and Options"
 msgstr "Menüs des Editorfensters und deren Optionen"
 
-#: conglomerate.xml:692(accel)
+#: C/conglomerate.xml:692(accel)
 msgid "F"
 msgstr "D"
 
-#: conglomerate.xml:691(guimenu)
+#: C/conglomerate.xml:691(guimenu)
 msgid "<placeholder-1/>ile"
 msgstr "<placeholder-1/>atei"
 
-#: conglomerate.xml:696(para)
+#: C/conglomerate.xml:696(para)
 msgid "Use the <guimenu>File</guimenu> menu, to perform the following tasks:"
 msgstr ""
+"Mit dem Menü <guimenu>Datei</guimenu> können Sie folgende Aufgaben ausführen:"
 
-#: conglomerate.xml:745(accel)
+#: C/conglomerate.xml:745(accel)
 msgid "E"
 msgstr "B"
 
-#: conglomerate.xml:744(guimenu)
+#: C/conglomerate.xml:744(guimenu)
 msgid "<placeholder-1/>dit"
 msgstr "<placeholder-1/>earbeiten"
 
-#: conglomerate.xml:749(para)
+#: C/conglomerate.xml:749(para)
 msgid "Use the <guimenu>Edit</guimenu> menu, to perform the following tasks:"
 msgstr ""
+"Mit dem Menü <guimenu>Bearbeiten</guimenu> können Sie folgende Aufgaben "
+"ausführen:"
 
-#: conglomerate.xml:788(accel)
+#: C/conglomerate.xml:788(accel)
 msgid "T"
 msgstr "W"
 
-#: conglomerate.xml:787(guimenu)
+#: C/conglomerate.xml:787(guimenu)
 msgid "<placeholder-1/>ools"
 msgstr "<placeholder-1/>erkzeuge"
 
-#: conglomerate.xml:792(para)
+#: C/conglomerate.xml:792(para)
 msgid "Use the <guimenu>Tools</guimenu> menu, to perform the following tasks:"
 msgstr ""
+"Mit dem Menü <guimenu>Werkzeuge</guimenu> können Sie folgende Aufgaben "
+"ausführen:"
 
-#: conglomerate.xml:821(accel)
+#: C/conglomerate.xml:821(accel)
 msgid "H"
 msgstr "H"
 
-#: conglomerate.xml:820(guimenu)
+#: C/conglomerate.xml:820(guimenu)
 msgid "<placeholder-1/>elp"
 msgstr "<placeholder-1/>ilfe"
 
-#: conglomerate.xml:825(para)
+#: C/conglomerate.xml:825(para)
 msgid ""
 "Use the <guimenu>Help</guimenu> menu, to display the "
 "<application>Conglomerate XML Editor</application> \"About\" dialog and "
 "access the Online Help."
 msgstr ""
+"Verwenden Sie das Menü <guimenu>Hilfe</guimenu>, um den Informationsdialog "
+"und die Online-Hilfe zum <application>Conglomerate XML-Editor</application> "
+"anzuzeigen."
 
-#: conglomerate.xml:833(title)
+#: C/conglomerate.xml:833(title)
 msgid "Editor Window Toolbar"
 msgstr "Werkzeugleiste des Editorfensters"
 
-#: conglomerate.xml:834(para)
+#: C/conglomerate.xml:834(para)
 msgid ""
 "The Toolbar provides quick access to the most commonly used operations of the "
 "<application>Conglomerate XML Editor</application>. The following options are "
 "available:"
 msgstr ""
+"Die Werkzeugleiste bietet Schnellzugriff auf die meistgenutzten Vorgänge von "
+"<application>Conglomerate XML-Editor</application>. Die folgenden Optionen "
+"sind verfügbar:"
 
-#: conglomerate.xml:837(title)
+#: C/conglomerate.xml:837(title)
 msgid "Editor Window Toolbar Options"
 msgstr "Optionen der Werkzeugleiste des Editorfensters"
 
-#: conglomerate.xml:840(emphasis)
+#: C/conglomerate.xml:840(emphasis)
 msgid "Open"
 msgstr "Öffnen"
 
-#: conglomerate.xml:843(para)
+#: C/conglomerate.xml:843(para)
 msgid ""
 "Use the <guibutton>Open</guibutton> button, to <link linkend=\"open_a_document"
 "\" endterm=\"open_a_document.title\"/> that already exists."
 msgstr ""
 
-#: conglomerate.xml:849(emphasis)
+#: C/conglomerate.xml:849(emphasis)
 msgid "Save"
 msgstr "Speichern"
 
-#: conglomerate.xml:852(para)
+#: C/conglomerate.xml:852(para)
 msgid ""
 "Use the <guibutton>Save</guibutton> button, to <link linkend=\"save_a_document"
 "\" endterm=\"save_a_document.title\"/> that is already save to a new file "
 "with a different filename."
 msgstr ""
 
-#: conglomerate.xml:858(emphasis)
+#: C/conglomerate.xml:858(emphasis)
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: conglomerate.xml:861(para)
+#: C/conglomerate.xml:861(para)
 msgid ""
 "Use the <guibutton>Undo</guibutton> button, to <link linkend=\"undo\" endterm="
 "\"undo.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:866(emphasis)
+#: C/conglomerate.xml:866(emphasis)
 msgid "Redo"
 msgstr "Wiederholen"
 
-#: conglomerate.xml:869(para)
+#: C/conglomerate.xml:869(para)
 msgid ""
 "Use the <guibutton>Redo</guibutton> button, to <link linkend=\"redo\" endterm="
 "\"redo.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:874(emphasis)
+#: C/conglomerate.xml:874(emphasis)
 msgid "Cut"
 msgstr "Ausschneiden"
 
-#: conglomerate.xml:877(para)
+#: C/conglomerate.xml:877(para)
 msgid ""
 "Use the <guibutton>Cut</guibutton> button, to <link linkend=\"cut_text\" "
 "endterm=\"cut_text.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:882(emphasis)
+#: C/conglomerate.xml:882(emphasis)
 msgid "Copy"
 msgstr "Kopieren"
 
-#: conglomerate.xml:885(para)
+#: C/conglomerate.xml:885(para)
 msgid ""
 "Use the <guibutton>Copy</guibutton> button, to <link linkend=\"copy_text\" "
 "endterm=\"copy_text.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:890(emphasis)
+#: C/conglomerate.xml:890(emphasis)
 msgid "Paste"
 msgstr "Einfügen"
 
-#: conglomerate.xml:893(para)
+#: C/conglomerate.xml:893(para)
 msgid ""
 "Use the <guibutton>Paste</guibutton> button, to <link linkend=\"paste_text\" "
 "endterm=\"paste_text.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:899(title)
+#: C/conglomerate.xml:899(title)
 msgid "Editor Window Document Area"
-msgstr ""
+msgstr "Dokumentbereich des Bearbeitungsfensters"
 
-#: conglomerate.xml:900(para)
+#: C/conglomerate.xml:900(para)
 msgid ""
 "The document area is the main workspace. It provides two views of the open "
 "document:"
 msgstr ""
 
-#: conglomerate.xml:903(para)
+#: C/conglomerate.xml:903(para)
 msgid ""
 "<link linkend=\"outline_view\" endterm=\"outline_view.title\"/> (left-pane)"
 msgstr ""
 
-#: conglomerate.xml:907(para)
+#: C/conglomerate.xml:907(para)
 msgid "<link linkend=\"page_view\" endterm=\"page_view.title\"/> (right-pane)"
 msgstr ""
 
-#: conglomerate.xml:911(para)
+#: C/conglomerate.xml:911(para)
 msgid ""
 "Each view is shown in a pane. The separator between the panes can be used to "
 "adjust how much of the document area is taken up by each of the views."
 msgstr ""
+"Jede Ansicht wird in einem eigenen Teilfenster angezeigt. Der Trenner "
+"zwischen den Teilfenstern wird verwendet, um die Größe zu ändern, also um "
+"festzulegen, wie viel Anteil am Hauptfenster das jeweilige Teilfenster haben "
+"soll."
 
-#: conglomerate.xml:914(title)
+#: C/conglomerate.xml:914(title)
 msgid "Outline view"
 msgstr ""
 
-#: conglomerate.xml:915(para)
+#: C/conglomerate.xml:915(para)
 msgid ""
 "Shows the structure of the document in a \"Tree View\" control. The outline "
 "view provides two XML tree perspectives of the open document:"
 msgstr ""
 
-#: conglomerate.xml:919(para)
+#: C/conglomerate.xml:919(para)
 msgid "<link linkend=\"overview\" endterm=\"overview.title\"/> (left-tab)"
 msgstr ""
 
-#: conglomerate.xml:923(para)
+#: C/conglomerate.xml:923(para)
 msgid "<link linkend=\"raw_xml\" endterm=\"raw_xml.title\"/> (right-tab)"
 msgstr ""
 
-#: conglomerate.xml:927(para)
+#: C/conglomerate.xml:927(para)
 msgid ""
 "Both perspectives enable the tree structure of the open document to be "
 "navigated. Starting from the root node of the tree, elements that have \"child"
 "\" or \"sibling-elements\" can be expanded and collapsed."
 msgstr ""
 
-#: conglomerate.xml:931(para)
+#: C/conglomerate.xml:931(para)
 msgid ""
 "A context-sensitive pop-up menu is available when a selected node is "
 "<action>right-clicked</action> with the mouse."
 msgstr ""
 
-#: conglomerate.xml:933(para)
+#: C/conglomerate.xml:933(para)
 msgid ""
 "The options displayed on the pop-up are dependent on the selected node type. "
 "For example, when nodes that are representative of the tree root, "
@@ -1219,38 +1306,38 @@ msgid ""
 "are selected, these options will be available as shown in the figure below."
 msgstr ""
 
-#: conglomerate.xml:944(title)
+#: C/conglomerate.xml:944(title)
 msgid "Outline view pop-up menu"
 msgstr ""
 
-#: conglomerate.xml:953(para)
+#: C/conglomerate.xml:953(para)
 msgid "Use the outline view pop-up menu to perform the following tasks:"
 msgstr ""
 
-#: conglomerate.xml:986(para) conglomerate.xml:1132(para)
+#: C/conglomerate.xml:986(para) C/conglomerate.xml:1132(para)
 msgid ""
 "Insert a <link linkend=\"insert_sibling_elements\" endterm="
 "\"insert_sibling_elements.title\"/> after the current element."
 msgstr ""
 
-#: conglomerate.xml:989(para) conglomerate.xml:1135(para)
+#: C/conglomerate.xml:989(para) C/conglomerate.xml:1135(para)
 msgid ""
 "Insert a <link linkend=\"insert_sub_elements\" endterm=\"insert_sub_elements."
 "title\"/> directly under the current element."
 msgstr ""
 
-#: conglomerate.xml:993(para)
+#: C/conglomerate.xml:993(para)
 msgid ""
 "This pop-up menu is also available when an <acronym>XML</acronym> element is "
 "<action>right-clicked</action> in the <link linkend=\"page_view\" endterm="
 "\"page_view.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:997(title)
+#: C/conglomerate.xml:997(title)
 msgid "Overview tree perspective"
-msgstr ""
+msgstr "Übersichts-Baumansicht"
 
-#: conglomerate.xml:998(para)
+#: C/conglomerate.xml:998(para)
 msgid ""
 "In Overview perspective the tree nodes of the open document are shown by "
 "their Docbook element name using a logical view. The value, or text, "
@@ -1259,7 +1346,7 @@ msgid ""
 "expanded."
 msgstr ""
 
-#: conglomerate.xml:1003(para)
+#: C/conglomerate.xml:1003(para)
 msgid ""
 "The element name shown in the tree view is not always the same as that shown "
 "in the <link linkend=\"page_view\" endterm=\"page_view.title\"/>. This is "
@@ -1277,15 +1364,15 @@ msgid ""
 "\"display_spec_element_map_ref\"/>."
 msgstr ""
 
-#: conglomerate.xml:1017(title)
+#: C/conglomerate.xml:1017(title)
 msgid "Outline view in Overview perspective"
 msgstr ""
 
-#: conglomerate.xml:1028(title)
+#: C/conglomerate.xml:1028(title)
 msgid "Raw XML tree perspective"
 msgstr ""
 
-#: conglomerate.xml:1029(para)
+#: C/conglomerate.xml:1029(para)
 msgid ""
 "In Raw XML perspective the tree nodes of the open document are shown using "
 "the full XML syntax, so the \"greater-than\" (&lt;) and \"less-than\" (&gt;) "
@@ -1294,21 +1381,23 @@ msgid ""
 "<xref linkend=\"fig_outline_raw_xml\"/>)."
 msgstr ""
 
-#: conglomerate.xml:1035(title)
+#: C/conglomerate.xml:1035(title)
 msgid "Outline view in Raw XML perspective"
 msgstr ""
 
-#: conglomerate.xml:1047(title)
+#: C/conglomerate.xml:1047(title)
 msgid "Page view"
-msgstr ""
+msgstr "Seitenansicht"
 
-#: conglomerate.xml:1048(para)
+#: C/conglomerate.xml:1048(para)
 msgid ""
 "The page view shows the content of the open document and the elements in "
 "which various content typesare tagged."
 msgstr ""
+"Die Seitenansicht zeigt den Inhalt des geöffneten Dokuments an sowie die "
+"Elemente, durch die die verschiedenen Inhaltstypen markiert werden können."
 
-#: conglomerate.xml:1050(para)
+#: C/conglomerate.xml:1050(para)
 msgid ""
 "Block elements such as <sgmltag class=\"starttag\">article</sgmltag>, "
 "<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
@@ -1318,7 +1407,7 @@ msgid ""
 "\"fig_page_view_doc_edit\"/>)."
 msgstr ""
 
-#: conglomerate.xml:1054(para)
+#: C/conglomerate.xml:1054(para)
 msgid ""
 "The \"structural element borders\" for nested block structures are "
 "alternately colored to help readability. The captions used, correspond to the "
@@ -1332,11 +1421,11 @@ msgid ""
 "\"doc_type_support\" endterm=\"doc_type_support.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:1064(title)
+#: C/conglomerate.xml:1064(title)
 msgid "Page view display of elements"
 msgstr ""
 
-#: conglomerate.xml:1073(para)
+#: C/conglomerate.xml:1073(para)
 msgid ""
 "Wrapped captions can be expanded or collapsed by <action>clicking</action> "
 "the mouse on the caption label. In <xref linkend=\"fig_wrapped_caption_states"
@@ -1345,21 +1434,21 @@ msgid ""
 "\"Author\" has been hidden. Inline elements cannot be collapsed."
 msgstr ""
 
-#: conglomerate.xml:1079(title)
+#: C/conglomerate.xml:1079(title)
 msgid "Wrapped caption states - expanded and collapsed"
 msgstr ""
 
-#: conglomerate.xml:1088(para)
+#: C/conglomerate.xml:1088(para)
 msgid ""
 "Two pop-up menus are available in the page view, each is associated with a "
 "different object:"
 msgstr ""
 
-#: conglomerate.xml:1093(emphasis)
+#: C/conglomerate.xml:1093(emphasis)
 msgid "Block Element Menu"
 msgstr ""
 
-#: conglomerate.xml:1096(para)
+#: C/conglomerate.xml:1096(para)
 msgid ""
 "This is the same menu that is available when an XML element is <action>right-"
 "clicked</action> in the <link linkend=\"outline_view\" endterm=\"outline_view."
@@ -1367,22 +1456,25 @@ msgid ""
 "<action>right-clicked</action>. Use the block element menu to:"
 msgstr ""
 
-#: conglomerate.xml:1143(emphasis)
+#: C/conglomerate.xml:1143(emphasis)
 msgid "Text Menu"
-msgstr ""
+msgstr "Text-Menü"
 
-#: conglomerate.xml:1146(para)
+#: C/conglomerate.xml:1146(para)
 msgid ""
 "This menu is displayed when text contained in a block element is "
 "<action>right-clicked</action>. It displays a list of options that allow you "
 "to:"
 msgstr ""
+"Dieses Menü wird angezeigt, wenn der in einem Blockelement enthaltene Text "
+"<action>mit der rechten Maustaste angeklickt</action> wird. Eine Liste "
+"folgender Optionen wird angezeigt:"
 
-#: conglomerate.xml:1177(title)
+#: C/conglomerate.xml:1177(title)
 msgid "Window Management"
-msgstr ""
+msgstr "Fensterverwaltung"
 
-#: conglomerate.xml:1178(para)
+#: C/conglomerate.xml:1178(para)
 msgid ""
 "The <application>Conglomerate XML Editor</application> uses your chosen "
 "<application>Window Manager</application> to create the main and editor "
@@ -1398,17 +1490,17 @@ msgid ""
 "<application>Conglomerate</application> windows."
 msgstr ""
 
-#: conglomerate.xml:1188(para)
+#: C/conglomerate.xml:1188(para)
 msgid ""
 "Within <application>Conglomerate</application> there are two options for "
 "window and application management:"
 msgstr ""
 
-#: conglomerate.xml:1203(title)
+#: C/conglomerate.xml:1203(title)
 msgid "Close"
 msgstr "Schließen"
 
-#: conglomerate.xml:1204(para)
+#: C/conglomerate.xml:1204(para)
 msgid ""
 "As multiple editor windows can be opened, editor windows can also be "
 "individually closed by selecting <menuchoice><guimenu><accel>F</accel>ile</"
@@ -1417,7 +1509,7 @@ msgid ""
 "keycombo>."
 msgstr ""
 
-#: conglomerate.xml:1215(para)
+#: C/conglomerate.xml:1215(para)
 msgid ""
 "This option should not be confused with the <option>Exit</option> option, "
 "which will close all <application>Conglomerate</application> windows "
@@ -1425,11 +1517,11 @@ msgid ""
 "terminate the application."
 msgstr ""
 
-#: conglomerate.xml:1221(title)
+#: C/conglomerate.xml:1221(title)
 msgid "Exit"
 msgstr "Beenden"
 
-#: conglomerate.xml:1222(para)
+#: C/conglomerate.xml:1222(para)
 msgid ""
 "Selecting <menuchoice><guimenu><accel>F</accel>ile</"
 "guimenu><guimenuitem><accel>Q</accel>uit</guimenuitem></menuchoice> or using "
@@ -1439,97 +1531,97 @@ msgid ""
 "the application."
 msgstr ""
 
-#: conglomerate.xml:1236(title)
+#: C/conglomerate.xml:1236(title)
 msgid "Performing Tasks"
 msgstr "Ausführen von Aufgaben"
 
-#: conglomerate.xml:1238(title)
+#: C/conglomerate.xml:1238(title)
 msgid "File Management"
 msgstr "Dateiverwaltung"
 
-#: conglomerate.xml:1240(title)
+#: C/conglomerate.xml:1240(title)
 msgid "Create a document"
 msgstr "Ein Dokument erstellen"
 
-#: conglomerate.xml:1241(para)
+#: C/conglomerate.xml:1241(para)
 msgid ""
 "When <application>Conglomerate</application> is first started main window "
 "does not provide editing functionality. To display the editor window Create "
 "or <link linkend=\"open_a_document\" endterm=\"open_a_document.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:1244(title)
+#: C/conglomerate.xml:1244(title)
 msgid "Creating a Document"
-msgstr ""
+msgstr "Erstellen eines Dokuments"
 
-#: conglomerate.xml:1246(para)
+#: C/conglomerate.xml:1246(para)
 msgid ""
 "From the main window menu <action>select</action><menuchoice><guimenu>File</"
 "guimenu><guimenuitem>New</guimenuitem></menuchoice>. The <application>Create "
 "New File</application> wizard is started."
 msgstr ""
 
-#: conglomerate.xml:1260(para)
+#: C/conglomerate.xml:1260(para)
 msgid ""
 "<action>Click</action> the <guibutton>Forward</guibutton> button. The wizard "
 "displays alist of document type templates."
 msgstr ""
 
-#: conglomerate.xml:1272(para)
+#: C/conglomerate.xml:1272(para)
 msgid ""
 "<action>Select</action> a suitable template from the list, then "
 "<action>click</action> the <guibutton>Forward</guibutton> button. The final "
 "dialog of the wizard is displayed."
 msgstr ""
 
-#: conglomerate.xml:1278(para)
+#: C/conglomerate.xml:1278(para)
 msgid ""
 "<action>Click</action> the <guibutton>Apply</guibutton> button. The Editor "
 "Window is displayed with the selected template ready for editing."
 msgstr ""
 
-#: conglomerate.xml:1292(title)
+#: C/conglomerate.xml:1292(title)
 msgid "Open a document"
 msgstr "Ein Dokument öffnen"
 
-#: conglomerate.xml:1293(para)
+#: C/conglomerate.xml:1293(para)
 msgid ""
 "The option to open an exiting document can be performed from the main and "
 "editor windows. The following procedure is performed from the main window."
 msgstr ""
 
-#: conglomerate.xml:1296(title)
+#: C/conglomerate.xml:1296(title)
 msgid "Opening a Document"
-msgstr ""
+msgstr "Öffnen eines Dokuments"
 
-#: conglomerate.xml:1298(para)
+#: C/conglomerate.xml:1298(para)
 msgid ""
 "From the Menubar <action>select</action><menuchoice><guimenu>File</"
 "guimenu><guimenuitem>Open</guimenuitem></menuchoice>. The Select an XML File "
 "dialog is displayed."
 msgstr ""
 
-#: conglomerate.xml:1312(para)
+#: C/conglomerate.xml:1312(para)
 msgid ""
 "Use the Folders list view to <action>Navigate</action> to the folder "
 "containing the required file."
 msgstr ""
 
-#: conglomerate.xml:1316(para)
+#: C/conglomerate.xml:1316(para)
 msgid ""
 "Use the Files list view to <action>select</action> the file, then "
 "<action>click</action><guibutton>OK</guibutton>."
 msgstr ""
 
-#: conglomerate.xml:1320(para)
+#: C/conglomerate.xml:1320(para)
 msgid "The selected file is opened in the editor window."
 msgstr ""
 
-#: conglomerate.xml:1325(title)
+#: C/conglomerate.xml:1325(title)
 msgid "Save a document"
 msgstr "Ein Dokument speichern"
 
-#: conglomerate.xml:1326(para)
+#: C/conglomerate.xml:1326(para)
 msgid ""
 "The first time you save a document you will be required to provide a file "
 "name and select a location where the file will be written to disk (see <xref "
@@ -1537,174 +1629,174 @@ msgid ""
 "operation will write directly to the open file."
 msgstr ""
 
-#: conglomerate.xml:1330(para)
+#: C/conglomerate.xml:1330(para)
 msgid ""
 "Save your document before you start and regularly there after to avoid "
 "loosing work due to unexpected software failure."
 msgstr ""
 
-#: conglomerate.xml:1335(title) conglomerate.xml:1340(title)
+#: C/conglomerate.xml:1335(title) C/conglomerate.xml:1340(title)
 msgid "Save As new document"
 msgstr "Als neues Dokument speichern"
 
-#: conglomerate.xml:1336(para)
+#: C/conglomerate.xml:1336(para)
 msgid ""
 "It is sometimes convenient to save an exiting file to a copy using a new "
 "filename or to a different location."
 msgstr ""
 
-#: conglomerate.xml:1338(para)
+#: C/conglomerate.xml:1338(para)
 msgid "Assuming that a document is already open proceed as follows."
 msgstr ""
 
-#: conglomerate.xml:1342(para)
+#: C/conglomerate.xml:1342(para)
 msgid ""
 "<action>Select</action><menuchoice><guimenu>File</guimenu><guimenuitem>Save "
 "As</guimenuitem></menuchoice> (<keycombo><keycap>Ctrl+Shft+S</keycap></"
 "keycombo>). The Save XML As dialog is displayed."
 msgstr ""
 
-#: conglomerate.xml:1359(para)
+#: C/conglomerate.xml:1359(para)
 msgid ""
 "Use the Folders list to navigate to the folder where the new copy of the file "
 "will be saved."
 msgstr ""
 
-#: conglomerate.xml:1363(para)
+#: C/conglomerate.xml:1363(para)
 msgid "Enter a filename in the Selection field."
 msgstr "Geben Sie einen Dateinamen im Auswahlfeld ein."
 
-#: conglomerate.xml:1366(para)
+#: C/conglomerate.xml:1366(para)
 msgid ""
 "<action>Click</action><guibutton>OK</guibutton> to save a new copy of the "
 "file."
 msgstr ""
 
-#: conglomerate.xml:1373(title)
+#: C/conglomerate.xml:1373(title)
 msgid "Import a document"
 msgstr "Importieren eines Dokuments"
 
-#: conglomerate.xml:1377(title)
+#: C/conglomerate.xml:1377(title)
 msgid "Export a document"
 msgstr "Exportieren eines Dokuments"
 
-#: conglomerate.xml:1381(title)
+#: C/conglomerate.xml:1381(title)
 msgid "Inspect document properties"
 msgstr "Betrachten der Dokumenteigenschaften"
 
-#: conglomerate.xml:1386(title)
+#: C/conglomerate.xml:1386(title)
 msgid "Editing"
 msgstr "Bearbeiten"
 
-#: conglomerate.xml:1388(title)
+#: C/conglomerate.xml:1388(title)
 msgid "Typing text"
 msgstr "Eingabe von Text"
 
-#: conglomerate.xml:1392(title)
+#: C/conglomerate.xml:1392(title)
 msgid "Undo actions"
 msgstr "Rückgängig-Vorgänge"
 
-#: conglomerate.xml:1396(title)
+#: C/conglomerate.xml:1396(title)
 msgid "Redo actions"
 msgstr "Wiederholen-Vorgänge"
 
-#: conglomerate.xml:1400(title)
+#: C/conglomerate.xml:1400(title)
 msgid "Cut text and elements"
-msgstr ""
+msgstr "Ausschneiden von Text und Elementen"
 
-#: conglomerate.xml:1404(title)
+#: C/conglomerate.xml:1404(title)
 msgid "Copy text and elements"
-msgstr ""
+msgstr "Kopieren von Text und Elementen"
 
-#: conglomerate.xml:1408(title)
+#: C/conglomerate.xml:1408(title)
 msgid "Paste text and elements"
-msgstr ""
+msgstr "Einfügen von Text und Elementen"
 
-#: conglomerate.xml:1412(title)
+#: C/conglomerate.xml:1412(title)
 msgid "Paste into an element"
-msgstr ""
+msgstr "Einfügen in ein Element"
 
-#: conglomerate.xml:1416(title)
+#: C/conglomerate.xml:1416(title)
 msgid "Paste before an element"
-msgstr ""
+msgstr "Einfügen vor einem Element"
 
-#: conglomerate.xml:1420(title)
+#: C/conglomerate.xml:1420(title)
 msgid "Paste after an element"
-msgstr ""
+msgstr "Einfügen nach einem Element"
 
-#: conglomerate.xml:1424(title)
+#: C/conglomerate.xml:1424(title)
 msgid "View XML source"
-msgstr ""
+msgstr "XML-Code betrachten"
 
-#: conglomerate.xml:1429(title)
+#: C/conglomerate.xml:1429(title)
 msgid "Markup"
-msgstr ""
+msgstr "Hervorhebung"
 
-#: conglomerate.xml:1432(title)
+#: C/conglomerate.xml:1432(title)
 msgid "Insert Elements"
-msgstr ""
+msgstr "Einfügen von Elementen"
 
-#: conglomerate.xml:1435(title)
+#: C/conglomerate.xml:1435(title)
 msgid "New sibling-element"
 msgstr ""
 
-#: conglomerate.xml:1439(title)
+#: C/conglomerate.xml:1439(title)
 msgid "New sub-element"
 msgstr ""
 
-#: conglomerate.xml:1443(title)
+#: C/conglomerate.xml:1443(title)
 msgid "Insert inline elements"
-msgstr ""
+msgstr "Einfügen eingebetteter Elemente"
 
-#: conglomerate.xml:1447(title)
+#: C/conglomerate.xml:1447(title)
 msgid "Remove inline elements"
-msgstr ""
+msgstr "Entfernen eingebetteter Elemente"
 
-#: conglomerate.xml:1452(title)
+#: C/conglomerate.xml:1452(title)
 msgid "Cleanup XML source"
 msgstr ""
 
-#: conglomerate.xml:1456(title)
+#: C/conglomerate.xml:1456(title)
 msgid "Modify Element Properties"
-msgstr ""
+msgstr "Anpassen der Elementeigenschaften"
 
-#: conglomerate.xml:1459(title)
+#: C/conglomerate.xml:1459(title)
 msgid "About XPath"
-msgstr ""
+msgstr "Info zu XPath"
 
-#: conglomerate.xml:1463(title)
+#: C/conglomerate.xml:1463(title)
 msgid "Scope"
 msgstr ""
 
-#: conglomerate.xml:1467(title)
+#: C/conglomerate.xml:1467(title)
 msgid "Language"
 msgstr "Sprache"
 
-#: conglomerate.xml:1471(title)
+#: C/conglomerate.xml:1471(title)
 msgid "Revisions"
 msgstr "Revisionen"
 
-#: conglomerate.xml:1475(title)
+#: C/conglomerate.xml:1475(title)
 msgid "Advanced"
-msgstr ""
+msgstr "Fortgeschritten"
 
-#: conglomerate.xml:1481(title)
+#: C/conglomerate.xml:1481(title)
 msgid "Validating"
-msgstr ""
+msgstr "Überprüfen"
 
-#: conglomerate.xml:1484(title)
+#: C/conglomerate.xml:1484(title)
 msgid "About validation"
-msgstr ""
+msgstr "Info zur Überprüfung"
 
-#: conglomerate.xml:1488(title)
+#: C/conglomerate.xml:1488(title)
 msgid "Validate a document"
-msgstr ""
+msgstr "Überprüfen eines Dokuments"
 
-#: conglomerate.xml:1494(title)
+#: C/conglomerate.xml:1494(title)
 msgid "Designing Display Definitions"
 msgstr ""
 
-#: conglomerate.xml:1495(para)
+#: C/conglomerate.xml:1495(para)
 msgid ""
 "Display specifications are <acronym>XML</acronym> files saved with the "
 "extension <filename>XDS</filename>. They hold various types of information, "
@@ -1712,7 +1804,7 @@ msgid ""
 "Conglomerate XML Editor."
 msgstr ""
 
-#: conglomerate.xml:1498(para)
+#: C/conglomerate.xml:1498(para)
 msgid ""
 "Display specifications do not take the place of <acronym>DTD</acronym>, XML "
 "Schema, or <acronym>XSL</acronym> files. Their function is only to provide "
@@ -1720,7 +1812,7 @@ msgid ""
 "<acronym>XML</acronym> instance."
 msgstr ""
 
-#: conglomerate.xml:1501(para)
+#: C/conglomerate.xml:1501(para)
 msgid ""
 "Because display specifications are <acronym>XML</acronym>, they can be easily "
 "modified in order to customize the <application>Conglomerate</application> "
@@ -1728,74 +1820,76 @@ msgid ""
 "<acronym>XML</acronym> file."
 msgstr ""
 
-#: conglomerate.xml:1504(para)
+#: C/conglomerate.xml:1504(para)
 msgid ""
 "A complete definition of the Conglomerate XDS DTD is available in <xref "
 "linkend=\"xds_dtd_def\"/>."
 msgstr ""
 
-#: conglomerate.xml:1505(para)
+#: C/conglomerate.xml:1505(para)
 msgid "The following operations can be performed on XDS files:"
 msgstr ""
 
-#: conglomerate.xml:1519(title)
+#: C/conglomerate.xml:1519(title)
 msgid "Edit a Display Spec"
 msgstr ""
 
-#: conglomerate.xml:1523(title)
+#: C/conglomerate.xml:1523(title)
 msgid "Dump a Display Spec"
 msgstr ""
 
-#: conglomerate.xml:1534(para)
+#: C/conglomerate.xml:1534(para)
 msgid ""
 "The Conglomerate project aims to provide support for the editing of a wide "
 "range of XML documents. During developed three levels of support are "
 "recognized:"
 msgstr ""
 
-#: conglomerate.xml:1538(para)
+#: C/conglomerate.xml:1538(para)
 msgid "<link linkend=\"supported_docs\" endterm=\"supported_docs.title\"/>."
 msgstr ""
 
-#: conglomerate.xml:1542(para)
+#: C/conglomerate.xml:1542(para)
 msgid ""
 "<link linkend=\"partial_supported_docs\" endterm=\"partial_supported_docs."
 "title\"/>."
 msgstr ""
 
-#: conglomerate.xml:1546(para)
+#: C/conglomerate.xml:1546(para)
 msgid ""
 "<link linkend=\"unsupported_docs\" endterm=\"unsupported_docs.title\"/>. We "
 "hope to add support in the future (patches welcome!)."
 msgstr ""
 
-#: conglomerate.xml:1552(title)
+#: C/conglomerate.xml:1552(title)
 msgid "Summary of Supported XML Document Types"
 msgstr ""
 
-#: conglomerate.xml:1556(entry)
+#: C/conglomerate.xml:1556(entry)
 msgid "Document Type"
-msgstr ""
+msgstr "Dokumenttyp"
 
-#: conglomerate.xml:1557(entry)
+#: C/conglomerate.xml:1557(entry)
 msgid "Status"
 msgstr "Status"
 
-#: conglomerate.xml:1629(title)
+#: C/conglomerate.xml:1629(title)
 msgid "Supported"
 msgstr "Unterstützt"
 
-#: conglomerate.xml:1630(para)
+#: C/conglomerate.xml:1630(para)
 msgid ""
 "Following is an introduction to the XML Document Types \"supported\" by the "
 "Conglomerate XML Editor."
 msgstr ""
+"Im Folgenden finden Sie eine Auflistung der durch den Conglomerate XML-Editor "
+"unterstützten Dokumenttypen. "
 
-#: conglomerate.xml:1633(title)
+#: C/conglomerate.xml:1633(title)
 msgid "Docbook XML 4.1.2"
 msgstr "Docbook XML 4.1.2"
 
-#: conglomerate.xml:1634(para)
+#: C/conglomerate.xml:1634(para)
 msgid ""
 "The first XML document type to be supported by <application>Conglomerate</"
 "application> is Docbook XML. Docbook XML is a standards based application of "
@@ -1803,7 +1897,7 @@ msgid ""
 "semantic description of content related computer hardware and software."
 msgstr ""
 
-#: conglomerate.xml:1638(para)
+#: C/conglomerate.xml:1638(para)
 msgid ""
 "Numerous free and open source software projects have adopted Docbook XML as "
 "their standard for content authoring and storage. Most significantly the two "
@@ -1811,7 +1905,7 @@ msgid ""
 "ulink> and <ulink url=\"http://www.kde.org\">KDE</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1641(para)
+#: C/conglomerate.xml:1641(para)
 msgid ""
 "The official release of the Docbook XML Document Type Definition (DTD) is "
 "available at <ulink url=\"http://www.oasis-open.org/\">OASIS</ulink>. "
@@ -1819,58 +1913,58 @@ msgid ""
 "\">Docbook Open Repository</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1644(para)
+#: C/conglomerate.xml:1644(para)
 msgid ""
 "There are two references of note that will get you started with Docbook and "
 "its usage:"
 msgstr ""
 
-#: conglomerate.xml:1648(ulink)
+#: C/conglomerate.xml:1648(ulink)
 msgid "Docbook: The Definitive Guide"
 msgstr ""
 
-#: conglomerate.xml:1653(ulink)
+#: C/conglomerate.xml:1653(ulink)
 msgid "Docbook XSL: The Complete Guide"
 msgstr ""
 
-#: conglomerate.xml:1657(para)
+#: C/conglomerate.xml:1657(para)
 msgid ""
 "Docbook is used throughout the user manual to explain and illustrate the "
 "functionality of the <application>Conglomerate XML Editor</application>."
 msgstr ""
 
-#: conglomerate.xml:1661(title)
+#: C/conglomerate.xml:1661(title)
 msgid "XHTML (strict)"
-msgstr ""
+msgstr "XHTML (strikt)"
 
-#: conglomerate.xml:1662(para)
+#: C/conglomerate.xml:1662(para)
 msgid ""
 "<acronym>XHTML</acronym> stands for EXtensible HyperText Markup Language "
 "which is aimed to replace HTML. It looks almost identical to HTML 4.01, but "
 "is stricter and cleaner because XHTML is HTML defined as an XML application."
 msgstr ""
 
-#: conglomerate.xml:1666(para)
+#: C/conglomerate.xml:1666(para)
 msgid ""
 "<acronym>XHTML</acronym> is a <ulink url=\"http://www.w3.org/TR/xhtml1/\">W3C "
 "Recommendation</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1668(para)
+#: C/conglomerate.xml:1668(para)
 msgid ""
 "The following online resource will be helpful in geting you started with "
 "<acronym>XHTML</acronym>:"
 msgstr ""
 
-#: conglomerate.xml:1672(ulink) conglomerate.xml:1719(ulink)
+#: C/conglomerate.xml:1672(ulink) C/conglomerate.xml:1719(ulink)
 msgid "W3 Schools"
 msgstr ""
 
-#: conglomerate.xml:1678(title)
+#: C/conglomerate.xml:1678(title)
 msgid "\"Kernel Traffic\" newsetter format"
 msgstr ""
 
-#: conglomerate.xml:1679(para)
+#: C/conglomerate.xml:1679(para)
 msgid ""
 "The \"Kernel Trafffic\" news letter is a HTML format used by the <ulink url="
 "\"http://kt.zork.net/\">Kernel Traffic Web Site</ulink>. The news letter "
@@ -1879,21 +1973,21 @@ msgid ""
 "world."
 msgstr ""
 
-#: conglomerate.xml:1685(title)
+#: C/conglomerate.xml:1685(title)
 msgid "Partially Supported"
-msgstr ""
+msgstr "Teilweise unterstützt"
 
-#: conglomerate.xml:1686(para)
+#: C/conglomerate.xml:1686(para)
 msgid ""
 "Following is an introduction to the XML Document Types \"partially supported"
 "\" by the Conglomerate XML Editor."
 msgstr ""
 
-#: conglomerate.xml:1689(title)
+#: C/conglomerate.xml:1689(title)
 msgid "Relax NG"
-msgstr ""
+msgstr "Relax NG"
 
-#: conglomerate.xml:1690(para)
+#: C/conglomerate.xml:1690(para)
 msgid ""
 "RELAX NG is a schema language for <acronym>XML</acronym>. The RELAX NG "
 "specifications have been developed within <ulink url=\"http://www.oasis-open."
@@ -1901,25 +1995,25 @@ msgid ""
 "relax-ng/\">RELAX NG Technical Committee</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1693(para)
+#: C/conglomerate.xml:1693(para)
 msgid ""
 "The following online resources will be helpful in geting you started with "
 "<acronym>Relax NG</acronym>:"
 msgstr ""
 
-#: conglomerate.xml:1698(ulink)
+#: C/conglomerate.xml:1698(ulink)
 msgid "relaxng.org"
 msgstr "relaxng.org"
 
-#: conglomerate.xml:1703(ulink) conglomerate.xml:1724(ulink)
+#: C/conglomerate.xml:1703(ulink) C/conglomerate.xml:1724(ulink)
 msgid "zvon.org"
 msgstr "zvon.org"
 
-#: conglomerate.xml:1709(title)
+#: C/conglomerate.xml:1709(title)
 msgid "XSL-FO"
 msgstr "XSL-FO"
 
-#: conglomerate.xml:1710(para)
+#: C/conglomerate.xml:1710(para)
 msgid ""
 "<acronym>XSL-FO</acronym> is a language for formatting <acronym>XML</acronym> "
 "data. The acronym stands for Extensible Stylesheet Language Formatting "
@@ -1928,31 +2022,31 @@ msgid ""
 "Style/XSL/\">W3C Recommendations</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1715(para)
+#: C/conglomerate.xml:1715(para)
 msgid ""
 "The following online resources will be helpful in geting you started with "
 "<acronym>XSL-FO</acronym>:"
 msgstr ""
 
-#: conglomerate.xml:1731(title)
+#: C/conglomerate.xml:1731(title)
 msgid "Unsupported"
 msgstr "Nicht unterstützt"
 
-#: conglomerate.xml:1732(para)
+#: C/conglomerate.xml:1732(para)
 msgid ""
 "Following is an introduction to the XML Document Types \"unsupported\" by the "
 "Conglomerate XML Editor."
 msgstr ""
 
-#: conglomerate.xml:1735(title)
+#: C/conglomerate.xml:1735(title)
 msgid "Cascading Style Sheets"
 msgstr "Cascading Style Sheets"
 
-#: conglomerate.xml:1739(title)
+#: C/conglomerate.xml:1739(title)
 msgid "OpenOffice.org File Format"
 msgstr "OpenOffice.org-Dateiformat"
 
-#: conglomerate.xml:1740(para)
+#: C/conglomerate.xml:1740(para)
 msgid ""
 "<ulink url=\"http://www.openoffice.org/\">OpenOffice.org</ulink> is both an "
 "open-source application and project. It is <ulink url=\"http://www.gnu.org/"
@@ -1963,7 +2057,7 @@ msgid ""
 "implementation for the OpenOffice.org application."
 msgstr ""
 
-#: conglomerate.xml:1747(para)
+#: C/conglomerate.xml:1747(para)
 msgid ""
 "The OpenOffice.org XML project has contributed the OpenOffice.org XML File "
 "Format to <ulink url=\"http://www.oasis-open.org/\">OASIS</ulink> where the "
@@ -1974,48 +2068,48 @@ msgid ""
 "openoffice.org/\">OpenOffice.org XML project</ulink>."
 msgstr ""
 
-#: conglomerate.xml:1754(title)
+#: C/conglomerate.xml:1754(title)
 msgid "Open eBook Publication Structure"
 msgstr ""
 
-#: conglomerate.xml:1766(title)
+#: C/conglomerate.xml:1766(title)
 msgid "XDS Element Mapping Reference"
 msgstr ""
 
-#: conglomerate.xml:1769(title)
+#: C/conglomerate.xml:1769(title)
 msgid "Map to Docbook"
 msgstr ""
 
-#: conglomerate.xml:1770(para)
+#: C/conglomerate.xml:1770(para)
 msgid ""
 "<xref linkend=\"tbl_cong2dbmap\"/> describes the name mapping used by "
 "Conglomerate Display Specification for Docbook V4.1.2 XML Documents."
 msgstr ""
 
-#: conglomerate.xml:1773(para)
+#: C/conglomerate.xml:1773(para)
 msgid ""
 "Only names that are different to those commonly recognised as elements in "
 "Docbook are listed. All other elements are considered unaltered by "
 "Conglomerate."
 msgstr ""
 
-#: conglomerate.xml:1777(title)
+#: C/conglomerate.xml:1777(title)
 msgid "title"
-msgstr ""
+msgstr "title"
 
-#: conglomerate.xml:1780(entry) conglomerate.xml:1784(entry)
+#: C/conglomerate.xml:1780(entry) C/conglomerate.xml:1784(entry)
 msgid "collumn"
-msgstr ""
+msgstr "collumn"
 
-#: conglomerate.xml:1792(title)
+#: C/conglomerate.xml:1792(title)
 msgid "Map to Relax NG"
 msgstr ""
 
-#: conglomerate.xml:1803(title)
+#: C/conglomerate.xml:1803(title)
 msgid "Display Specification DTD"
 msgstr ""
 
-#: conglomerate.xml:1804(para)
+#: C/conglomerate.xml:1804(para)
 msgid ""
 "The Display Specification DTD (<filename>xds.dtd</filename>) specifies the "
 "kinds of tags that can be included in your XDS document. In addition, the DTD "
@@ -2025,7 +2119,7 @@ msgid ""
 "or ignorable."
 msgstr ""
 
-#: conglomerate.xml:1809(para)
+#: C/conglomerate.xml:1809(para)
 msgid ""
 "When creating or editing an XDS, the XML tags used, their attributes and "
 "arrangement must conform to <filename>xds.dtd</filename>. If the XDS is "
@@ -2033,17 +2127,17 @@ msgid ""
 "exit."
 msgstr ""
 
-#: conglomerate.xml:1813(title)
+#: C/conglomerate.xml:1813(title)
 msgid "Anatomy of a Display Specification"
 msgstr ""
 
-#: conglomerate.xml:1814(para)
+#: C/conglomerate.xml:1814(para)
 msgid ""
 "A display specification is an XML file, it therefore has an XML prolog like "
 "such."
 msgstr ""
 
-#: conglomerate.xml:1818(para)
+#: C/conglomerate.xml:1818(para)
 msgid ""
 "When creating or editing an XDS the Display Specification DTD (<filename>xds."
 "dtd</filename>) should be declared so that your custom XDS may be validated "
@@ -2051,7 +2145,7 @@ msgid ""
 "defines the \"root\" as <sgmltag class=\"starttag\">dispspec</sgmltag>."
 msgstr ""
 
-#: conglomerate.xml:1822(para)
+#: C/conglomerate.xml:1822(para)
 msgid ""
 "The Document Type Declaration does not have a PUBLIC Identifier as they are "
 "not strictly required for <acronym>XML</acronym> documents. The DTD location "
@@ -2059,27 +2153,27 @@ msgid ""
 "example."
 msgstr ""
 
-#: conglomerate.xml:1829(para)
+#: C/conglomerate.xml:1829(para)
 msgid ""
 "<application>Conglomerate</application> does currently validate XDS files at "
 "run-time."
 msgstr ""
 
-#: conglomerate.xml:1834(title)
+#: C/conglomerate.xml:1834(title)
 msgid "Element Reference"
 msgstr "Elementreferenz"
 
-#: conglomerate.xml:1836(title)
+#: C/conglomerate.xml:1836(title)
 msgid "collapseto"
-msgstr ""
+msgstr "collapseto"
 
-#: conglomerate.xml:1837(para)
+#: C/conglomerate.xml:1837(para)
 msgid ""
 "The <sgmltag class=\"starttag\">collapseto</sgmltag> element is currently "
 "unsupported."
 msgstr ""
 
-#: conglomerate.xml:1838(para)
+#: C/conglomerate.xml:1838(para)
 msgid ""
 "When supported, setting <sgmltag class=\"starttag\">collapseto</sgmltag> "
 "causes the element wrapper to become part of the parent node element wrapper. "
@@ -2088,140 +2182,140 @@ msgid ""
 "sgmltag> set is located."
 msgstr ""
 
-#: conglomerate.xml:1843(title) conglomerate.xml:1865(title)
-#: conglomerate.xml:1915(title) conglomerate.xml:1955(title)
-#: conglomerate.xml:1991(title) conglomerate.xml:2104(title)
-#: conglomerate.xml:2152(title) conglomerate.xml:2206(title)
-#: conglomerate.xml:2241(title) conglomerate.xml:2288(title)
-#: conglomerate.xml:2324(title) conglomerate.xml:2347(title)
-#: conglomerate.xml:2383(title) conglomerate.xml:2433(title)
-#: conglomerate.xml:2546(title) conglomerate.xml:2586(title)
-#: conglomerate.xml:2622(title) conglomerate.xml:2672(title)
-#: conglomerate.xml:2785(title)
+#: C/conglomerate.xml:1843(title) C/conglomerate.xml:1865(title)
+#: C/conglomerate.xml:1915(title) C/conglomerate.xml:1955(title)
+#: C/conglomerate.xml:1991(title) C/conglomerate.xml:2104(title)
+#: C/conglomerate.xml:2152(title) C/conglomerate.xml:2206(title)
+#: C/conglomerate.xml:2241(title) C/conglomerate.xml:2288(title)
+#: C/conglomerate.xml:2324(title) C/conglomerate.xml:2347(title)
+#: C/conglomerate.xml:2383(title) C/conglomerate.xml:2433(title)
+#: C/conglomerate.xml:2546(title) C/conglomerate.xml:2586(title)
+#: C/conglomerate.xml:2622(title) C/conglomerate.xml:2672(title)
+#: C/conglomerate.xml:2785(title)
 msgid "Attributes"
 msgstr "Attribute"
 
-#: conglomerate.xml:1844(para) conglomerate.xml:1854(para)
-#: conglomerate.xml:1903(para) conglomerate.xml:1920(para)
-#: conglomerate.xml:2194(para) conglomerate.xml:2207(para)
-#: conglomerate.xml:2217(para) conglomerate.xml:2277(para)
-#: conglomerate.xml:2335(para) conglomerate.xml:2421(para)
-#: conglomerate.xml:2574(para) conglomerate.xml:2587(para)
-#: conglomerate.xml:2660(para)
+#: C/conglomerate.xml:1844(para) C/conglomerate.xml:1854(para)
+#: C/conglomerate.xml:1903(para) C/conglomerate.xml:1920(para)
+#: C/conglomerate.xml:2194(para) C/conglomerate.xml:2207(para)
+#: C/conglomerate.xml:2217(para) C/conglomerate.xml:2277(para)
+#: C/conglomerate.xml:2335(para) C/conglomerate.xml:2421(para)
+#: C/conglomerate.xml:2574(para) C/conglomerate.xml:2587(para)
+#: C/conglomerate.xml:2660(para)
 msgid "None Applicable"
-msgstr ""
+msgstr "Nicht anwendbar"
 
-#: conglomerate.xml:1847(title) conglomerate.xml:1896(title)
-#: conglomerate.xml:1919(title) conglomerate.xml:1959(title)
-#: conglomerate.xml:2068(title) conglomerate.xml:2108(title)
-#: conglomerate.xml:2187(title) conglomerate.xml:2210(title)
-#: conglomerate.xml:2270(title) conglomerate.xml:2292(title)
-#: conglomerate.xml:2328(title) conglomerate.xml:2351(title)
-#: conglomerate.xml:2414(title) conglomerate.xml:2510(title)
-#: conglomerate.xml:2567(title) conglomerate.xml:2590(title)
-#: conglomerate.xml:2653(title) conglomerate.xml:2749(title)
-#: conglomerate.xml:2862(title)
+#: C/conglomerate.xml:1847(title) C/conglomerate.xml:1896(title)
+#: C/conglomerate.xml:1919(title) C/conglomerate.xml:1959(title)
+#: C/conglomerate.xml:2068(title) C/conglomerate.xml:2108(title)
+#: C/conglomerate.xml:2187(title) C/conglomerate.xml:2210(title)
+#: C/conglomerate.xml:2270(title) C/conglomerate.xml:2292(title)
+#: C/conglomerate.xml:2328(title) C/conglomerate.xml:2351(title)
+#: C/conglomerate.xml:2414(title) C/conglomerate.xml:2510(title)
+#: C/conglomerate.xml:2567(title) C/conglomerate.xml:2590(title)
+#: C/conglomerate.xml:2653(title) C/conglomerate.xml:2749(title)
+#: C/conglomerate.xml:2862(title)
 msgid "Parents"
-msgstr ""
+msgstr "Eltern"
 
-#: conglomerate.xml:1853(title) conglomerate.xml:1902(title)
-#: conglomerate.xml:1923(title) conglomerate.xml:1965(title)
-#: conglomerate.xml:2074(title) conglomerate.xml:2114(title)
-#: conglomerate.xml:2193(title) conglomerate.xml:2216(title)
-#: conglomerate.xml:2276(title) conglomerate.xml:2298(title)
-#: conglomerate.xml:2334(title) conglomerate.xml:2357(title)
-#: conglomerate.xml:2420(title) conglomerate.xml:2516(title)
-#: conglomerate.xml:2573(title) conglomerate.xml:2596(title)
-#: conglomerate.xml:2659(title) conglomerate.xml:2755(title)
-#: conglomerate.xml:2868(title)
+#: C/conglomerate.xml:1853(title) C/conglomerate.xml:1902(title)
+#: C/conglomerate.xml:1923(title) C/conglomerate.xml:1965(title)
+#: C/conglomerate.xml:2074(title) C/conglomerate.xml:2114(title)
+#: C/conglomerate.xml:2193(title) C/conglomerate.xml:2216(title)
+#: C/conglomerate.xml:2276(title) C/conglomerate.xml:2298(title)
+#: C/conglomerate.xml:2334(title) C/conglomerate.xml:2357(title)
+#: C/conglomerate.xml:2420(title) C/conglomerate.xml:2516(title)
+#: C/conglomerate.xml:2573(title) C/conglomerate.xml:2596(title)
+#: C/conglomerate.xml:2659(title) C/conglomerate.xml:2755(title)
+#: C/conglomerate.xml:2868(title)
 msgid "Children"
-msgstr ""
+msgstr "Kinder"
 
-#: conglomerate.xml:1857(title) conglomerate.xml:1906(title)
-#: conglomerate.xml:1929(title) conglomerate.xml:1971(title)
-#: conglomerate.xml:2080(title) conglomerate.xml:2120(title)
-#: conglomerate.xml:2197(title) conglomerate.xml:2220(title)
-#: conglomerate.xml:2280(title) conglomerate.xml:2304(title)
-#: conglomerate.xml:2338(title) conglomerate.xml:2363(title)
-#: conglomerate.xml:2424(title) conglomerate.xml:2522(title)
-#: conglomerate.xml:2577(title) conglomerate.xml:2602(title)
-#: conglomerate.xml:2663(title) conglomerate.xml:2761(title)
-#: conglomerate.xml:2874(title)
+#: C/conglomerate.xml:1857(title) C/conglomerate.xml:1906(title)
+#: C/conglomerate.xml:1929(title) C/conglomerate.xml:1971(title)
+#: C/conglomerate.xml:2080(title) C/conglomerate.xml:2120(title)
+#: C/conglomerate.xml:2197(title) C/conglomerate.xml:2220(title)
+#: C/conglomerate.xml:2280(title) C/conglomerate.xml:2304(title)
+#: C/conglomerate.xml:2338(title) C/conglomerate.xml:2363(title)
+#: C/conglomerate.xml:2424(title) C/conglomerate.xml:2522(title)
+#: C/conglomerate.xml:2577(title) C/conglomerate.xml:2602(title)
+#: C/conglomerate.xml:2663(title) C/conglomerate.xml:2761(title)
+#: C/conglomerate.xml:2874(title)
 msgid "Example"
 msgstr "Beispiel"
 
-#: conglomerate.xml:1858(para) conglomerate.xml:2281(para)
+#: C/conglomerate.xml:1858(para) C/conglomerate.xml:2281(para)
 msgid "See <link endterm=\"element.title\" linkend=\"element\"/>."
 msgstr ""
 
-#: conglomerate.xml:1862(title)
+#: C/conglomerate.xml:1862(title)
 msgid "description"
 msgstr "Beschreibung"
 
-#: conglomerate.xml:1863(para)
+#: C/conglomerate.xml:1863(para)
 msgid "A paragraph describing the Document Type annoted by the XDS."
 msgstr ""
 
-#: conglomerate.xml:1870(entry) conglomerate.xml:2005(entry)
-#: conglomerate.xml:2157(entry) conglomerate.xml:2246(entry)
-#: conglomerate.xml:2388(entry) conglomerate.xml:2447(entry)
-#: conglomerate.xml:2551(entry) conglomerate.xml:2627(entry)
-#: conglomerate.xml:2686(entry) conglomerate.xml:2799(entry)
+#: C/conglomerate.xml:1870(entry) C/conglomerate.xml:2005(entry)
+#: C/conglomerate.xml:2157(entry) C/conglomerate.xml:2246(entry)
+#: C/conglomerate.xml:2388(entry) C/conglomerate.xml:2447(entry)
+#: C/conglomerate.xml:2551(entry) C/conglomerate.xml:2627(entry)
+#: C/conglomerate.xml:2686(entry) C/conglomerate.xml:2799(entry)
 msgid "Name"
 msgstr "Name"
 
-#: conglomerate.xml:1871(entry) conglomerate.xml:2006(entry)
-#: conglomerate.xml:2158(entry) conglomerate.xml:2247(entry)
-#: conglomerate.xml:2389(entry) conglomerate.xml:2448(entry)
-#: conglomerate.xml:2552(entry) conglomerate.xml:2628(entry)
-#: conglomerate.xml:2687(entry) conglomerate.xml:2800(entry)
+#: C/conglomerate.xml:1871(entry) C/conglomerate.xml:2006(entry)
+#: C/conglomerate.xml:2158(entry) C/conglomerate.xml:2247(entry)
+#: C/conglomerate.xml:2389(entry) C/conglomerate.xml:2448(entry)
+#: C/conglomerate.xml:2552(entry) C/conglomerate.xml:2628(entry)
+#: C/conglomerate.xml:2687(entry) C/conglomerate.xml:2800(entry)
 msgid "Value"
 msgstr "Wert"
 
-#: conglomerate.xml:1872(entry) conglomerate.xml:2007(entry)
-#: conglomerate.xml:2159(entry) conglomerate.xml:2248(entry)
-#: conglomerate.xml:2390(entry) conglomerate.xml:2449(entry)
-#: conglomerate.xml:2553(entry) conglomerate.xml:2629(entry)
-#: conglomerate.xml:2688(entry) conglomerate.xml:2801(entry)
+#: C/conglomerate.xml:1872(entry) C/conglomerate.xml:2007(entry)
+#: C/conglomerate.xml:2159(entry) C/conglomerate.xml:2248(entry)
+#: C/conglomerate.xml:2390(entry) C/conglomerate.xml:2449(entry)
+#: C/conglomerate.xml:2553(entry) C/conglomerate.xml:2629(entry)
+#: C/conglomerate.xml:2688(entry) C/conglomerate.xml:2801(entry)
 msgid "Description"
 msgstr "Beschreibung"
 
-#: conglomerate.xml:1886(entry) conglomerate.xml:2404(entry)
-#: conglomerate.xml:2643(entry)
+#: C/conglomerate.xml:1886(entry) C/conglomerate.xml:2404(entry)
+#: C/conglomerate.xml:2643(entry)
 msgid "xml:lang"
 msgstr "xml:lang"
 
-#: conglomerate.xml:1887(entry) conglomerate.xml:2405(entry)
-#: conglomerate.xml:2644(entry)
+#: C/conglomerate.xml:1887(entry) C/conglomerate.xml:2405(entry)
+#: C/conglomerate.xml:2644(entry)
 msgid "en"
 msgstr "en"
 
-#: conglomerate.xml:1888(entry) conglomerate.xml:2406(entry)
-#: conglomerate.xml:2645(entry)
+#: C/conglomerate.xml:1888(entry) C/conglomerate.xml:2406(entry)
+#: C/conglomerate.xml:2645(entry)
 msgid "Language localization"
 msgstr ""
 
-#: conglomerate.xml:1907(para)
+#: C/conglomerate.xml:1907(para)
 msgid "See <link endterm=\"metadata.title\" linkend=\"metadata\"/>"
 msgstr ""
 
-#: conglomerate.xml:1912(title)
+#: C/conglomerate.xml:1912(title)
 msgid "dispspec"
-msgstr ""
+msgstr "dispspec"
 
-#: conglomerate.xml:1913(para)
+#: C/conglomerate.xml:1913(para)
 msgid ""
 "This is the root element of the Conglomerate Display Specification Document "
 "Type."
 msgstr ""
 
-#: conglomerate.xml:1916(para) conglomerate.xml:1956(para)
-#: conglomerate.xml:2105(para) conglomerate.xml:2289(para)
-#: conglomerate.xml:2325(para) conglomerate.xml:2348(para)
+#: C/conglomerate.xml:1916(para) C/conglomerate.xml:1956(para)
+#: C/conglomerate.xml:2105(para) C/conglomerate.xml:2289(para)
+#: C/conglomerate.xml:2325(para) C/conglomerate.xml:2348(para)
 msgid "None Applicable."
-msgstr ""
+msgstr "Nicht anwendbar."
 
-#: conglomerate.xml:1924(para)
+#: C/conglomerate.xml:1924(para)
 msgid ""
 "<link endterm=\"metadata.title\" linkend=\"metadata\"/>, <link endterm="
 "\"serialisation.title\" linkend=\"serialisation\"/>, <link endterm=\"document-"
@@ -2229,163 +2323,163 @@ msgid ""
 "title\" linkend=\"element-list\"/>"
 msgstr ""
 
-#: conglomerate.xml:1951(title)
+#: C/conglomerate.xml:1951(title)
 msgid "document-models"
-msgstr ""
+msgstr "document-models"
 
-#: conglomerate.xml:1952(para)
+#: C/conglomerate.xml:1952(para)
 msgid ""
 "A wrapper element for <sgmltag class=\"starttag\">external-document-model</"
 "sgmltag>. Mutiple <sgmltag class=\"starttag\">external-document-model</"
 "sgmltag> elements may be specified."
 msgstr ""
 
-#: conglomerate.xml:1988(title)
+#: C/conglomerate.xml:1988(title)
 msgid "element"
-msgstr ""
+msgstr "element"
 
-#: conglomerate.xml:1989(para)
+#: C/conglomerate.xml:1989(para)
 msgid "An XML element."
-msgstr ""
+msgstr "Ein XML-Element."
 
-#: conglomerate.xml:2012(entry) conglomerate.xml:2454(entry)
-#: conglomerate.xml:2693(entry) conglomerate.xml:2806(entry)
+#: C/conglomerate.xml:2012(entry) C/conglomerate.xml:2454(entry)
+#: C/conglomerate.xml:2693(entry) C/conglomerate.xml:2806(entry)
 msgid "color"
-msgstr ""
+msgstr "color"
 
-#: conglomerate.xml:2013(entry) conglomerate.xml:2455(entry)
-#: conglomerate.xml:2694(entry) conglomerate.xml:2807(entry)
+#: C/conglomerate.xml:2013(entry) C/conglomerate.xml:2455(entry)
+#: C/conglomerate.xml:2694(entry) C/conglomerate.xml:2807(entry)
 msgid "Hex Value"
-msgstr ""
+msgstr "Hexadezimaler Wert"
 
-#: conglomerate.xml:2015(acronym) conglomerate.xml:2457(acronym)
-#: conglomerate.xml:2696(acronym) conglomerate.xml:2809(acronym)
+#: C/conglomerate.xml:2015(acronym) C/conglomerate.xml:2457(acronym)
+#: C/conglomerate.xml:2696(acronym) C/conglomerate.xml:2809(acronym)
 msgid "RGB"
 msgstr "RGB"
 
-#: conglomerate.xml:2014(entry) conglomerate.xml:2456(entry)
-#: conglomerate.xml:2695(entry) conglomerate.xml:2808(entry)
+#: C/conglomerate.xml:2014(entry) C/conglomerate.xml:2456(entry)
+#: C/conglomerate.xml:2695(entry) C/conglomerate.xml:2808(entry)
 msgid ""
 "Use hexadecimal notation for the combination of Red, Green, and Blue color "
 "values (<placeholder-1/>). The lowest value that can be given to one light "
 "source is 0 (hex #00). The highest value is 255 (hex #FF)."
 msgstr ""
 
-#: conglomerate.xml:2019(entry) conglomerate.xml:2461(entry)
-#: conglomerate.xml:2700(entry) conglomerate.xml:2813(entry)
+#: C/conglomerate.xml:2019(entry) C/conglomerate.xml:2461(entry)
+#: C/conglomerate.xml:2700(entry) C/conglomerate.xml:2813(entry)
 msgid "filename-xpath"
-msgstr ""
+msgstr "filename-xpath"
 
-#: conglomerate.xml:2020(entry) conglomerate.xml:2025(entry)
-#: conglomerate.xml:2030(entry) conglomerate.xml:2035(entry)
-#: conglomerate.xml:2174(entry) conglomerate.xml:2179(entry)
-#: conglomerate.xml:2261(entry) conglomerate.xml:2462(entry)
-#: conglomerate.xml:2467(entry) conglomerate.xml:2472(entry)
-#: conglomerate.xml:2477(entry) conglomerate.xml:2559(entry)
-#: conglomerate.xml:2701(entry) conglomerate.xml:2706(entry)
-#: conglomerate.xml:2711(entry) conglomerate.xml:2716(entry)
-#: conglomerate.xml:2814(entry) conglomerate.xml:2819(entry)
-#: conglomerate.xml:2824(entry) conglomerate.xml:2829(entry)
+#: C/conglomerate.xml:2020(entry) C/conglomerate.xml:2025(entry)
+#: C/conglomerate.xml:2030(entry) C/conglomerate.xml:2035(entry)
+#: C/conglomerate.xml:2174(entry) C/conglomerate.xml:2179(entry)
+#: C/conglomerate.xml:2261(entry) C/conglomerate.xml:2462(entry)
+#: C/conglomerate.xml:2467(entry) C/conglomerate.xml:2472(entry)
+#: C/conglomerate.xml:2477(entry) C/conglomerate.xml:2559(entry)
+#: C/conglomerate.xml:2701(entry) C/conglomerate.xml:2706(entry)
+#: C/conglomerate.xml:2711(entry) C/conglomerate.xml:2716(entry)
+#: C/conglomerate.xml:2814(entry) C/conglomerate.xml:2819(entry)
+#: C/conglomerate.xml:2824(entry) C/conglomerate.xml:2829(entry)
 msgid "value"
-msgstr ""
+msgstr "value"
 
-#: conglomerate.xml:2021(entry) conglomerate.xml:2026(entry)
-#: conglomerate.xml:2031(entry) conglomerate.xml:2036(entry)
-#: conglomerate.xml:2052(entry) conglomerate.xml:2060(entry)
-#: conglomerate.xml:2463(entry) conglomerate.xml:2468(entry)
-#: conglomerate.xml:2473(entry) conglomerate.xml:2478(entry)
-#: conglomerate.xml:2494(entry) conglomerate.xml:2502(entry)
-#: conglomerate.xml:2702(entry) conglomerate.xml:2707(entry)
-#: conglomerate.xml:2712(entry) conglomerate.xml:2717(entry)
-#: conglomerate.xml:2733(entry) conglomerate.xml:2741(entry)
-#: conglomerate.xml:2815(entry) conglomerate.xml:2820(entry)
-#: conglomerate.xml:2825(entry) conglomerate.xml:2830(entry)
-#: conglomerate.xml:2846(entry) conglomerate.xml:2854(entry)
+#: C/conglomerate.xml:2021(entry) C/conglomerate.xml:2026(entry)
+#: C/conglomerate.xml:2031(entry) C/conglomerate.xml:2036(entry)
+#: C/conglomerate.xml:2052(entry) C/conglomerate.xml:2060(entry)
+#: C/conglomerate.xml:2463(entry) C/conglomerate.xml:2468(entry)
+#: C/conglomerate.xml:2473(entry) C/conglomerate.xml:2478(entry)
+#: C/conglomerate.xml:2494(entry) C/conglomerate.xml:2502(entry)
+#: C/conglomerate.xml:2702(entry) C/conglomerate.xml:2707(entry)
+#: C/conglomerate.xml:2712(entry) C/conglomerate.xml:2717(entry)
+#: C/conglomerate.xml:2733(entry) C/conglomerate.xml:2741(entry)
+#: C/conglomerate.xml:2815(entry) C/conglomerate.xml:2820(entry)
+#: C/conglomerate.xml:2825(entry) C/conglomerate.xml:2830(entry)
+#: C/conglomerate.xml:2846(entry) C/conglomerate.xml:2854(entry)
 msgid "desc"
-msgstr ""
+msgstr "desc"
 
-#: conglomerate.xml:2024(entry) conglomerate.xml:2466(entry)
-#: conglomerate.xml:2705(entry) conglomerate.xml:2818(entry)
+#: C/conglomerate.xml:2024(entry) C/conglomerate.xml:2466(entry)
+#: C/conglomerate.xml:2705(entry) C/conglomerate.xml:2818(entry)
 msgid "icon"
-msgstr ""
+msgstr "icon"
 
-#: conglomerate.xml:2029(entry) conglomerate.xml:2471(entry)
-#: conglomerate.xml:2710(entry) conglomerate.xml:2823(entry)
+#: C/conglomerate.xml:2029(entry) C/conglomerate.xml:2471(entry)
+#: C/conglomerate.xml:2710(entry) C/conglomerate.xml:2823(entry)
 msgid "ns"
-msgstr ""
+msgstr "ns"
 
-#: conglomerate.xml:2034(entry) conglomerate.xml:2476(entry)
-#: conglomerate.xml:2558(entry) conglomerate.xml:2715(entry)
-#: conglomerate.xml:2828(entry)
+#: C/conglomerate.xml:2034(entry) C/conglomerate.xml:2476(entry)
+#: C/conglomerate.xml:2558(entry) C/conglomerate.xml:2715(entry)
+#: C/conglomerate.xml:2828(entry)
 msgid "plugin-id"
-msgstr ""
+msgstr "plugin-id"
 
-#: conglomerate.xml:2039(entry) conglomerate.xml:2253(entry)
-#: conglomerate.xml:2256(sgmltag) conglomerate.xml:2481(entry)
-#: conglomerate.xml:2720(entry) conglomerate.xml:2833(entry)
+#: C/conglomerate.xml:2039(entry) C/conglomerate.xml:2253(entry)
+#: C/conglomerate.xml:2256(sgmltag) C/conglomerate.xml:2481(entry)
+#: C/conglomerate.xml:2720(entry) C/conglomerate.xml:2833(entry)
 msgid "tag"
-msgstr ""
+msgstr "tag"
 
-#: conglomerate.xml:2040(entry) conglomerate.xml:2482(entry)
-#: conglomerate.xml:2721(entry) conglomerate.xml:2834(entry)
+#: C/conglomerate.xml:2040(entry) C/conglomerate.xml:2482(entry)
+#: C/conglomerate.xml:2721(entry) C/conglomerate.xml:2834(entry)
 msgid "external element name"
 msgstr ""
 
-#: conglomerate.xml:2041(entry) conglomerate.xml:2483(entry)
-#: conglomerate.xml:2722(entry) conglomerate.xml:2835(entry)
+#: C/conglomerate.xml:2041(entry) C/conglomerate.xml:2483(entry)
+#: C/conglomerate.xml:2722(entry) C/conglomerate.xml:2835(entry)
 msgid ""
 "The name of an element declared by the DTD specified in <link endterm="
 "\"external-document-model.title\" linkend=\"external-document-model\"/>."
 msgstr ""
 
-#: conglomerate.xml:2044(entry) conglomerate.xml:2164(entry)
-#: conglomerate.xml:2486(entry) conglomerate.xml:2725(entry)
-#: conglomerate.xml:2838(entry)
+#: C/conglomerate.xml:2044(entry) C/conglomerate.xml:2164(entry)
+#: C/conglomerate.xml:2486(entry) C/conglomerate.xml:2725(entry)
+#: C/conglomerate.xml:2838(entry)
 msgid "type"
-msgstr ""
+msgstr "type"
 
-#: conglomerate.xml:2046(para) conglomerate.xml:2488(para)
-#: conglomerate.xml:2727(para) conglomerate.xml:2840(para)
+#: C/conglomerate.xml:2046(para) C/conglomerate.xml:2488(para)
+#: C/conglomerate.xml:2727(para) C/conglomerate.xml:2840(para)
 msgid "embedded-external-file"
-msgstr ""
+msgstr "embedded-external-file"
 
-#: conglomerate.xml:2047(para) conglomerate.xml:2489(para)
-#: conglomerate.xml:2728(para) conglomerate.xml:2841(para)
+#: C/conglomerate.xml:2047(para) C/conglomerate.xml:2489(para)
+#: C/conglomerate.xml:2728(para) C/conglomerate.xml:2841(para)
 msgid "paragraph"
-msgstr ""
+msgstr "paragraph"
 
-#: conglomerate.xml:2048(para) conglomerate.xml:2490(para)
-#: conglomerate.xml:2729(para) conglomerate.xml:2842(para)
+#: C/conglomerate.xml:2048(para) C/conglomerate.xml:2490(para)
+#: C/conglomerate.xml:2729(para) C/conglomerate.xml:2842(para)
 msgid "plugin"
-msgstr ""
+msgstr "plugin"
 
-#: conglomerate.xml:2049(para) conglomerate.xml:2491(para)
-#: conglomerate.xml:2730(para) conglomerate.xml:2843(para)
+#: C/conglomerate.xml:2049(para) C/conglomerate.xml:2491(para)
+#: C/conglomerate.xml:2730(para) C/conglomerate.xml:2843(para)
 msgid "span"
-msgstr ""
+msgstr "span"
 
-#: conglomerate.xml:2050(para) conglomerate.xml:2492(para)
-#: conglomerate.xml:2731(para) conglomerate.xml:2844(para)
+#: C/conglomerate.xml:2050(para) C/conglomerate.xml:2492(para)
+#: C/conglomerate.xml:2731(para) C/conglomerate.xml:2844(para)
 msgid "structural"
-msgstr ""
+msgstr "structural"
 
-#: conglomerate.xml:2055(entry) conglomerate.xml:2497(entry)
-#: conglomerate.xml:2736(entry) conglomerate.xml:2849(entry)
+#: C/conglomerate.xml:2055(entry) C/conglomerate.xml:2497(entry)
+#: C/conglomerate.xml:2736(entry) C/conglomerate.xml:2849(entry)
 msgid "whitepace"
-msgstr ""
+msgstr "whitepace"
 
-#: conglomerate.xml:2057(para) conglomerate.xml:2499(para)
-#: conglomerate.xml:2738(para) conglomerate.xml:2851(para)
+#: C/conglomerate.xml:2057(para) C/conglomerate.xml:2499(para)
+#: C/conglomerate.xml:2738(para) C/conglomerate.xml:2851(para)
 msgid "normalize"
-msgstr ""
+msgstr "normalize"
 
-#: conglomerate.xml:2058(para) conglomerate.xml:2500(para)
-#: conglomerate.xml:2739(para) conglomerate.xml:2852(para)
+#: C/conglomerate.xml:2058(para) C/conglomerate.xml:2500(para)
+#: C/conglomerate.xml:2739(para) C/conglomerate.xml:2852(para)
 msgid "preserve"
-msgstr ""
+msgstr "preserve"
 
-#: conglomerate.xml:2075(para) conglomerate.xml:2517(para)
-#: conglomerate.xml:2756(para) conglomerate.xml:2869(para)
+#: C/conglomerate.xml:2075(para) C/conglomerate.xml:2517(para)
+#: C/conglomerate.xml:2756(para) C/conglomerate.xml:2869(para)
 msgid ""
 "<link endterm=\"header-info.title\" linkend=\"header-info\"/>, <link endterm="
 "\"key-value-list.title\" linkend=\"key-value-list\"/>, <link endterm=\"name."
@@ -2393,157 +2487,171 @@ msgid ""
 "\"property-dialog\"/>, <link endterm=\"short-desc.title\" linkend=\"short-desc"
 "\"/>"
 msgstr ""
+"<link endterm=\"header-info.title\" linkend=\"header-info\"/>, <link endterm="
+"\"key-value-list.title\" linkend=\"key-value-list\"/>, <link endterm=\"name."
+"title\" linkend=\"name\"/>, <link endterm=\"property-dialog.title\" linkend="
+"\"property-dialog\"/>, <link endterm=\"short-desc.title\" linkend=\"short-desc"
+"\"/>"
 
-#: conglomerate.xml:2101(title)
+#: C/conglomerate.xml:2101(title)
 msgid "element-list"
-msgstr ""
+msgstr "element-list"
 
-#: conglomerate.xml:2102(para)
+#: C/conglomerate.xml:2102(para)
 msgid "A wrapper element for element types."
-msgstr ""
+msgstr "Ein umschließendes Element für Elementtypen."
 
-#: conglomerate.xml:2115(para) conglomerate.xml:2293(para)
-#: conglomerate.xml:2568(para) conglomerate.xml:2654(para)
+#: C/conglomerate.xml:2115(para) C/conglomerate.xml:2293(para)
+#: C/conglomerate.xml:2568(para) C/conglomerate.xml:2654(para)
 msgid ""
 "<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm=\"plugin-"
 "element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element."
 "title\" linkend=\"span-element\"/>, <link endterm=\"structural-element.title"
 "\" linkend=\"structural-element\"/>"
 msgstr ""
+"<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm=\"plugin-"
+"element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element."
+"title\" linkend=\"span-element\"/>, <link endterm=\"structural-element.title"
+"\" linkend=\"structural-element\"/>"
 
-#: conglomerate.xml:2148(title)
+#: C/conglomerate.xml:2148(title)
 msgid "external-document-model"
-msgstr ""
+msgstr "external-document-model"
 
-#: conglomerate.xml:2149(para)
+#: C/conglomerate.xml:2149(para)
 msgid ""
 "Specifies the Document Type Definition (DTD) annotated by this Display "
 "Specification (XDS)."
 msgstr ""
 
-#: conglomerate.xml:2166(para)
+#: C/conglomerate.xml:2166(para)
 msgid "dtd"
-msgstr ""
+msgstr "dtd"
 
-#: conglomerate.xml:2167(para)
+#: C/conglomerate.xml:2167(para)
 msgid "relax-ng-schema"
 msgstr "relax-ng-schema"
 
-#: conglomerate.xml:2168(para)
+#: C/conglomerate.xml:2168(para)
 msgid "w3c-schema"
 msgstr "w3c-schema"
 
-#: conglomerate.xml:2173(entry)
+#: C/conglomerate.xml:2173(entry)
 msgid "public-id"
 msgstr "public-id"
 
-#: conglomerate.xml:2175(entry)
+#: C/conglomerate.xml:2175(entry)
 msgid "The PUBLIC Identifier by which the Documen Type is recognized."
 msgstr ""
 
-#: conglomerate.xml:2178(entry)
+#: C/conglomerate.xml:2178(entry)
 msgid "system-id"
 msgstr "system-id"
 
-#: conglomerate.xml:2180(entry)
+#: C/conglomerate.xml:2180(entry)
 msgid "The SYSTEM Indentifier by which the Document Type is to be recognized."
 msgstr ""
 
-#: conglomerate.xml:2198(para)
+#: C/conglomerate.xml:2198(para)
 msgid ""
 "See <link endterm=\"document-models.title\" linkend=\"document-models\"/>"
 msgstr ""
+"Siehe <link endterm=\"document-models.title\" linkend=\"document-models\"/>"
 
-#: conglomerate.xml:2203(title)
+#: C/conglomerate.xml:2203(title)
 msgid "format"
 msgstr "format"
 
-#: conglomerate.xml:2221(para)
+#: C/conglomerate.xml:2221(para)
 msgid "See <link linkend=\"serialisation\" endterm=\"serialisation.title\"/>."
 msgstr ""
+"Siehe <link linkend=\"serialisation\" endterm=\"serialisation.title\"/>."
 
-#: conglomerate.xml:2225(title)
+#: C/conglomerate.xml:2225(title)
 msgid "header-info"
 msgstr "header-info"
 
-#: conglomerate.xml:2226(para)
+#: C/conglomerate.xml:2226(para)
 msgid ""
 "Defines title content for nodes shown in the outline tree view and the "
 "element wrappers shown in the page view. Node content is comprised of two "
 "parts [element name] : [title] where:"
 msgstr ""
 
-#: conglomerate.xml:2231(para)
+#: C/conglomerate.xml:2231(para)
 msgid ""
 "<emphasis role=\"bold\">[name]</emphasis> is derived from <sgmltag class="
 "\"starttag\">name</sgmltag>."
 msgstr ""
+"<emphasis role=\"bold\">[name]</emphasis> ist abgeleitet von <sgmltag class="
+"\"starttag\">name</sgmltag>."
 
-#: conglomerate.xml:2235(para)
+#: C/conglomerate.xml:2235(para)
 msgid ""
 "<emphasis role=\"bold\">[title]</emphasis> is derived from either the value "
 "of <sgmltag class=\"attribute\">tag</sgmltag> or the result of <sgmltag class="
 "\"attribute\">xpath</sgmltag>."
 msgstr ""
 
-#: conglomerate.xml:2254(entry)
+#: C/conglomerate.xml:2254(entry)
 msgid "An element name from the anotated Document Type."
 msgstr ""
 
-#: conglomerate.xml:2255(entry)
+#: C/conglomerate.xml:2255(entry)
 msgid ""
 "When an element name is provided Conglomerate will search for a child node "
 "whose name corrsponds to the value of <placeholder-1/> and return the value "
 "of the next child node for [title]."
 msgstr ""
 
-#: conglomerate.xml:2260(entry)
+#: C/conglomerate.xml:2260(entry)
 msgid "xpath"
 msgstr "xpath"
 
-#: conglomerate.xml:2262(entry)
+#: C/conglomerate.xml:2262(entry)
 msgid ""
 "An XPath expression that can be used to return a string. The resulting string "
 "is used for [title]."
 msgstr ""
 
-#: conglomerate.xml:2285(title)
+#: C/conglomerate.xml:2285(title)
 msgid "key-value-list"
 msgstr "key-value-list"
 
-#: conglomerate.xml:2321(title)
+#: C/conglomerate.xml:2321(title)
 msgid "key-value-pair"
 msgstr "key-value-pair"
 
-#: conglomerate.xml:2339(para)
+#: C/conglomerate.xml:2339(para)
 msgid "See <link endterm=\"key-value-list.title\" linkend=\"key-value-list\"/>"
 msgstr ""
+"Siehe <link endterm=\"key-value-list.title\" linkend=\"key-value-list\"/>"
 
-#: conglomerate.xml:2344(title)
+#: C/conglomerate.xml:2344(title)
 msgid "metadata"
 msgstr "metadata"
 
-#: conglomerate.xml:2345(para)
+#: C/conglomerate.xml:2345(para)
 msgid ""
 "A wrapper for elements that provide data about the Document Type which the "
 "XDS annotates."
 msgstr ""
 
-#: conglomerate.xml:2358(para)
+#: C/conglomerate.xml:2358(para)
 msgid ""
 "<link endterm=\"name.title\" linkend=\"name\"/>, <link endterm=\"description."
 "title\" linkend=\"description\"/>"
 msgstr ""
 
-#: conglomerate.xml:2380(title)
+#: C/conglomerate.xml:2380(title)
 msgid "name"
 msgstr "name"
 
-#: conglomerate.xml:2381(para)
+#: C/conglomerate.xml:2381(para)
 msgid "The displayed name of an object."
 msgstr "Der angezeigte Name eines Objekts."
 
-#: conglomerate.xml:2415(para)
+#: C/conglomerate.xml:2415(para)
 msgid ""
 "<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
 "\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-element."
@@ -2552,7 +2660,7 @@ msgid ""
 "linkend=\"structural-element\"/>"
 msgstr ""
 
-#: conglomerate.xml:2425(para)
+#: C/conglomerate.xml:2425(para)
 msgid ""
 "See <link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
 "\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-element."
@@ -2561,15 +2669,15 @@ msgid ""
 "linkend=\"structural-element\"/>"
 msgstr ""
 
-#: conglomerate.xml:2430(title)
+#: C/conglomerate.xml:2430(title)
 msgid "plugin-element"
 msgstr "plugin-element"
 
-#: conglomerate.xml:2543(title)
+#: C/conglomerate.xml:2543(title)
 msgid "property-dialog"
 msgstr "property-dialog"
 
-#: conglomerate.xml:2578(para) conglomerate.xml:2664(para)
+#: C/conglomerate.xml:2578(para) C/conglomerate.xml:2664(para)
 msgid ""
 "See <link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
 "\"plugin-element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-"
@@ -2577,37 +2685,37 @@ msgid ""
 "element.title\" linkend=\"structural-element\"/>"
 msgstr ""
 
-#: conglomerate.xml:2583(title)
+#: C/conglomerate.xml:2583(title)
 msgid "serialisation"
-msgstr ""
+msgstr "serialisation"
 
-#: conglomerate.xml:2619(title)
+#: C/conglomerate.xml:2619(title)
 msgid "short-desc"
 msgstr "short-desc"
 
-#: conglomerate.xml:2620(para)
+#: C/conglomerate.xml:2620(para)
 msgid ""
 "A short description of the element specified in <sgmltag class=\"attribute"
 "\">tag</sgmltag>."
 msgstr ""
 
-#: conglomerate.xml:2669(title)
+#: C/conglomerate.xml:2669(title)
 msgid "span-element"
 msgstr "span-element"
 
-#: conglomerate.xml:2782(title)
+#: C/conglomerate.xml:2782(title)
 msgid "structural-element"
 msgstr "structural-element"
 
-#: conglomerate.xml:2898(glossterm)
+#: C/conglomerate.xml:2898(glossterm)
 msgid "Dummy"
 msgstr ""
 
-#: conglomerate.xml:2900(para)
+#: C/conglomerate.xml:2900(para)
 msgid "Now you see me, next you won't"
-msgstr ""
+msgstr "Jetzt siehst du mich, aber gleich nicht mehr"
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
-#: conglomerate.xml:0(None)
+#: C/conglomerate.xml:0(None)
 msgid "translator-credits"
-msgstr "Mario Blättermann <mariobl@gnome.org>, 2009"
+msgstr "Mario Blättermann <mariobl@gnome.org>, 2009, 2010"
