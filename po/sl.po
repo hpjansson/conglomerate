@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=conglomerate&component=general\n"
-"POT-Creation-Date: 2009-09-17 06:03+0000\n"
-"PO-Revision-Date: 2010-04-02 19:03+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"POT-Creation-Date: 2010-07-02 21:26+0000\n"
+"PO-Revision-Date: 2010-08-03 20:21+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,14 +22,11 @@ msgstr ""
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
-msgstr "Poskusen zapis \"cnxml\""
+msgstr "Poskusni zapis \"cnxml\""
 
 #: ../dispspecs/cnxml.xds.in.h:2
-#, fuzzy
 msgid "Test CNXML ds"
-msgstr ""
-"Test razčlenjevanja URI-jev.\n"
-"\n"
+msgstr "Preizkusni CNXML ds"
 
 #: ../dispspecs/cnxml.xds.in.h:3
 msgid "cite"
@@ -84,7 +81,6 @@ msgid "note"
 msgstr "opomba"
 
 #: ../dispspecs/cnxml.xds.in.h:16
-#, fuzzy
 msgid "para"
 msgstr "ods"
 
@@ -110,11 +106,11 @@ msgstr "izraz"
 
 #: ../dispspecs/dispspec.xds.in.h:1
 msgid "Collapseto"
-msgstr "Skrči na"
+msgstr "Zloži na"
 
 #: ../dispspecs/dispspec.xds.in.h:2
 msgid "Conglomerate Display Specification"
-msgstr "Specifikacija prikaza conglomerate"
+msgstr "Določilo prikaza conglomerate"
 
 #: ../dispspecs/dispspec.xds.in.h:3
 #: ../glade/cong-file-properties.glade.h:3
@@ -153,7 +149,7 @@ msgstr "Podatki ki povejo programu kako prikazati določeno vrsto datoteke."
 
 #: ../dispspecs/dispspec.xds.in.h:10
 msgid "List of XML Elements"
-msgstr "Seznam elementov XML"
+msgstr "Seznam predmetov XML"
 
 #: ../dispspecs/dispspec.xds.in.h:11
 msgid "List of file types for this type of document"
@@ -180,7 +176,7 @@ msgstr "Ime"
 
 #: ../dispspecs/dispspec.xds.in.h:14
 msgid "Name of an XML element"
-msgstr "Ime elementa XML"
+msgstr "Ime predmeta XML"
 
 #: ../dispspecs/dispspec.xds.in.h:15
 msgid "Serialisation Type List"
@@ -192,7 +188,7 @@ msgstr "Kratek opis"
 
 #: ../dispspecs/dispspec.xds.in.h:17
 msgid "Short Description of an XML element"
-msgstr "Kratek opis elementa XML"
+msgstr "Kratek opis predmeta XML"
 
 #: ../dispspecs/dispspec.xds.in.h:18
 msgid "Short Description of the document type"
@@ -201,12 +197,12 @@ msgstr "Kratek opis vrste dokumenta"
 #: ../dispspecs/dispspec.xds.in.h:19
 #: ../dispspecs/relax-ng.xds.in.h:15
 msgid "XML Element"
-msgstr "Element XML"
+msgstr "Predmet XML"
 
 #: ../dispspecs/docbook.xds.in.h:1
 #: ../dispspecs/website-webpage.xds.in.h:1
 msgid "A URL link (perhaps to a web site)"
-msgstr "Povezava URL (morda na drugo spletno stran)"
+msgstr "Naslov URL (morda na drugo spletno stran)"
 
 #: ../dispspecs/docbook.xds.in.h:2
 msgid "A book, with a title, and perhaps with some bibliographical material, in addition to the actual content of the book."
@@ -273,7 +269,7 @@ msgstr "Naslov"
 #: ../dispspecs/docbook.xds.in.h:14
 #: ../dispspecs/website-webpage.xds.in.h:11
 msgid "An email address"
-msgstr "E-poštni naslov"
+msgstr "Elektronski naslov"
 
 #. FIXME:  EMPTY content model should have a special type of localName
 #: ../dispspecs/docbook.xds.in.h:16
@@ -396,7 +392,7 @@ msgstr "Ime družbe"
 #: ../dispspecs/docbook.xds.in.h:41
 #: ../dispspecs/website-webpage.xds.in.h:24
 msgid "Cross-reference"
-msgstr "Navzkrižna referenca"
+msgstr "Navzkrižni sklic"
 
 #: ../dispspecs/docbook.xds.in.h:42
 #: ../dispspecs/teixlite.xds.in.h:103
@@ -442,7 +438,7 @@ msgstr "Urejevalnik"
 
 #: ../dispspecs/docbook.xds.in.h:50
 msgid "Email Address"
-msgstr "Naslov e-pošte"
+msgstr "Naslov elektronske pošte"
 
 #: ../dispspecs/docbook.xds.in.h:51
 #: ../dispspecs/forrest-document.xds.in.h:13
@@ -504,7 +500,7 @@ msgstr "Opomba noge"
 #: ../dispspecs/docbook.xds.in.h:62
 #: ../dispspecs/website-webpage.xds.in.h:35
 msgid "Free-floating Heading"
-msgstr "Prosto plavajoča glava"
+msgstr "Prosto plavajoči naslov"
 
 #: ../dispspecs/docbook.xds.in.h:63
 #: ../dispspecs/website-webpage.xds.in.h:36
@@ -648,7 +644,7 @@ msgstr "Izbira menija"
 #: ../dispspecs/docbook.xds.in.h:92
 #: ../dispspecs/website-webpage.xds.in.h:54
 msgid "Meta-information about a Reference Page"
-msgstr "Metapodatki o strani referenc"
+msgstr "Metapodatki o strani sklicev"
 
 #: ../dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
@@ -666,7 +662,7 @@ msgstr "Različni bibliografski podatki"
 #: ../dispspecs/docbook.xds.in.h:98
 #: ../dispspecs/website-webpage.xds.in.h:58
 msgid "Name, purpose and classification about a Reference Page"
-msgstr "Ime, namen in klasifikacija o referenčni strani"
+msgstr "Ime, namen in klasifikacija o sklicne strani"
 
 #: ../dispspecs/docbook.xds.in.h:99
 #: ../dispspecs/website-webpage.xds.in.h:59
@@ -776,17 +772,17 @@ msgstr "Navedek"
 #: ../dispspecs/relax-ng.xds.in.h:10
 #: ../dispspecs/website-webpage.xds.in.h:70
 msgid "Reference"
-msgstr "Referenca"
+msgstr "Sklic"
 
 #: ../dispspecs/docbook.xds.in.h:127
 #: ../dispspecs/website-webpage.xds.in.h:71
 msgid "Reference Page"
-msgstr "Referenčna stran"
+msgstr "Sklicna stran"
 
 #: ../dispspecs/docbook.xds.in.h:128
 #: ../dispspecs/website-webpage.xds.in.h:72
 msgid "Release Information"
-msgstr "Podatki ob izidu"
+msgstr "Podatki ob objavi"
 
 #: ../dispspecs/docbook.xds.in.h:129
 #: ../dispspecs/website-webpage.xds.in.h:73
@@ -954,17 +950,17 @@ msgstr "Mednarodna standardna knjižna številka dokumenta."
 #: ../dispspecs/docbook.xds.in.h:162
 #: ../dispspecs/website-webpage.xds.in.h:92
 msgid "The International Standard Serial Number of a periodical."
-msgstr "Mednarodna standardna serijska številka revij."
+msgstr "Mednarodna standardna zaporedna številka revije."
 
 #: ../dispspecs/docbook.xds.in.h:163
 #: ../dispspecs/website-webpage.xds.in.h:93
 msgid "The first place where a word or term occurs in a particular context"
-msgstr "Mesto kjer se beseda ali izraz prvič pojavi v določeni vsebini"
+msgstr "Mesto, kjer se beseda ali izraz prvič pojavi v določeni vsebini"
 
 #: ../dispspecs/docbook.xds.in.h:164
 #: ../dispspecs/website-webpage.xds.in.h:94
 msgid "The name of a function, subroutine or procedure"
-msgstr "Ime funkcije, podrutine ali postopka"
+msgstr "Ime funkcije, podrejene rutine ali postopka"
 
 #: ../dispspecs/docbook.xds.in.h:165
 #: ../dispspecs/website-webpage.xds.in.h:95
@@ -993,7 +989,7 @@ msgstr "Navedek naslova"
 #: ../dispspecs/docbook.xds.in.h:169
 #: ../dispspecs/website-webpage.xds.in.h:98
 msgid "URL Link"
-msgstr "Povezava URL"
+msgstr "Naslov URL"
 
 #: ../dispspecs/docbook.xds.in.h:170
 msgid "User Input"
@@ -1060,7 +1056,7 @@ msgstr "Noga"
 
 #: ../dispspecs/forrest-document.xds.in.h:17
 msgid "Fork"
-msgstr "Razvejaj"
+msgstr "Razvejanje"
 
 #: ../dispspecs/forrest-document.xds.in.h:18
 msgid "Header"
@@ -1151,7 +1147,7 @@ msgstr "Vrstica preglednice"
 
 #: ../dispspecs/forrest-document.xds.in.h:43
 msgid "This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://forrest.apache.org ."
-msgstr "Ta DTD je bil razvit z namenom ustvariti preprosto a mogočno vrsto dokumenta za dokumentacijo programov projekta Apache. To je z XML-združljiv DTD in ga vzdržuje projekt Apache XML. Oglejte si http://forrest.apache.org "
+msgstr "DTD je bil razvit z namenom ustvariti preprosto a mogočno vrsto dokumenta za dokumentacijo programov projekta Apache. To je z XML-združljiv DTD in ga vzdržuje projekt Apache XML. Oglejte si http://forrest.apache.org "
 
 #: ../dispspecs/forrest-document.xds.in.h:45
 #: ../glade/cong-file-properties.glade.h:17
@@ -1166,11 +1162,11 @@ msgstr "Različica"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:1
 msgid "&quot;Kernel Traffic&quot; Newsletter"
-msgstr "&quot;Promet jedra&quot; Pismo novic"
+msgstr "&quot;Promet jedra&quot; Novice"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid "A newsletter tracking the technical development of a project within the Free/Open Source Software world"
-msgstr "Pismo novic, ki sledi tehnični razvoj projekta znotraj sveta brezplačnega/odprtokodnega programja"
+msgstr "Novice, ki sledijo tehničnemu razvoju projekta znotraj brezplačne/odprtokodne programske opreme"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:4
 msgid "Block Quote"
@@ -1209,17 +1205,17 @@ msgstr "Pisava"
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:15
 #: ../dispspecs/xhtml1-strict.xds.in.h:30
 msgid "Heading (level 1)"
-msgstr "Glava (raven 1)"
+msgstr "Naslov (1 raven)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:16
 #: ../dispspecs/xhtml1-strict.xds.in.h:31
 msgid "Heading (level 2)"
-msgstr "Glava (raven 2)"
+msgstr "Naslov (2 raven)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:17
 #: ../dispspecs/xhtml1-strict.xds.in.h:32
 msgid "Heading (level 3)"
-msgstr "Glava (raven 3)"
+msgstr "Naslov (3 raven)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:18
 msgid "Hyperlink"
@@ -1235,7 +1231,7 @@ msgstr "Poševno"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:22
 msgid "Kernel Cousin Newsletter"
-msgstr "Pismo novic bratranca jedra"
+msgstr "Novice jedra"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:28
 msgid "Quotation"
@@ -1273,7 +1269,7 @@ msgstr "Drevo nadzora različice"
 
 #: ../dispspecs/opml.xds.in.h:1
 msgid "Apple OPML dispspec"
-msgstr "Specifikacija zaslona Apple OPML"
+msgstr "Določilo zaslona Apple OPML"
 
 #: ../dispspecs/opml.xds.in.h:2
 msgid "Experimental \"opml\" format"
@@ -1301,7 +1297,7 @@ msgstr "Poskusni zapis \"preberi me\""
 
 #: ../dispspecs/readme.xds.in.h:8
 msgid "Inspirational"
-msgstr "Navdihujoč"
+msgstr "Navdihujoče"
 
 #: ../dispspecs/readme.xds.in.h:10
 msgid "Optimistic"
@@ -1380,11 +1376,11 @@ msgstr "NičaliVeč"
 
 #: ../dispspecs/teixlite.xds.in.h:1
 msgid "A bibliographic description of the copy text(s) from which an electronic text was derived or generated"
-msgstr "Bibliografski opis kopije besedil(a) iz katerih je bilo izpeljano ali ustvarjeno elektronsko besedilo"
+msgstr "Bibliografski opis kopije besedil iz katerih je bilo izpeljano ali ustvarjeno elektronsko besedilo"
 
 #: ../dispspecs/teixlite.xds.in.h:2
 msgid "A brief description of the place, date, time, etc. of production of a letter, newspaper story, or other work, prefixed or suffixed to it as a kind of heading or trailer"
-msgstr "Kratek opis prostora, datuma, časa, itn. izdelave pisma, časopisne zgodbe ali drugega dela. Opis je predpona ali pripona kot vrsta glave ali napovednika"
+msgstr "Kratek opis prostora, datuma, časa, itn. izdelave pisma, časopisne zgodbe ali drugega dela. Opis je predpona ali pripona kot vrsta naslova ali napovednika"
 
 #: ../dispspecs/teixlite.xds.in.h:3
 msgid "A brief prose description of the appearance or content of a graphic figure, for use when documenting an image without displaying it"
@@ -1408,7 +1404,7 @@ msgstr "Pododsek ospredja, telesa, ali ozadja besedila pete ravni"
 
 #: ../dispspecs/teixlite.xds.in.h:8
 msgid "A first-level subdivision of the front, body, or back of a text (the largest, if &lt;div0&gt; is not used, the second largest if it is)"
-msgstr "Pododsek ospredja, telesa, ali ozadja besedila prve ravni (največji, če &lt;div0&gt; ni uporabljen, in drugi največji če je uporabljen)"
+msgstr "Pododsek ospredja, telesa, ali ozadja besedila prve ravni (največji, če &lt;div0&gt; ni uporabljen, in drugi največji, če je uporabljen)"
 
 #: ../dispspecs/teixlite.xds.in.h:9
 msgid "A formal list or prose description of the topics addressed by a subdivision of a text"
@@ -1420,7 +1416,7 @@ msgstr "Pododsek ospredja, telesa, ali ozadja besedila četrte ravni"
 
 #: ../dispspecs/teixlite.xds.in.h:11
 msgid "A full bibliographic description of an electronic file"
-msgstr "Polen bibliografski opis elektronske datoteke"
+msgstr "Poln bibliografski opis elektronske datoteke"
 
 #: ../dispspecs/teixlite.xds.in.h:12
 msgid "A fully-structured bibliographic citation, in which all components of the TEI file description are present"
@@ -1444,7 +1440,7 @@ msgstr "Seznam bibliografskih navedkov katerekoli vrste"
 
 #: ../dispspecs/teixlite.xds.in.h:17
 msgid "A list of keywords or phrases identifying the topic or nature of a text"
-msgstr "Seznam ključnih besed ali fraz, ki določijo temo ali naravo besedila"
+msgstr "Seznam ključnih besed ali rekel, ki določijo temo ali naravo besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:18
 msgid "A loosely-structured bibliographic citation of which the sub-components may or may not be explicitly localNameged"
@@ -1472,15 +1468,15 @@ msgstr "Reklo, ki opisuje naravo intelektualne odgovornosti osebe"
 
 #: ../dispspecs/teixlite.xds.in.h:24
 msgid "A phrase or word used to provide a gloss or definition for some other word or phrase"
-msgstr "Fraza ali beseda ki zagotovi pripis ali definicijo za neko drugo besedo ali frazo"
+msgstr "Reklo ali beseda, ki zagotovi pripis ali definicijo za neko drugo besedo ali reklo"
 
 #: ../dispspecs/teixlite.xds.in.h:25
 msgid "A pointer to another location in the current document in terms of one or more identifiable elements"
-msgstr "Kazalec na drugo mesto v trenutnem dokumentu izražen z enim ali več določljivimi elementi"
+msgstr "Kazalnik na drugo mesto v trenutnem dokumentu izražen z enim ali več določljivimi predmeti"
 
 #: ../dispspecs/teixlite.xds.in.h:26
 msgid "A pointer to another location in the current document or an external document"
-msgstr "Kazalec na drugo mesto v trenutnem ali zunanjem dokumentu"
+msgstr "Kazalnik na drugo mesto v trenutnem ali zunanjem dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:27
 msgid "A postal or other address, for example of a publisher, an organization, or an individual"
@@ -1488,17 +1484,15 @@ msgstr "Poštni ali drug naslov, na primer izdajatelja, organizacije ali posamez
 
 #: ../dispspecs/teixlite.xds.in.h:28
 msgid "A proper noun or noun phrase"
-msgstr "Pravilen samostalnik ali samostalniška fraza"
+msgstr "Pravilen samostalnik ali samostalniško reklo"
 
-# Definicija corpusa - http://en.wikipedia.org/wiki/Corpus_linguistics
 #: ../dispspecs/teixlite.xds.in.h:29
-#, fuzzy
 msgid "A prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection"
-msgstr "Prozni opis namena ni metod uporabljenih v vzorčnih besedilih v ustvarjanju xxxx ali zbirke"
+msgstr "Prozni opis namena in metod uporabljenih v vzorčnih besedilih med ustvarjanjem korpusa ali zbirke"
 
 #: ../dispspecs/teixlite.xds.in.h:30
 msgid "A quotation from some other document, together with a bibliographic reference to its source"
-msgstr "Navedba drugega dokumenta skupaj z bibliografsko referenco vira"
+msgstr "Navedba drugega dokumenta skupaj z bibliografskim sklicem vira"
 
 #: ../dispspecs/teixlite.xds.in.h:31
 msgid "A quotation or apparent quotation — a representation of speech or thought marked as being quoted from someone else (whether in fact quoted or not); in narrative, the words are usually those of of a character or speaker; in dictionaries, &lt;q&gt; may be used to mark real or contrived examples of usage"
@@ -1506,7 +1500,7 @@ msgstr "Navedek ali očiten navedek - predstavitev govora ali misli označene ko
 
 #: ../dispspecs/teixlite.xds.in.h:32
 msgid "A quotation, anonymous or attributed, appearing at the start of a section or chapter, or on a title page"
-msgstr "Navedek, anonimen ali priznan na začetku odseka, poglavja ali na naslovni strani"
+msgstr "Navedek, brezimen ali priznan na začetku odseka, poglavja ali na naslovni strani"
 
 #: ../dispspecs/teixlite.xds.in.h:33
 msgid "A reading which has been regularized or normalized in some sense"
@@ -1514,11 +1508,11 @@ msgstr "Branje, ki je bilo v nekem smislu regulirano ali normalizirano"
 
 #: ../dispspecs/teixlite.xds.in.h:34
 msgid "A reference to another location in the current document, in terms of one or more identifiable elements, possibly modified by additional text or comment"
-msgstr "Referenca drugega mesta v trenutnem dokumentu izražena z enim ali več določljivimi elementi, katerim je lahko dodano besedilo ali opomba"
+msgstr "Sklic na drugo mesto v trenutnem dokumentu izražena z enim ali več določljivimi predmeti, katerim je lahko dodano besedilo ali opomba"
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid "A reference to another location in the current document, or an external document, using an extended pointer notation, possibly modified by additional text or comment"
-msgstr "Referenca drugega mesta v trenutnem ali zunanjem dokumentu z uporabo razširjenega zapisa kazalnika, kateremu je lahko dodatno besedilo ali opomba"
+msgstr "Sklic na drugo mesto v trenutnem ali zunanjem dokumentu z uporabo razširjenega zapisa kazalnika, kateremu je lahko dodatno besedilo ali opomba"
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid "A salutation or greeting prefixed to a foreword, dedicatory epistle, or other division of a text, or the salutation in the closing of a letter, preface, etc."
@@ -1526,7 +1520,7 @@ msgstr "Pozdrav uporabljen kot predpona uvodne besede, pisma posvetila ali druge
 
 #: ../dispspecs/teixlite.xds.in.h:37
 msgid "A second-level subdivision of the front, body, or back of a text"
-msgstr "Pododsek ospredja, telesa, ali ozadja besedila druge ravni"
+msgstr "Pododsek ospredja, telesa ali ozadja besedila druge ravni"
 
 #: ../dispspecs/teixlite.xds.in.h:38
 msgid "A sentence-like division of a text"
@@ -1542,13 +1536,11 @@ msgstr "Kratek delček kode v formalnem jeziku (pogosto programerskem jeziku)"
 
 #: ../dispspecs/teixlite.xds.in.h:41
 msgid "A single example demonstrating the use of an element or attribute"
-msgstr "En primer, ki prikazuje uporabo elementa ali atributa"
+msgstr "En primer, ki prikazuje uporabo predmeta ali atributa"
 
-# Corpus je tukaj http://en.wikipedia.org/wiki/Corpus_linguistics
 #: ../dispspecs/teixlite.xds.in.h:42
-#, fuzzy
 msgid "A single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
-msgstr "Eno besedilo kakršnekoli vrste ali unitarno ali sestavljeno, na primer pesem ali drami, zbirka esejev, roman, slovar ali primer besedila"
+msgstr "Eno besedilo katerekoli vrste, enotno ali sestavljeno, na primer pesem ali drama, zbirka esejev, novela, slovar ali korpus besedila."
 
 #: ../dispspecs/teixlite.xds.in.h:43
 msgid "A single, possibly incomplete, line of verse"
@@ -1564,11 +1556,11 @@ msgstr "Pododsek ospredja, telesa, ali ozadja besedila šeste ravni"
 
 #: ../dispspecs/teixlite.xds.in.h:46
 msgid "A specialized form of heading or label, giving the name of one or more speakers in a dramatic text or fragment"
-msgstr "Posebna oblika glave ali oznake, ki da ime enemu ali več govorcev dramskega besedila ali delčka"
+msgstr "Posebna oblika naslova ali oznake, ki da ime enemu ali več govorcev dramskega besedila ali delčka"
 
 #: ../dispspecs/teixlite.xds.in.h:47
 msgid "A statement of responsibility for someone responsible for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply"
-msgstr "Izjava odgovornosti nekoga odgovornega za intelektualno vsebino besedila, izdaje, snemanja ali nadaljevanke, kjer posebni elementi za avtorje, urednike, itn. ne zadostujejo ali niso uporabni"
+msgstr "Izjava odgovornosti nekoga odgovornega za intelektualno vsebino besedila, izdaje, snemanja ali nadaljevanke, kjer posebni predmeti za avtorje, urednike, itn. ne zadostujejo ali niso uporabni"
 
 #: ../dispspecs/teixlite.xds.in.h:48
 msgid "A subdivision of the front, body, or back of a text"
@@ -1584,17 +1576,17 @@ msgstr "Pododsek ospredja, telesa, ali ozadja besedila tretje ravni"
 
 #: ../dispspecs/teixlite.xds.in.h:51
 msgid "A word or phrase belonging to some language other than that of the surrounding text"
-msgstr "Beseda ali faza, ki pripada drugemu jeziku kot obkrožajoče besedilo"
+msgstr "Beseda ali reklo, ki pripada drugemu jeziku kot obkrožajoče besedilo"
 
 # Ne vem kako naj prevedem scare quotes
 # http://en.wikipedia.org/wiki/Scare_quotes
 #: ../dispspecs/teixlite.xds.in.h:52
 msgid "A word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics"
-msgstr "Beseda ali fraza za katero avtor ali pripovedovalec določi izjavo odgovornosti, na primer uporabo dvojnih narekovajev ali poševnice"
+msgstr "Beseda ali reklo za katero avtor ali pripovedovalec določi izjavo odgovornosti, na primer uporabo dvojnih narekovajev ali poševnice"
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid "A word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source"
-msgstr "Beseda, fraza ali odlomek, ki ne more biti z gotovostjo kopiran ker je le to nelegalno ali pa vira ni mogoče urejati"
+msgstr "Beseda, reklo ali odlomek, ki ne more biti z gotovostjo kopiran, ker je le to nelegalno ali pa vira ni mogoče urejati"
 
 #: ../dispspecs/teixlite.xds.in.h:54
 msgid "Abbr"
@@ -1618,7 +1610,7 @@ msgstr "Izjava izdaje kot je predstavljena na naslovni strani dokumenta"
 
 #: ../dispspecs/teixlite.xds.in.h:60
 msgid "An identifier of some kind, e.g. a variable name or the name of an SGML element or attribute"
-msgstr "Neke vrste določilo, na primer ime spremenljivke ali ime elementa ali atributa SGML"
+msgstr "Neke vrste določilo, na primer ime spremenljivke ali ime predmeta ali atributa SGML"
 
 #: ../dispspecs/teixlite.xds.in.h:61
 msgid "An individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy"
@@ -1634,15 +1626,15 @@ msgstr "Razlagalna opomba ki je lahko povezana z razmikom besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:65
 msgid "Anonymous Block (&lt;ab&gt;)"
-msgstr "Anonimni blok (&lt;ab&gt;)"
+msgstr "Brezimni blok (&lt;ab&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:66
 msgid "Any arbitrary phrase-level unit of text (including other &lt;seg&gt; elements)"
-msgstr "Katerakoli poljubna enota besedila na ravni fraze (vključujoč druge elemente &lt;ods&gt;)"
+msgstr "Katerakoli poljubna enota besedila na ravni rekla (vključujoč druge predmete &lt;ods&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:67
 msgid "Any heading, for example, the title of a section, or the heading of a list or glossary"
-msgstr "Kakršnakoli glava, na primer naslov odseka ali glave seznama ali slovarja"
+msgstr "Kakršnkoli naslov, na primer naslov odseka ali naslova seznama ali slovarja"
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
@@ -1654,7 +1646,7 @@ msgstr "Katerokoli gradivo predgovora (glave, naslova stran, predgovor, posvetil
 
 #: ../dispspecs/teixlite.xds.in.h:70
 msgid "Any sequence of items organized as a list"
-msgstr "Katerokoli zaporedje elementov organizirano kot seznam"
+msgstr "Katerokoli zaporedje predmetov organizirano kot seznam"
 
 #: ../dispspecs/teixlite.xds.in.h:71
 msgid "Any standard or non-standard number used to identify a bibliographic item"
@@ -1670,7 +1662,7 @@ msgstr "Argument"
 
 #: ../dispspecs/teixlite.xds.in.h:74
 msgid "Attaches an identifier to a point within a text, whether or not it corresponds with a textual element"
-msgstr "Točki znotraj besedila priloži določilo ali se odgovarja besedilnem elementu"
+msgstr "Točki znotraj besedila priloži določilo ali se odgovarja besedilnem predmetu"
 
 #: ../dispspecs/teixlite.xds.in.h:76
 msgid "Authority"
@@ -1685,7 +1677,6 @@ msgid "Back Matter"
 msgstr "Gradivo ozadja"
 
 #: ../dispspecs/teixlite.xds.in.h:79
-#, fuzzy
 msgid "BiblFull"
 msgstr "BiblFull"
 
@@ -1716,7 +1707,7 @@ msgstr "Opis kategorije"
 
 #: ../dispspecs/teixlite.xds.in.h:86
 msgid "Category Reference"
-msgstr "Referenca kategorije"
+msgstr "Sklic kategorije"
 
 #: ../dispspecs/teixlite.xds.in.h:87
 msgid "Cell"
@@ -1753,12 +1744,11 @@ msgstr "Zbere vse opombe s podatki o besedilu skupaj s podatki posnetimi v drugi
 
 #: ../dispspecs/teixlite.xds.in.h:96
 msgid "Contains a general purpose name or referring string"
-msgstr "Vsebuje ime za splošen namen ali navajajočim nizom"
+msgstr "Vsebuje ime za splošen namen ali sklicni niz"
 
-# Glej pomen corpus v drugih komentarjih
 #: ../dispspecs/teixlite.xds.in.h:97
 msgid "Contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a &lt;teiCorpus&gt; element"
-msgstr "Vsebuje en TEI-vdan dokument sestavljen iz glave TEI in besedila ali ločena ali kot del elementa &lt;teiCorpus&gt; element"
+msgstr "Vsebuje en TEI-vdan dokument sestavljen iz glave TEI in besedila ali ločena ali kot del predmeta &lt;teiCorpus&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:98
 msgid "Contains any appendixes, etc. following the main part of a text"
@@ -1766,7 +1756,7 @@ msgstr "Vsebuje vse priloge, itn. ter sledi glavnemu delu besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:99
 msgid "Contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph"
-msgstr "Vsebuje poljubno enoto besedila na ravni sestavnega dela, ki se obnaša kot anonimni vsebnik za fraze ali elemente znotraj ravni podobne odstavku, a brez semantične prtljage"
+msgstr "Vsebuje poljubno enoto besedila na ravni sestavnega dela, ki se obnaša kot brezimni vsebnik za rekla ali predmete znotraj ravni podobne odstavku, a brez skladenjskih določil"
 
 #: ../dispspecs/teixlite.xds.in.h:100
 msgid "Contains text displayed in tabular form, in rows and columns"
@@ -1790,7 +1780,7 @@ msgstr "Določi topologijo uporabljeno za razporejanje besedil ali implicitno z 
 
 #: ../dispspecs/teixlite.xds.in.h:106
 msgid "Defines the scope of a bibliographic reference, for example as a list of pagenumbers, or a named subdivision of a larger work"
-msgstr "Določi obseg bibliografske reference, na primer kot seznam številk strani ali kot imenovan pododsek večjega dela"
+msgstr "Določi obseg bibliografskega sklica, na primer kot seznam številk strani ali kot imenovan pododsek večjega dela"
 
 #: ../dispspecs/teixlite.xds.in.h:107
 msgid "Del"
@@ -1818,35 +1808,35 @@ msgstr "Ods"
 
 #: ../dispspecs/teixlite.xds.in.h:113
 msgid "Div0"
-msgstr "Div0"
+msgstr "Ods0"
 
 #: ../dispspecs/teixlite.xds.in.h:114
 msgid "Div1"
-msgstr "Div1"
+msgstr "Ods1"
 
 #: ../dispspecs/teixlite.xds.in.h:115
 msgid "Div2"
-msgstr "Div2"
+msgstr "Ods2"
 
 #: ../dispspecs/teixlite.xds.in.h:116
 msgid "Div3"
-msgstr "Div3"
+msgstr "Ods3"
 
 #: ../dispspecs/teixlite.xds.in.h:117
 msgid "Div4"
-msgstr "Div4"
+msgstr "Ods4"
 
 #: ../dispspecs/teixlite.xds.in.h:118
 msgid "Div5"
-msgstr "Div5"
+msgstr "Ods5"
 
 #: ../dispspecs/teixlite.xds.in.h:119
 msgid "Div6"
-msgstr "Div6"
+msgstr "Ods6"
 
 #: ../dispspecs/teixlite.xds.in.h:120
 msgid "Div7"
-msgstr "Div7"
+msgstr "Ods7"
 
 #: ../dispspecs/teixlite.xds.in.h:121
 msgid "DivGen"
@@ -1902,7 +1892,7 @@ msgstr "Razširjeni kazalnik (rkaz)"
 
 #: ../dispspecs/teixlite.xds.in.h:137
 msgid "Extended Reference (&lt;xref&gt;)"
-msgstr "Razširjena referenca (&lt;rref&gt;)"
+msgstr "Razširjeni sklic (&lt;rref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
@@ -1938,7 +1928,7 @@ msgstr "Presledek"
 
 #: ../dispspecs/teixlite.xds.in.h:147
 msgid "Generic Identifier (&lt;gi&gt;)"
-msgstr "Splošno določilo (&lt;sd&gt;)"
+msgstr "Izvorno določilo (&lt;sd&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:148
 msgid "Gloss"
@@ -1966,11 +1956,11 @@ msgstr "Združi podatke ki opisujejo naravo teme besedila v načinu standardne s
 
 #: ../dispspecs/teixlite.xds.in.h:155
 msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a final group at the end of a division, especially of a letter"
-msgstr "Združi vrstico datuma, vrstico zaslug, pozdrav in podobne fraze, ter se pojavi kot skupina na koncu odseka, še posebno pisma"
+msgstr "Združi vrstico datuma, vrstico zaslug, pozdrav in podobna rekla, ter se pojavi kot skupina na koncu odseka, še posebej pisma"
 
 #: ../dispspecs/teixlite.xds.in.h:156
 msgid "Groups together dateline, byline, salutation, and similar phrases appearing as a preliminary group at the start of a division, especially of a letter"
-msgstr "Združi vrstico datuma, vrstico zaslug, pozdrav in podobne fraze, ter se pojavi kot skupina na začetku odseka, še posebno pisma"
+msgstr "Združi vrstico datuma, vrstico zaslug, pozdrav in podobna rekla, ter se pojavi kot skupina na začetku odseka, še posebej pisma"
 
 #: ../dispspecs/teixlite.xds.in.h:157
 #: ../dispspecs/xhtml1-strict.xds.in.h:29
@@ -1983,7 +1973,7 @@ msgstr "Poudarjeno"
 
 #: ../dispspecs/teixlite.xds.in.h:159
 msgid "Id. Number"
-msgstr "Id. številka"
+msgstr "ID številka"
 
 #: ../dispspecs/teixlite.xds.in.h:160
 msgid "Ident"
@@ -2019,7 +2009,7 @@ msgstr "Podrobnosti o ustvarjanju besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:168
 msgid "Information about the intended rendition of one or more elements"
-msgstr "Podatki o namenjeni izvedbi enega ali več elementov"
+msgstr "Podatki o namenjeni izvedbi enega ali več predmetov"
 
 #: ../dispspecs/teixlite.xds.in.h:169
 msgid "Information about the title of a work and those responsible for its intellectual content"
@@ -2027,7 +2017,7 @@ msgstr "Podatki o naslovu dela in odgovornih za njegovo intelektualno vsebino"
 
 #: ../dispspecs/teixlite.xds.in.h:170
 msgid "Information about the usage of a specific element within a &lt;text&gt;"
-msgstr "Podatki o uporabi določenega elementa znotraj &lt;besedilo&gt;"
+msgstr "Podatki o uporabi določenega predmeta znotraj &lt;besedilo&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:171
 msgid "Interpretation"
@@ -2047,7 +2037,7 @@ msgstr "Ključne besede"
 
 #: ../dispspecs/teixlite.xds.in.h:175
 msgid "Kw"
-msgstr "kb"
+msgstr "Kb"
 
 #: ../dispspecs/teixlite.xds.in.h:176
 #: ../dispspecs/xhtml1-strict.xds.in.h:44
@@ -2066,7 +2056,7 @@ msgstr "Uporaba jezika"
 
 #: ../dispspecs/teixlite.xds.in.h:179
 msgid "Letters, words, or phrases inserted in the text by an author, scribe, annotator, or corrector"
-msgstr "Črke, besede ali fraze vstavljene v besedilo s strani avtorja, pisatelja, pripisovalca ali popravljalca"
+msgstr "Črke, besede ali rekla vstavljene v besedilo s strani avtorja, pisatelja, pripisovalca ali popravljalca"
 
 #: ../dispspecs/teixlite.xds.in.h:180
 msgid "Line Break"
@@ -2086,7 +2076,7 @@ msgstr "SezBibl"
 
 #: ../dispspecs/teixlite.xds.in.h:184
 msgid "Marks a location to be indexed for whatever purpose"
-msgstr "Označi mesto za indeksiranje za katerikoli namen"
+msgstr "Označi mesto za ustvarjanje kazala za katerikoli namen"
 
 #: ../dispspecs/teixlite.xds.in.h:185
 msgid "Marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made"
@@ -2098,11 +2088,11 @@ msgstr "Označi odstavke v prozi"
 
 #: ../dispspecs/teixlite.xds.in.h:187
 msgid "Marks the boundary between one page of a text and the next in a standard reference system"
-msgstr "Označi mejo med stranmi besedila v standardnem referenčnem sistemu"
+msgstr "Označi mejo med stranmi besedila v standardnem skicnem sistemu"
 
 #: ../dispspecs/teixlite.xds.in.h:188
 msgid "Marks the boundary between sections of a text, as indicated by changes in a standard reference system"
-msgstr "Označi mejo med odseki besedila, kot je določeno s spremembami v standardnem referenčnem sistemu"
+msgstr "Označi mejo med odseki besedila, kot je določeno s spremembami v standardnem sklicnem sistemu"
 
 #: ../dispspecs/teixlite.xds.in.h:189
 msgid "Marks the start of a new (typographic) line in some edition or version of a text"
@@ -2110,11 +2100,11 @@ msgstr "Označi začetek nove (tipografske) vrstice v neki izdaji ali različici
 
 #: ../dispspecs/teixlite.xds.in.h:190
 msgid "Marks words or phrases mentioned, not used"
-msgstr "Označi omenjene a ne uporabljene besede ali fraze"
+msgstr "Označi omenjene a ne uporabljene besede ali rekla"
 
 #: ../dispspecs/teixlite.xds.in.h:191
 msgid "Marks words or phrases which are stressed or emphasized for linguistic or rhetorical effect"
-msgstr "Označi poudarjene besede ali fraze za jezikovni ali retorični učinek"
+msgstr "Označi poudarjene besede ali rekla za jezikovni ali retorični učinek"
 
 #: ../dispspecs/teixlite.xds.in.h:192
 msgid "Mentioned"
@@ -2198,30 +2188,27 @@ msgstr "Navedba (&lt;n&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:216
 msgid "Ref"
-msgstr "Ref"
+msgstr "Sklic"
 
 #: ../dispspecs/teixlite.xds.in.h:217
 msgid "References Declaration"
-msgstr "Deklaracija referenc"
+msgstr "Deklaracija sklicev"
 
 #: ../dispspecs/teixlite.xds.in.h:218
 msgid "Referencing String (&lt;rs&gt;)"
-msgstr "Referenčna nit (&lt;rn&gt;)"
+msgstr "Sklicna nit (&lt;rn&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:219
-#, fuzzy
 msgid "Reg"
-msgstr "Reg"
+msgstr "sk.niz"
 
 #: ../dispspecs/teixlite.xds.in.h:220
-#, fuzzy
 msgid "Rendition"
-msgstr "Rendition"
+msgstr "Izročitve"
 
 #: ../dispspecs/teixlite.xds.in.h:221
-#, fuzzy
 msgid "Resp"
-msgstr "Resp"
+msgstr "iOdg"
 
 #: ../dispspecs/teixlite.xds.in.h:222
 msgid "Responsibility Statement (respStmt)"
@@ -2257,7 +2244,7 @@ msgstr "Izjava nanizanke"
 
 #: ../dispspecs/teixlite.xds.in.h:230
 msgid "Sic"
-msgstr "Sic"
+msgstr "t.i."
 
 #: ../dispspecs/teixlite.xds.in.h:232
 msgid "So Called"
@@ -2269,11 +2256,11 @@ msgstr "Opis vira"
 
 #: ../dispspecs/teixlite.xds.in.h:234
 msgid "Speaker"
-msgstr "Zvočnik"
+msgstr "Govornik"
 
 #: ../dispspecs/teixlite.xds.in.h:235
 msgid "Specifies how canonical references are constructed for this text"
-msgstr "Določi kako so izgrajene kanonične reference za to besedilo"
+msgstr "Določi, kako so izgrajene kanonični sklici besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:236
 msgid "Specifies one or more defined categories within some taxonomy or text typology"
@@ -2293,11 +2280,11 @@ msgstr "Smer koraka ((&lt;korak&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:240
 msgid "Summarizes a particular change or correction made to a particular version of an electronic text which is shared between several researchers"
-msgstr "Obnovi določeno spremembo ali popravek narejen določeni različici elektronskega besedila, ki je deljena med več raziskovalci"
+msgstr "Obnovi določeno spremembo ali popravek narejen določeni različici elektronskega besedila, ki je souporabljena med več raziskovalci"
 
 #: ../dispspecs/teixlite.xds.in.h:241
 msgid "Summarizes the revision history for a file"
-msgstr "Obnovi zgodovino popravkov za datoteko"
+msgstr "Obnovi zgodovino predelav datoteke"
 
 #: ../dispspecs/teixlite.xds.in.h:242
 msgid "TEI Lite"
@@ -2305,7 +2292,7 @@ msgstr "TEI Lite"
 
 #: ../dispspecs/teixlite.xds.in.h:243
 msgid "TEI stands for Text Encoding Initiative, see http://www.tei-c.org/ for more information; the TEI Lite dtd is a subset of the powerful TEI dtds which comprises the most commonly used elements."
-msgstr "TEI pomeni Iniciativa kodiranja besedila, za več podrobnosti si oglejte http://www.tei-c.org; TEI lite dtd je podniz močnih TEI dtd-jev, ki vsebuje najpogosteje uporabljene elemente."
+msgstr "Kratica TEI (Text Encoding Initiative) predstavlja pobudo kodiranja besedila. Za več podrobnosti si poglejte http://www.tei-c.org; TEI lite DTD je podrejeni niz deklaracij TEI DTD, ki vsebuje najpogosteje uporabljene predmete."
 
 #: ../dispspecs/teixlite.xds.in.h:244
 msgid "TEI.2"
@@ -2317,7 +2304,7 @@ msgstr "Uporaba oznake"
 
 #: ../dispspecs/teixlite.xds.in.h:247
 msgid "Tagging Declaration"
-msgstr "Določilo označevanja"
+msgstr "Deklaracija označevanja"
 
 #: ../dispspecs/teixlite.xds.in.h:248
 msgid "Taxonomy"
@@ -2333,7 +2320,7 @@ msgstr "Razvrstitev besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:253
 msgid "Text reproduced although apparently incorrect or inaccurate"
-msgstr "Poustvarjeno besedilo čeprav je videti napačno ali nepravilno"
+msgstr "Poustvarjeno besedilo, čeprav je videti napačno ali nepravilno"
 
 #: ../dispspecs/teixlite.xds.in.h:254
 msgid "The approximate size of the electronic text as stored on some carrier medium, specified in any convenient units"
@@ -2353,11 +2340,11 @@ msgstr "Zaključni pozdrav, itn. pripet začetni besedi, posvetilnemu pismu ali 
 
 #: ../dispspecs/teixlite.xds.in.h:258
 msgid "The correct form of a passage apparently erroneous in the copy text"
-msgstr "Pravilna oblika odlomka očitno napačna v kopiranem besedilu"
+msgstr "Pravilna oblika odlomka, ki je zapisana očitno napačno v kopiranem besedilu"
 
 #: ../dispspecs/teixlite.xds.in.h:259
 msgid "The date of a document, as given (usually) on a title page"
-msgstr "Datum dokumenta, kot je podan (ponavadi) na naslovni strani"
+msgstr "Datum dokumenta, kot je podan (običajno) na naslovni strani"
 
 #: ../dispspecs/teixlite.xds.in.h:260
 msgid "The descriptive and declarative information making up an ‘electronic title page’ prefixed to every TEI-conformant text"
@@ -2365,7 +2352,7 @@ msgstr "Opisni in deklarativni podatki, ki sestavljajo ‘elektronsko naslovno s
 
 #: ../dispspecs/teixlite.xds.in.h:261
 msgid "The imprint statement (place and date of publication, publisher name), as given (usually) at the foot of a title page"
-msgstr "Izjava vtiska (mesto in datum izdaje, ime izdajatelja), kot je podano (ponavadi) v nogi naslovne strani"
+msgstr "Izjava vtiska (mesto in datum izdaje, ime izdajatelja), kot je podano (običajno) v nogi naslovne strani"
 
 #: ../dispspecs/teixlite.xds.in.h:262
 msgid "The label associated with an item in a list; in glossaries, marks the term being defined"
@@ -2373,7 +2360,7 @@ msgstr "Oznaka povezana s predmetom na seznamu; v slovarjih označi določen izr
 
 #: ../dispspecs/teixlite.xds.in.h:263
 msgid "The languages, sublanguages, registers, dialects etc. represented within a text"
-msgstr "Jeziki, podjeziki, registri, naglasi, itn. predstavljeni znotraj besedila"
+msgstr "Jeziki, narečja, dialekti, naglasi, itn. predstavljeni znotraj besedila"
 
 #: ../dispspecs/teixlite.xds.in.h:264
 msgid "The largest possible subdivision of the body of a text"
@@ -2385,7 +2372,7 @@ msgstr "Mesto na katerem program za obdelovanje besedila samodejno ustvari besed
 
 #: ../dispspecs/teixlite.xds.in.h:266
 msgid "The name (generic identifier) of an element"
-msgstr "Ime (splošno določilo) elementa"
+msgstr "Ime (izvorno določilo) predmeta"
 
 #: ../dispspecs/teixlite.xds.in.h:267
 msgid "The name of a person or other agency responsible for making an electronic file available, other than a publisher or distributor"
@@ -2405,11 +2392,11 @@ msgstr "Ime osebe, inštitucije ali organizacije odgovorne za financiranje proje
 
 #: ../dispspecs/teixlite.xds.in.h:271
 msgid "The name of the author of the document, as given on the title page (often but not always contained in a &lt;byline&gt;)"
-msgstr "Ime avtorja dokumenta, kot je podan na naslovni strani (pogosto a ne vedno vsebovan v &lt;vrstici zaslug&gt;)"
+msgstr "Ime avtorja dokumenta, kot je podan na naslovni strani (pogosto vpisan v &lt;vrstici zaslug&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:272
 msgid "The name of the author(s), personal or corporate, of a work; the primary statement of responsibility for any bibliographic item"
-msgstr "Ime atvorj-a/ev, zasebnih ali službenih, dela; osnovna izjava odgovornosti za katerikoli bibliografski predmet"
+msgstr "Ime avtorjev (zasebno ali skupine) dela; osnovna izjava odgovornosti za katerikoli bibliografski predmet"
 
 #: ../dispspecs/teixlite.xds.in.h:273
 msgid "The name of the organization responsible for the publication or distribution of a bibliographic item"
@@ -2425,7 +2412,7 @@ msgstr "Ime glavnega raziskovalca odgovornega za ustvarjanje elektronskega besed
 
 #: ../dispspecs/teixlite.xds.in.h:276
 msgid "The original form of a reading, for which a regularized form is given in an attribute value"
-msgstr "Izvorna oblika branja, za katerega je regularna oblika dana z vrednostjo atributa"
+msgstr "Izvorna oblika branja, katerega je oblika je podana z vrednostjo atributa"
 
 #: ../dispspecs/teixlite.xds.in.h:277
 msgid "The particularities of one edition of a text"
@@ -2437,19 +2424,19 @@ msgstr "Glavna izjava odgovornosti za delo na naslovni strani ali na glavi ali k
 
 #: ../dispspecs/teixlite.xds.in.h:279
 msgid "The title of a document, including all its constituents, as given on a title page"
-msgstr "Naslov dokumenta, vključujoč z vsemi sestavnimi deli, kot so podani na naslovni strani"
+msgstr "Naslov dokumenta, z vsemi sestavnimi deli, podanimi na naslovni strani"
 
 #: ../dispspecs/teixlite.xds.in.h:280
 msgid "The title of a work, whether article, book, journal, or series, including any alternative titles or subtitles"
-msgstr "Naslov dela, ali članka, knjige, dnevnika ali nanizanke, vključujoč morebitne dodatne naslove ali podnaslove"
+msgstr "Naslov dela, članka, knjige, dnevnika ali nanizanke, z vsemi morebitnimi dodatnimi naslovi ali podnaslovi"
 
 #: ../dispspecs/teixlite.xds.in.h:281
 msgid "The title page of a text, appearing within the front or back matter"
-msgstr "Naslovna stan besedila, ki se pojavi znotraj gradiva ospredja ali ozadja"
+msgstr "Naslovna stan besedila, ki se pojavi znotraj ospredja ali ozadja gradiva"
 
 #: ../dispspecs/teixlite.xds.in.h:282
 msgid "The whole body of a single unitary text, excluding any front or back matter"
-msgstr "Celotno telo enega unitarnega besedila, izključujoč gradivo ospredja ali ozadja"
+msgstr "Celotno telo enotnega besedila, izključujoč gradivo ospredja ali ozadja"
 
 #: ../dispspecs/teixlite.xds.in.h:283
 msgid "Time"
@@ -2497,7 +2484,7 @@ msgstr "Povezava glave"
 
 #: ../dispspecs/website-layout.xds.in.h:6
 msgid "Holder"
-msgstr "Nosilec"
+msgstr "Vsebnik"
 
 #: ../dispspecs/website-layout.xds.in.h:7
 #: ../dispspecs/xsl.xds.in.h:2
@@ -2526,7 +2513,7 @@ msgstr "Spletna stran"
 
 #: ../dispspecs/website-webpage.xds.in.h:102
 msgid "email"
-msgstr "E-pošta"
+msgstr "Elektronska pošta"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:1
 msgid "Abbreviated Form"
@@ -2586,7 +2573,7 @@ msgstr "Odsek"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:25
 msgid "Forced Line Break"
-msgstr "Prisiljen prelom vrstice"
+msgstr "Vsiljen prelom vrstice"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:26
 msgid "Form Control"
@@ -2602,15 +2589,15 @@ msgstr "Stran HTML"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:33
 msgid "Heading (level 4)"
-msgstr "Glava (raven 4)"
+msgstr "Naslov (4 raven)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:34
 msgid "Heading (level 5)"
-msgstr "Glava (raven 5)"
+msgstr "Naslov (5 raven)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:35
 msgid "Heading (level 6)"
-msgstr "Glava (raven 6)"
+msgstr "Naslov (6 raven)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:36
 msgid "Horizontal Rule"
@@ -2620,10 +2607,10 @@ msgstr "Vodoravno pravilo"
 msgid "Image"
 msgstr "Slika"
 
+# http://en.wikipedia.org/wiki/Image_map
 #: ../dispspecs/xhtml1-strict.xds.in.h:38
-#, fuzzy
 msgid "Image Map"
-msgstr "Karta slike"
+msgstr "Kartiranje slike"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:39
 msgid "Inline Quotation"
@@ -2683,12 +2670,11 @@ msgstr "Vzorec"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:59
 msgid "Script"
-msgstr "Skripta"
+msgstr "Skript"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:60
-#, fuzzy
 msgid "Selectable Choice"
-msgstr "Izbirne naloge z enim odgovorom"
+msgstr "Izbirna možnost"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:61
 msgid "Small"
@@ -2706,11 +2692,11 @@ msgstr "Slog"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:69
 msgid "Table Cell (data)"
-msgstr "Celica tabele (podatki)"
+msgstr "Celica preglednice (podatki)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:70
 msgid "Table Cell (header)"
-msgstr "Celica tabele (glava)"
+msgstr "Celica preglednice (glava)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:74
 msgid "Teletype"
@@ -2755,15 +2741,15 @@ msgstr "Urejanje datotek XML"
 
 #: ../data/conglomerate.schemas.in.h:1
 msgid "A list of custom directories where Conglomerate should look for the display specification (called dispspec, or .xds) files, in addition to the standard installation path. When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used."
-msgstr "Seznam map po meri kjer bo Conglomerate iskal datoteke specifikacij prikaza (imenovane dispspec ali .xds) poleg standardne namestitvene poti. Ko so dokumenti naloženi je v teh mapah poiskana skladajoča datoteka dispsec. Uporabljena je prva skladajoča datoteka dispspec. "
+msgstr "Seznam map z datotekami določil prikaza (poimenovane dispspec ali .xds) ob standardni namestitveni poti. Ko so dokumenti naloženi je uporabljena prva skladna datoteka dispspec. "
 
 #: ../data/conglomerate.schemas.in.h:2
 msgid "A list of directories where Conglomerate should look for template xml files. These documents will be used by the new document assistant as types of documents which can be created by the user."
-msgstr "Seznam map kamor naj Conglomerate gleda za predloge datotek xml. Te dokumente bodo uporabljali novi pomočniki dokumentov kot vrste dokumentov, ki jih lahko ustvari uporabnik."
+msgstr "Seznam map s predlogami datotek XML. Dokumente bodo uporabljali novi pomočniki dokumentov kot vrste dokumentov, ki jih lahko ustvari uporabnik."
 
 #: ../data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
-msgstr "Mesta po meri za datoteke specifikacij prikaza."
+msgstr "Mesta po meri za datoteke določil prikaza."
 
 #: ../data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
@@ -2822,7 +2808,7 @@ msgstr "Spremenjeno"
 
 #: ../glade/cong-file-properties.glade.h:11
 msgid "Number of elements:"
-msgstr "Število elementov:"
+msgstr "Število predmetov:"
 
 #: ../glade/cong-file-properties.glade.h:12
 msgid "Number of words :"
@@ -2869,7 +2855,7 @@ msgstr "oznaka_id_dtd_sistema"
 
 #: ../glade/cong-file-properties.glade.h:24
 msgid "label_elements"
-msgstr "oznaka_elementi"
+msgstr "oznaka_predmeti"
 
 #: ../glade/cong-file-properties.glade.h:25
 msgid "label_location"
@@ -2943,11 +2929,11 @@ msgstr "Poišči _nazaj"
 
 #: ../glade/cong-find-replace.glade.h:8
 msgid "_Match case"
-msgstr "_Skladanje velikosti črk"
+msgstr "_Upoštevaj velikost črk"
 
 #: ../glade/cong-find-replace.glade.h:9
 msgid "_Search for: "
-msgstr "_Poišči za:"
+msgstr "_Poišči:"
 
 #: ../glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
@@ -2967,15 +2953,15 @@ msgstr "Vstavki"
 
 #: ../glade/custom-element.glade.h:2
 msgid "Adhoc Element"
-msgstr "Adhoc element"
+msgstr "Adhoc predmet"
 
 #: ../glade/custom-element.glade.h:3
 msgid "Element Name"
-msgstr "Ime elementa"
+msgstr "Ime predmeta"
 
 #: ../glade/custom-element.glade.h:4
 msgid "Element Type"
-msgstr "Vrsta elementa"
+msgstr "Vrsta predmeta"
 
 #: ../glade/custom-element.glade.h:5
 msgid "I Don't Care"
@@ -3005,9 +2991,9 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
-"To je stran držala. To stran bo mogoče uporabiti za upravljanje podatkov preprostega sledenja različicam DocBook.\n"
+"To je stran vsebnika. Stran bo mogoče uporabiti za upravljanje podatkov preprostega sledenja različicam DocBook.\n"
 "\n"
-"To je navedeno v Bugzilli kot hrošč št. 122538"
+"Zmožnost je navedena v Bugzilli kot hrošč št. 122538"
 
 #: ../glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -3053,7 +3039,7 @@ msgstr "Podeduj oštevilčenje s sosednjih seznamov"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:7
 msgid "Minimise vertical space"
-msgstr "Zmanjšaj navpični prostor"
+msgstr "Skrči navpični prostor"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:8
 msgid "Numbering"
@@ -3077,7 +3063,7 @@ msgstr "Cilj"
 
 #: ../glade/docbook-ulink-properties.glade.h:6
 msgid "URL"
-msgstr "URL"
+msgstr "Naslov URL"
 
 #: ../glade/docbook-ulink-properties.glade.h:7
 msgid "_Test this Link"
@@ -3089,7 +3075,7 @@ msgstr "Krajevno ime"
 
 #: ../glade/plugin-arbitrary.glade.h:3
 msgid "Namespace URI"
-msgstr "URI imenskega prostora"
+msgstr "Naslov URI imenskega prostora"
 
 #: ../glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
@@ -3097,7 +3083,7 @@ msgstr "Predogled"
 
 #: ../glade/plugin-arbitrary.glade.h:6
 msgid "Top-level Element"
-msgstr "Element vrhnje ravni"
+msgstr "Predmet vrhnje ravni"
 
 #: ../glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
@@ -3119,7 +3105,7 @@ msgstr "pogovorno_okno_izbire_niza"
 
 #: ../src/cong-app.c:960
 msgid "Unit test: quit immediately (after loading any files specified on the command-line)"
-msgstr "Preskus enote: takoj končajte (po nalaganju katerihkoli datotek določenih v ukazni vrstici)"
+msgstr "Preskus enote: takoj končaj (po nalaganju katerihkoli datotek določenih v ukazni vrstici)"
 
 #: ../src/cong-app.c:1021
 msgid "XML Editor"
@@ -3136,7 +3122,7 @@ msgstr "S programom Conglomerate ni mogoče najti nobenih opisov vrst dokumentov
 
 #: ../src/cong-app.c:1162
 msgid "If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it.  If you have changed the default setting for the display spec path, please double check that as well."
-msgstr "V primeru, da vidite to napako, ste verjetno izgradili Conglomerate, vendar ga niste namestili. Poskusite ga namestiti. V kolikor ste medtem spremenili privzete nastavitve poti specifikacij prikaza, preverite tudi to."
+msgstr "V primeru, da vidite to napako, ste verjetno izgradili Conglomerate, vendar ga niste namestili. Poskusite ga namestiti. V kolikor ste medtem spremenili privzete nastavitve poti določil prikaza, preverite tudi to."
 
 #: ../src/cong-attribute-editor-cdata.c:206
 #: ../src/cong-attribute-editor-nmtoken.c:272
@@ -3268,7 +3254,7 @@ msgstr "Brez jezika"
 #: ../src/cong-attribute-editor-nmtoken.c:225
 #, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
-msgstr "Atributa \"%s\" ni mogoče nastaviti na \"%s\""
+msgstr "Ni mogoče nastaviti atributa \"%s\" na \"%s\""
 
 #: ../src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
@@ -3276,7 +3262,7 @@ msgstr "Vrednost atributa mora biti žeton imena XML."
 
 #: ../src/cong-attribute-editor-nmtoken.c:237
 msgid "XML name tokens can only contain alphanumeric and/or ideographic characters and the punctuation marks _,-, ., and :. It can not contain whitespace characters."
-msgstr "Žetoni imen XML lahko vsebujejo alfanumerične in/ali ideografske znake ter znake _,-,. in :. Presledni znaki niso dovoljeni."
+msgstr "Žetoni imen XML lahko vsebujejo številčno-znakovne in/ali ideografske znake ter znake _,-,. in :. Presledni znaki niso dovoljeni."
 
 #: ../src/cong-attribute-editor.c:249
 #: ../src/cong-attribute-wrapper.c:232
@@ -3345,7 +3331,7 @@ msgstr "S programom Conglomerate ni mogoče prebrati vpisnika vrst dokumentov."
 
 #: ../src/cong-dispspec-registry.c:111
 msgid "Conglomerate attempted to look at all the files in the location."
-msgstr "Program Conglomerate je poskusil pogledati vse datoteke na tem mestu."
+msgstr "S programom Conglomerate so bile pregledane vse datoteke na tem mestu."
 
 #: ../src/cong-dispspec-registry.c:333
 #: ../src/cong-file-new.c:343
@@ -3386,7 +3372,7 @@ msgstr "Podatki znaka"
 #: ../src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
-msgstr "Referenca entitete \"%s\""
+msgstr "Sklic do enititete \"%s\""
 
 #: ../src/cong-document.c:974
 #, c-format
@@ -3491,7 +3477,7 @@ msgstr "Izberi besedo"
 
 #: ../src/cong-editor-node-text.c:936
 msgid "Move cursor"
-msgstr "Premakni kazalec"
+msgstr "Premakni kazalko"
 
 #: ../src/cong-editor-node-text.c:1022
 msgid "Drag out selection"
@@ -3516,7 +3502,7 @@ msgstr "Tipkanje"
 
 #: ../src/cong-editor-widget3.c:1310
 msgid "Cursor Movement"
-msgstr "Gibanje kazalca"
+msgstr "Gibanje kazalke"
 
 #: ../src/cong-editor-widget3.c:1350
 #: ../src/cong-editor-widget3.c:1363
@@ -3528,11 +3514,11 @@ msgstr "Izbriši izbor"
 #: ../src/cong-error-dialog.c:271
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
-msgstr "V primeru da ste programer, je težava v datoteki %s, vrstica %i \n"
+msgstr "V kolikor bi želeli sami razhroščevati napako, je težava v datoteki %s, vrstica %i \n"
 
 #: ../src/cong-error-dialog.c:235
 msgid "That feature has not yet been implemented.  Sorry."
-msgstr "Ta zmožnost še ni podprta. Oprostite."
+msgstr "Ta zmožnost še ni podprta."
 
 #: ../src/cong-error-dialog.c:265
 #, c-format
@@ -3541,19 +3527,19 @@ msgid ""
 "\n"
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
 msgstr ""
-"Ta zmožnost še ni podprta. Oprostite.\n"
+"Ta zmožnost še ni podprta.\n"
 "\n"
-"To je znana težava; je hrošč št. %i v sistemu sledenja hroščev na %s"
+"Težava je znana; zavedena je kot hrošč št. %i v sistemu sledenja hroščev na %s"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-dialog.c:321
 #, c-format
 msgid "An error was reported whilst attempting the operation \"%s\""
-msgstr "Med poskusom opravila \"%s\" je prišlo do napke"
+msgstr "Prišlo je do napake med poskusom opravila \"%s\""
 
 #: ../src/cong-error-dialog.c:325
 msgid "A GError occurred; the error report was:"
-msgstr "Prišlo je do GError; poročilo o napaki je bilo:"
+msgstr "Prišlo je do GError; poročilo o napaki je:"
 
 #: ../src/cong-error-dialog.c:335
 #: ../src/cong-error-file-open.c:516
@@ -3567,29 +3553,29 @@ msgstr "Za več podrobnosti kliknite na gumb \"Podrobnosti\"."
 
 #: ../src/cong-error-dialog.c:386
 msgid "An error occurred whilst running this system command:"
-msgstr "Med izvajanjem tega sistemskega ukaza je prišlo do napake:"
+msgstr "Prišlo je do napake med izvajanjem tega sistemskega ukaza:"
 
 #: ../src/cong-error-dialog.c:389
 #, c-format
 msgid "The error number reported was %d.  Below is the error text that was output by the command."
-msgstr "Številka sporočene napake je %d. Spodaj je besedilo napake, ki ga je odvedel ukaz."
+msgstr "Številka sporočene napake je %d. Spodaj je besedilo napake, ki je odveden z ukazom."
 
 #. FIXME: ought to set up the parent window properly
 #: ../src/cong-error-file-open.c:67
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr "Conglomerate ne more zagnati iskalnega orodja.\n"
+msgstr "Ni mogoče zagnati iskalnega orodja.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: ../src/cong-error-file-open.c:103
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
-msgstr "%s ne more brati \"%s\" iz %s."
+msgstr "%s ni mogoče brati \"%s\" iz %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
 #: ../src/cong-error-file-open.c:106
 #, c-format
 msgid "%s could not read \"%s\" from %s."
-msgstr "%s ne more brati \"%s\" iz %s."
+msgstr "%s ni mogoče brati \"%s\" iz %s."
 
 #: ../src/cong-error-file-open.c:264
 #: ../src/cong-error-file-save.c:92
@@ -3599,7 +3585,7 @@ msgstr "Prišlo je do nepričakovane notranje napake."
 #: ../src/cong-error-file-open.c:265
 #: ../src/cong-error-file-save.c:93
 msgid "Try again.  If it fails again, file a bug report with the maintainer of this application."
-msgstr "Poskusite ponovno. V primeru da ponovno spodleti, pošljite vzdrževalcu tega programa poročilo o napaki."
+msgstr "Poskusite znova. V primeru, da spet spodleti, pošljite vzdrževalcu programa poročilo o napaki."
 
 #: ../src/cong-error-file-open.c:291
 msgid "There is no file with that name at that location."
@@ -3610,7 +3596,7 @@ msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or \"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Preverite če ste ime datoteke pravilno črkovali. Zapomnite si, da je velikost črk pomembna (\"MojaDatoteka\" ni enako kot \"mojadatoteka\" ali \"MOJADATOTEKA\").\n"
+"(i) Preverite, da je ime datoteke zapisano pravilno. Upoštevajte velikost črk (\"MojaDatoteka\" ni enako kot \"mojadatoteka\" ali \"MOJADATOTEKA\").\n"
 "(ii) Uporabite iskalno orodje za iskanje vaše datoteke."
 
 #: ../src/cong-error-file-open.c:293
@@ -3630,7 +3616,7 @@ msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Preverite če ste mesto pravilno črkovali. Zapomnite si, da je velikost črk pomembna (\"MojaMapa\" ni enako kot \"mojamapa\" ali \"MOJAMAPA\").\n"
+"(i) Preverite, da je mesto zapisano pravilno. Upoštevajte velikost črk (\"MojaMapa\" ni enako kot \"mojamapa\" ali \"MOJAMAPA\").\n"
 "(ii) Uporabite iskalno orodje za iskanje vaše datoteke."
 
 #. FIXME: need some thought about the messages for this
@@ -3641,7 +3627,7 @@ msgstr "Mesto \"%s\" ne podpira branja datotek."
 
 #: ../src/cong-error-file-open.c:318
 msgid "Try loading a file from a different location.  If you think that you ought to be able to read this file, contact your system administrator."
-msgstr "Poskusite naložiti datoteko iz drugega mesta. V primeru da mislite, da bi morali biti sposobni brati to datoteko, stopite v stik s skrbnikom sistema."
+msgstr "Poskusite naložiti datoteko iz drugega mesta. V primeru težav z drugim mestom, stopite v stik s skrbnikom sistema."
 
 #: ../src/cong-error-file-open.c:328
 msgid "There were problems reading the content of the file."
@@ -3651,7 +3637,7 @@ msgstr "Prišlo je do težav med branjem vsebine datoteke."
 #: ../src/cong-error-file-open.c:347
 #: ../src/cong-error-file-open.c:386
 msgid "Try again.  If it fails again, contact your system administrator."
-msgstr "Poskusite ponovno. V primeru da spodleti, stopite v stik s skrbnikom sistema."
+msgstr "Poskusite znova. V primeru, da spet spodleti, stopite v stik s skrbnikom sistema."
 
 #: ../src/cong-error-file-open.c:338
 msgid "The contents of the file seem to be corrupt."
@@ -3659,7 +3645,7 @@ msgstr "Videti je, da je vsebina datoteke pokvarjena."
 
 #: ../src/cong-error-file-open.c:339
 msgid "Try again.  If it fails again, try looking for a backup copy of the file."
-msgstr "Poskusite ponovno. V primeru da spodleti, poskusite z iskanjem varnostne kopije datoteke."
+msgstr "Poskusite znova. V primeru, da spet spodleti, poskusite z iskanjem varnostne kopije datoteke."
 
 #: ../src/cong-error-file-open.c:346
 #: ../src/cong-error-file-open.c:385
@@ -3669,19 +3655,19 @@ msgstr "Prišlo je do težav med branjem vsebine datoteke."
 #: ../src/cong-error-file-open.c:355
 #: ../src/cong-error-file-save.c:251
 msgid "The system does not recognise that as a valid location."
-msgstr "Sistem tega ne prepozna kot veljavno mesto."
+msgstr "Sistem naslova ne prepozna kot veljavno mesto."
 
 #: ../src/cong-error-file-open.c:356
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Preverite če ste pravilno črkovali mesto. Zapomnite si, da je velikost črk pomembna. (\"http\" ni enako kot \"Http\" ali \"HTTP\").\n"
+"(i) Preverite, da je mesto zapisano pravilno. Upoštevajte velikost črk (\"http\" ni enako kot \"Http\" ali \"HTTP\").\n"
 "(ii) Uporabite iskalno orodje za iskanje vaše datoteke."
 
 #: ../src/cong-error-file-open.c:367
 msgid "You do not have permission to read that file."
-msgstr "Nimate dovoljenj za branje te datoteke."
+msgstr "Ni ustreznih dovoljenj za branje te datoteke."
 
 #: ../src/cong-error-file-open.c:368
 msgid "Try asking your system administrator to give you permission."
@@ -3690,14 +3676,14 @@ msgstr "Vprašajte skrbnika sistema za dovoljenje."
 #: ../src/cong-error-file-open.c:375
 #: ../src/cong-error-file-save.c:274
 msgid "The system is trying to operate on too many files at once."
-msgstr "Sistem poskuša delati s preveč datotekami na enkrat."
+msgstr "Sistem poskuša upravljati s preveč datotekami na hkrati."
 
 #: ../src/cong-error-file-open.c:376
 #: ../src/cong-error-file-open.c:410
 #: ../src/cong-error-file-save.c:275
 #: ../src/cong-error-file-save.c:294
 msgid "Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."
-msgstr "Poskusite ponovno. V primeru da spodleti poskusite zapreti neželene programe ali stopite v stik s skrbnikom sistema."
+msgstr "Poskusite znova. V primeru, da spet spodleti poskusite zapreti neželene programe ali stopite v stik s skrbnikom sistema."
 
 #. FIXME:  capitalisation issues
 #: ../src/cong-error-file-open.c:393
@@ -3725,7 +3711,7 @@ msgstr "S strežnikom ni mogoče vzpostaviti stika."
 
 #: ../src/cong-error-file-open.c:419
 msgid "Try again.  If it fails again, the server may be down."
-msgstr "Poskusite ponovno. V primeru da shranjevanje ponovno spodleti, je morda strežnik nedostopen."
+msgstr "Poskusite znova. V primeru, da shranjevanje spet spodleti, je strežnik morda nedostopen."
 
 #: ../src/cong-error-file-open.c:428
 #: ../src/cong-error-file-open.c:437
@@ -3733,52 +3719,52 @@ msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
 msgstr ""
-"(i) Preverite da ste mesto pravilno črkovali.\n"
-"(ii) Poskusite ponovno. V primeru da spodleti, je morda strežnik nedostopen."
+"(i) Preverite, da je mesto zapisano pravilno.\n"
+"(ii) Poskusite znova. V primeru, da spet spodleti, je strežnik morda nedostopen."
 
 #: ../src/cong-error-file-open.c:445
 #: ../src/cong-error-file-save.c:329
 msgid "The system could not login to the location."
-msgstr "Sistem se ne more prijaviti na mesto."
+msgstr "Ni se mogoče prijaviti na mesto."
 
 #: ../src/cong-error-file-open.c:446
 #: ../src/cong-error-file-open.c:456
 msgid "Try again. If it fails again, contact your system administrator."
-msgstr "Poskusite ponovno. V primeru da ponovno spodleti, stopite v stik s skrbnikom sistema."
+msgstr "Poskusite znova. V primeru, spet spodleti, stopite v stik s skrbnikom sistema."
 
 #: ../src/cong-error-file-open.c:455
 #: ../src/cong-error-file-save.c:338
 msgid "The location was too busy."
-msgstr "Mesto je bilo prezaposleno."
+msgstr "Mesto je prezaposleno."
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-file-open.c:505
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
-msgstr "Napaka \"%s\" je bila sporočena med dostopanjem do \"%s\""
+msgstr "Sporočena je napaka \"%s\" med dostopom do \"%s\""
 
 #: ../src/cong-error-file-open.c:509
 msgid "The program unexpectedly received an error report from the GNOME Virtual File System."
-msgstr "Program je nepričakovano prejel poročilo o napaki od Navideznega datotečnega sistema GNOME."
+msgstr "Program je nepričakovano prejel poročilo o napaki navideznega datotečnega sistema GNOME."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: ../src/cong-error-file-save.c:61
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
-msgstr "%s ne more shraniti \"%s\" v %s."
+msgstr "%s ni mogoče shraniti \"%s\" v %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: ../src/cong-error-file-save.c:64
 #, c-format
 msgid "%s could not save \"%s\" to %s."
-msgstr "%s ne more shraniti \"%s\" v %s."
+msgstr "%s ni mogoče shraniti \"%s\" v %s."
 
 #: ../src/cong-error-file-save.c:111
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Preverite, če ste pravilno črkovali ime mesta. Zapomnite si, da je velikost črk pomembna (\"MojaMapa\" ni enako kot \"MOJAMAPA\" ali \"mojamapa\").\n"
+"(i) Preverite, da je ime mesta zapisano pravilno. Upoštevajte velikost črk (\"MojaMapa\" ni enako kot \"MOJAMAPA\" ali \"mojamapa\").\n"
 "(ii) Poskusite shraniti na drugo mesto."
 
 #. FIXME: need some thought about the messages for this
@@ -3800,12 +3786,12 @@ msgstr "Prišlo je do težav med zapisovanjem vsebine datoteke."
 
 #: ../src/cong-error-file-save.c:135
 msgid "Try again.  If it fails again, try saving to a different location."
-msgstr "Poskusite ponovno. V primeru da shranjevanje ponovno spodleti, poskusite shraniti na drugo mesto."
+msgstr "Poskusite znova. V primeru, da shranjevanje spet spodleti, poskusite shraniti na drugo mesto."
 
 #: ../src/cong-error-file-save.c:159
 #, c-format
 msgid "The size of the file would be %s, but the device only has a capacity of %s."
-msgstr "Velikost datoteke bi bila %s, toda zmogljivost naprave je le %s."
+msgstr "Velikost datoteke je %s, zmogljivost naprave pa le %s."
 
 #. Can't get at the capacity for the device or "volume":
 #. FIXME: This is the workaround:
@@ -3813,7 +3799,7 @@ msgstr "Velikost datoteke bi bila %s, toda zmogljivost naprave je le %s."
 #: ../src/cong-error-file-save.c:169
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
-msgstr "Datoteka je prevelika za to napravo (velikost datoteke bi bila %s)"
+msgstr "Datoteka je prevelika za to napravo (velikost datoteke je %s)"
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:178
@@ -3828,13 +3814,13 @@ msgstr "Poskusite shraniti na drugo mesto."
 #: ../src/cong-error-file-save.c:208
 #, c-format
 msgid "The size of the file would be %s, but you only have %s free on that device."
-msgstr "Velikost datoteke bi bila %s, toda na napravi imate na voljo imate le %s."
+msgstr "Velikost datoteke je %s, na napravi pa je na voljo le %s."
 
 #. Can't get at the free space for the device or "volume":
 #: ../src/cong-error-file-save.c:214
 #, c-format
 msgid "The file is too big to fit in the remaining space on the device (file size would be %s)."
-msgstr "Datoteka je prevelika za preostali prostor na napravi (velikost datoteke bi bila %s)."
+msgstr "Datoteka je prevelika za preostali prostor na napravi (velikost datoteke je %s)."
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:222
@@ -3851,16 +3837,16 @@ msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Preverite če ste mesto pravilno črkovali. Zapomnite si da je velikost črk pomembna (\"http\" ni enako kot \"Http\" ali \"HTTP\").\n"
+"(i) Preverite, da je mesto pravilno zapisano. Upoštevajte tudi velikost črk (\"http\" ni enako kot \"Http\" ali \"HTTP\").\n"
 "(ii) Shranite na drugo mesto."
 
 #: ../src/cong-error-file-save.c:266
 msgid "You do not have permission to write to that location."
-msgstr "Nimate dovoljenja za pisanje na to mesto."
+msgstr "Ni ustreznih dovoljenj za pisanje na to mesto."
 
 #: ../src/cong-error-file-save.c:267
 msgid "Try saving to a different location, or ask your system administrator to give you permission."
-msgstr "Poskusite shraniti na drugo mesto ali vprašajte skrbnika sistema za dovoljenje."
+msgstr "Poskusite shraniti na drugo mesto ali pa zahtevajte ustrezna sistemska dovoljenja."
 
 #. FIXME:  capitalisation issues
 #: ../src/cong-error-file-save.c:281
@@ -3870,11 +3856,11 @@ msgstr "\"%s\" je mapa."
 
 #: ../src/cong-error-file-save.c:285
 msgid "You must save to a file within a directory, rather than to the directory itself."
-msgstr "Datoteko morate shraniti znotraj mape, namesto shranjevanja na mapo samo."
+msgstr "Datoteko je treba shraniti v mapo in ne namesto mape same."
 
 #: ../src/cong-error-file-save.c:303
 msgid "Try again.  If it fails again, the server may be down; try saving to another location."
-msgstr "Poskusite ponovno. V primeru da shranjevanje ponovno spodleti, je strežnik morda nedostopen; poskusite shraniti na drugo mesto."
+msgstr "Poskusite znova. V primeru da shranjevanje ponovno spodleti, je strežnik morda nedostopen; poskusite shraniti na drugo mesto."
 
 #: ../src/cong-error-file-save.c:312
 #: ../src/cong-error-file-save.c:321
@@ -3904,7 +3890,7 @@ msgstr "Ime \"%s\" je predolgo za upravljanje mesta."
 
 #: ../src/cong-error-file-save.c:362
 msgid "Try again with a shorter file name."
-msgstr "Poskusite ponovno s krajšim imenom datoteke."
+msgstr "Poskusite znova s krajšim imenom datoteke."
 
 #. 5 megabytes, for a test
 #: ../src/cong-error-tests.c:25
@@ -3924,7 +3910,7 @@ msgstr "Poskušanje splošne napake \"%s\" z rezultatom %s"
 
 #: ../src/cong-error-tests.c:40
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr "Conglomerate oponaša napako splošnega dejanja datoteke."
+msgstr "Program Conglomerate simulira napako splošnega dejanja datoteke."
 
 #: ../src/cong-error-tests.c:43
 msgid "This dialog was generated by the automated testing routine"
@@ -3969,7 +3955,7 @@ msgstr "Določite ime datoteke."
 
 #: ../src/cong-file-import.c:80
 msgid "Import file..."
-msgstr "Uvažanje datoteke ..."
+msgstr "Uvoz datoteke ..."
 
 #: ../src/cong-file-new.c:169
 #, c-format
@@ -3984,7 +3970,6 @@ msgid "Creating a new file"
 msgstr "Ustvarjanje nove datoteke"
 
 #: ../src/cong-file-new.c:619
-#, fuzzy
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -3992,11 +3977,11 @@ msgid ""
 "\n"
 "We hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system."
 msgstr ""
-"Ta pomočnik vas bo vodil skozi ustvarjanje nove datoteke.\n"
+"Pomočnik olajša ustvarjanje nove datoteke.\n"
 "\n"
-"Dostopne so različne vrste datotek in Conglomerate bo mora lahko zagotovil nekaj \"boilerplate ???\" vsebine za vas.\n"
+"Na voljo so različne vrste datotek in s programom je mogoče samodejno ustvariti določeno vrsto običajne vsebine.\n"
 "\n"
-"Upamo da boste lahko v prihodnjih različicah Conglomerate lahko ustvarili \"dokumente predlog\" ."
+"V prihodnjih različicah programa bo mogoče ustvariti tudi \"predlogo\" za dodajanje v besedilo."
 
 #: ../src/cong-file-new.c:632
 msgid "What type of file would you like to create?"
@@ -4004,19 +3989,19 @@ msgstr "Kakšno vrsto datoteke želite ustvariti?"
 
 #: ../src/cong-file-new.c:634
 msgid "Highlight one of the items in the list and select \"Forward\" to continue"
-msgstr "Poudarite enega od predmetov na seznamu in izberite \"Naprej\" za nadaljevanje"
+msgstr "Poudarite enega od predmetov na seznamu in izberite \"Naprej\" za nadaljevanje."
 
 #: ../src/cong-file-new.c:644
 msgid "Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it."
-msgstr "Conglomerate sedaj ima podatke potrebne za ustvarjanje dokumenta. Pritisnite \"Uporabi\" za ustvarjanje. Dokument boste morali shraniti, če ga želite obdržati."
+msgstr "Program Conglomerate ima vse zahtevane podatke za ustvarjanje dokumenta. Pritisnite \"Uporabi\" za ustvarjanje. Dokument bo treba shraniti, če ga želite obdržati."
 
 #: ../src/cong-file-open.c:72
 msgid "The internal structure of the document does not match any of the types known to Conglomerate."
-msgstr "Notranja struktura dokumenta se ne sklada z nobeno od vrst, ki jih pozna Conglomerate."
+msgstr "Notranja zgradba dokumenta ni skladna z nobeno od vrst poznanih programu Conglomerate."
 
 #: ../src/cong-file-open.c:73
 msgid "You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."
-msgstr "Conglomerate lahko vsilite nalaganje dokumenta s klikom na gumb \"Vsili\" spodaj, toda rezultati morda ne bodo idealni."
+msgstr "Programu je mogoče vsiliti nalaganje dokumenta s klikom na gumb \"Vsili\", toda rezultati morda ne bodo najboljši."
 
 #: ../src/cong-file-open.c:74
 msgid "Force"
@@ -4051,7 +4036,7 @@ msgstr "Predogled tiskanja"
 #: ../src/cong-file-print.c:346
 #, c-format
 msgid "Conglomerate cannot print \"%s\""
-msgstr "\"%s\" ni mogoče natisniti"
+msgstr "\"%s\" ni mogoče natisniti."
 
 #: ../src/cong-file-print.c:349
 msgid "None of Conglomerate's plugins know how to print files of that type."
@@ -4076,7 +4061,7 @@ msgstr "_Odstrani ta DTD"
 
 #: ../src/cong-file-properties.c:285
 msgid "The document does not specify an external DTD, but Conglomerate believes the above information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document."
-msgstr "Dokument ne določi zunanjega DTD, toda zdi se da so zgornji podatki pravilni. Kliknite na \"Poveži ta DTD\" za eksplicitno določitev teh podatkov v dokumentu."
+msgstr "Dokument ne uporablja zunanih pravil DTD, toda zdi se da so zgornji podatki pravilni. Kliknite na \"Poveži ta DTD\" za pravilno določitev teh podatkov v dokumentu."
 
 #: ../src/cong-file-properties.c:294
 msgid "No External Subset"
@@ -4152,7 +4137,7 @@ msgstr "Izbrani meni še ni podprt."
 
 #: ../src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
-msgstr "Conglomerate ne more odpreti rezultata pretvorbe"
+msgstr "Ni mogoče odpreti rezultata pretvorbe"
 
 #.
 #. * Since we can not assume that these are the DocBook stylesheets we can not
@@ -4228,17 +4213,16 @@ msgstr "Pomo_č"
 #: ../src/cong-menus.c:1490
 #: ../src/popup.c:1121
 msgid "New sub-element"
-msgstr "Nov pod element"
+msgstr "Nov podrejeni predmet"
 
 #: ../src/cong-menus.c:1491
 #: ../src/popup.c:1135
 msgid "New sibling"
-msgstr "Nov sorodni element"
+msgstr "Nov enakovreden predmet"
 
 #: ../src/cong-menus.c:1492
-#, fuzzy
 msgid "Remove span tag"
-msgstr "<span weight=\"bold\">Oznaka:</span>"
+msgstr "Odstrani oznako razmika"
 
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1495
@@ -4273,7 +4257,7 @@ msgstr "_Vsebina"
 
 #: ../src/cong-menus.c:1517
 msgid "_Homepage"
-msgstr "_Domača stran"
+msgstr "_Spletna stran"
 
 #: ../src/cong-menus.c:1518
 msgid "_About"
@@ -4325,7 +4309,7 @@ msgstr "_Razveljavi"
 #: ../src/cong-menus.c:1544
 #: ../src/cong-menus.c:1782
 msgid "_Redo"
-msgstr "_Uveljavi"
+msgstr "Ponovno _uveljavi"
 
 #: ../src/cong-menus.c:1545
 msgid "Cu_t"
@@ -4364,7 +4348,7 @@ msgstr "_Vstavi ..."
 
 #: ../src/cong-menus.c:1554
 msgid "View _Source"
-msgstr "Ogled _vira"
+msgstr "Pogled _vira"
 
 #: ../src/cong-menus.c:1768
 #, c-format
@@ -4374,16 +4358,16 @@ msgstr "_Razveljavi: %s"
 #: ../src/cong-menus.c:1778
 #, c-format
 msgid "_Redo: %s"
-msgstr "_Uveljavi: %s"
+msgstr "Ponovno _uveljavi: %s"
 
 #: ../src/cong-node-properties-dialog.c:254
 msgid "XPath"
-msgstr "XPath"
+msgstr "XPot"
 
 #: ../src/cong-node-properties-dialog.c:379
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
-msgstr "Preimenuj atribut \"%s\" kot \"%s\""
+msgstr "Preimenuj atribut \"%s\" v \"%s\""
 
 #: ../src/cong-node-properties-dialog.c:560
 msgid "Namespace"
@@ -4396,7 +4380,7 @@ msgstr "Surovi atributi"
 #: ../src/cong-node-properties-dialog.c:713
 #, c-format
 msgid "Attributes for <tt>%s</tt> elements"
-msgstr "Atributi elementov <tt>%s</tt>"
+msgstr "Atributi predmetov <tt>%s</tt>"
 
 #: ../src/cong-node-properties-dialog.c:930
 msgid "Zero or more"
@@ -4415,7 +4399,7 @@ msgstr "Veljavna vsebina"
 #: ../src/cong-node-properties-dialog.c:1038
 #, c-format
 msgid "Content model for <tt>%s</tt> elements"
-msgstr "Model vsebine za elemente <tt>%s</tt>"
+msgstr "Model vsebine za predmete <tt>%s</tt>"
 
 #: ../src/cong-node-properties-dialog.c:1185
 #: ../src/cong-node-properties-dialog.c:1316
@@ -4433,7 +4417,7 @@ msgstr "Napake razčlenjevanja med nalaganjem %s"
 
 #: ../src/cong-parser-error.c:236
 msgid "_Retry"
-msgstr "Poskusi _ponovno"
+msgstr "Poskusi _znova"
 
 #: ../src/cong-parser-error.c:315
 msgid "Line Number"
@@ -4442,11 +4426,11 @@ msgstr "Številka vrstice"
 #: ../src/cong-parser-error.c:393
 #, c-format
 msgid "%s cannot understand the internal format of the file."
-msgstr "%s ne more razumeti notranjega zapisa datoteke."
+msgstr "%s ne razume notranjega zapisa datoteke."
 
 #: ../src/cong-parser-error.c:401
 msgid "Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."
-msgstr "Conglomerate trenutno zahteva \"dobro-oblikovane\" dokumente. Ima precej strožja pravila kot večina spletnih brskalnikov. Trenutno še ne podpira SGML. Upamo da bomo te težave popravili do naslednje različice."
+msgstr "Program Conglomerate trenutno zahteva \"kakovostno-oblikovane\" dokumente. Uporablja precej strožja pravila kot večina spletnih brskalnikov. Trenutno še ne podpira SGML. Upamo, da bomo te težave popravili do naslednje različice."
 
 #: ../src/cong-parser-error.c:402
 msgid "Show Details"
@@ -4455,7 +4439,7 @@ msgstr "Pokaži podrobnosti"
 #: ../src/cong-plugin.c:515
 #: ../src/cong-plugin.c:580
 msgid "Conglomerate could not find display information for the new file"
-msgstr "Conglomerate ne more najti podatkov o prikazu za novo datoteko"
+msgstr "Ni mogoče najti podatkov o prikazu za novo datoteko"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
 #: ../src/cong-plugin.c:1004
@@ -4467,18 +4451,18 @@ msgstr "Pogovorno okno lastnosti <%s>"
 #: ../src/cong-plugin.c:1007
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
-msgstr "Zagotovi pogovorno okno lastnosti za element <%s>"
+msgstr "Zagotovi pogovorno okno lastnosti za predmet <%s>"
 
 #: ../src/cong-plugin.c:1091
 #, c-format
 msgid "<%s> property page"
-msgstr "stran lastnosti <%s>"
+msgstr "Stran lastnosti <%s>"
 
 #. Generate a user-visible description for this plugin
 #: ../src/cong-plugin.c:1095
 #, c-format
 msgid "Provides a Properties page for the <%s> element"
-msgstr "Zagotovi stran lastnosti za element <%s>"
+msgstr "Zagotovi stran lastnosti za predmet <%s>"
 
 #: ../src/cong-primary-window.c:415
 msgid "Overview"
@@ -4495,7 +4479,7 @@ msgstr "Surov XML"
 #: ../src/cong-primary-window.c:662
 #: ../src/cong-primary-window.c:681
 msgid "Welcome to the much-delayed Conglomerate editor."
-msgstr "Dobrodošli v močno zakasnjen urejevalnik Conglomerate"
+msgstr "Dobrodošli v urejevalnik Conglomerate"
 
 #: ../src/cong-primary-window.c:810
 #, c-format
@@ -4509,7 +4493,7 @@ msgstr "Počisti vir XML"
 
 #: ../src/cong-stylesheet.c:230
 msgid "Since Conglomerate could not read the stylesheet it is possible that your XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog.html for more information on catalogs."
-msgstr "Ker program ne more brati slogovne predloge je mogoče, da je datoteka kataloga XML nastavljena nepravilno. Oglejte si http://www.xmlsoft.org/catalog.html za več podrobnosti o katalogih."
+msgstr "Ker ni mogoče prebrati slogovne predloge, najverjetneje datoteka kataloga XML ni nastavljena pravilno. poglejte si http://www.xmlsoft.org/catalog.html za več podrobnosti o katalogih."
 
 #: ../src/cong-stylesheet.c:261
 #, c-format
@@ -4524,7 +4508,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Sledeči parametri slogovne predloge so bili uporabljeni:\n"
+"Naslednji parametri slogovne predloge so bili uporabljeni:\n"
 
 #: ../src/cong-util.c:321
 #: ../src/plugin-docbook.c:1402
@@ -4550,7 +4534,7 @@ msgstr "Izbor DTD"
 #: ../src/cursor.c:129
 #, c-format
 msgid "Split <%s> element"
-msgstr "Razdeli element <%s>"
+msgstr "Razdeli predmet <%s>"
 
 #: ../src/file.c:106
 msgid "XML Files"
@@ -4570,7 +4554,7 @@ msgstr "Vozlišče urejevalnika za predočenje namigov, opozoril, itn"
 
 #: ../src/plugin-arbitrary.c:168
 msgid "The XML document needs a top-level element."
-msgstr "Dokument XML potrebuje element vrhnje ravni."
+msgstr "Dokument XML zahteva predmet vrhnje ravni."
 
 #: ../src/plugin-arbitrary.c:270
 msgid "Empty XML Document"
@@ -4637,7 +4621,7 @@ msgstr "Neimenovan niz dokumentov"
 #: ../src/plugin-docbook.c:1103
 #, c-format
 msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
-msgstr "Program ne more najti slogovne predloge uporabljene za pretvorbo DocBook v %s"
+msgstr "Ni mogoče najti slogovne predloge uporabljene za pretvorbo DocBook v %s"
 
 #: ../src/plugin-docbook.c:1106
 msgid "Unable to locate the DocBook stylesheets"
@@ -4645,7 +4629,7 @@ msgstr "Slogovnih predlog DocBook ni mogoče najti"
 
 #: ../src/plugin-docbook.c:1108
 msgid "Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://docbook.sourceforge.net/projects/xsl/, are installed and are added to your XML catalog file (see http://www.xmlsoft.org/catalog.html for more information on catalogs)."
-msgstr "Prepričajte se, da so DocBook XSL slogovne predloge Normana Walsha dostopne na http://docbook.sourceforge.net/projects/xsl/ nameščene in dodane v vašo kataloško datoteko XML (za več podrobnosti o katalogih si oglejte http://www.xmlsoft.org/catalog.html)"
+msgstr "Prepričajte se, da so DocBook XSL slogovne predloge Normana Walsha dostopne na http://docbook.sourceforge.net/projects/xsl/ nameščene in dodane v vašo kataloško datoteko XML (za več podrobnosti o katalogih si poglejte http://www.xmlsoft.org/catalog.html)"
 
 #: ../src/plugin-docbook.c:1144
 #, c-format
@@ -4654,7 +4638,7 @@ msgid ""
 "\n"
 "Converted %s to %s in %s"
 msgstr ""
-"%s pretvorba končana.\n"
+"%s pretvorba je končana.\n"
 "\n"
 "Pretvorjeno %s v %s v %s"
 
@@ -4718,7 +4702,7 @@ msgstr "Izvozi DocBook kot HTML"
 
 #: ../src/plugin-docbook.c:2105
 msgid "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook file"
-msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje spletne strani iz te datoteke DocBook"
+msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje spletne strani iz te datoteke DocBook."
 
 #: ../src/plugin-docbook.c:2113
 msgid "Export DocBook as PDF"
@@ -4726,7 +4710,7 @@ msgstr "Izvozi DocBook kot PDF"
 
 #: ../src/plugin-docbook.c:2114
 msgid "Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook file"
-msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje datoteke PDF iz te datoteke DocBook"
+msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje datoteke PDF iz te datoteke DocBook."
 
 #: ../src/plugin-docbook.c:2122
 msgid "Export DocBook as XSL:FO"
@@ -4734,7 +4718,7 @@ msgstr "Izvozi DocBook kot XSL:FO"
 
 #: ../src/plugin-docbook.c:2123
 msgid "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this DocBook file that can be printed or converted to PDF at a later date"
-msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje datoteke XSL:FO iz te datoteke DocBook, katero je mogoče natisniti ali kasneje pretvoriti v PDF"
+msgstr "Uporabi DocBook slogovne predloge Normana Walsha za ustvarjanje datoteke XSL:FO iz te datoteke DocBook, ki jo je mogoče natisniti ali kasneje pretvoriti v PDF."
 
 #: ../src/plugin-docbook.c:2132
 msgid "Print DocBook"
@@ -4817,11 +4801,11 @@ msgstr "Določilo prikaza Conglomerate so bila samodejno ustvarjena iz %s"
 
 #: ../src/plugin-dtd.c:215
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr "Pretvori DTD v Conglomerate specifikacijo zaslona"
+msgstr "Pretvori DTD v Conglomerate določila zaslona"
 
 #: ../src/plugin-dtd.c:216
 msgid "Import a DTD file, creating a Conglomerate display specification file."
-msgstr "Uvozi datoteko DTD in ustvari datoteko specifikacije zaslona Conglomerate."
+msgstr "Uvozi datoteko DTD in ustvari datoteko določila zaslona Conglomerate."
 
 #: ../src/plugin-dtd.c:224
 msgid "Convert DTD into a Relax NG schema"
@@ -4868,9 +4852,8 @@ msgid "Print XSL:FO"
 msgstr "Natisni XSL:FO"
 
 #: ../src/plugin-lists.c:77
-#, fuzzy
 msgid "List Member Element"
-msgstr "Razmerje velikosti elementa"
+msgstr "Predmet seznama članov"
 
 #: ../src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
@@ -4892,7 +4875,7 @@ msgstr "Natisni vir XML"
 
 #: ../src/plugin-random.c:140
 msgid "What kind of random XML document would you like to create?"
-msgstr "Kakšno vrsto naključnega XML dokumenta želite ustvariti?"
+msgstr "Kakšno vrsto naključnega dokumenta XML želite ustvariti?"
 
 #: ../src/plugin-random.c:223
 msgid "Random Document"
@@ -4909,7 +4892,7 @@ msgstr "Skrčen pogled skladnje"
 #: ../src/plugin-relaxng.c:146
 #: ../src/plugin-relaxng.c:149
 msgid "View as Compact RELAX NG"
-msgstr "Ogled kot skrčen RELAX NG"
+msgstr "Pogled kot skrčen RELAX NG"
 
 #: ../src/plugin-relaxng.c:147
 msgid "Display the compact syntax form of a RELAX NG schema"
@@ -4917,17 +4900,17 @@ msgstr "Prikaže skrčeno obliko skladnje sheme RELAX NG"
 
 #: ../src/plugin-save-dispspec.c:155
 msgid "Dump Display Spec"
-msgstr "Izpiši določil prikaza"
+msgstr "Odloži določila prikaza"
 
 #: ../src/plugin-save-dispspec.c:156
 #: ../src/plugin-save-dispspec.c:159
 #: ../src/plugin-save-dispspec.c:160
 msgid "Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"
-msgstr "Zapiše trenutna določila prikaza v xml datoteko določil. To datoteko lahko uporabnik prilagodi po meri."
+msgstr "Zapiše trenutna določila prikaza v datoteko XML določil. To datoteko lahko uporabnik prilagodi po meri."
 
 #: ../src/plugin-save-dispspec.c:158
 msgid "_Dump Display Spec"
-msgstr "_Izpiši določila prikaza"
+msgstr "_Odložii določila prikaza"
 
 #: ../src/plugin-save-dispspec.c:166
 msgid "Edit Display Spec"
@@ -4962,34 +4945,34 @@ msgstr "Uvozi SGML"
 
 #: ../src/plugin-sgml.c:210
 msgid "Import an SGML file, converting to XML."
-msgstr "Uvažanje datoteke SGML, pretvarjanje v XML."
+msgstr "Uvažanje datoteke SGML in pretvarjanje v XML."
 
 #: ../src/plugin-tests.c:64
 msgid "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"
-msgstr "To je poskusni nadzor koledarja; je držalo in bo sčasoma nadomeščeno z uporabnimi možnostmi"
+msgstr "To je poskusni nadzor koledarja; je vsebnik in bo sčasoma nadomeščen z uporabnimi možnostmi"
 
 #: ../src/plugin-tests.c:142
 #: ../src/plugin-tests.c:221
 #, c-format
 msgid "Unicode Characters 0x%04X-0x%04X"
-msgstr "Znaki unicode 0x%04X-0x%04X"
+msgstr "Znaki Unicode 0x%04X-0x%04X"
 
 #: ../src/plugin-tests.c:359
 msgid "Unicode Character Reference"
-msgstr "Sklic znakov unicode"
+msgstr "Sklicevanje znakov Unicode"
 
 #: ../src/plugin-tests.c:360
 msgid "Create a table listing a part of the Unicode character set as a DocBook article"
-msgstr "Ustvari seznam preglednic kot del znakovnega niza Unicode nastavljenega kot članek DocBook"
+msgstr "Ustvari seznam preglednic kot del znakovnega nabora Unicode nastavljenega kot članek DocBook"
 
 #: ../src/plugin-validate.c:163
 #, c-format
 msgid "The document \"%s\" cannot be checked for validity."
-msgstr "Dokumenta \"%s\" ni mogoče preveriti za veljavnost."
+msgstr "Dokumentu \"%s\" ni mogoče preveriti veljavnosti."
 
 #: ../src/plugin-validate.c:170
 msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
-msgstr "To lahko popravite z dodajanjem deklaracije (DTD) vrste dokumenta dokumentu"
+msgstr "Napako je mogoče popraviti z dodatkom deklaracije (DTD) vrste dokumenta"
 
 #: ../src/plugin-validate.c:215
 #, c-format
@@ -4998,17 +4981,17 @@ msgstr "Dokument \"%s\" je veljaven."
 
 #: ../src/plugin-validate.c:249
 msgid "Validate Document"
-msgstr "Potrdi dokument"
+msgstr "Potrdi veljavnost dokumenta"
 
 #: ../src/plugin-validate.c:250
 #: ../src/plugin-validate.c:253
 #: ../src/plugin-validate.c:254
 msgid "Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"
-msgstr "Preveri, če je dokument \"veljaven\" in da se sklada z nizom pravil odgovarjajoče sheme ali vrste dokumenta."
+msgstr "Preveri, če je dokument \"veljaven\" in je skladen s pravili odgovarjajoče sheme ali vrste dokumenta."
 
 #: ../src/plugin-validate.c:252
 msgid "_Validate Document"
-msgstr "_Potrdi dokument"
+msgstr "Preveri _veljavnost dokumenta"
 
 #: ../src/plugin-website.c:465
 msgid "Generating website"
@@ -5024,7 +5007,7 @@ msgstr "Program Conglomerate ni končal ustvarjanja spletišča"
 
 #: ../src/plugin-website.c:478
 msgid "One of the stages reported an error."
-msgstr "Pri enem izmed korakov je prišlo do napake."
+msgstr "Prišlo je do napake na enem izmed korakov opravila."
 
 #: ../src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
@@ -5050,16 +5033,16 @@ msgstr "Ustvari _spletišče"
 
 #: ../src/plugin-xsl.c:324
 msgid "XSL Template Element"
-msgstr "Element predloge XSL"
+msgstr "Predmet predloge XSL"
 
 #: ../src/plugin-xsl.c:325
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr "Element za predočitev pravil predlog v slogovni predlogi XSL"
+msgstr "Predmet za predočenje pravil predloge v slogovni predlogi XSL"
 
 #: ../src/popup.c:490
-#, fuzzy, c-format
+#, c-format
 msgid "Apply span tag: %s"
-msgstr "<span weight=\"bold\">Oznaka:</span>"
+msgstr "Uveljavi oznako razmika: %s"
 
 #: ../src/popup.c:561
 msgid "Remove Span Tag"
@@ -5081,12 +5064,12 @@ msgstr "Pretvori opombo, ki vsebuje izvorno kodo XML v odgovarjajočo kodo"
 #. FIXME: could do with better text here
 #: ../src/popup.c:648
 msgid "Convert Reference into a Copy"
-msgstr "Pretvori referenco v kopijo"
+msgstr "Pretvori sklic v kopijo"
 
 #. FIXME: could do with better text here
 #: ../src/popup.c:650
 msgid "Convert a reference to an XML entity to an inline copy of that entity's content"
-msgstr "Pretvori referenco v entiteto XML v notranjo kopijo vsebine entitete"
+msgstr "Pretvori sklic v entiteto XML v notranjo kopijo vsebine entitete"
 
 #: ../src/popup.c:729
 #: ../src/popup.c:1047
@@ -5100,7 +5083,7 @@ msgstr "_Izreži"
 
 #: ../src/popup.c:989
 msgid "Other XML element..."
-msgstr "Drug element XML ..."
+msgstr "Drug predmet XML ..."
 
 #: ../src/popup.c:1083
 msgid "Paste into"
@@ -5118,7 +5101,7 @@ msgstr "Prilepi za"
 #: ../src/tree.c:136
 #, c-format
 msgid "Insert sibling: %s"
-msgstr "Vstavi sorodnika: %s"
+msgstr "Vstavi enakovredni predmet: %s"
 
 #: ../src/tree.c:188
 #: ../src/tree.c:216
@@ -5138,13 +5121,13 @@ msgstr "Pretvori v opombo"
 #: ../src/tree.c:585
 #, c-format
 msgid "Convert reference to \"%s\" to copy"
-msgstr "Pretvori referenco v \"%s\" v kopijo"
+msgstr "Pretvori sklic z \"%s\" v kopijo"
 
 #. create description for dialog
 #: ../src/xmldata.c:452
 #, c-format
 msgid "The element \"%s\" requires a child to be valid. Please choose one of the following child types."
-msgstr "Element \"%s\" zahteva veljaven podrejen predmet. Izberite eno od navedenih vrst podrejenih predmetov."
+msgstr "Predmet \"%s\" zahteva veljaven podrejen predmet. Izberite eno izmed navedenih vrst podrejenih predmetov."
 
 #. FIXME: put in a better description for the name
 #. select a dialog element
@@ -5170,5 +5153,5 @@ msgstr "Prilepi za"
 
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
-msgstr "Pogled izvorne kode - Conglomerate"
+msgstr "Pogledovanje izvorne kode - Conglomerate"
 
