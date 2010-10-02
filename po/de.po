@@ -13,17 +13,17 @@
 # Geert Stappers <stappers@stappers.nl>, 2004.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2004, 2005.
 # Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
-# Christian Kirbach <christian.kirbach@googlemail.com>, 2010.
+# Christian Kirbach <Christian.Kirbach@googlemail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=conglomerate&component=general\n"
-"POT-Creation-Date: 2010-05-03 18:00+0000\n"
-"PO-Revision-Date: 2010-06-01 22:10+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
-"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2010-08-03 18:22+0000\n"
+"PO-Revision-Date: 2010-10-01 23:44+0200\n"
+"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
+"Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -400,13 +400,13 @@ msgstr "DocBook"
 
 #: ../dispspecs/docbook.xds.in.h:47
 msgid ""
-"DocBook is a document type that broadly corresponds to what most people think "
-"of as \"a book\"; it is well-suited for writing books and articles, for both "
-"print and web-based publication."
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
 msgstr ""
 "DocBook ist ein Dokumententyp, der weitestgehend mit dem übereinstimmt, was "
-"viele Leute als Buch bezeichnen würden. Es ist gut geeignet zum Schreiben von "
-"Büchern und Artikeln für druck- und netzbasierende Publikationen."
+"viele Leute als Buch bezeichnen würden. Es ist gut geeignet zum Schreiben "
+"von Büchern und Artikeln für druck- und netzbasierende Publikationen."
 
 #: ../dispspecs/docbook.xds.in.h:48 ../dispspecs/teixlite.xds.in.h:128
 #: ../dispspecs/website-webpage.xds.in.h:27
@@ -1026,8 +1026,8 @@ msgstr "Tiefgestellt"
 msgid "Superscript"
 msgstr "Hochgestellt"
 
-#: ../dispspecs/forrest-document.xds.in.h:39 ../dispspecs/teixlite.xds.in.h:245
-#: ../dispspecs/xhtml1-strict.xds.in.h:67
+#: ../dispspecs/forrest-document.xds.in.h:39
+#: ../dispspecs/teixlite.xds.in.h:245 ../dispspecs/xhtml1-strict.xds.in.h:67
 msgid "Table"
 msgstr "Tabelle"
 
@@ -1052,8 +1052,8 @@ msgid ""
 msgstr ""
 "Diese DTD wurde entwickelt, um einen einfachen aber leistungsfähigen "
 "Dokumenttyp zur Dokumentation von Software des Apache-Projekts zu erstellen. "
-"Sie ist eine XML-konforme DTD und wird vom Apache XML-Projekt gewartet. Siehe "
-"http://forrest.apache.org ."
+"Sie ist eine XML-konforme DTD und wird vom Apache XML-Projekt gewartet. "
+"Siehe http://forrest.apache.org ."
 
 #: ../dispspecs/forrest-document.xds.in.h:45
 #: ../glade/cong-file-properties.glade.h:17
@@ -1259,8 +1259,8 @@ msgstr "Grammatik von RELAX NG"
 
 #: ../dispspecs/relax-ng.xds.in.h:9
 msgid ""
-"RELAX NG is a schema language i.e. a language for describing the structure of "
-"an XML document."
+"RELAX NG is a schema language i.e. a language for describing the structure "
+"of an XML document."
 msgstr ""
 "RELAX NG ist eine Schema-Sprache, d.h. eine Sprache zur Beschreibung der "
 "Struktur eines XML-Dokuments."
@@ -1288,17 +1288,17 @@ msgstr "Null oder mehr"
 
 #: ../dispspecs/teixlite.xds.in.h:1
 msgid ""
-"A bibliographic description of the copy text(s) from which an electronic text "
-"was derived or generated"
+"A bibliographic description of the copy text(s) from which an electronic "
+"text was derived or generated"
 msgstr ""
 "Eine bibliografische Beschreibung des/der kopierten Text(e), aus welchen der "
 "elekronische Text abgeleitet oder erstellt wurde."
 
 #: ../dispspecs/teixlite.xds.in.h:2
 msgid ""
-"A brief description of the place, date, time, etc. of production of a letter, "
-"newspaper story, or other work, prefixed or suffixed to it as a kind of "
-"heading or trailer"
+"A brief description of the place, date, time, etc. of production of a "
+"letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
+"of heading or trailer"
 msgstr ""
 "Eine kurze Beschreibung von Ort, Datum, Uhrzeit usw. bei Erstellung eines "
 "Briefs, eines Zeitungsartikels oder eines anderen Werks, vorangestellt oder "
@@ -1340,15 +1340,20 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:8
 msgid ""
-"A first-level subdivision of the front, body, or back of a text (the largest, "
-"if &lt;div0&gt; is not used, the second largest if it is)"
+"A first-level subdivision of the front, body, or back of a text (the "
+"largest, if &lt;div0&gt; is not used, the second largest if it is)"
 msgstr ""
+"Eine Unterteilung der ersten Ebene der Vorderseite, des Rumpfs oder der "
+"Rückseite eines Textes (die größte, wenn &lt;div0&gt; nicht verwendet wird, "
+"andernfalls die zweitgrößte)"
 
 #: ../dispspecs/teixlite.xds.in.h:9
 msgid ""
 "A formal list or prose description of the topics addressed by a subdivision "
 "of a text"
 msgstr ""
+"Eine formale Liste oder prosaische Beschreibung der Themen in einer "
+"Unterteilung eines Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:10
 msgid "A fourth-level subdivision of the front, body, or back of a text"
@@ -1363,15 +1368,19 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:12
 msgid ""
-"A fully-structured bibliographic citation, in which all components of the TEI "
-"file description are present"
+"A fully-structured bibliographic citation, in which all components of the "
+"TEI file description are present"
 msgstr ""
+"Ein vollkommen strukturiertes bibliografisches Zitat, in dem alle "
+"Komponenten der TEI-Dateibeschreibung vorhanden sind"
 
 #: ../dispspecs/teixlite.xds.in.h:13
 msgid ""
 "A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
 "verse paragraph, etc."
 msgstr ""
+"Eine Gruppe von Verszeilen, die als formale Einheit gelten, wie z.B. ein "
+"Absatz, ein Refrain, Versabschnitt etc."
 
 #: ../dispspecs/teixlite.xds.in.h:14
 msgid "A keyword in some formal language"
@@ -1383,6 +1392,9 @@ msgid ""
 "as superfluous or spurious in the copy text by an author, scribe, annotator, "
 "or corrector"
 msgstr ""
+"Ein Buchstabe, Wort oder eine Passage, die im Text durch einen Autor, "
+"Schreiber, Kommentator oder Korrekturleser als gelöscht, anderweitig "
+"gelöscht oder überflüssig bzw. unberechtigt markiert ist"
 
 #: ../dispspecs/teixlite.xds.in.h:16
 msgid "A list of bibliographic citations of any kind"
@@ -1399,6 +1411,8 @@ msgid ""
 "A loosely-structured bibliographic citation of which the sub-components may "
 "or may not be explicitly localNameged"
 msgstr ""
+"Ein lose strukturiertes bibliografisches Zitat, dessen Unterkomponenten "
+"nicht unbedingt explizit lokal benannt werden müssen"
 
 #: ../dispspecs/teixlite.xds.in.h:19
 msgid "A mathematical or other formula"
@@ -1417,23 +1431,24 @@ msgid "A phrase defining a time of day in any format"
 msgstr "Eine Phrase für die Angabe des Tages in einem beliebigen Format"
 
 #: ../dispspecs/teixlite.xds.in.h:23
-msgid "A phrase describing the nature of a person's intellectual responsibility"
+msgid ""
+"A phrase describing the nature of a person's intellectual responsibility"
 msgstr ""
 "Eine Phrase, die die Natur der intellektuellen Verantwortung einer Person "
 "beschreibt"
 
 #: ../dispspecs/teixlite.xds.in.h:24
 msgid ""
-"A phrase or word used to provide a gloss or definition for some other word or "
-"phrase"
+"A phrase or word used to provide a gloss or definition for some other word "
+"or phrase"
 msgstr ""
 "Eine Phrase oder ein Wort, welches eine Erklärung oder Definition für andere "
 "Wörter oder Phrasen bereitstellt."
 
 #: ../dispspecs/teixlite.xds.in.h:25
 msgid ""
-"A pointer to another location in the current document in terms of one or more "
-"identifiable elements"
+"A pointer to another location in the current document in terms of one or "
+"more identifiable elements"
 msgstr ""
 "Ein Verweis auf einen anderen Ort im aktuellen Dokument, angegeben als eines "
 "oder mehrere identifizierbare Elemente"
@@ -1447,8 +1462,8 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:27
 msgid ""
-"A postal or other address, for example of a publisher, an organization, or an "
-"individual"
+"A postal or other address, for example of a publisher, an organization, or "
+"an individual"
 msgstr ""
 "Eine Post-oder andere Adresse, beispielsweise eines Herausgebers, einer "
 "Organisation oder einer Einzelperson"
@@ -1462,12 +1477,14 @@ msgstr "Ein richtiges Nomen oder Nominalphrase"
 msgid ""
 "A prose description of the rationale and methods used in sampling texts in "
 "the creation of a corpus or collection"
-msgstr "Eine Prosa-Beschreibung von Argumentation und Methoden bei der"
+msgstr ""
+"Eine Prosa-Beschreibung von Argumentation und Methoden in Leseproben zur "
+"Erstellung"
 
 #: ../dispspecs/teixlite.xds.in.h:30
 msgid ""
-"A quotation from some other document, together with a bibliographic reference "
-"to its source"
+"A quotation from some other document, together with a bibliographic "
+"reference to its source"
 msgstr ""
 "Ein Zitat aus einem anderen Dokument, einschließlich einer bibliografischen "
 "Referenz zu dessen Quelle"
@@ -1482,9 +1499,9 @@ msgid ""
 msgstr ""
 "Ein Zitat oder offensichtliches Zitat — eine Darstellung von Sprache und "
 "Gedanken, die als Zitat eines anderen markiert sind (ob tatsächlich zitiert "
-"oder nicht); In Erzählungen sind es normalerweise die Wörter eines Charakters "
-"oder Sprechers; In Wörterbüchern kann &lt;q&gt; verwendet werden, um echte "
-"oder erfundene Anwendungsbeispiele zu markieren"
+"oder nicht); In Erzählungen sind es normalerweise die Wörter eines "
+"Charakters oder Sprechers; In Wörterbüchern kann &lt;q&gt; verwendet werden, "
+"um echte oder erfundene Anwendungsbeispiele zu markieren"
 
 #: ../dispspecs/teixlite.xds.in.h:32
 msgid ""
@@ -1497,21 +1514,22 @@ msgstr ""
 #: ../dispspecs/teixlite.xds.in.h:33
 msgid "A reading which has been regularized or normalized in some sense"
 msgstr ""
+"Eine Leseprobe, die in gewissem Sinne reglementiert oder normalisiert wurde"
 
 #: ../dispspecs/teixlite.xds.in.h:34
 msgid ""
 "A reference to another location in the current document, in terms of one or "
 "more identifiable elements, possibly modified by additional text or comment"
 msgstr ""
-"Eine Referenz zu einem anderen Ort im aktuellen Dokument, angegeben als eines "
-"oder mehrere identifizierbare Elemente, möglicherweise durch zusätzlichen "
-"Text oder Kommentar erweitert."
+"Eine Referenz zu einem anderen Ort im aktuellen Dokument, angegeben als "
+"eines oder mehrere identifizierbare Elemente, möglicherweise durch "
+"zusätzlichen Text oder Kommentar erweitert."
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid ""
 "A reference to another location in the current document, or an external "
-"document, using an extended pointer notation, possibly modified by additional "
-"text or comment"
+"document, using an extended pointer notation, possibly modified by "
+"additional text or comment"
 msgstr ""
 "Eine Referenz zu einem anderen Ort im aktuellen Dokument oder einem externen "
 "Dokument, mit einer erweiterten Verweisnotierung, möglicherweise durch "
@@ -1519,9 +1537,9 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid ""
-"A salutation or greeting prefixed to a foreword, dedicatory epistle, or other "
-"division of a text, or the salutation in the closing of a letter, preface, "
-"etc."
+"A salutation or greeting prefixed to a foreword, dedicatory epistle, or "
+"other division of a text, or the salutation in the closing of a letter, "
+"preface, etc."
 msgstr ""
 "Eine Anrede oder Begrüßung, die einem Vorwort, einer Widmung oder einem "
 "anderen Textteil vorangestellt ist, oder die Anrede im Schlussteil eines "
@@ -1561,9 +1579,9 @@ msgid ""
 "A single text of any kind, whether unitary or composite, for example a poem "
 "or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
 msgstr ""
-"Ein einzelner Text beliebiger Art, entweder einheitlich oder zusammengesetzt, "
-"wie zum Beispiel ein Gedicht oder Drama, eine Sammlung Aufsätze, ein Roman, "
-"ein Wörterbuch oder ein Korpus"
+"Ein einzelner Text beliebiger Art, entweder einheitlich oder "
+"zusammengesetzt, wie zum Beispiel ein Gedicht oder Drama, eine Sammlung "
+"Aufsätze, ein Roman, ein Wörterbuch oder ein Korpus"
 
 #: ../dispspecs/teixlite.xds.in.h:43
 msgid "A single, possibly incomplete, line of verse"
@@ -1632,9 +1650,11 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid ""
-"A word, phrase, or passage which cannot be transcribed with certainty because "
-"it is illegible or inaudible in the source"
+"A word, phrase, or passage which cannot be transcribed with certainty "
+"because it is illegible or inaudible in the source"
 msgstr ""
+"Ein Wort, Phrase oder Passage, die nicht mit Gewissheit übertragen werden "
+"kann, weil die Quelle unleserlich oder unhörbar ist"
 
 #: ../dispspecs/teixlite.xds.in.h:54
 msgid "Abbr"
@@ -1674,8 +1694,8 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:62
 msgid ""
-"An individual speech in a performance text, or a passage presented as such in "
-"a prose or verse text"
+"An individual speech in a performance text, or a passage presented as such "
+"in a prose or verse text"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:63
@@ -1690,26 +1710,29 @@ msgstr "Anonymer Block (&lt;ab&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:66
 msgid ""
-"Any arbitrary phrase-level unit of text (including other &lt;seg&gt; elements)"
+"Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
+"elements)"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:67
 msgid ""
-"Any heading, for example, the title of a section, or the heading of a list or "
-"glossary"
+"Any heading, for example, the title of a section, or the heading of a list "
+"or glossary"
 msgstr ""
 "Eine Überschrift, beispielsweise der Titel eines Abschnitts oder die "
 "Kopfzeile einer Liste oder eines Glossars"
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
-msgstr ""
+msgstr "Jede Art von Regieanweisung in einem Dramatext oder Teilstück"
 
 #: ../dispspecs/teixlite.xds.in.h:69
 msgid ""
-"Any prefatory matter (headers, title page, prefaces, dedications, etc.) found "
-"at the start of a document, before the main body"
+"Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
+"found at the start of a document, before the main body"
 msgstr ""
+"Jeder einleitende Inhalt (Kopfzeilen, Titelseite, Vorwort, Widmungen usw.) "
+"am Anfang eines Dokuments vor dem Hauptteil"
 
 #: ../dispspecs/teixlite.xds.in.h:70
 msgid "Any sequence of items organized as a list"
@@ -1748,7 +1771,7 @@ msgstr "Verfügbarkeit"
 
 #: ../dispspecs/teixlite.xds.in.h:78
 msgid "Back Matter"
-msgstr ""
+msgstr "Rückseite"
 
 #: ../dispspecs/teixlite.xds.in.h:79
 msgid "BiblFull"
@@ -1759,10 +1782,8 @@ msgid "Bibliographic Citation (&lt;bibl&gt;)"
 msgstr "Bibliografisches Zitat (&lt;bibl&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:81
-#, fuzzy
-#| msgid "Bibliography"
 msgid "Bibliographic Scope"
-msgstr "Quellverzeichnis"
+msgstr "Bibliografischer Umfang"
 
 #: ../dispspecs/teixlite.xds.in.h:82 ../dispspecs/xhtml1-strict.xds.in.h:11
 msgid "Body"
@@ -1797,22 +1818,16 @@ msgid "Citation"
 msgstr "Literaturangabe"
 
 #: ../dispspecs/teixlite.xds.in.h:90
-#, fuzzy
-#| msgid "Code"
 msgid "ClassCode"
-msgstr "Programmcode"
+msgstr "ClassCode"
 
 #: ../dispspecs/teixlite.xds.in.h:91
-#, fuzzy
-#| msgid "Namespace Declaration"
 msgid "Classification Declaration"
-msgstr "Namensraumdeklaration"
+msgstr "Klassifizierungsdeklaration"
 
 #: ../dispspecs/teixlite.xds.in.h:92
-#, fuzzy
-#| msgid "_Close"
 msgid "Closer"
-msgstr "S_chließen"
+msgstr "Abschluss"
 
 #: ../dispspecs/teixlite.xds.in.h:94
 msgid "Collects together &lt;interp&gt; tags"
@@ -1823,10 +1838,12 @@ msgid ""
 "Collects together any notes providing information about a text additional to "
 "that recorded in other parts of the bibliographic description"
 msgstr ""
+"Fasst alle Notizen zusammen, die Informationen zu einem Text zusätzlich zu "
+"denen in anderen Teilen der bibliografischen Beschreibung"
 
 #: ../dispspecs/teixlite.xds.in.h:96
 msgid "Contains a general purpose name or referring string"
-msgstr ""
+msgstr "Enthält einen allgemeinen Namen oder Bezugszeichenkette"
 
 #: ../dispspecs/teixlite.xds.in.h:97
 msgid ""
@@ -1853,10 +1870,8 @@ msgid "Contains text displayed in tabular form, in rows and columns"
 msgstr "Enthält in Tabellenform angezeigten Text, in Zeilen und Spalten"
 
 #: ../dispspecs/teixlite.xds.in.h:101
-#, fuzzy
-#| msgid "Correction"
 msgid "Correct Form"
-msgstr "Korrektur"
+msgstr "Korrekte Form"
 
 #: ../dispspecs/teixlite.xds.in.h:102
 msgid "Creation"
@@ -1877,12 +1892,13 @@ msgid ""
 "Defines the scope of a bibliographic reference, for example as a list of "
 "pagenumbers, or a named subdivision of a larger work"
 msgstr ""
+"Legt den Bereich einer bibliografischen Referenz fest, zum Beispiel in Form "
+"einer Liste von Zeilennummern oder einer benannten Unterteilung eines "
+"größeren Werks"
 
 #: ../dispspecs/teixlite.xds.in.h:107
-#, fuzzy
-#| msgid "Details"
 msgid "Del"
-msgstr "Details"
+msgstr "Del"
 
 #: ../dispspecs/teixlite.xds.in.h:108
 msgid ""
@@ -2009,7 +2025,7 @@ msgstr "Erweiterte Referenz (&lt;xref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
-msgstr ""
+msgstr "Umfang"
 
 #: ../dispspecs/teixlite.xds.in.h:140
 msgid "Figure Description"
@@ -2020,7 +2036,6 @@ msgid "File Description (fileDesc)"
 msgstr "Dateibeschreibung (fileDesc)"
 
 #: ../dispspecs/teixlite.xds.in.h:142
-#| msgid "Force"
 msgid "Foreign"
 msgstr "Fremd"
 
@@ -2030,7 +2045,7 @@ msgstr "Formel"
 
 #: ../dispspecs/teixlite.xds.in.h:144
 msgid "Front Matter"
-msgstr ""
+msgstr "Titel"
 
 #: ../dispspecs/teixlite.xds.in.h:145
 msgid "Funder"
@@ -2052,12 +2067,16 @@ msgstr "Fußnote"
 msgid ""
 "Groups information about the series, if any, to which a publication belongs"
 msgstr ""
+"Gruppiert Informationen über eine Serie, falls zutreffend, zu der eine "
+"Veröffentlichung gehört"
 
 #: ../dispspecs/teixlite.xds.in.h:151
 msgid ""
 "Groups information concerning the publication or distribution of an "
 "electronic or other text"
 msgstr ""
+"Gruppiert Informationen bezüglich der Veröffentlichung oder Verteilung eines "
+"elektronischen oder sonstigen Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:152
 msgid "Groups information relating to one edition of a text"
@@ -2085,12 +2104,16 @@ msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a final group at the end of a division, especially of a letter"
 msgstr ""
+"Gruppiert Datumsangabe, Absender, Grußformel und ähnliche Phrasen als "
+"abschließenden Teil am Ende einer Unterteilung, insbesondere bei Briefen"
 
 #: ../dispspecs/teixlite.xds.in.h:156
 msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a preliminary group at the start of a division, especially of a letter"
 msgstr ""
+"Gruppiert Datumsangabe, Absender, Anrede und ähnliche Phrasen als "
+"einleitenden Teil am Anfang einer Unterteilung, insbesondere bei Briefen"
 
 #: ../dispspecs/teixlite.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:29
 msgid "Head"
@@ -2101,16 +2124,13 @@ msgid "Highlighted"
 msgstr "Hervorgehoben"
 
 #: ../dispspecs/teixlite.xds.in.h:159
-#, fuzzy
-#| msgid "Line Number"
 msgid "Id. Number"
-msgstr "Zeilennummer"
+msgstr " Ident-Nummer"
 
 # Müsste es dann nicht »Indent« heißen?
 #: ../dispspecs/teixlite.xds.in.h:160
-#, fuzzy
 msgid "Ident"
-msgstr "Einrückung"
+msgstr "Ident"
 
 #: ../dispspecs/teixlite.xds.in.h:161
 msgid ""
@@ -2128,10 +2148,14 @@ msgstr "Index"
 
 #: ../dispspecs/teixlite.xds.in.h:164
 msgid ""
-"Indicates a point where material has been omitted in a transcription, whether "
-"for editorial reasons described in the TEI header, as part of sampling "
-"practice, or because the material is illegible or inaudible"
+"Indicates a point where material has been omitted in a transcription, "
+"whether for editorial reasons described in the TEI header, as part of "
+"sampling practice, or because the material is illegible or inaudible"
 msgstr ""
+"Gibt einen Punkt an, an dem bei einer Abschrift Material ausgelassen wurde, "
+"entweder aus auf die Bearbeitung bezogenen Gründen, wie in der TEI-Kopfzeile "
+"angegeben, im Rahmen einer Leseprobe oder weil das Material unleserlich oder "
+"unverständlich ist"
 
 #: ../dispspecs/teixlite.xds.in.h:165
 msgid "Indicates the location of a graphic, illustration, or figure"
@@ -2139,8 +2163,8 @@ msgstr "Gibt den Ort einer Grafik, Illustration oder Abbildung an"
 
 #: ../dispspecs/teixlite.xds.in.h:166
 msgid ""
-"Information about the availability of a text, for example any restrictions on "
-"its use or distribution, its copyright status, etc."
+"Information about the availability of a text, for example any restrictions "
+"on its use or distribution, its copyright status, etc."
 msgstr ""
 "Informationen über die Verfügbarkeit eines Texts, beispielsweise eventuelle "
 "Einschränkungen hinsichtlich der Nutzung oder Verteilung, dessen "
@@ -2153,12 +2177,15 @@ msgstr "Information über die Erstellung des Textes"
 #: ../dispspecs/teixlite.xds.in.h:168
 msgid "Information about the intended rendition of one or more elements"
 msgstr ""
+"Informationen über die beabsichtigte Wiedergabe eines oder mehrerer Elemente"
 
 #: ../dispspecs/teixlite.xds.in.h:169
 msgid ""
 "Information about the title of a work and those responsible for its "
 "intellectual content"
 msgstr ""
+"Informationen zum Titel einer Arbeit und die für den intellektuellen Inhalt "
+"Verantwortlichen"
 
 #: ../dispspecs/teixlite.xds.in.h:170
 msgid "Information about the usage of a specific element within a &lt;text&gt;"
@@ -2171,7 +2198,6 @@ msgid "Interpretation"
 msgstr "Interpretation"
 
 #: ../dispspecs/teixlite.xds.in.h:172
-#| msgid "Option Group"
 msgid "Interpretation Group"
 msgstr "Interpretationsgruppe"
 
@@ -2213,7 +2239,6 @@ msgid "Line Break"
 msgstr "Zeilenumbruch"
 
 #: ../dispspecs/teixlite.xds.in.h:181
-#| msgid "Option Group"
 msgid "Line Group"
 msgstr "Zeilengruppe"
 
@@ -2230,14 +2255,17 @@ msgid "Marks a location to be indexed for whatever purpose"
 msgstr "Markiert einen zu indizierenden Ort, für einen beliebigen Zweck"
 
 #: ../dispspecs/teixlite.xds.in.h:185
+#, fuzzy
 msgid ""
-"Marks a word or phrase as graphically distinct from the surrounding text, for "
-"reasons concerning which no claim is made"
+"Marks a word or phrase as graphically distinct from the surrounding text, "
+"for reasons concerning which no claim is made"
 msgstr ""
+"Markiert ein Wort oder eine Phrase als vom umgebenden Text grafisch "
+"hervorgehoben aus Gründen, für die kein Anspruch erhoben wurde (?)"
 
 #: ../dispspecs/teixlite.xds.in.h:186
 msgid "Marks paragraphs in prose"
-msgstr ""
+msgstr "Markiert Paragrafen in Prosa"
 
 #: ../dispspecs/teixlite.xds.in.h:187
 msgid ""
@@ -2260,10 +2288,12 @@ msgid ""
 "Marks the start of a new (typographic) line in some edition or version of a "
 "text"
 msgstr ""
+"Markiert den Beginn einer neuen (typografischen) Zeile in einer Edition oder "
+"Version eines Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:190
 msgid "Marks words or phrases mentioned, not used"
-msgstr ""
+msgstr "Markiert erwähnte Wörter oder Phrasen, nicht verwendet"
 
 #: ../dispspecs/teixlite.xds.in.h:191
 msgid ""
@@ -2283,7 +2313,7 @@ msgstr "Meilenstein"
 
 #: ../dispspecs/teixlite.xds.in.h:196
 msgid "Notes Statement"
-msgstr ""
+msgstr "Notizanweisung"
 
 #: ../dispspecs/teixlite.xds.in.h:197
 msgid "Num"
@@ -2317,7 +2347,7 @@ msgstr "Eröffnung"
 
 #: ../dispspecs/teixlite.xds.in.h:204
 msgid "Original Form"
-msgstr ""
+msgstr "Ursprüngliche Form"
 
 #: ../dispspecs/teixlite.xds.in.h:205
 msgid "Page Break"
@@ -2376,7 +2406,6 @@ msgid "Reg"
 msgstr "Reg"
 
 #: ../dispspecs/teixlite.xds.in.h:220
-#| msgid "Edition"
 msgid "Rendition"
 msgstr "Zeilengruppe"
 
@@ -2385,8 +2414,9 @@ msgid "Resp"
 msgstr "Resp"
 
 #: ../dispspecs/teixlite.xds.in.h:222
+#, fuzzy
 msgid "Responsibility Statement (respStmt)"
-msgstr ""
+msgstr "Aussage zur Verantwortlichkeit (respStmt)"
 
 #: ../dispspecs/teixlite.xds.in.h:223
 msgid "Revision Description"
@@ -2427,7 +2457,7 @@ msgstr "Sic"
 
 #: ../dispspecs/teixlite.xds.in.h:232
 msgid "So Called"
-msgstr ""
+msgstr "Sogenannt"
 
 #: ../dispspecs/teixlite.xds.in.h:233
 msgid "Source Description"
@@ -2443,7 +2473,8 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:236
 msgid ""
-"Specifies one or more defined categories within some taxonomy or text typology"
+"Specifies one or more defined categories within some taxonomy or text "
+"typology"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:237
@@ -2456,7 +2487,7 @@ msgstr "Sponsor"
 
 #: ../dispspecs/teixlite.xds.in.h:239
 msgid "Stage Direction (&lt;stage&gt;)"
-msgstr ""
+msgstr "Bühnenanweisung (&lt;stage&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:240
 msgid ""
@@ -2469,10 +2500,8 @@ msgid "Summarizes the revision history for a file"
 msgstr "Fasst die Revisionschronik einer Datei zusammen"
 
 #: ../dispspecs/teixlite.xds.in.h:242
-#, fuzzy
-#| msgid "Title"
 msgid "TEI Lite"
-msgstr "Titel"
+msgstr "TEI-Lite"
 
 #: ../dispspecs/teixlite.xds.in.h:243
 msgid ""
@@ -2480,6 +2509,10 @@ msgid ""
 "information; the TEI Lite dtd is a subset of the powerful TEI dtds which "
 "comprises the most commonly used elements."
 msgstr ""
+"TEI ist eine Abkürzung für »Text Encoding Initiative«. Lesen Sie auch http://"
+"www.tei-c.org/ für weitere Informationen; Das TEI Lite-dtd ist eine "
+"Untermenge der mächtigen TEI-dtds, welche die meist genutzten Elemente "
+"enthält."
 
 #: ../dispspecs/teixlite.xds.in.h:244
 msgid "TEI.2"
@@ -2487,7 +2520,7 @@ msgstr "TEI.2"
 
 #: ../dispspecs/teixlite.xds.in.h:246
 msgid "Tag Usage"
-msgstr ""
+msgstr "Verwendung von Schlagwörtern"
 
 #: ../dispspecs/teixlite.xds.in.h:247
 msgid "Tagging Declaration"
@@ -2498,10 +2531,8 @@ msgid "Taxonomy"
 msgstr "Taxonomie"
 
 #: ../dispspecs/teixlite.xds.in.h:249
-#, fuzzy
-#| msgid "Table Header"
 msgid "Tei Header"
-msgstr "Tabellenkopf"
+msgstr "Tei-Kopf"
 
 #: ../dispspecs/teixlite.xds.in.h:252
 msgid "Text Classification"
@@ -2510,12 +2541,16 @@ msgstr "Textklassifizierung"
 #: ../dispspecs/teixlite.xds.in.h:253
 msgid "Text reproduced although apparently incorrect or inaccurate"
 msgstr ""
+"Reproduzierter Text, auch wenn er offensichtlich inkorrekt oder nicht "
+"akkurat ist"
 
 #: ../dispspecs/teixlite.xds.in.h:254
 msgid ""
-"The approximate size of the electronic text as stored on some carrier medium, "
-"specified in any convenient units"
+"The approximate size of the electronic text as stored on some carrier "
+"medium, specified in any convenient units"
 msgstr ""
+"Die geschätzte Größe des elektronischen Texts, so wie er in Trägermedien "
+"gespeichert wird, angegeben in üblichen Einheiten"
 
 #: ../dispspecs/teixlite.xds.in.h:255
 msgid ""
@@ -2541,6 +2576,8 @@ msgstr ""
 #: ../dispspecs/teixlite.xds.in.h:258
 msgid "The correct form of a passage apparently erroneous in the copy text"
 msgstr ""
+"Die korrekte Form einer Passage, die offensichtlich fehlerhaft im Kopietext "
+"ist"
 
 #: ../dispspecs/teixlite.xds.in.h:259
 msgid "The date of a document, as given (usually) on a title page"
@@ -2577,6 +2614,8 @@ msgid ""
 "The languages, sublanguages, registers, dialects etc. represented within a "
 "text"
 msgstr ""
+"Die Sprachen, Untersprachen, Register, Dialekte usw., die in einem Text "
+"enthalten sind"
 
 #: ../dispspecs/teixlite.xds.in.h:264
 msgid "The largest possible subdivision of the body of a text"
@@ -2620,11 +2659,13 @@ msgid ""
 "The name of an individual, institution, or organization responsible for the "
 "funding of a project or text"
 msgstr ""
+"Der Name einer Einzelperson, Institution oder Organisation, die für die "
+"Finanzierung eines Projekts oder Texts verantwortlich ist"
 
 #: ../dispspecs/teixlite.xds.in.h:271
 msgid ""
-"The name of the author of the document, as given on the title page (often but "
-"not always contained in a &lt;byline&gt;)"
+"The name of the author of the document, as given on the title page (often "
+"but not always contained in a &lt;byline&gt;)"
 msgstr ""
 "Der Name des Autors des Dokuments, wie auf der Titelseite angegeben (oft, "
 "aber nicht immer in &lt;byline&gt; enthalten)"
@@ -2667,8 +2708,8 @@ msgstr "Die Besonderheiten einer Ausgabe eines Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:278
 msgid ""
-"The primary statement of responsibility given for a work on its title page or "
-"at the head or end of the work"
+"The primary statement of responsibility given for a work on its title page "
+"or at the head or end of the work"
 msgstr ""
 "Die primäre Angabe der Verantwortlichkeit für ein Werk auf der Titelseite, "
 "den Kopfzeilen oder am Ende einer Arbeit"
@@ -2683,8 +2724,8 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:280
 msgid ""
-"The title of a work, whether article, book, journal, or series, including any "
-"alternative titles or subtitles"
+"The title of a work, whether article, book, journal, or series, including "
+"any alternative titles or subtitles"
 msgstr ""
 "Der Titel eines Werkes, ob Artikel, Buch, Zeitschrift oder Reihe, "
 "einschließlich eventueller alternativer Titel oder Untertitel"
@@ -2692,6 +2733,7 @@ msgstr ""
 #: ../dispspecs/teixlite.xds.in.h:281
 msgid "The title page of a text, appearing within the front or back matter"
 msgstr ""
+"Die Titelseite eines Texts, die auf der Titelei oder der Rückseite erscheint"
 
 #: ../dispspecs/teixlite.xds.in.h:282
 msgid ""
@@ -2707,19 +2749,14 @@ msgid "Title Page"
 msgstr "Titelseite"
 
 #: ../dispspecs/teixlite.xds.in.h:286
-#, fuzzy
-#| msgid "Title"
 msgid "Title Part"
 msgstr "Titel"
 
 #: ../dispspecs/teixlite.xds.in.h:287
-#, fuzzy
-#| msgid "Title Citation"
 msgid "Title Statement"
-msgstr "Titel einer zitierten Arbeit"
+msgstr "Titelangabe"
 
 #: ../dispspecs/teixlite.xds.in.h:288
-#| msgid "Title"
 msgid "Trailer"
 msgstr "Vorspann"
 
@@ -2744,7 +2781,6 @@ msgid "Content"
 msgstr "Inhalt"
 
 #: ../dispspecs/website-layout.xds.in.h:5
-#| msgid "Header"
 msgid "Header Link"
 msgstr "Kopfzeilen-Link"
 
@@ -2979,17 +3015,17 @@ msgstr "XHTML 1.0 (strikt)"
 
 #: ../dispspecs/xsl.xds.in.h:1
 msgid ""
-"An XSL stylesheet describes a way of transforming a document of one type into "
-"one in another form. For example, it might describe a way of converting "
+"An XSL stylesheet describes a way of transforming a document of one type "
+"into one in another form. For example, it might describe a way of converting "
 "DocBook files into HTML web pages."
 msgstr ""
-"Eine XSL-Stilvorlage, die den Weg zur Umwandlung eines Dokumententyps in eine "
-"andere Form beschreibt. Beispielsweise könnte ein Weg zur Umwandlung von "
-"DocBook-Dateien in HTML-Webseiten beschrieben werden."
+"Eine XSL-Stilvorlage, die den Weg zur Umwandlung eines Dokumententyps in "
+"eine andere Form beschreibt. Beispielsweise könnte ein Weg zur Umwandlung "
+"von DocBook-Dateien in HTML-Webseiten beschrieben werden."
 
 #: ../dispspecs/xsl.xds.in.h:3
 msgid "Template-matching Rule"
-msgstr ""
+msgstr "Regel zur Übereinstimmung"
 
 #: ../dispspecs/xsl.xds.in.h:4
 msgid "XSL stylesheet"
@@ -3015,8 +3051,8 @@ msgstr ""
 "Eine Liste von Verzeichnissen, in denen Conglomerate nach "
 "Anzeigespezifikationsdateien (»dispspec« oder ».xds« genannt) zusätzlich zum "
 "Installationspfad suchen soll. Sobald ein Dokument geladen wird, wird nach "
-"einer passenden Anzeigespezifikation in diesen Verzeichnissen gesucht und die "
-"erste passende Spezifikation genutzt."
+"einer passenden Anzeigespezifikation in diesen Verzeichnissen gesucht und "
+"die erste passende Spezifikation genutzt."
 
 #: ../data/conglomerate.schemas.in.h:2
 msgid ""
@@ -3024,9 +3060,9 @@ msgid ""
 "These documents will be used by the new document assistant as types of "
 "documents which can be created by the user."
 msgstr ""
-"Eine Liste von Verzeichnissen, in denen Conglomerate nach XML-Vorlagen suchen "
-"soll. Diese Dokumente werden vom neuen Dokumentassistenten als Dokumenttypen, "
-"die der Anwender erstellen kann, genutzt."
+"Eine Liste von Verzeichnissen, in denen Conglomerate nach XML-Vorlagen "
+"suchen soll. Diese Dokumente werden vom neuen Dokumentassistenten als "
+"Dokumenttypen, die der Anwender erstellen kann, genutzt."
 
 #: ../data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
@@ -3183,13 +3219,15 @@ msgstr "Weitersuchen"
 msgid "Match _entire word only"
 msgstr "Nur _vollständige Wörter berücksichtigen"
 
-#: ../glade/cong-find-replace.glade.h:4 ../src/cong-edit-find-and-replace.c:187
+#: ../glade/cong-find-replace.glade.h:4
+#: ../src/cong-edit-find-and-replace.c:187
 #: ../src/cong-edit-find-and-replace.c:836
 #: ../src/cong-edit-find-and-replace.c:850
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: ../glade/cong-find-replace.glade.h:5 ../src/cong-edit-find-and-replace.c:908
+#: ../glade/cong-find-replace.glade.h:5
+#: ../src/cong-edit-find-and-replace.c:908
 msgid "Replace All"
 msgstr "Ersetze alles"
 
@@ -3386,8 +3424,8 @@ msgstr "Dialog_zum_Festlegen_der_Beschriftung"
 
 #: ../src/cong-app.c:960
 msgid ""
-"Unit test: quit immediately (after loading any files specified on the command-"
-"line)"
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
 msgstr ""
 "Einheiten-Test: Sofort beenden (nach dem Laden aller Dateien, die über die "
 "Kommandozeile angegeben wurden)"
@@ -3412,9 +3450,9 @@ msgid ""
 "the display spec path, please double check that as well."
 msgstr ""
 "Falls Sie diesen Fehler sehen, ist es wahrscheinlich, dass Sie Conglomerate "
-"kompiliert, jedoch nicht installiert haben. Versuchen Sie es zu installieren. "
-"Falls Sie die Vorgabeeinstellung für den Display-Spec-Pfad verändert haben, "
-"so überprüfen Sie diese bitte ebenfalls gewissenhaft."
+"kompiliert, jedoch nicht installiert haben. Versuchen Sie es zu "
+"installieren. Falls Sie die Vorgabeeinstellung für den Display-Spec-Pfad "
+"verändert haben, so überprüfen Sie diese bitte ebenfalls gewissenhaft."
 
 #: ../src/cong-attribute-editor-cdata.c:206
 #: ../src/cong-attribute-editor-nmtoken.c:272
@@ -3837,8 +3875,8 @@ msgid ""
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
 msgstr ""
 "Leider wurde diese Funktion noch nicht implementiert.\n"
-"Dies ist ein bekanntes Problem. Es ist der Fehler #%i im Fehlerberichtssystem "
-"unter %s"
+"Dies ist ein bekanntes Problem. Es ist der Fehler #%i im "
+"Fehlerberichtssystem unter %s"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-dialog.c:321
@@ -3857,7 +3895,8 @@ msgstr "Es ist ein unerwarteter Fehler aufgetreten."
 
 #: ../src/cong-error-dialog.c:336 ../src/cong-error-file-open.c:517
 msgid "For more information, click on the \"Details\" button."
-msgstr "Klicken Sie den »Details«-Knopf an, um weitere Informationen zu erhalten"
+msgstr ""
+"Klicken Sie den »Details«-Knopf an, um weitere Informationen zu erhalten"
 
 #: ../src/cong-error-dialog.c:386
 msgid "An error occurred whilst running this system command:"
@@ -3866,8 +3905,8 @@ msgstr "Beim Ausführen des folgenden Systembefehls ist ein Fehler aufgetreten:"
 #: ../src/cong-error-dialog.c:389
 #, c-format
 msgid ""
-"The error number reported was %d.  Below is the error text that was output by "
-"the command."
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
 msgstr ""
 "Die berichtete Fehlernummer war %d. Unten befindet sich der Fehlertext, der "
 "vom Befehl ausgegeben wurde."
@@ -3913,9 +3952,9 @@ msgid ""
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. Beachten "
-"Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss (»MeineDatei« "
-"entspricht weder »meinedatei« noch »MEINEDATEI«).\n"
+"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. "
+"Beachten Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
+"(»MeineDatei« entspricht weder »meinedatei« noch »MEINEDATEI«).\n"
 "II. Versuchen Sie, das Suchwerkzeug zu verwenden, um Ihre Datei zu finden."
 
 #: ../src/cong-error-file-open.c:293 ../src/cong-error-file-open.c:302
@@ -3934,8 +3973,8 @@ msgid ""
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. Beachten "
-"Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
+"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. "
+"Beachten Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
 "(»MeinVerzeichnis« entspricht weder »meinverzeichnis« noch »MEINVERZEICHNIS«).\n"
 "II. Versuchen Sie, das Suchwerkzeug zu verwenden, um Ihre Datei zu finden."
 
@@ -3947,8 +3986,8 @@ msgstr "Der Speicherort »%s« unterstützt das Lesen von Dateien nicht."
 
 #: ../src/cong-error-file-open.c:318
 msgid ""
-"Try loading a file from a different location.  If you think that you ought to "
-"be able to read this file, contact your system administrator."
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
 msgstr ""
 "Versuchen Sie, eine Datei von einem anderen Speicherort zu laden. "
 "Kontaktieren Sie Ihren Systemadministrator, wenn Sie denken, Sie sollten "
@@ -3991,9 +4030,9 @@ msgid ""
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. Beachten "
-"Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss (»http« "
-"entspricht weder »Http« noch »HTTP«).\n"
+"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. "
+"Beachten Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
+"(»http« entspricht weder »Http« noch »HTTP«).\n"
 "II. Versuchen Sie, das Suchwerkzeug zu verwenden, um Ihre Datei zu finden."
 
 #: ../src/cong-error-file-open.c:367
@@ -4053,8 +4092,8 @@ msgid ""
 "(ii) Try again. If it fails again, the server may be down."
 msgstr ""
 "I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben.\n"
-"II. Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist möglicherweise "
-"der Server nicht erreichbar."
+"II. Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist "
+"möglicherweise der Server nicht erreichbar."
 
 #: ../src/cong-error-file-open.c:445 ../src/cong-error-file-save.c:329
 msgid "The system could not login to the location."
@@ -4078,8 +4117,8 @@ msgstr "Beim Zugriff auf »%s« wurde der Fehler »%s« berichtet"
 
 #: ../src/cong-error-file-open.c:509
 msgid ""
-"The program unexpectedly received an error report from the GNOME Virtual File "
-"System."
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
 msgstr ""
 "Das Programm hat einen unerwarteten Fehlerbericht vom virtuellen GNOME-"
 "Dateisystem erhalten."
@@ -4098,13 +4137,13 @@ msgstr "%s konnte »%s« nicht unter %s speichern."
 
 #: ../src/cong-error-file-save.c:111
 msgid ""
-"(i) Try checking that you spelt the location's name correctly.  Remember that "
-"capitalisation is significant (\"MyDirectory\" is not the same as "
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. Beachten "
-"Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
+"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. "
+"Beachten Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
 "(»MeinVerzeichnis« entspricht weder »meinverzeichnis« noch »MEINVERZEICHNIS«).\n"
 "II. Versuchen Sie, die Datei unter einem anderen Speicherort abzuspeichern."
 
@@ -4121,7 +4160,8 @@ msgstr "Versuchen Sie an einem anderen Ort abzuspeichern."
 
 #: ../src/cong-error-file-save.c:134
 msgid "There were problems writing the content of the file."
-msgstr "Beim Schreiben des Dateiinhalts ist mindestens ein Problem aufgetreten."
+msgstr ""
+"Beim Schreiben des Dateiinhalts ist mindestens ein Problem aufgetreten."
 
 #: ../src/cong-error-file-save.c:135
 msgid "Try again.  If it fails again, try saving to a different location."
@@ -4158,8 +4198,8 @@ msgstr "Versuchen Sie, die Datei an einem anderen Speicherort zu speichern."
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
 msgstr ""
-"Die Dateigröße ist %s, der freie Platz auf dem Gerät beträgt jedoch lediglich "
-"%s."
+"Die Dateigröße ist %s, der freie Platz auf dem Gerät beträgt jedoch "
+"lediglich %s."
 
 #. Can't get at the free space for the device or "volume":
 #: ../src/cong-error-file-save.c:214
@@ -4175,16 +4215,17 @@ msgstr ""
 #: ../src/cong-error-file-save.c:222
 #, c-format
 msgid "The file is too big to fit in the remaining space on the device."
-msgstr "Die Datei ist zu groß, um auf den freien Platz auf dem Gerät zu passen."
+msgstr ""
+"Die Datei ist zu groß, um auf den freien Platz auf dem Gerät zu passen."
 
 #: ../src/cong-error-file-save.c:231
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
 msgstr ""
-"Versuchen Sie, die Datei an einem anderen Speicherort zu speichern oder Platz "
-"freizumachen, indem Sie unerwünschte Dateien auf diesem Gerät in den Müll "
-"verschieben."
+"Versuchen Sie, die Datei an einem anderen Speicherort zu speichern oder "
+"Platz freizumachen, indem Sie unerwünschte Dateien auf diesem Gerät in den "
+"Müll verschieben."
 
 #: ../src/cong-error-file-save.c:252
 msgid ""
@@ -4193,9 +4234,9 @@ msgid ""
 "\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. Beachten "
-"Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss (»http« "
-"entspricht weder »Http« noch »HTTP«).\n"
+"I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben. "
+"Beachten Sie, dass die Groß-/Kleinschreibung berücksichtigt werden muss "
+"(»http« entspricht weder »Http« noch »HTTP«).\n"
 "II. Versuchen Sie, die Datei unter einem anderen Speicherort abzuspeichern."
 
 #: ../src/cong-error-file-save.c:266
@@ -4232,8 +4273,8 @@ msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
 msgstr ""
-"Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist möglicherweise der "
-"Server nicht erreichbar. Versuchen Sie dann, an einem anderen Ort zu "
+"Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist möglicherweise "
+"der Server nicht erreichbar. Versuchen Sie dann, an einem anderen Ort zu "
 "speichern."
 
 #: ../src/cong-error-file-save.c:312 ../src/cong-error-file-save.c:321
@@ -4243,9 +4284,9 @@ msgid ""
 "another location."
 msgstr ""
 "I. Überprüfen Sie, ob Sie den Speicherort korrekt geschrieben haben.\n"
-"II. Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist möglicherweise "
-"der Server nicht erreichbar. Versuchen Sie dann, an einem anderen Ort zu "
-"speichern."
+"II. Versuchen Sie es nochmal. Falls es erneut fehlschlägt, ist "
+"möglicherweise der Server nicht erreichbar. Versuchen Sie dann, an einem "
+"anderen Ort zu speichern."
 
 #: ../src/cong-error-file-save.c:330 ../src/cong-error-file-save.c:339
 msgid "Try again. If it fails again, try saving to another location."
@@ -4276,7 +4317,8 @@ msgstr "Versuchen Sie es nochmal mit einem kürzeren Dateinamen."
 #: ../src/cong-error-tests.c:25
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
-msgstr "Fehlschlagendes Datei->Öffnen von »%s« wird mit dem Ergebnis %s getestet"
+msgstr ""
+"Fehlschlagendes Datei->Öffnen von »%s« wird mit dem Ergebnis %s getestet"
 
 #: ../src/cong-error-tests.c:31
 #, c-format
@@ -4291,7 +4333,8 @@ msgstr "Allgemeines Fehlschlagen von »%s« wird mit dem Ergebnis %s getestet"
 
 #: ../src/cong-error-tests.c:40
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr "Conglomerate simuliert eine fehlgeschlagene, allgemeine Dateioperation."
+msgstr ""
+"Conglomerate simuliert eine fehlgeschlagene, allgemeine Dateioperation."
 
 #: ../src/cong-error-tests.c:43
 msgid "This dialog was generated by the automated testing routine"
@@ -4466,8 +4509,8 @@ msgstr "Diese DTD _entfernen"
 #: ../src/cong-file-properties.c:285
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
-"above information is appropriate.  Click on \"Associate this DTD\" to specify "
-"this information explicitly in the document."
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
 msgstr ""
 "Das Dokument gibt keine externe DTD an, Conglomerate nimmt jedoch an, dass "
 "obenstehende Informationen korrekt sind. Klicken Sie den »Mit dieser DTD "
@@ -4555,8 +4598,8 @@ msgstr "Conglomerate konnte das Ergebnis der Umwandlung nicht öffnen"
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Beim Lesen der Stylesheet-Datei »%s« ist ein Fehler aufgetreten"
 
-#: ../src/cong-menus.c:531 ../src/cong-menus.c:555 ../src/cong-stylesheet.c:228
-#: ../src/cong-stylesheet.c:291
+#: ../src/cong-menus.c:531 ../src/cong-menus.c:555
+#: ../src/cong-stylesheet.c:228 ../src/cong-stylesheet.c:291
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate konnte das Dokument nicht umwandeln"
 
@@ -4898,9 +4941,9 @@ msgstr "XML-Quelltext bereinigen"
 
 #: ../src/cong-stylesheet.c:230
 msgid ""
-"Since Conglomerate could not read the stylesheet it is possible that your XML "
-"catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog.html "
-"for more information on catalogs."
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
 msgstr ""
 "Da Conglomerate das Stylesheet nicht lesen konnte, ist es möglich, dass die "
 "XML-Katalogdatei nicht korrekt aufgesetzt ist. Siehe http://www.xmlsoft.org/"
@@ -5098,8 +5141,8 @@ msgstr "DocBook-Artikel"
 
 #: ../src/plugin-docbook.c:2061
 msgid ""
-"Create an article, perhaps for a website or a magazine, using the \"DocBook\" "
-"format"
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
 msgstr ""
 "Einen Artikel im »DocBook«-Format anlegen, z.B. für eine Website oder ein "
 "Magazin"
@@ -5146,8 +5189,8 @@ msgstr "DocBook als PDF exportieren"
 
 #: ../src/plugin-docbook.c:2114
 msgid ""
-"Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook "
-"file"
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
 msgstr ""
 "Norman Walshs DocBook-Stylesheets verwenden, um eine PDF-Datei aus dieser "
 "DocBook-Datei zu erzeugen."
@@ -5175,13 +5218,11 @@ msgid "Provides a Scope properties page for most DocBook nodes"
 msgstr "Stellt einen Eigenschaftsdialog für die meisten DocBook-Knoten bereit"
 
 #: ../src/plugin-docbook.c:2150
-#| msgid "Provides a Properties dialog for most DocBook nodes"
 msgid "Provides a Language properties page for most DocBook nodes"
 msgstr ""
 "Stellt einen Sprachen-Eigenschaftsseite für die meisten DocBook-Knoten bereit"
 
 #: ../src/plugin-docbook.c:2156
-#| msgid "Provides a Properties dialog for most DocBook nodes"
 msgid "Provides a Revisions properties page for most DocBook nodes"
 msgstr ""
 "Stellt einen Revisionen-Eigenschaftsseite für die meisten DocBook-Knoten "
@@ -5218,7 +5259,8 @@ msgid "Promote"
 msgstr "Heraufstufen"
 
 #: ../src/plugin-docbook.c:2208 ../src/plugin-docbook.c:2209
-msgid "Promote the section to a higher organisational level within the document"
+msgid ""
+"Promote the section to a higher organisational level within the document"
 msgstr ""
 "Den Abschnitt auf eine höhere organisatorische Ebene im Dokument heraufstufen"
 
@@ -5486,7 +5528,8 @@ msgstr "Einer der Schritte hat einen Fehler berichtet."
 
 #: ../src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
-msgstr "Klicken Sie den »Details«-Knopf an, um weitere Informationen zu erhalten"
+msgstr ""
+"Klicken Sie den »Details«-Knopf an, um weitere Informationen zu erhalten"
 
 #: ../src/plugin-website.c:480
 msgid "_Details"
@@ -5511,7 +5554,8 @@ msgstr "XSL-Vorlageelement"
 
 #: ../src/plugin-xsl.c:325
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr "Ein Element zum Visualisieren von Vorlageregeln in einem XSL-Stylesheet"
+msgstr ""
+"Ein Element zum Visualisieren von Vorlageregeln in einem XSL-Stylesheet"
 
 #: ../src/popup.c:490
 #, c-format
@@ -5531,7 +5575,8 @@ msgid "Uncomment"
 msgstr "Auskommentierung entfernen"
 
 #: ../src/popup.c:628
-msgid "Convert a comment containing XML source code into the corresponding code"
+msgid ""
+"Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 "Einen Kommentar, der XML-Quellcode enthält, in entsprechenden Code umwandeln"
 
