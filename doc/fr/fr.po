@@ -1,0 +1,3323 @@
+# French translation for conglomerate.
+# Copyright (C) 2010 conglomerate's COPYRIGHT HOLDER
+# This file is distributed under the same license as the conglomerate package.
+# G. Baylard <gerard DOT b AT bbox DOT fr>, 2010.
+# G. Baylard <gerard.b@bbox.fr>, 2010.
+# Laurent Coudeur <laurentc@iol.ie>, 2010.
+# Bruno Brouard <annoa.b@gmail.com>, 2010
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-19 17:49+0000\n"
+"PO-Revision-Date: 2010-10-25 00:37+0200\n"
+"Last-Translator: Laurent Coudeur <laurentc@iol.ie>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:505(None)
+msgid ""
+"@@image: 'figures/cong_start_window.png'; "
+"md5=93a8ff7594ce5170b21b9c33a52b9aad"
+msgstr ""
+"@@image: 'figures/cong_start_window.png'; "
+"md5=93a8ff7594ce5170b21b9c33a52b9aad"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:589(None) C/conglomerate.xml:1284(None)
+msgid ""
+"@@image: 'figures/cong_editor_window.png'; "
+"md5=620dd87aad04f7c3739008f23ae1d3f4"
+msgstr ""
+"@@image: 'figures/cong_editor_window.png'; "
+"md5=620dd87aad04f7c3739008f23ae1d3f4"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:608(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_titlebar.png'; "
+"md5=185bab93418e51a9f138aba9d195d4b5"
+msgstr ""
+"@@image: 'figures/cong_editor_window_titlebar.png'; "
+"md5=185bab93418e51a9f138aba9d195d4b5"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:625(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_menubar.png'; "
+"md5=f239cb84ee9ef7cee26583db1d812745"
+msgstr ""
+"@@image: 'figures/cong_editor_window_menubar.png'; "
+"md5=f239cb84ee9ef7cee26583db1d812745"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:642(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_toolbar.png'; "
+"md5=44333e3e2aad87a74cba75089aea8ec6"
+msgstr ""
+"@@image: 'figures/cong_editor_window_toolbar.png'; "
+"md5=44333e3e2aad87a74cba75089aea8ec6"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:657(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_doc_area.png'; "
+"md5=8f32feb281deafbba932f9b928b00021"
+msgstr ""
+"@@image: 'figures/cong_editor_window_doc_area.png'; "
+"md5=8f32feb281deafbba932f9b928b00021"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:674(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_statusbar.png'; "
+"md5=041633d6c3f52676972d123b313b8da5"
+msgstr ""
+"@@image: 'figures/cong_editor_window_statusbar.png'; "
+"md5=041633d6c3f52676972d123b313b8da5"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:948(None)
+msgid ""
+"@@image: 'figures/cong_editor_outlineview_popup_menu.png'; "
+"md5=cc02078f5ea283a3ccafe0202023b494"
+msgstr ""
+"@@image: 'figures/cong_editor_outlineview_popup_menu.png'; "
+"md5=cc02078f5ea283a3ccafe0202023b494"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1021(None)
+msgid ""
+"@@image: 'figures/cong_editor_outlineview_overview.png'; "
+"md5=dfaede4160542333ece572999e35f65b"
+msgstr ""
+"@@image: 'figures/cong_editor_outlineview_overview.png'; "
+"md5=dfaede4160542333ece572999e35f65b"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1039(None)
+msgid ""
+"@@image: 'figures/cong_editor_outlineview_raw.png'; "
+"md5=1dcf596561333d270c24c8c76de5ea4f"
+msgstr ""
+"@@image: 'figures/cong_editor_outlineview_raw.png'; "
+"md5=1dcf596561333d270c24c8c76de5ea4f"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1068(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_doc_edit.png'; "
+"md5=67922048751e4c8864f6a1e74ae960fe"
+msgstr ""
+"@@image: 'figures/cong_editor_window_doc_edit.png'; "
+"md5=67922048751e4c8864f6a1e74ae960fe"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1083(None)
+msgid ""
+"@@image: 'figures/cong_editor_window_doc_edit_collapse.png'; "
+"md5=4ffd250889a0dfdfbc1289dd5cb3c3a0"
+msgstr ""
+"@@image: 'figures/cong_editor_window_doc_edit_collapse.png'; "
+"md5=4ffd250889a0dfdfbc1289dd5cb3c3a0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1254(None)
+msgid ""
+"@@image: 'figures/cong_create_new_file_wiz1.png'; "
+"md5=950904d27b441f9a6fa48b051196bc9e"
+msgstr ""
+"@@image: 'figures/cong_create_new_file_wiz1.png'; "
+"md5=950904d27b441f9a6fa48b051196bc9e"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1266(None)
+msgid ""
+"@@image: 'figures/cong_create_new_file_wiz2.png'; "
+"md5=ff886ef90828475cd58928f1a380a5f0"
+msgstr ""
+"@@image: 'figures/cong_create_new_file_wiz2.png'; "
+"md5=ff886ef90828475cd58928f1a380a5f0"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1306(None)
+msgid ""
+"@@image: 'figures/cong_open_dialog.png'; md5=af23dc4f1e8d4b90340d956103dd6a4e"
+msgstr ""
+"@@image: 'figures/cong_open_dialog.png'; md5=af23dc4f1e8d4b90340d956103dd6a4e"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/conglomerate.xml:1353(None)
+msgid ""
+"@@image: 'figures/cong_save_as_dialog.png'; "
+"md5=8a8a0c9d3813205388a56058657936b6"
+msgstr ""
+"@@image: 'figures/cong_save_as_dialog.png'; "
+"md5=8a8a0c9d3813205388a56058657936b6"
+
+#: C/conglomerate.xml:54(title)
+msgid "Conglomerate XML Editor"
+msgstr "Éditeur XML Conglomerate"
+
+#: C/conglomerate.xml:56(title)
+msgid "Conglomerate XML Editor Manual V0.0.1"
+msgstr "Manuel de l'éditeur XML Conglomerate V0.0.1"
+
+#: C/conglomerate.xml:58(para)
+msgid "User manual for the conglomerate XML editor."
+msgstr "Manuel utilisateur pour l'éditeur XML Conglomerate."
+
+#: C/conglomerate.xml:63(simpara)
+msgid ""
+"This is the User Manual V0.0.1 to the <application>Conglomerate XML Editor</"
+"application> V0.7.10, a free software that provides a user-friendly tool for "
+"editing <ulink url=\"http://www.oasis-open.org/\">DocBook</ulink> and other "
+"document types created in the <glossterm>Extensible Markup Language Format</"
+"glossterm> (<acronym>XML</acronym>). It aims to hide the complexity and "
+"jargon of <acronym>XML</acronym> behind a friendly Graphical User Interface "
+"(<acronym>GUI</acronym>)."
+msgstr ""
+"Voici le manuel utilisateur V0.0.1 de l'<application>Éditeur XML "
+"Conglomerate</application> V0.7.10 : un logiciel libre mettant à disposition "
+"de l'utilisateur un outil convivial pour l'édition des type de document "
+"<ulink url=\"http://www.oasis-open.org/\">DocBook</ulink> ainsi que ceux "
+"créés en <glossterm>eXtensible Markup Language Format</glossterm> "
+"(<acronym>XML</acronym>). Il vise à dissimuler la complexité et le jargon de "
+"<acronym>XML</acronym> derrière une interface utilisateur graphique "
+"conviviale(<acronym>GUI</acronym>)."
+
+#: C/conglomerate.xml:71(firstname) C/conglomerate.xml:83(firstname)
+msgid "Sean"
+msgstr "Sean"
+
+#: C/conglomerate.xml:72(surname) C/conglomerate.xml:84(surname)
+msgid "Wheller"
+msgstr "Wheller"
+
+#: C/conglomerate.xml:75(firstname)
+msgid "Geert"
+msgstr "Geert"
+
+#: C/conglomerate.xml:76(surname)
+msgid "Stappers"
+msgstr "Stappers"
+
+#: C/conglomerate.xml:78(orgname)
+msgid "GNOME Documentation Project"
+msgstr "Projet de documentation GNOME"
+
+#: C/conglomerate.xml:79(email)
+msgid "stappers@stappers.nl"
+msgstr "stappers@stappers.nl"
+
+#: C/conglomerate.xml:87(year)
+msgid "1999-2004"
+msgstr "1999-2004"
+
+#: C/conglomerate.xml:88(holder)
+msgid "The Conglomerate Team"
+msgstr "L'équipe Conglomerate"
+
+#: C/conglomerate.xml:92(revnumber)
+msgid "0.1"
+msgstr "0.1"
+
+#: C/conglomerate.xml:93(date)
+msgid "2003-12-30"
+msgstr "30/12/2003"
+
+#: C/conglomerate.xml:94(authorinitials)
+msgid "SW"
+msgstr "SW"
+
+#: C/conglomerate.xml:96(remark)
+msgid "Manual V0.0.1 correlates to software V0.7.10"
+msgstr ""
+"La version V0.0.1 du manuel se rapporte à la version V0.7.10 du logiciel"
+
+#: C/conglomerate.xml:101(application)
+msgid "Conglomerate"
+msgstr "Conglomerate"
+
+#: C/conglomerate.xml:101(remark)
+msgid "This manual describes version V0.7.10 of <placeholder-1/>."
+msgstr "Ce manuel décrit la version V0.7.10 de <placeholder-1/>."
+
+#: C/conglomerate.xml:104(title)
+msgid "Documentation License"
+msgstr "Licence de la documentation"
+
+#: C/conglomerate.xml:105(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink url=\"http://www.gnu.org/licenses/fdl.html"
+"\">link</ulink>."
+msgstr ""
+"Permission vous est donnée de copier, distribuer et/ou modifier ce document "
+"sans section inaltérable, sans texte de première de couverture ni de "
+"dernière de couverture conformément aux termes de la licence de "
+"documentation libre GNU, Version 1.1 ou ultérieure publiée par la Free "
+"Software Foundation . Vous trouverez un exemplaire de cette licence <ulink "
+"type=\"help\" url=\"ghelp:fdl\">ici</ulink>."
+
+#: C/conglomerate.xml:113(title)
+msgid "Source License"
+msgstr "Licence du code source"
+
+#: C/conglomerate.xml:114(para)
+msgid ""
+"This library is <ulink url=\"http://www.gnu.org/philosophy/free-sw.html"
+"\">Free Software</ulink>; you can redistribute it and/or modify it under the "
+"terms of the GNU Lesser General Public License as published by the Free "
+"Software Foundation; either version 2.1 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Ce programme est un <ulink url=\"http://www.gnu.org/philosophy/free-sw.html"
+"\">logiciel libre</ulink> ; vous pouvez le redistribuer et/ou le modifier au "
+"titre des clauses de la Licence Publique Générale GNU, telle que publiée par "
+"la Free Software Foundation ; soit la version 2.1 de la Licence, ou (à votre "
+"discrétion) n'importe quelle version ultérieure."
+
+#: C/conglomerate.xml:118(para)
+msgid ""
+"This library is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License "
+"for more details. You can find a copy of the GPL at this <ulink url=\"http://"
+"www.gnu.org/copyleft/gpl.html\">link</ulink>."
+msgstr ""
+"Ce programme est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE "
+"GARANTIE ; sans même une garantie implicite de QUALITÉ LOYALE et MARCHANDE "
+"ou DE CONFORMITÉ À UNE UTILISATION PARTICULIÈRE. Consultez la Licence "
+"Publique Générale GNU pour plus de détails. Vous trouverez une copie de "
+"cette licence en suivant ce <ulink url=\"http://www.gnu.org/copyleft/gpl.html"
+"\">lien</ulink>."
+
+#: C/conglomerate.xml:123(para)
+msgid ""
+"You should have received a copy of the GNU Lesser General Public License "
+"along with this library; if not, write to the Free Software Foundation, "
+"Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA."
+msgstr ""
+"Vous devriez avoir reçu un exemplaire de la Licence Publique Générale GNU "
+"avec ce programme ; si ce n'est pas le cas, écrivez à la Free Software "
+"Foundation Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA."
+
+#: C/conglomerate.xml:129(title)
+msgid "Preface"
+msgstr "Préface"
+
+#: C/conglomerate.xml:131(title)
+msgid "About the Conglomerate Project"
+msgstr "À propos du projet <application>Conglomerate</application>"
+
+#: C/conglomerate.xml:132(para) C/conglomerate.xml:1374(para)
+#: C/conglomerate.xml:1378(para) C/conglomerate.xml:1382(para)
+#: C/conglomerate.xml:1389(para) C/conglomerate.xml:1401(para)
+#: C/conglomerate.xml:1405(para) C/conglomerate.xml:1409(para)
+#: C/conglomerate.xml:1413(para) C/conglomerate.xml:1417(para)
+#: C/conglomerate.xml:1421(para) C/conglomerate.xml:1425(para)
+#: C/conglomerate.xml:1430(para) C/conglomerate.xml:1433(para)
+#: C/conglomerate.xml:1436(para) C/conglomerate.xml:1440(para)
+#: C/conglomerate.xml:1444(para) C/conglomerate.xml:1448(para)
+#: C/conglomerate.xml:1453(para) C/conglomerate.xml:1457(para)
+#: C/conglomerate.xml:1460(para) C/conglomerate.xml:1464(para)
+#: C/conglomerate.xml:1468(para) C/conglomerate.xml:1472(para)
+#: C/conglomerate.xml:1476(para) C/conglomerate.xml:1482(para)
+#: C/conglomerate.xml:1485(para) C/conglomerate.xml:1489(para)
+#: C/conglomerate.xml:1520(para) C/conglomerate.xml:1524(para)
+#: C/conglomerate.xml:1755(para) C/conglomerate.xml:1767(para)
+#: C/conglomerate.xml:1793(para) C/conglomerate.xml:2170(entry)
+#: C/conglomerate.xml:2204(para) C/conglomerate.xml:2286(para)
+#: C/conglomerate.xml:2322(para) C/conglomerate.xml:2431(para)
+#: C/conglomerate.xml:2544(para) C/conglomerate.xml:2560(entry)
+#: C/conglomerate.xml:2584(para) C/conglomerate.xml:2670(para)
+#: C/conglomerate.xml:2783(para)
+msgid "text"
+msgstr "Texte à rédiger"
+
+#: C/conglomerate.xml:135(title)
+msgid "Getting Involved"
+msgstr "Comment s'impliquer"
+
+#: C/conglomerate.xml:136(para)
+msgid ""
+"The <application>Conglomerate</application> project is managed as an open "
+"source initiative to develop the ultimate user-friendly <acronym>XML</"
+"acronym> editing system. As such, help in the form of productive "
+"contribution is always welcomed."
+msgstr ""
+"Le projet <application>Conglomerate</application> est géré sous forme d'une "
+"initiative Open Source pour développer un système d'édition <acronym>XML</"
+"acronym> de convivialité optimale. En tant que tel, toute aide sous forme "
+"d'une contribution efficace sera toujours la bienvenue."
+
+#: C/conglomerate.xml:139(para)
+msgid ""
+"The first step in joining the project, is to join the <ulink url=\"http://"
+"lists.copyleft.no/mailman/listinfo/conglomerate-devel/\">conglomerate-devel "
+"mailing list</ulink>. This is where our development discussion happens."
+msgstr ""
+"La première démarche à entreprendre pour se joindre au projet est de "
+"s'abonner à la liste de diffusion <ulink url=\"http://lists.copyleft.no/"
+"mailman/listinfo/conglomerate-devel/\">conglomerate-devel</ulink>. C'est là "
+"où se tiennent toutes les discussions concernant le développement."
+
+#: C/conglomerate.xml:141(para)
+msgid ""
+"Next, it is recommended that you join the <ulink url=\"http://lists.copyleft."
+"no/mailman/listinfo/conglomerate-auto/\">conglomerate-auto mailing list</"
+"ulink>, which receives email every time something changes in our bug "
+"database."
+msgstr ""
+"Ensuite, il est recommandé de s'abonner à la liste de diffusion <ulink url="
+"\"http://lists.copyleft.no/mailman/listinfo/conglomerate-auto/"
+"\">conglomerate-auto</ulink>, dans laquelle un courriel est émis chaque fois "
+"qu'un changement intervient dans la base de données des anomalies."
+
+#: C/conglomerate.xml:143(para)
+msgid ""
+"Then proceed to download a copy of the latest source code as described in "
+"<xref linkend=\"installation\"/>."
+msgstr ""
+"Enfin, téléchargez une copie de la dernière édition du code source comme "
+"décrit dans la <xref linkend=\"installation\"/>."
+
+#: C/conglomerate.xml:145(title)
+msgid "Things you can do to help:"
+msgstr "Que faire pour nous aider :"
+
+#: C/conglomerate.xml:147(para)
+msgid ""
+"<emphasis role=\"bold\">Development:</emphasis> Add support for new XML "
+"document types, fix bugs and implement new features. If you're a programmer, "
+"looking for something to get stuck into, we've prepared a list of easy-to-"
+"fix bugs, which should let you become familiar with the code without having "
+"to look at all of it at once."
+msgstr ""
+"<emphasis role=\"bold\">Développement :</emphasis> ajout de la prise en "
+"charge de nouveaux types de document XML, correction de bogues et "
+"implémentation de nouvelles fonctionnalités. Si vous êtes programmeur, et "
+"que vous cherchez à vous rendre utile, nous avons préparé une liste de "
+"bogues « faciles à corriger ». Elle vous permet de vous familiariser avec le "
+"code sans avoir à en examiner la totalité dès le début."
+
+#: C/conglomerate.xml:155(para)
+msgid ""
+"<emphasis role=\"bold\">Testing:</emphasis> Test the various functions of "
+"the editor, report replicable bugs not already listed in the bug tracking "
+"system, please refer to the <ulink url=\"http://www.conglomerate.org/bugs.php"
+"\">list of things</ulink> we already know about."
+msgstr ""
+"<emphasis role=\"bold\">Tests :</emphasis> test des diverses fonctions de "
+"l'éditeur, signalement de bogues reproductibles non encore listés dans le "
+"système de suivi des anomalies. Reportez-vous à la liste des <ulink url="
+"\"http://www.conglomerate.org/bugs.php\">anomalies connues</ulink>."
+
+#: C/conglomerate.xml:162(para)
+msgid ""
+"<emphasis role=\"bold\">Localization (I10n):</emphasis> Localize "
+"<application>Conglomerate</application> into your own language. Localization "
+"is being co-ordinated by the <ulink url=\"http://developer.gnome.org/"
+"projects/gtp/\">Gnome Translation Project</ulink>."
+msgstr ""
+"<emphasis role=\"bold\">Localisation (l10n) :</emphasis> adaptation de "
+"<application>Conglomerate</application> aux usages de votre langue. La "
+"localisation est coordonnée au sein du <ulink url=\"http://developer.gnome."
+"org/projects/gtp/\">Projet de Traduction GNOME</ulink>."
+
+#: C/conglomerate.xml:168(para)
+msgid ""
+"<emphasis role=\"bold\">Translation (I18n):</emphasis> Translate the "
+"<application>Conglomerate</application> User Manual and other documents into "
+"your own language."
+msgstr ""
+"<emphasis role=\"bold\">Traduction (I18n) :</emphasis> traduction du manuel "
+"utilisateur et d'autres documents concernant <application>Conglomerate</"
+"application> dans une langue que vous possédez bien."
+
+#: C/conglomerate.xml:174(para)
+msgid ""
+"<emphasis role=\"bold\">Documentation:</emphasis> Write articles, add new "
+"sections, and improve on exiting sections within the documentation."
+msgstr ""
+"<emphasis role=\"bold\">Documentation :</emphasis> écriture d'articles, "
+"ajout de nouveaux chapitres et amélioration des parties existantes de la "
+"documentation."
+
+#: C/conglomerate.xml:179(para)
+msgid ""
+"<emphasis role=\"bold\">General:</emphasis> Suggest new features that would "
+"make it easier to use get your work done - or are just simply cool!"
+msgstr ""
+"<emphasis role=\"bold\">Généralités :</emphasis> suggestion de nouvelles "
+"fonctionnalités pour vous faciliter le travail &mdash; ou pour simplement "
+"l'agrémenter !"
+
+#: C/conglomerate.xml:186(title)
+msgid "Acknowledgments"
+msgstr "Remerciements"
+
+#: C/conglomerate.xml:187(para) C/conglomerate.xml:1393(para)
+#: C/conglomerate.xml:1397(para) C/conglomerate.xml:1736(para)
+msgid "Text"
+msgstr "Texte à rédiger"
+
+#: C/conglomerate.xml:195(title)
+msgid "Conventions"
+msgstr "Conventions"
+
+#: C/conglomerate.xml:196(para)
+msgid ""
+"This book is most effective when used in conjunction with the Conglomerate "
+"XML Editor V0.7.10."
+msgstr ""
+"Ce manuel est plus particulièrement adapté à l'utilisation de la version "
+"0.7.10 de l'éditeur XML <application>Conglomerate</application>."
+
+#: C/conglomerate.xml:198(para)
+msgid ""
+"Throughout this book the <ulink url=\"http://www.oasis-open.org/\">Docbook "
+"XML</ulink> document type will be used to explain and illustrate the "
+"functionality of the Conglomerate XML Editor."
+msgstr ""
+"Tout au long de cet ouvrage, nous utilisons le type de document <ulink url="
+"\"http://www.oasis-open.org/\">XML Docbook</ulink> pour expliquer et "
+"illustrer les fonctionnalités de l'éditeur XML <application>Conglomerate</"
+"application>."
+
+#: C/conglomerate.xml:201(para)
+msgid ""
+"Familiarity with the standard controls and Notations provided by the Window "
+"Manager and Linux File System is assumed."
+msgstr ""
+"Une bonne connaissance des contrôles habituels et des notations du "
+"gestionnaire de fenêtres et du système de fichiers Linux est supposée "
+"acquise."
+
+#: C/conglomerate.xml:204(emphasis)
+msgid "The following admonitions will be found throughout the book:"
+msgstr "Signalisations rencontrées dans la suite de l'ouvrage :"
+
+#: C/conglomerate.xml:208(para)
+msgid ""
+"A note presents interesting, sometimes technical, pieces of information "
+"related to the surrounding discussion."
+msgstr ""
+"Une note présente des informations intéressantes, quelquefois techniques, en "
+"relation avec les explications environnantes."
+
+#: C/conglomerate.xml:212(para)
+msgid "A tip offers advice or an easier way of doing something."
+msgstr ""
+"Une astuce donne des conseils ou un moyen facilitant la réalisation "
+"d'opérations."
+
+# note changement conseil 
+#: C/conglomerate.xml:215(para)
+msgid ""
+"A caution advises you of potential problems and helps you to steer clear "
+"thereof."
+msgstr ""
+"Une mise en garde vous prévient de problèmes potentiels et vous aide à les "
+"éviter."
+
+#: C/conglomerate.xml:219(para)
+msgid ""
+"A warning advises you of a hazard condition that may be created in a given "
+"scenario."
+msgstr ""
+"Un avertissement vous prévient de situations dangereuses qui pourraient "
+"survenir dans certains cas de figures."
+
+#: C/conglomerate.xml:223(emphasis)
+msgid "Type conventions will be shown as follows:"
+msgstr "Conventions d'affichage :"
+
+#: C/conglomerate.xml:227(para)
+msgid ""
+"File names or paths to directories will be shown in <filename>monospace</"
+"filename> type."
+msgstr ""
+"Les noms de fichiers ou les chemins vers les dossiers sont affichés avec une "
+"police <filename>à chasse fixe</filename>."
+
+#: C/conglomerate.xml:231(para)
+msgid ""
+"Commands that you type at a prompt will be shown in <command> bold</command> "
+"type."
+msgstr ""
+"Les commandes saisies à l'invite sont affichés avec une police "
+"<command>grasse</command>."
+
+#: C/conglomerate.xml:235(para)
+msgid ""
+"Options that you click, select or choose in the user interface will be shown "
+"in <filename>monospace</filename> type."
+msgstr ""
+"Les options que vous cliquez, sélectionnez ou choisissez dans l'interface "
+"utilisateur sont affichées à l'aide d'une police à <filename>chasse fixe</"
+"filename>."
+
+#: C/conglomerate.xml:239(para)
+msgid ""
+"When variables, parameters, sgmltags etc. are contained within a paragraph "
+"of text will be shown in <command>monospaced</command> type, otherwise they "
+"will use the normal type."
+msgstr ""
+"Quand les variables, paramètres, balises, etc. sont incorporées dans un "
+"paragraphe de texte, elles sont affichées avec une police à <command>chasse "
+"fixe</command>. Dans les autres cas, il est fait usage de la police courante."
+
+#: C/conglomerate.xml:246(emphasis)
+msgid "Menu selections, mouse actions, and keyboard short-cuts:"
+msgstr "Choix de menus, actions de la souris et raccourcis clavier :"
+
+#: C/conglomerate.xml:250(para)
+msgid ""
+"A sequence of menu selections will be shown as follows:"
+"<menuchoice><guimenu><accel>F</accel>ile</guimenu><guimenuitem><accel>O</"
+"accel>pen</guimenuitem></menuchoice>"
+msgstr ""
+"Une séquence de choix de menu est affichée ainsi : "
+"<menuchoice><guimenu><accel>F</accel>ichier</guimenu><guimenuitem><accel>O</"
+"accel>uvrir</guimenuitem></menuchoice>"
+
+#: C/conglomerate.xml:259(para)
+msgid ""
+"Mouse actions shall assume a right-handed mouse configuration. The terms "
+"\"<mousebutton>click</mousebutton>\" and \"<mousebutton>double-click</"
+"mousebutton>\" refers to using the left-hand mouse button. The term "
+"\"<mousebutton>right-click</mousebutton>\" refers to using the right-hand "
+"button."
+msgstr ""
+"Les actions de la souris sont supposées réalisées avec une souris pour "
+"droitier. Le terme « <mousebutton>cliquer</mousebutton> » ou "
+"« <mousebutton>double-cliquer</mousebutton> » se rapporte à une utilisation "
+"du bouton gauche de la souris, le terme « <mousebutton>faire un clic-droit</"
+"mousebutton> » à celle du bouton de droite."
+
+#: C/conglomerate.xml:267(para)
+msgid ""
+"Keyboard short-cut combinations will be shown as follows: "
+"<keycombo><keysym>Ctrl+N</keysym></keycombo>. Where the convention for "
+"\"Control\", \"Shift\", and \"Alternate\" keys will be <keysym>Ctrl</"
+"keysym>, <keysym>Shift</keysym>, <keysym>Alt</keysym> respectively and shall "
+"mean to hold down the first key while pressing the second key."
+msgstr ""
+"Les combinaisons des raccourcis clavier sont affichées ainsi : "
+"<keycombo><keysym>Ctrl+N</keysym></keycombo>. Les désignations "
+"conventionnelles des touches « contrôle », « majuscules » et « alternative » "
+"sont respectivement <keysym>Ctrl</keysym>, <keysym>Maj.</keysym> et "
+"<keysym>Alt</keysym>. Elles doivent être maintenues enfoncées pendant "
+"l'appui sur la deuxième touche."
+
+# Note typo in source "pint"
+#: C/conglomerate.xml:278(emphasis)
+msgid "Cross reference conventions for pint will be shown as follows:"
+msgstr "Conventions de références croisées :"
+
+#: C/conglomerate.xml:283(para)
+msgid ""
+"Internal references will look like this: <xref linkend=\"introduction\"/>. "
+"The numeral contained by square braces is the [page number]."
+msgstr ""
+"Les références internes se présentent ainsi : <xref linkend=\"introduction\"/"
+">. Le chiffre entre crochets représente le [numéro de la page]."
+
+#: C/conglomerate.xml:287(para)
+msgid ""
+"External reference, say to a Web Site, will look like <ulink url=\"http://"
+"www.somedomain.com\">this</ulink>."
+msgstr ""
+"Les références externes, par exemple à un site Web, ressemblent à <ulink url="
+"\"http://www.somedomain.com\">ceci</ulink>."
+
+#: C/conglomerate.xml:291(para)
+msgid ""
+"PDF, HTML or XHTML versions of this document will use hyper-links to denote "
+"cross-references."
+msgstr ""
+"Les versions PDF, HTML ou XHTML de ce document utilisent des hyperliens pour "
+"marquer les références croisées."
+
+#: C/conglomerate.xml:295(emphasis)
+msgid "Code conventions:"
+msgstr "Conventions de code :"
+
+#: C/conglomerate.xml:299(para)
+msgid "Code and mark-up samples will be formatted in a Grey block."
+msgstr ""
+"Les exemples de code et de balisage sont incorporés dans des blocs grisés."
+
+#: C/conglomerate.xml:302(para)
+msgid ""
+"Sometimes lines of code or mark-up examples will be longer than the page "
+"width. To avoid from them running off the page, the slash character \"\\\" "
+"is used to denote a soft line break. This means that the line of code is in "
+"reality meant to be on one line, but for print formatting it has been broken "
+"into two lines. For the example below, the line starting with msgbox has "
+"been cut so that the comment will not run off the right-side of the page."
+msgstr ""
+"Parfois des lignes de code ou des exemples de balisage excédent la largeur "
+"de la page. Pour éviter le dépassement, le caractère barre oblique inverse "
+"« \\ » est utilisé pour marquer un saut de ligne logique. Cette notation "
+"indique que la ligne de code, en réalité unique, a été partagée en deux en "
+"raison du format d'impression. Dans l'exemple qui suit, la ligne débutant "
+"par <literal>msgbox</literal> a été coupée de façon à ce que le texte ne "
+"dépasse pas du côté droit de la page."
+
+#: C/conglomerate.xml:312(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"Dim uid, Encore\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"uid = Encore.logon(\"ADMIN\",\"\" ,\"0\" ,\"\", \"00\", 0, 0,\"\")\n"
+"\n"
+"<emphasis>msgbox uid, , \"The GUID created by login and  \\\n"
+"    used for all method calls\"</emphasis>\n"
+"\n"
+"Set Encore = CreateObject(\"Encore.Query\")\n"
+"\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"Encore.logoff(uid)\n"
+"Set Encore = Nothing\n"
+"    "
+msgstr ""
+"\n"
+"Dim uid, Encore\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"uid = Encore.logon(\"ADMIN\",\"\" ,\"0\" ,\"\", \"00\", 0, 0,\"\")\n"
+"\n"
+"<emphasis>msgbox uid, , \"Le GUID créé à la connexion et \\\n"
+"    utilisé pour tous les appels de méthodes\"</emphasis>\n"
+"\n"
+"Set Encore = CreateObject(\"Encore.Query\")\n"
+"\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"Encore.logoff(uid)\n"
+"Set Encore = Nothing\n"
+"    "
+
+#: C/conglomerate.xml:329(title)
+msgid "Introduction"
+msgstr "Introduction"
+
+#: C/conglomerate.xml:330(para)
+msgid ""
+"The <application>Conglomerate XML Editor</application> is a free, user-"
+"friendly XML editor, for <ulink url=\"http://www.oasis-open.org/\">DocBook</"
+"ulink> and other XML document types. It aims to hide the complexity and "
+"jargon of XML behind a friendly GUI."
+msgstr ""
+"L'<application>éditeur XML Conglomerate</application> est un logiciel libre "
+"et convivial d'édition de types de document <ulink url=\"http://www.oasis-"
+"open.org/\">DocBook</ulink> et autres <acronym>XML</acronym>. Il vise à "
+"dissimuler la complexité et le jargon <acronym>XML</acronym> derrière une "
+"interface utilisateur graphique (<acronym>GUI</acronym>) accueillante."
+
+#: C/conglomerate.xml:333(para)
+msgid ""
+"<application>Conglomerate XML Editor</application> is one part of the "
+"<application>Conglomerate</application> project to create a complete "
+"structured information authoring, management, archival, revision control and "
+"transformation system. The <application>Conglomerate XML Editor</"
+"application> uses XML semantics and powerful graphical editing, coupled with "
+"a centralised storage model and a flexible transformation language to create "
+"an environment that is easy to use, produces high-quality structured output, "
+"and lets the user target several formatted output file types from a single "
+"XML source."
+msgstr ""
+"L'<application>Éditeur XML Conglomerate</application> est un volet du projet "
+"<application>Conglomerate</application> en vue de la création d'un système "
+"complet de validation, gestion, archivage, contrôle des versions et "
+"transformation de l'information structurée. L'<application>Éditeur XML "
+"Conglomerate</application> incorpore la sémantique XML dans un système "
+"d'édition graphique puissant, couplé à un modèle de stockage centralisé avec "
+"un langage de transformation souple dans un ensemble d'utilisation facile ; "
+"il produit une sortie structurée de grande qualité et permet à l'utilisateur "
+"de cibler plusieurs types de formats de sortie à partir d'une source XML "
+"unique."
+
+#: C/conglomerate.xml:342(title)
+msgid "Requirements"
+msgstr "Configuration logicielle requise"
+
+#: C/conglomerate.xml:343(para)
+msgid ""
+"The <application>Conglomerate XML Editor</application> can be run on any "
+"Linux system that has Gnome 2.4 or higher installed. When this condition is "
+"met Conglomerate can be run under the <ulink url=\"http://www.gnome.org"
+"\">Gnome</ulink> or <ulink url=\"http://www.kde.org\">KDE</ulink> desktops."
+msgstr ""
+"L'<application>Éditeur XML Conglomerate</application> peut être lancé sur "
+"tout système Linux qui dispose de Gnome 2.4 ou plus récent. Si cette "
+"condition est remplie, <application>Conglomerate</application> peut être "
+"lancé sous les bureaux <ulink url=\"http://www.gnome.org\">GNOME</ulink> ou "
+"<ulink url=\"http://www.kde.org\">KDE</ulink>."
+
+#: C/conglomerate.xml:346(para)
+msgid ""
+"Conglomerate is dependant of the following libraries and their development "
+"versions:"
+msgstr ""
+"<application>Conglomerate</application> dépend des librairies suivantes dans "
+"la version de développement indiquée :"
+
+#: C/conglomerate.xml:349(para)
+msgid "libxml-2.0 &gt;= 2.0.0"
+msgstr "libxml-2.0 &gt;= 2.0.0"
+
+#: C/conglomerate.xml:352(para)
+msgid "libxslt &gt;= 2.0.0"
+msgstr "libxslt &gt;= 2.0.0"
+
+#: C/conglomerate.xml:355(para)
+msgid "libbonobo-2.0 &gt;= 2.0.0"
+msgstr "libbonobo-2.0 &gt;= 2.0.0"
+
+#: C/conglomerate.xml:358(para)
+msgid "libbonoboui-2.0 &gt;= 2.0.0"
+msgstr "libbonoboui-2.0 &gt;= 2.0.0"
+
+#: C/conglomerate.xml:361(para)
+msgid "libgnomeui-2.0 &gt; 2.0.0"
+msgstr "libgnomeui-2.0 &gt; 2.0.0"
+
+#: C/conglomerate.xml:364(para)
+msgid "libglade-2.0 &gt;= 2.0.0"
+msgstr "libglade-2.0 &gt;= 2.0.0"
+
+#: C/conglomerate.xml:367(para)
+msgid "intltool-0.2.8 &gt; 0.2.8"
+msgstr "intltool-0.2.8 &gt; 0.2.8"
+
+#: C/conglomerate.xml:371(para)
+msgid ""
+"<application>Conglomerate</application> V0.7.10 is an unstable release. "
+"Current releases are intended as previews that some people may find useful."
+msgstr ""
+"<application>Conglomerate</application> V0.7.10 est une version instable. "
+"Les parutions actuelles sont des pré-éditions que certains peuvent trouver "
+"utiles."
+
+#: C/conglomerate.xml:377(title)
+msgid "Installation"
+msgstr "Installation"
+
+#: C/conglomerate.xml:378(para)
+msgid ""
+"If <application>Conglomerate</application> was shipped with your distro then "
+"you should be able to install it from the distibution source using a "
+"Software Installer. Please refer to your distro documentation for "
+"information on how to install new packages."
+msgstr ""
+"Si <application>Conglomerate</application> est livré avec votre "
+"distribution, installez-le à partir de celle-ci à l'aide d'un installateur "
+"de logiciels. Reportez-vous à la documentation de votre distribution pour "
+"toute information relative à l'installation de nouveaux paquets logiciels."
+
+#: C/conglomerate.xml:381(para)
+msgid ""
+"Alternative methods of installation include installation from <link linkend="
+"\"installation_from_tarball\" endterm=\"installation_from_tarball.title\"/> "
+"or <link linkend=\"installation_from_cvs\" endterm=\"installation_from_cvs."
+"title\"/>."
+msgstr ""
+"Il existe d'autres méthodes : <link linkend=\"installation_from_tarball\" "
+"endterm=\"installation_from_tarball.title\"/> ou <link linkend="
+"\"installation_from_cvs\" endterm=\"installation_from_cvs.title\"/>."
+
+#: C/conglomerate.xml:384(title)
+msgid "Installation from tarball"
+msgstr "Installation à partir d'une archive tar"
+
+#: C/conglomerate.xml:385(para)
+msgid ""
+"Releases are frequently packaged into tarballs and placed on the <ulink url="
+"\"http://sourceforge.net/project/showfiles.php?group_id=82766\">project CVS</"
+"ulink> at SourceForge."
+msgstr ""
+"Les versions sont souvent empaquetées dans des archives tar et placées sur "
+"le site du <ulink url=\"http://sourceforge.net/project/showfiles.php?"
+"group_id=82766\">projet CVS</ulink> de SourceForge."
+
+# Note typo in source up to
+#: C/conglomerate.xml:387(para)
+msgid ""
+"When a new release is announced the tarball may take upto 24 hours to "
+"display in the Web based CVS interface."
+msgstr ""
+"Quand une nouvelle parution est annoncée, cela peut prendre jusqu'à 24 "
+"heures avant que l'archive tar ne soit affichée dans l'interface Web de CVS ."
+
+#: C/conglomerate.xml:391(title)
+msgid "General installation overview"
+msgstr "Aperçu général de l'installation"
+
+#: C/conglomerate.xml:393(para)
+msgid "<action>Start</action> a <application>Bash</application> session."
+msgstr "<action>Lancez</action> une session <application>Bash</application>."
+
+#: C/conglomerate.xml:397(para)
+msgid "Login as root."
+msgstr "Connectez-vous en tant que root."
+
+#: C/conglomerate.xml:400(para)
+msgid ""
+"<action>Copy</action> the tarball to a location such as <filename class="
+"\"directory\">/usr/src/packages/</filename>."
+msgstr ""
+"<action>Copiez</action> l'archive tar dans un dossier tel que <filename "
+"class=\"directory\">/usr/src/packages/</filename>."
+
+#: C/conglomerate.xml:403(command)
+msgid "cp filename-0.2.3.tar.gz /usr/src/packages/"
+msgstr "cp filename-0.2.3.tar.gz /usr/src/packages/"
+
+#: C/conglomerate.xml:407(para)
+msgid "<action>Change</action> to this directory."
+msgstr "<action>Déplacez-vous</action> dans ce dossier."
+
+#: C/conglomerate.xml:410(command)
+msgid "cd /usr/src/packages/"
+msgstr "cd /usr/src/packages/"
+
+#: C/conglomerate.xml:414(para)
+msgid ""
+"<action>Extract</action> the tarball. This will create a new folder "
+"<filename class=\"directory\">filename-0.2.3</filename>"
+msgstr ""
+"<action>Extrayez</action> l'archive tar. Un nouveau dossier <filename class="
+"\"directory\">filename-0.2.3</filename> est créé."
+
+#: C/conglomerate.xml:419(command)
+msgid "tar xzvf filename-0.2.3.tar.gz"
+msgstr "tar xzvf filename-0.2.3.tar.gz"
+
+#: C/conglomerate.xml:423(para)
+msgid "<action>Change</action> to the new folder."
+msgstr "<action>Déplacez-vous</action> dans ce nouveau dossier."
+
+#: C/conglomerate.xml:426(command)
+msgid "cd filename-0.2.3"
+msgstr "cd filename-0.2.3"
+
+#: C/conglomerate.xml:430(para) C/conglomerate.xml:445(para)
+msgid ""
+"<action>Type</action> the following, followed by <keycap>Enter</keycap>."
+msgstr ""
+"<action>Saisissez</action> la ligne de commande suivante, puis appuyez sur "
+"<keycap>Entrée</keycap>."
+
+#: C/conglomerate.xml:433(command)
+msgid "./configure"
+msgstr "./configure"
+
+#: C/conglomerate.xml:437(para)
+msgid ""
+"If there are no errors, <action>type</action> the following, followed by "
+"<keycap>Enter</keycap>."
+msgstr ""
+"S'il n'y a aucune erreur, <action>saisissez</action> la ligne de commande "
+"suivante, puis appuyez sur <keycap>Entrée</keycap>."
+
+#: C/conglomerate.xml:440(command)
+msgid "make"
+msgstr "make"
+
+#: C/conglomerate.xml:442(para)
+msgid "If there are errors, resolve them if required."
+msgstr "S'il y a des erreurs, résolvez-les si nécessaire."
+
+#: C/conglomerate.xml:448(command)
+msgid "make install"
+msgstr "make install"
+
+#: C/conglomerate.xml:450(para)
+msgid ""
+"This will install to the default path <filename class=\"directory\">/usr/"
+"local/bin</filename> which should already be in your environment "
+"<varname>PATH</varname>, type <command>echo $PATH</command> to view your "
+"<varname>PATH</varname> if you are not sure."
+msgstr ""
+"Le logiciel sera installé dans le répertoire par défaut <filename class="
+"\"directory\">/usr/local/bin</filename>, qui doit être déjà défini dans\t la "
+"variable d'environnement <varname>PATH</varname>. Saisissez <command>echo "
+"$PATH</command> pour afficher le contenu de la variable <varname>PATH</"
+"varname>, si vous n'en êtes pas sûr."
+
+#: C/conglomerate.xml:457(title)
+msgid "Installation from CVS"
+msgstr "Installation à partir de CVS"
+
+# note the project is now in git 
+#: C/conglomerate.xml:458(para)
+msgid ""
+"If you don't mind running on the \"bleeding-edge\" of development, you may "
+"also run your installation from the project <glossterm>Concurrent Versioning "
+"System</glossterm> (<acronym>CVS</acronym>) located at <ulink url=\"http://"
+"cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;"
+"module=default\">Gnome</ulink>."
+msgstr ""
+"Si vous voulez être à la « pointe du développement », vous pouvez aussi "
+"installer les fichiers directement depuis le projet <glossterm>Concurrent "
+"Versioning System</glossterm> (<acronym>CVS</acronym>) qui se situe dans "
+"<ulink url=\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;"
+"cvsroot=/cvs/gnome&amp;module=default\">GNOME</ulink>."
+
+#: C/conglomerate.xml:463(para)
+msgid ""
+"As a result of the ongoing application of patches and addition of new "
+"components to the source, installation from CVS is not guaranteed to work."
+msgstr ""
+"L'ajout de correctifs et de nouveaux composants à la source de l'application "
+"impliquent que le fonctionnement d'une installation depuis CVS n'est pas "
+"garanti."
+
+#: C/conglomerate.xml:469(title)
+msgid "Getting Started"
+msgstr "Premiers pas"
+
+#: C/conglomerate.xml:470(para)
+msgid ""
+"You can start <application>Conglomerate</application> in the following ways:"
+msgstr ""
+"<application>Conglomerate</application> peut être lancé à l'aide des "
+"méthodes suivantes :"
+
+#: C/conglomerate.xml:475(guimenu)
+msgid "Applications"
+msgstr "Applications"
+
+#: C/conglomerate.xml:475(emphasis)
+msgid "From the <placeholder-1/> menu"
+msgstr "À partir du menu <placeholder-1/>"
+
+#: C/conglomerate.xml:478(para)
+msgid ""
+"Choose <menuchoice><guimenu>Main Menu</guimenu><guisubmenu>Utilities</"
+"guisubmenu><guisubmenu>Texteditor</guisubmenu><guimenuitem>Conglomerate XML "
+"Editor</guimenuitem></menuchoice>."
+msgstr ""
+"Choisissez <menuchoice><guimenu>Menu principal</"
+"guimenu><guisubmenu>Utilitaires</guisubmenu><guisubmenu>Bureautique</"
+"guisubmenu><guimenuitem>Éditeur XML Conglomerate</guimenuitem></menuchoice>."
+
+#: C/conglomerate.xml:488(emphasis)
+msgid "From the Command Prompt"
+msgstr "À partir de l'invite de la ligne de commande"
+
+#: C/conglomerate.xml:491(para)
+msgid ""
+"To start <application>Conglomerate</application> from the command prompt, "
+"type <command>conglomerate</command>, then press <keycap>Enter</keycap>."
+msgstr ""
+"Pour lancer <application>Conglomerate</application> à partir de la ligne de "
+"commande, saisissez <command>conglomerate</command>, puis appuyez sur "
+"<keycap>Entrée</keycap>."
+
+#: C/conglomerate.xml:493(para)
+msgid ""
+"You can also open an XML file directly from the command by passing the name "
+"of the XML file to open when <application>Conglomerate</application> starts, "
+"like this <command>conglomerate filename.xml</command>."
+msgstr ""
+"Vous pouvez aussi ouvrir un fichier XML directement à partir de la ligne de "
+"commande. Il suffit de passer comme paramètre le nom du fichier XML à ouvrir "
+"au lancement de <application>Conglomerate</application>, par exemple "
+"<command>conglomerate nomdufichier.xml</command>."
+
+#: C/conglomerate.xml:499(para)
+msgid ""
+"When you start <application>Conglomerate</application>, the following window "
+"is displayed."
+msgstr ""
+"Quand vous lancez <application>Conglomerate</application>, la fenêtre ci-"
+"dessous apparaît."
+
+#: C/conglomerate.xml:501(title)
+msgid "Conglomerate Start Up Window"
+msgstr "Fenêtre de Conglomerate au démarrage"
+
+#: C/conglomerate.xml:510(para)
+msgid ""
+"This is the main window of the <application>Conglomerate XML Editor</"
+"application>. It provides basic options that can be used to create, open and "
+"import files when the <application>Conglomerate</application> is first "
+"started. It also provides options to close the main window, exit the "
+"<application>Conglomerate</application> and to access the user manual and "
+"about dialog which displays version and related information about the "
+"<application>Conglomerate</application>. The main window becomes the editing "
+"interface when a new document is created or an exiting document is opened. "
+"New options will then be displayed, they are described in <xref linkend="
+"\"editor_window\"/>."
+msgstr ""
+"C'est la fenêtre principale de l'<application>Éditeur XML Conglomerate</"
+"application>. Elle offre les options classiques qui servent à créer, ouvrir "
+"et importer des fichiers quand <application>Conglomerate</application> est "
+"déjà démarré. Elle fournit également les options pour fermer la fenêtre "
+"principale, quitter l'application ou bien accéder au manuel utilisateur et à "
+"la boîte de dialogue « À propos » qui affiche le numéro de version et les "
+"informations se rapportant à <application>Conglomerate</application>. La "
+"fenêtre principale devient l'interface d'édition lorsqu'un document est créé "
+"ou qu'un document existant est ouvert. De nouvelles options de commande "
+"s'affichent alors : elles sont décrites au <xref linkend=\"editor_window\"/>."
+
+#: C/conglomerate.xml:518(para)
+msgid ""
+"If you want to quickly get a glimpse of the editor window, create a new "
+"document as follows. Documents are create with the help of templates, "
+"skeleton files that provide a basic structure from which to start "
+"documenting. <application>Conglomerate</application> provides several "
+"templates, to get us started we will use the \"Docbook Article\" template."
+msgstr ""
+"Si vous voulez tout de suite faire connaissance avec la fenêtre d'édition, "
+"créez un nouveau document comme indiqué plus loin. Des documents sont crées "
+"à l'aide de modèles, squelettes de fichiers fournissant la structure de base "
+"pour faire de la documentation. <application>Conglomerate</application> "
+"propose plusieurs possibilités de modèles ; pour débuter nous utiliserons le "
+"modèle « Article Docbook »."
+
+#: C/conglomerate.xml:524(title)
+msgid "Create a new document"
+msgstr "Création d'un nouveau document"
+
+#: C/conglomerate.xml:526(para)
+msgid ""
+"Choose <menuchoice><guimenu><accel>F</accel>ile</"
+"guimenu><guimenuitem><accel>N</accel>ew</guimenuitem></menuchoice> "
+"(<keycombo><keycap>Ctrl</keycap><keycap>N</keycap></keycombo>). A wizard "
+"dialog is displayed. This will assist you in selecting a template to start "
+"your document."
+msgstr ""
+"Choisissez <menuchoice><guimenu><accel>F</accel>ichier</"
+"guimenu><guimenuitem><accel>N</accel>ouveau</guimenuitem></menuchoice> "
+"(<keycombo><keycap>Ctrl</keycap><keycap>N</keycap></keycombo>). Un assistant "
+"s'affiche. Il vous aide à choisir un modèle de départ pour votre document."
+
+#: C/conglomerate.xml:538(para)
+msgid ""
+"<action>Click</action><guibutton>Forward</guibutton> to display the list of "
+"available templates."
+msgstr ""
+"<action>Cliquez</action> sur <guibutton>Suivant</guibutton> pour afficher "
+"les modèles disponibles."
+
+#: C/conglomerate.xml:543(para)
+msgid ""
+"<action>Select</action> the <option>Docbook Article</option>, then "
+"<action>click</action><guibutton>Forward</guibutton>. The wizard now has all "
+"the information required to create a new Docbook XML Document of the type "
+"\"Article\"."
+msgstr ""
+"<action>Choisissez</action> <option>Article Docbook</option>, puis "
+"<action>cliquez</action> sur <guibutton>Suivant</guibutton>. L'assistant "
+"dispose maintenant de toutes les informations pour créer un nouveau document "
+"XML Docbook du type « article »."
+
+#: C/conglomerate.xml:549(para)
+msgid ""
+"<action>Click</action><guibutton>Apply</guibutton> to create the Article. "
+"This will open the <link linkend=\"editor_window\" endterm=\"editor_window."
+"title\"/>."
+msgstr ""
+"<action>Cliquez</action> sur <guibutton>Appliquer</guibutton> pour créer "
+"l'article. Cela ouvre la <link linkend=\"editor_window\" endterm="
+"\"editor_window.title\"/>."
+
+#: C/conglomerate.xml:554(para)
+msgid ""
+"Congratulations you have just created your first document with "
+"<application>Conglomerate</application>. Now you will have to learn to get "
+"arround the <link linkend=\"editor_window\" endterm=\"editor_window.title\"/"
+"> and perform common operations such as <link linkend=\"save_a_document\" "
+"endterm=\"save_a_document.title\"/>, <link linkend="
+"\"inspect_document_properties\" endterm=\"inspect_document_properties.title"
+"\"/>, and generally <link linkend=\"markup\" endterm=\"markup.title\"/> your "
+"text."
+msgstr ""
+"Félicitations, vous venez de créer votre premier document avec "
+"<application>Conglomerate</application>. Maintenant, il faut apprendre à "
+"utiliser la <link linkend=\"editor_window\" endterm=\"editor_window.title\"/"
+"> et à réaliser des opérations courantes comme l'<link linkend="
+"\"save_a_document\" endterm=\"save_a_document.title\"/>, la <link linkend="
+"\"inspect_document_properties\" endterm=\"inspect_document_properties.title"
+"\"/> et plus généralement le <link linkend=\"markup\" endterm=\"markup.title"
+"\"/> de votre texte."
+
+#: C/conglomerate.xml:560(title) C/conglomerate.xml:1533(title)
+msgid "Supported XML Document Types"
+msgstr "Types de document XML pris en charge"
+
+# Note typo in english source Ultimately
+#: C/conglomerate.xml:561(para)
+msgid ""
+"Ulimately the <application>Conglomerate XML Editor</application> is being "
+"developed to support creation and editing of any XML wide variety of data or "
+"document orientated XML instances."
+msgstr ""
+"À terme, l'<application>éditeur XML Conglomerate</application> est prévu "
+"pour prendre en charge la création et l'édition de tous les types de données "
+"ou de documents basés sur XML."
+
+#: C/conglomerate.xml:564(para)
+msgid ""
+"The following XML document types are currently supported, with time more "
+"will be added:"
+msgstr ""
+"Les types de document XML suivants sont actuellement pris en charge ; au fur "
+"et à mesure d'autres seront ajoutés à cette liste :"
+
+#: C/conglomerate.xml:573(para)
+msgid ""
+"A full list of the the XML Document Types supported can be found in <xref "
+"linkend=\"doc_type_support\"/>. This document also provides an introduction "
+"to each of the document types and references where you can find more "
+"information."
+msgstr ""
+"La liste complète des types de document XML pris en charge se trouve dans "
+"l'<xref linkend=\"doc_type_support\"/>. Vous y trouverez également une "
+"introduction à chacun des types de document ainsi que les endroits où vous "
+"pourrez trouver des informations complémentaires."
+
+#: C/conglomerate.xml:579(title)
+msgid "Editor Window"
+msgstr "Fenêtre d'édition"
+
+#: C/conglomerate.xml:580(para)
+msgid ""
+"As the name implies, the editor window is used to edit documents. This "
+"window is displayed when a new document is created or an exiting document is "
+"opened and has more options than the main window. The figure below shows the "
+"editor window after a new \"Docbook Article\" has been created."
+msgstr ""
+"Comme son nom le sous-entend, la fenêtre d'édition s'utilise pour modifier "
+"les documents. Cette fenêtre s'affiche lors de la création d'un nouveau "
+"document ou de l'ouverture d'un document existant. Elle dispose de plus "
+"d'options de menu que la fenêtre principale. La figure ci-dessous montre la "
+"fenêtre d'édition après la création d'un « article DocBook »."
+
+#: C/conglomerate.xml:585(title)
+msgid "Conglomerate Editor window"
+msgstr "Fenêtre d'édition de Conglomerate"
+
+#: C/conglomerate.xml:594(para)
+msgid "The editor window is comprise of the following elements:"
+msgstr "La fenêtre d'édition comporte les éléments suivants :"
+
+#: C/conglomerate.xml:598(emphasis)
+msgid "Window titlebar"
+msgstr "Barre de titre de la fenêtre"
+
+#: C/conglomerate.xml:601(para)
+msgid ""
+"The window titlebar shows the filename of the document being edited. If the "
+"document has not been saved to a file the default document name will be "
+"<literal>(Untitled)</literal>. The window titlebar also provides the "
+"standard menus and controls of the <application>Window Manager</application>."
+msgstr ""
+"La barre de titre de la fenêtre affiche le nom du fichier du document en "
+"cours de modification. Si le document n'a pas encore été enregistré dans un "
+"fichier, la dénomination par défaut est <literal>(Sans titre)</literal>. "
+"Elle comporte également les menus et contrôles standards du "
+"<application>gestionnaire de fenêtres</application>."
+
+#: C/conglomerate.xml:616(emphasis)
+msgid "Menubar"
+msgstr "Barre de menus"
+
+#: C/conglomerate.xml:619(para)
+msgid ""
+"The Menubar provides menus that arrange and provide access to all the "
+"functional operations of the <application>Conglomerate XML Editor</"
+"application>. The menu options are described in the <link linkend="
+"\"editor_window_menus\" endterm=\"editor_window_menus.title\"/>."
+msgstr ""
+"La barre de menus fournit les menus qui organisent et permettent un accès à "
+"toutes les opérations fonctionnelles de l'<application>éditeur XML "
+"Conglomerate</application>. Les options de menu sont décrites dans la "
+"section <link linkend=\"editor_window_menus\" endterm=\"editor_window_menus."
+"title\"/>."
+
+#: C/conglomerate.xml:633(emphasis)
+msgid "Toolbar"
+msgstr "Barre d'outils"
+
+# Note incorrect english text corrected in translation refers to toolbar not menu
+#: C/conglomerate.xml:636(para)
+msgid ""
+"The Toolbar provides quick access to the most commonly used operations of "
+"the <application>Conglomerate XML Editor</application>. The menu options are "
+"described in the <link linkend=\"editor_window_toolbar\" endterm="
+"\"editor_window_toolbar.title\"/>."
+msgstr ""
+"La barre d'outils fournit un accès rapide aux opérations les plus fréquentes "
+"de l'<application>éditeur XML Conglomerate</application>. Les options de la "
+"barre d'outils sont décrites dans la section <link linkend="
+"\"editor_window_toolbar\" endterm=\"editor_window_toolbar.title\"/>."
+
+#: C/conglomerate.xml:650(emphasis)
+msgid "Document Area"
+msgstr "Zone du document"
+
+#: C/conglomerate.xml:653(para)
+msgid "The Document Area is the main workspace."
+msgstr "La zone du document est l'espace de travail principal."
+
+#: C/conglomerate.xml:665(emphasis)
+msgid "Status bar"
+msgstr "Barre d'état"
+
+#: C/conglomerate.xml:668(para)
+msgid ""
+"The Status Bar shows the \"Document Type\" of the open document and provides "
+"a window \"Resize\" control with which to increase or decrease the size of "
+"the editor window."
+msgstr ""
+"La barre d'état affiche le « type de document » du fichier ouvert. Elle "
+"dispose aussi d'une poignée de « redimensionnement » pour augmenter ou "
+"réduire la taille de la fenêtre d'édition."
+
+#: C/conglomerate.xml:682(title)
+msgid "Editor Window Menus"
+msgstr "Menus de la fenêtre d'édition"
+
+#: C/conglomerate.xml:683(para)
+msgid ""
+"The Menubar provides menus that arrange and provide access to all the "
+"functional operations of the <application>Conglomerate XML Editor</"
+"application>. The following options are available:"
+msgstr ""
+"La barre des menus comporte les menus qui permettent l'accès aux "
+"fonctionnalités de l'<application>éditeur XML Conglomerate</application>. "
+"Les options suivantes sont disponibles :"
+
+#: C/conglomerate.xml:687(title)
+msgid "Editor Window Menus and Options"
+msgstr "Menus de la fenêtre d'édition et options"
+
+#: C/conglomerate.xml:692(accel)
+msgid "F"
+msgstr "F"
+
+#: C/conglomerate.xml:691(guimenu)
+msgid "<placeholder-1/>ile"
+msgstr "<placeholder-1/>ichier"
+
+#: C/conglomerate.xml:696(para)
+msgid "Use the <guimenu>File</guimenu> menu, to perform the following tasks:"
+msgstr ""
+"Utilisez le menu <guimenu>Fichier</guimenu> pour effectuer les actions "
+"suivantes :"
+
+#: C/conglomerate.xml:745(accel)
+msgid "E"
+msgstr "d"
+
+#: C/conglomerate.xml:744(guimenu)
+msgid "<placeholder-1/>dit"
+msgstr "É<placeholder-1/>ition"
+
+#: C/conglomerate.xml:749(para)
+msgid "Use the <guimenu>Edit</guimenu> menu, to perform the following tasks:"
+msgstr ""
+"Utilisez le menu <guimenu>Édition</guimenu> pour réaliser les tâches "
+"suivantes :"
+
+#: C/conglomerate.xml:788(accel)
+msgid "T"
+msgstr "O"
+
+#: C/conglomerate.xml:787(guimenu)
+msgid "<placeholder-1/>ools"
+msgstr "<placeholder-1/>utils"
+
+#: C/conglomerate.xml:792(para)
+msgid "Use the <guimenu>Tools</guimenu> menu, to perform the following tasks:"
+msgstr ""
+"Utilisez le menu <guimenu>Outils</guimenu> pour effectuer les opérations "
+"suivantes :"
+
+#: C/conglomerate.xml:821(accel)
+msgid "H"
+msgstr "e"
+
+#: C/conglomerate.xml:820(guimenu)
+msgid "<placeholder-1/>elp"
+msgstr "Aid<placeholder-1/>"
+
+#: C/conglomerate.xml:825(para)
+msgid ""
+"Use the <guimenu>Help</guimenu> menu, to display the "
+"<application>Conglomerate XML Editor</application> \"About\" dialog and "
+"access the Online Help."
+msgstr ""
+"Utilisez le menu d'<guimenu>Aide</guimenu> pour afficher la boîte de "
+"dialogue « À propos » de l'<application>Éditeur XML Conglomerate</"
+"application> et pour avoir accès à l'aide en ligne."
+
+#: C/conglomerate.xml:833(title)
+msgid "Editor Window Toolbar"
+msgstr "Barre d'outils de la fenêtre d'édition"
+
+#: C/conglomerate.xml:834(para)
+msgid ""
+"The Toolbar provides quick access to the most commonly used operations of "
+"the <application>Conglomerate XML Editor</application>. The following "
+"options are available:"
+msgstr ""
+"La barre d'outils permet un accès rapide aux opérations les plus fréquentes "
+"de l'<application>Éditeur XML Conglomerate</application>. Les options "
+"suivantes sont disponibles :"
+
+#: C/conglomerate.xml:837(title)
+msgid "Editor Window Toolbar Options"
+msgstr "Options de la barre d'outils de l'éditeur"
+
+#: C/conglomerate.xml:840(emphasis)
+msgid "Open"
+msgstr "Ouvrir"
+
+#: C/conglomerate.xml:843(para)
+msgid ""
+"Use the <guibutton>Open</guibutton> button, to <link linkend="
+"\"open_a_document\" endterm=\"open_a_document.title\"/> that already exists."
+msgstr ""
+"Utilisez le bouton <guibutton>Ouvrir</guibutton> pour l'<link linkend="
+"\"open_a_document\" endterm=\"open_a_document.title\"/> qui existe déjà."
+
+#: C/conglomerate.xml:849(emphasis)
+msgid "Save"
+msgstr "Enregistrer"
+
+#: C/conglomerate.xml:852(para)
+msgid ""
+"Use the <guibutton>Save</guibutton> button, to <link linkend="
+"\"save_a_document\" endterm=\"save_a_document.title\"/> that is already save "
+"to a new file with a different filename."
+msgstr ""
+"Utilisez le bouton <guibutton>Enregistrer</guibutton> pour l'<link linkend="
+"\"save_a_document\" endterm=\"save_a_document.title\"/> déjà enregistré, "
+"sous un nouveau nom."
+
+#: C/conglomerate.xml:858(emphasis)
+msgid "Undo"
+msgstr "Annuler"
+
+#: C/conglomerate.xml:861(para)
+msgid ""
+"Use the <guibutton>Undo</guibutton> button, to <link linkend=\"undo\" "
+"endterm=\"undo.title\"/>."
+msgstr ""
+"Utilisez le bouton <guibutton>Annuler</guibutton> pour les <link linkend="
+"\"undo\" endterm=\"undo.title\"/>."
+
+#: C/conglomerate.xml:866(emphasis)
+msgid "Redo"
+msgstr "Rétablir"
+
+#: C/conglomerate.xml:869(para)
+msgid ""
+"Use the <guibutton>Redo</guibutton> button, to <link linkend=\"redo\" "
+"endterm=\"redo.title\"/>."
+msgstr ""
+"Utilisez le bouton <guibutton>Rétablir</guibutton> pour les <link linkend="
+"\"redo\" endterm=\"redo.title\"/>."
+
+#: C/conglomerate.xml:874(emphasis)
+msgid "Cut"
+msgstr "Couper"
+
+#: C/conglomerate.xml:877(para)
+msgid ""
+"Use the <guibutton>Cut</guibutton> button, to <link linkend=\"cut_text\" "
+"endterm=\"cut_text.title\"/>."
+msgstr ""
+"Utilisez le bouton <guibutton>Couper</guibutton> pour l'<link linkend="
+"\"cut_text\" endterm=\"cut_text.title\"/>."
+
+#: C/conglomerate.xml:882(emphasis)
+msgid "Copy"
+msgstr "Copier"
+
+#: C/conglomerate.xml:885(para)
+msgid ""
+"Use the <guibutton>Copy</guibutton> button, to <link linkend=\"copy_text\" "
+"endterm=\"copy_text.title\"/>."
+msgstr ""
+"Utilisez le bouton <guibutton>Copier</guibutton> pour l'<link linkend="
+"\"copy_text\" endterm=\"copy_text.title\"/>."
+
+#: C/conglomerate.xml:890(emphasis)
+msgid "Paste"
+msgstr "Coller"
+
+#: C/conglomerate.xml:893(para)
+msgid ""
+"Use the <guibutton>Paste</guibutton> button, to <link linkend=\"paste_text\" "
+"endterm=\"paste_text.title\"/>."
+msgstr ""
+"Utilisez le bouton <guibutton>Coller</guibutton> pour le <link linkend="
+"\"paste_text\" endterm=\"paste_text.title\"/>."
+
+#: C/conglomerate.xml:899(title)
+msgid "Editor Window Document Area"
+msgstr "Zone document de la fenêtre d'édition"
+
+#: C/conglomerate.xml:900(para)
+msgid ""
+"The document area is the main workspace. It provides two views of the open "
+"document:"
+msgstr ""
+"La zone document est l'espace de travail principal. Elle fournit à "
+"l'utilisateur deux vues du document ouvert :"
+
+#: C/conglomerate.xml:903(para)
+msgid ""
+"<link linkend=\"outline_view\" endterm=\"outline_view.title\"/> (left-pane)"
+msgstr ""
+"<link linkend=\"outline_view\" endterm=\"outline_view.title\"/> (volet de "
+"gauche)"
+
+#: C/conglomerate.xml:907(para)
+msgid "<link linkend=\"page_view\" endterm=\"page_view.title\"/> (right-pane)"
+msgstr ""
+"<link linkend=\"page_view\" endterm=\"page_view.title\"/> (volet de droite)"
+
+#: C/conglomerate.xml:911(para)
+msgid ""
+"Each view is shown in a pane. The separator between the panes can be used to "
+"adjust how much of the document area is taken up by each of the views."
+msgstr ""
+"Chaque vue est affichée dans un volet. Le séparateur entre volets peut être "
+"ajusté pour modifier leur surface respective."
+
+#: C/conglomerate.xml:914(title)
+msgid "Outline view"
+msgstr "Vue d'ensemble"
+
+#: C/conglomerate.xml:915(para)
+msgid ""
+"Shows the structure of the document in a \"Tree View\" control. The outline "
+"view provides two XML tree perspectives of the open document:"
+msgstr ""
+"La vue d'ensemble permet d'afficher la structure du document dans une "
+"« arborescence ». La vue d'ensemble offre deux perspectives de "
+"l'arborescence XML du document ouvert :"
+
+#: C/conglomerate.xml:919(para)
+msgid "<link linkend=\"overview\" endterm=\"overview.title\"/> (left-tab)"
+msgstr ""
+"<link linkend=\"overview\" endterm=\"overview.title\"/> (onglet de gauche)"
+
+#: C/conglomerate.xml:923(para)
+msgid "<link linkend=\"raw_xml\" endterm=\"raw_xml.title\"/> (right-tab)"
+msgstr ""
+"<link linkend=\"raw_xml\" endterm=\"raw_xml.title\"/> (onglet de droite)"
+
+#: C/conglomerate.xml:927(para)
+msgid ""
+"Both perspectives enable the tree structure of the open document to be "
+"navigated. Starting from the root node of the tree, elements that have "
+"\"child\" or \"sibling-elements\" can be expanded and collapsed."
+msgstr ""
+"Chaque perspective permet de naviguer dans l'arborescence du document "
+"ouvert. À partir de la racine de l'arborescence, les éléments qui possèdent "
+"des « enfants » ou des « éléments de même parenté » peuvent être développés "
+"ou réduits."
+
+#: C/conglomerate.xml:931(para)
+msgid ""
+"A context-sensitive pop-up menu is available when a selected node is "
+"<action>right-clicked</action> with the mouse."
+msgstr ""
+"Un menu contextuel apparait si vous faites un <action>clic droit</action> "
+"sur un nœud."
+
+#: C/conglomerate.xml:933(para)
+msgid ""
+"The options displayed on the pop-up are dependent on the selected node type. "
+"For example, when nodes that are representative of the tree root, "
+"<acronym>XML</acronym> declaration, or document type declaration are "
+"selected, the <guimenuitem>Cut</guimenuitem>, <guimenuitem>Copy</"
+"guimenuitem>, <guimenuitem>Paste into</guimenuitem>, <guimenuitem>Paste "
+"before</guimenuitem>, and <guimenuitem>Paste after</guimenuitem> options are "
+"not displayed. When nodes that are representative of an <acronym>XML</"
+"acronym> element that forms part of the vocabulary of the \"Document Type\" "
+"are selected, these options will be available as shown in the figure below."
+msgstr ""
+"Les options affichées dans le menu contextuel dépendent du type de nœud "
+"choisi. Par exemple, si le nœud représente la racine de l'arborescence, une "
+"déclaration <acronym>XML</acronym> ou une déclaration de type de document, "
+"les options <guimenuitem>Couper</guimenuitem>, <guimenuitem>Copier</"
+"guimenuitem>, <guimenuitem>Coller dans</guimenuitem>, <guimenuitem>Coller "
+"avant</guimenuitem> et <guimenuitem>Coller après</guimenuitem> ne sont pas "
+"affichées. Quand les nœuds représentent un élément <acronym>XML</acronym> "
+"faisant partie du vocabulaire du « type de document  », les options "
+"suivantes sont disponibles comme cela est affiché sur la figure ci-dessous."
+
+#: C/conglomerate.xml:944(title)
+msgid "Outline view pop-up menu"
+msgstr "Menu contextuel de la vue d'ensemble"
+
+#: C/conglomerate.xml:953(para)
+msgid "Use the outline view pop-up menu to perform the following tasks:"
+msgstr "Utilisez le menu contextuel pour effectuer les tâches suivantes :"
+
+#: C/conglomerate.xml:986(para) C/conglomerate.xml:1132(para)
+msgid ""
+"Insert a <link linkend=\"insert_sibling_elements\" endterm="
+"\"insert_sibling_elements.title\"/> after the current element."
+msgstr ""
+"Insertion d'un <link linkend=\"insert_sibling_elements\" endterm="
+"\"insert_sibling_elements.title\"/> après l'élément sélectionné."
+
+#: C/conglomerate.xml:989(para) C/conglomerate.xml:1135(para)
+msgid ""
+"Insert a <link linkend=\"insert_sub_elements\" endterm=\"insert_sub_elements."
+"title\"/> directly under the current element."
+msgstr ""
+"Insertion d'un <link linkend=\"insert_sub_elements\" endterm="
+"\"insert_sub_elements.title\"/> directement sous l'élément actuel."
+
+#: C/conglomerate.xml:993(para)
+msgid ""
+"This pop-up menu is also available when an <acronym>XML</acronym> element is "
+"<action>right-clicked</action> in the <link linkend=\"page_view\" endterm="
+"\"page_view.title\"/>."
+msgstr ""
+"Ce menu contextuel est également disponible quand vous faites un "
+"<action>clic droit</action> sur un élément <acronym>XML</acronym> dans la "
+"<link linkend=\"page_view\" endterm=\"page_view.title\"/>."
+
+#: C/conglomerate.xml:997(title)
+msgid "Overview tree perspective"
+msgstr "Arborescence d'ensemble"
+
+#: C/conglomerate.xml:998(para)
+msgid ""
+"In Overview perspective the tree nodes of the open document are shown by "
+"their Docbook element name using a logical view. The value, or text, "
+"contained by the element is not displayed. For this reason, paragraph or "
+"<sgmltag class=\"starttag\">para</sgmltag> elements within the tree cannot "
+"be expanded."
+msgstr ""
+"Dans la vue synthétique, les nœuds de l'arborescence du document ouvert sont "
+"affichés sous leur nom d'élément Docbook en utilisant un affichage logique. "
+"La valeur, ou le texte, contenu dans l'élément n'est pas affiché. C'est pour "
+"cette raison que les paragraphes ou éléments <sgmltag class=\"starttag"
+"\">para</sgmltag> de l'arborescence ne peuvent pas être développés."
+
+#: C/conglomerate.xml:1003(para)
+msgid ""
+"The element name shown in the tree view is not always the same as that shown "
+"in the <link linkend=\"page_view\" endterm=\"page_view.title\"/>. This is "
+"because Conglomerate renames elements according to the information provided "
+"by a \"Display Specification\" which can define an alternate bame for any "
+"element type. These names are not valid element names and are therefore not "
+"used to created <acronym>XML</acronym> elements within the <acronym>XML</"
+"acronym> source file. Instead they are mapped to valid Docbook elements "
+"which are what is created in the open <acronym>XML</acronym> source file or "
+"document. If they were to be inserted using the names provided by "
+"<application>Conglomerate</application>, the document would be invalid "
+"against the rules specified by the documents <glossterm>Document Type "
+"Definition</glossterm> (<acronym>DTD</acronym>). A listing of the mappings "
+"for various document types is provided in <xref linkend="
+"\"display_spec_element_map_ref\"/>."
+msgstr ""
+"Le nom de l'élément affiché dans la vue arborescente n'est pas toujours le "
+"même que celui montré dans la <link linkend=\"page_view\" endterm="
+"\"page_view.title\"/>. Cela résulte du fait que Conglomerate renomme les "
+"éléments selon les indications données par une « définition d'affichage » "
+"qui peut donner un nom alternatif à tout type d'élément. Ce ne sont pas des "
+"noms d'éléments valides ; de ce fait, ils ne sont pas utilisés pour créer "
+"des éléments <acronym>XML</acronym> dans le fichier source <acronym>XML</"
+"acronym>. Au lieu de cela, ils sont mis en correspondance avec des éléments "
+"Docbook valides qui seront ceux utilisés dans le fichier source ou le "
+"document <acronym>XML</acronym>. S'ils étaient insérés sous le nom donné par "
+"<application>Conglomerate</application>, le document ne serait pas valide en "
+"regard des règles déterminées par la <glossterm>Document Type Definition</"
+"glossterm> (définition de type de document <acronym>DTD</acronym>). Une "
+"liste de correspondances pour les divers types de document est fournie en "
+"<xref linkend=\"display_spec_element_map_ref\"/>."
+
+#: C/conglomerate.xml:1017(title)
+msgid "Outline view in Overview perspective"
+msgstr "Aperçu de la vue synthétique"
+
+#: C/conglomerate.xml:1028(title)
+msgid "Raw XML tree perspective"
+msgstr "Arborescence XML brute"
+
+#: C/conglomerate.xml:1029(para)
+msgid ""
+"In Raw XML perspective the tree nodes of the open document are shown using "
+"the full XML syntax, so the \"greater-than\" (&lt;) and \"less-than\" (&gt;) "
+"characters the surround element names are shown. The value of the element, "
+"the tagged text, is also shown alongside the element in inverted commas (see "
+"<xref linkend=\"fig_outline_raw_xml\"/>)."
+msgstr ""
+"Dans la vue <acronym>XML</acronym> brute, les nœuds de l'arborescence du "
+"document sont affichés avec la syntaxe <acronym>XML</acronym> complète ; "
+"ainsi le signe « plus grand que » (&gt;) et « plus petit que » (&lt;) qui "
+"encadrent les noms d'éléments sont affichés. La valeur de l'élément (le "
+"texte balisé) est également affichée entre des guillemets droits (consultez "
+"la <xref linkend=\"fig_outline_raw_xml\"/>)."
+
+#: C/conglomerate.xml:1035(title)
+msgid "Outline view in Raw XML perspective"
+msgstr "Aperçu du XML brut dans la vue d'ensemble"
+
+#: C/conglomerate.xml:1047(title)
+msgid "Page view"
+msgstr "Vue page"
+
+# note missing space in source
+#: C/conglomerate.xml:1048(para)
+msgid ""
+"The page view shows the content of the open document and the elements in "
+"which various content typesare tagged."
+msgstr ""
+"La vue page affiche le contenu du document ouvert, ainsi que la nature du "
+"balisage des éléments."
+
+#: C/conglomerate.xml:1050(para)
+msgid ""
+"Block elements such as <sgmltag class=\"starttag\">article</sgmltag>, "
+"<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
+"\">sect2</sgmltag>, and <sgmltag class=\"starttag\">figure</sgmltag> are "
+"shown in \"structural element borders\" and inline elements are displayed "
+"with a line beneath the tagged text (see <xref linkend="
+"\"fig_page_view_doc_edit\"/>)."
+msgstr ""
+"Les éléments blocs tels que <sgmltag class=\"starttag\">article</sgmltag>, "
+"<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
+"\">sect2</sgmltag> ou <sgmltag class=\"starttag\">figure</sgmltag> sont "
+"affichés entourés d'un « encadrement d'élément structuré » et les éléments "
+"intégrés sont affichés soulignés de l'intitulé de la balise (consultez la "
+"<xref linkend=\"fig_page_view_doc_edit\"/>)."
+
+#: C/conglomerate.xml:1054(para)
+msgid ""
+"The \"structural element borders\" for nested block structures are "
+"alternately colored to help readability. The captions used, correspond to "
+"the <application>Conglomerate</application> equivalent of the Document Type "
+"elements. For example, in the following figure the "
+"<application>Conglomerate</application> \"Paragraph\" caption will "
+"correspond with the Docbook <literal>&lt;para&gt;</literal> element. For "
+"inline elements the caption name is written in the center of the line "
+"beneath the tagged text. A listing of the <application>Conglomerate</"
+"application> names is provided in <xref linkend="
+"\"display_spec_element_map_ref\"/> for each of the <link linkend="
+"\"doc_type_support\" endterm=\"doc_type_support.title\"/>."
+msgstr ""
+"Les « encadrements d'éléments structurés » de blocs imbriqués sont teintés "
+"de manière alternée pour faciliter la lisibilité. Les intitulés utilisés "
+"correspondent aux équivalents <application>Conglomerate</application> des "
+"éléments du type de document. Par exemple, dans la figure ci-dessous, "
+"l'intitulé « Paragraph » correspond à l'élément Docbook <literal>&lt;para&gt;"
+"</literal>. Pour les éléments intégrés, l'intitulé de l'élément est écrit au-"
+"dessous et au milieu du texte balisé. Une liste des noms utilisés par "
+"<application>Conglomerate</application> est donnée dans l'<xref linkend="
+"\"display_spec_element_map_ref\"/> pour chacun des <link linkend="
+"\"doc_type_support\" endterm=\"doc_type_support.title\"/>."
+
+#: C/conglomerate.xml:1064(title)
+msgid "Page view display of elements"
+msgstr "Affichage des éléments de la vue page"
+
+#: C/conglomerate.xml:1073(para)
+msgid ""
+"Wrapped captions can be expanded or collapsed by <action>clicking</action> "
+"the mouse on the caption label. In <xref linkend=\"fig_wrapped_caption_states"
+"\"/> both states are shown. Notice that the content for \"Subtitle\", \"Title"
+"\" under the <sgmltag class=\"starttag\">articleinfo</sgmltag>, and the "
+"\"Author\" has been hidden. Inline elements cannot be collapsed."
+msgstr ""
+"Les intitulés enveloppes peuvent être développés ou réduits en "
+"<action>cliquant</action> sur l'étiquette de l'intitulé. Dans la <xref "
+"linkend=\"fig_wrapped_caption_states\"/>, les deux configurations sont "
+"affichées. Notez que le contenu de « Sous-titre » ainsi que celui de "
+"« Titre » et « Auteur » sous <sgmltag class=\"starttag\">articleinfo</"
+"sgmltag> ont été cachés. Les éléments incorporés ne peuvent pas être réduits."
+
+#: C/conglomerate.xml:1079(title)
+msgid "Wrapped caption states - expanded and collapsed"
+msgstr "État des intitulés enveloppes - développés/réduits"
+
+#: C/conglomerate.xml:1088(para)
+msgid ""
+"Two pop-up menus are available in the page view, each is associated with a "
+"different object:"
+msgstr ""
+"Deux menus contextuels sont disponibles dans la vue page ; chacun est "
+"associé à un objet différent :"
+
+#: C/conglomerate.xml:1093(emphasis)
+msgid "Block Element Menu"
+msgstr "Menu d'un élément bloc"
+
+#: C/conglomerate.xml:1096(para)
+msgid ""
+"This is the same menu that is available when an XML element is <action>right-"
+"clicked</action> in the <link linkend=\"outline_view\" endterm="
+"\"outline_view.title\"/>, only this time the menu is displayed when the "
+"caption label is <action>right-clicked</action>. Use the block element menu "
+"to:"
+msgstr ""
+"C'est le même menu que celui qui est affiché lors d'un <action>clic-droit</"
+"action> sur un élément XML dans la <link linkend=\"outline_view\" endterm="
+"\"outline_view.title\"/>. Sauf que, dans le cas présent, le menu s'affiche "
+"quand vous faites un <action>clic-droit</action> sur l'étiquette de "
+"l'intitulé. Utilisez le menu de l'élément bloc pour réaliser les actions "
+"suivantes :"
+
+#: C/conglomerate.xml:1143(emphasis)
+msgid "Text Menu"
+msgstr "Menu texte"
+
+#: C/conglomerate.xml:1146(para)
+msgid ""
+"This menu is displayed when text contained in a block element is "
+"<action>right-clicked</action>. It displays a list of options that allow you "
+"to:"
+msgstr ""
+"Ce menu s'affiche quand vous faites un <action>clic-droit</action> sur le "
+"texte contenu dans un élément bloc. Il affiche une liste d'options qui vous "
+"permettent de réaliser les actions suivantes :"
+
+#: C/conglomerate.xml:1177(title)
+msgid "Window Management"
+msgstr "Gestion des fenêtres"
+
+# note source  broken tag
+#: C/conglomerate.xml:1178(para)
+msgid ""
+"The <application>Conglomerate XML Editor</application> uses your chosen "
+"<application>Window Manager</application> to create the main and editor "
+"windows. Multiple instances of <application>Conglomerate</application> can "
+"be run at the same time and multiple editor windows can be opened, each "
+"editor window displaying a single document. With so many windows open, "
+"window management can become a problem. Fortunately, most desktops like "
+"<ulink url=\"http://www.gnome.org\">GNOME</ulink> and <ulink url=\"http://"
+"www.kde.org\">KDE</ulink> have a <application>Taskbar</application> with "
+"powerful desktop management features. These should enable you to maximize "
+"the usage of your screen real-estate. The standard window controls of your "
+"desktop environment will also help you to define the behavior of your "
+"<application>Conglomerate</application> windows."
+msgstr ""
+"L'<application>Éditeur XML Conglomerate</application> utilise le "
+"<application>gestionnaire de fenêtres</application> que vous avez choisi "
+"pour créer la fenêtre principale et la fenêtre de l'éditeur. Plusieurs "
+"instances de <application>Conglomerate</application> peuvent être lancées "
+"simultanément et plusieurs fenêtres d'édition ouvertes ; chaque fenêtre "
+"d'édition n'affiche qu'un seul document. Si beaucoup de fenêtres sont "
+"ouvertes simultanément, leur gestion peut poser problème. Heureusement, la "
+"plupart des bureaux, tels <ulink url=\"http://www.gnome.org\">GNOME</ulink> "
+"ou <ulink url=\"http://www.kde.org\">KDE</ulink>, disposent de "
+"<application>tableaux de bord</application> avec des fonctionnalités "
+"avancées de gestion du bureau. Elles vous permettent d'optimiser "
+"l'utilisation de votre écran. Les contrôles standard des fenêtres dans votre "
+"environnement de bureau vous aident également à définir le comportement des "
+"fenêtres de <application>Conglomerate</application>."
+
+#: C/conglomerate.xml:1188(para)
+msgid ""
+"Within <application>Conglomerate</application> there are two options for "
+"window and application management:"
+msgstr ""
+"Dans <application>Conglomerate</application>, il existe deux options qui "
+"gèrent respectivement la fenêtre et l'application :"
+
+#: C/conglomerate.xml:1203(title)
+msgid "Close"
+msgstr "Fermeture"
+
+#: C/conglomerate.xml:1204(para)
+msgid ""
+"As multiple editor windows can be opened, editor windows can also be "
+"individually closed by selecting <menuchoice><guimenu><accel>F</accel>ile</"
+"guimenu><guimenuitem><accel>C</accel>lose</guimenuitem></menuchoice> or "
+"using the keyboard combination <keycombo><keycap>Ctrl</keycap><keycap>W</"
+"keycap></keycombo>."
+msgstr ""
+"De la même manière qu'il est possible d'ouvrir plusieurs fenêtres d'édition, "
+"il est possible de les fermer individuellement en sélectionnant "
+"<menuchoice><guimenu><accel>F</accel>ichier</guimenu><guimenuitem><accel>F</"
+"accel>ermer</guimenuitem></menuchoice> ou en utilisant le raccourci clavier "
+"<keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo>."
+
+#: C/conglomerate.xml:1215(para)
+msgid ""
+"This option should not be confused with the <option>Exit</option> option, "
+"which will close all <application>Conglomerate</application> windows "
+"associated with a <application>Conglomerate</application> instance and "
+"terminate the application."
+msgstr ""
+"Cette option ne doit pas être confondue avec l'option <option>Quitter</"
+"option> qui ferme toutes les fenêtres <application>Conglomerate</"
+"application> associées à l'instance de l'application et qui y met fin."
+
+#: C/conglomerate.xml:1221(title)
+msgid "Exit"
+msgstr "Fin du programme"
+
+#: C/conglomerate.xml:1222(para)
+msgid ""
+"Selecting <menuchoice><guimenu><accel>F</accel>ile</"
+"guimenu><guimenuitem><accel>Q</accel>uit</guimenuitem></menuchoice> or using "
+"the keyboard combination <keycombo><keycap>Ctrl</keycap><keycap>Q</keycap></"
+"keycombo> on the main window and any editor window will close all windows "
+"associated with the <application>Conglomerate</application> instance and "
+"exit the application."
+msgstr ""
+"Choisissez <menuchoice><guimenu><accel>F</accel>ichier</"
+"guimenu><guimenuitem><accel>Q</accel>uitter</guimenuitem></menuchoice> ou la "
+"combinaison clavier <keycombo><keycap>Ctrl</keycap><keycap>Q</keycap></"
+"keycombo> sur la fenêtre principale ou n'importe quelle fenêtre d'édition "
+"pour fermer toutes les fenêtres associées à l'instance de "
+"<application>Conglomerate</application> et quitter l'application."
+
+#: C/conglomerate.xml:1236(title)
+msgid "Performing Tasks"
+msgstr "Exécution de tâches"
+
+#: C/conglomerate.xml:1238(title)
+msgid "File Management"
+msgstr "Gestion des fichiers"
+
+#: C/conglomerate.xml:1240(title)
+msgid "Create a document"
+msgstr "Création d'un document"
+
+#: C/conglomerate.xml:1241(para)
+msgid ""
+"When <application>Conglomerate</application> is first started main window "
+"does not provide editing functionality. To display the editor window Create "
+"or <link linkend=\"open_a_document\" endterm=\"open_a_document.title\"/>."
+msgstr ""
+"Au premier lancement de <application>Conglomerate</application>, la fenêtre "
+"principale n'offre aucune fonctionnalité d'édition. Pour afficher la fenêtre "
+"d'édition, il faut créer ou réaliser l'<link linkend=\"open_a_document\" "
+"endterm=\"open_a_document.title\"/>."
+
+#: C/conglomerate.xml:1244(title)
+msgid "Creating a Document"
+msgstr "Création d'un document"
+
+#: C/conglomerate.xml:1246(para)
+msgid ""
+"From the main window menu <action>select</action><menuchoice><guimenu>File</"
+"guimenu><guimenuitem>New</guimenuitem></menuchoice>. The <application>Create "
+"New File</application> wizard is started."
+msgstr ""
+"À partir du menu de la fenêtre principale, <action>choisissez</action> "
+"<menuchoice><guimenu>Fichier</guimenu><guimenuitem>Nouveau</guimenuitem></"
+"menuchoice>. Cette opération lance l'assistant de <application>Création d'un "
+"nouveau fichier</application>."
+
+# note typo in source missing space alist
+#: C/conglomerate.xml:1260(para)
+msgid ""
+"<action>Click</action> the <guibutton>Forward</guibutton> button. The wizard "
+"displays alist of document type templates."
+msgstr ""
+"<action>Cliquez</action> sur <guibutton>Suivant</guibutton>. L'assistant "
+"affiche une liste de modèles de type de document."
+
+#: C/conglomerate.xml:1272(para)
+msgid ""
+"<action>Select</action> a suitable template from the list, then "
+"<action>click</action> the <guibutton>Forward</guibutton> button. The final "
+"dialog of the wizard is displayed."
+msgstr ""
+"<action>Choisissez</action> le modèle adéquat dans la liste, puis "
+"<action>cliquez</action> sur <guibutton>Suivant</guibutton>. La dernière "
+"boîte de dialogue de l'assistant s'affiche."
+
+#: C/conglomerate.xml:1278(para)
+msgid ""
+"<action>Click</action> the <guibutton>Apply</guibutton> button. The Editor "
+"Window is displayed with the selected template ready for editing."
+msgstr ""
+"<action>Cliquez</action> sur <guibutton>Appliquer</guibutton>. La fenêtre "
+"d'édition s'affiche avec le modèle choisi prêt à être modifié."
+
+#: C/conglomerate.xml:1292(title)
+msgid "Open a document"
+msgstr "Ouverture d'un document"
+
+#: C/conglomerate.xml:1293(para)
+msgid ""
+"The option to open an exiting document can be performed from the main and "
+"editor windows. The following procedure is performed from the main window."
+msgstr ""
+"L'ouverture d'un document existant peut se faire à partir de la fenêtre "
+"principale ou de la fenêtre d'édition. La procédure suivante est celle qui "
+"s'effectue à partir de la fenêtre principale."
+
+#: C/conglomerate.xml:1296(title)
+msgid "Opening a Document"
+msgstr "Ouverture d'un document"
+
+#: C/conglomerate.xml:1298(para)
+msgid ""
+"From the Menubar <action>select</action><menuchoice><guimenu>File</"
+"guimenu><guimenuitem>Open</guimenuitem></menuchoice>. The Select an XML File "
+"dialog is displayed."
+msgstr ""
+"Dans la barre de menus, <action>sélectionnez </"
+"action><menuchoice><guimenu>Fichier</guimenu><guimenuitem>Ouvrir</"
+"guimenuitem></menuchoice>. La boîte de dialogue « Sélectionner un document "
+"XML » s'affiche."
+
+#: C/conglomerate.xml:1312(para)
+msgid ""
+"Use the Folders list view to <action>Navigate</action> to the folder "
+"containing the required file."
+msgstr ""
+"Utilisez la liste des dossiers pour vous <action>déplacer</action> dans le "
+"dossier contenant le fichier requis."
+
+#: C/conglomerate.xml:1316(para)
+msgid ""
+"Use the Files list view to <action>select</action> the file, then "
+"<action>click</action><guibutton>OK</guibutton>."
+msgstr ""
+"Utilisez la liste des fichiers pour <action>sélectionner</action> le "
+"fichier, puis <action>cliquez</action> sur le bouton <guibutton>Ouvrir</"
+"guibutton>."
+
+#: C/conglomerate.xml:1320(para)
+msgid "The selected file is opened in the editor window."
+msgstr "Le fichier choisi s'ouvre dans la fenêtre d'édition."
+
+#: C/conglomerate.xml:1325(title)
+msgid "Save a document"
+msgstr "Enregistrement d'un document"
+
+#: C/conglomerate.xml:1326(para)
+msgid ""
+"The first time you save a document you will be required to provide a file "
+"name and select a location where the file will be written to disk (see <xref "
+"linkend=\"save_as_document\"/>). Once a document is saved to disk, the save "
+"operation will write directly to the open file."
+msgstr ""
+"La première fois que vous enregistrez un document, le logiciel vous demande "
+"d'indiquer un nom de fichier et de choisir un emplacement pour son écriture "
+"sur le disque (consultez la <xref linkend=\"save_as_document\"/>). Une fois "
+"le document enregistré, les opérations « Enregistrer » ultérieures écrivent "
+"directement dans le fichier ouvert."
+
+#: C/conglomerate.xml:1330(para)
+msgid ""
+"Save your document before you start and regularly there after to avoid "
+"loosing work due to unexpected software failure."
+msgstr ""
+"Enregistrez votre document dès le départ, et ensuite régulièrement pour "
+"éviter de perdre votre travail à la suite d'une anomalie logicielle "
+"inattendue."
+
+#: C/conglomerate.xml:1335(title) C/conglomerate.xml:1340(title)
+msgid "Save As new document"
+msgstr "Enregistrement comme nouveau document"
+
+#: C/conglomerate.xml:1336(para)
+msgid ""
+"It is sometimes convenient to save an exiting file to a copy using a new "
+"filename or to a different location."
+msgstr ""
+"Il est parfois commode d'enregistrer un fichier existant sous forme de "
+"copie, soit avec un nouveau nom, soit à un endroit différent."
+
+#: C/conglomerate.xml:1338(para)
+msgid "Assuming that a document is already open proceed as follows."
+msgstr "En supposant que le document est déjà ouvert, procédez comme suit :"
+
+#: C/conglomerate.xml:1342(para)
+msgid ""
+"<action>Select</action><menuchoice><guimenu>File</guimenu><guimenuitem>Save "
+"As</guimenuitem></menuchoice> (<keycombo><keycap>Ctrl+Shft+S</keycap></"
+"keycombo>). The Save XML As dialog is displayed."
+msgstr ""
+"<action>Sélectionnez </action><menuchoice><guimenu>Fichier</"
+"guimenu><guimenuitem>Enregistrer sous...</guimenuitem></menuchoice> "
+"(<keycombo><keycap>Ctrl+Maj+S</keycap></keycombo>). La boîte de dialogue "
+"« Enregistrer XML sous... » s'affiche."
+
+#: C/conglomerate.xml:1359(para)
+msgid ""
+"Use the Folders list to navigate to the folder where the new copy of the "
+"file will be saved."
+msgstr ""
+"Utilisez la liste des dossiers pour aller dans le dossier où la nouvelle "
+"copie du fichier doit être enregistrée."
+
+#: C/conglomerate.xml:1363(para)
+msgid "Enter a filename in the Selection field."
+msgstr "Saisissez un nom de fichier dans le champ « Nom »."
+
+#: C/conglomerate.xml:1366(para)
+msgid ""
+"<action>Click</action><guibutton>OK</guibutton> to save a new copy of the "
+"file."
+msgstr ""
+"<action>Cliquez sur </action><guibutton>Enregistrer</guibutton> pour "
+"enregistrer une nouvelle copie du fichier."
+
+#: C/conglomerate.xml:1373(title)
+msgid "Import a document"
+msgstr "Importation d'un document"
+
+#: C/conglomerate.xml:1377(title)
+msgid "Export a document"
+msgstr "Exportation d'un document"
+
+#: C/conglomerate.xml:1381(title)
+msgid "Inspect document properties"
+msgstr "Consultation des propriétés du document"
+
+#: C/conglomerate.xml:1386(title)
+msgid "Editing"
+msgstr "Modification"
+
+#: C/conglomerate.xml:1388(title)
+msgid "Typing text"
+msgstr "Saisie de texte"
+
+#: C/conglomerate.xml:1392(title)
+msgid "Undo actions"
+msgstr "Actions d'annulation"
+
+#: C/conglomerate.xml:1396(title)
+msgid "Redo actions"
+msgstr "Actions de rétablissement"
+
+#: C/conglomerate.xml:1400(title)
+msgid "Cut text and elements"
+msgstr "Action de couper du texte ou des éléments"
+
+#: C/conglomerate.xml:1404(title)
+msgid "Copy text and elements"
+msgstr "Action de copier du texte ou des éléments"
+
+#: C/conglomerate.xml:1408(title)
+msgid "Paste text and elements"
+msgstr "Collage du texte ou des éléments"
+
+#: C/conglomerate.xml:1412(title)
+msgid "Paste into an element"
+msgstr "Collage dans un élément"
+
+#: C/conglomerate.xml:1416(title)
+msgid "Paste before an element"
+msgstr "Collage avant un élément"
+
+#: C/conglomerate.xml:1420(title)
+msgid "Paste after an element"
+msgstr "Collage après un élément"
+
+#: C/conglomerate.xml:1424(title)
+msgid "View XML source"
+msgstr "Affichage du code source XML"
+
+#: C/conglomerate.xml:1429(title)
+msgid "Markup"
+msgstr "Balisage"
+
+#: C/conglomerate.xml:1432(title)
+msgid "Insert Elements"
+msgstr "Insertion d'éléments"
+
+#: C/conglomerate.xml:1435(title)
+msgid "New sibling-element"
+msgstr "Nouvel élément enfant"
+
+#: C/conglomerate.xml:1439(title)
+msgid "New sub-element"
+msgstr "Nouveau sous-élément"
+
+#: C/conglomerate.xml:1443(title)
+msgid "Insert inline elements"
+msgstr "Insertion d'éléments incorporés"
+
+#: C/conglomerate.xml:1447(title)
+msgid "Remove inline elements"
+msgstr "Suppression d'éléments incorporés"
+
+#: C/conglomerate.xml:1452(title)
+msgid "Cleanup XML source"
+msgstr "Nettoyage de la source XML"
+
+#: C/conglomerate.xml:1456(title)
+msgid "Modify Element Properties"
+msgstr "Modification des propriétés d'un élément"
+
+#: C/conglomerate.xml:1459(title)
+msgid "About XPath"
+msgstr "À propos de XPath"
+
+#: C/conglomerate.xml:1463(title)
+msgid "Scope"
+msgstr "Portée"
+
+#: C/conglomerate.xml:1467(title)
+msgid "Language"
+msgstr "Langage"
+
+#: C/conglomerate.xml:1471(title)
+msgid "Revisions"
+msgstr "Révisions"
+
+#: C/conglomerate.xml:1475(title)
+msgid "Advanced"
+msgstr "Fonctions avancées"
+
+#: C/conglomerate.xml:1481(title)
+msgid "Validating"
+msgstr "Validation"
+
+#: C/conglomerate.xml:1484(title)
+msgid "About validation"
+msgstr "À propos de la validation"
+
+#: C/conglomerate.xml:1488(title)
+msgid "Validate a document"
+msgstr "Validation d'un document"
+
+#: C/conglomerate.xml:1494(title)
+msgid "Designing Display Definitions"
+msgstr "Conception de définitions d'affichage"
+
+#: C/conglomerate.xml:1495(para)
+msgid ""
+"Display specifications are <acronym>XML</acronym> files saved with the "
+"extension <filename>XDS</filename>. They hold various types of information, "
+"that annotate a one or more Document Types that may be edited with the "
+"Conglomerate XML Editor."
+msgstr ""
+"Les définitions d'affichage sont des fichiers <acronym>XML</acronym> "
+"enregistrés avec l'extension <filename>XDS</filename>. Ils contiennent "
+"divers types d'informations pour annoter un ou plusieurs types de document "
+"pouvant être modifiés avec l'éditeur XML Conglomerate."
+
+#: C/conglomerate.xml:1498(para)
+msgid ""
+"Display specifications do not take the place of <acronym>DTD</acronym>, XML "
+"Schema, or <acronym>XSL</acronym> files. Their function is only to provide "
+"information to <application>Conglomerate</application> when editing a given "
+"<acronym>XML</acronym> instance."
+msgstr ""
+"Les définitions d'affichage ne remplacent pas les <acronym>DTD</acronym>, "
+"schémas XML ou fichiers <acronym>XSL</acronym>. Leur unique fonction "
+"consiste à fournir des informations à <application>Conglomerate</"
+"application> lors de l'édition d'une instance <acronym>XML</acronym> donnée."
+
+#: C/conglomerate.xml:1501(para)
+msgid ""
+"Because display specifications are <acronym>XML</acronym>, they can be "
+"easily modified in order to customize the <application>Conglomerate</"
+"application> editing environment to the particluar requirements of a user or "
+"a specific <acronym>XML</acronym> file."
+msgstr ""
+"Comme les définitions d'affichage sont de type <acronym>XML</acronym>, elles "
+"peuvent être aisément modifiées pour personnaliser l'environnement d'édition "
+"de <application>Conglomerate</application> selon les souhaits de "
+"l'utilisateur ou selon les besoins spécifiques d'un fichier."
+
+#: C/conglomerate.xml:1504(para)
+msgid ""
+"A complete definition of the Conglomerate XDS DTD is available in <xref "
+"linkend=\"xds_dtd_def\"/>."
+msgstr ""
+"La définition complète de la DTD du fichier XDS de Conglomerate est "
+"disponible dans l'<xref linkend=\"xds_dtd_def\"/>."
+
+#: C/conglomerate.xml:1505(para)
+msgid "The following operations can be performed on XDS files:"
+msgstr ""
+"Il est possible d'effectuer les opérations suivantes sur les fichiers XDS :"
+
+#: C/conglomerate.xml:1519(title)
+msgid "Edit a Display Spec"
+msgstr "Modification d'une définition d'affichage"
+
+#: C/conglomerate.xml:1523(title)
+msgid "Dump a Display Spec"
+msgstr "Récupération d'une définition d'affichage"
+
+#: C/conglomerate.xml:1534(para)
+msgid ""
+"The Conglomerate project aims to provide support for the editing of a wide "
+"range of XML documents. During developed three levels of support are "
+"recognized:"
+msgstr ""
+"Le projet Conglomerate vise à prendre en charge l'édition d'un grand nombre "
+"de documents XML. Au cours du développement, trois niveaux de prise en "
+"charge sont considérés :"
+
+#: C/conglomerate.xml:1538(para)
+msgid "<link linkend=\"supported_docs\" endterm=\"supported_docs.title\"/>."
+msgstr "<link linkend=\"supported_docs\" endterm=\"supported_docs.title\"/>."
+
+#: C/conglomerate.xml:1542(para)
+msgid ""
+"<link linkend=\"partial_supported_docs\" endterm=\"partial_supported_docs."
+"title\"/>."
+msgstr ""
+"<link linkend=\"partial_supported_docs\" endterm=\"partial_supported_docs."
+"title\"/>."
+
+#: C/conglomerate.xml:1546(para)
+msgid ""
+"<link linkend=\"unsupported_docs\" endterm=\"unsupported_docs.title\"/>. We "
+"hope to add support in the future (patches welcome!)."
+msgstr ""
+"<link linkend=\"unsupported_docs\" endterm=\"unsupported_docs.title\"/>. "
+"Nous espérons incorporer leur prise en charge dans le futur (vos correctifs "
+"sont les bienvenus !)."
+
+#: C/conglomerate.xml:1552(title)
+msgid "Summary of Supported XML Document Types"
+msgstr "Résumé des types de document XML pris en charge"
+
+#: C/conglomerate.xml:1556(entry)
+msgid "Document Type"
+msgstr "Type de document"
+
+#: C/conglomerate.xml:1557(entry)
+msgid "Status"
+msgstr "État"
+
+#: C/conglomerate.xml:1629(title)
+msgid "Supported"
+msgstr "Pris en charge"
+
+#: C/conglomerate.xml:1630(para)
+msgid ""
+"Following is an introduction to the XML Document Types \"supported\" by the "
+"Conglomerate XML Editor."
+msgstr ""
+"Ce qui suit est une présentation des types de document XML « pris en "
+"charge » par l'éditeur XML Conglomerate."
+
+#: C/conglomerate.xml:1633(title)
+msgid "Docbook XML 4.1.2"
+msgstr "Docbook XML 4.1.2"
+
+#: C/conglomerate.xml:1634(para)
+msgid ""
+"The first XML document type to be supported by <application>Conglomerate</"
+"application> is Docbook XML. Docbook XML is a standards based application of "
+"XML that offers a markup vocabulary that is particularly well suited to the "
+"semantic description of content related computer hardware and software."
+msgstr ""
+"Le premier type de document XML à avoir été pris en charge par "
+"<application>Conglomerate</application> est le Docbook XML. Docbook XML est "
+"une application normalisée de XML offrant un vocabulaire de balisage "
+"particulièrement bien choisi pour la description sémantique d'un contenu "
+"relatif à des matériels ou des logiciels informatiques."
+
+#: C/conglomerate.xml:1638(para)
+msgid ""
+"Numerous free and open source software projects have adopted Docbook XML as "
+"their standard for content authoring and storage. Most significantly the two "
+"leading free desktop environments <ulink url=\"http://www.gnome.org\">GNOME</"
+"ulink> and <ulink url=\"http://www.kde.org\">KDE</ulink>."
+msgstr ""
+"De nombreux projets logiciels libres ou « Open Source » ont adopté DocBook "
+"XML comme norme pour la création de contenu et pour l'enregistrement. Il a "
+"été retenu par les deux leaders les plus marquants en matière "
+"d'environnement bureau : <ulink url=\"http://www.gnome.org\">GNOME</ulink> "
+"et <ulink url=\"http://www.kde.org\">KDE</ulink>."
+
+#: C/conglomerate.xml:1641(para)
+msgid ""
+"The official release of the Docbook XML Document Type Definition (DTD) is "
+"available at <ulink url=\"http://www.oasis-open.org/\">OASIS</ulink>. "
+"Development is conducted at the <ulink url=\"http://docbook.sourceforge.net"
+"\">Docbook Open Repository</ulink>."
+msgstr ""
+"La version officielle de la « Document Type Definition » (DTD) de Docbook "
+"XML est disponible sur le site Web de <ulink url=\"http://www.oasis-open.org/"
+"\">OASIS</ulink>. Le développement est piloté au sein du dépôt <ulink url="
+"\"http://docbook.sourceforge.net\">Docbook Open Repository</ulink>."
+
+#: C/conglomerate.xml:1644(para)
+msgid ""
+"There are two references of note that will get you started with Docbook and "
+"its usage:"
+msgstr ""
+"Voici deux références à connaître pour débuter avec Docbook et pour "
+"l'utiliser :"
+
+#: C/conglomerate.xml:1648(ulink)
+msgid "Docbook: The Definitive Guide"
+msgstr "Docbook : The Definitive Guide"
+
+#: C/conglomerate.xml:1653(ulink)
+msgid "Docbook XSL: The Complete Guide"
+msgstr "Docbook XSL : The Complete Guide"
+
+#: C/conglomerate.xml:1657(para)
+msgid ""
+"Docbook is used throughout the user manual to explain and illustrate the "
+"functionality of the <application>Conglomerate XML Editor</application>."
+msgstr ""
+"Docbook est utilisé dans ce manuel utilisateur pour expliquer et illustrer "
+"les fonctionnalités de l'<application>éditeur XML Conglomerate</application>."
+
+#: C/conglomerate.xml:1661(title)
+msgid "XHTML (strict)"
+msgstr "XHTML (strict)"
+
+#: C/conglomerate.xml:1662(para)
+msgid ""
+"<acronym>XHTML</acronym> stands for EXtensible HyperText Markup Language "
+"which is aimed to replace HTML. It looks almost identical to HTML 4.01, but "
+"is stricter and cleaner because XHTML is HTML defined as an XML application."
+msgstr ""
+"<acronym>XHTML</acronym> est l'acronyme de « eXtensible HyperText Markup "
+"Language ». Il vise à remplacer l'HTML. Il ressemble beaucoup à l'HTML 4.01, "
+"mais il est plus strict et plus clair étant donné que le XHTML est du HTML "
+"défini en tant qu'application XML."
+
+#: C/conglomerate.xml:1666(para)
+msgid ""
+"<acronym>XHTML</acronym> is a <ulink url=\"http://www.w3.org/TR/xhtml1/"
+"\">W3C Recommendation</ulink>."
+msgstr ""
+"<acronym>XHTML</acronym> est une <ulink url=\"http://www.w3.org/TR/xhtml1/"
+"\">Recommandation du W3C</ulink>."
+
+#: C/conglomerate.xml:1668(para)
+msgid ""
+"The following online resource will be helpful in geting you started with "
+"<acronym>XHTML</acronym>:"
+msgstr ""
+"La ressource en ligne suivante est très utile pour vous aider à démarrer "
+"avec <acronym>XHTML</acronym> :"
+
+#: C/conglomerate.xml:1672(ulink) C/conglomerate.xml:1719(ulink)
+msgid "W3 Schools"
+msgstr "Tutoriels W3"
+
+#: C/conglomerate.xml:1678(title)
+msgid "\"Kernel Traffic\" newsetter format"
+msgstr "Format de la lettre d'information « Kernel Traffic »"
+
+#: C/conglomerate.xml:1679(para)
+msgid ""
+"The \"Kernel Trafffic\" news letter is a HTML format used by the <ulink url="
+"\"http://kt.zork.net/\">Kernel Traffic Web Site</ulink>. The news letter "
+"tracks the technical development of various projects of the <ulink url="
+"\"http://www.gnu.org/philosophy/free-sw.html\">Free</ulink> and Open Source "
+"world."
+msgstr ""
+"La lettre d'information « Kernel Traffic » est un format HTML utilisé par le "
+"site Web <ulink url=\"http://kt.zork.net/\">Kernel Traffic</ulink>. Les "
+"bulletins d'information renseignent sur le suivi du développement technique "
+"de divers projets dans l'univers du <ulink url=\"http://www.gnu.org/"
+"philosophy/free-sw.html\">Libre</ulink> et de l'Open Source."
+
+#: C/conglomerate.xml:1685(title)
+msgid "Partially Supported"
+msgstr "Partiellement pris en charge"
+
+#: C/conglomerate.xml:1686(para)
+msgid ""
+"Following is an introduction to the XML Document Types \"partially supported"
+"\" by the Conglomerate XML Editor."
+msgstr ""
+"Une présentation des types de document XML « partiellement pris en charge » "
+"par l'éditeur XML Conglomerate suit."
+
+#: C/conglomerate.xml:1689(title)
+msgid "Relax NG"
+msgstr "Relax NG"
+
+#: C/conglomerate.xml:1690(para)
+msgid ""
+"RELAX NG is a schema language for <acronym>XML</acronym>. The RELAX NG "
+"specifications have been developed within <ulink url=\"http://www.oasis-open."
+"org/\">OASIS</ulink> by the <ulink url=\"http://www.oasis-open.org/"
+"committees/relax-ng/\">RELAX NG Technical Committee</ulink>."
+msgstr ""
+"RELAX NG est un langage de schémas pour <acronym>XML</acronym>. Les "
+"spécifications de RELAX NG ont été développées au sein de <ulink url="
+"\"http://www.oasis-open.org/\">OASIS</ulink> par le <ulink url=\"http://www."
+"oasis-open.org/committees/relax-ng/\">Comité technique de RELAX NG</ulink>."
+
+#: C/conglomerate.xml:1693(para)
+msgid ""
+"The following online resources will be helpful in geting you started with "
+"<acronym>Relax NG</acronym>:"
+msgstr ""
+"Les ressources en ligne suivantes peuvent vous aider à débuter avec "
+"<acronym>Relax NG</acronym> :"
+
+#: C/conglomerate.xml:1698(ulink)
+msgid "relaxng.org"
+msgstr "relaxng.org"
+
+#: C/conglomerate.xml:1703(ulink) C/conglomerate.xml:1724(ulink)
+msgid "zvon.org"
+msgstr "zvon.org"
+
+#: C/conglomerate.xml:1709(title)
+msgid "XSL-FO"
+msgstr "XSL-FO"
+
+#: C/conglomerate.xml:1710(para)
+msgid ""
+"<acronym>XSL-FO</acronym> is a language for formatting <acronym>XML</"
+"acronym> data. The acronym stands for Extensible Stylesheet Language "
+"Formatting Objects. <acronym>XSL-FO</acronym> is a part of the the "
+"Extensible Stylesheet Language Family (<acronym>XSL</acronym>) of <ulink url="
+"\"http://www.w3.org/Style/XSL/\">W3C Recommendations</ulink>."
+msgstr ""
+"<acronym>XSL-FO</acronym> est un langage de formatage de données "
+"<acronym>XML</acronym>. L'acronyme signifie « eXtensible Stylesheet Language "
+"Formatting Objects ». <acronym>XSL-FO</acronym> fait partie de la famille "
+"des (<acronym>XSL</acronym>) « eXtensible Stylesheet Language » (langage "
+"extensible pour feuilles de style) des <ulink url=\"http://www.w3.org/Style/"
+"XSL/\">Recommandations du W3C</ulink>."
+
+#: C/conglomerate.xml:1715(para)
+msgid ""
+"The following online resources will be helpful in geting you started with "
+"<acronym>XSL-FO</acronym>:"
+msgstr ""
+"Les ressources en-ligne ci-après peuvent se révéler utiles pour débuter avec "
+"<acronym>XSL-FO</acronym> :"
+
+#: C/conglomerate.xml:1731(title)
+msgid "Unsupported"
+msgstr "Non pris en charge"
+
+#: C/conglomerate.xml:1732(para)
+msgid ""
+"Following is an introduction to the XML Document Types \"unsupported\" by "
+"the Conglomerate XML Editor."
+msgstr ""
+"Une présentation des types de document XML « non pris en charge » par "
+"l'éditeur XML Conglomerate suit."
+
+#: C/conglomerate.xml:1735(title)
+msgid "Cascading Style Sheets"
+msgstr "Feuilles de style en cascade"
+
+#: C/conglomerate.xml:1739(title)
+msgid "OpenOffice.org File Format"
+msgstr "Format de fichier OpenOffice.org"
+
+#: C/conglomerate.xml:1740(para)
+msgid ""
+"<ulink url=\"http://www.openoffice.org/\">OpenOffice.org</ulink> is both an "
+"open-source application and project. It is <ulink url=\"http://www.gnu.org/"
+"philosophy/free-sw.html\">free</ulink>. The product is a multi-platform "
+"office productivity suite compatible with all major file formats. The <ulink "
+"url=\"http://xml.openoffice.org/\">OpenOffice.org XML project</ulink> "
+"develops the OpenOffice.org XML File Format, as well as the necessary "
+"implementation for the OpenOffice.org application."
+msgstr ""
+"<ulink url=\"http://www.openoffice.org/\">OpenOffice.org</ulink> est à la "
+"fois une application « Open Source » et un projet. Il est <ulink url="
+"\"http://www.gnu.org/philosophy/free-sw.html\">libre</ulink>. Le produit est "
+"une suite bureautique multi-plateforme compatible avec la plupart des "
+"formats de fichier les plus courants. Le projet <ulink url=\"http://xml."
+"openoffice.org/\">XML OpenOffice.org</ulink> développe le format de fichier "
+"XML OpenOffice.org et son nécessaire intégration à l'application OpenOffice."
+"org."
+
+#: C/conglomerate.xml:1747(para)
+msgid ""
+"The OpenOffice.org XML project has contributed the OpenOffice.org XML File "
+"Format to <ulink url=\"http://www.oasis-open.org/\">OASIS</ulink> where the "
+"<ulink url=\"http://xml.openoffice.org/\">OASIS Open Office XML Format "
+"Technical Committee</ulink> works on creating an open XML file format for "
+"office documents, using the OpenOffice.org format as a base. The best way to "
+"get started with this format is by visiting the <ulink url=\"http://xml."
+"openoffice.org/\">OpenOffice.org XML project</ulink>."
+msgstr ""
+"Le projet XML OpenOffice.org a transmis le format de fichier XML OpenOffice."
+"org à <ulink url=\"http://www.oasis-open.org/\">OASIS</ulink> où le comité "
+"technique <ulink url=\"http://xml.openoffice.org/\">Format XML OpenOffice "
+"OASIS</ulink> travaille à la création d'un format de fichier XML ouvert pour "
+"les documents de bureautique en utilisant le format OpenOffice.org comme "
+"base. La meilleure façon de s'initier à ce format est de visiter le site du "
+"projet <ulink url=\"http://xml.openoffice.org/\">XML OpenOffice.org</ulink>."
+
+#: C/conglomerate.xml:1754(title)
+msgid "Open eBook Publication Structure"
+msgstr "Structure de publication « Open eBook »"
+
+#: C/conglomerate.xml:1766(title)
+msgid "XDS Element Mapping Reference"
+msgstr ""
+"Références de la table de correspondance pour les éléments du fichier XDS"
+
+#: C/conglomerate.xml:1769(title)
+msgid "Map to Docbook"
+msgstr "Correspondance avec Docbook"
+
+#: C/conglomerate.xml:1770(para)
+msgid ""
+"<xref linkend=\"tbl_cong2dbmap\"/> describes the name mapping used by "
+"Conglomerate Display Specification for Docbook V4.1.2 XML Documents."
+msgstr ""
+"Le <xref linkend=\"tbl_cong2dbmap\"/> décrit la correspondance des noms "
+"utilisés par la spécification d'affichage Conglomerate pour les documents "
+"XML Docbook V4.1.2."
+
+#: C/conglomerate.xml:1773(para)
+msgid ""
+"Only names that are different to those commonly recognised as elements in "
+"Docbook are listed. All other elements are considered unaltered by "
+"Conglomerate."
+msgstr ""
+"Sont listés uniquement les noms qui différent de ceux couramment reconnus "
+"comme éléments dans Docbook. Tous les autres éléments sont considérés comme "
+"n'étant pas modifiés par Conglomerate."
+
+#: C/conglomerate.xml:1777(title)
+msgid "title"
+msgstr "titre"
+
+#: C/conglomerate.xml:1780(entry) C/conglomerate.xml:1784(entry)
+msgid "collumn"
+msgstr "collumn"
+
+#: C/conglomerate.xml:1792(title)
+msgid "Map to Relax NG"
+msgstr "Correspondance avec Relax NG"
+
+#: C/conglomerate.xml:1803(title)
+msgid "Display Specification DTD"
+msgstr "DTD des définitions d'affichage"
+
+#: C/conglomerate.xml:1804(para)
+msgid ""
+"The Display Specification DTD (<filename>xds.dtd</filename>) specifies the "
+"kinds of tags that can be included in your XDS document. In addition, the "
+"DTD tells a validating parser which tags are valid, and in what "
+"arrangements. A DTD tells both validating and non-validating parsers where "
+"text is expected. This lets the parser determine whether the whitespace it "
+"sees is significant or ignorable."
+msgstr ""
+"La DTD des définitions d'affichage (<filename>xds.dtd</filename>) indique "
+"les types de balisages pouvant être inclus dans le fichier XDS. En plus, la "
+"DTD indique à l'analyseur de validité les balises valables et selon quelles "
+"dispositions. Une DTD indique à la fois la validité et la non-validité aux "
+"analyseurs là où du texte est attendu. Ceci permet à l'analyseur de "
+"déterminer si les espaces rencontrés sont significatifs ou bien s'ils "
+"peuvent être ignorés."
+
+#: C/conglomerate.xml:1809(para)
+msgid ""
+"When creating or editing an XDS, the XML tags used, their attributes and "
+"arrangement must conform to <filename>xds.dtd</filename>. If the XDS is "
+"invalid, <application>Conglomerate</application> may throw an exception and "
+"exit."
+msgstr ""
+"Lors de la création ou de la modification d'un fichier XDS, le balisage XML "
+"est utilisé ; les attributs et les dispositions doivent se conformer au "
+"<filename>xds.dtd</filename>. Si le fichier XDS n'est pas valable, il se "
+"peut que <application>Conglomerate</application> lance une exception et "
+"s'arrête."
+
+#: C/conglomerate.xml:1813(title)
+msgid "Anatomy of a Display Specification"
+msgstr "Anatomie d'une définition d'affichage"
+
+#: C/conglomerate.xml:1814(para)
+msgid ""
+"A display specification is an XML file, it therefore has an XML prolog like "
+"such."
+msgstr ""
+"Une définition d'affichage est un fichier XML ; il a donc un prologue XML "
+"comme ceci."
+
+#: C/conglomerate.xml:1818(para)
+msgid ""
+"When creating or editing an XDS the Display Specification DTD (<filename>xds."
+"dtd</filename>) should be declared so that your custom XDS may be validated "
+"against it. The Document Type Declaration of a display specification always "
+"defines the \"root\" as <sgmltag class=\"starttag\">dispspec</sgmltag>."
+msgstr ""
+"Lors de la création ou de la modification d'un fichier XDS, la DTD des "
+"définitions d'affichage (<filename>xds.dtd</filename>) doit être déclarée "
+"pour que le fichier XDS personnalisé puisse être validé en conformité avec "
+"ce dernier. La « Document Type Declaration » (DTD) d'une définition "
+"d'affichage désigne toujours la « racine » comme <sgmltag class=\"starttag"
+"\">dispspec</sgmltag>."
+
+#: C/conglomerate.xml:1822(para)
+msgid ""
+"The Document Type Declaration does not have a PUBLIC Identifier as they are "
+"not strictly required for <acronym>XML</acronym> documents. The DTD location "
+"is therefore specified using the SYSTEM Identifier as shown in the following "
+"example."
+msgstr ""
+"La « Document Type Declaration » (DTD) n'a pas d'identifiant PUBLIC étant "
+"donné qu'elle n'est pas obligatoirement requise pour des documents "
+"<acronym>XML</acronym>. La localisation de la DTD est toutefois précisée "
+"avec l'utilisation de l'identifiant SYSTEM ainsi qu'il est montré dans "
+"l'exemple suivant."
+
+#: C/conglomerate.xml:1829(para)
+msgid ""
+"<application>Conglomerate</application> does currently validate XDS files at "
+"run-time."
+msgstr ""
+"Actuellement <application>Conglomerate</application> valide les fichiers XDS "
+"lors de l'exécution."
+
+#: C/conglomerate.xml:1834(title)
+msgid "Element Reference"
+msgstr "Référence des éléments"
+
+#: C/conglomerate.xml:1836(title)
+msgid "collapseto"
+msgstr "collapseto"
+
+#: C/conglomerate.xml:1837(para)
+msgid ""
+"The <sgmltag class=\"starttag\">collapseto</sgmltag> element is currently "
+"unsupported."
+msgstr ""
+"L'élément <sgmltag class=\"starttag\">collapseto</sgmltag> n'est "
+"actuellement pas pris en charge."
+
+#: C/conglomerate.xml:1838(para)
+msgid ""
+"When supported, setting <sgmltag class=\"starttag\">collapseto</sgmltag> "
+"causes the element wrapper to become part of the parent node element "
+"wrapper. The vertical line of the parent element wrapper is punctuated or "
+"outdented at the point where the element with <sgmltag class=\"starttag"
+"\">collapseto</sgmltag> set is located."
+msgstr ""
+"Quand elle est prise en charge, la définition de <sgmltag class=\"starttag"
+"\">collapseto</sgmltag> fait que l'enveloppe de l'élément devient une partie "
+"de l'enveloppe de l'élément du nœud parent. La ligne verticale de "
+"l'enveloppe de l'élément parent est mise en pointillée ou dentelée à "
+"l'aplomb de l'endroit où l'élément défini <sgmltag class=\"starttag"
+"\">collapseto</sgmltag> est situé."
+
+#: C/conglomerate.xml:1843(title) C/conglomerate.xml:1865(title)
+#: C/conglomerate.xml:1915(title) C/conglomerate.xml:1955(title)
+#: C/conglomerate.xml:1991(title) C/conglomerate.xml:2104(title)
+#: C/conglomerate.xml:2152(title) C/conglomerate.xml:2206(title)
+#: C/conglomerate.xml:2241(title) C/conglomerate.xml:2288(title)
+#: C/conglomerate.xml:2324(title) C/conglomerate.xml:2347(title)
+#: C/conglomerate.xml:2383(title) C/conglomerate.xml:2433(title)
+#: C/conglomerate.xml:2546(title) C/conglomerate.xml:2586(title)
+#: C/conglomerate.xml:2622(title) C/conglomerate.xml:2672(title)
+#: C/conglomerate.xml:2785(title)
+msgid "Attributes"
+msgstr "Attributs"
+
+#: C/conglomerate.xml:1844(para) C/conglomerate.xml:1854(para)
+#: C/conglomerate.xml:1903(para) C/conglomerate.xml:1920(para)
+#: C/conglomerate.xml:2194(para) C/conglomerate.xml:2207(para)
+#: C/conglomerate.xml:2217(para) C/conglomerate.xml:2277(para)
+#: C/conglomerate.xml:2335(para) C/conglomerate.xml:2421(para)
+#: C/conglomerate.xml:2574(para) C/conglomerate.xml:2587(para)
+#: C/conglomerate.xml:2660(para)
+msgid "None Applicable"
+msgstr "Non applicable"
+
+#: C/conglomerate.xml:1847(title) C/conglomerate.xml:1896(title)
+#: C/conglomerate.xml:1919(title) C/conglomerate.xml:1959(title)
+#: C/conglomerate.xml:2068(title) C/conglomerate.xml:2108(title)
+#: C/conglomerate.xml:2187(title) C/conglomerate.xml:2210(title)
+#: C/conglomerate.xml:2270(title) C/conglomerate.xml:2292(title)
+#: C/conglomerate.xml:2328(title) C/conglomerate.xml:2351(title)
+#: C/conglomerate.xml:2414(title) C/conglomerate.xml:2510(title)
+#: C/conglomerate.xml:2567(title) C/conglomerate.xml:2590(title)
+#: C/conglomerate.xml:2653(title) C/conglomerate.xml:2749(title)
+#: C/conglomerate.xml:2862(title)
+msgid "Parents"
+msgstr "Parents"
+
+#: C/conglomerate.xml:1853(title) C/conglomerate.xml:1902(title)
+#: C/conglomerate.xml:1923(title) C/conglomerate.xml:1965(title)
+#: C/conglomerate.xml:2074(title) C/conglomerate.xml:2114(title)
+#: C/conglomerate.xml:2193(title) C/conglomerate.xml:2216(title)
+#: C/conglomerate.xml:2276(title) C/conglomerate.xml:2298(title)
+#: C/conglomerate.xml:2334(title) C/conglomerate.xml:2357(title)
+#: C/conglomerate.xml:2420(title) C/conglomerate.xml:2516(title)
+#: C/conglomerate.xml:2573(title) C/conglomerate.xml:2596(title)
+#: C/conglomerate.xml:2659(title) C/conglomerate.xml:2755(title)
+#: C/conglomerate.xml:2868(title)
+msgid "Children"
+msgstr "Enfants"
+
+#: C/conglomerate.xml:1857(title) C/conglomerate.xml:1906(title)
+#: C/conglomerate.xml:1929(title) C/conglomerate.xml:1971(title)
+#: C/conglomerate.xml:2080(title) C/conglomerate.xml:2120(title)
+#: C/conglomerate.xml:2197(title) C/conglomerate.xml:2220(title)
+#: C/conglomerate.xml:2280(title) C/conglomerate.xml:2304(title)
+#: C/conglomerate.xml:2338(title) C/conglomerate.xml:2363(title)
+#: C/conglomerate.xml:2424(title) C/conglomerate.xml:2522(title)
+#: C/conglomerate.xml:2577(title) C/conglomerate.xml:2602(title)
+#: C/conglomerate.xml:2663(title) C/conglomerate.xml:2761(title)
+#: C/conglomerate.xml:2874(title)
+msgid "Example"
+msgstr "Exemple"
+
+#: C/conglomerate.xml:1858(para) C/conglomerate.xml:2281(para)
+msgid "See <link endterm=\"element.title\" linkend=\"element\"/>."
+msgstr "Consultez <link endterm=\"element.title\" linkend=\"element\"/>."
+
+#: C/conglomerate.xml:1862(title)
+msgid "description"
+msgstr "description"
+
+#: C/conglomerate.xml:1863(para)
+msgid "A paragraph describing the Document Type annoted by the XDS."
+msgstr "Un paragraphe décrivant le type de document annoté par le fichier XDS."
+
+#: C/conglomerate.xml:1870(entry) C/conglomerate.xml:2005(entry)
+#: C/conglomerate.xml:2157(entry) C/conglomerate.xml:2246(entry)
+#: C/conglomerate.xml:2388(entry) C/conglomerate.xml:2447(entry)
+#: C/conglomerate.xml:2551(entry) C/conglomerate.xml:2627(entry)
+#: C/conglomerate.xml:2686(entry) C/conglomerate.xml:2799(entry)
+msgid "Name"
+msgstr "Nom"
+
+#: C/conglomerate.xml:1871(entry) C/conglomerate.xml:2006(entry)
+#: C/conglomerate.xml:2158(entry) C/conglomerate.xml:2247(entry)
+#: C/conglomerate.xml:2389(entry) C/conglomerate.xml:2448(entry)
+#: C/conglomerate.xml:2552(entry) C/conglomerate.xml:2628(entry)
+#: C/conglomerate.xml:2687(entry) C/conglomerate.xml:2800(entry)
+msgid "Value"
+msgstr "Valeur"
+
+#: C/conglomerate.xml:1872(entry) C/conglomerate.xml:2007(entry)
+#: C/conglomerate.xml:2159(entry) C/conglomerate.xml:2248(entry)
+#: C/conglomerate.xml:2390(entry) C/conglomerate.xml:2449(entry)
+#: C/conglomerate.xml:2553(entry) C/conglomerate.xml:2629(entry)
+#: C/conglomerate.xml:2688(entry) C/conglomerate.xml:2801(entry)
+msgid "Description"
+msgstr "Description"
+
+#: C/conglomerate.xml:1886(entry) C/conglomerate.xml:2404(entry)
+#: C/conglomerate.xml:2643(entry)
+msgid "xml:lang"
+msgstr "xml:lang"
+
+#: C/conglomerate.xml:1887(entry) C/conglomerate.xml:2405(entry)
+#: C/conglomerate.xml:2644(entry)
+msgid "en"
+msgstr "fr"
+
+# note description de la balise de langue
+#: C/conglomerate.xml:1888(entry) C/conglomerate.xml:2406(entry)
+#: C/conglomerate.xml:2645(entry)
+msgid "Language localization"
+msgstr "La langue utilisée pour la localisation"
+
+#: C/conglomerate.xml:1907(para)
+msgid "See <link endterm=\"metadata.title\" linkend=\"metadata\"/>"
+msgstr "Consultez <link endterm=\"metadata.title\" linkend=\"metadata\"/>"
+
+#: C/conglomerate.xml:1912(title)
+msgid "dispspec"
+msgstr "dispspec"
+
+#: C/conglomerate.xml:1913(para)
+msgid ""
+"This is the root element of the Conglomerate Display Specification Document "
+"Type."
+msgstr ""
+"Ceci est l'élément racine du type de document de spécification d'affichage "
+"Conglomerate."
+
+#: C/conglomerate.xml:1916(para) C/conglomerate.xml:1956(para)
+#: C/conglomerate.xml:2105(para) C/conglomerate.xml:2289(para)
+#: C/conglomerate.xml:2325(para) C/conglomerate.xml:2348(para)
+msgid "None Applicable."
+msgstr "Non applicable."
+
+#: C/conglomerate.xml:1924(para)
+msgid ""
+"<link endterm=\"metadata.title\" linkend=\"metadata\"/>, <link endterm="
+"\"serialisation.title\" linkend=\"serialisation\"/>, <link endterm="
+"\"document-models.title\" linkend=\"document-models\"/>, <link endterm="
+"\"element-list.title\" linkend=\"element-list\"/>"
+msgstr ""
+"<link endterm=\"metadata.title\" linkend=\"metadata\"/>, <link endterm="
+"\"serialisation.title\" linkend=\"serialisation\"/>, <link endterm="
+"\"document-models.title\" linkend=\"document-models\"/>, <link endterm="
+"\"element-list.title\" linkend=\"element-list\"/>"
+
+#: C/conglomerate.xml:1951(title)
+msgid "document-models"
+msgstr "document-models"
+
+#: C/conglomerate.xml:1952(para)
+msgid ""
+"A wrapper element for <sgmltag class=\"starttag\">external-document-model</"
+"sgmltag>. Mutiple <sgmltag class=\"starttag\">external-document-model</"
+"sgmltag> elements may be specified."
+msgstr ""
+"Un élément enveloppe pour <sgmltag class=\"starttag\">external-document-"
+"model</sgmltag>. Plusieurs éléments <sgmltag class=\"starttag\">external-"
+"document-model</sgmltag> peuvent être définis."
+
+#: C/conglomerate.xml:1988(title)
+msgid "element"
+msgstr "element"
+
+#: C/conglomerate.xml:1989(para)
+msgid "An XML element."
+msgstr "Un élément XML."
+
+#: C/conglomerate.xml:2012(entry) C/conglomerate.xml:2454(entry)
+#: C/conglomerate.xml:2693(entry) C/conglomerate.xml:2806(entry)
+msgid "color"
+msgstr "color"
+
+#: C/conglomerate.xml:2013(entry) C/conglomerate.xml:2455(entry)
+#: C/conglomerate.xml:2694(entry) C/conglomerate.xml:2807(entry)
+msgid "Hex Value"
+msgstr "Valeur hexadécimale"
+
+#: C/conglomerate.xml:2015(acronym) C/conglomerate.xml:2457(acronym)
+#: C/conglomerate.xml:2696(acronym) C/conglomerate.xml:2809(acronym)
+msgid "RGB"
+msgstr "RVB"
+
+#: C/conglomerate.xml:2014(entry) C/conglomerate.xml:2456(entry)
+#: C/conglomerate.xml:2695(entry) C/conglomerate.xml:2808(entry)
+msgid ""
+"Use hexadecimal notation for the combination of Red, Green, and Blue color "
+"values (<placeholder-1/>). The lowest value that can be given to one light "
+"source is 0 (hex #00). The highest value is 255 (hex #FF)."
+msgstr ""
+"Utilisez la notation hexadécimale pour la combinaison des valeurs des "
+"couleurs rouge, vert et bleu (<placeholder-1/>). La plus petite valeur "
+"définissable pour une couleur primaire est 0 (hex #00), la plus grande 255 "
+"(hex #FF)."
+
+#: C/conglomerate.xml:2019(entry) C/conglomerate.xml:2461(entry)
+#: C/conglomerate.xml:2700(entry) C/conglomerate.xml:2813(entry)
+msgid "filename-xpath"
+msgstr "filename-xpath"
+
+#: C/conglomerate.xml:2020(entry) C/conglomerate.xml:2025(entry)
+#: C/conglomerate.xml:2030(entry) C/conglomerate.xml:2035(entry)
+#: C/conglomerate.xml:2174(entry) C/conglomerate.xml:2179(entry)
+#: C/conglomerate.xml:2261(entry) C/conglomerate.xml:2462(entry)
+#: C/conglomerate.xml:2467(entry) C/conglomerate.xml:2472(entry)
+#: C/conglomerate.xml:2477(entry) C/conglomerate.xml:2559(entry)
+#: C/conglomerate.xml:2701(entry) C/conglomerate.xml:2706(entry)
+#: C/conglomerate.xml:2711(entry) C/conglomerate.xml:2716(entry)
+#: C/conglomerate.xml:2814(entry) C/conglomerate.xml:2819(entry)
+#: C/conglomerate.xml:2824(entry) C/conglomerate.xml:2829(entry)
+msgid "value"
+msgstr "valeur"
+
+#: C/conglomerate.xml:2021(entry) C/conglomerate.xml:2026(entry)
+#: C/conglomerate.xml:2031(entry) C/conglomerate.xml:2036(entry)
+#: C/conglomerate.xml:2052(entry) C/conglomerate.xml:2060(entry)
+#: C/conglomerate.xml:2463(entry) C/conglomerate.xml:2468(entry)
+#: C/conglomerate.xml:2473(entry) C/conglomerate.xml:2478(entry)
+#: C/conglomerate.xml:2494(entry) C/conglomerate.xml:2502(entry)
+#: C/conglomerate.xml:2702(entry) C/conglomerate.xml:2707(entry)
+#: C/conglomerate.xml:2712(entry) C/conglomerate.xml:2717(entry)
+#: C/conglomerate.xml:2733(entry) C/conglomerate.xml:2741(entry)
+#: C/conglomerate.xml:2815(entry) C/conglomerate.xml:2820(entry)
+#: C/conglomerate.xml:2825(entry) C/conglomerate.xml:2830(entry)
+#: C/conglomerate.xml:2846(entry) C/conglomerate.xml:2854(entry)
+msgid "desc"
+msgstr "description"
+
+#: C/conglomerate.xml:2024(entry) C/conglomerate.xml:2466(entry)
+#: C/conglomerate.xml:2705(entry) C/conglomerate.xml:2818(entry)
+msgid "icon"
+msgstr "icon"
+
+#: C/conglomerate.xml:2029(entry) C/conglomerate.xml:2471(entry)
+#: C/conglomerate.xml:2710(entry) C/conglomerate.xml:2823(entry)
+msgid "ns"
+msgstr "ns"
+
+#: C/conglomerate.xml:2034(entry) C/conglomerate.xml:2476(entry)
+#: C/conglomerate.xml:2558(entry) C/conglomerate.xml:2715(entry)
+#: C/conglomerate.xml:2828(entry)
+msgid "plugin-id"
+msgstr "plugin-id"
+
+#: C/conglomerate.xml:2039(entry) C/conglomerate.xml:2253(entry)
+#: C/conglomerate.xml:2256(sgmltag) C/conglomerate.xml:2481(entry)
+#: C/conglomerate.xml:2720(entry) C/conglomerate.xml:2833(entry)
+msgid "tag"
+msgstr "tag"
+
+#: C/conglomerate.xml:2040(entry) C/conglomerate.xml:2482(entry)
+#: C/conglomerate.xml:2721(entry) C/conglomerate.xml:2834(entry)
+msgid "external element name"
+msgstr "nom d'un élément externe"
+
+#: C/conglomerate.xml:2041(entry) C/conglomerate.xml:2483(entry)
+#: C/conglomerate.xml:2722(entry) C/conglomerate.xml:2835(entry)
+msgid ""
+"The name of an element declared by the DTD specified in <link endterm="
+"\"external-document-model.title\" linkend=\"external-document-model\"/>."
+msgstr ""
+"Le nom d'un élément déclaré dans la DTD et défini dans <link endterm="
+"\"external-document-model.title\" linkend=\"external-document-model\"/>."
+
+#: C/conglomerate.xml:2044(entry) C/conglomerate.xml:2164(entry)
+#: C/conglomerate.xml:2486(entry) C/conglomerate.xml:2725(entry)
+#: C/conglomerate.xml:2838(entry)
+msgid "type"
+msgstr "type"
+
+#: C/conglomerate.xml:2046(para) C/conglomerate.xml:2488(para)
+#: C/conglomerate.xml:2727(para) C/conglomerate.xml:2840(para)
+msgid "embedded-external-file"
+msgstr "embedded-external-file"
+
+#: C/conglomerate.xml:2047(para) C/conglomerate.xml:2489(para)
+#: C/conglomerate.xml:2728(para) C/conglomerate.xml:2841(para)
+msgid "paragraph"
+msgstr "paragraph"
+
+#: C/conglomerate.xml:2048(para) C/conglomerate.xml:2490(para)
+#: C/conglomerate.xml:2729(para) C/conglomerate.xml:2842(para)
+msgid "plugin"
+msgstr "plugin"
+
+#: C/conglomerate.xml:2049(para) C/conglomerate.xml:2491(para)
+#: C/conglomerate.xml:2730(para) C/conglomerate.xml:2843(para)
+msgid "span"
+msgstr "span"
+
+#: C/conglomerate.xml:2050(para) C/conglomerate.xml:2492(para)
+#: C/conglomerate.xml:2731(para) C/conglomerate.xml:2844(para)
+msgid "structural"
+msgstr "structural"
+
+#: C/conglomerate.xml:2055(entry) C/conglomerate.xml:2497(entry)
+#: C/conglomerate.xml:2736(entry) C/conglomerate.xml:2849(entry)
+msgid "whitepace"
+msgstr "whitepace"
+
+#: C/conglomerate.xml:2057(para) C/conglomerate.xml:2499(para)
+#: C/conglomerate.xml:2738(para) C/conglomerate.xml:2851(para)
+msgid "normalize"
+msgstr "normalize"
+
+#: C/conglomerate.xml:2058(para) C/conglomerate.xml:2500(para)
+#: C/conglomerate.xml:2739(para) C/conglomerate.xml:2852(para)
+msgid "preserve"
+msgstr "preserve"
+
+#: C/conglomerate.xml:2075(para) C/conglomerate.xml:2517(para)
+#: C/conglomerate.xml:2756(para) C/conglomerate.xml:2869(para)
+msgid ""
+"<link endterm=\"header-info.title\" linkend=\"header-info\"/>, <link endterm="
+"\"key-value-list.title\" linkend=\"key-value-list\"/>, <link endterm=\"name."
+"title\" linkend=\"name\"/>, <link endterm=\"property-dialog.title\" linkend="
+"\"property-dialog\"/>, <link endterm=\"short-desc.title\" linkend=\"short-"
+"desc\"/>"
+msgstr ""
+"<link endterm=\"header-info.title\" linkend=\"header-info\"/>, <link endterm="
+"\"key-value-list.title\" linkend=\"key-value-list\"/>, <link endterm=\"name."
+"title\" linkend=\"name\"/>, <link endterm=\"property-dialog.title\" linkend="
+"\"property-dialog\"/>, <link endterm=\"short-desc.title\" linkend=\"short-"
+"desc\"/>"
+
+#: C/conglomerate.xml:2101(title)
+msgid "element-list"
+msgstr "element-list"
+
+#: C/conglomerate.xml:2102(para)
+msgid "A wrapper element for element types."
+msgstr "Un élément enveloppe pour les types d'élément."
+
+#: C/conglomerate.xml:2115(para) C/conglomerate.xml:2293(para)
+#: C/conglomerate.xml:2568(para) C/conglomerate.xml:2654(para)
+msgid ""
+"<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"plugin-element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-"
+"element.title\" linkend=\"span-element\"/>, <link endterm=\"structural-"
+"element.title\" linkend=\"structural-element\"/>"
+msgstr ""
+"<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"plugin-element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-"
+"element.title\" linkend=\"span-element\"/>, <link endterm=\"structural-"
+"element.title\" linkend=\"structural-element\"/>"
+
+#: C/conglomerate.xml:2148(title)
+msgid "external-document-model"
+msgstr "external-document-model"
+
+#: C/conglomerate.xml:2149(para)
+msgid ""
+"Specifies the Document Type Definition (DTD) annotated by this Display "
+"Specification (XDS)."
+msgstr ""
+"Définit la « Document Type Definition » (DTD) annotée de ses spécifications "
+"d'affichage (fichier XDS)."
+
+#: C/conglomerate.xml:2166(para)
+msgid "dtd"
+msgstr "dtd"
+
+#: C/conglomerate.xml:2167(para)
+msgid "relax-ng-schema"
+msgstr "relax-ng-schema"
+
+#: C/conglomerate.xml:2168(para)
+msgid "w3c-schema"
+msgstr "w3c-schema"
+
+#: C/conglomerate.xml:2173(entry)
+msgid "public-id"
+msgstr "public-id"
+
+#: C/conglomerate.xml:2175(entry)
+msgid "The PUBLIC Identifier by which the Documen Type is recognized."
+msgstr "L'identifiant PUBLIC par lequel le type de document est reconnu."
+
+#: C/conglomerate.xml:2178(entry)
+msgid "system-id"
+msgstr "system-id"
+
+#: C/conglomerate.xml:2180(entry)
+msgid "The SYSTEM Indentifier by which the Document Type is to be recognized."
+msgstr "L'identifiant SYSTEM par lequel le type de document doit être reconnu."
+
+#: C/conglomerate.xml:2198(para)
+msgid ""
+"See <link endterm=\"document-models.title\" linkend=\"document-models\"/>"
+msgstr ""
+"Consultez <link endterm=\"document-models.title\" linkend=\"document-models"
+"\"/>"
+
+#: C/conglomerate.xml:2203(title)
+msgid "format"
+msgstr "format"
+
+#: C/conglomerate.xml:2221(para)
+msgid "See <link linkend=\"serialisation\" endterm=\"serialisation.title\"/>."
+msgstr ""
+"Consultez <link linkend=\"serialisation\" endterm=\"serialisation.title\"/>."
+
+#: C/conglomerate.xml:2225(title)
+msgid "header-info"
+msgstr "header-info"
+
+#: C/conglomerate.xml:2226(para)
+msgid ""
+"Defines title content for nodes shown in the outline tree view and the "
+"element wrappers shown in the page view. Node content is comprised of two "
+"parts [element name] : [title] where:"
+msgstr ""
+"Définit le contenu des intitulés pour les nœuds affichés dans l'arborescence "
+"d'ensemble et les éléments enveloppes affichés dans la vue page. Le contenu "
+"d'un nœud est formé de deux parties [nom de l'élément] : [titre] où :"
+
+#: C/conglomerate.xml:2231(para)
+msgid ""
+"<emphasis role=\"bold\">[name]</emphasis> is derived from <sgmltag class="
+"\"starttag\">name</sgmltag>."
+msgstr ""
+"<emphasis role=\"bold\">[nom]</emphasis> dérive du <sgmltag class=\"starttag"
+"\">nom</sgmltag>,"
+
+#: C/conglomerate.xml:2235(para)
+msgid ""
+"<emphasis role=\"bold\">[title]</emphasis> is derived from either the value "
+"of <sgmltag class=\"attribute\">tag</sgmltag> or the result of <sgmltag "
+"class=\"attribute\">xpath</sgmltag>."
+msgstr ""
+"<emphasis role=\"bold\">[titre]</emphasis> dérive, soit de la valeur de "
+"<sgmltag class=\"attribute\">tag</sgmltag>, soit du résultat de <sgmltag "
+"class=\"attribute\">xpath</sgmltag>."
+
+#: C/conglomerate.xml:2254(entry)
+msgid "An element name from the anotated Document Type."
+msgstr "Un nom d'élément issu du type de document annoté."
+
+#: C/conglomerate.xml:2255(entry)
+msgid ""
+"When an element name is provided Conglomerate will search for a child node "
+"whose name corrsponds to the value of <placeholder-1/> and return the value "
+"of the next child node for [title]."
+msgstr ""
+"Quand un nom d'élément est fourni, Conglomerate recherche un nœud enfant "
+"dont le nom correspond à la valeur du <placeholder-1/> et renvoie la valeur "
+"du nœud enfant suivant en tant que [titre]."
+
+#: C/conglomerate.xml:2260(entry)
+msgid "xpath"
+msgstr "xpath"
+
+#: C/conglomerate.xml:2262(entry)
+msgid ""
+"An XPath expression that can be used to return a string. The resulting "
+"string is used for [title]."
+msgstr ""
+"Une expression XPath qui peut être utilisée pour renvoyer une chaîne de "
+"caractères. La chaîne résultante est utilisée en tant que [titre]."
+
+#: C/conglomerate.xml:2285(title)
+msgid "key-value-list"
+msgstr "key-value-list"
+
+#: C/conglomerate.xml:2321(title)
+msgid "key-value-pair"
+msgstr "key-value-pair"
+
+#: C/conglomerate.xml:2339(para)
+msgid "See <link endterm=\"key-value-list.title\" linkend=\"key-value-list\"/>"
+msgstr ""
+"Consultez <link endterm=\"key-value-list.title\" linkend=\"key-value-list\"/>"
+
+#: C/conglomerate.xml:2344(title)
+msgid "metadata"
+msgstr "metadata"
+
+#: C/conglomerate.xml:2345(para)
+msgid ""
+"A wrapper for elements that provide data about the Document Type which the "
+"XDS annotates."
+msgstr ""
+"Une enveloppe pour les éléments qui fournissent des données concernant le "
+"type de document que le fichier XDS a annoté."
+
+#: C/conglomerate.xml:2358(para)
+msgid ""
+"<link endterm=\"name.title\" linkend=\"name\"/>, <link endterm=\"description."
+"title\" linkend=\"description\"/>"
+msgstr ""
+"<link endterm=\"name.title\" linkend=\"name\"/>, <link endterm=\"description."
+"title\" linkend=\"description\"/>"
+
+#: C/conglomerate.xml:2380(title)
+msgid "name"
+msgstr "name"
+
+#: C/conglomerate.xml:2381(para)
+msgid "The displayed name of an object."
+msgstr "Le nom affiché d'un objet."
+
+#: C/conglomerate.xml:2415(para)
+msgid ""
+"<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-element."
+"title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element.title\" "
+"linkend=\"span-element\"/>, <link endterm=\"structural-element.title\" "
+"linkend=\"structural-element\"/>"
+msgstr ""
+"<link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-element."
+"title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element.title\" "
+"linkend=\"span-element\"/>, <link endterm=\"structural-element.title\" "
+"linkend=\"structural-element\"/>"
+
+#: C/conglomerate.xml:2425(para)
+msgid ""
+"See <link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-element."
+"title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element.title\" "
+"linkend=\"span-element\"/>, <link endterm=\"structural-element.title\" "
+"linkend=\"structural-element\"/>"
+msgstr ""
+"Consultez <link endterm=\"element.title\" linkend=\"element\"/>, <link "
+"endterm=\"metadata.title\" linkend=\"metadata\"/>, <link endterm=\"plugin-"
+"element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-element."
+"title\" linkend=\"span-element\"/>, <link endterm=\"structural-element.title"
+"\" linkend=\"structural-element\"/>"
+
+#: C/conglomerate.xml:2430(title)
+msgid "plugin-element"
+msgstr "plugin-element"
+
+#: C/conglomerate.xml:2543(title)
+msgid "property-dialog"
+msgstr "property-dialog"
+
+#: C/conglomerate.xml:2578(para) C/conglomerate.xml:2664(para)
+msgid ""
+"See <link endterm=\"element.title\" linkend=\"element\"/>, <link endterm="
+"\"plugin-element.title\" linkend=\"plugin-element\"/>, <link endterm=\"span-"
+"element.title\" linkend=\"span-element\"/>, <link endterm=\"structural-"
+"element.title\" linkend=\"structural-element\"/>"
+msgstr ""
+"Consultez <link endterm=\"element.title\" linkend=\"element\"/>, <link "
+"endterm=\"plugin-element.title\" linkend=\"plugin-element\"/>, <link endterm="
+"\"span-element.title\" linkend=\"span-element\"/>, <link endterm="
+"\"structural-element.title\" linkend=\"structural-element\"/>"
+
+#: C/conglomerate.xml:2583(title)
+msgid "serialisation"
+msgstr "serialisation"
+
+#: C/conglomerate.xml:2619(title)
+msgid "short-desc"
+msgstr "short-desc"
+
+#: C/conglomerate.xml:2620(para)
+msgid ""
+"A short description of the element specified in <sgmltag class=\"attribute"
+"\">tag</sgmltag>."
+msgstr ""
+"Une courte description de l'élément défini dans <sgmltag class=\"attribute"
+"\">tag</sgmltag>."
+
+#: C/conglomerate.xml:2669(title)
+msgid "span-element"
+msgstr "span-element"
+
+#: C/conglomerate.xml:2782(title)
+msgid "structural-element"
+msgstr "structural-element"
+
+#: C/conglomerate.xml:2898(glossterm)
+msgid "Dummy"
+msgstr "Fictif"
+
+#: C/conglomerate.xml:2900(para)
+msgid "Now you see me, next you won't"
+msgstr "Maintenant vous me voyez, plus tard vous ne pourrez pas"
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/conglomerate.xml:0(None)
+msgid "translator-credits"
+msgstr ""
+"Gérard Baylard < gerard DOT b AT bbox DOT fr >, 2010\n"
+"Laurent Coudeur <laurentc@iol.ie>, 2010\n"
+"Bruno Brouard <annoa.b@gmail.com>, 2010"
