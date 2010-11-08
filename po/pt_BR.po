@@ -4,14 +4,16 @@
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <raphaelh@uai.com.br>, 2004.
 # João Emanuel <joaoemanuel1981@gmail.com>, 2006.
+# Marcelo Odir <marceloodir@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-12 02:12+0200\n"
-"PO-Revision-Date: 2006-10-11 22:25-0300\n"
-"Last-Translator: João Emanuel <joaoemanuel1981@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=conglomerate&component=general\n"
+"POT-Creation-Date: 2010-10-31 20:01+0000\n"
+"PO-Revision-Date: 2010-11-05 16:52-0300\n"
+"Last-Translator: Marcelo Odir <marceloodir@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,7 +81,7 @@ msgstr "nota"
 
 #: ../dispspecs/cnxml.xds.in.h:16
 msgid "para"
-msgstr ""
+msgstr "para"
 
 #: ../dispspecs/cnxml.xds.in.h:17
 msgid "proof"
@@ -140,7 +142,8 @@ msgstr "Informação de Cabeçalho"
 msgid ""
 "Information that tells Conglomerate how to display a particular type of file."
 msgstr ""
-"Informação que diz ao Conglomerate como mostrar um tipo específico de arquivo."
+"Informação que diz ao Conglomerate como mostrar um tipo específico de "
+"arquivo."
 
 #: ../dispspecs/dispspec.xds.in.h:10
 msgid "List of XML Elements"
@@ -196,8 +199,8 @@ msgid ""
 "A book, with a title, and perhaps with some bibliographical material, in "
 "addition to the actual content of the book."
 msgstr ""
-"Um livro, com um título e talvez com algum material bibliográfico, em "
-"adição ao conteúdo atual do livro."
+"Um livro, com um título e talvez com algum material bibliográfico, em adição "
+"ao conteúdo atual do livro."
 
 #: ../dispspecs/docbook.xds.in.h:3 ../dispspecs/website-webpage.xds.in.h:2
 msgid "A brief description of the version of a document."
@@ -213,13 +216,15 @@ msgstr "Uma divisão de alto nível de um livro."
 
 #: ../dispspecs/docbook.xds.in.h:6 ../dispspecs/website-webpage.xds.in.h:3
 msgid "A specific piece of data from a computer system, to be taken literally."
-msgstr "Uma parte específica de dados de um sistema de computador, deve ser tomada literalmente."
+msgstr ""
+"Uma parte específica de dados de um sistema de computador, deve ser tomada "
+"literalmente."
 
 #: ../dispspecs/docbook.xds.in.h:7 ../dispspecs/website-webpage.xds.in.h:4
 msgid "A subsection within a section"
 msgstr "Uma subseção dentro de uma seção"
 
-#: ../dispspecs/docbook.xds.in.h:8
+#: ../dispspecs/docbook.xds.in.h:8 ../dispspecs/website-webpage.xds.in.h:5
 msgid "A summary."
 msgstr "Um sumário."
 
@@ -462,9 +467,8 @@ msgid "Free-floating Heading"
 msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:63 ../dispspecs/website-webpage.xds.in.h:36
-#, fuzzy
 msgid "Function"
-msgstr "Localização"
+msgstr "Função"
 
 #. various related localNames need to be added
 #: ../dispspecs/docbook.xds.in.h:65
@@ -505,11 +509,11 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:74 ../dispspecs/website-webpage.xds.in.h:44
 msgid "ISBN"
-msgstr ""
+msgstr "ISBN"
 
 #: ../dispspecs/docbook.xds.in.h:75 ../dispspecs/website-webpage.xds.in.h:45
 msgid "ISSN"
-msgstr ""
+msgstr "ISSN"
 
 #: ../dispspecs/docbook.xds.in.h:76
 msgid "Image Data"
@@ -520,9 +524,8 @@ msgid "Image Object"
 msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:78
-#, fuzzy
 msgid "Important"
-msgstr "Importador"
+msgstr "Importante"
 
 #: ../dispspecs/docbook.xds.in.h:79 ../dispspecs/website-webpage.xds.in.h:46
 msgid "Index Term"
@@ -531,9 +534,8 @@ msgstr ""
 #: ../dispspecs/docbook.xds.in.h:80 ../dispspecs/forrest-document.xds.in.h:21
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
 #: ../dispspecs/readme.xds.in.h:9
-#, fuzzy
 msgid "Introduction"
-msgstr "Localização"
+msgstr "Introdução"
 
 #: ../dispspecs/docbook.xds.in.h:81 ../dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
@@ -613,9 +615,8 @@ msgstr "Numeração"
 
 #: ../dispspecs/docbook.xds.in.h:100 ../dispspecs/forrest-document.xds.in.h:29
 #: ../dispspecs/teixlite.xds.in.h:195
-#, fuzzy
 msgid "Note"
-msgstr "Nenhum"
+msgstr "Nota"
 
 #: ../dispspecs/docbook.xds.in.h:101 ../dispspecs/forrest-document.xds.in.h:31
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:26
@@ -669,7 +670,7 @@ msgstr ""
 #: ../dispspecs/docbook.xds.in.h:117
 #, fuzzy
 msgid "Prompt"
-msgstr "Promover"
+msgstr "Prompt"
 
 #: ../dispspecs/docbook.xds.in.h:118 ../dispspecs/teixlite.xds.in.h:214
 #: ../dispspecs/website-webpage.xds.in.h:67
@@ -709,9 +710,8 @@ msgstr "Sai_r"
 
 #: ../dispspecs/docbook.xds.in.h:126 ../dispspecs/relax-ng.xds.in.h:10
 #: ../dispspecs/website-webpage.xds.in.h:70
-#, fuzzy
 msgid "Reference"
-msgstr "Preferê_ncias"
+msgstr "Referência"
 
 #: ../dispspecs/docbook.xds.in.h:127 ../dispspecs/website-webpage.xds.in.h:71
 #, fuzzy
@@ -728,9 +728,8 @@ msgid "Replaceable Text"
 msgstr "Substituir"
 
 #: ../dispspecs/docbook.xds.in.h:130
-#, fuzzy
 msgid "Revision"
-msgstr "Revisões"
+msgstr "Revisão"
 
 #: ../dispspecs/docbook.xds.in.h:131
 #, fuzzy
@@ -752,14 +751,13 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
-msgstr ""
+msgstr "Captura de tela"
 
 #: ../dispspecs/docbook.xds.in.h:136 ../dispspecs/forrest-document.xds.in.h:33
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
 #: ../dispspecs/readme.xds.in.h:13 ../dispspecs/website-webpage.xds.in.h:76
-#, fuzzy
 msgid "Section"
-msgstr "Rebaixar Seção"
+msgstr "Seção"
 
 #: ../dispspecs/docbook.xds.in.h:137 ../dispspecs/website-webpage.xds.in.h:77
 msgid "Section (level 5)"
@@ -801,9 +799,8 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:146 ../dispspecs/forrest-document.xds.in.h:37
 #: ../dispspecs/website-webpage.xds.in.h:85
-#, fuzzy
 msgid "Subtitle"
-msgstr "<sem título>"
+msgstr "Legenda"
 
 #: ../dispspecs/docbook.xds.in.h:147 ../dispspecs/website-webpage.xds.in.h:86
 #, fuzzy
@@ -894,9 +891,8 @@ msgstr ""
 #: ../dispspecs/readme.xds.in.h:16 ../dispspecs/teixlite.xds.in.h:284
 #: ../dispspecs/website-webpage.xds.in.h:96
 #: ../dispspecs/xhtml1-strict.xds.in.h:76
-#, fuzzy
 msgid "Title"
-msgstr "_Arquivo"
+msgstr "Título"
 
 #: ../dispspecs/docbook.xds.in.h:168 ../dispspecs/website-webpage.xds.in.h:97
 #, fuzzy
@@ -918,9 +914,8 @@ msgstr ""
 
 #: ../dispspecs/docbook.xds.in.h:172 ../dispspecs/website-layout.xds.in.h:10
 #: ../dispspecs/website-webpage.xds.in.h:101
-#, fuzzy
 msgid "Year"
-msgstr "Localizar"
+msgstr "Ano"
 
 #: ../dispspecs/forrest-document.xds.in.h:3 ../dispspecs/teixlite.xds.in.h:64
 #: ../dispspecs/xhtml1-strict.xds.in.h:5
@@ -938,9 +933,8 @@ msgstr ""
 #: ../dispspecs/forrest-document.xds.in.h:7
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:9
 #: ../dispspecs/teixlite.xds.in.h:93 ../dispspecs/xhtml1-strict.xds.in.h:16
-#, fuzzy
 msgid "Code"
-msgstr "Escolha"
+msgstr "Código"
 
 #: ../dispspecs/forrest-document.xds.in.h:8
 msgid "Defined term"
@@ -952,6 +946,7 @@ msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:11 ../dispspecs/readme.xds.in.h:4
 #: ../src/cong-document.c:988
+#, c-format
 msgid "Document"
 msgstr "Documento"
 
@@ -973,16 +968,15 @@ msgstr "Promover"
 #: ../dispspecs/forrest-document.xds.in.h:17
 #, fuzzy
 msgid "Fork"
-msgstr "Forçar"
+msgstr "Fork"
 
 #: ../dispspecs/forrest-document.xds.in.h:18
-#, fuzzy
 msgid "Header"
-msgstr "Cabeçalho XML"
+msgstr "Cabeçalho"
 
 #: ../dispspecs/forrest-document.xds.in.h:19
 msgid "Icon"
-msgstr ""
+msgstr "Ícone"
 
 #: ../dispspecs/forrest-document.xds.in.h:20
 msgid "Img"
@@ -997,9 +991,8 @@ msgid "Legal info"
 msgstr ""
 
 #: ../dispspecs/forrest-document.xds.in.h:24
-#, fuzzy
 msgid "Line break"
-msgstr "Números de Linha"
+msgstr "Quebra de linha"
 
 #: ../dispspecs/forrest-document.xds.in.h:25
 #: ../dispspecs/xhtml1-strict.xds.in.h:46
@@ -1020,7 +1013,7 @@ msgstr ""
 #: ../dispspecs/forrest-document.xds.in.h:30
 #, fuzzy
 msgid "Notice"
-msgstr "Escolha"
+msgstr "Aviso"
 
 #: ../dispspecs/forrest-document.xds.in.h:32
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:27
@@ -1029,9 +1022,8 @@ msgid "Person"
 msgstr "Versão"
 
 #: ../dispspecs/forrest-document.xds.in.h:34
-#, fuzzy
 msgid "Source"
-msgstr "Forçar"
+msgstr "Fonte"
 
 #: ../dispspecs/forrest-document.xds.in.h:35
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:31
@@ -1053,9 +1045,8 @@ msgstr "Descrição"
 
 #: ../dispspecs/forrest-document.xds.in.h:39
 #: ../dispspecs/teixlite.xds.in.h:245 ../dispspecs/xhtml1-strict.xds.in.h:67
-#, fuzzy
 msgid "Table"
-msgstr "Valor"
+msgstr "Tabela"
 
 #: ../dispspecs/forrest-document.xds.in.h:40
 msgid "Table cell"
@@ -1105,7 +1096,7 @@ msgstr ""
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:5
 #: ../dispspecs/xhtml1-strict.xds.in.h:12
 msgid "Bold"
-msgstr ""
+msgstr "Negrito"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:6
 msgid "Break (manual)"
@@ -1113,7 +1104,7 @@ msgstr ""
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:7
 msgid "Centered"
-msgstr ""
+msgstr "Centralizado"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:8
 #, fuzzy
@@ -1121,9 +1112,8 @@ msgid "Cite"
 msgstr "Escolha"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:10
-#, fuzzy
 msgid "Correction"
-msgstr "Localização"
+msgstr "Correção"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:12
 msgid "Editorialize"
@@ -1131,26 +1121,26 @@ msgstr ""
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:14
 msgid "Font"
-msgstr ""
+msgstr "Fonte"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:15
 #: ../dispspecs/xhtml1-strict.xds.in.h:30
 msgid "Heading (level 1)"
-msgstr ""
+msgstr "Título (nível 1)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:16
 #: ../dispspecs/xhtml1-strict.xds.in.h:31
 msgid "Heading (level 2)"
-msgstr ""
+msgstr "Título (nível 2)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:17
 #: ../dispspecs/xhtml1-strict.xds.in.h:32
 msgid "Heading (level 3)"
-msgstr ""
+msgstr "Título (nível 3)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:18
 msgid "Hyperlink"
-msgstr ""
+msgstr "Hyperlink"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:20
 msgid "Issue"
@@ -1172,23 +1162,20 @@ msgstr "Notação"
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:30
 #: ../glade/cong-file-properties.glade.h:15
 msgid "Statistics"
-msgstr ""
+msgstr "Estatísticas"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:33
 msgid "Topic"
-msgstr ""
+msgstr "Tópico"
 
 #. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:35
-#, fuzzy
 msgid "Translator"
-msgstr ""
-"João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>.\n"
-"Raphael Higino <raphaelh@uai.com.br>"
+msgstr "Tradutor"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:36
 msgid "Underlined"
-msgstr ""
+msgstr "Sublinhado"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:37
 msgid "Version Control Activity"
@@ -1243,7 +1230,7 @@ msgstr ""
 
 #: ../dispspecs/readme.xds.in.h:14 ../dispspecs/teixlite.xds.in.h:231
 msgid "Signature"
-msgstr ""
+msgstr "Assinatura"
 
 #: ../dispspecs/readme.xds.in.h:15
 msgid ""
@@ -1261,7 +1248,7 @@ msgstr ""
 
 #: ../dispspecs/relax-ng.xds.in.h:3
 msgid "Empty"
-msgstr ""
+msgstr "Vazio"
 
 #: ../dispspecs/relax-ng.xds.in.h:4 ../dispspecs/teixlite.xds.in.h:149
 msgid "Group"
@@ -1292,7 +1279,7 @@ msgstr ""
 
 #: ../dispspecs/relax-ng.xds.in.h:11
 msgid "Start"
-msgstr ""
+msgstr "Início"
 
 #: ../dispspecs/relax-ng.xds.in.h:12 ../dispspecs/teixlite.xds.in.h:251
 #: ../src/cong-node-properties-dialog.c:827
@@ -1675,9 +1662,8 @@ msgid "Arbitrary Segment (&lt;seg&gt;)"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:73
-#, fuzzy
 msgid "Argument"
-msgstr "Documento"
+msgstr "Argumento"
 
 #: ../dispspecs/teixlite.xds.in.h:74
 msgid ""
@@ -1691,7 +1677,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:77
 msgid "Availability"
-msgstr ""
+msgstr "Disponível"
 
 #: ../dispspecs/teixlite.xds.in.h:78
 msgid "Back Matter"
@@ -1719,7 +1705,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:84
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: ../dispspecs/teixlite.xds.in.h:85
 #, fuzzy
@@ -1733,16 +1719,15 @@ msgstr "Referência de Caractere Unicode"
 
 #: ../dispspecs/teixlite.xds.in.h:87
 msgid "Cell"
-msgstr ""
+msgstr "Célula"
 
 #: ../dispspecs/teixlite.xds.in.h:88
 msgid "Change"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:89 ../dispspecs/xhtml1-strict.xds.in.h:15
-#, fuzzy
 msgid "Citation"
-msgstr "Notação"
+msgstr "Citação"
 
 #: ../dispspecs/teixlite.xds.in.h:90
 msgid "ClassCode"
@@ -1794,13 +1779,13 @@ msgid "Contains text displayed in tabular form, in rows and columns"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:101
+#, fuzzy
 msgid "Correct Form"
-msgstr ""
+msgstr "Forma correta"
 
 #: ../dispspecs/teixlite.xds.in.h:102
-#, fuzzy
 msgid "Creation"
-msgstr "Bretão"
+msgstr "Criação"
 
 #: ../dispspecs/teixlite.xds.in.h:104
 msgid "Dateline"
@@ -1934,11 +1919,11 @@ msgstr "Descrição"
 
 #: ../dispspecs/teixlite.xds.in.h:134
 msgid "Epigraph"
-msgstr ""
+msgstr "Epígrafe"
 
 #: ../dispspecs/teixlite.xds.in.h:135
 msgid "Example"
-msgstr ""
+msgstr "Exemplo"
 
 #: ../dispspecs/teixlite.xds.in.h:136
 msgid "Extended Pointer (xptr)"
@@ -1969,7 +1954,7 @@ msgstr "Forçar"
 
 #: ../dispspecs/teixlite.xds.in.h:143
 msgid "Formula"
-msgstr ""
+msgstr "Fórmula"
 
 #: ../dispspecs/teixlite.xds.in.h:144
 msgid "Front Matter"
@@ -2037,7 +2022,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:158
 msgid "Highlighted"
-msgstr ""
+msgstr "Realçado"
 
 #: ../dispspecs/teixlite.xds.in.h:159
 #, fuzzy
@@ -2099,7 +2084,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:171
 msgid "Interpretation"
-msgstr ""
+msgstr "Interpretação"
 
 #: ../dispspecs/teixlite.xds.in.h:172
 msgid "Interpretation Group"
@@ -2107,19 +2092,20 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:173
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
 #: ../dispspecs/teixlite.xds.in.h:174
 msgid "Keywords"
-msgstr ""
+msgstr "Palavras-chave"
 
 #: ../dispspecs/teixlite.xds.in.h:175
 msgid "Kw"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:176 ../dispspecs/xhtml1-strict.xds.in.h:44
+#, fuzzy
 msgid "Label"
-msgstr ""
+msgstr "Rótulo"
 
 #: ../dispspecs/teixlite.xds.in.h:177
 #: ../glade/docbook-common-properties.glade.h:2 ../src/plugin-docbook.c:2149
@@ -2127,9 +2113,8 @@ msgid "Language"
 msgstr "Idioma"
 
 #: ../dispspecs/teixlite.xds.in.h:178
-#, fuzzy
 msgid "Language Usage"
-msgstr "Idioma"
+msgstr "Idioma em uso"
 
 #: ../dispspecs/teixlite.xds.in.h:179
 msgid ""
@@ -2139,7 +2124,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:180
 msgid "Line Break"
-msgstr ""
+msgstr "Quebra de linha"
 
 #: ../dispspecs/teixlite.xds.in.h:181
 msgid "Line Group"
@@ -2147,7 +2132,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:182
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: ../dispspecs/teixlite.xds.in.h:183
 msgid "ListBibl"
@@ -2213,7 +2198,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:198
 msgid "One cell of a table"
-msgstr ""
+msgstr "Uma célula de uma tabela"
 
 #: ../dispspecs/teixlite.xds.in.h:199
 msgid "One component of a list"
@@ -2240,7 +2225,7 @@ msgstr "Geral"
 
 #: ../dispspecs/teixlite.xds.in.h:204
 msgid "Original Form"
-msgstr ""
+msgstr "Forma original"
 
 #: ../dispspecs/teixlite.xds.in.h:205
 #, fuzzy
@@ -2248,9 +2233,8 @@ msgid "Page Break"
 msgstr "Colar Antes"
 
 #: ../dispspecs/teixlite.xds.in.h:207
-#, fuzzy
 msgid "Pointer"
-msgstr "Imprimir"
+msgstr "Ponteiro"
 
 #: ../dispspecs/teixlite.xds.in.h:208
 msgid "Principal Researcher"
@@ -2321,7 +2305,7 @@ msgstr "Descrição"
 
 #: ../dispspecs/teixlite.xds.in.h:224
 msgid "Row"
-msgstr ""
+msgstr "Linha"
 
 #: ../dispspecs/teixlite.xds.in.h:225
 #, fuzzy
@@ -2342,7 +2326,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:228
 msgid "Sentence"
-msgstr ""
+msgstr "Sentença"
 
 #: ../dispspecs/teixlite.xds.in.h:229
 msgid "Series Statement"
@@ -2603,7 +2587,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:285
 msgid "Title Page"
-msgstr ""
+msgstr "Título da página"
 
 #: ../dispspecs/teixlite.xds.in.h:286
 msgid "Title Part"
@@ -2615,11 +2599,11 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:288
 msgid "Trailer"
-msgstr ""
+msgstr "Trailer"
 
 #: ../dispspecs/teixlite.xds.in.h:289
 msgid "Unclear"
-msgstr ""
+msgstr "Obscuro"
 
 #: ../dispspecs/teixlite.xds.in.h:290
 msgid "Verse Line (&lt;l&gt;)"
@@ -2635,9 +2619,8 @@ msgid "Configuration Data"
 msgstr ""
 
 #: ../dispspecs/website-layout.xds.in.h:3
-#, fuzzy
 msgid "Content"
-msgstr "_Conteúdo"
+msgstr "Conteúdo"
 
 #: ../dispspecs/website-layout.xds.in.h:5
 msgid "Header Link"
@@ -2650,7 +2633,7 @@ msgstr ""
 #: ../dispspecs/website-layout.xds.in.h:7 ../dispspecs/xsl.xds.in.h:2
 #, fuzzy
 msgid "Stylesheet"
-msgstr "Estilo"
+msgstr "Folha de estilo"
 
 #: ../dispspecs/website-layout.xds.in.h:8
 #, fuzzy
@@ -2661,10 +2644,6 @@ msgstr "Conteúdo Válido"
 msgid "Website Layout"
 msgstr ""
 
-#: ../dispspecs/website-webpage.xds.in.h:5
-msgid "A sumamry."
-msgstr ""
-
 #: ../dispspecs/website-webpage.xds.in.h:62
 #, fuzzy
 msgid "Part Introduction"
@@ -2672,17 +2651,15 @@ msgstr "Instrução de Processamento XML"
 
 #: ../dispspecs/website-webpage.xds.in.h:99
 msgid "Web Page"
-msgstr ""
+msgstr "Página web"
 
 #: ../dispspecs/website-webpage.xds.in.h:100
-#, fuzzy
 msgid "Webpage"
-msgstr "_Homepage"
+msgstr "Página da web"
 
 #: ../dispspecs/website-webpage.xds.in.h:102
-#, fuzzy
 msgid "email"
-msgstr "Detalhes"
+msgstr "e-mail"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:1
 msgid "Abbreviated Form"
@@ -2694,7 +2671,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:6
 msgid "Area"
-msgstr ""
+msgstr "Área"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:7
 #, fuzzy
@@ -2707,7 +2684,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:9
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:10
 #, fuzzy
@@ -2715,21 +2692,21 @@ msgid "Block Quotation"
 msgstr "Localização"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:13
-#, fuzzy
 msgid "Button"
-msgstr "Bretão"
+msgstr "Botão"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:17
 msgid "Column"
-msgstr ""
+msgstr "Coluna"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:18
+#, fuzzy
 msgid "Column Group"
-msgstr ""
+msgstr "Grupo de coluna"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:20
 msgid "Definition List"
-msgstr ""
+msgstr "Lista de definições"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:21
 msgid "Definition Term"
@@ -2747,7 +2724,7 @@ msgstr "Revisões"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:25
 msgid "Forced Line Break"
-msgstr ""
+msgstr "Quebra de linha forçada"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:26
 msgid "Form Control"
@@ -2759,19 +2736,19 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:28
 msgid "HTML Page"
-msgstr ""
+msgstr "Página HTML"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:33
 msgid "Heading (level 4)"
-msgstr ""
+msgstr "Título (nível 4)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:34
 msgid "Heading (level 5)"
-msgstr ""
+msgstr "Título (nível 5)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:35
 msgid "Heading (level 6)"
-msgstr ""
+msgstr "Título (nível 6)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:36
 msgid "Horizontal Rule"
@@ -2779,7 +2756,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:37
 msgid "Image"
-msgstr ""
+msgstr "Imagem"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:38
 msgid "Image Map"
@@ -2798,17 +2775,16 @@ msgid "Interactive Form"
 msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:42
-#, fuzzy
 msgid "Italic"
-msgstr "Italiano"
+msgstr "Itálico"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:43
 msgid "Keyboard"
-msgstr ""
+msgstr "Teclado"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:45
 msgid "Legend"
-msgstr ""
+msgstr "Legenda"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:50
 msgid "Metainformation"
@@ -2820,7 +2796,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:52
 msgid "Object"
-msgstr ""
+msgstr "Objeto"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:53
 #, fuzzy
@@ -2833,22 +2809,20 @@ msgid "Option Selector"
 msgstr "Selecionar palavra"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:56
-#, fuzzy
 msgid "Parameter"
-msgstr "Parâmetros de Criação"
+msgstr "Parâmetro"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:57
 msgid "Preformatted Text"
 msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:58
-#, fuzzy
 msgid "Sample"
-msgstr "Nome"
+msgstr "Amostra"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:59
 msgid "Script"
-msgstr ""
+msgstr "Script"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:60
 msgid "Selectable Choice"
@@ -2856,7 +2830,7 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:61
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:62 ../glade/custom-element.glade.h:6
 msgid "Span"
@@ -2885,9 +2859,8 @@ msgid "The strict XML version of HTML"
 msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:77
-#, fuzzy
 msgid "Variable"
-msgstr "Valor"
+msgstr "Variável"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:78
 msgid "XHTML 1.0 (strict)"
@@ -2909,8 +2882,8 @@ msgid "XSL stylesheet"
 msgstr ""
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
-#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:793
-#: ../src/cong-primary-window.c:795 ../src/cong-primary-window.c:801
+#: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:810
+#: ../src/cong-primary-window.c:812 ../src/cong-primary-window.c:818
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate - Editor XML"
 
@@ -2973,6 +2946,7 @@ msgid "Basic"
 msgstr "Básico"
 
 #: ../glade/cong-file-properties.glade.h:4 ../src/cong-document.c:1003
+#, c-format
 msgid "Document Type Declaration"
 msgstr "Declaração do Tipo de Documento"
 
@@ -3000,11 +2974,11 @@ msgstr "Modificado"
 
 #: ../glade/cong-file-properties.glade.h:11
 msgid "Number of elements:"
-msgstr ""
+msgstr "Número de elementos:"
 
 #: ../glade/cong-file-properties.glade.h:12
 msgid "Number of words :"
-msgstr ""
+msgstr "Número de palavras:"
 
 #: ../glade/cong-file-properties.glade.h:13
 #: ../glade/docbook-common-properties.glade.h:3
@@ -3295,6 +3269,7 @@ msgid "Depth"
 msgstr "Profundidade"
 
 #: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
+#, c-format
 msgid "Document Type"
 msgstr "Tipo de Documento"
 
@@ -3313,6 +3288,7 @@ msgid "XML Editor"
 msgstr "Editor XML"
 
 #: ../src/cong-app.c:1158
+#, c-format
 msgid "Conglomerate could not load any xds files"
 msgstr "O Conglomerate não pôde carregar nenhum arquivo xds"
 
@@ -3511,6 +3487,7 @@ msgstr ""
 "descartadas."
 
 #: ../src/cong-dialog.c:325
+#, c-format
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
@@ -3532,6 +3509,7 @@ msgid "Changes from the past %li minutes will be discarded."
 msgstr "As alterações dos últimos %li minutos serão descartadas."
 
 #: ../src/cong-dialog.c:388
+#, c-format
 msgid "Changes from the past minute will be discarded."
 msgstr "As alterações do último minuto serão descartadas."
 
@@ -3583,6 +3561,7 @@ msgid "Text \"%s\""
 msgstr "Texto \"%s\""
 
 #: ../src/cong-document.c:968
+#, c-format
 msgid "Character Data"
 msgstr "Dados do Caractere"
 
@@ -3597,6 +3576,7 @@ msgid "Entity \"%s\""
 msgstr "Entidade \"%s\""
 
 #: ../src/cong-document.c:977
+#, c-format
 msgid "XML Processing Instruction"
 msgstr "Instrução de Processamento XML"
 
@@ -3606,38 +3586,47 @@ msgid "Comment \"%s\""
 msgstr "Comentário \"%s\""
 
 #: ../src/cong-document.c:994
+#, c-format
 msgid "Document Fragment"
 msgstr "Fragmento de Documento"
 
 #: ../src/cong-document.c:997
+#, c-format
 msgid "Notation"
 msgstr "Notação"
 
 #: ../src/cong-document.c:1000
+#, c-format
 msgid "HTML Document"
 msgstr "Documento HTML"
 
 #: ../src/cong-document.c:1006
+#, c-format
 msgid "Element Declaration"
 msgstr "Declaração de Elemento"
 
 #: ../src/cong-document.c:1009
+#, c-format
 msgid "Attribute Declaration"
 msgstr "Declaração de Atributo"
 
 #: ../src/cong-document.c:1012
+#, c-format
 msgid "Entity Declaration"
 msgstr "Declaração de Entidade"
 
 #: ../src/cong-document.c:1015
+#, c-format
 msgid "Namespace Declaration"
 msgstr "Declaração de Espaço de Nomes"
 
 #: ../src/cong-document.c:1018
+#, c-format
 msgid "XInclude Start"
 msgstr "Início XInclude"
 
 #: ../src/cong-document.c:1021
+#, c-format
 msgid "XInclude End"
 msgstr "Fim XInclude"
 
@@ -4037,6 +4026,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:178
+#, c-format
 msgid "The file is too big to fit on the device."
 msgstr "O arquivo e grande demais para caber no dispositivo."
 
@@ -4064,6 +4054,7 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:222
+#, c-format
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
 "O arquivo é grande demais para caber no espaço restante no dispositivo."
@@ -4210,11 +4201,11 @@ msgstr "Opções de Exportação"
 
 #: ../src/cong-file-export.c:431
 msgid "No output file specified"
-msgstr ""
+msgstr "Nenhum arquivo de saída especificado"
 
 #: ../src/cong-file-export.c:432
 msgid "Please specify a file name."
-msgstr ""
+msgstr "Por favor, especifique um nome de arquivo."
 
 #: ../src/cong-file-import.c:80
 msgid "Import file..."
@@ -4267,7 +4258,7 @@ msgstr ""
 "Pressione \"Aplicar\" para criá-lo. Você precisará salvar o documento se "
 "desejar mantê-lo."
 
-#: ../src/cong-file-open.c:73
+#: ../src/cong-file-open.c:72
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
@@ -4275,7 +4266,7 @@ msgstr ""
 "A estrutura interna do documento não corresponde a nenhum dos tipos "
 "conhecidos pelo Conglomerate."
 
-#: ../src/cong-file-open.c:74
+#: ../src/cong-file-open.c:73
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
@@ -4283,11 +4274,11 @@ msgstr ""
 "Você pode forçar o Conglomerate a carregar o documento clicando no botão "
 "\"Forçar\" abaixo, mas o resultado pode não ser o ideal."
 
-#: ../src/cong-file-open.c:75
+#: ../src/cong-file-open.c:74
 msgid "Force"
 msgstr "Forçar"
 
-#: ../src/cong-file-open.c:228
+#: ../src/cong-file-open.c:223
 msgid "Select an XML document"
 msgstr "Selecione um documento XML"
 
@@ -4387,28 +4378,27 @@ msgid "A file named \"%s\" already exists.\n"
 msgstr ""
 
 #: ../src/cong-file-save.c:121
-#, fuzzy
 msgid "_Replace"
-msgstr "Substituir"
+msgstr "_Substituir"
 
 #: ../src/cong-file-save.c:131
 msgid "Do you want to replace it with the one you are saving?"
-msgstr ""
+msgstr "Você deseja substituí-lo com o que você está salvando?"
 
 #: ../src/cong-location.c:395 ../src/cong-location.c:416
 msgid "Merge tags"
 msgstr "Mesclar marcas"
 
-#: ../src/cong-location.c:467
+#: ../src/cong-location.c:469
 #, fuzzy
 msgid "Delete character"
 msgstr "Caractere delete"
 
-#: ../src/cong-location.c:1061
+#: ../src/cong-location.c:1063
 msgid "Calculating previous page"
 msgstr "Calculando a página anterior"
 
-#: ../src/cong-location.c:1084
+#: ../src/cong-location.c:1086
 msgid "Calculating next page"
 msgstr "Calculando a próxima página"
 
@@ -4437,6 +4427,7 @@ msgid "Conglomerate could not transform the document"
 msgstr "O Conglomerate não pôde transformar o documento"
 
 #: ../src/cong-menus.c:552
+#, c-format
 msgid "There was a problem applying the stylesheet file"
 msgstr "Houve um problema ao aplicar o arquivo de folha de estilos"
 
@@ -4633,11 +4624,6 @@ msgstr "_Desfazer: %s"
 msgid "_Redo: %s"
 msgstr "_Refazer: %s"
 
-#: ../src/cong-menus.c:1972
-#, c-format
-msgid "Open '%s'"
-msgstr ""
-
 #: ../src/cong-node-properties-dialog.c:254
 msgid "XPath"
 msgstr "XPath"
@@ -4760,11 +4746,11 @@ msgstr "Marcadores"
 msgid "Raw XML"
 msgstr "XML Puro"
 
-#: ../src/cong-primary-window.c:660 ../src/cong-primary-window.c:679
+#: ../src/cong-primary-window.c:662 ../src/cong-primary-window.c:681
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Bem-vindo(a) ao atrasadíssimo editor Conglomerate."
 
-#: ../src/cong-primary-window.c:793
+#: ../src/cong-primary-window.c:810
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (modificado) - %s"
