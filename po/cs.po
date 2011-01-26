@@ -1,126 +1,112 @@
-# Czech translation of conglomerate.
-# Copyright (C) 2003, 2004, 2005 conglomerate'S COPYRIGHT HOLDER
-# Copyright (C) 2003, 2004, 2005 Miloslav Trmac <mitr@volny.cz>
-# Copyright (C) 2005 Lukas Novotny <lenochod@tiscali.cz>
+# Czech translation for Conglomerate.
+# Copyright (C) 2010 the author(s) of Conglomerate.
 # This file is distributed under the same license as the conglomerate package.
-# Miloslav Trmac <mitr@volny.cz>, 2003 - 2005.
-# Lukáš Novotný <lenochod@tiscali.cz>, 2005.
-# Lucas Lommer <llommer@svn.gnome.org>, 2008 (just fixing GNOMEBUG #517758)
-#
+# Marek Černocký <marek@manet.cz>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: conglomerate 0.9.1\n"
+"Project-Id-Version: conglomearte master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-13 01:42+0100\n"
-"PO-Revision-Date: 2006-01-11 22:23+0100\n"
-"Last-Translator: Lukas Novotny <lenochod@tiscali.cz>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"POT-Creation-Date: 2011-01-26 21:13+0100\n"
+"PO-Revision-Date: 2011-01-04 16:26+0100\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../dispspecs/cnxml.xds.in.h:1
 msgid "Experimental \"cnxml\" format"
-msgstr "Experimentální \"cnxml\" formát"
+msgstr "Experimentální formát „cnxml“"
 
 #: ../dispspecs/cnxml.xds.in.h:2
 msgid "Test CNXML ds"
-msgstr "Test CNXML ds"
+msgstr "Test specifikace zobrazení CNXML"
 
 #: ../dispspecs/cnxml.xds.in.h:3
-#, fuzzy
 msgid "cite"
-msgstr "citace"
+msgstr "Citace"
 
 #: ../dispspecs/cnxml.xds.in.h:4
 msgid "cnxn"
-msgstr "cnxn"
+msgstr "Odkaz na jiný dokument"
 
 #: ../dispspecs/cnxml.xds.in.h:5
 msgid "codeblock"
-msgstr "blok kódu"
+msgstr "Blok kódu"
 
 #: ../dispspecs/cnxml.xds.in.h:6
-#, fuzzy
 msgid "codeline"
-msgstr "Kódování"
+msgstr "Řádek kódu"
 
 #: ../dispspecs/cnxml.xds.in.h:7
 msgid "content"
-msgstr "obsah"
+msgstr "Obsah"
 
 #: ../dispspecs/cnxml.xds.in.h:8
-#, fuzzy
 msgid "emphasis"
-msgstr "zvýraznění"
+msgstr "Zvýraznění"
 
 #: ../dispspecs/cnxml.xds.in.h:9
-#, fuzzy
 msgid "equation"
-msgstr "Umístění"
+msgstr "Rovnice"
 
 #: ../dispspecs/cnxml.xds.in.h:10
-#, fuzzy
 msgid "item"
-msgstr "odstavec"
+msgstr "Položka"
 
 #: ../dispspecs/cnxml.xds.in.h:11
 msgid "link"
-msgstr "odkaz"
+msgstr "Obecný odkaz"
 
 #: ../dispspecs/cnxml.xds.in.h:12
-#, fuzzy
 msgid "list"
-msgstr "seznam"
+msgstr "Seznam"
 
 #: ../dispspecs/cnxml.xds.in.h:13
 msgid "metadata"
-msgstr "popisná data datových prvků"
+msgstr "Metadata"
 
 #: ../dispspecs/cnxml.xds.in.h:14
 msgid "module"
-msgstr "modul"
+msgstr "Modul"
 
 #: ../dispspecs/cnxml.xds.in.h:15
 msgid "note"
 msgstr "Poznámka"
 
 #: ../dispspecs/cnxml.xds.in.h:16
-#, fuzzy
 msgid "para"
-msgstr "rodič"
+msgstr "Odstavec"
 
 #: ../dispspecs/cnxml.xds.in.h:17
-#, fuzzy
 msgid "proof"
-msgstr "zkouška"
+msgstr "Důkaz"
 
 #: ../dispspecs/cnxml.xds.in.h:18
 msgid "rule"
-msgstr "pravidlo"
+msgstr "Pravidlo"
 
 #: ../dispspecs/cnxml.xds.in.h:19
 msgid "section"
-msgstr "oddíl"
+msgstr "Oddíl"
 
 #: ../dispspecs/cnxml.xds.in.h:20
-#, fuzzy
 msgid "statement"
-msgstr "tvrzení"
+msgstr "Složený výraz"
 
 #: ../dispspecs/cnxml.xds.in.h:21
-#, fuzzy
 msgid "term"
-msgstr "podmínka"
+msgstr "Termín"
 
 #: ../dispspecs/dispspec.xds.in.h:1
-#, fuzzy
 msgid "Collapseto"
-msgstr "pád na"
+msgstr "Sbalit do"
 
 #: ../dispspecs/dispspec.xds.in.h:2
 msgid "Conglomerate Display Specification"
-msgstr "Specifikace zobrazování v aplikaci Conglomerate"
+msgstr "Specifikace zobrazení Conglomerate"
 
 #: ../dispspecs/dispspec.xds.in.h:3 ../glade/cong-file-properties.glade.h:3
 #: ../src/cong-dispspec-registry.c:355 ../src/cong-edit-preferences.c:250
@@ -130,9 +116,8 @@ msgid "Description"
 msgstr "Popis"
 
 #: ../dispspecs/dispspec.xds.in.h:4
-#, fuzzy
 msgid "Document Models"
-msgstr "Typy dokumentů"
+msgstr "Modely dokumentů"
 
 #: ../dispspecs/dispspec.xds.in.h:5
 msgid "External Document Model"
@@ -144,22 +129,22 @@ msgstr "Formát"
 
 #: ../dispspecs/dispspec.xds.in.h:7
 msgid "GUI"
-msgstr "Grafické uživatelské rozhranní"
+msgstr "Uživatelské rozhraní"
 
 #: ../dispspecs/dispspec.xds.in.h:8
 msgid "Header Information"
-msgstr "Informace o hlavičce"
+msgstr "Hlavičkové informace"
 
 #: ../dispspecs/dispspec.xds.in.h:9
 msgid ""
 "Information that tells Conglomerate how to display a particular type of file."
 msgstr ""
-"Informace pomáhající aplikaci Conglomerate zobrazit speciální typy souborů."
+"Informace, které aplikaci Conglomerate říkají, jak zobrazit určitý typ "
+"souboru."
 
 #: ../dispspecs/dispspec.xds.in.h:10
-#, fuzzy
 msgid "List of XML Elements"
-msgstr "Element položky seznamu"
+msgstr "Seznam elementů XML"
 
 #: ../dispspecs/dispspec.xds.in.h:11
 msgid "List of file types for this type of document"
@@ -168,7 +153,7 @@ msgstr "Seznam typů souborů pro tento typ dokumentu"
 #: ../dispspecs/dispspec.xds.in.h:12 ../dispspecs/docbook.xds.in.h:95
 #: ../dispspecs/website-webpage.xds.in.h:55
 msgid "Metadata"
-msgstr "Popisná data popisných prvků"
+msgstr "Metadata"
 
 #: ../dispspecs/dispspec.xds.in.h:13 ../dispspecs/docbook.xds.in.h:97
 #: ../dispspecs/teixlite.xds.in.h:194 ../dispspecs/website-webpage.xds.in.h:57
@@ -179,45 +164,44 @@ msgid "Name"
 msgstr "Název"
 
 #: ../dispspecs/dispspec.xds.in.h:14
-#, fuzzy
 msgid "Name of an XML element"
-msgstr "Počet elementů"
+msgstr "Název elementu XML"
 
 #: ../dispspecs/dispspec.xds.in.h:15
 msgid "Serialisation Type List"
-msgstr ""
+msgstr "Seznam serializovaných typů"
 
 #: ../dispspecs/dispspec.xds.in.h:16
-#, fuzzy
 msgid "Short Description"
-msgstr "Popis"
+msgstr "Krátký popis"
 
 #: ../dispspecs/dispspec.xds.in.h:17
 msgid "Short Description of an XML element"
-msgstr "Krátký popis XML elementu"
+msgstr "Krátký popis elementu XML"
 
 #: ../dispspecs/dispspec.xds.in.h:18
-#, fuzzy
 msgid "Short Description of the document type"
-msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
+msgstr "Krátký popis typu dokumentu"
 
 #: ../dispspecs/dispspec.xds.in.h:19 ../dispspecs/relax-ng.xds.in.h:15
 msgid "XML Element"
-msgstr "XML Element"
+msgstr "Element XML"
 
 #: ../dispspecs/docbook.xds.in.h:1 ../dispspecs/website-webpage.xds.in.h:1
 msgid "A URL link (perhaps to a web site)"
-msgstr "URL odkaz (třeba na webovou stránku)"
+msgstr "Odkaz URL (třeba na webové stránky)"
 
 #: ../dispspecs/docbook.xds.in.h:2
 msgid ""
 "A book, with a title, and perhaps with some bibliographical material, in "
 "addition to the actual content of the book."
 msgstr ""
+"Kniha, s názvem a snad i nějakým bibliografickým materiálem a k tomu ještě "
+"aktuální obsah knihy."
 
 #: ../dispspecs/docbook.xds.in.h:3 ../dispspecs/website-webpage.xds.in.h:2
 msgid "A brief description of the version of a document."
-msgstr "Krátký popis verze dokumentu."
+msgstr "Stručný popis verze dokumentu"
 
 #: ../dispspecs/docbook.xds.in.h:4
 msgid "A collection of books."
@@ -225,29 +209,30 @@ msgstr "Sbírka knih."
 
 #: ../dispspecs/docbook.xds.in.h:5
 msgid "A high-level division of a book."
-msgstr ""
+msgstr "Nejvyšší úroveň členění knihy."
 
 #: ../dispspecs/docbook.xds.in.h:6 ../dispspecs/website-webpage.xds.in.h:3
 msgid "A specific piece of data from a computer system, to be taken literally."
 msgstr ""
+"Konkrétní kus dat z počítačového systému, který má být formátován přesně "
+"podle předlohy."
 
 #: ../dispspecs/docbook.xds.in.h:7 ../dispspecs/website-webpage.xds.in.h:4
 msgid "A subsection within a section"
-msgstr ""
+msgstr "Pododdíl v rámci oddílu."
 
-#: ../dispspecs/docbook.xds.in.h:8
+#: ../dispspecs/docbook.xds.in.h:8 ../dispspecs/website-webpage.xds.in.h:5
 msgid "A summary."
 msgstr "Souhrn."
 
 #: ../dispspecs/docbook.xds.in.h:9 ../dispspecs/website-webpage.xds.in.h:6
-#, fuzzy
 msgid "A top-level section of document"
-msgstr "Nepojmenovaná sada dokumentů"
+msgstr "Oddíl nejvyšší úrovně dokumentu"
 
 #: ../dispspecs/docbook.xds.in.h:10 ../dispspecs/forrest-document.xds.in.h:1
 #: ../dispspecs/website-webpage.xds.in.h:7
 msgid "Abstract"
-msgstr "Výtah"
+msgstr "Přehled"
 
 #: ../dispspecs/docbook.xds.in.h:11 ../dispspecs/forrest-document.xds.in.h:2
 #: ../dispspecs/website-webpage.xds.in.h:8
@@ -257,37 +242,34 @@ msgstr "Zkratka"
 
 #: ../dispspecs/docbook.xds.in.h:12 ../dispspecs/website-webpage.xds.in.h:9
 msgid "Additional metadata"
-msgstr "Pomocná popisná data datových prvků"
+msgstr "Doplňující metadata"
 
 #: ../dispspecs/docbook.xds.in.h:13 ../dispspecs/teixlite.xds.in.h:56
 #: ../dispspecs/website-webpage.xds.in.h:10
 #: ../dispspecs/xhtml1-strict.xds.in.h:3
 msgid "Address"
-msgstr "Adresy"
+msgstr "Adresa"
 
 #: ../dispspecs/docbook.xds.in.h:14 ../dispspecs/website-webpage.xds.in.h:11
 msgid "An email address"
-msgstr ""
+msgstr "E-mailová adresa"
 
 #. FIXME:  EMPTY content model should have a special type of localName
 #: ../dispspecs/docbook.xds.in.h:16
-#, fuzzy
 msgid "Anchor Point"
-msgstr "Kotva"
+msgstr "Kotevní bod"
 
 #: ../dispspecs/docbook.xds.in.h:17
-#, fuzzy
 msgid "Answer"
 msgstr "Odpověď"
 
 #: ../dispspecs/docbook.xds.in.h:18 ../dispspecs/website-webpage.xds.in.h:12
 msgid "Appendix"
-msgstr "Rejstřík"
+msgstr "Příloha"
 
 #: ../dispspecs/docbook.xds.in.h:19 ../dispspecs/website-webpage.xds.in.h:13
-#, fuzzy
 msgid "Application"
-msgstr "Umístění"
+msgstr "Aplikace"
 
 #: ../dispspecs/docbook.xds.in.h:20
 msgid "Article"
@@ -295,7 +277,7 @@ msgstr "Článek"
 
 #: ../dispspecs/docbook.xds.in.h:21
 msgid "Article Header"
-msgstr "Hlavička článku"
+msgstr "Záhlaví článku"
 
 #: ../dispspecs/docbook.xds.in.h:22
 msgid "Article Information"
@@ -309,21 +291,19 @@ msgstr "Autor"
 
 #: ../dispspecs/docbook.xds.in.h:24
 msgid "Author Initials"
-msgstr ""
+msgstr "Iniciály autora"
 
 #: ../dispspecs/docbook.xds.in.h:25 ../dispspecs/website-webpage.xds.in.h:15
-#, fuzzy
 msgid "Authorship Information"
-msgstr "Autorská práva"
+msgstr "Informace o autorství"
 
 #: ../dispspecs/docbook.xds.in.h:26 ../dispspecs/website-webpage.xds.in.h:16
-#, fuzzy
 msgid "Bibliographic Information"
-msgstr "Bibliografické informace"
+msgstr "Bibliografická informace"
 
 #: ../dispspecs/docbook.xds.in.h:27 ../dispspecs/website-webpage.xds.in.h:17
 msgid "Bibliography"
-msgstr "Použitá literatura"
+msgstr "Seznam literatury"
 
 #: ../dispspecs/docbook.xds.in.h:28
 msgid "Book"
@@ -335,17 +315,16 @@ msgstr "Informace o knize"
 
 #: ../dispspecs/docbook.xds.in.h:30 ../dispspecs/forrest-document.xds.in.h:6
 #: ../dispspecs/xhtml1-strict.xds.in.h:14
-#, fuzzy
 msgid "Caption"
-msgstr "Možnosti"
+msgstr "Nadpis"
 
 #: ../dispspecs/docbook.xds.in.h:31
 msgid "Caution"
-msgstr "Varování"
+msgstr "Upozornění"
 
 #: ../dispspecs/docbook.xds.in.h:32 ../dispspecs/website-webpage.xds.in.h:18
 msgid "Chapter"
-msgstr ""
+msgstr "Kapitola"
 
 #: ../dispspecs/docbook.xds.in.h:33 ../dispspecs/website-webpage.xds.in.h:19
 msgid "City"
@@ -353,7 +332,7 @@ msgstr "Město"
 
 #: ../dispspecs/docbook.xds.in.h:34 ../dispspecs/website-webpage.xds.in.h:20
 msgid "Colophon"
-msgstr ""
+msgstr "Tiráž"
 
 #: ../dispspecs/docbook.xds.in.h:35
 msgid "Command"
@@ -361,29 +340,28 @@ msgstr "Příkaz"
 
 #: ../dispspecs/docbook.xds.in.h:36 ../dispspecs/website-webpage.xds.in.h:21
 msgid "Command Synopsis"
-msgstr "Přehled o příkazu"
+msgstr "Syntaxe příkazu"
 
 #: ../dispspecs/docbook.xds.in.h:37
 msgid "Computer Output"
-msgstr ""
+msgstr "Výstup počítače"
 
 #: ../dispspecs/docbook.xds.in.h:38 ../dispspecs/website-layout.xds.in.h:4
 #: ../dispspecs/website-webpage.xds.in.h:22
 msgid "Copyright"
-msgstr ""
+msgstr "Autorská práva"
 
 #: ../dispspecs/docbook.xds.in.h:39 ../dispspecs/website-webpage.xds.in.h:23
 msgid "Copyright Holder"
-msgstr ""
+msgstr "Držitel autorských práv"
 
 #: ../dispspecs/docbook.xds.in.h:40
 msgid "Corporate Name"
-msgstr ""
+msgstr "Název organizace"
 
 #: ../dispspecs/docbook.xds.in.h:41 ../dispspecs/website-webpage.xds.in.h:24
-#, fuzzy
 msgid "Cross-reference"
-msgstr "Nas_tavení"
+msgstr "Křížový odkaz"
 
 #: ../dispspecs/docbook.xds.in.h:42 ../dispspecs/teixlite.xds.in.h:103
 msgid "Date"
@@ -391,47 +369,46 @@ msgstr "Datum"
 
 #: ../dispspecs/docbook.xds.in.h:43 ../dispspecs/website-webpage.xds.in.h:25
 msgid "Date of Publication"
-msgstr ""
+msgstr "Datum vydání"
 
 #: ../dispspecs/docbook.xds.in.h:44
 msgid "Defined terms"
-msgstr ""
+msgstr "Definované termíny"
 
 #: ../dispspecs/docbook.xds.in.h:45 ../dispspecs/forrest-document.xds.in.h:9
 #: ../dispspecs/website-webpage.xds.in.h:26
 #: ../dispspecs/xhtml1-strict.xds.in.h:19
-#, fuzzy
 msgid "Definition"
-msgstr "Popis"
+msgstr "Definice"
 
 #: ../dispspecs/docbook.xds.in.h:46
 msgid "DocBook"
 msgstr "DocBook"
 
 #: ../dispspecs/docbook.xds.in.h:47
-#, fuzzy
 msgid ""
 "DocBook is a document type that broadly corresponds to what most people "
 "think of as \"a book\"; it is well-suited for writing books and articles, "
 "for both print and web-based publication."
-msgstr "DocBook je typ dokumentu jenž všeobecně ????"
+msgstr ""
+"DocBook je typ dokumentu, který všeobecně odpovídá tomu, čím většina lidí "
+"myslí knihu (anglicky „book“). Je dobře vhodný pro psaní knih a článků, jak "
+"tištěných, tak publikovaných na webu."
 
 #: ../dispspecs/docbook.xds.in.h:48 ../dispspecs/teixlite.xds.in.h:128
 #: ../dispspecs/website-webpage.xds.in.h:27
-#, fuzzy
 msgid "Edition"
-msgstr "Upozornění"
+msgstr "Vydání"
 
 #: ../dispspecs/docbook.xds.in.h:49
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:11
 #: ../dispspecs/teixlite.xds.in.h:130 ../dispspecs/website-webpage.xds.in.h:28
-#, fuzzy
 msgid "Editor"
-msgstr "Editor XML"
+msgstr "Redaktor"
 
 #: ../dispspecs/docbook.xds.in.h:50
 msgid "Email Address"
-msgstr "E-mailové adresy"
+msgstr "E-mailová adresa"
 
 #: ../dispspecs/docbook.xds.in.h:51 ../dispspecs/forrest-document.xds.in.h:13
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:13
@@ -439,40 +416,36 @@ msgstr "E-mailové adresy"
 #: ../dispspecs/website-webpage.xds.in.h:29
 #: ../dispspecs/xhtml1-strict.xds.in.h:24
 msgid "Emphasis"
-msgstr ""
+msgstr "Zvýraznění"
 
 #: ../dispspecs/docbook.xds.in.h:52 ../dispspecs/website-webpage.xds.in.h:30
-#, fuzzy
 msgid "Entry"
-msgstr "Položka tabulky"
+msgstr "Položka"
 
 #: ../dispspecs/docbook.xds.in.h:53
 msgid "Environment Variable"
-msgstr ""
+msgstr "Proměnná prostředí"
 
 #: ../dispspecs/docbook.xds.in.h:54
 msgid "Example (formal)"
-msgstr "Varování (určité)"
+msgstr "Příklad (formální)"
 
 #: ../dispspecs/docbook.xds.in.h:55 ../dispspecs/website-webpage.xds.in.h:31
 msgid "Example (informal)"
-msgstr "Varování (běžné)"
+msgstr "Příklad (neformální)"
 
 #: ../dispspecs/docbook.xds.in.h:56 ../dispspecs/forrest-document.xds.in.h:14
 #: ../dispspecs/teixlite.xds.in.h:139
-#, fuzzy
 msgid "Figure"
-msgstr "Vzorec"
+msgstr "Nákres"
 
 #: ../dispspecs/docbook.xds.in.h:57
-#, fuzzy
 msgid "Figure (informal)"
-msgstr "Vzorec (běžný)"
+msgstr "Nákres (neformální)"
 
 #: ../dispspecs/docbook.xds.in.h:58 ../dispspecs/website-webpage.xds.in.h:32
-#, fuzzy
 msgid "Filename"
-msgstr "label_name"
+msgstr "Název souboru"
 
 #: ../dispspecs/docbook.xds.in.h:59 ../dispspecs/website-webpage.xds.in.h:33
 msgid "First Name"
@@ -480,46 +453,44 @@ msgstr "Křestní jméno"
 
 #: ../dispspecs/docbook.xds.in.h:60 ../dispspecs/website-webpage.xds.in.h:34
 msgid "First Term"
-msgstr ""
+msgstr "Termín poprvé"
 
 #: ../dispspecs/docbook.xds.in.h:61
-#, fuzzy
 msgid "Footnote"
-msgstr "Poznámka"
+msgstr "Poznámka pod čarou"
 
 #: ../dispspecs/docbook.xds.in.h:62 ../dispspecs/website-webpage.xds.in.h:35
 msgid "Free-floating Heading"
-msgstr "Volně plovoucí záhlavý"
+msgstr "Volně plovoucí záhlaví"
 
 #: ../dispspecs/docbook.xds.in.h:63 ../dispspecs/website-webpage.xds.in.h:36
-#, fuzzy
 msgid "Function"
-msgstr "Umístění"
+msgstr "Funkce"
 
 #. various related localNames need to be added
 #: ../dispspecs/docbook.xds.in.h:65
 msgid "Function Synopsis"
-msgstr "Funkce osnova"
+msgstr "Definice funkce"
 
 #: ../dispspecs/docbook.xds.in.h:66 ../dispspecs/website-webpage.xds.in.h:37
 msgid "GUI Button"
-msgstr ""
+msgstr "Tlačítko uživatelského rozhraní"
 
 #: ../dispspecs/docbook.xds.in.h:67 ../dispspecs/website-webpage.xds.in.h:38
 msgid "GUI Label"
-msgstr ""
+msgstr "Popisek uživatelského rozhraní"
 
 #: ../dispspecs/docbook.xds.in.h:68 ../dispspecs/website-webpage.xds.in.h:39
 msgid "GUI Menu"
-msgstr ""
+msgstr "Nabídka uživatelského rozhraní"
 
 #: ../dispspecs/docbook.xds.in.h:69 ../dispspecs/website-webpage.xds.in.h:40
 msgid "GUI Menu Item"
-msgstr ""
+msgstr "Položka nabídky uživatelského rozhraní"
 
 #: ../dispspecs/docbook.xds.in.h:70 ../dispspecs/website-webpage.xds.in.h:41
 msgid "GUI Submenu"
-msgstr ""
+msgstr "Podnabídka uživatelského rozhraní"
 
 #: ../dispspecs/docbook.xds.in.h:71 ../dispspecs/website-webpage.xds.in.h:42
 msgid "Glossary"
@@ -527,11 +498,11 @@ msgstr "Slovníček"
 
 #: ../dispspecs/docbook.xds.in.h:72 ../dispspecs/website-webpage.xds.in.h:43
 msgid "Glossary Entry"
-msgstr ""
+msgstr "Heslo slovníčku"
 
 #: ../dispspecs/docbook.xds.in.h:73
 msgid "Graphic"
-msgstr ""
+msgstr "Grafika"
 
 #: ../dispspecs/docbook.xds.in.h:74 ../dispspecs/website-webpage.xds.in.h:44
 msgid "ISBN"
@@ -543,46 +514,44 @@ msgstr "ISSN"
 
 #: ../dispspecs/docbook.xds.in.h:76
 msgid "Image Data"
-msgstr ""
+msgstr "Obrazová data"
 
 #: ../dispspecs/docbook.xds.in.h:77
 msgid "Image Object"
-msgstr ""
+msgstr "Obrazový objekt"
 
 #: ../dispspecs/docbook.xds.in.h:78
 msgid "Important"
-msgstr "Důležité oznámení"
+msgstr "Důležité"
 
 #: ../dispspecs/docbook.xds.in.h:79 ../dispspecs/website-webpage.xds.in.h:46
-#, fuzzy
 msgid "Index Term"
-msgstr "Jmenný název"
+msgstr "Termín rejstříku"
 
 #: ../dispspecs/docbook.xds.in.h:80 ../dispspecs/forrest-document.xds.in.h:21
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
 #: ../dispspecs/readme.xds.in.h:9
-#, fuzzy
 msgid "Introduction"
-msgstr "Umístění"
+msgstr "Úvod"
 
 #: ../dispspecs/docbook.xds.in.h:81 ../dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
-msgstr ""
+msgstr "Klíčový nadpis"
 
 #: ../dispspecs/docbook.xds.in.h:82 ../dispspecs/website-webpage.xds.in.h:48
 msgid "Legal Notice"
-msgstr ""
+msgstr "Právní upozornění"
 
 #: ../dispspecs/docbook.xds.in.h:83 ../dispspecs/website-webpage.xds.in.h:49
 msgid "List (itemised)"
-msgstr "Seznam (specifikace jednotlivě)"
+msgstr "Seznam (položkový)"
 
 #: ../dispspecs/docbook.xds.in.h:84 ../dispspecs/forrest-document.xds.in.h:26
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:23
 #: ../dispspecs/website-webpage.xds.in.h:50
 #: ../dispspecs/xhtml1-strict.xds.in.h:47
 msgid "List (ordered)"
-msgstr "Seznam (uspořádání)"
+msgstr "Seznam (uspořádaný)"
 
 #: ../dispspecs/docbook.xds.in.h:85 ../dispspecs/website-webpage.xds.in.h:51
 msgid "List (simple)"
@@ -590,57 +559,53 @@ msgstr "Seznam (jednoduchý)"
 
 #: ../dispspecs/docbook.xds.in.h:86
 msgid "List (terms and definitions)"
-msgstr "Seznam (výrazy a definování)"
+msgstr "Seznam (termíny a definice)"
 
 #: ../dispspecs/docbook.xds.in.h:87
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:25
 #: ../dispspecs/xhtml1-strict.xds.in.h:49
 msgid "List Item"
-msgstr ""
+msgstr "Položka seznamu"
 
 #: ../dispspecs/docbook.xds.in.h:88
-#, fuzzy
 msgid "List Member"
-msgstr "Element položky seznamu"
+msgstr "Člen seznamu"
 
 #: ../dispspecs/docbook.xds.in.h:89 ../dispspecs/website-webpage.xds.in.h:52
 msgid "Literal"
-msgstr ""
+msgstr "Literál"
 
 #: ../dispspecs/docbook.xds.in.h:90
-#, fuzzy
 msgid "Media Object"
-msgstr "Mediální objekt"
+msgstr "Objekt média"
 
 #: ../dispspecs/docbook.xds.in.h:91 ../dispspecs/website-webpage.xds.in.h:53
-#, fuzzy
 msgid "Menu Choice"
-msgstr "Výběr"
+msgstr "Volba nabídky"
 
 #: ../dispspecs/docbook.xds.in.h:92 ../dispspecs/website-webpage.xds.in.h:54
 msgid "Meta-information about a Reference Page"
-msgstr ""
+msgstr "Metainformace na referenční stránce"
 
 #: ../dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
-msgstr ""
+msgstr "Metainformace pro knihu"
 
 #: ../dispspecs/docbook.xds.in.h:94
 msgid "Meta-information for an article"
-msgstr ""
+msgstr "Metainformace pro článek"
 
 #: ../dispspecs/docbook.xds.in.h:96 ../dispspecs/website-webpage.xds.in.h:56
 msgid "Miscellaneous Bibliographic Information"
-msgstr ""
+msgstr "Různorodá bibliografická informace"
 
 #: ../dispspecs/docbook.xds.in.h:98 ../dispspecs/website-webpage.xds.in.h:58
 msgid "Name, purpose and classification about a Reference Page"
-msgstr ""
+msgstr "Název, účel a klasifikace na referenční stránce"
 
 #: ../dispspecs/docbook.xds.in.h:99 ../dispspecs/website-webpage.xds.in.h:59
-#, fuzzy
 msgid "Naming"
-msgstr "Číslování"
+msgstr "Pojmenování"
 
 #: ../dispspecs/docbook.xds.in.h:100 ../dispspecs/forrest-document.xds.in.h:29
 #: ../dispspecs/teixlite.xds.in.h:195
@@ -657,31 +622,27 @@ msgstr "Odstavec"
 
 #: ../dispspecs/docbook.xds.in.h:102
 msgid "Paragraph (titled)"
-msgstr "Odstavec (nadpis)"
+msgstr "Odstavec (s názvem)"
 
 #: ../dispspecs/docbook.xds.in.h:103 ../dispspecs/website-webpage.xds.in.h:61
-#, fuzzy
 msgid "Part"
-msgstr "Vložit"
+msgstr "Část"
 
 #: ../dispspecs/docbook.xds.in.h:104 ../dispspecs/website-webpage.xds.in.h:63
-#, fuzzy
 msgid "Preface"
-msgstr "Nas_tavení"
+msgstr "Předmluva"
 
 #: ../dispspecs/docbook.xds.in.h:105 ../dispspecs/website-webpage.xds.in.h:64
 msgid "Printing History"
-msgstr ""
+msgstr "Historie tisku"
 
 #: ../dispspecs/docbook.xds.in.h:106 ../dispspecs/website-webpage.xds.in.h:65
-#, fuzzy
 msgid "Procedure"
-msgstr "Vlastnosti"
+msgstr "Procedura"
 
 #: ../dispspecs/docbook.xds.in.h:107 ../dispspecs/website-webpage.xds.in.h:66
-#, fuzzy
 msgid "Product Name"
-msgstr "Místní název"
+msgstr "Název produktu"
 
 #.
 #. perhaps this should use a fixed-space font
@@ -692,71 +653,62 @@ msgstr "Místní název"
 #. Even better would be to invoke a Scintilla control and have syntax highlighting!
 #.
 #: ../dispspecs/docbook.xds.in.h:116
-#, fuzzy
 msgid "Program Listing"
-msgstr "Seznam programů"
+msgstr "Výpis programu"
 
 #: ../dispspecs/docbook.xds.in.h:117
-#, fuzzy
 msgid "Prompt"
-msgstr "Povýšit"
+msgstr "Vstupní pole"
 
 #: ../dispspecs/docbook.xds.in.h:118 ../dispspecs/teixlite.xds.in.h:214
 #: ../dispspecs/website-webpage.xds.in.h:67
-#, fuzzy
 msgid "Publisher"
-msgstr "Polština"
+msgstr "Vydavatel"
 
 #: ../dispspecs/docbook.xds.in.h:119 ../dispspecs/website-webpage.xds.in.h:68
 msgid "Publisher Name"
-msgstr ""
+msgstr "Název vydavatele"
 
 #: ../dispspecs/docbook.xds.in.h:120 ../dispspecs/website-webpage.xds.in.h:69
 msgid "Purpose"
-msgstr ""
+msgstr "Účel"
 
 #: ../dispspecs/docbook.xds.in.h:121
-#, fuzzy
 msgid "Question"
-msgstr "Verze"
+msgstr "Otázka"
 
 #: ../dispspecs/docbook.xds.in.h:122
 msgid "Question-and-Answer"
-msgstr ""
+msgstr "Otázka a odpověď"
 
 #: ../dispspecs/docbook.xds.in.h:123
-#, fuzzy
 msgid "Question-and-Answer Set"
-msgstr "Sestavení otázky a odpovědi"
+msgstr "Sada otázek a odpovědí"
 
 #: ../dispspecs/docbook.xds.in.h:124
 msgid "Question-and-Answer Subset"
-msgstr ""
+msgstr "Podmnožina otázek a odpovědí"
 
 #: ../dispspecs/docbook.xds.in.h:125 ../dispspecs/readme.xds.in.h:12
-#, fuzzy
 msgid "Quote"
-msgstr "U_končit"
+msgstr "Krátká citace"
 
 #: ../dispspecs/docbook.xds.in.h:126 ../dispspecs/relax-ng.xds.in.h:10
 #: ../dispspecs/website-webpage.xds.in.h:70
-#, fuzzy
 msgid "Reference"
-msgstr "Nas_tavení"
+msgstr "Odkazy"
 
 #: ../dispspecs/docbook.xds.in.h:127 ../dispspecs/website-webpage.xds.in.h:71
-#, fuzzy
 msgid "Reference Page"
-msgstr "Odkaz na stránku"
+msgstr "Referenční stránka"
 
 #: ../dispspecs/docbook.xds.in.h:128 ../dispspecs/website-webpage.xds.in.h:72
 msgid "Release Information"
-msgstr ""
+msgstr "Informace o vydání"
 
 #: ../dispspecs/docbook.xds.in.h:129 ../dispspecs/website-webpage.xds.in.h:73
-#, fuzzy
 msgid "Replaceable Text"
-msgstr "Nahradit"
+msgstr "Nahraditelný text"
 
 #: ../dispspecs/docbook.xds.in.h:130
 msgid "Revision"
@@ -764,26 +716,23 @@ msgstr "Revize"
 
 #: ../dispspecs/docbook.xds.in.h:131
 msgid "Revision History"
-msgstr "Revize historie"
+msgstr "Historie revizí"
 
 #: ../dispspecs/docbook.xds.in.h:132
-#, fuzzy
 msgid "Revision Remark"
-msgstr "Revize"
+msgstr "Pracovní komentář revize"
 
 #: ../dispspecs/docbook.xds.in.h:133 ../dispspecs/website-webpage.xds.in.h:74
 msgid "SGML Tag"
-msgstr ""
+msgstr "Značka SGML"
 
 #: ../dispspecs/docbook.xds.in.h:134 ../dispspecs/website-webpage.xds.in.h:75
-#, fuzzy
 msgid "Screen"
-msgstr "???"
+msgstr "Obrazovka"
 
 #: ../dispspecs/docbook.xds.in.h:135
-#, fuzzy
 msgid "Screenshot"
-msgstr "????"
+msgstr "Snímek obrazovky"
 
 #: ../dispspecs/docbook.xds.in.h:136 ../dispspecs/forrest-document.xds.in.h:33
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
@@ -793,96 +742,88 @@ msgstr "Oddíl"
 
 #: ../dispspecs/docbook.xds.in.h:137 ../dispspecs/website-webpage.xds.in.h:77
 msgid "Section (level 5)"
-msgstr ""
+msgstr "Oddíl (úroveň 5)"
 
 #: ../dispspecs/docbook.xds.in.h:138
 msgid "Set"
-msgstr ""
+msgstr "Sada"
 
 #: ../dispspecs/docbook.xds.in.h:139 ../dispspecs/website-webpage.xds.in.h:78
-#, fuzzy
 msgid "Step"
-msgstr "Styl"
+msgstr "Krok"
 
 #: ../dispspecs/docbook.xds.in.h:140 ../dispspecs/website-webpage.xds.in.h:79
-#, fuzzy
 msgid "Structure Name"
-msgstr "Strukturální"
+msgstr "Název struktury"
 
 #: ../dispspecs/docbook.xds.in.h:141 ../dispspecs/website-webpage.xds.in.h:80
 msgid "Subsection"
-msgstr ""
+msgstr "Pododdíl"
 
 #: ../dispspecs/docbook.xds.in.h:142 ../dispspecs/website-webpage.xds.in.h:81
 msgid "Subsection (level 3)"
-msgstr ""
+msgstr "Pododdíl (úroveň 3)"
 
 #: ../dispspecs/docbook.xds.in.h:143 ../dispspecs/website-webpage.xds.in.h:82
 msgid "Subsection (level 4)"
-msgstr ""
+msgstr "Pododdíl (úroveň 4)"
 
 #: ../dispspecs/docbook.xds.in.h:144 ../dispspecs/website-webpage.xds.in.h:83
 msgid "Substeps"
-msgstr ""
+msgstr "Dílčí kroky"
 
 #: ../dispspecs/docbook.xds.in.h:145 ../dispspecs/website-webpage.xds.in.h:84
 msgid "Subsubsection"
-msgstr ""
+msgstr "Podpododdíl"
 
 #: ../dispspecs/docbook.xds.in.h:146 ../dispspecs/forrest-document.xds.in.h:37
 #: ../dispspecs/website-webpage.xds.in.h:85
-#, fuzzy
 msgid "Subtitle"
-msgstr "<nepojmenovaný>"
+msgstr "Podnázev"
 
 #: ../dispspecs/docbook.xds.in.h:147 ../dispspecs/website-webpage.xds.in.h:86
-#, fuzzy
 msgid "Surname"
-msgstr "nepojmenovaný"
+msgstr "Příjmení"
 
 #: ../dispspecs/docbook.xds.in.h:148 ../dispspecs/website-webpage.xds.in.h:87
 msgid "Symbol"
-msgstr ""
+msgstr "Symbol"
 
 #: ../dispspecs/docbook.xds.in.h:149 ../dispspecs/website-webpage.xds.in.h:88
 msgid "Synopsis (syntax)"
-msgstr ""
+msgstr "Přehled (syntaxe)"
 
 #: ../dispspecs/docbook.xds.in.h:150 ../dispspecs/website-webpage.xds.in.h:89
 msgid "Table (informal)"
-msgstr "Tabulka (běžná)"
+msgstr "Tabulka (neformální)"
 
 #: ../dispspecs/docbook.xds.in.h:151 ../dispspecs/xhtml1-strict.xds.in.h:68
-#, fuzzy
 msgid "Table Body"
-msgstr "Řádek tabulky"
+msgstr "Tělo tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:152
 msgid "Table Column Specification"
-msgstr ""
+msgstr "Specifikace sloupce tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:153 ../src/plugin-table.c:417
 msgid "Table Entry"
 msgstr "Položka tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:154
-#, fuzzy
 msgid "Table Entry (subtable)"
-msgstr "Položka tabulky"
+msgstr "Položka tabulky (podřízená tabulka)"
 
 #: ../dispspecs/docbook.xds.in.h:155 ../dispspecs/xhtml1-strict.xds.in.h:71
-#, fuzzy
 msgid "Table Footer"
-msgstr "Položka tabulky"
+msgstr "Zápatí tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:156 ../src/plugin-table.c:405
 msgid "Table Group"
-msgstr "Skupina tabulek"
+msgstr "Skupina tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:72
-#, fuzzy
 msgid "Table Header"
-msgstr "Hlavička XML"
+msgstr "Záhlaví tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:158 ../dispspecs/xhtml1-strict.xds.in.h:73
 #: ../src/plugin-table.c:411
@@ -891,33 +832,36 @@ msgstr "Řádek tabulky"
 
 #: ../dispspecs/docbook.xds.in.h:159 ../dispspecs/teixlite.xds.in.h:250
 #: ../dispspecs/website-webpage.xds.in.h:90
-#, fuzzy
 msgid "Term"
-msgstr "Podmínky"
+msgstr "Termín"
 
 #: ../dispspecs/docbook.xds.in.h:160
 msgid "Text Object"
-msgstr ""
+msgstr "Textový objekt"
 
 #: ../dispspecs/docbook.xds.in.h:161 ../dispspecs/website-webpage.xds.in.h:91
 msgid "The International Standard Book Number of a document."
 msgstr ""
+"Mezinárodně standardizované číslo knihy (International Standard Book Number) "
+"pro dokument"
 
 #: ../dispspecs/docbook.xds.in.h:162 ../dispspecs/website-webpage.xds.in.h:92
 msgid "The International Standard Serial Number of a periodical."
 msgstr ""
+"Mezinárodně standardizované sériové číslo (International Standard Serial "
+"Number) pro periodikum"
 
 #: ../dispspecs/docbook.xds.in.h:163 ../dispspecs/website-webpage.xds.in.h:93
 msgid "The first place where a word or term occurs in a particular context"
-msgstr ""
+msgstr "První místo, kde se slovo nebo termín vyskytují v konkrétním kontextu"
 
 #: ../dispspecs/docbook.xds.in.h:164 ../dispspecs/website-webpage.xds.in.h:94
 msgid "The name of a function, subroutine or procedure"
-msgstr ""
+msgstr "Název funkce, podprogramu nebo procedury"
 
 #: ../dispspecs/docbook.xds.in.h:165 ../dispspecs/website-webpage.xds.in.h:95
 msgid "The printed text on a particular key on a keyboard"
-msgstr ""
+msgstr "Potisk na jednotlivé klávese klávesnice"
 
 #: ../dispspecs/docbook.xds.in.h:166
 msgid "Tip"
@@ -929,20 +873,19 @@ msgstr "Tip"
 #: ../dispspecs/website-webpage.xds.in.h:96
 #: ../dispspecs/xhtml1-strict.xds.in.h:76
 msgid "Title"
-msgstr "Titulek"
+msgstr "Název"
 
 #: ../dispspecs/docbook.xds.in.h:168 ../dispspecs/website-webpage.xds.in.h:97
-#, fuzzy
 msgid "Title Citation"
-msgstr "Nepojmenovaný oddíl"
+msgstr "Titulní citace"
 
 #: ../dispspecs/docbook.xds.in.h:169 ../dispspecs/website-webpage.xds.in.h:98
 msgid "URL Link"
-msgstr "URL odkaz"
+msgstr "Odkaz URL"
 
 #: ../dispspecs/docbook.xds.in.h:170
 msgid "User Input"
-msgstr ""
+msgstr "Uživatelský vstup"
 
 #: ../dispspecs/docbook.xds.in.h:171 ../dispspecs/forrest-document.xds.in.h:47
 msgid "Warning"
@@ -956,81 +899,75 @@ msgstr "Rok"
 #: ../dispspecs/forrest-document.xds.in.h:3 ../dispspecs/teixlite.xds.in.h:64
 #: ../dispspecs/xhtml1-strict.xds.in.h:5
 msgid "Anchor"
-msgstr ""
+msgstr "Kotva"
 
 #: ../dispspecs/forrest-document.xds.in.h:4
 msgid "Apache Documentation DTD v1.2"
-msgstr "Apache dokumentace DTD verze 1.2"
+msgstr "Apache Documentation DTD v1.2"
 
 #: ../dispspecs/forrest-document.xds.in.h:5
 msgid "Authors"
-msgstr ""
+msgstr "Autoři"
 
 #: ../dispspecs/forrest-document.xds.in.h:7
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:9
 #: ../dispspecs/teixlite.xds.in.h:93 ../dispspecs/xhtml1-strict.xds.in.h:16
-#, fuzzy
 msgid "Code"
-msgstr "Výběr"
+msgstr "Kód"
 
 #: ../dispspecs/forrest-document.xds.in.h:8
 msgid "Defined term"
-msgstr ""
+msgstr "Definice termínu"
 
 #: ../dispspecs/forrest-document.xds.in.h:10
 msgid "Definition list"
-msgstr ""
+msgstr "Seznam definic"
 
 #: ../dispspecs/forrest-document.xds.in.h:11 ../dispspecs/readme.xds.in.h:4
 #: ../src/cong-document.c:988
+#, c-format
 msgid "Document"
 msgstr "Dokument"
 
 #: ../dispspecs/forrest-document.xds.in.h:12
-#, fuzzy
 msgid "Document body"
-msgstr "Typ dokumentu"
+msgstr "Tělo dokumentu"
 
 #: ../dispspecs/forrest-document.xds.in.h:15
-#, fuzzy
 msgid "Fixme"
-msgstr "_Soubor"
+msgstr "K opravě"
 
 #: ../dispspecs/forrest-document.xds.in.h:16
-#, fuzzy
 msgid "Footer"
-msgstr "Povýšit"
+msgstr "Zápatí"
 
 #: ../dispspecs/forrest-document.xds.in.h:17
-#, fuzzy
 msgid "Fork"
-msgstr "Vnutit"
+msgstr "Rozvětvení"
 
 #: ../dispspecs/forrest-document.xds.in.h:18
-#, fuzzy
 msgid "Header"
-msgstr "Hlavička XML"
+msgstr "Záhlaví"
 
 #: ../dispspecs/forrest-document.xds.in.h:19
 msgid "Icon"
-msgstr ""
+msgstr "Ikona"
 
 #: ../dispspecs/forrest-document.xds.in.h:20
 msgid "Img"
-msgstr ""
+msgstr "Obrázek"
 
 #: ../dispspecs/forrest-document.xds.in.h:22
 msgid "Jump"
-msgstr ""
+msgstr "Skok"
 
 #: ../dispspecs/forrest-document.xds.in.h:23
 msgid "Legal info"
-msgstr ""
+msgstr "Právní informace"
 
 #: ../dispspecs/forrest-document.xds.in.h:24
-#, fuzzy
 msgid "Line break"
-msgstr "Číslo řádku"
+msgstr "Zalomení řádku"
 
 #: ../dispspecs/forrest-document.xds.in.h:25
 #: ../dispspecs/xhtml1-strict.xds.in.h:46
@@ -1046,41 +983,36 @@ msgstr "Seznam (neuspořádaný)"
 
 #: ../dispspecs/forrest-document.xds.in.h:28
 msgid "List item"
-msgstr ""
+msgstr "Položka seznamu"
 
 #: ../dispspecs/forrest-document.xds.in.h:30
-#, fuzzy
 msgid "Notice"
-msgstr "Výběr"
+msgstr "Poznámka"
 
 #: ../dispspecs/forrest-document.xds.in.h:32
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:27
-#, fuzzy
 msgid "Person"
-msgstr "Verze"
+msgstr "Osoba"
 
 #: ../dispspecs/forrest-document.xds.in.h:34
-#, fuzzy
 msgid "Source"
-msgstr "Vnutit"
+msgstr "Zdrojový kód"
 
 #: ../dispspecs/forrest-document.xds.in.h:35
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:31
 #: ../dispspecs/xhtml1-strict.xds.in.h:63
 msgid "Strong"
-msgstr ""
+msgstr "Zesíleně"
 
 #: ../dispspecs/forrest-document.xds.in.h:36
 #: ../dispspecs/xhtml1-strict.xds.in.h:65
-#, fuzzy
 msgid "Subscript"
-msgstr "Popis"
+msgstr "Dolní index"
 
 #: ../dispspecs/forrest-document.xds.in.h:38
 #: ../dispspecs/xhtml1-strict.xds.in.h:66
-#, fuzzy
 msgid "Superscript"
-msgstr "Popis"
+msgstr "Horní index"
 
 #: ../dispspecs/forrest-document.xds.in.h:39
 #: ../dispspecs/teixlite.xds.in.h:245 ../dispspecs/xhtml1-strict.xds.in.h:67
@@ -1088,16 +1020,14 @@ msgid "Table"
 msgstr "Tabulka"
 
 #: ../dispspecs/forrest-document.xds.in.h:40
-#, fuzzy
 msgid "Table cell"
-msgstr "Řádek tabulky"
+msgstr "Buňka tabulky"
 
 #: ../dispspecs/forrest-document.xds.in.h:41
 msgid "Table header cell"
-msgstr ""
+msgstr "Buňka záhlaví tabulky"
 
 #: ../dispspecs/forrest-document.xds.in.h:42
-#, fuzzy
 msgid "Table row"
 msgstr "Řádek tabulky"
 
@@ -1108,10 +1038,10 @@ msgid ""
 "compliant DTD and it's maintained by the Apache XML project. See http://"
 "forrest.apache.org ."
 msgstr ""
-"DTD bylo vyvíjeno pro vytvoření jednoduchého výkonného typu dokumentu za "
-"účelem dokumentaci softwaru s použitím v Apache projektech. Je to XML-"
-"compliant TD podporovaný Apache XML projektem. Viz. http://forrest.apache."
-"org/."
+"Tato DTD byla vyvinuta k vytvoření jednoduchého ale mocného typu dokumentu, "
+"který slouží k dokumentaci softwaru pro potřeby projektu Apache. Jedná se o "
+"DTD vyhovující XML a je spravováno projektem Apache XML. Viz http://forrest."
+"apache.org ."
 
 #: ../dispspecs/forrest-document.xds.in.h:45
 #: ../glade/cong-file-properties.glade.h:17
@@ -1126,165 +1056,161 @@ msgstr "Verze"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:1
 msgid "&quot;Kernel Traffic&quot; Newsletter"
-msgstr ""
+msgstr "Zpravodaj „Kernel Traffic“"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid ""
 "A newsletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
 msgstr ""
-"Informační bulletin o vývoji projektů s Volným/Otevřeným softwarem ve světě."
+"Zpravodaj sledující technický vývoj projektů ze světa svobodného a "
+"otevřeného softwaru"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:4
 msgid "Block Quote"
-msgstr ""
+msgstr "Dlouhá citace"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:5
 #: ../dispspecs/xhtml1-strict.xds.in.h:12
 msgid "Bold"
-msgstr ""
+msgstr "Tučně"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:6
 msgid "Break (manual)"
-msgstr ""
+msgstr "Zalomení (ruční)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:7
 msgid "Centered"
-msgstr ""
+msgstr "Na střed"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:8
-#, fuzzy
 msgid "Cite"
-msgstr "Výběr"
+msgstr "Citace"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:10
-#, fuzzy
 msgid "Correction"
-msgstr "Umístění"
+msgstr "Oprava"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:12
 msgid "Editorialize"
-msgstr ""
+msgstr "Redakční doplnění"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:14
 msgid "Font"
-msgstr ""
+msgstr "Písmo"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:15
 #: ../dispspecs/xhtml1-strict.xds.in.h:30
 msgid "Heading (level 1)"
-msgstr ""
+msgstr "Nadpis (úroveň 1)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:16
 #: ../dispspecs/xhtml1-strict.xds.in.h:31
 msgid "Heading (level 2)"
-msgstr ""
+msgstr "Nadpis (úroveň 2)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:17
 #: ../dispspecs/xhtml1-strict.xds.in.h:32
 msgid "Heading (level 3)"
-msgstr ""
+msgstr "Nadpis (úroveň 3)"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:18
 msgid "Hyperlink"
-msgstr ""
+msgstr "Hypertextový odkaz"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:20
 msgid "Issue"
-msgstr ""
+msgstr "Vydání"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:21
 msgid "Italicised"
-msgstr ""
+msgstr "Kurzíva"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:22
 msgid "Kernel Cousin Newsletter"
-msgstr ""
+msgstr "Zpravodaj z projektů příbuzných k jádru"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:28
-#, fuzzy
 msgid "Quotation"
-msgstr "Zápis"
+msgstr "Citace"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:30
 #: ../glade/cong-file-properties.glade.h:15
 msgid "Statistics"
-msgstr "Statistika"
+msgstr "Statistiky"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:33
 msgid "Topic"
-msgstr ""
+msgstr "Téma"
 
 #. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:35
 msgid "Translator"
-msgstr "Miloslav Trmač <mitr@volny.cz>Lukáš Novotný <lenochod@tiscali.cz>"
+msgstr "Překladatel"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:36
 msgid "Underlined"
-msgstr ""
+msgstr "Podtrženě"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:37
 msgid "Version Control Activity"
-msgstr ""
+msgstr "Aktivita správy verzí"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:38
 msgid "Version Control Statistics"
-msgstr ""
+msgstr "Statistiky správy verzí"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:39
 msgid "Version Control Tree"
-msgstr ""
+msgstr "Strom správy verzí"
 
 #: ../dispspecs/opml.xds.in.h:1
 msgid "Apple OPML dispspec"
-msgstr "Apple OPML dispspec"
+msgstr "Definice zobrazení Apple OPML"
 
 #: ../dispspecs/opml.xds.in.h:2
 msgid "Experimental \"opml\" format"
-msgstr ""
+msgstr "Experimentální formát „opml“"
 
 #: ../dispspecs/readme.xds.in.h:1
-#, fuzzy
 msgid "Admission"
-msgstr "Upozornění"
+msgstr "Přijetí"
 
 #: ../dispspecs/readme.xds.in.h:2
-#, fuzzy
 msgid "Corp jargon"
-msgstr "Přecházet přes _okraj"
+msgstr "Firemní žargon"
 
 #: ../dispspecs/readme.xds.in.h:3
 msgid "Disclaimer"
-msgstr ""
+msgstr "Odmítnutí"
 
 #: ../dispspecs/readme.xds.in.h:6
 msgid "Excuse"
-msgstr ""
+msgstr "Omluva"
 
 #: ../dispspecs/readme.xds.in.h:7
 msgid "Experimental \"readme\" format"
-msgstr ""
+msgstr "Experimentální formát „readme“"
 
 #: ../dispspecs/readme.xds.in.h:8
-#, fuzzy
 msgid "Inspirational"
-msgstr "Nepovinné"
+msgstr "Inspirující"
 
 #: ../dispspecs/readme.xds.in.h:10
-#, fuzzy
 msgid "Optimistic"
-msgstr "Statistika"
+msgstr "Optimistický"
 
 #: ../dispspecs/readme.xds.in.h:14 ../dispspecs/teixlite.xds.in.h:231
 msgid "Signature"
-msgstr ""
+msgstr "Podpis"
 
 #: ../dispspecs/readme.xds.in.h:15
 msgid ""
 "This is a document type associated with the \"readme\" file distributed with "
 "the initial prototype of Conglomerate."
 msgstr ""
+"Jedná se o typ dokumentu svázaný se souborem „readme“, šířený spolu s "
+"úvodním prototypem Conglomrate."
 
 #: ../dispspecs/relax-ng.xds.in.h:1 ../src/cong-node-properties-dialog.c:879
 msgid "Choice"
@@ -1292,25 +1218,23 @@ msgstr "Výběr"
 
 #: ../dispspecs/relax-ng.xds.in.h:2
 msgid "Define"
-msgstr ""
+msgstr "Definice"
 
 #: ../dispspecs/relax-ng.xds.in.h:3
 msgid "Empty"
-msgstr ""
+msgstr "Prázdný"
 
 #: ../dispspecs/relax-ng.xds.in.h:4 ../dispspecs/teixlite.xds.in.h:149
-#, fuzzy
 msgid "Group"
-msgstr "Skupina tabulek"
+msgstr "Seskupení"
 
 #: ../dispspecs/relax-ng.xds.in.h:5
-#, fuzzy
 msgid "OneOrMore"
 msgstr "Jeden nebo více"
 
 #: ../dispspecs/relax-ng.xds.in.h:6 ../src/cong-node-properties-dialog.c:914
 msgid "Optional"
-msgstr "Nepovinné"
+msgstr "Volitelné"
 
 #: ../dispspecs/relax-ng.xds.in.h:7
 msgid "RELAX NG"
@@ -1318,19 +1242,18 @@ msgstr "RELAX NG"
 
 #: ../dispspecs/relax-ng.xds.in.h:8
 msgid "RELAX NG Grammar"
-msgstr ""
+msgstr "Gramatika RELAX NG"
 
 #: ../dispspecs/relax-ng.xds.in.h:9
 msgid ""
 "RELAX NG is a schema language i.e. a language for describing the structure "
 "of an XML document."
 msgstr ""
-"RELAX NG je schéma jazyka, to znamená, jazyk popisující strukturu XML "
-"dokumentu."
+"RELAX NG je schématický jazyk, např. jazyk pro popis struktury dokumentu XML."
 
 #: ../dispspecs/relax-ng.xds.in.h:11
 msgid "Start"
-msgstr ""
+msgstr "Začátek"
 
 #: ../dispspecs/relax-ng.xds.in.h:12 ../dispspecs/teixlite.xds.in.h:251
 #: ../src/cong-node-properties-dialog.c:827
@@ -1343,7 +1266,7 @@ msgstr "Hodnota"
 
 #: ../dispspecs/relax-ng.xds.in.h:14
 msgid "XML Attribute"
-msgstr "XML atribut"
+msgstr "Atribut XML"
 
 #: ../dispspecs/relax-ng.xds.in.h:16
 msgid "ZeroOrMore"
@@ -1354,6 +1277,8 @@ msgid ""
 "A bibliographic description of the copy text(s) from which an electronic "
 "text was derived or generated"
 msgstr ""
+"Bibliografický popis kopie textu či textů, ze kterého byl odvozen nebo "
+"vygenerován text v elektronické podobě"
 
 #: ../dispspecs/teixlite.xds.in.h:2
 msgid ""
@@ -1361,20 +1286,25 @@ msgid ""
 "letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
 "of heading or trailer"
 msgstr ""
+"Stručný popis místa, data, času apod., který vytvořenému dopisu, novinovému "
+"článku nebo jiné práci předchází nebo ji následuje jako jakési záhlaví nebo "
+"dovětek"
 
 #: ../dispspecs/teixlite.xds.in.h:3
 msgid ""
 "A brief prose description of the appearance or content of a graphic figure, "
 "for use when documenting an image without displaying it"
 msgstr ""
+"Stručný prozaický popis vzhledu nebo obsahu obrázku pro situace, kdy je "
+"dokument použit bez zobrazení obrázku"
 
 #: ../dispspecs/teixlite.xds.in.h:4
 msgid "A closing title or footer appearing at the end of a division of a text"
-msgstr ""
+msgstr "Závěrečný titulek nebo zápatí objevující se na konci členění textu"
 
 #: ../dispspecs/teixlite.xds.in.h:5
 msgid "A date in any format"
-msgstr "Datum v jakémkoliv formátu"
+msgstr "Datum v libovolném formátu"
 
 #: ../dispspecs/teixlite.xds.in.h:6
 msgid ""
@@ -1382,46 +1312,56 @@ msgid ""
 "the languages and sublanguages used, the situation in which it was produced, "
 "the participants and their setting"
 msgstr ""
+"Podrobný popis nebibliografických aspektů textu, především použité jazyky a "
+"podjazyky, situace, za které byl vytvořen, účastníci a jejich nastavení"
 
 #: ../dispspecs/teixlite.xds.in.h:7
 msgid "A fifth-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Pátá úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:8
 msgid ""
 "A first-level subdivision of the front, body, or back of a text (the "
 "largest, if &lt;div0&gt; is not used, the second largest if it is)"
 msgstr ""
+"První úroveň členění textu přední strany, hlavní části nebo zadní strany "
+"(největší, pokud není použito &lt;div0&gt;, jinak druhá největší)"
 
 #: ../dispspecs/teixlite.xds.in.h:9
 msgid ""
 "A formal list or prose description of the topics addressed by a subdivision "
 "of a text"
-msgstr ""
+msgstr "Formální seznam nebo prozaický popis témat daných členěním textu"
 
 #: ../dispspecs/teixlite.xds.in.h:10
 msgid "A fourth-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Čtvrtá úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:11
 msgid "A full bibliographic description of an electronic file"
-msgstr ""
+msgstr "Úplný bibliografický popis elektronického souboru"
 
 #: ../dispspecs/teixlite.xds.in.h:12
 msgid ""
 "A fully-structured bibliographic citation, in which all components of the "
 "TEI file description are present"
 msgstr ""
+"Plně strukturovaná bibliografická citace, ve které se nachází všechny "
+"komponenty popisující soubor TEI"
 
 #: ../dispspecs/teixlite.xds.in.h:13
 msgid ""
 "A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
 "verse paragraph, etc."
 msgstr ""
+"Skupina řádků s verši fungující jako formální jednotka, např. sloka, refrén, "
+"veršovaný odstavec apod."
 
 #: ../dispspecs/teixlite.xds.in.h:14
 msgid "A keyword in some formal language"
-msgstr ""
+msgstr "Klíčové slovo v nějakém formálním jazyce"
 
 #: ../dispspecs/teixlite.xds.in.h:15
 msgid ""
@@ -1429,80 +1369,95 @@ msgid ""
 "as superfluous or spurious in the copy text by an author, scribe, annotator, "
 "or corrector"
 msgstr ""
+"Písmeno, slovo nebo pasáž, které byly smazány, označeny jako smazané nebo "
+"jinak označené jako nadbytečné nebo nežádoucí v kopírovaném textu autorem, "
+"spisovatelem, autorem poznámek nebo korektorem"
 
 #: ../dispspecs/teixlite.xds.in.h:16
 msgid "A list of bibliographic citations of any kind"
-msgstr ""
+msgstr "Seznam bibliografických citací libovolného druhu"
 
 #: ../dispspecs/teixlite.xds.in.h:17
 msgid "A list of keywords or phrases identifying the topic or nature of a text"
-msgstr ""
+msgstr "Seznam klíčových slov nebo frází určujících téma nebo povahu textu"
 
 #: ../dispspecs/teixlite.xds.in.h:18
 msgid ""
 "A loosely-structured bibliographic citation of which the sub-components may "
 "or may not be explicitly localNameged"
 msgstr ""
+"Volně strukturovaná bibliografická citace, jejíž dílčí komponenty mohou mít "
+"nebo nemusí mít jednoznačně přidělený atribut s názvem localName"
 
 #: ../dispspecs/teixlite.xds.in.h:19
 msgid "A mathematical or other formula"
-msgstr ""
+msgstr "Matematický nebo jiný vzorec"
 
 #: ../dispspecs/teixlite.xds.in.h:20
 msgid "A note of any type"
-msgstr ""
+msgstr "Poznámka libovolného typu"
 
 #: ../dispspecs/teixlite.xds.in.h:21
 msgid "A number, written in any form"
-msgstr ""
+msgstr "Číslo zapsané v libovolné formě"
 
 #: ../dispspecs/teixlite.xds.in.h:22
 msgid "A phrase defining a time of day in any format"
-msgstr ""
+msgstr "Vyjádření definující čas v průběhu dne v libovolném formátu"
 
 #: ../dispspecs/teixlite.xds.in.h:23
 msgid ""
 "A phrase describing the nature of a person's intellectual responsibility"
-msgstr ""
+msgstr "Fráze popisující druh intelektuální odpovědnosti osoby"
 
 #: ../dispspecs/teixlite.xds.in.h:24
 msgid ""
 "A phrase or word used to provide a gloss or definition for some other word "
 "or phrase"
 msgstr ""
+"Fráze nebo slovo poskytující vysvětlivku nebo definici pro nějaké jiné slovo "
+"nebo frázi"
 
 #: ../dispspecs/teixlite.xds.in.h:25
 msgid ""
 "A pointer to another location in the current document in terms of one or "
 "more identifiable elements"
 msgstr ""
+"Ukazatel na jiné umístění v současném dokumentu pomocí jednoho nebo více "
+"identifikovatelných elementů"
 
 #: ../dispspecs/teixlite.xds.in.h:26
 msgid ""
 "A pointer to another location in the current document or an external document"
 msgstr ""
+"Ukazatel na jiné umístění v současném dokumentu nebo externím dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:27
 msgid ""
 "A postal or other address, for example of a publisher, an organization, or "
 "an individual"
 msgstr ""
+"Poštovní nebo jiná adresa, například vydavatele, organizace nebo soukromá"
 
 #: ../dispspecs/teixlite.xds.in.h:28
 msgid "A proper noun or noun phrase"
-msgstr ""
+msgstr "Vlastní jméno nebo jmenná fráze"
 
 #: ../dispspecs/teixlite.xds.in.h:29
 msgid ""
 "A prose description of the rationale and methods used in sampling texts in "
 "the creation of a corpus or collection"
 msgstr ""
+"Prozaický popis principu nebo metod použitých v ukázkových textech při "
+"tvorbě korpusu nebo sbírky"
 
 #: ../dispspecs/teixlite.xds.in.h:30
 msgid ""
 "A quotation from some other document, together with a bibliographic "
 "reference to its source"
 msgstr ""
+"Citace z nějakého jiného dokumentu spolu s bibliografickým odkazem na zdroj "
+"původu"
 
 #: ../dispspecs/teixlite.xds.in.h:31
 msgid ""
@@ -1512,22 +1467,33 @@ msgid ""
 "dictionaries, &lt;q&gt; may be used to mark real or contrived examples of "
 "usage"
 msgstr ""
+"Citace nebo zdánlivá citace – ve vyřčené podobě nebo zaznamenaná myšlenka "
+"tak, jak je citována od někde jinde (ať jde ve skutečnosti o citaci nebo "
+"ne); ve vyprávění jsou to obvykle výroky hrdinů nebo řečníků; ve slovnících "
+"může být &lt;q&gt; použito k vyznačení reálných nebo smyšlených příkladů "
+"použití"
 
 #: ../dispspecs/teixlite.xds.in.h:32
 msgid ""
 "A quotation, anonymous or attributed, appearing at the start of a section or "
 "chapter, or on a title page"
 msgstr ""
+"Citace, anonymní nebo připsaná, objevující se na začátku oddílu nebo "
+"kapitoly a nebo na titulní stránce"
 
 #: ../dispspecs/teixlite.xds.in.h:33
 msgid "A reading which has been regularized or normalized in some sense"
 msgstr ""
+"Čtení, které bylo upraveno pravidlem nebo normalizováno v nějakém smyslu"
 
 #: ../dispspecs/teixlite.xds.in.h:34
 msgid ""
 "A reference to another location in the current document, in terms of one or "
 "more identifiable elements, possibly modified by additional text or comment"
 msgstr ""
+"Odkaz na jiné místo v aktuálním dokumentu, v podobě vyjádření jednoho nebo "
+"více identifikovatelných elementů, eventuálně upravené pomocí doplňujícího "
+"textu nebo komentáře"
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid ""
@@ -1535,6 +1501,9 @@ msgid ""
 "document, using an extended pointer notation, possibly modified by "
 "additional text or comment"
 msgstr ""
+"Odkaz na jiné místo v aktuálním dokumentu nebo externí dokument a to pomocí "
+"rozšířené notace ukazatele, eventuálně upravené pomocí doplňujícího textu "
+"nebo komentáře"
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid ""
@@ -1542,54 +1511,66 @@ msgid ""
 "other division of a text, or the salutation in the closing of a letter, "
 "preface, etc."
 msgstr ""
+"Oslovení nebo uvítání před úvodem, věnovací stranou nebo jinou částí textu a "
+"nebo pozdrav v závěru dopisu, předmluvě apod."
 
 #: ../dispspecs/teixlite.xds.in.h:37
 msgid "A second-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Druhá úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:38
 msgid "A sentence-like division of a text"
-msgstr ""
+msgstr "Dělení textu do podoby vět"
 
 #: ../dispspecs/teixlite.xds.in.h:39
 msgid "A seventh-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Sedmá úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:40
 msgid ""
 "A short fragment of code in some formal language (often a programming "
 "language)"
 msgstr ""
+"Krátký úsek kódu v nějakém formálním jazyce (často v programovacím jazyce)"
 
 #: ../dispspecs/teixlite.xds.in.h:41
 msgid "A single example demonstrating the use of an element or attribute"
-msgstr ""
+msgstr "Jednoduchý příklad demonstrující použití elementu nebo atributu"
 
 #: ../dispspecs/teixlite.xds.in.h:42
 msgid ""
 "A single text of any kind, whether unitary or composite, for example a poem "
 "or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
 msgstr ""
+"Jeden text libovolného druhu, jedno zda unitární nebo složený, např. báseň "
+"nebo drama, sbírka esejí, román, slovník nebo korpus ukázek"
 
 #: ../dispspecs/teixlite.xds.in.h:43
 msgid "A single, possibly incomplete, line of verse"
-msgstr ""
+msgstr "Jeden, možno i neúplný, řádek s veršem"
 
 #: ../dispspecs/teixlite.xds.in.h:44
 msgid ""
 "A single-word, multi-word, or symbolic designation which is regarded as a "
 "technical term"
 msgstr ""
+"Jedno slovo, více slov nebo symbolické pojmenování, které jsou považovány za "
+"technický termín"
 
 #: ../dispspecs/teixlite.xds.in.h:45
 msgid "A sixth-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Šestá úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:46
 msgid ""
 "A specialized form of heading or label, giving the name of one or more "
 "speakers in a dramatic text or fragment"
 msgstr ""
+"Speciální forma hlavičky nebo návěští udávající jméno jednoho nebo více "
+"řečníků u dramatického textu nebo úryvku"
 
 #: ../dispspecs/teixlite.xds.in.h:47
 msgid ""
@@ -1597,226 +1578,247 @@ msgid ""
 "content of a text, edition, recording, or series, where the specialized "
 "elements for authors, editors, etc. do not suffice or do not apply"
 msgstr ""
+"Vyjádření zodpovědnosti za někoho zodpovědného za intelektuální obsah textu, "
+"vydání, záznamu nebo série, tam kde nejsou dostačující nebo nejsou použity "
+"elementy pro autory, editory atd."
 
 #: ../dispspecs/teixlite.xds.in.h:48
 msgid "A subdivision of the front, body, or back of a text"
-msgstr ""
+msgstr "Další členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:49
 msgid ""
 "A subsection or division of the title of a work, as indicated on a title page"
 msgstr ""
+"Další část nebo členění titulu práce, tak jak je uvedeno na titulní stránce"
 
 #: ../dispspecs/teixlite.xds.in.h:50
 msgid "A third-level subdivision of the front, body, or back of a text"
 msgstr ""
+"Třetí úroveň členění textu přední strany, hlavní části nebo zadní strany"
 
 #: ../dispspecs/teixlite.xds.in.h:51
 msgid ""
 "A word or phrase belonging to some language other than that of the "
 "surrounding text"
-msgstr ""
+msgstr "Slovo nebo fráze příslušející k jinému jazyku než ostatní text okolo"
 
 #: ../dispspecs/teixlite.xds.in.h:52
 msgid ""
 "A word or phrase for which the author or narrator indicates a disclaiming of "
 "responsibility, for example by the use of scare quotes or italics"
 msgstr ""
+"Slovo nebo fráze, u kterých autor nebo vypravěč naznačuje, že za ně neručí, "
+"a to např. použitím uvozovek nebo kurzívy"
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid ""
 "A word, phrase, or passage which cannot be transcribed with certainty "
 "because it is illegible or inaudible in the source"
 msgstr ""
+"Slovo, fráze nebo pasáž, která nemůže být přepsána s jistotou, protože je ve "
+"zdroji nečitelná nebo nesrozumitelná"
 
 #: ../dispspecs/teixlite.xds.in.h:54
 msgid "Abbr"
-msgstr "Abbr"
+msgstr "Zkratka"
 
 #: ../dispspecs/teixlite.xds.in.h:55
 msgid "Add"
-msgstr "Přidat"
+msgstr "Dodatek"
 
 #: ../dispspecs/teixlite.xds.in.h:57
 msgid "Address Line"
-msgstr ""
+msgstr "Řádek adresy"
 
 #: ../dispspecs/teixlite.xds.in.h:58
 msgid "An abbreviation of any sort"
-msgstr ""
+msgstr "Zkratka libovolného typu"
 
 #: ../dispspecs/teixlite.xds.in.h:59
 msgid "An edition statement as presented on a title page of a document"
-msgstr ""
+msgstr "Informace o vydání, jak je prezentována na titulní stránce dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:60
 msgid ""
 "An identifier of some kind, e.g. a variable name or the name of an SGML "
 "element or attribute"
 msgstr ""
+"Identifikátor libovolného druhu, např. název proměnné nebo název elementu či "
+"atributu SGML"
 
 #: ../dispspecs/teixlite.xds.in.h:61
 msgid ""
 "An individual descriptive category, possibly nested within a superordinate "
 "category, within a user-defined taxonomy"
 msgstr ""
+"Individuální popisná kategorie, případně vložená do nadřízené kategorie, v "
+"uživatelem definované taxonomii"
 
 #: ../dispspecs/teixlite.xds.in.h:62
 msgid ""
 "An individual speech in a performance text, or a passage presented as such "
 "in a prose or verse text"
 msgstr ""
+"Osobitá mluva v textu pro přednes nebo pasáž podání umělcem, jako je próza "
+"nebo veršovaný text"
 
 #: ../dispspecs/teixlite.xds.in.h:63
 msgid "An interpretative annotation which can be linked to a span of text"
-msgstr ""
+msgstr "Vysvětlivka, která může odkazovat na segment textu"
 
 #: ../dispspecs/teixlite.xds.in.h:65
 msgid "Anonymous Block (&lt;ab&gt;)"
-msgstr ""
+msgstr "Anonymní blok (&lt;ab&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:66
 msgid ""
 "Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
 "elements)"
 msgstr ""
+"Libovolná jednotka textu na úrovni slovního spojení (včetně dalším elementů "
+"&lt;seg&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:67
 msgid ""
 "Any heading, for example, the title of a section, or the heading of a list "
 "or glossary"
-msgstr ""
+msgstr "Libovolný nadpis, například nadpis oddílu nebo seznamu či slovníčku"
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
-msgstr ""
+msgstr "Libovolný druh režisérských pokynů v dramatickém textu nebo fragmentu"
 
 #: ../dispspecs/teixlite.xds.in.h:69
 msgid ""
 "Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
 "found at the start of a document, before the main body"
 msgstr ""
+"Úvodní část (záhlaví, titulní stránka, předmluva, věnování, atd.), která se "
+"nachází na začátku dokumentu, před jeho hlavní částí"
 
 #: ../dispspecs/teixlite.xds.in.h:70
 msgid "Any sequence of items organized as a list"
-msgstr ""
+msgstr "Řada položek uspořádaných jako seznam"
 
 #: ../dispspecs/teixlite.xds.in.h:71
 msgid ""
 "Any standard or non-standard number used to identify a bibliographic item"
 msgstr ""
+"Standardní nebo nestandardní číslo použité k identifikaci bibliografické "
+"položky"
 
 #: ../dispspecs/teixlite.xds.in.h:72
 msgid "Arbitrary Segment (&lt;seg&gt;)"
-msgstr ""
+msgstr "Libovolný segment (&lt;seg&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:73
-#, fuzzy
 msgid "Argument"
-msgstr "Dokument"
+msgstr "Argument"
 
 #: ../dispspecs/teixlite.xds.in.h:74
 msgid ""
 "Attaches an identifier to a point within a text, whether or not it "
 "corresponds with a textual element"
 msgstr ""
+"Připojuje identifikátor do místa v rámci textu, které může i nemusí "
+"odpovídat textovému elementu"
 
 #: ../dispspecs/teixlite.xds.in.h:76
 msgid "Authority"
-msgstr ""
+msgstr "Autorita"
 
 #: ../dispspecs/teixlite.xds.in.h:77
 msgid "Availability"
-msgstr ""
+msgstr "Dostupnost"
 
 #: ../dispspecs/teixlite.xds.in.h:78
 msgid "Back Matter"
-msgstr ""
+msgstr "Závěrečná část"
 
 #: ../dispspecs/teixlite.xds.in.h:79
 msgid "BiblFull"
-msgstr ""
+msgstr "Plná bibliografická citace"
 
 #: ../dispspecs/teixlite.xds.in.h:80
 msgid "Bibliographic Citation (&lt;bibl&gt;)"
-msgstr ""
+msgstr "Bibliografická citace (&lt;bibl&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:81
 msgid "Bibliographic Scope"
-msgstr ""
+msgstr "Bibliografický rozsah"
 
 #: ../dispspecs/teixlite.xds.in.h:82 ../dispspecs/xhtml1-strict.xds.in.h:11
 msgid "Body"
-msgstr ""
+msgstr "Tělo"
 
 #: ../dispspecs/teixlite.xds.in.h:83
 msgid "Byline"
-msgstr ""
+msgstr "Řádek se jménem autora"
 
 #: ../dispspecs/teixlite.xds.in.h:84
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: ../dispspecs/teixlite.xds.in.h:85
-#, fuzzy
 msgid "Category Description"
-msgstr "Popis"
+msgstr "Popis kategorie"
 
 #: ../dispspecs/teixlite.xds.in.h:86
-#, fuzzy
 msgid "Category Reference"
-msgstr "Odkaz na znaky Unicode"
+msgstr "Seznam kategorií"
 
 #: ../dispspecs/teixlite.xds.in.h:87
 msgid "Cell"
-msgstr ""
+msgstr "Buňka"
 
 #: ../dispspecs/teixlite.xds.in.h:88
 msgid "Change"
-msgstr ""
+msgstr "Změna"
 
 #: ../dispspecs/teixlite.xds.in.h:89 ../dispspecs/xhtml1-strict.xds.in.h:15
-#, fuzzy
 msgid "Citation"
-msgstr "Zápis"
+msgstr "Citace"
 
 #: ../dispspecs/teixlite.xds.in.h:90
 msgid "ClassCode"
-msgstr ""
+msgstr "Klasifikační kód"
 
 #: ../dispspecs/teixlite.xds.in.h:91
-#, fuzzy
 msgid "Classification Declaration"
-msgstr "Deklarace prostoru jmen"
+msgstr "Deklarace klasifikace"
 
 #: ../dispspecs/teixlite.xds.in.h:92
-#, fuzzy
 msgid "Closer"
-msgstr "_Zavřít"
+msgstr "Uzavření"
 
 #: ../dispspecs/teixlite.xds.in.h:94
 msgid "Collects together &lt;interp&gt; tags"
-msgstr ""
+msgstr "Soustřeďuje dohromady značky &lt;interp&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:95
 msgid ""
 "Collects together any notes providing information about a text additional to "
 "that recorded in other parts of the bibliographic description"
 msgstr ""
+"Shrnuje dohromady libovolné poznámky poskytující informace o textových "
+"dodatcích, které jsou zaznamenány v ostatních částech bibliografického popisu"
 
 #: ../dispspecs/teixlite.xds.in.h:96
 msgid "Contains a general purpose name or referring string"
-msgstr ""
+msgstr "Obsahuje název pro obecné účely nebo odkazující řetězec"
 
 #: ../dispspecs/teixlite.xds.in.h:97
 msgid ""
 "Contains a single TEI-conformant document, comprising a TEI header and a "
 "text, either in isolation or as part of a &lt;teiCorpus&gt; element"
 msgstr ""
+"Obsahuje jeden dokument vyhovující TEI a zahrnující hlavičku TEI a text, buď "
+"odděleně nebo jako část elementu &lt;teiCorpus&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:98
 msgid "Contains any appendixes, etc. following the main part of a text"
-msgstr ""
+msgstr "Obsahuje různé přílohy apod., následující za hlavní částí textu"
 
 #: ../dispspecs/teixlite.xds.in.h:99
 msgid ""
@@ -1824,40 +1826,46 @@ msgid ""
 "container for phrase or inter level elements analogous to, but without the "
 "semantic baggage of, a paragraph"
 msgstr ""
+"Obsahuje libovolnou jednotku textu na úrovni komponenty, přičemž vystupuje "
+"jako anonymní kontejner pro frázi nebo podobně jako elementy interní úrovně, "
+"ale bez sémantického balastu, odstavec"
 
 #: ../dispspecs/teixlite.xds.in.h:100
 msgid "Contains text displayed in tabular form, in rows and columns"
-msgstr ""
+msgstr "Obsahuje text zobrazený ve formě tabulky, v řádcích a sloupcích"
 
 #: ../dispspecs/teixlite.xds.in.h:101
 msgid "Correct Form"
-msgstr ""
+msgstr "Správná forma"
 
 #: ../dispspecs/teixlite.xds.in.h:102
-#, fuzzy
 msgid "Creation"
-msgstr "Bretonština"
+msgstr "Vytvoření"
 
 #: ../dispspecs/teixlite.xds.in.h:104
 msgid "Dateline"
-msgstr ""
+msgstr "Řádek s datem"
 
 #: ../dispspecs/teixlite.xds.in.h:105
 msgid ""
 "Defines a typology used to classify texts either implicitly, by means of a "
 "bibliographic citation, or explicitly by a structured taxonomy"
 msgstr ""
+"Definuje typologie použitou ke klasifikaci textů, buď implicitně "
+"prostřednictvím bibliografické citace nebo explicitně strukturovanou "
+"taxonomií"
 
 #: ../dispspecs/teixlite.xds.in.h:106
 msgid ""
 "Defines the scope of a bibliographic reference, for example as a list of "
 "pagenumbers, or a named subdivision of a larger work"
 msgstr ""
+"Definuje rozsah bibliografického odkazu, například jako seznam s čísly "
+"stránek nebo pojmenovaný pododdíl rozsáhlé práce"
 
 #: ../dispspecs/teixlite.xds.in.h:107
-#, fuzzy
 msgid "Del"
-msgstr "Detaily"
+msgstr "Smazáno"
 
 #: ../dispspecs/teixlite.xds.in.h:108
 msgid ""
@@ -1865,6 +1873,9 @@ msgid ""
 "encoded, together with any other relevant information concerning the process "
 "by which it was assembled or collected"
 msgstr ""
+"Podrobně popisuje cíl nebo účel, kvůli kterému byl elektronický soubor "
+"zakódován, spolu s libovolnými dalšími souvisejícími informacemi, které se "
+"týkají postupu, kterým byl sestaven nebo sesbírán"
 
 #: ../dispspecs/teixlite.xds.in.h:109
 msgid ""
@@ -1872,12 +1883,17 @@ msgid ""
 "form of a brief prose description or in terms of the situational parameters "
 "used by the TEI formal &lt;textDesc&gt;"
 msgstr ""
+"Popisuje některou kategorii v rámci taxonomie nebo textové typologie, buď ve "
+"formě stručného prozaického popisu nebo z hlediska situačních parametrů "
+"použitých formální značkou TEI &lt;textDesc&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:110
 msgid ""
 "Details of editorial principles and practices applied during the encoding of "
 "a text"
 msgstr ""
+"Podrobnosti o redakčních postupech a praktikách použitých během kódování "
+"textu"
 
 #: ../dispspecs/teixlite.xds.in.h:111
 msgid "Distributor"
@@ -1885,218 +1901,217 @@ msgstr "Distributor"
 
 #: ../dispspecs/teixlite.xds.in.h:112
 msgid "Div"
-msgstr "Div"
+msgstr "Členění"
 
 #: ../dispspecs/teixlite.xds.in.h:113
 msgid "Div0"
-msgstr "Div0"
+msgstr "Členění 0"
 
 #: ../dispspecs/teixlite.xds.in.h:114
 msgid "Div1"
-msgstr "Div1"
+msgstr "Členění 1"
 
 #: ../dispspecs/teixlite.xds.in.h:115
 msgid "Div2"
-msgstr "Div2"
+msgstr "Členění 2"
 
 #: ../dispspecs/teixlite.xds.in.h:116
 msgid "Div3"
-msgstr "Div3"
+msgstr "Členění 3"
 
 #: ../dispspecs/teixlite.xds.in.h:117
 msgid "Div4"
-msgstr "Div4"
+msgstr "Členění 4"
 
 #: ../dispspecs/teixlite.xds.in.h:118
 msgid "Div5"
-msgstr "Div5"
+msgstr "Členění 5"
 
 #: ../dispspecs/teixlite.xds.in.h:119
 msgid "Div6"
-msgstr "Div6"
+msgstr "Členění 6"
 
 #: ../dispspecs/teixlite.xds.in.h:120
 msgid "Div7"
-msgstr "Div7"
+msgstr "Členění 7"
 
 #: ../dispspecs/teixlite.xds.in.h:121
 msgid "DivGen"
-msgstr "DivGen"
+msgstr "Generované členění"
 
 #: ../dispspecs/teixlite.xds.in.h:122
-#, fuzzy
 msgid "Document Author"
-msgstr "Dokument"
+msgstr "Autor dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:123
-#, fuzzy
 msgid "Document Date"
-msgstr "Typ dokumentu"
+msgstr "Datum dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:124
-#, fuzzy
 msgid "Document Edition"
-msgstr "Dokument"
+msgstr "Vydání dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:125
-#, fuzzy
 msgid "Document Imprint"
-msgstr "Fragment dokumentu"
+msgstr "Tiráž dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:126
-#, fuzzy
 msgid "Document Title"
-msgstr "Typ dokumentu"
+msgstr "Název dokumentu"
 
 #: ../dispspecs/teixlite.xds.in.h:127
 msgid ""
 "Documents the relationship between an electronic text and the source or "
 "sources from which it was derived"
 msgstr ""
+"Dokumentuje vztah mezi elektronickým textem a zdrojem nebo zdroji, ze "
+"kterých byl odvozen"
 
 #: ../dispspecs/teixlite.xds.in.h:129
 msgid "Edition Statement"
-msgstr ""
+msgstr "Údaje o edici"
 
 #: ../dispspecs/teixlite.xds.in.h:131
-#, fuzzy
 msgid "Editorial Declaration"
-msgstr "Deklarace entity"
+msgstr "Redakční prohlášení"
 
 #: ../dispspecs/teixlite.xds.in.h:133
-#, fuzzy
 msgid "Encoding Description"
-msgstr "Popis"
+msgstr "Popis kódování"
 
 #: ../dispspecs/teixlite.xds.in.h:134
 msgid "Epigraph"
-msgstr ""
+msgstr "Motto"
 
 #: ../dispspecs/teixlite.xds.in.h:135
 msgid "Example"
-msgstr "Varování"
+msgstr "Příklad"
 
 #: ../dispspecs/teixlite.xds.in.h:136
 msgid "Extended Pointer (xptr)"
-msgstr ""
+msgstr "Rozšířený ukazatel (xptr)"
 
 #: ../dispspecs/teixlite.xds.in.h:137
 msgid "Extended Reference (&lt;xref&gt;)"
-msgstr ""
+msgstr "Rozšířený odkaz (&lt;xref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
-msgstr ""
+msgstr "Velikost"
 
 #: ../dispspecs/teixlite.xds.in.h:140
-#, fuzzy
 msgid "Figure Description"
-msgstr "Popis"
+msgstr "Popis nákresu"
 
 #: ../dispspecs/teixlite.xds.in.h:141
-#, fuzzy
 msgid "File Description (fileDesc)"
-msgstr "(popis není k dispozici)"
+msgstr "Popis souboru (fileDesc)"
 
 #: ../dispspecs/teixlite.xds.in.h:142
-#, fuzzy
 msgid "Foreign"
-msgstr "Vnutit"
+msgstr "Cizí výraz"
 
 #: ../dispspecs/teixlite.xds.in.h:143
 msgid "Formula"
-msgstr ""
+msgstr "Vzorec"
 
 #: ../dispspecs/teixlite.xds.in.h:144
 msgid "Front Matter"
-msgstr ""
+msgstr "Úvodní část"
 
 #: ../dispspecs/teixlite.xds.in.h:145
-#, fuzzy
 msgid "Funder"
-msgstr "Hledat"
+msgstr "Financovatel"
 
 #: ../dispspecs/teixlite.xds.in.h:146
 msgid "Gap"
-msgstr ""
+msgstr "Vynechávka"
 
 #: ../dispspecs/teixlite.xds.in.h:147
 msgid "Generic Identifier (&lt;gi&gt;)"
-msgstr ""
+msgstr "Obecný identifikátor (&lt;gi&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:148
 msgid "Gloss"
-msgstr ""
+msgstr "Glosář"
 
 #: ../dispspecs/teixlite.xds.in.h:150
 msgid ""
 "Groups information about the series, if any, to which a publication belongs"
 msgstr ""
+"Seskupuje informace o sériích, pokud nějaké jsou, do kterých publikace náleží"
 
 #: ../dispspecs/teixlite.xds.in.h:151
 msgid ""
 "Groups information concerning the publication or distribution of an "
 "electronic or other text"
 msgstr ""
+"Seskupuje informace týkající se vydání nebo šíření elektronického nebo "
+"jiného textu"
 
 #: ../dispspecs/teixlite.xds.in.h:152
 msgid "Groups information relating to one edition of a text"
-msgstr ""
+msgstr "Seskupuje informace vztahující se k jedné edici textu"
 
 #: ../dispspecs/teixlite.xds.in.h:153
 msgid ""
 "Groups information relating to the publication or distribution of a "
 "bibliographic item"
 msgstr ""
+"Seskupuje informace vztahující se k vydání nebo šíření bibliografické položky"
 
 #: ../dispspecs/teixlite.xds.in.h:154
 msgid ""
 "Groups information which describes the nature or topic of a text in terms of "
 "a standard classification scheme, thesaurus, etc"
 msgstr ""
+"Seskupuje informace, které popisují povahu nebo téma textu v termínech "
+"standardního klasifikačního schématu, lexikonu atd."
 
 #: ../dispspecs/teixlite.xds.in.h:155
 msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a final group at the end of a division, especially of a letter"
 msgstr ""
+"Seskupuje řádek s datem, řádek se jménem autora, oslovení a další podobné "
+"fráze vyskytující se v závěrečné skupině na konci oddílu, především dopisu"
 
 #: ../dispspecs/teixlite.xds.in.h:156
 msgid ""
 "Groups together dateline, byline, salutation, and similar phrases appearing "
 "as a preliminary group at the start of a division, especially of a letter"
 msgstr ""
+"Seskupuje řádek s datem, řádek se jménem autora, oslovení a další podobné "
+"fráze vyskytující se v úvodní skupině na začátku oddílu, především dopisu"
 
 #: ../dispspecs/teixlite.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:29
 msgid "Head"
-msgstr ""
+msgstr "Nadpis"
 
 #: ../dispspecs/teixlite.xds.in.h:158
 msgid "Highlighted"
-msgstr ""
+msgstr "Zvýrazněno"
 
 #: ../dispspecs/teixlite.xds.in.h:159
-#, fuzzy
 msgid "Id. Number"
-msgstr "Číslo řádku"
+msgstr "Ident. číslo"
 
 #: ../dispspecs/teixlite.xds.in.h:160
 msgid "Ident"
-msgstr ""
+msgstr "Identifikátor"
 
 #: ../dispspecs/teixlite.xds.in.h:161
 msgid ""
 "Identifies the language being described in the writing system declaration"
-msgstr ""
+msgstr "Identifikuje jazyk, který je popsán v zápisu systémové deklarace"
 
 #: ../dispspecs/teixlite.xds.in.h:162
-#, fuzzy
 msgid "Imprint"
-msgstr "Vytisknout"
+msgstr "Tiráž"
 
 #: ../dispspecs/teixlite.xds.in.h:163
 msgid "Index"
-msgstr ""
+msgstr "Rejstřík"
 
 #: ../dispspecs/teixlite.xds.in.h:164
 msgid ""
@@ -2104,59 +2119,65 @@ msgid ""
 "whether for editorial reasons described in the TEI header, as part of "
 "sampling practice, or because the material is illegible or inaudible"
 msgstr ""
+"Ukazuje bod, ve kterém by materiál v přepisu vynechán, ať už z redakčních "
+"důvodů popsaných v hlavičce TEI, jako součást praktického hlediska výběru, "
+"nebo protože je materiál nečitelný nebo neslyšitelný"
 
 #: ../dispspecs/teixlite.xds.in.h:165
 msgid "Indicates the location of a graphic, illustration, or figure"
-msgstr ""
+msgstr "Udává umístění grafiky, ilustrace nebo nákresu"
 
 #: ../dispspecs/teixlite.xds.in.h:166
 msgid ""
 "Information about the availability of a text, for example any restrictions "
 "on its use or distribution, its copyright status, etc."
 msgstr ""
+"Informace o dostupnosti textu, například nějaká omezení na použití nebo "
+"šíření, stav autorských práv k němu, apod."
 
 #: ../dispspecs/teixlite.xds.in.h:167
 msgid "Information about the creation of a text"
-msgstr ""
+msgstr "Informace o vytvoření textu"
 
 #: ../dispspecs/teixlite.xds.in.h:168
 msgid "Information about the intended rendition of one or more elements"
-msgstr ""
+msgstr "Informace o plánovaném ztvárnění jednoho nebo více elementů"
 
 #: ../dispspecs/teixlite.xds.in.h:169
 msgid ""
 "Information about the title of a work and those responsible for its "
 "intellectual content"
 msgstr ""
+"Informace o názvu práce a o těch, kdo jsou zodpovědní za její intelektuální "
+"obsah"
 
 #: ../dispspecs/teixlite.xds.in.h:170
 msgid "Information about the usage of a specific element within a &lt;text&gt;"
-msgstr ""
+msgstr "Informace o použití určitého elementu v rámci &lt;text&gt;"
 
 #: ../dispspecs/teixlite.xds.in.h:171
 msgid "Interpretation"
-msgstr ""
+msgstr "Výklad"
 
 #: ../dispspecs/teixlite.xds.in.h:172
 msgid "Interpretation Group"
-msgstr ""
+msgstr "Skupina výkladů"
 
 #: ../dispspecs/teixlite.xds.in.h:173
 msgid "Item"
-msgstr ""
+msgstr "Položka"
 
 #: ../dispspecs/teixlite.xds.in.h:174
-#, fuzzy
 msgid "Keywords"
-msgstr "label_words"
+msgstr "Klíčová slova"
 
 #: ../dispspecs/teixlite.xds.in.h:175
 msgid "Kw"
-msgstr "Kw"
+msgstr "Klíčové slovo"
 
 #: ../dispspecs/teixlite.xds.in.h:176 ../dispspecs/xhtml1-strict.xds.in.h:44
 msgid "Label"
-msgstr ""
+msgstr "Návěští"
 
 #: ../dispspecs/teixlite.xds.in.h:177
 #: ../glade/docbook-common-properties.glade.h:2 ../src/plugin-docbook.c:2149
@@ -2164,24 +2185,24 @@ msgid "Language"
 msgstr "Jazyk"
 
 #: ../dispspecs/teixlite.xds.in.h:178
-#, fuzzy
 msgid "Language Usage"
-msgstr "Jazyk"
+msgstr "Použití jazyka"
 
 #: ../dispspecs/teixlite.xds.in.h:179
 msgid ""
 "Letters, words, or phrases inserted in the text by an author, scribe, "
 "annotator, or corrector"
 msgstr ""
+"Písmena, slova nebo fráze vložené v textu autorem, spisovatelem, autorem "
+"poznámek nebo korektorem"
 
 #: ../dispspecs/teixlite.xds.in.h:180
 msgid "Line Break"
-msgstr ""
+msgstr "Zalomení řádku"
 
 #: ../dispspecs/teixlite.xds.in.h:181
-#, fuzzy
 msgid "Line Group"
-msgstr "Skupina tabulek"
+msgstr "Skupina řádků"
 
 #: ../dispspecs/teixlite.xds.in.h:182
 msgid "List"
@@ -2189,187 +2210,190 @@ msgstr "Seznam"
 
 #: ../dispspecs/teixlite.xds.in.h:183
 msgid "ListBibl"
-msgstr ""
+msgstr "Bibliografický seznam"
 
 #: ../dispspecs/teixlite.xds.in.h:184
 msgid "Marks a location to be indexed for whatever purpose"
-msgstr ""
+msgstr "Označuje místo, které se má pro jakýkoliv účel indexovat"
 
 #: ../dispspecs/teixlite.xds.in.h:185
 msgid ""
 "Marks a word or phrase as graphically distinct from the surrounding text, "
 "for reasons concerning which no claim is made"
 msgstr ""
+"Označuje slovo nebo frázi, která se má graficky odlišit od okolního textu z "
+"důvodů, které se netýkají žádného tvrzení"
 
 #: ../dispspecs/teixlite.xds.in.h:186
 msgid "Marks paragraphs in prose"
-msgstr ""
+msgstr "Označuje odstavce v próze"
 
 #: ../dispspecs/teixlite.xds.in.h:187
 msgid ""
 "Marks the boundary between one page of a text and the next in a standard "
 "reference system"
 msgstr ""
+"Označuje hranice mezi stránku a následující stránkou textu ve standardním "
+"referenčním systému"
 
 #: ../dispspecs/teixlite.xds.in.h:188
 msgid ""
 "Marks the boundary between sections of a text, as indicated by changes in a "
 "standard reference system"
 msgstr ""
+"Označuje hranice mezi oddíly textu, jak jsou určeny změnami ve standardním "
+"referenčním systému"
 
 #: ../dispspecs/teixlite.xds.in.h:189
 msgid ""
 "Marks the start of a new (typographic) line in some edition or version of a "
 "text"
 msgstr ""
+"Označuje začátek nového (typografického) řádku v některém vydání nebo verzi "
+"textu"
 
 #: ../dispspecs/teixlite.xds.in.h:190
 msgid "Marks words or phrases mentioned, not used"
-msgstr ""
+msgstr "Označuje slova nebo fráze, které jsou zmíněny, ne použity"
 
 #: ../dispspecs/teixlite.xds.in.h:191
 msgid ""
 "Marks words or phrases which are stressed or emphasized for linguistic or "
 "rhetorical effect"
 msgstr ""
+"Označuje slova nebo fráze, které jsou zdůrazněny nebo zvýrazněny kvůli "
+"jazykovému nebo řečnickému efektu"
 
 #: ../dispspecs/teixlite.xds.in.h:192
 msgid "Mentioned"
-msgstr ""
+msgstr "Zmíněno"
 
 #: ../dispspecs/teixlite.xds.in.h:193
 msgid "Milestone"
-msgstr ""
+msgstr "Milník"
 
 #: ../dispspecs/teixlite.xds.in.h:196
 msgid "Notes Statement"
-msgstr ""
+msgstr "Blok s poznámkami"
 
 #: ../dispspecs/teixlite.xds.in.h:197
 msgid "Num"
-msgstr ""
+msgstr "Číslo"
 
 #: ../dispspecs/teixlite.xds.in.h:198
 msgid "One cell of a table"
-msgstr ""
+msgstr "Jedna buňka tabulky"
 
 #: ../dispspecs/teixlite.xds.in.h:199
 msgid "One component of a list"
-msgstr ""
+msgstr "Jedna položka seznamu"
 
 #: ../dispspecs/teixlite.xds.in.h:200
 msgid "One line of a postal or other address"
-msgstr ""
+msgstr "Jeden řádek poštovní nebo jiné adresy"
 
 #: ../dispspecs/teixlite.xds.in.h:201
 msgid ""
 "One or more taxonomies defining any classificatory codes used elsewhere in "
 "the text"
 msgstr ""
+"Jedna nebo více taxonomií definujících libovolné klasifikační kódy použité "
+"libovolně kdekoliv v textu"
 
 #: ../dispspecs/teixlite.xds.in.h:202
 msgid "One row of a table"
-msgstr ""
+msgstr "Jeden řádek tabulky"
 
 #: ../dispspecs/teixlite.xds.in.h:203
-#, fuzzy
 msgid "Opener"
-msgstr "Obecné"
+msgstr "Otevření"
 
 #: ../dispspecs/teixlite.xds.in.h:204
 msgid "Original Form"
-msgstr ""
+msgstr "Původní forma"
 
 #: ../dispspecs/teixlite.xds.in.h:205
-#, fuzzy
 msgid "Page Break"
-msgstr "Vložit před"
+msgstr "Zalomení stránky"
 
 #: ../dispspecs/teixlite.xds.in.h:207
-#, fuzzy
 msgid "Pointer"
-msgstr "Vytisknout"
+msgstr "Ukazatel"
 
 #: ../dispspecs/teixlite.xds.in.h:208
 msgid "Principal Researcher"
-msgstr ""
+msgstr "Hlavní badatel"
 
 #: ../dispspecs/teixlite.xds.in.h:209
-#, fuzzy
 msgid "Profile Description"
-msgstr "Popis"
+msgstr "Popis profilu"
 
 #: ../dispspecs/teixlite.xds.in.h:210
-#, fuzzy
 msgid "Project Description"
-msgstr "Popis"
+msgstr "Popis projektu"
 
 #: ../dispspecs/teixlite.xds.in.h:211
 msgid ""
 "Provides detailed information about the tagging applied to an SGML or XML "
 "document"
 msgstr ""
+"Poskytuje podrobné informace o značkování použitém na dokument SGML nebo XML"
 
 #: ../dispspecs/teixlite.xds.in.h:212
 msgid "Publication Place"
-msgstr ""
+msgstr "Místo vydání"
 
 #: ../dispspecs/teixlite.xds.in.h:213
 msgid "Publication Statement"
-msgstr ""
+msgstr "Údaje o vydání"
 
 #: ../dispspecs/teixlite.xds.in.h:215
 msgid "Quotation (&lt;q&gt;)"
-msgstr ""
+msgstr "Citace (&lt;q&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:216
 msgid "Ref"
-msgstr ""
+msgstr "Odkaz"
 
 #: ../dispspecs/teixlite.xds.in.h:217
-#, fuzzy
 msgid "References Declaration"
-msgstr "Deklarace elementu"
+msgstr "Deklarace odkazů"
 
 #: ../dispspecs/teixlite.xds.in.h:218
 msgid "Referencing String (&lt;rs&gt;)"
-msgstr ""
+msgstr "Odkazující řetězec (&lt;rs&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:219
 msgid "Reg"
-msgstr ""
+msgstr "Zpravidelnění"
 
 #: ../dispspecs/teixlite.xds.in.h:220
-#, fuzzy
 msgid "Rendition"
-msgstr "Revize"
+msgstr "Ztvárnění"
 
 #: ../dispspecs/teixlite.xds.in.h:221
 msgid "Resp"
-msgstr ""
+msgstr "Odpovědnost"
 
 #: ../dispspecs/teixlite.xds.in.h:222
 msgid "Responsibility Statement (respStmt)"
-msgstr ""
+msgstr "Vyjádření odpovědnosti (respStmt)"
 
 #: ../dispspecs/teixlite.xds.in.h:223
-#, fuzzy
 msgid "Revision Description"
-msgstr "Popis"
+msgstr "Popis revize"
 
 #: ../dispspecs/teixlite.xds.in.h:224
 msgid "Row"
-msgstr ""
+msgstr "Řádek"
 
 #: ../dispspecs/teixlite.xds.in.h:225
-#, fuzzy
 msgid "Salute"
-msgstr "Hodnota"
+msgstr "Oslovení"
 
 #: ../dispspecs/teixlite.xds.in.h:226
-#, fuzzy
 msgid "Sampling Declaration"
-msgstr "Deklarace prostoru jmen"
+msgstr "Ukázková deklarace"
 
 #: ../dispspecs/teixlite.xds.in.h:227
 msgid ""
@@ -2377,64 +2401,69 @@ msgid ""
 "the name of an individual, institution or organization, (or of several such) "
 "acting as editor, compiler, translator, etc."
 msgstr ""
+"Podružné vyjádření odpovědnosti za bibliografickou položku, například jméno "
+"jednotlivce, instituce nebo organizace (nebo několika takových) "
+"vystupujících jako editoři, zpracovatelé, překladatelé atd."
 
 #: ../dispspecs/teixlite.xds.in.h:228
 msgid "Sentence"
-msgstr ""
+msgstr "Věta"
 
 #: ../dispspecs/teixlite.xds.in.h:229
 msgid "Series Statement"
-msgstr ""
+msgstr "Údaj série"
 
 #: ../dispspecs/teixlite.xds.in.h:230
 msgid "Sic"
-msgstr ""
+msgstr "Sic"
 
 #: ../dispspecs/teixlite.xds.in.h:232
 msgid "So Called"
-msgstr ""
+msgstr "Takzvané"
 
 #: ../dispspecs/teixlite.xds.in.h:233
-#, fuzzy
 msgid "Source Description"
-msgstr "Popis"
+msgstr "Popis zdroje"
 
 #: ../dispspecs/teixlite.xds.in.h:234
-#, fuzzy
 msgid "Speaker"
-msgstr "Hledat"
+msgstr "Řečník"
 
 #: ../dispspecs/teixlite.xds.in.h:235
 msgid "Specifies how canonical references are constructed for this text"
-msgstr ""
+msgstr "Specifikuje jak jsou pro tento text konstruovány kanonické odkazy"
 
 #: ../dispspecs/teixlite.xds.in.h:236
 msgid ""
 "Specifies one or more defined categories within some taxonomy or text "
 "typology"
 msgstr ""
+"Vymezuje jednu nebo více definovaných kategorií v rámci nějaké taxonomie "
+"nebo textové typologie"
 
 #: ../dispspecs/teixlite.xds.in.h:237
 msgid "Speech (&lt;sp&gt;)"
-msgstr ""
+msgstr "Přednes (&lt;sp&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:238
 msgid "Sponsor"
-msgstr ""
+msgstr "Sponzor"
 
 #: ../dispspecs/teixlite.xds.in.h:239
 msgid "Stage Direction (&lt;stage&gt;)"
-msgstr ""
+msgstr "Režie (&lt;stage&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:240
 msgid ""
 "Summarizes a particular change or correction made to a particular version of "
 "an electronic text which is shared between several researchers"
 msgstr ""
+"Sumarizuje konkrétní změnu nebo opravu provedenou v konkrétní verzi "
+"elektronického textu, který je sdílen mezi několika badateli"
 
 #: ../dispspecs/teixlite.xds.in.h:241
 msgid "Summarizes the revision history for a file"
-msgstr ""
+msgstr "Souhrn historie revizí pro soubor"
 
 #: ../dispspecs/teixlite.xds.in.h:242
 msgid "TEI Lite"
@@ -2446,9 +2475,9 @@ msgid ""
 "information; the TEI Lite dtd is a subset of the powerful TEI dtds which "
 "comprises the most commonly used elements."
 msgstr ""
-"TEI (Text Encoding Initiative), viz http://www.tei-c.org/ pro více "
-"informací; TEI Lite dtd je odlehčená verze od TEI dtds, která obsahuje mnoho "
-"veřejně používaných elementů."
+"TEI znamená Text Encoding Initiative (Iniciativa pro kódování textu), více "
+"informací viz http://www.tei-c.org/ . DTD TEI Lite je podmnožinou mocných "
+"DTD TEI a zahrnuje většinu běžně používaných elementů."
 
 #: ../dispspecs/teixlite.xds.in.h:244
 msgid "TEI.2"
@@ -2456,35 +2485,35 @@ msgstr "TEI.2"
 
 #: ../dispspecs/teixlite.xds.in.h:246
 msgid "Tag Usage"
-msgstr ""
+msgstr "Použití značky"
 
 #: ../dispspecs/teixlite.xds.in.h:247
-#, fuzzy
 msgid "Tagging Declaration"
-msgstr "Deklarace entity"
+msgstr "Deklarace značkování"
 
 #: ../dispspecs/teixlite.xds.in.h:248
 msgid "Taxonomy"
-msgstr ""
+msgstr "Taxonomie"
 
 #: ../dispspecs/teixlite.xds.in.h:249
-#, fuzzy
 msgid "Tei Header"
-msgstr "Hlavička XML"
+msgstr "Hlavička TEI"
 
 #: ../dispspecs/teixlite.xds.in.h:252
 msgid "Text Classification"
-msgstr ""
+msgstr "Klasifikace textu"
 
 #: ../dispspecs/teixlite.xds.in.h:253
 msgid "Text reproduced although apparently incorrect or inaccurate"
-msgstr ""
+msgstr "Text reprodukovaný, ačkoliv je očividně nepřesný nebo chybný"
 
 #: ../dispspecs/teixlite.xds.in.h:254
 msgid ""
 "The approximate size of the electronic text as stored on some carrier "
 "medium, specified in any convenient units"
 msgstr ""
+"Odhadovaná velikost elektronického textu, který je uložen na nějakém nosném "
+"médiu, uvedená v libovolných vhodných jednotkách"
 
 #: ../dispspecs/teixlite.xds.in.h:255
 msgid ""
@@ -2492,151 +2521,183 @@ msgid ""
 "(or groups of such texts) which are regarded as a unit for some purpose, for "
 "example the collected works of an author, a sequence of prose essays, etc."
 msgstr ""
+"Tělo složeného textu seskupující dohromady sekvence různých textů (nebo "
+"skupin takovýchto textů), které jsou považovány za celek k určitému účelu, "
+"například sbírka prací jednoho autora, sled esejí apod."
 
 #: ../dispspecs/teixlite.xds.in.h:256
 msgid ""
 "The classification code used for this text in some standard classification "
 "system"
 msgstr ""
+"Klasifikační kód použitý pro tento text v některých standardních "
+"klasifikačních systémech"
 
 #: ../dispspecs/teixlite.xds.in.h:257
 msgid ""
 "The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
 "other division of a text"
 msgstr ""
+"Závěrečný pozdrav apod, připojený k úvodu, věnování nebo jinému oddílu textu"
 
 #: ../dispspecs/teixlite.xds.in.h:258
 msgid "The correct form of a passage apparently erroneous in the copy text"
-msgstr ""
+msgstr "Správná forma pasáže, která je v kopírovaném textu zjevně chybná"
 
 #: ../dispspecs/teixlite.xds.in.h:259
 msgid "The date of a document, as given (usually) on a title page"
-msgstr ""
+msgstr "Datum dokumentu, jak je uvedeno (obvykle) na titulní stránce"
 
 #: ../dispspecs/teixlite.xds.in.h:260
 msgid ""
 "The descriptive and declarative information making up an ‘electronic title "
 "page’ prefixed to every TEI-conformant text"
 msgstr ""
+"Popisná a vysvětlující informace tvořící „elektronickou titulní stránku“ "
+"předřazenou každému textu vyhovujícímu TEI"
 
 #: ../dispspecs/teixlite.xds.in.h:261
 msgid ""
 "The imprint statement (place and date of publication, publisher name), as "
 "given (usually) at the foot of a title page"
 msgstr ""
+"Blok s tiráží (místo a datum vydání, název vydavatele), jak je uvedena "
+"(obvykle) v patičce titulní stránky"
 
 #: ../dispspecs/teixlite.xds.in.h:262
 msgid ""
 "The label associated with an item in a list; in glossaries, marks the term "
 "being defined"
 msgstr ""
+"Návěští patřící k položce v seznamu; ve slovnících označuje definovaný termín"
 
 #: ../dispspecs/teixlite.xds.in.h:263
 msgid ""
 "The languages, sublanguages, registers, dialects etc. represented within a "
 "text"
 msgstr ""
+"Jazyky, podjazyky, jazykové variace, nářečí apod. zastoupené v rámci textu"
 
 #: ../dispspecs/teixlite.xds.in.h:264
 msgid "The largest possible subdivision of the body of a text"
-msgstr ""
+msgstr "Nejrozsáhlejší možné dílčí členění těla textu"
 
 #: ../dispspecs/teixlite.xds.in.h:265
 msgid ""
 "The location at which a textual division generated automatically by a text-"
 "processing application is to appear"
 msgstr ""
+"Místo, ve kterém se objevuje textové členění generované automaticky pomocí "
+"aplikace pro zpracování textu"
 
 #: ../dispspecs/teixlite.xds.in.h:266
 msgid "The name (generic identifier) of an element"
-msgstr ""
+msgstr "Název (obecný identifikátor) elementu"
 
 #: ../dispspecs/teixlite.xds.in.h:267
 msgid ""
 "The name of a person or other agency responsible for making an electronic "
 "file available, other than a publisher or distributor"
 msgstr ""
+"Jméno osoby nebo dalšího činitele, jiného než vydavatel nebo distributor, "
+"zaslouživšího se za zajištění dostupnosti elektronického souboru"
 
 #: ../dispspecs/teixlite.xds.in.h:268
 msgid ""
 "The name of a person or other agency responsible for the distribution of a "
 "text"
-msgstr ""
+msgstr "Jméno osoby nebo dalšího činitele zaslouživšího se za šíření textu"
 
 #: ../dispspecs/teixlite.xds.in.h:269
 msgid "The name of a sponsoring organization or institution"
-msgstr ""
+msgstr "Název sponzorující organizace nebo instituce"
 
 #: ../dispspecs/teixlite.xds.in.h:270
 msgid ""
 "The name of an individual, institution, or organization responsible for the "
 "funding of a project or text"
 msgstr ""
+"Jméno jednotlivce, instituce či organizace zaslouživší se za financování "
+"projektu nebo textu"
 
 #: ../dispspecs/teixlite.xds.in.h:271
 msgid ""
 "The name of the author of the document, as given on the title page (often "
 "but not always contained in a &lt;byline&gt;)"
 msgstr ""
+"Jméno autora dokumentu, jak je uvedeno na titulní stránce (často, i když ne "
+"vždy, obsažené v elementu &lt;byline&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:272
 msgid ""
 "The name of the author(s), personal or corporate, of a work; the primary "
 "statement of responsibility for any bibliographic item"
 msgstr ""
+"Jméno autora(ů) práce, ať už se jedná o osobu či společnost. Hlavním údaj o "
+"odpovědnosti o autorství pro bibliografickou položku"
 
 #: ../dispspecs/teixlite.xds.in.h:273
 msgid ""
 "The name of the organization responsible for the publication or distribution "
 "of a bibliographic item"
 msgstr ""
+"Název organizace zodpovědné za publikování nebo šíření bibliografické položky"
 
 #: ../dispspecs/teixlite.xds.in.h:274
 msgid "The name of the place where a bibliographic item was published"
-msgstr ""
+msgstr "Název místa, kde byla bibliografická položka vydána"
 
 #: ../dispspecs/teixlite.xds.in.h:275
 msgid ""
 "The name of the principal researcher responsible for the creation of an "
 "electronic text"
-msgstr ""
+msgstr "Jméno hlavního badatele zodpovědného za vytvoření elektronického textu"
 
 #: ../dispspecs/teixlite.xds.in.h:276
 msgid ""
 "The original form of a reading, for which a regularized form is given in an "
 "attribute value"
 msgstr ""
+"Původní forma čtení, pro kterou je forma upravená pravidlem udána v hodnotě "
+"atributu"
 
 #: ../dispspecs/teixlite.xds.in.h:277
 msgid "The particularities of one edition of a text"
-msgstr ""
+msgstr "Podrobnosti jednoho vydání textu"
 
 #: ../dispspecs/teixlite.xds.in.h:278
 msgid ""
 "The primary statement of responsibility given for a work on its title page "
 "or at the head or end of the work"
 msgstr ""
+"Hlavní prohlášení odpovědnosti dané pro práci na její titulní stránce nebo "
+"ve hlavičce nebo závěru práce"
 
 #: ../dispspecs/teixlite.xds.in.h:279
 msgid ""
 "The title of a document, including all its constituents, as given on a title "
 "page"
 msgstr ""
+"Název dokumentu, včetně všech jeho součástí, jak je uveden na titulní stránce"
 
 #: ../dispspecs/teixlite.xds.in.h:280
 msgid ""
 "The title of a work, whether article, book, journal, or series, including "
 "any alternative titles or subtitles"
 msgstr ""
+"Název práce, ať už článku, knihy, časopisu nebo sérií, včetně libovolných "
+"alternativních názvů nebo podnázvů"
 
 #: ../dispspecs/teixlite.xds.in.h:281
 msgid "The title page of a text, appearing within the front or back matter"
-msgstr ""
+msgstr "Text titulní stránky objevující se v rámci úvodní nebo závěrečné části"
 
 #: ../dispspecs/teixlite.xds.in.h:282
 msgid ""
 "The whole body of a single unitary text, excluding any front or back matter"
 msgstr ""
+"Celé tělo jednoho jednotného textu, vyjma jakékoliv úvodní nebo závěrečné "
+"části"
 
 #: ../dispspecs/teixlite.xds.in.h:283
 msgid "Time"
@@ -2644,35 +2705,35 @@ msgstr "Čas"
 
 #: ../dispspecs/teixlite.xds.in.h:285
 msgid "Title Page"
-msgstr ""
+msgstr "Titulní stránka"
 
 #: ../dispspecs/teixlite.xds.in.h:286
 msgid "Title Part"
-msgstr ""
+msgstr "Titulní část"
 
 #: ../dispspecs/teixlite.xds.in.h:287
 msgid "Title Statement"
-msgstr ""
+msgstr "Titulní údaje"
 
 #: ../dispspecs/teixlite.xds.in.h:288
 msgid "Trailer"
-msgstr ""
+msgstr "Přívěsek"
 
 #: ../dispspecs/teixlite.xds.in.h:289
 msgid "Unclear"
-msgstr ""
+msgstr "Nejasné"
 
 #: ../dispspecs/teixlite.xds.in.h:290
 msgid "Verse Line (&lt;l&gt;)"
-msgstr ""
+msgstr "Řádek s veršem (&lt;l&gt;)"
 
 #: ../dispspecs/website-layout.xds.in.h:1
 msgid "Additional Content"
-msgstr "Pomocný obsah"
+msgstr "Doplňující obsah"
 
 #: ../dispspecs/website-layout.xds.in.h:2
 msgid "Configuration Data"
-msgstr ""
+msgstr "Data nastavení"
 
 #: ../dispspecs/website-layout.xds.in.h:3
 msgid "Content"
@@ -2680,76 +2741,67 @@ msgstr "Obsah"
 
 #: ../dispspecs/website-layout.xds.in.h:5
 msgid "Header Link"
-msgstr ""
+msgstr "Odkaz z hlavičky"
 
 #: ../dispspecs/website-layout.xds.in.h:6
 msgid "Holder"
-msgstr ""
+msgstr "Schránka"
 
 #: ../dispspecs/website-layout.xds.in.h:7 ../dispspecs/xsl.xds.in.h:2
-#, fuzzy
 msgid "Stylesheet"
-msgstr "Styl"
+msgstr "Stylopis"
 
 #: ../dispspecs/website-layout.xds.in.h:8
 msgid "Table of Contents"
-msgstr "Obsah tabulky"
+msgstr "Obsah"
 
 #: ../dispspecs/website-layout.xds.in.h:9
 msgid "Website Layout"
-msgstr "Uspořádání webové stránky"
-
-#: ../dispspecs/website-webpage.xds.in.h:5
-msgid "A sumamry."
-msgstr ""
+msgstr "Rozvržení webové stránky"
 
 #: ../dispspecs/website-webpage.xds.in.h:62
-#, fuzzy
 msgid "Part Introduction"
-msgstr "Instrukce zpracování XML"
+msgstr "Úvod části"
 
 #: ../dispspecs/website-webpage.xds.in.h:99
 msgid "Web Page"
 msgstr "Webová stránka"
 
 #: ../dispspecs/website-webpage.xds.in.h:100
-#, fuzzy
 msgid "Webpage"
-msgstr "_Domovská stránka"
+msgstr "Webová stránka"
 
 #: ../dispspecs/website-webpage.xds.in.h:102
 msgid "email"
-msgstr "e-mail"
+msgstr "E-mail"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:1
 msgid "Abbreviated Form"
-msgstr ""
+msgstr "Zkrácená forma"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:4
 msgid "Alternative Non-Scripted Content"
-msgstr ""
+msgstr "Alternativní neskriptovaný obsah"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:6
 msgid "Area"
-msgstr ""
+msgstr "Oblast"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:7
-#, fuzzy
 msgid "Base"
-msgstr "Vložit"
+msgstr "Základní umístění"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:8
 msgid "Bidirectional Override"
-msgstr ""
+msgstr "Přebití obousměrného algoritmu"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:9
 msgid "Big"
-msgstr ""
+msgstr "Velké písmo"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:10
-#, fuzzy
 msgid "Block Quotation"
-msgstr "Umístění"
+msgstr "Bloková citace"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:13
 msgid "Button"
@@ -2757,7 +2809,7 @@ msgstr "Tlačítko"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:17
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:18
 msgid "Column Group"
@@ -2765,120 +2817,115 @@ msgstr "Skupina sloupců"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:20
 msgid "Definition List"
-msgstr ""
+msgstr "Seznam definic"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:21
 msgid "Definition Term"
-msgstr ""
+msgstr "Definovaný termín"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:22
 msgid "Deleted Text"
-msgstr "Odstranit text"
+msgstr "Smazaný text"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:23
-#, fuzzy
 msgid "Division"
-msgstr "Revize"
+msgstr "Členění"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:25
 msgid "Forced Line Break"
-msgstr ""
+msgstr "Vynucené zalomení řádku"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:26
 msgid "Form Control"
-msgstr ""
+msgstr "Ovládací prvek formuláře"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:27
 msgid "Form Control Group"
-msgstr ""
+msgstr "Skupina ovládacích prvků formuláře"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:28
 msgid "HTML Page"
-msgstr ""
+msgstr "Stránka HTML"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:33
 msgid "Heading (level 4)"
-msgstr ""
+msgstr "Nadpis (úroveň 4)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:34
 msgid "Heading (level 5)"
-msgstr ""
+msgstr "Nadpis (úroveň 5)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:35
 msgid "Heading (level 6)"
-msgstr ""
+msgstr "Nadpis (úroveň 6)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:36
 msgid "Horizontal Rule"
-msgstr ""
+msgstr "Vodorovná linka"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:37
 msgid "Image"
-msgstr ""
+msgstr "Obrázek"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:38
 msgid "Image Map"
-msgstr ""
+msgstr "Obrázková mapa"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:39
 msgid "Inline Quotation"
-msgstr ""
+msgstr "Řádková citace"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:40
 msgid "Inserted Text"
-msgstr ""
+msgstr "Vložený text"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:41
 msgid "Interactive Form"
-msgstr ""
+msgstr "Interaktivní formulář"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:42
 msgid "Italic"
-msgstr "kurziva"
+msgstr "Kurzíva"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:43
 msgid "Keyboard"
-msgstr ""
+msgstr "Klávesnice"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:45
 msgid "Legend"
-msgstr ""
+msgstr "Legenda"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:50
 msgid "Metainformation"
-msgstr ""
+msgstr "Metainformace"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:51
 msgid "Multi-line Text Field"
-msgstr ""
+msgstr "Víceřádkové textové pole"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:52
 msgid "Object"
 msgstr "Objekt"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:53
-#, fuzzy
 msgid "Option Group"
-msgstr "Možnosti"
+msgstr "Skupina voleb"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:54
-#, fuzzy
 msgid "Option Selector"
-msgstr "Vybrat slovo"
+msgstr "Výběr voleb"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:56
-#, fuzzy
 msgid "Parameter"
 msgstr "Parametr"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:57
 msgid "Preformatted Text"
-msgstr ""
+msgstr "Předformátovaný text"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:58
-#, fuzzy
 msgid "Sample"
-msgstr "Název"
+msgstr "Příklad"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:59
 msgid "Script"
@@ -2886,15 +2933,15 @@ msgstr "Skript"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:60
 msgid "Selectable Choice"
-msgstr ""
+msgstr "Výběr z voleb"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:61
 msgid "Small"
-msgstr ""
+msgstr "Malé písmo"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:62 ../glade/custom-element.glade.h:6
 msgid "Span"
-msgstr "Rozsah"
+msgstr "Segment"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:64
 #: ../glade/docbook-orderedlist-properties.glade.h:10
@@ -2903,28 +2950,27 @@ msgstr "Styl"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:69
 msgid "Table Cell (data)"
-msgstr ""
+msgstr "Buňka tabulky (data)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:70
 msgid "Table Cell (header)"
-msgstr ""
+msgstr "Buňka tabulky (záhlaví)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:74
-#, fuzzy
 msgid "Teletype"
-msgstr "Typ"
+msgstr "Terminálový text"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:75
 msgid "The strict XML version of HTML"
-msgstr "XML verze HTML"
+msgstr "HTML v podobě striktní verze XML"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:77
 msgid "Variable"
-msgstr "Proměnlivé"
+msgstr "Proměnná"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:78
 msgid "XHTML 1.0 (strict)"
-msgstr "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (striktní)"
 
 #: ../dispspecs/xsl.xds.in.h:1
 msgid ""
@@ -2932,17 +2978,17 @@ msgid ""
 "into one in another form. For example, it might describe a way of converting "
 "DocBook files into HTML web pages."
 msgstr ""
-"XSL stylesheet popisuje postup převodu jednoho typu dat do jiného. Například "
-"charakterizuje, jak převést DocBook soubory do formátu HTML pro webové "
-"stránky"
+"Stylopis XSL popisuje způsob převodu dokumentu jednoho typu na jiný typ. "
+"Například může popisovat způsob převodu souborů DocBook na webové stránky "
+"HTML."
 
 #: ../dispspecs/xsl.xds.in.h:3
 msgid "Template-matching Rule"
-msgstr ""
+msgstr "Pravidlo odpovídající šablony"
 
 #: ../dispspecs/xsl.xds.in.h:4
 msgid "XSL stylesheet"
-msgstr ""
+msgstr "Stylopis XSL"
 
 #: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
 #: ../src/cong-primary-window.c:605 ../src/cong-primary-window.c:810
@@ -2961,10 +3007,11 @@ msgid ""
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
 msgstr ""
-"Seznam vlastních adresářů, kde má Conglomerate hledat soubory se "
-"specifikacemi zobrazování (nazývané dispspec nebo .xds) navíc k standardní "
-"cestě instalace. Když jsou načítány dokumenty, hledá se odpovídající "
-"dispspec v těchto adresářích a použije se soubor první odpovídající dispspec."
+"Seznam vlastních složek, ve kterých by měla aplikace Conglomerate hledat "
+"soubory se specifikacemi zobrazení (nazývané dispspec nebo .xds) a to navíc "
+"ke standardní instalační cestě. Když jsou dokumenty načteny, odpovídající "
+"specifikace zobrazení jsou hledány v těchto složkách a použit je první "
+"nalezený soubor se specifikací zobrazení."
 
 #: ../data/conglomerate.schemas.in.h:2
 msgid ""
@@ -2972,21 +3019,21 @@ msgid ""
 "These documents will be used by the new document assistant as types of "
 "documents which can be created by the user."
 msgstr ""
-"Seznam adresářů, kde má Conglomerate hledat soubory šablon xml. Tyto "
-"dokumenty bude používat asistent pro nový dokument jako typy dokumentů, "
-"které uživatel může vytvořit."
+"Seznam složek, ve kterých by měla aplikace Conglomerate hledat soubory se "
+"šablonami xml. Tyto dokumenty budou použity průvodcem novým dokumentem jako "
+"typy dokumentů, které uživatel může vytvářet."
 
 #: ../data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
-msgstr "Vlastní umístění pro soubory specifikace zobrazování."
+msgstr "Vlastní umístění pro soubory se specifikací zobrazení."
 
 #: ../data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
-msgstr "Umístění souborů se šablonami."
+msgstr "Umístění souborů šablon."
 
 #: ../glade/cong-file-import.glade.h:1
 msgid "File Import Options"
-msgstr "Možnosti importu souborů"
+msgstr "Volby importu souboru"
 
 #: ../glade/cong-file-import.glade.h:2
 msgid "Importer"
@@ -2994,7 +3041,7 @@ msgstr "Importér"
 
 #: ../glade/cong-file-import.glade.h:3
 msgid "Options"
-msgstr "Možnosti"
+msgstr "Volby"
 
 #: ../glade/cong-file-properties.glade.h:1
 #: ../src/cong-node-properties-dialog.c:1193
@@ -3007,6 +3054,7 @@ msgid "Basic"
 msgstr "Základní"
 
 #: ../glade/cong-file-properties.glade.h:4 ../src/cong-document.c:1003
+#, c-format
 msgid "Document Type Declaration"
 msgstr "Deklarace typu dokumentu"
 
@@ -3030,11 +3078,11 @@ msgstr "Umístění"
 
 #: ../glade/cong-file-properties.glade.h:9
 msgid "Modified"
-msgstr "Změněn"
+msgstr "Změněno"
 
 #: ../glade/cong-file-properties.glade.h:11
 msgid "Number of elements:"
-msgstr "Počet elementů"
+msgstr "Počet elementů:"
 
 #: ../glade/cong-file-properties.glade.h:12
 msgid "Number of words :"
@@ -3051,11 +3099,11 @@ msgstr "Vlastnosti"
 
 #: ../glade/cong-file-properties.glade.h:14
 msgid "Standalone"
-msgstr "Samostatný"
+msgstr "Samostatná"
 
 #: ../glade/cong-file-properties.glade.h:16
 msgid "System ID"
-msgstr "Systémové ID"
+msgstr "Systémový ID"
 
 #: ../glade/cong-file-properties.glade.h:19
 msgid "XML Header"
@@ -3063,7 +3111,7 @@ msgstr "Hlavička XML"
 
 #: ../glade/cong-file-properties.glade.h:20 ../src/cong-file-properties.c:279
 msgid "_Associate this DTD"
-msgstr "_Přiřadit tuto DTD"
+msgstr "Přiř_adit toto DTD"
 
 #: ../glade/cong-file-properties.glade.h:21
 msgid "label_dtd_external_id"
@@ -3124,47 +3172,47 @@ msgstr "*"
 
 #: ../glade/cong-find-replace.glade.h:2
 msgid "Find Next"
-msgstr "Hledat následující"
+msgstr "Najít další"
 
 #: ../glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
-msgstr "Hledat jen _celá slova"
+msgstr "Pouze _celá slova"
 
 #: ../glade/cong-find-replace.glade.h:4
 #: ../src/cong-edit-find-and-replace.c:187
 #: ../src/cong-edit-find-and-replace.c:836
 #: ../src/cong-edit-find-and-replace.c:850
 msgid "Replace"
-msgstr "Nahradit"
+msgstr "Nahrazování"
 
 #: ../glade/cong-find-replace.glade.h:5
 #: ../src/cong-edit-find-and-replace.c:908
 msgid "Replace All"
-msgstr "Nahradit vše"
+msgstr "Nahrazení všeho"
 
 #: ../glade/cong-find-replace.glade.h:6
 msgid "Replace _with: "
-msgstr "Nahradit _na:"
+msgstr "Nah_radit za:"
 
 #: ../glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
-msgstr "Hledat _pozpátku"
+msgstr "Hledat směrem k _začátku"
 
 #: ../glade/cong-find-replace.glade.h:8
 msgid "_Match case"
-msgstr "_Rozlišovat velikost písmen"
+msgstr "Rozlišovat velikost pís_men"
 
 #: ../glade/cong-find-replace.glade.h:9
 msgid "_Search for: "
-msgstr "_Hledat: "
+msgstr "_Hledat:"
 
 #: ../glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
-msgstr "Přecházet přes _okraj"
+msgstr "Procházet _dokola"
 
 #: ../glade/cong-preferences.glade.h:1
 msgid "Conglomerate Preferences"
-msgstr "Nastavení Conglomerate"
+msgstr "Předvolby Conglomerate"
 
 #: ../glade/cong-preferences.glade.h:2
 msgid "Document Types"
@@ -3176,7 +3224,7 @@ msgstr "Zásuvné moduly"
 
 #: ../glade/custom-element.glade.h:2
 msgid "Adhoc Element"
-msgstr "Element adhoc"
+msgstr "Element ad hoc"
 
 #: ../glade/custom-element.glade.h:3
 msgid "Element Name"
@@ -3188,19 +3236,19 @@ msgstr "Typ elementu"
 
 #: ../glade/custom-element.glade.h:5
 msgid "I Don't Care"
-msgstr "Je mi to jedno"
+msgstr "Nestarám se"
 
 #: ../glade/custom-element.glade.h:7
 msgid "Structural"
-msgstr "Strukturální"
+msgstr "Strukturovaný"
 
 #: ../glade/docbook-common-properties.glade.h:1
 msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
 msgstr ""
-"<small>Co je rozsah textu? Tuto stranu můžete použít pro popsání toho, jak "
-"se text týká různých typů počítačových systémů.</small>"
+"<small>Jaká je působnost textu? Můžete tuto stránku použít k určení "
+"relevantnosti textu k různým typům počítačového systému.</small>"
 
 #: ../glade/docbook-common-properties.glade.h:4 ../src/plugin-docbook.c:2155
 msgid "Revisions"
@@ -3208,7 +3256,7 @@ msgstr "Revize"
 
 #: ../glade/docbook-common-properties.glade.h:5 ../src/plugin-docbook.c:2143
 msgid "Scope"
-msgstr "Rozsah"
+msgstr "Působnost"
 
 #: ../glade/docbook-common-properties.glade.h:6
 msgid ""
@@ -3217,10 +3265,10 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
-"Tato strana drží místo. Časem budete moci používat tuto stranu pro práci s "
-"jednoduchými informacemi DocBooku o sledování verzí.\n"
+"Toto je rezervovaná stránka. Posléze byste měli mít na této stránce možnost "
+"manipulovat s jednoduchou verzí sledovacích informací DocBook.\n"
 "\n"
-"Je to uvedeno v Bugzille jako chyba #122538"
+"Toto je vedeno v systému Bugzilla jako chyba #122538"
 
 #: ../glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -3232,40 +3280,40 @@ msgstr "_Operační systém"
 
 #: ../glade/docbook-common-properties.glade.h:11
 msgid "_User Level"
-msgstr "_Úroveň uživatele"
+msgstr "_Uživatelská úroveň"
 
 #: ../glade/docbook-common-properties.glade.h:12
 msgid "_Vendor"
-msgstr "_Dodavatel"
+msgstr "Doda_vatel"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:1
 msgid "1, 2, 3, ..."
-msgstr "1, 2, 3, ..."
+msgstr "1, 2, 3, …"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:2
 msgid "A, B, C, ..."
-msgstr "A, B, C, ..."
+msgstr "A, B, C, …"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:3
 msgid "Continue numbering from previous list"
-msgstr "Pokračovat číslování z předchozího seznamu"
+msgstr "Pokračovat v číslování z předchozího seznamu"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:4
 #: ../src/cong-error-dialog.c:337 ../src/cong-error-file-open.c:518
 msgid "Details"
-msgstr "Detaily"
+msgstr "Podrobnosti"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:5
 msgid "I, II, III, ..."
-msgstr "I, II, III, ..."
+msgstr "I, II, III, …"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:6
 msgid "Inherit numbering from surrounding lists"
-msgstr "Zdědit číslování z okolního seznamu"
+msgstr "Dědit číslování z okolních seznamů"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:7
 msgid "Minimise vertical space"
-msgstr "Minimalizovat vertikální prostor"
+msgstr "Minimalizovat svislé mezery"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:8
 msgid "Numbering"
@@ -3273,19 +3321,19 @@ msgstr "Číslování"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
-msgstr "a, b, c, ..."
+msgstr "a, b, c, …"
 
 #: ../glade/docbook-orderedlist-properties.glade.h:12
 msgid "i, ii, iii, ..."
-msgstr "i, ii, iii, ..."
+msgstr "i, ii, iii, …"
 
 #: ../glade/docbook-ulink-properties.glade.h:1
 msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
 msgstr ""
-"<small>Některé aplikace DocBooku umožňují upravit chování odkazu pomocí "
-"atributu \"type\". </small>"
+"<small>Některé aplikace pro práce s DocBook umožňují chování odkazu "
+"uzpůsobit pomocí tohoto atributu „Typ“ (type).</small>"
 
 #: ../glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -3293,7 +3341,7 @@ msgstr "Cíl"
 
 #: ../glade/docbook-ulink-properties.glade.h:6
 msgid "URL"
-msgstr "URL"
+msgstr "Adresa URL"
 
 #: ../glade/docbook-ulink-properties.glade.h:7
 msgid "_Test this Link"
@@ -3305,7 +3353,7 @@ msgstr "Místní název"
 
 #: ../glade/plugin-arbitrary.glade.h:3
 msgid "Namespace URI"
-msgstr "URI prostoru jmen"
+msgstr "URI jmenného prostoru"
 
 #: ../glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
@@ -3317,26 +3365,27 @@ msgstr "Element nejvyšší úrovně"
 
 #: ../glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
-msgstr "Parametry vytváření"
+msgstr "Parametry pro vytvoření"
 
 #: ../glade/plugin-random.glade.h:2
 msgid "Depth"
 msgstr "Hloubka"
 
 #: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
+#, c-format
 msgid "Document Type"
 msgstr "Typ dokumentu"
 
 #: ../glade/string_selection_dialog.glade.h:1
 msgid "string_selection_dialog"
-msgstr "dialog_výběru_řetězce"
+msgstr "string_selection_dialog"
 
 #: ../src/cong-app.c:960
 msgid ""
 "Unit test: quit immediately (after loading any files specified on the "
 "command-line)"
 msgstr ""
-"Test modulu: okamžitě skonči (po načtení souborů určených na příkazovém "
+"Test jednotky: ihned skončit (po načtení souborů zadaných na příkazovém "
 "řádku)"
 
 #: ../src/cong-app.c:1021
@@ -3344,12 +3393,14 @@ msgid "XML Editor"
 msgstr "Editor XML"
 
 #: ../src/cong-app.c:1158
+#, c-format
 msgid "Conglomerate could not load any xds files"
-msgstr "Conglomerate nemohl načíst žádný soubor xds"
+msgstr "Aplikace Conglomerate nemůže načíst žádné soubory xds"
 
 #: ../src/cong-app.c:1160
 msgid "Conglomerate could not find any descriptions of document types."
-msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
+msgstr ""
+"Aplikace Conglomerate nemůže najít žádný popis pro tyto typy dokumentů."
 
 #: ../src/cong-app.c:1162
 msgid ""
@@ -3357,16 +3408,17 @@ msgid ""
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
 msgstr ""
-"Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, "
-"ale nenainstalovali. Zkuste jej nainstalovat. Pokud jste změnili implicitní "
-"nastaven9 specifikací zobrazení, zkontrolujte je prosím také."
+"Pokud vidíte tuto chybu, obvykle to znamená, že jste aplikaci Conglomerate "
+"sestavili, ale nenainstalovali ji. Zkuste ji nainstalovat. Pokud jste "
+"změnili výchozí nastavení pro cestu ke specifikaci zobrazení, tak ji prosím "
+"raději dvakrát zkontrolujte."
 
 #: ../src/cong-attribute-editor-cdata.c:206
 #: ../src/cong-attribute-editor-nmtoken.c:272
 #: ../src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
-msgstr "Přidat atribut \"%s\""
+msgstr "Přidat atribut „%s“"
 
 #: ../src/cong-attribute-editor-cdata.c:232
 #: ../src/cong-attribute-editor-nmtoken.c:298
@@ -3374,11 +3426,11 @@ msgstr "Přidat atribut \"%s\""
 #: ../src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
-msgstr "Odstranit atribut \"%s\""
+msgstr "Smazat atribut „%s“"
 
 #: ../src/cong-attribute-editor-enumeration.c:122
 msgid "(unspecified)"
-msgstr "(neurčeno)"
+msgstr "(nespecifikováno)"
 
 #: ../src/cong-attribute-editor-lang.c:48
 msgid "Breton"
@@ -3398,11 +3450,11 @@ msgstr "Dánština"
 
 #: ../src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr "Němčina (německá)"
+msgstr "Němčina (Německo)"
 
 #: ../src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr "Němčina (švýcarská)"
+msgstr "Němčina (Švýcarsko)"
 
 #: ../src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
@@ -3426,15 +3478,15 @@ msgstr "Španělština"
 
 #: ../src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr "Faroese"
+msgstr "Faerština"
 
 #: ../src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr "Francouzština (francouzská)"
+msgstr "Francouzština (Francie)"
 
 #: ../src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr "Francouzština (švýcarská)"
+msgstr "Francouzština (Švýcarsko)"
 
 #: ../src/cong-attribute-editor-lang.c:62
 msgid "Italian"
@@ -3490,11 +3542,11 @@ msgstr "Žádný jazyk"
 #: ../src/cong-attribute-editor-nmtoken.c:225
 #, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
-msgstr "Nemohu nastavit atribut \"%s\" na \"%s\""
+msgstr "Nelze nastavit atribut „%s“ na „%s“"
 
 #: ../src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
-msgstr "Hodnota atributu musí být atom názvu v XML."
+msgstr "Hodnota atributu musí být rozlišující název XML."
 
 #: ../src/cong-attribute-editor-nmtoken.c:237
 msgid ""
@@ -3502,23 +3554,23 @@ msgid ""
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
 msgstr ""
-"Atomy názvu v XML mohou obsahovat jen alfanumerické nebo ideografické znaky "
-"a interpunkci _,-, ., a :. Nemohou obsahovat mezery."
+"Rozlišující název XML může obsahovat pouze alfanumerické a/nebo ideografické "
+"znaky a interpunkční znaménka _,-, ., a :. Nemůže obsahovat bílé znaky."
 
 #: ../src/cong-attribute-editor.c:249 ../src/cong-attribute-wrapper.c:232
 #: ../src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
-msgstr "Nastavit atribut \"%s\" na \"%s\""
+msgstr "Nastavit atribut „%s“ na „%s“"
 
 #: ../src/cong-dialog.c:301
 msgid "_Close without Saving"
-msgstr "_Zavřít bez uložení"
+msgstr "_Zavřít bez ukládání"
 
 #: ../src/cong-dialog.c:316
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr "Uložit změny do dokumentu \"%s\" před zavřením?"
+msgstr "Uložit před zavřením změny do dokumentu „%s“?"
 
 #: ../src/cong-dialog.c:321
 #, c-format
@@ -3526,7 +3578,7 @@ msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
-"Pokud dokument zavřete bez uložení, budou změny za posledních %li hodin "
+"Pokud jej zavřete bez uložení, budou všechny změny za posledních %li hodin "
 "zahozeny."
 
 #: ../src/cong-dialog.c:323
@@ -3535,19 +3587,21 @@ msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
 msgstr ""
-"Pokud dokument zavřete bez uložení, budou změny za posledních %li minut "
+"Pokud jej zavřete bez uložení, budou všechny změny za posledních %li minut "
 "zahozeny."
 
 #: ../src/cong-dialog.c:325
+#, c-format
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
-"Pokud dokument zavřete bez uložení, budou změny za poslední minutu zahozeny."
+"Pokud jej zavřete bez uložení, budou všechny změny za poslední minutu "
+"zahozeny."
 
 #: ../src/cong-dialog.c:379
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr "Zahodit neuložené změny dokumentu \"%s\"?"
+msgstr "Vrátit zpět neuložené změny v dokumentu „%s“?"
 
 #: ../src/cong-dialog.c:384
 #, c-format
@@ -3560,25 +3614,27 @@ msgid "Changes from the past %li minutes will be discarded."
 msgstr "Změny za posledních %li minut budou zahozeny."
 
 #: ../src/cong-dialog.c:388
+#, c-format
 msgid "Changes from the past minute will be discarded."
 msgstr "Změny za poslední minutu budou zahozeny."
 
 #: ../src/cong-dispspec-element.c:661 ../src/cong-xpath-expression.c:248
 msgid "(xpath failed)"
-msgstr "(xpath selhalo)"
+msgstr "(cesta xpath selhala)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
 #: ../src/cong-dispspec-element.c:697
 msgid "<untitled>"
-msgstr "<nepojmenovaný>"
+msgstr "<nepojmenováno>"
 
 #: ../src/cong-dispspec-registry.c:108
 msgid "Conglomerate could not read its registry of document types."
-msgstr "Conglomerate nemohl číst svůj registr typů dokumentů."
+msgstr "Aplikace Conglomerate nemůže číst svůj registr typů dokumentů."
 
 #: ../src/cong-dispspec-registry.c:111
 msgid "Conglomerate attempted to look at all the files in the location."
-msgstr "Conglomerate se pokusil podívat na všechny soubory v daném umístění."
+msgstr ""
+"Aplikace Conglomerate se pokoušela hledat ve všech souborech v umístění."
 
 #: ../src/cong-dispspec-registry.c:333 ../src/cong-file-new.c:343
 msgid "File Type"
@@ -3586,88 +3642,99 @@ msgstr "Typ souboru"
 
 #: ../src/cong-dispspec-registry.c:344
 msgid "Coverage"
-msgstr "Pokrytí"
+msgstr "Působnost"
 
 #: ../src/cong-dispspec.c:513
 msgid "unnamed"
-msgstr "nepojmenovaný"
+msgstr "neznámý"
 
 #: ../src/cong-dispspec.c:536
 msgid "No description available."
-msgstr "Popis není k dispozici"
+msgstr "Není k dispozici žádný popis."
 
 #: ../src/cong-document.c:651
 msgid "(Untitled)"
-msgstr "(Nepojmenovaný)"
+msgstr "(Nepojmenováno)"
 
 #: ../src/cong-document.c:955
 #, c-format
 msgid "Attribute \"%s\""
-msgstr "Atribut \"%s\""
+msgstr "Atribut „%s“"
 
 #: ../src/cong-document.c:962
 #, c-format
 msgid "Text \"%s\""
-msgstr "Text \"%s\""
+msgstr "Text „%s“"
 
 #: ../src/cong-document.c:968
+#, c-format
 msgid "Character Data"
 msgstr "Znaková data"
 
 #: ../src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
-msgstr "Odkaz na entitu \"%s\""
+msgstr "Odkaz na entitu „%s“"
 
 #: ../src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
-msgstr "Entita \"%s\""
+msgstr "Entita „%s“"
 
 #: ../src/cong-document.c:977
+#, c-format
 msgid "XML Processing Instruction"
-msgstr "Instrukce zpracování XML"
+msgstr "Instrukce pro zpracování XML"
 
 #: ../src/cong-document.c:982
 #, c-format
 msgid "Comment \"%s\""
-msgstr "Komentář \"%s\""
+msgstr "Komentář „%s“"
 
 #: ../src/cong-document.c:994
+#, c-format
 msgid "Document Fragment"
 msgstr "Fragment dokumentu"
 
 #: ../src/cong-document.c:997
+#, c-format
 msgid "Notation"
-msgstr "Zápis"
+msgstr "Poznámka"
 
 #: ../src/cong-document.c:1000
+#, c-format
 msgid "HTML Document"
 msgstr "Dokument HTML"
 
 #: ../src/cong-document.c:1006
+#, c-format
 msgid "Element Declaration"
 msgstr "Deklarace elementu"
 
 #: ../src/cong-document.c:1009
+#, c-format
 msgid "Attribute Declaration"
 msgstr "Deklarace atributu"
 
 #: ../src/cong-document.c:1012
+#, c-format
 msgid "Entity Declaration"
 msgstr "Deklarace entity"
 
 #: ../src/cong-document.c:1015
+#, c-format
 msgid "Namespace Declaration"
-msgstr "Deklarace prostoru jmen"
+msgstr "Deklarace jmenného prostoru"
 
 #: ../src/cong-document.c:1018
+#, c-format
 msgid "XInclude Start"
-msgstr "Začátek XInclude"
+msgstr "Začátek vložení XInclude"
 
 #: ../src/cong-document.c:1021
+#, c-format
 msgid "XInclude End"
-msgstr "Konec XInclude"
+msgstr "Konec vložení XInclude"
 
 #: ../src/cong-document.c:2163
 #, c-format
@@ -3689,18 +3756,18 @@ msgstr "CDATA:"
 #: ../src/cong-edit-find-and-replace.c:98
 #, c-format
 msgid "The text \"%s\" was not found."
-msgstr "Text \"%s\" nebyl nalezen."
+msgstr "Text „%s“ nebyl nalezen."
 
 #: ../src/cong-edit-find-and-replace.c:200
 msgid "Replace _All"
-msgstr "Nahradit _vše"
+msgstr "N_ahradit vše"
 
 #: ../src/cong-edit-find-and-replace.c:307
 #: ../src/cong-edit-find-and-replace.c:761
 #: ../src/cong-edit-find-and-replace.c:959
 #: ../src/cong-edit-find-and-replace.c:1000
 msgid "Find"
-msgstr "Hledat"
+msgstr "Hledání"
 
 #: ../src/cong-editor-node-text.c:887
 msgid "Select line"
@@ -3716,7 +3783,7 @@ msgstr "Přesunout kurzor"
 
 #: ../src/cong-editor-node-text.c:1022
 msgid "Drag out selection"
-msgstr "Vytáhnout výběr"
+msgstr "Přetáhnout výběr"
 
 #: ../src/cong-editor-widget3.c:269
 msgid "Expander Size"
@@ -3724,7 +3791,7 @@ msgstr "Velikost rozbalovače"
 
 #: ../src/cong-editor-widget3.c:270
 msgid "Size of the expander arrow"
-msgstr "Velikost šipky rozbalovače"
+msgstr "Velikost rozbalovací šipky"
 
 #: ../src/cong-editor-widget3.c:748
 msgid "Input Method"
@@ -3736,21 +3803,21 @@ msgstr "Psaní"
 
 #: ../src/cong-editor-widget3.c:1310
 msgid "Cursor Movement"
-msgstr "Pohyb kurzoru"
+msgstr "Posun kurzoru"
 
 #: ../src/cong-editor-widget3.c:1350 ../src/cong-editor-widget3.c:1363
 msgid "Delete Selection"
-msgstr "Odstranit výběr"
+msgstr "Smazat výběr"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: ../src/cong-error-dialog.c:231 ../src/cong-error-dialog.c:271
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
-msgstr "Pokud jste programátor, problém je v souboru %s na řádku %i\n"
+msgstr "Pokud jste programátor, tak problém je v souboru %s na řádku %i\n"
 
 #: ../src/cong-error-dialog.c:235
 msgid "That feature has not yet been implemented.  Sorry."
-msgstr "Tato funkce ještě nebyla implementována. Lituji."
+msgstr "Tato funkce zatím nebyl implementována. Omlouváme se."
 
 #: ../src/cong-error-dialog.c:265
 #, c-format
@@ -3759,71 +3826,72 @@ msgid ""
 "\n"
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
 msgstr ""
-"Tato funkce ještě nebyla implementována. Lituji.\n"
+"Tato funkce zatím nebyl implementována. Omlouváme se.\n"
 "\n"
-"Toto je známý problém; je to chyba #%i v systému pro sledování chyb v %s"
+"Jedná se o známý problém, byl nahlášen pod číslem #%i v Systému pro "
+"sledování chyb na %s"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-dialog.c:321
 #, c-format
 msgid "An error was reported whilst attempting the operation \"%s\""
-msgstr "Při pokusu o operaci \"%s\" byla ohlášena chyba"
+msgstr "Během pokusu o operaci „%s“ byla oznámena chyba"
 
-# FIXME: GError is technical
 #: ../src/cong-error-dialog.c:325
 msgid "A GError occurred; the error report was:"
-msgstr "Došlo k GError; zpráva o chybě byla:"
+msgstr "Vyskytla se chyba GError. Chybové hlášení bylo:"
 
 #: ../src/cong-error-dialog.c:335 ../src/cong-error-file-open.c:516
 msgid "An unexpected error occurred."
-msgstr "Došlo k neočekávané chybě."
+msgstr "Vyskytla se neočekávaná chyba."
 
 #: ../src/cong-error-dialog.c:336 ../src/cong-error-file-open.c:517
 msgid "For more information, click on the \"Details\" button."
-msgstr "Pro více informací klikněte na tlačítko \"Detaily\"."
+msgstr "Pro další informace klikněte na tlačítko „Podrobnosti“."
 
 #: ../src/cong-error-dialog.c:386
 msgid "An error occurred whilst running this system command:"
-msgstr "Při spouštění tohoto příkazu systému došlo k chybě:"
+msgstr "Vyskytla se chyba při běhu tohoto systémového příkazu:"
 
 #: ../src/cong-error-dialog.c:389
 #, c-format
 msgid ""
 "The error number reported was %d.  Below is the error text that was output "
 "by the command."
-msgstr "Ohlášené číslo chyby bylo %d. Níže je chybový text vytvořený příkazem."
+msgstr ""
+"Oznámené číslo chyby bylo %d. Níže je uveden text chyby, který příkaz vypsal."
 
 #. FIXME: ought to set up the parent window properly
 #: ../src/cong-error-file-open.c:67
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr "Conglomerate nemohl spustit nástroj pro hledání.\n"
+msgstr "Aplikace Conglomerate nemůže spustit vyhledávací nástroj.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: ../src/cong-error-file-open.c:103
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
-msgstr "%s nemůže číst \"%s\" z %s."
+msgstr "%s nemůže číst „%s“ z %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
 #: ../src/cong-error-file-open.c:106
 #, c-format
 msgid "%s could not read \"%s\" from %s."
-msgstr "%s nemůže číst \"%s\" z %s."
+msgstr "%s nemůže číst „%s“ z %s."
 
 #: ../src/cong-error-file-open.c:264 ../src/cong-error-file-save.c:92
 msgid "An unexpected internal error occurred."
-msgstr "Došlo k neočekávané interní chybě."
+msgstr "Vyskytla se neočekávaná interní chyba."
 
 #: ../src/cong-error-file-open.c:265 ../src/cong-error-file-save.c:93
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, ohlaste chybu u správce této aplikace."
+"Zkuste to znovu. Pokud to opět selže, nahlaste chybu správci této aplikace."
 
 #: ../src/cong-error-file-open.c:291
 msgid "There is no file with that name at that location."
-msgstr "V daném umístění neexistuje soubor s takovým názvem."
+msgstr "V tomto umístění není žádný soubor s takovýmto názvem."
 
 #: ../src/cong-error-file-open.c:292
 msgid ""
@@ -3832,10 +3900,10 @@ msgid ""
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste napsali název souboru správě. Nezapomeňte, "
-"že velikost písmen je důležitá (\"MůjSoubor\" není to samé jako \"MŮJSOUBOR"
-"\" nebo \"můjsoubor\").\n"
-"(ii) Zkuste hledat svůj soubor pomocí nástroje pro hledání."
+"(i) Zkuste zkontrolovat, zda jste název souboru napsali správně. Pamatujte, "
+"že se rozlišuje velikost písmen („Můj soubor“ není totéž co „MŮJ SOUBOR“ "
+"nebo „můj soubor“).\n"
+"(ii) Zkuste k vyhledání souboru použít nástroj „Hledat soubory“"
 
 #: ../src/cong-error-file-open.c:293 ../src/cong-error-file-open.c:302
 #: ../src/cong-error-file-open.c:357 ../src/cong-error-file-open.c:398
@@ -3853,52 +3921,53 @@ msgid ""
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
-"velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" "
-"nebo \"MŮJADRESÁŘ\").\n"
-"(ii) Zkuste váš soubor hledat pomocí nástroje pro hledání."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně. Pamatujte, "
+"že se rozlišuje velikost písmen („Moje složka“ není totéž co „moje složka“ "
+"nebo „MOJE SLOŽKA“).\n"
+"(ii) Zkuste k vyhledání souboru použít nástroj „Hledat soubory“"
 
 #. FIXME: need some thought about the messages for this
 #: ../src/cong-error-file-open.c:314
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
-msgstr "Umístění \"%s\" nepodporuje čtení souborů."
+msgstr "Umístění „%s“ nepodporuje čtení souborů."
 
 #: ../src/cong-error-file-open.c:318
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
 msgstr ""
-"Zkuste soubor načíst z jiného umístění. Pokud si myslíte, že byste měli být "
-"schopni číst tento soubor, kontaktujte svého správce systému."
+"Zkuste soubor načíst z jiného umístění. Pokud si myslíte, že by mělo být "
+"možné tento soubor číst, kontaktujte svého správce systému."
 
 #: ../src/cong-error-file-open.c:328
 msgid "There were problems reading the content of the file."
-msgstr "Při čtení obsahu souboru se vyskytly problémy."
+msgstr "Nastal problém se čtením obsahu souboru."
 
 #: ../src/cong-error-file-open.c:329 ../src/cong-error-file-open.c:347
 #: ../src/cong-error-file-open.c:386
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
+"Zkuste to znovu. Pokud to opět selže, kontaktujte svého správce systému."
 
 #: ../src/cong-error-file-open.c:338
 msgid "The contents of the file seem to be corrupt."
-msgstr "Obsah souboru je zřejmě poškozen."
+msgstr "Vypadá to, že je obsah souboru poškozený."
 
 #: ../src/cong-error-file-open.c:339
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, zkuste najít záložní kopii souboru."
+"Zkuste to znovu. Pokud to opět selže, zkuste se poohlédnout po záložní kopii "
+"souboru."
 
 #: ../src/cong-error-file-open.c:346 ../src/cong-error-file-open.c:385
 msgid "There were problems reading the contents of the file."
-msgstr "Při čtení obsahu souboru se vyskytly problémy."
+msgstr "Vyskytl se problém se čtením obsahu souboru."
 
 #: ../src/cong-error-file-open.c:355 ../src/cong-error-file-save.c:251
 msgid "The system does not recognise that as a valid location."
-msgstr "Systém to nerozpoznává jako platné umístění."
+msgstr "Systém v tomto nerozpoznal platné umístění."
 
 #: ../src/cong-error-file-open.c:356
 msgid ""
@@ -3907,10 +3976,9 @@ msgid ""
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
-"velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP"
-"\").\n"
-"(ii) Zkuste váš soubor hledat pomocí nástroje pro hledání."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně. Pamatujte, "
+"že se rozlišuje velikost písmen („http“ není totéž co „Http“ nebo „HTTP“).\n"
+"(ii) Zkuste k vyhledání souboru použít nástroj „Hledat soubory“"
 
 #: ../src/cong-error-file-open.c:367
 msgid "You do not have permission to read that file."
@@ -3922,7 +3990,7 @@ msgstr "Zkuste požádat svého správce systému, aby vám přidělil oprávně
 
 #: ../src/cong-error-file-open.c:375 ../src/cong-error-file-save.c:274
 msgid "The system is trying to operate on too many files at once."
-msgstr "Systém se pokouší pracovat s příliš mnoha soubory zároveň."
+msgstr "Systém se pokouší pracovat s příliš mnoha soubory naráz."
 
 #: ../src/cong-error-file-open.c:376 ../src/cong-error-file-open.c:410
 #: ../src/cong-error-file-save.c:275 ../src/cong-error-file-save.c:294
@@ -3930,79 +3998,79 @@ msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, zkuste zavřít nepotřebné aplikace "
-"nebo kontaktujte svého správce systému."
+"Zkuste to znovu. Pokud to opět selže, zkuste zavřít nepotřebné aplikace nebo "
+"kontaktujte svého správce systému."
 
 #. FIXME:  capitalisation issues
 #: ../src/cong-error-file-open.c:393
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
-msgstr "\"%s\" je adresář, ne soubor."
+msgstr "„%s“ je složkou namísto souborem."
 
 #: ../src/cong-error-file-open.c:397
 msgid "Try using the Search Tool to find your file."
-msgstr "Zkuste hledat svůj soubor pomocí nástroje pro hledání."
+msgstr "Zkuste k vyhledání souboru použít nástroj „Hledat soubory“"
 
 #: ../src/cong-error-file-open.c:409 ../src/cong-error-file-save.c:293
 msgid "The system ran out of memory."
-msgstr "Systému došla paměť."
+msgstr "Systém běží s nedostatkem paměti."
 
 #: ../src/cong-error-file-open.c:418 ../src/cong-error-file-open.c:427
 #: ../src/cong-error-file-open.c:436 ../src/cong-error-file-save.c:302
 #: ../src/cong-error-file-save.c:311 ../src/cong-error-file-save.c:320
 msgid "The server could not be contacted."
-msgstr "Nebylo možné kontaktovat server."
+msgstr "Nelze kontaktovat server."
 
 #: ../src/cong-error-file-open.c:419
 msgid "Try again.  If it fails again, the server may be down."
-msgstr "Zkuste to znovu. Pokud to znovu selže, server je možná vypnut."
+msgstr "Zkuste to znovu. Pokud to opět selže, je server nejspíš nedostupný. "
 
 #: ../src/cong-error-file-open.c:428 ../src/cong-error-file-open.c:437
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně.\n"
-"(ii) Zkuste to znovu. Pokud to znovu selže, server je možná vypnut."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně.\n"
+"(ii) Zkuste to znovu. Pokud to opět selže, je server nejspíš nedostupný. "
 
 #: ../src/cong-error-file-open.c:445 ../src/cong-error-file-save.c:329
 msgid "The system could not login to the location."
-msgstr "Systém se k danému umístění nemohl přihlásit."
+msgstr "Systém se nemůže přihlásit k umístění."
 
 #: ../src/cong-error-file-open.c:446 ../src/cong-error-file-open.c:456
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
+"Zkuste to znovu. Pokud to opět selže, kontaktujte svého správce systému."
 
 #: ../src/cong-error-file-open.c:455 ../src/cong-error-file-save.c:338
 msgid "The location was too busy."
-msgstr "Umístění bylo příliš používané."
+msgstr "Umístění bylo příliš zaneprázdněno."
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: ../src/cong-error-file-open.c:505
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
-msgstr "Při přístupu k \"%2$s\" byla ohlášena chyba \"%1$s\""
+msgstr "Během přístupu k „%s“ byla oznámena chyba „%s“"
 
 #: ../src/cong-error-file-open.c:509
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
 msgstr ""
-"Program neočekávaně obdržel chybovou zprávu z virtuálního systému souborů "
-"GNOME."
+"Program neočekávaně obdržel chybové hlášení od virtuálního souborového "
+"systému GNOME."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: ../src/cong-error-file-save.c:61
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
-msgstr "%s nemůže uložit \"%s\" do %s."
+msgstr "%s nemůže uložit „%s“ na %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: ../src/cong-error-file-save.c:64
 #, c-format
 msgid "%s could not save \"%s\" to %s."
-msgstr "%s nemůže uložit \"%s\" do %s."
+msgstr "%s nemůže uložit „%s“ na %s."
 
 #: ../src/cong-error-file-save.c:111
 msgid ""
@@ -4011,36 +4079,36 @@ msgid ""
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
-"velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" "
-"nebo \"MŮJADRESÁŘ\").\n"
-"(ii) Zkuste ukládat do jiného umístění."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně. Pamatujte, "
+"že se rozlišuje velikost písmen („Moje složka“ není totéž co „moje složka“ "
+"nebo „MOJE SLOŽKA“).\n"
+"(ii) Zkuste uložení do jiného umístění."
 
 #. FIXME: need some thought about the messages for this
 #: ../src/cong-error-file-save.c:119 ../src/cong-error-file-save.c:238
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
-msgstr "Umístění \"%s\" nepodporuje zápis souborů."
+msgstr "Umístění „%s“ nepodporuje zápis souborů."
 
 #: ../src/cong-error-file-save.c:123 ../src/cong-error-file-save.c:242
 #: ../src/cong-error-file-save.c:350
 msgid "Try saving to a different location."
-msgstr "Zkuste ukládat do jiného umístění."
+msgstr "Zkuste uložení do jiného umístění."
 
 #: ../src/cong-error-file-save.c:134
 msgid "There were problems writing the content of the file."
-msgstr "Při zápisu obsahu souboru se vyskytly problémy."
+msgstr "Nastal problém s ukládáním obsahu souboru."
 
 #: ../src/cong-error-file-save.c:135
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného adresáře."
+"Zkuste to znovu. Pokud to opět selže, zkuste uložení do jiného umístění."
 
 #: ../src/cong-error-file-save.c:159
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
-msgstr "Velikost souboru by byla %s, ale zařízení má kapacitu jen %s."
+msgstr "Velikost souboru by byla %s, ale zařízení má kapacitu pouze %s."
 
 #. Can't get at the capacity for the device or "volume":
 #. FIXME: This is the workaround:
@@ -4048,13 +4116,14 @@ msgstr "Velikost souboru by byla %s, ale zařízení má kapacitu jen %s."
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
-"Soubor je příliš velký na to, aby se vešel na zařízení (velikost souboru by "
-"byla %s)"
+"Soubor je příliš velký, než aby se na zařízení vešel (velikost souboru by "
+"byla %s)."
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:178
+#, c-format
 msgid "The file is too big to fit on the device."
-msgstr "Soubor je příliš velký na to, aby se vešel na zařízení."
+msgstr "Soubor je příliš velký, než aby se na zařízení vešel."
 
 #: ../src/cong-error-file-save.c:187
 msgid "Try saving the file to a different location."
@@ -4064,8 +4133,7 @@ msgstr "Zkuste soubor uložit do jiného umístění."
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
-msgstr ""
-"Velikost souboru by byla %s, ale na daném zařízení máte jen %s volných."
+msgstr "Velikost souboru by byla %s, ale na tomto zařízení máte volné jen %s."
 
 #. Can't get at the free space for the device or "volume":
 #: ../src/cong-error-file-save.c:214
@@ -4074,22 +4142,23 @@ msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
 msgstr ""
-"Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení "
+"Soubor je příliš velký, než aby se vešel do zbývajícího místa na zařízení "
 "(velikost souboru by byla %s)."
 
 #. We don't know the size of the file:
 #: ../src/cong-error-file-save.c:222
+#, c-format
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
-"Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení."
+"Soubor je příliš velký, než aby se vešel do zbývajícího místa na zařízení."
 
 #: ../src/cong-error-file-save.c:231
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
 msgstr ""
-"Zkuste soubor uložit do jiného umístění nebo udělat více místa přesunem "
-"nepotřebných souborů z daného zařízení do koše."
+"Zkuste uložit soubor do jiného umístění nebo uvolněte místo tím, že "
+"přesunete nepotřebné soubory ze zařízení do koše."
 
 #: ../src/cong-error-file-save.c:252
 msgid ""
@@ -4098,42 +4167,41 @@ msgid ""
 "\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
-"velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP"
-"\").\n"
-"(ii) Zkuste ukládat do jiného umístění."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně. Pamatujte, "
+"že se rozlišuje velikost písmen („http“ není totéž co „Http“ nebo „HTTP“).\n"
+"(ii) Zkuste uložení do jiného umístění."
 
 #: ../src/cong-error-file-save.c:266
 msgid "You do not have permission to write to that location."
-msgstr "Nemáte oprávnění zapisovat do daného umístění."
+msgstr "Nemáte oprávnění zapisovat do tohoto umístění."
 
 #: ../src/cong-error-file-save.c:267
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
 msgstr ""
-"Zkuste ukládat do jiného umístění nebo požádejte svého správce systému, aby "
+"Zkuste uložení do jiného umístění nebo požádejte svého správce systému, aby "
 "vám přidělil oprávnění."
 
 #. FIXME:  capitalisation issues
 #: ../src/cong-error-file-save.c:281
 #, c-format
 msgid "\"%s\" is a directory."
-msgstr "\"%s\" je adresář."
+msgstr "„%s“ je složka."
 
 #: ../src/cong-error-file-save.c:285
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
-msgstr "Musíte ukládat do souboru v adresáři, ne přímo do adresáře."
+msgstr "Musíte soubor uložit do složky a ne s názvem složky."
 
 #: ../src/cong-error-file-save.c:303
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste "
-"ukládat do jiného umístění."
+"Zkuste to znovu. Pokud to opět selže, je server nejspíš nedostupný. Pak "
+"zkuste uložení do jiného umístění."
 
 #: ../src/cong-error-file-save.c:312 ../src/cong-error-file-save.c:321
 msgid ""
@@ -4141,67 +4209,67 @@ msgid ""
 "(ii) Try again. If it fails again, the server may be down; try saving to "
 "another location."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně.\n"
-"(ii) Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste "
-"ukládat do jiného umístění."
+"(i) Zkuste zkontrolovat, zda jste název umístění napsali správně.\n"
+"(ii) Zkuste to znovu. Pokud to opět selže, je server nejspíš nedostupný. Pak "
+"zkuste uložení do jiného umístění."
 
 #: ../src/cong-error-file-save.c:330 ../src/cong-error-file-save.c:339
 msgid "Try again. If it fails again, try saving to another location."
 msgstr ""
-"Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného umístění."
+"Zkuste to znovu. Pokud to opět selže, zkuste uložení do jiného umístění."
 
 #. FIXME: need some thought about the messages for this
 #: ../src/cong-error-file-save.c:346
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
-msgstr "Umístění \"%s\" umožňuje jen čtení souborů, ne zápis."
+msgstr "Umístění „%s“ umožňuje soubory pouze číst, ne zapisovat."
 
 #. FIXME: need to think more about these messages
 #: ../src/cong-error-file-save.c:358
 #, c-format
 msgid "The name \"%s\" is too long for the location to manage."
-msgstr "Název \"%s\" je příliš dlouhý pro dané umístění."
+msgstr "Název „%s“ je příliš dlouhý pro umístění, které jej má použít."
 
 #: ../src/cong-error-file-save.c:362
 msgid "Try again with a shorter file name."
-msgstr "Zkuste to znovu s kratším názvem souboru."
+msgstr "Zkuste znovu s kratším názvem souboru."
 
 #. 5 megabytes, for a test
 #: ../src/cong-error-tests.c:25
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
-msgstr "Testuji selhání Soubor->Otevřít \"%s\" s výsledkem %s"
+msgstr "Testování selhání Soubor→Otevřít „%s“ s výsledkem %s"
 
 #: ../src/cong-error-tests.c:31
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
-msgstr "Testuji selhání Soubor->Uložit \"%s\" s výsledkem %s"
+msgstr "Testování selhání Soubor→Uložit „%s“ s výsledkem %s"
 
 #: ../src/cong-error-tests.c:37
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
-msgstr "Testuji obecné selhání \"%s\" s výsledkem %s"
+msgstr "Testování obecného selhání „%s“ s výsledkem %s"
 
 #: ../src/cong-error-tests.c:40
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr "Conglomerate simuluje selhání obecné operace se souborem."
+msgstr "Aplikace Conglomerate simuluje selhání běžné operace se souborem."
 
 #: ../src/cong-error-tests.c:43
 msgid "This dialog was generated by the automated testing routine"
-msgstr "Tento dialog byl vygenerován automatizovanou testovací rutinou"
+msgstr "Toto dialogové okno bylo vygenerováno automatickou testovací rutinou"
 
 #: ../src/cong-file-export.c:153
 msgid "(No description available)"
-msgstr "(Popis není k dispozici)"
+msgstr "(Není k dispozici žádný popis)"
 
 #: ../src/cong-file-export.c:212
 msgid "Select file to export to"
-msgstr "Zvolte soubor, do kterého exportovat"
+msgstr "Výběr souboru pro export"
 
 #: ../src/cong-file-export.c:260
 #, c-format
 msgid "Export \"%s\""
-msgstr "Exportovat \"%s\""
+msgstr "Export „%s“"
 
 #: ../src/cong-file-export.c:265
 msgid "Export"
@@ -4217,11 +4285,11 @@ msgstr "Soubor:"
 
 #: ../src/cong-file-export.c:321
 msgid "Export Options"
-msgstr "Možnosti exportu"
+msgstr "Volby exportu"
 
 #: ../src/cong-file-export.c:431
 msgid "No output file specified"
-msgstr "Nezadán výstupní soubor"
+msgstr "Nebyl určen žádný výstupní soubor"
 
 #: ../src/cong-file-export.c:432
 msgid "Please specify a file name."
@@ -4229,17 +4297,17 @@ msgstr "Zadejte prosím název souboru."
 
 #: ../src/cong-file-import.c:80
 msgid "Import file..."
-msgstr "Importovat soubor..."
+msgstr "Import souboru…"
 
 #: ../src/cong-file-new.c:169
 #, c-format
 msgid "Creating a new file (%s)"
-msgstr "Vytvářím nový soubor (%s)"
+msgstr "Vytvoření nového souboru (%s)"
 
 #: ../src/cong-file-new.c:595 ../src/cong-file-new.c:618
 #: ../src/cong-file-new.c:626 ../src/cong-file-new.c:643
 msgid "Creating a new file"
-msgstr "Vytvářím nový soubor"
+msgstr "Vytvoření nového souboru"
 
 #: ../src/cong-file-new.c:619
 msgid ""
@@ -4251,22 +4319,22 @@ msgid ""
 "We hope that in future versions of Conglomerate you will be able to create "
 "\"template documents\" to add to this system."
 msgstr ""
-"Tento asistent vás provede vytvářením nového souboru.\n"
+"Tento průvodce vás provede vytvořením nového souboru.\n"
 "\n"
-"Jsou k dispozici různé typy souborů a Conglomerate možná bude moci dodat "
-"\"základní\" obsah za vás.\n"
+"Jsou k dispozici různé typy souboru a aplikace Conglomerate vám dokáže "
+"zaopatřit libovolný obsah.\n"
 "\n"
-"Doufáme, že v budoucích verzích Conglomerate budete moci vytvářet \"šablony "
-"dokumentů\", a přidat je do tohoto systému."
+"Doufáme, že v budoucích verzích aplikace Conglomerate budete moci vytvářet "
+"„dokumenty šablon“ a přidávat je do tohoto systému."
 
 #: ../src/cong-file-new.c:632
 msgid "What type of file would you like to create?"
-msgstr "Jaký typ souboru byste chtěli vytvořit?"
+msgstr "Jaký typ souboru byste si přáli vytvořit?"
 
 #: ../src/cong-file-new.c:634
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
-msgstr "Zvýrazněte jednu z položek v seznamu a pokračujte zvolením \"Vpřed\""
+msgstr "Vyberte v seznamu jednu položku a pro pokračování zvolte „Vpřed“"
 
 #: ../src/cong-file-new.c:644
 msgid ""
@@ -4274,41 +4342,42 @@ msgid ""
 "\"Apply\" to create it.  You will need to save the document if you wish to "
 "keep it."
 msgstr ""
-"Conglomerate nyní má informace, které potřebuje pro vytvoření dokumentu. "
-"Vytvořte je stisknutím \"Použít\". Pokud si dokument chcete ponechat, budete "
-"jej muset uložit."
+"Aplikace Conglomerate má nyní informace, které potřebuje k vytvoření "
+"dokumentu. Zmáčknutím „Použít“ jej vytvoříte. Pokud jej bude chtít uchovat, "
+"budete jej muset uložit."
 
 #: ../src/cong-file-open.c:72
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
 msgstr ""
-"Interní struktura dokumentu neodpovídá žádnému typu známému v Conglomerate."
+"Interní struktura dokumentu neodpovídá žádnému typu známému aplikaci "
+"Conglomerate."
 
 #: ../src/cong-file-open.c:73
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 msgstr ""
-"Můžete Conglomerate přinutit k načtení dokumentu kliknutím na tlačítko "
-"\"Vnutit\" níže, ale výsledek možná nebude ideální."
+"Můžete aplikaci Conglomerate přimět dokument načíst kliknutím na následující "
+"tlačítko „Vynuti“, ale výsledky nemusí být ideální."
 
 #: ../src/cong-file-open.c:74
 msgid "Force"
-msgstr "Vnutit"
+msgstr "Vynutit"
 
 #: ../src/cong-file-open.c:223
 msgid "Select an XML document"
-msgstr "Zvolte dokument XML"
+msgstr "Výběr dokumentu XML"
 
 #: ../src/cong-file-print.c:195
 #, c-format
 msgid "Print \"%s\""
-msgstr "Vytisknout \"%s\""
+msgstr "Tisk „%s“"
 
 #: ../src/cong-file-print.c:201
 msgid "Print"
-msgstr "Vytisknout"
+msgstr "Tisk"
 
 #: ../src/cong-file-print.c:233
 msgid "Print Method:"
@@ -4316,21 +4385,21 @@ msgstr "Metoda tisku:"
 
 #: ../src/cong-file-print.c:241
 msgid "Print Options"
-msgstr "Možnosti tisku"
+msgstr "Volby tisku"
 
 #: ../src/cong-file-print.c:336 ../src/cong-menus.c:727
 msgid "Print Preview"
-msgstr "Náhled před tiskem"
+msgstr "Náhled tisku"
 
 #: ../src/cong-file-print.c:346
 #, c-format
 msgid "Conglomerate cannot print \"%s\""
-msgstr "Conglomerate nemůže vytisknout \"%s\""
+msgstr "Aplikace Conglomerate nemůže vytisknout „%s“"
 
 #: ../src/cong-file-print.c:349
 msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
-"Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
+"Žádný ze zásuvných modulů Conglomerate neumí vytisknout soubor tohoto typu."
 
 #: ../src/cong-file-properties.c:200
 msgid "Yes"
@@ -4346,7 +4415,7 @@ msgstr "Žádný"
 
 #: ../src/cong-file-properties.c:260
 msgid "_Remove this DTD"
-msgstr "_Odstranit tuto DTD"
+msgstr "Odst_ranit toto DTD"
 
 #: ../src/cong-file-properties.c:285
 msgid ""
@@ -4354,21 +4423,21 @@ msgid ""
 "above information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
 msgstr ""
-"Dokument neurčuje externí DTD, ale Conglomerate si myslí, že vhodné jsou "
-"informace výše. Určete tuto informaci v dokumentu explicitně kliknutím na "
-"\"Asociovat tuto DTD\"."
+"Dokument neurčuje žádné externí DTD, ale aplikace Conglomerate věří, že "
+"následující informace je správná. Kliknutím na „Přiřadit toto DTD“ určíte "
+"tuto informaci dokumentu explicitně."
 
 #: ../src/cong-file-properties.c:294
 msgid "No External Subset"
-msgstr "Žádná externí podmnožina"
+msgstr "Žádná externí verze"
 
 #: ../src/cong-file-properties.c:296 ../src/plugin-validate.c:171
 msgid "_Add a DTD"
-msgstr "_Přidat DTD"
+msgstr "Přid_at DTD"
 
 #: ../src/cong-file-properties.c:373 ../src/cong-file-properties.c:375
 msgid "Unknown"
-msgstr "Neznámé"
+msgstr "Neznámý"
 
 #: ../src/cong-file-properties.c:386
 msgid "Unspecified"
@@ -4376,29 +4445,29 @@ msgstr "Neurčeno"
 
 #: ../src/cong-file-properties.c:461
 msgid "Remove DTD"
-msgstr "Odstranit DTD"
+msgstr "Odebrat DTD"
 
 #: ../src/cong-file-properties.c:478 ../src/cong-util.c:1636
 msgid "Associate with DTD"
-msgstr "Přiřadit DTD"
+msgstr "Asociovat s DTD"
 
 #: ../src/cong-file-save.c:75
 msgid "Save XML as..."
-msgstr "Uložit XML jako..."
+msgstr "Uložit XML jako…"
 
 #: ../src/cong-file-save.c:110
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "Soubor \"%s\" je jen pro čtení.\n"
+msgstr "Soubor „%s“ je pouze ke čtení.\n"
 
 #: ../src/cong-file-save.c:113
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr "Již existuje soubor nazvaný \"%s\".\n"
+msgstr "Soubor s názvem „%s“ již existuje.\n"
 
 #: ../src/cong-file-save.c:121
 msgid "_Replace"
-msgstr "_Nahradit"
+msgstr "Nah_radit"
 
 #: ../src/cong-file-save.c:131
 msgid "Do you want to replace it with the one you are saving?"
@@ -4406,27 +4475,27 @@ msgstr "Chcete jej nahradit tím, který ukládáte?"
 
 #: ../src/cong-location.c:395 ../src/cong-location.c:416
 msgid "Merge tags"
-msgstr "Sloučit tagy"
+msgstr "Sloučit značky"
 
-#: ../src/cong-location.c:467
+#: ../src/cong-location.c:469
 msgid "Delete character"
-msgstr "Odstranit znak"
+msgstr "Smazat znak"
 
-#: ../src/cong-location.c:1061
+#: ../src/cong-location.c:1063
 msgid "Calculating previous page"
-msgstr "Počítám předchozí stránku"
+msgstr "Výpočet předchozí stránky"
 
-#: ../src/cong-location.c:1084
+#: ../src/cong-location.c:1086
 msgid "Calculating next page"
-msgstr "Počítám následující stránku"
+msgstr "Výpočet následující stránky"
 
 #: ../src/cong-menus.c:112 ../src/cong-menus.c:165 ../src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
-msgstr "Vybraná položka menu ještě nebyla implementována."
+msgstr "Vybraná položka nabídky nebyla zatím implementována."
 
 #: ../src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
-msgstr "Conglomerate nemůže otevřít výsledek transformace"
+msgstr "Aplikace Conglomerate nemůže otevřít výsledek převodu"
 
 #.
 #. * Since we can not assume that these are the DocBook stylesheets we can not
@@ -4437,49 +4506,50 @@ msgstr "Conglomerate nemůže otevřít výsledek transformace"
 #: ../src/cong-menus.c:528 ../src/cong-stylesheet.c:226
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
-msgstr "Při čtení souboru stylesheetu \"%s\" se vyskytl problém"
+msgstr "Nastal problém se čtením souboru se stylopisem „%s“"
 
 #: ../src/cong-menus.c:531 ../src/cong-menus.c:555
 #: ../src/cong-stylesheet.c:228 ../src/cong-stylesheet.c:291
 msgid "Conglomerate could not transform the document"
-msgstr "Conglomerate nemohl transformovat tento dokument"
+msgstr "Aplikace Conglomerate nemůže převést dokument"
 
 #: ../src/cong-menus.c:552
+#, c-format
 msgid "There was a problem applying the stylesheet file"
-msgstr "Při použití souboru stylesheetu se vyskytl problém"
+msgstr "Nastal problém s použitím souboru se stylopisem"
 
 #: ../src/cong-menus.c:1113
 msgid "Test Progress Checklist"
-msgstr "Otestovat zaškrtávací pole průběhu"
+msgstr "Test "
 
 #: ../src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
-msgstr "Toto je krok %i"
+msgstr "Toto je fáze %i"
 
 #: ../src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
-msgstr "Záznam zpráv - Conglomerate"
+msgstr "Evidence zprávy – Conglomerate"
 
 #: ../src/cong-menus.c:1187
 msgid "Signal Log - Conglomerate"
-msgstr "Záznam signálů - Conglomerate"
+msgstr "Evidence signálu – Conglomerate"
 
 #: ../src/cong-menus.c:1427
 msgid "translator_credits"
-msgstr "Miloslav Trmač <mitr@volny.cz>"
+msgstr "Marek Černocký <marek@manet.cz>"
 
 #: ../src/cong-menus.c:1446
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 msgstr ""
-"© 1999 Hans Petter Jansson\n"
-"© 2004 David Malcolm"
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
 
 #: ../src/cong-menus.c:1447
 msgid "Conglomerate: a free, user-friendly XML editor"
-msgstr "Conglomerate: svobodný editor XML přívětivý k uživatelům"
+msgstr "Conglomerate: svobodný, uživatelsky přívětivý editor XML"
 
 #. Menus:
 #: ../src/cong-menus.c:1481
@@ -4492,12 +4562,12 @@ msgstr "_Upravit"
 
 #: ../src/cong-menus.c:1487
 msgid "_Help"
-msgstr "Nápo_věda"
+msgstr "_Nápověda"
 
 #. Sub-menus:
 #: ../src/cong-menus.c:1490 ../src/popup.c:1121
 msgid "New sub-element"
-msgstr "Nový podelement"
+msgstr "Nový podřízený element"
 
 #: ../src/cong-menus.c:1491 ../src/popup.c:1135
 msgid "New sibling"
@@ -4505,20 +4575,20 @@ msgstr "Nový sourozenec"
 
 #: ../src/cong-menus.c:1492
 msgid "Remove span tag"
-msgstr "Odstranit tag span"
+msgstr "Odebrat segmentovou značku"
 
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1495
 msgid "_New..."
-msgstr "_Nový..."
+msgstr "_Nový…"
 
 #: ../src/cong-menus.c:1496
 msgid "_Open..."
-msgstr "_Otevřít..."
+msgstr "_Otevřít…"
 
 #: ../src/cong-menus.c:1497
 msgid "_Import..."
-msgstr "_Importovat..."
+msgstr "_Import…"
 
 #: ../src/cong-menus.c:1498
 msgid "_Close"
@@ -4531,7 +4601,7 @@ msgstr "U_končit"
 #. Actions found in Edit menu:
 #: ../src/cong-menus.c:1503
 msgid "Pr_eferences"
-msgstr "Nas_tavení"
+msgstr "Př_edvolby"
 
 #. Actions found in Help menu:
 #: ../src/cong-menus.c:1516
@@ -4548,7 +4618,7 @@ msgstr "O _aplikaci"
 
 #: ../src/cong-menus.c:1524
 msgid "_Tools"
-msgstr "_Nástroje"
+msgstr "Nás_troje"
 
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1528
@@ -4557,19 +4627,19 @@ msgstr "_Uložit"
 
 #: ../src/cong-menus.c:1529
 msgid "Save _as..."
-msgstr "Uložit _jako..."
+msgstr "Uložit _jako…"
 
 #: ../src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
-msgstr "Uložit _kopii..."
+msgstr "Uložit ko_pii…"
 
 #: ../src/cong-menus.c:1532
 msgid "Print Previe_w..."
-msgstr "Ná_hled před tiskem..."
+msgstr "Ná_hled před tiskem…"
 
 #: ../src/cong-menus.c:1533
 msgid "_Print"
-msgstr "Vy_tisknout"
+msgstr "_Tisk"
 
 #: ../src/cong-menus.c:1536
 msgid "_Revert"
@@ -4577,11 +4647,11 @@ msgstr "V_rátit"
 
 #: ../src/cong-menus.c:1538
 msgid "_Export..."
-msgstr "_Exportovat..."
+msgstr "_Export…"
 
 #: ../src/cong-menus.c:1539
 msgid "Proper_ties"
-msgstr "_Vlastnosti"
+msgstr "Vlas_tnosti"
 
 #. Actions found in Edit menu:
 #: ../src/cong-menus.c:1543 ../src/cong-menus.c:1772
@@ -4606,7 +4676,7 @@ msgstr "V_ložit"
 
 #: ../src/cong-menus.c:1548
 msgid "_Find..."
-msgstr "_Hledat..."
+msgstr "_Hledat…"
 
 #: ../src/cong-menus.c:1549
 msgid "Find Ne_xt"
@@ -4614,19 +4684,19 @@ msgstr "Hledat _následující"
 
 #: ../src/cong-menus.c:1550
 msgid "Find Pre_vious"
-msgstr "Hledat _předchozí"
+msgstr "Hledat pře_dchozí"
 
 #: ../src/cong-menus.c:1551
 msgid "R_eplace..."
-msgstr "Nah_radit..."
+msgstr "Nah_radit…"
 
 #: ../src/cong-menus.c:1553
 msgid "_Insert..."
-msgstr "V_ložit..."
+msgstr "Vlož_it…"
 
 #: ../src/cong-menus.c:1554
 msgid "View _Source"
-msgstr "Zobrazit _zdroj"
+msgstr "Zobrazit z_drojový kód"
 
 #: ../src/cong-menus.c:1768
 #, c-format
@@ -4645,20 +4715,20 @@ msgstr "XPath"
 #: ../src/cong-node-properties-dialog.c:379
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
-msgstr "Přejmenovat atribut \"%s\" na \"%s\""
+msgstr "Přejmenovat atribut „%s“ na „%s“"
 
 #: ../src/cong-node-properties-dialog.c:560
 msgid "Namespace"
-msgstr "Prostor jmen"
+msgstr "Jmenný prostor"
 
 #: ../src/cong-node-properties-dialog.c:588
 msgid "Raw Attributes"
-msgstr "Přímo atributy"
+msgstr "Řádkové atributy"
 
 #: ../src/cong-node-properties-dialog.c:713
 #, c-format
 msgid "Attributes for <tt>%s</tt> elements"
-msgstr "Atributy pro elementy <tt>%s</tt>"
+msgstr "Atributy pro element <tt>%s</tt>"
 
 #: ../src/cong-node-properties-dialog.c:930
 msgid "Zero or more"
@@ -4666,7 +4736,7 @@ msgstr "Nula nebo více"
 
 #: ../src/cong-node-properties-dialog.c:946
 msgid "One or more"
-msgstr "Jeden nebo více"
+msgstr "Jedna nebo více"
 
 #. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
 #: ../src/cong-node-properties-dialog.c:1013
@@ -4691,11 +4761,11 @@ msgstr "Neznámá data"
 #: ../src/cong-parser-error.c:228
 #, c-format
 msgid "Parse errors loading %s"
-msgstr "Chyby při zpracovávání %s"
+msgstr "Chyba zpracování při načítání %s"
 
 #: ../src/cong-parser-error.c:236
 msgid "_Retry"
-msgstr "Zkusit z_novu"
+msgstr "Zkusit _znovu"
 
 #: ../src/cong-parser-error.c:315
 msgid "Line Number"
@@ -4704,7 +4774,7 @@ msgstr "Číslo řádku"
 #: ../src/cong-parser-error.c:393
 #, c-format
 msgid "%s cannot understand the internal format of the file."
-msgstr "%s nerozumí internímu formátu souboru."
+msgstr "%s nemůže porozumět internímu formátu souboru."
 
 #: ../src/cong-parser-error.c:401
 msgid ""
@@ -4712,29 +4782,31 @@ msgid ""
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
 "We hope to fix these problems in a later release."
 msgstr ""
-"Conglomerate v současné době vyžaduje, aby dokumenty byly \"well-formed\"; "
-"má mnohem přísnější pravidla než většina WWW prohlížečů. Také zatím "
-"nepodporuje SGML. Doufáme, že tyto problém v pozdější verzi opravíme."
+"Aplikace Conglomerate v současnosti vyžaduje, aby dokumenty byly „dobře "
+"naformátovány“. To jsou přísnější pravidla, než ve většině webových "
+"prohlížečů. Zatím také není podporováno SGML. Doufáme, že tento problém "
+"vyřešíme v některém pozdějším vydání."
 
 #: ../src/cong-parser-error.c:402
 msgid "Show Details"
-msgstr "Zobrazit detaily"
+msgstr "Zobrazit podrobnosti"
 
 #: ../src/cong-plugin.c:515 ../src/cong-plugin.c:580
 msgid "Conglomerate could not find display information for the new file"
-msgstr "Conglomerate nemohl najít informace o zobrazování nového souboru"
+msgstr ""
+"Aplikace Conglomerate nemůže najít zobrazovací informace pro nový soubor"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
 #: ../src/cong-plugin.c:1004
 #, c-format
 msgid "<%s> property dialog"
-msgstr "Dialog vlastností <%s>"
+msgstr "Dialogové okno vlastností <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
 #: ../src/cong-plugin.c:1007
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
-msgstr "Poskytuje dialog Vlastnosti pro element <%s>"
+msgstr "Poskytuje dialogové okno vlastností pro element <%s>"
 
 #: ../src/cong-plugin.c:1091
 #, c-format
@@ -4745,7 +4817,7 @@ msgstr "Stránka vlastností <%s>"
 #: ../src/cong-plugin.c:1095
 #, c-format
 msgid "Provides a Properties page for the <%s> element"
-msgstr "Poskytuje stránku Vlastnosti pro element <%s>"
+msgstr "Poskytuje stránku vlastností pro element <%s>"
 
 #: ../src/cong-primary-window.c:415
 msgid "Overview"
@@ -4757,20 +4829,20 @@ msgstr "Záložky"
 
 #: ../src/cong-primary-window.c:436
 msgid "Raw XML"
-msgstr "Přímo XML"
+msgstr "Řádky XML"
 
 #: ../src/cong-primary-window.c:662 ../src/cong-primary-window.c:681
 msgid "Welcome to the much-delayed Conglomerate editor."
-msgstr "Vítejte ve velice opožděném editoru Conglomerate."
+msgstr "Vítejte v dlouho odkládaném editoru Conglomerate."
 
 #: ../src/cong-primary-window.c:810
 #, c-format
 msgid "%s (modified) - %s"
-msgstr "%s (upraven) - %s"
+msgstr "%s (změněno) – %s"
 
 #: ../src/cong-source-layout.c:513 ../src/plugin-cleanup-source.c:73
 msgid "Cleanup XML Source"
-msgstr "Vyčistit zdroj XML"
+msgstr "Pročistit zdrojový kód XML"
 
 #: ../src/cong-stylesheet.c:230
 msgid ""
@@ -4778,14 +4850,14 @@ msgid ""
 "XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
 "html for more information on catalogs."
 msgstr ""
-"Protože Conglomerate nemůže číst stylesheet, je možné, že váš soubor "
-"katalogu XML není nastaven správně. Pro více informací o katalozích viz "
-"http://www.xmlsoft.org/catalog.html"
+"Jelikož aplikace Conglomerate nemůže přečíst stylopis, je možné že není "
+"správně nastaven váš soubor s katalogem XML. Více informací o katalozích viz "
+"http://www.xmlsoft.org/catalog.html."
 
 #: ../src/cong-stylesheet.c:261
 #, c-format
 msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
-msgstr "Při použití souboru stylesheetu \"%s\" na \"%s\" se vyskytl problém"
+msgstr "Vyskytl se problém při použití souboru se stylopisem „%s“ na „%s“"
 
 #: ../src/cong-stylesheet.c:278
 msgid ""
@@ -4795,19 +4867,19 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Byly použity následující parametry stylesheetu:\n"
+"Byly použity následující parametry stylopisu:\n"
 
 #: ../src/cong-util.c:321 ../src/plugin-docbook.c:1402
 msgid "Printing XSL Formatting Objects"
-msgstr "Tisk formátovacích objektů XSL"
+msgstr "Tisknou se formátovací objekty XSL"
 
 #: ../src/cong-util.c:365
 msgid "This will eventually be the result from cong_util_print_xslfo"
-msgstr "Toto bude časem výsledek cong_util_print_xslfo"
+msgstr "Toto nakonec bude výsledek z funkce cong_util_print_xslfo"
 
 #: ../src/cong-util.c:1437
 msgid "(no description available)"
-msgstr "(popis není k dispozici)"
+msgstr "(není k dispozici žádný popis)"
 
 #: ../src/cong-util.c:1625
 msgid "DTD files"
@@ -4815,7 +4887,7 @@ msgstr "Soubory DTD"
 
 #: ../src/cong-util.c:1628
 msgid "Select a DTD"
-msgstr "Zvolte DTD"
+msgstr "Výběr DTD"
 
 #: ../src/cursor.c:129
 #, c-format
@@ -4832,15 +4904,15 @@ msgstr "Všechny soubory"
 
 #: ../src/plugin-admonition.c:77
 msgid "Admonition"
-msgstr "Upozornění"
+msgstr "Varování"
 
 #: ../src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
-msgstr "Uzel editoru pro zobrazení tipů, varování atd"
+msgstr "Uzel editoru pro zobrazení tipů, varování apod."
 
 #: ../src/plugin-arbitrary.c:168
 msgid "The XML document needs a top-level element."
-msgstr "Dokument XML potřebuje element nejvyšší úrovně."
+msgstr "Dokument XML potřebuje nějaký element nejvyšší úrovně."
 
 #: ../src/plugin-arbitrary.c:270
 msgid "Empty XML Document"
@@ -4855,23 +4927,26 @@ msgstr "Vytvořit prázdný dokument XML libovolného typu."
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
-msgstr "Vyčistí zdroj XML dokumentu, takže se snadno čte v editoru zdroje."
+msgstr ""
+"Pročistit zdrojový kód XML dokumentu, takže se bude dát dobře číst v editoru "
+"kódu."
 
 #: ../src/plugin-cleanup-source.c:76
 msgid "_Clean the XML Source"
-msgstr "_Vyčistit zdroj XML"
+msgstr "Proči_stit zdrojový kód XML"
 
 #: ../src/plugin-convert-case.c:125
 msgid "Export as \"lower case\" XML"
-msgstr "Exportovat jako XML \"s malými písmeny\""
+msgstr "Export XML „malými písmeny“"
 
 #: ../src/plugin-convert-case.c:126
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
 msgstr ""
-"Exportuje jako soubor XML a převádí všechny tagy a atributy v dokumentu na "
-"malá písmena. Užitečné při práci se zděděnými dokumenty SGML."
+"Exportovat soubor XML, přičemž se všechny značky a atributy v dokumentu "
+"převedou na malá písmena. To je užitečné, pokud se pracuje se zastaralými "
+"dokumenty SGML."
 
 #: ../src/plugin-docbook.c:225
 msgid "Untitled section"
@@ -4879,7 +4954,7 @@ msgstr "Nepojmenovaný oddíl"
 
 #: ../src/plugin-docbook.c:232
 msgid "Text of the article goes here"
-msgstr "Sem přijde text článku"
+msgstr "Text článku začíná odtud"
 
 #: ../src/plugin-docbook.c:251
 msgid "Untitled Article"
@@ -4891,7 +4966,7 @@ msgstr "Nepojmenovaná kapitola"
 
 #: ../src/plugin-docbook.c:308
 msgid "Text of the first chapter goes here"
-msgstr "Sem přijde text první kapitoly"
+msgstr "Text první kapitoly začíná odtud"
 
 #: ../src/plugin-docbook.c:327
 msgid "Untitled Book"
@@ -4912,12 +4987,11 @@ msgstr "Nepojmenovaná sada dokumentů"
 #: ../src/plugin-docbook.c:1103
 #, c-format
 msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
-msgstr ""
-"Conglomerate nemůže najít stylesheet používaný pro převod DocBooku do %s"
+msgstr "Aplikace nemůže najít stylopis použitý k převodu DocBook na %s"
 
 #: ../src/plugin-docbook.c:1106
 msgid "Unable to locate the DocBook stylesheets"
-msgstr "Nemohu najít stylesheety DocBooku"
+msgstr "Nelze najít stylopis DocBook"
 
 #: ../src/plugin-docbook.c:1108
 msgid ""
@@ -4926,10 +5000,10 @@ msgid ""
 "XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
 "information on catalogs)."
 msgstr ""
-"Zajistěte, aby stylesheety Normana Walshe pro DocBook XSL, dostupné na "
-"http://docbook.sourceforge.net/projects/xsl/, byly nainstalovány a přidány "
-"do vašeho souboru katalogu XML (pro více informací o katalozích viz http://"
-"www.xmlsoft.org/catalog.html)."
+"Ujistěte se, že stylopisy DocBook XSL Normana Walshe, dostupný na http://"
+"docbook.sourceforge.net/projects/xsl/, jsou nainstalovány a jsou přidány do "
+"vašeho souboru s katalogem XML (více informací o katalozích viz http://www."
+"xmlsoft.org/catalog.html)."
 
 #: ../src/plugin-docbook.c:1144
 #, c-format
@@ -4938,29 +5012,29 @@ msgid ""
 "\n"
 "Converted %s to %s in %s"
 msgstr ""
-"Převod %s hotov.\n"
+"Převod %s dokončen.\n"
 "\n"
-"Převedeno %s do %s za %s"
+"Převedeno %s na %s v %s"
 
 #: ../src/plugin-docbook.c:1268
 msgid "Exporting PDF file"
-msgstr "Exportuji soubor PDF"
+msgstr "Export souboru PDF"
 
 #: ../src/plugin-docbook.c:1272 ../src/plugin-docbook.c:1400
 msgid "Transforming DocBook into XSL Formatting Objects"
-msgstr "Transformuji DocBook do formátovacích objektů XSL"
+msgstr "DocBook se převádí na objekty formátované pomocí XSL"
 
 #: ../src/plugin-docbook.c:1274
 msgid "Laying out XSL Formatting Objects as a PDF file"
-msgstr "Kreslím formátovací objekty XSL jako soubor PDF"
+msgstr "Objekty formátované pomocí XSL se rozmisťují do souboru PDF"
 
 #: ../src/plugin-docbook.c:1289 ../src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
-msgstr "Převádím formátovací objekty XSL do PDF"
+msgstr "Objekty formátované pomocí XSL se konvertují do PDF"
 
 #: ../src/plugin-docbook.c:1396
 msgid "Printing DocBook file"
-msgstr "Tisknu soubor DocBook"
+msgstr "Tisk souboru DocBook"
 
 #: ../src/plugin-docbook.c:2060
 msgid "DocBook Article"
@@ -4971,7 +5045,7 @@ msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
-"Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
+"Vytvořit článek, třeba na web nebo pro časopis, za použití formátu „DocBook“"
 
 #: ../src/plugin-docbook.c:2068
 msgid "DocBook Book"
@@ -4979,7 +5053,7 @@ msgstr "Kniha DocBook"
 
 #: ../src/plugin-docbook.c:2069
 msgid "Create a book, using the \"DocBook\" format"
-msgstr "Vytvořit knihu pomocí formátu \"DocBook\""
+msgstr "Vytvořit knihu za použití formátu „DocBook“"
 
 #: ../src/plugin-docbook.c:2076
 msgid "DocBook Set"
@@ -4987,51 +5061,51 @@ msgstr "Sada DocBook"
 
 #: ../src/plugin-docbook.c:2077
 msgid "Create a set of related books, using the \"DocBook\" format"
-msgstr "Vytvořit sadu souvisejících knih pomocí formátu \"DocBook\""
+msgstr "Vytvořit sadu svázaných knih za použití formátu „DocBook“"
 
 #: ../src/plugin-docbook.c:2085
 msgid "Import text as a DocBook article"
-msgstr "Importovat text jako článek DocBook"
+msgstr "Import textu jako článku DocBook"
 
 #: ../src/plugin-docbook.c:2086
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
-msgstr "Importovat čistý textový soubor do formátu \"DocBook\" jako článek"
+msgstr "Importovat soubor s prostým textem do formátu „DocBook“ jako článek."
 
 #: ../src/plugin-docbook.c:2104
 msgid "Export DocBook as HTML"
-msgstr "Exportovat DocBook jako HTML"
+msgstr "Export DocBook jako HTML"
 
 #: ../src/plugin-docbook.c:2105
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr ""
-"Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto "
-"souboru DocBook"
+"Použít stylopisů DocBook od Normana Walshe k vytvoření webové stránky z "
+"tohoto souboru DocBook"
 
 #: ../src/plugin-docbook.c:2113
 msgid "Export DocBook as PDF"
-msgstr "Exportovat DocBook jako PDF"
+msgstr "Export DocBook jako PDF"
 
 #: ../src/plugin-docbook.c:2114
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
-"Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto "
+"Použít stylopisů DocBook od Normana Walshe k vytvoření souboru PDF z tohoto "
 "souboru DocBook"
 
 #: ../src/plugin-docbook.c:2122
 msgid "Export DocBook as XSL:FO"
-msgstr "Exportovat DocBook jako XSL:FO"
+msgstr "Export DocBook jako XSL:FO"
 
 #: ../src/plugin-docbook.c:2123
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 msgstr ""
-"Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z "
-"tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
+"Použít stylopisů DocBook od Normana Walshe k vytvoření souboru XSL:PO z "
+"tohoto souboru DocBook. Ten může být později vytisknut nebo převeden do PDF"
 
 #: ../src/plugin-docbook.c:2132
 msgid "Print DocBook"
@@ -5039,38 +5113,38 @@ msgstr "Vytisknout DocBook"
 
 #: ../src/plugin-docbook.c:2144
 msgid "Provides a Scope properties page for most DocBook nodes"
-msgstr "Poskytuje stránku Vlastnosti rozsahu pro většinu uzlů DocBook"
+msgstr "Poskytuje stránku s vlastnostmi rozsahu pro většinu uzlů DocBook"
 
 #: ../src/plugin-docbook.c:2150
 msgid "Provides a Language properties page for most DocBook nodes"
-msgstr "Poskytuje dialog Vlastnosti jazyka pro většinu uzlů DocBook"
+msgstr "Poskytuje stránku s vlastnostmi jazyka pro většinu uzlů DocBook"
 
 #: ../src/plugin-docbook.c:2156
 msgid "Provides a Revisions properties page for most DocBook nodes"
-msgstr "Poskytuje stránku Vlastnosti verzí pro většinu uzlů DocBook"
+msgstr "Poskytuje stránku s vlastnostmi revizí pro většinu uzlů DocBook"
 
 #: ../src/plugin-docbook.c:2173
 msgid "Generic DocBook property dialog"
-msgstr "Obecný dialog vlastností DocBook"
+msgstr "Dialogové okno vlastností pro obecný DocBook"
 
 #: ../src/plugin-docbook.c:2174
 msgid "Provides a Properties dialog for most DocBook nodes"
-msgstr "Poskytuje dialog Vlastnosti pro většinu uzlů DocBook"
+msgstr "Poskytuje dialogové okno vlastností pro většinu uzlů DocBook"
 
 #: ../src/plugin-docbook.c:2192 ../src/plugin-docbook.c:2195
 #: ../src/plugin-html.c:137 ../src/plugin-html.c:140
 msgid "Open Link in Browser"
-msgstr "Otevřít odkaz v prohlížeči"
+msgstr "Otevření odkazu v prohlížeči"
 
 #: ../src/plugin-docbook.c:2204
 msgid "Promote Section"
-msgstr "Povýšit oddíl"
+msgstr "Povýšení oddílu"
 
 #: ../src/plugin-docbook.c:2205
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
-msgstr "Povýší oddíl DocBook na vyšší úroveň organizace v dokumentu"
+msgstr "Povýšení oddílu DocBook do vyšší organizační úrovně v rámci dokumentu"
 
 #: ../src/plugin-docbook.c:2207 ../src/plugin-html.c:148
 #: ../src/plugin-html.c:151
@@ -5080,16 +5154,16 @@ msgstr "Povýšit"
 #: ../src/plugin-docbook.c:2208 ../src/plugin-docbook.c:2209
 msgid ""
 "Promote the section to a higher organisational level within the document"
-msgstr "Povýšit oddíl na vyšší úroveň organizace v dokumentu"
+msgstr "Povýšit oddíl do vyšší organizační úrovně v rámci dokumentu"
 
 #: ../src/plugin-docbook.c:2215
 msgid "Demote Section"
-msgstr "Ponížit oddíl"
+msgstr "Ponížení oddílu"
 
 #: ../src/plugin-docbook.c:2216
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
-msgstr "Poníží oddíl DocBook na nižší úroveň organizace v dokumentu"
+msgstr "Ponížení oddílu DocBook do nižší organizační úrovně v rámci dokumentu"
 
 #: ../src/plugin-docbook.c:2218 ../src/plugin-html.c:159
 #: ../src/plugin-html.c:162
@@ -5098,7 +5172,7 @@ msgstr "Ponížit"
 
 #: ../src/plugin-docbook.c:2219 ../src/plugin-docbook.c:2220
 msgid "Demote the section to a lower organisational level within the document"
-msgstr "Ponížit oddíl DocBook na nižší úroveň organizace v dokumentu"
+msgstr "Ponížit oddíl do nižší organizační úrovně v rámci dokumentu"
 
 #: ../src/plugin-dtd.c:93
 #, c-format
@@ -5110,68 +5184,70 @@ msgstr "Automaticky generovaný typ dokumentu založený na %s"
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
-"Tato specifikace zobrazování Conglomerate byla automaticky vygenerována z %s"
+"Tato specifikace zobrazení pro aplikaci Conglomerate byla automaticky "
+"vygenerována z %s"
 
 #: ../src/plugin-dtd.c:215
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr "Převést DTD do specifikace zobrazování Conglomerate"
+msgstr "Převod DTD do specifikace zobrazení pro aplikaci Conglomerate"
 
 #: ../src/plugin-dtd.c:216
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr ""
-"Importovat soubor DTD a vytvořit soubor specifikace zobrazování Conglomerate."
+"Importovat soubor DTD, vytvořit soubor specifikace zobrazení pro "
+"Conglomerate."
 
 #: ../src/plugin-dtd.c:224
 msgid "Convert DTD into a Relax NG schema"
-msgstr "Převést DTD do schématu Relax NG"
+msgstr "Převod DTD do schématu Relax NG"
 
 #: ../src/plugin-dtd.c:225
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
-msgstr "Importovat soubor DTD a převést jej do schématu RELAX NG."
+msgstr "Importovat soubor DTD, převést jej do schématu RELAX NG."
 
 #: ../src/plugin-dtd.c:233
 msgid "Convert DTD into W3C XML Schema"
-msgstr "Převést DTD do schématu W3C XML"
+msgstr "Převod DTD do schématu W3C XML"
 
 #: ../src/plugin-dtd.c:234
 msgid "Import a DTD file, converting it into a W3C XML Schema."
-msgstr "Importovat soubor DTD a převést jej do schématu W3C XML."
+msgstr "Importovat soubor DTD, převést jej do schématu W3C XML."
 
 #: ../src/plugin-dtd.c:242
 msgid "Convert DTD into a Schematron file"
-msgstr "Převést DTD do souboru Schematron"
+msgstr "Převod DTD do souboru Schematron"
 
 #: ../src/plugin-dtd.c:243
 msgid "Import a DTD file, converting it into a Schematron Schema."
-msgstr "Importovat soubor DTD a převést jej do schématu Schematron."
+msgstr "Importovat soubor DTD, převést jej do schématu Schematron."
 
 #: ../src/plugin-dtd.c:251
 msgid "Convert DTD into an Examplotron file"
-msgstr "Převést DTD do souboru Exampletron"
+msgstr "Převod DTD do souboru Examplotron"
 
 #: ../src/plugin-dtd.c:252
 msgid "Import a DTD file, converting it into an Examplotron Schema."
-msgstr "Importovat soubor DTD a převést jej do schématu Exampletron."
+msgstr "Importovat soubor DTD, převést jej do schématu Examplotron."
 
 #: ../src/plugin-fo.c:152
 msgid "Export XSL-FO as PDF"
-msgstr "Exportovat XSL-Fo jako PDF"
+msgstr "Export XSL-FO jako PDF"
 
 #: ../src/plugin-fo.c:153
 msgid "Generate a PDF file from the XSL:FO information"
-msgstr "Vygenerovat soubor PDF z informací XSL:FO"
+msgstr "Generovat soubor PDF z informací XSL:FO"
 
 #: ../src/plugin-fo.c:162
 msgid "Print XSL:FO"
-msgstr "Vytisknout XSL:FO"
+msgstr "Tisk XSL:FO"
 
 #: ../src/plugin-lists.c:77
 msgid "List Member Element"
-msgstr "Element položky seznamu"
+msgstr "Seznam členských elementů"
 
 #: ../src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
-msgstr "Uzel editoru pro zobrazení položky seznamu"
+msgstr "Uzel editoru pro zobrazení člena seznamu"
 
 #: ../src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
@@ -5184,11 +5260,11 @@ msgstr "Uzel editoru pro zobrazení odstavce"
 #.
 #: ../src/plugin-print-source.c:73 ../src/plugin-print-source.c:86
 msgid "Print XML source"
-msgstr "Vytisknout zdroj XML"
+msgstr "Tisk zdrojového kódu XML"
 
 #: ../src/plugin-random.c:140
 msgid "What kind of random XML document would you like to create?"
-msgstr "Jaký typ náhodného dokumentu XML byste chtěli vytvořit?"
+msgstr "Jaký druh náhodného dokumentu XML byste si přáli vytvořit?"
 
 #: ../src/plugin-random.c:223
 msgid "Random Document"
@@ -5200,19 +5276,19 @@ msgstr "Vytvořit dokument XML obsahující náhodný obsah."
 
 #: ../src/plugin-relaxng.c:128
 msgid "Compact Syntax View"
-msgstr "Kompaktní zobrazení syntaxe"
+msgstr "Zobrazení kompaktní syntaxe"
 
 #: ../src/plugin-relaxng.c:146 ../src/plugin-relaxng.c:149
 msgid "View as Compact RELAX NG"
-msgstr "Zobrazit jako Compact Relax NG"
+msgstr "Zobrazit jako Compact RELAX NG"
 
 #: ../src/plugin-relaxng.c:147
 msgid "Display the compact syntax form of a RELAX NG schema"
-msgstr "Zobrazit kompaktní formu syntaxe schématu RELAX NG"
+msgstr "Zobrazuje schéma RELAX NG ve formě kompaktní syntaxe"
 
 #: ../src/plugin-save-dispspec.c:155
 msgid "Dump Display Spec"
-msgstr "Vypsat specifikaci zobrazování"
+msgstr "Výpis specifikace zobrazení"
 
 #: ../src/plugin-save-dispspec.c:156 ../src/plugin-save-dispspec.c:159
 #: ../src/plugin-save-dispspec.c:160
@@ -5220,89 +5296,91 @@ msgid ""
 "Writes the current display spec into a display spec xml file. This file can "
 "then be customized by the conglomerate user"
 msgstr ""
-"Zapíše aktuální specifikaci zobrazování do souboru xml specifikace "
-"zobrazování. Tento soubor pak může uživatel conglomerate upravit"
+"Zapíše aktuální specifikaci zobrazení do souboru xml display spec. Uživatel "
+"aplikace Conglomerate si může tento soubor přizpůsobit"
 
 #: ../src/plugin-save-dispspec.c:158
 msgid "_Dump Display Spec"
-msgstr "_Vypsat specifikaci zobrazování"
+msgstr "_Vypsat specifikaci zobrazení"
 
 #: ../src/plugin-save-dispspec.c:166
 msgid "Edit Display Spec"
-msgstr "Upravit specifikaci zobrazování"
+msgstr "Úpravy specifikace zobrazení"
 
 #: ../src/plugin-save-dispspec.c:167 ../src/plugin-save-dispspec.c:170
 #: ../src/plugin-save-dispspec.c:171
 msgid "Opens the current display spec as a conglomerate document."
-msgstr "Otevře aktuální specifikaci zobrazování jako dokument conglomerate"
+msgstr ""
+"Otevře aktuální specifikaci zobrazení jako dokument aplikace Conglomerate."
 
 #: ../src/plugin-save-dispspec.c:169
 msgid "_Edit Display Spec"
-msgstr "_Upravit specifikaci zobrazování"
+msgstr "_Upravit specifikaci zobrazení"
 
 #: ../src/plugin-sgml.c:43
 #, c-format
 msgid "Conglomerate could not import the file \"%s\""
-msgstr "Conglomerate nemohl importovat soubor \"%s\""
+msgstr "Aplikace Conglomerate nemůže importovat soubor „%s“"
 
 #: ../src/plugin-sgml.c:135
 msgid "Attempting to run the sgml2xml tool"
-msgstr "Pokouším se spustit nástroj sgml2xml"
+msgstr "Pokus o spuštění nástroje sgml2xml"
 
 #: ../src/plugin-sgml.c:190
 msgid "Importing SGML"
-msgstr "Importuji SGML"
+msgstr "Import SGML"
 
 #: ../src/plugin-sgml.c:209
 msgid "Import SGML"
-msgstr "Importovat SGML"
+msgstr "Import SGML"
 
 #: ../src/plugin-sgml.c:210
 msgid "Import an SGML file, converting to XML."
-msgstr "Importovat soubor SGML a převést jej do XML."
+msgstr "Importovat soubor SGML, převést jej na XML."
 
 #: ../src/plugin-tests.c:64
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
 "replaced with some useful options"
 msgstr ""
-"Toto je zástupný ovládací prvek kalendáře; drží tu místo a bude časem "
-"nahrazen užitečnými možnostmi"
+"Toto je fiktivní ovládání kalendáře; jde jen o rezervované místo, které bude "
+"výhledově nahrazeno něčím použitelným"
 
 #: ../src/plugin-tests.c:142 ../src/plugin-tests.c:221
 #, c-format
 msgid "Unicode Characters 0x%04X-0x%04X"
-msgstr "Znaky Unicode 0x%04X-0x%04X"
+msgstr "Znaky Unicode 0x%04X – 0x%04X"
 
 #: ../src/plugin-tests.c:359
 msgid "Unicode Character Reference"
-msgstr "Odkaz na znaky Unicode"
+msgstr "Referenční tabulka znaků Unicode"
 
 #: ../src/plugin-tests.c:360
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
 msgstr ""
-"Vytvořit tabulku vypisující část sady znaků Unicode jako článek DocBook"
+"Vytváří tabulku vypisující část znakové sady Unicode jako článek DocBook"
 
 #: ../src/plugin-validate.c:163
 #, c-format
 msgid "The document \"%s\" cannot be checked for validity."
-msgstr "Nemůže být zkontrolována platnost dokumentu \"%s\"."
+msgstr "Platnost dokumentu „%s“ nelze zkontrolovat."
 
 #: ../src/plugin-validate.c:170
 msgid ""
 "You can fix this by adding a Document Type Declaration (DTD) to the document"
-msgstr "Můžete to opravit přidáním deklarace typu dokumentu (DTD) do dokumentu"
+msgstr ""
+"Toto můžete napravit přidáním DTD (Document Type Declaration) do dokumentu"
 
 #: ../src/plugin-validate.c:215
 #, c-format
 msgid "The document \"%s\" is valid."
-msgstr "Dokument \"%s\" je platný."
+msgstr "Dokument „%s“ je platný."
 
 #: ../src/plugin-validate.c:249
 msgid "Validate Document"
-msgstr "Ověřit platnost dokumentu"
+msgstr "Kontrola správnosti dokumentu"
 
 #: ../src/plugin-validate.c:250 ../src/plugin-validate.c:253
 #: ../src/plugin-validate.c:254
@@ -5310,49 +5388,49 @@ msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
 msgstr ""
-"Zkontroluje, jestli je dokument \"platný\", tj. jestli odpovídá sadě "
-"pravidel určených odpovídajícím typem dokumentu nebo schématem"
+"Zkontrolovat, zda je dokument „platný“, např. zda odpovídá sadě pravidel "
+"daných příslušným typem dokumentu nebo schématu"
 
 #: ../src/plugin-validate.c:252
 msgid "_Validate Document"
-msgstr "_Ověřit platnost dokumentu"
+msgstr "Testo_vat platnost dokumentu"
 
 #: ../src/plugin-website.c:465
 msgid "Generating website"
-msgstr "Generuji WWW stránky"
+msgstr "Generování webových stránek"
 
 #: ../src/plugin-website.c:472
 msgid "Finished generating website."
-msgstr "Generování WWW stránek dokončeno."
+msgstr "Generování webových stránek dokončeno"
 
 #: ../src/plugin-website.c:477
 msgid "Conglomerate did not finish generating the website"
-msgstr "Conglomerate nedokončil generování WWW stránek"
+msgstr "Aplikace Conglomerate nedokončila generování webových stránek"
 
 #: ../src/plugin-website.c:478
 msgid "One of the stages reported an error."
-msgstr "Jeden z kroků ohlásil chybu."
+msgstr "V některé fázi byla oznámena chyba."
 
 #: ../src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
-msgstr "Pro více informací klikněte na tlačítko \"Detaily\""
+msgstr "Kliknutím na tlačítko „Podrobnosti“ získáte více informací"
 
 #: ../src/plugin-website.c:480
 msgid "_Details"
-msgstr "_Detaily"
+msgstr "Po_drobnosti"
 
 #: ../src/plugin-website.c:508
 msgid "Generate website"
-msgstr "Vygenerovat WWW stránky"
+msgstr "Generování webových stránek"
 
 #: ../src/plugin-website.c:509 ../src/plugin-website.c:512
 #: ../src/plugin-website.c:513
 msgid "Generates a collection of HTML pages from the website XML description"
-msgstr "Vygeneruje sadu HTML stránek pro popis WWW stránek v XML"
+msgstr "Generuje kolekci stránek HTML z popisu webových stránek v XML"
 
 #: ../src/plugin-website.c:511
 msgid "Generate _Website"
-msgstr "Vygenerovat _WWW stránky"
+msgstr "Generovat _webové stránky"
 
 #: ../src/plugin-xsl.c:324
 msgid "XSL Template Element"
@@ -5360,16 +5438,16 @@ msgstr "Element šablony XSL"
 
 #: ../src/plugin-xsl.c:325
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr "Element pro zobrazení pravidel šablon ve stylesheetu XSL"
+msgstr "Element pro pravidla šablony zobrazení ve stylopisu XSL"
 
 #: ../src/popup.c:490
 #, c-format
 msgid "Apply span tag: %s"
-msgstr "Použít tag span: %s"
+msgstr "Použít segmentovou značku: %s"
 
 #: ../src/popup.c:561
 msgid "Remove Span Tag"
-msgstr "Odstranit tag span"
+msgstr "Odebrat segmentovou značku"
 
 #: ../src/popup.c:607
 msgid "Convert to a comment"
@@ -5377,12 +5455,12 @@ msgstr "Převést na komentář"
 
 #: ../src/popup.c:627 ../src/tree.c:521
 msgid "Uncomment"
-msgstr "Odkomentovat"
+msgstr "Zrušit zakomentování"
 
 #: ../src/popup.c:628
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
-msgstr "Převést komentář obsahující zdrojový kód v XML na tento kód"
+msgstr "Převést komentář obsahující zdrojový kód XML na odpovídající kód"
 
 #. FIXME: could do with better text here
 #: ../src/popup.c:648
@@ -5394,7 +5472,9 @@ msgstr "Převést odkaz na kopii"
 msgid ""
 "Convert a reference to an XML entity to an inline copy of that entity's "
 "content"
-msgstr "Převést odkaz na entitu XML na vloženou kopii obsahu této entity"
+msgstr ""
+"Převést odkaz na libovolnou entitu XML na vloženou kopii s obsahem této "
+"entity"
 
 #: ../src/popup.c:729 ../src/popup.c:1047
 msgid "_Properties"
@@ -5406,7 +5486,7 @@ msgstr "_Vyjmout"
 
 #: ../src/popup.c:989
 msgid "Other XML element..."
-msgstr "Jiný element XML..."
+msgstr "Ostatní elementy XML…"
 
 #: ../src/popup.c:1083
 msgid "Paste into"
@@ -5441,7 +5521,7 @@ msgstr "Převést na komentář"
 #: ../src/tree.c:585
 #, c-format
 msgid "Convert reference to \"%s\" to copy"
-msgstr "Převést odkaz na \"%s\" na kopii"
+msgstr "Převést odkaz na „%s“ na kopii"
 
 #. create description for dialog
 #: ../src/xmldata.c:452
@@ -5450,14 +5530,14 @@ msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
 msgstr ""
-"Aby byl element \"%s\" platný, vyžaduje potomka. Vyberte prosím jeden z "
+"Element „%s“ vyžaduje, aby byl potomek platný. Zvolte prosím jeden z "
 "následujících typů potomků."
 
 #. FIXME: put in a better description for the name
 #. select a dialog element
 #: ../src/xmldata.c:457
 msgid "Required Children Choices"
-msgstr "Vyžadované volby potomků"
+msgstr "Vyžadována volba potomka"
 
 #: ../src/xmledit.c:166
 msgid "Paste"
@@ -5477,4 +5557,4 @@ msgstr "Vložit za"
 
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
-msgstr "Pohled na zdroj - Conglomerate"
+msgstr "Zobrazení zdrojového kódu – Conglomerate"
