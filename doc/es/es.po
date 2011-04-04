@@ -5,13 +5,14 @@
 #
 # Jorge González González <aloriel@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
+# Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2010-03-16 18:12+0000\n"
-"PO-Revision-Date: 2011-02-15 18:24+0100\n"
+"POT-Creation-Date: 2011-03-13 11:09+0000\n"
+"PO-Revision-Date: 2011-04-04 15:59+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -184,12 +185,15 @@ msgstr "Edito de XML Conglomerate"
 
 #: C/conglomerate.xml:56(title)
 msgid "Conglomerate XML Editor Manual V0.0.1"
-msgstr "Manual del editor de XML Conglomerate V0.0.1"
+msgstr "Manual del editor XML Conglomerate V0.0.1"
 
 #: C/conglomerate.xml:58(para)
 msgid "User manual for the conglomerate XML editor."
-msgstr "Manual de usuario del editor de XML Conglomerate."
+msgstr "Manual de usuario del editor XML Conglomerate."
 
+# Extensible Markup Language Format = Formato de lenguaje de marcado extensible.
+#
+# Lo dejo en difusa.
 #: C/conglomerate.xml:63(simpara)
 msgid ""
 "This is the User Manual V0.0.1 to the <application>Conglomerate XML Editor</"
@@ -200,6 +204,14 @@ msgid ""
 "jargon of <acronym>XML</acronym> behind a friendly Graphical User Interface "
 "(<acronym>GUI</acronym>)."
 msgstr ""
+"Esta es la versión V0.0.1 del manual de usuario del <application>Editor XML "
+"Conglomerate</application> V0.7.10, un software libre que proporciona una "
+"herramienta amigable para la edición de <ulink url=\"http://www.oasis-open."
+"org/\">DocBook</ulink> y otros tipos de documentos creados en el "
+"<glossterm>Formato de lenguaje de marcas extensible</glossterm> "
+"(<acronym>XML</acronym>). Pretende ocultar la complejidad y la jerga del "
+"<acronym>XML</acronym> detrás de una interfaz gráfica de usuario "
+"(<acronym>IGU</acronym>)."
 
 #: C/conglomerate.xml:71(firstname) C/conglomerate.xml:83(firstname)
 msgid "Sean"
@@ -247,7 +259,7 @@ msgstr "SW"
 
 #: C/conglomerate.xml:96(remark)
 msgid "Manual V0.0.1 correlates to software V0.7.10"
-msgstr ""
+msgstr "El manual de usuario V0.0.1 corresponde a la V0.7.10 del software"
 
 #: C/conglomerate.xml:101(application)
 msgid "Conglomerate"
@@ -270,11 +282,22 @@ msgid ""
 "of the GFDL at this <ulink url=\"http://www.gnu.org/licenses/fdl.html"
 "\">link</ulink>."
 msgstr ""
+"Se otorga permiso para copiar, distribuir y/o modificar este documento bajo "
+"los términos de la Licencia de Documentación Libre de GNU, Versión 1.1 o "
+"cualquier otra versión posterior publicada por la Free Software Foundation; "
+"sin Secciones Invariantes ni Textos de Cubierta Delantera ni Textos de "
+"Cubierta Trasera. Puede encontrar una copia de la licencia GFDL en este "
+"<ulink url=\"http://www.gnu.org/licenses/fdl.html\">link</ulink>."
 
+# Podría traducirse como "Licencia de fuentes" pero me parece más claro de ésta forma.
 #: C/conglomerate.xml:113(title)
 msgid "Source License"
-msgstr ""
+msgstr "Licencia del código fuente"
 
+# Texto adaptado de la traducción de Rafael Palomino
+# http://gugs.sindominio.net/licencias/lgpl-es.html
+#
+# Se deja en difusa por ser de importancia legal.
 #: C/conglomerate.xml:114(para)
 msgid ""
 "This library is <ulink url=\"http://www.gnu.org/philosophy/free-sw.html"
@@ -283,7 +306,16 @@ msgid ""
 "Software Foundation; either version 2.1 of the License, or (at your option) "
 "any later version."
 msgstr ""
+"Esta biblioteca es <ulink url=\"http://www.gnu.org/philosophy/free-sw.html"
+"\">software libre</ulink>; puede redistribuirla y/o modificarla bajo los "
+"términos de la Licencia Pública General Reducida de GNU tal como fue "
+"publicada por la Free Software Foundation; ya sea en su versión 2.1 o (a su "
+"criterio) cualquier versión posterior."
 
+# Texto adaptado de la traducción de Rafael Palomino
+# http://gugs.sindominio.net/licencias/lgpl-es.html
+#
+# Se deja en difusa por ser de importancia legal.
 #: C/conglomerate.xml:118(para)
 msgid ""
 "This library is distributed in the hope that it will be useful, but WITHOUT "
@@ -292,13 +324,26 @@ msgid ""
 "for more details. You can find a copy of the GPL at this <ulink url=\"http://"
 "www.gnu.org/copyleft/gpl.html\">link</ulink>."
 msgstr ""
+"Esta biblioteca se distribuye con la esperanza de que le sea útil, pero SIN "
+"NINGUNA GARANTÍA; sin incluso la garantía implícita de MERCANTILIDAD o "
+"IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Vea la Licencia Pública General "
+"Reducida de GNU para obtener más detalles. Puede encontrar una copia de la "
+"GPL en este <ulink url=\"http://www.gnu.org/copyleft/gpl.html\">enlace</"
+"ulink>."
 
+# Texto adaptado de la traducción de Rafael Palomino
+# http://gugs.sindominio.net/licencias/lgpl-es.html
+#
+# Se deja en difusa por ser de importancia legal.
 #: C/conglomerate.xml:123(para)
 msgid ""
 "You should have received a copy of the GNU Lesser General Public License "
 "along with this library; if not, write to the Free Software Foundation, "
 "Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA."
 msgstr ""
+"Debería haber recibido una copia de la Licencia Pública General GNU junto "
+"con este programa; si no, escriba a la Free Software Foundation, Inc., 51 "
+"Franklin Street, Fifth Floor, Boston,MA, 02110-1301, EE. UU."
 
 #: C/conglomerate.xml:129(title)
 msgid "Preface"
@@ -344,6 +389,10 @@ msgid ""
 "acronym> editing system. As such, help in the form of productive "
 "contribution is always welcomed."
 msgstr ""
+"El proyecto <application>Conglomerate</application> se gestiona como una "
+"iniciativa de código abierto para el desarrollo amigable de un sistema de "
+"edición <acronym>XML</acronym>. Como tal, la ayuda en forma de "
+"contribuciones productivas es siempre bienvenida."
 
 #: C/conglomerate.xml:139(para)
 msgid ""
@@ -351,6 +400,9 @@ msgid ""
 "lists.copyleft.no/mailman/listinfo/conglomerate-devel/\">conglomerate-devel "
 "mailing list</ulink>. This is where our development discussion happens."
 msgstr ""
+"El primer paso para unirse al proyecto es suscribirse a la <ulink url="
+"\"http://lists.copyleft.no/mailman/listinfo/conglomerate-devel/\">lista de "
+"correo conglomerate-devel</ulink>. Aquí se discute sobre el desarrollo."
 
 #: C/conglomerate.xml:141(para)
 msgid ""
@@ -359,16 +411,23 @@ msgid ""
 "ulink>, which receives email every time something changes in our bug "
 "database."
 msgstr ""
+"Luego, recomendamos que se suscriba a la <ulink url=\"http://lists.copyleft."
+"no/mailman/listinfo/conglomerate-auto/\">lista de correo conglomerate-auto</"
+"ulink>, que recibe un correo-e cada vez que cambia algo en la base de datos "
+"de errores."
 
+# Revisar conectores entre las dos cadenas anteriores.
 #: C/conglomerate.xml:143(para)
 msgid ""
 "Then proceed to download a copy of the latest source code as described in "
 "<xref linkend=\"installation\"/>."
 msgstr ""
+"Después proceda a la descarga de una copia del código fuente más actualizado "
+"como se describe en la <xref linkend=\"installation\"/>."
 
 #: C/conglomerate.xml:145(title)
 msgid "Things you can do to help:"
-msgstr ""
+msgstr "Cosas que puede hacer para ayudar:"
 
 #: C/conglomerate.xml:147(para)
 msgid ""
@@ -378,6 +437,11 @@ msgid ""
 "fix bugs, which should let you become familiar with the code without having "
 "to look at all of it at once."
 msgstr ""
+"<emphasis role=\"bold\">Desarrollo:</emphasis> agregar soporte para nuevos "
+"tipos de documentos XML, solucionar errores e implementar nuevas "
+"características. Si es programador, buscando algo de lo que ocuparse, hay "
+"preparada una lista de errores sencillos de resolver, que pueden ayudarle a "
+"familiarizarse con el código sin tener que leerlo todo de una vez."
 
 #: C/conglomerate.xml:155(para)
 msgid ""
@@ -386,6 +450,10 @@ msgid ""
 "system, please refer to the <ulink url=\"http://www.conglomerate.org/bugs.php"
 "\">list of things</ulink> we already know about."
 msgstr ""
+"<emphasis role=\"bold\">Pruebas:</emphasis> probar las funciones del editor "
+"e informar de errores que sean reproducibles y no estén listados todavía en "
+"el sistema de registro, consulte <ulink url=\"http://www.conglomerate.org/"
+"bugs.php\">lista de cosas</ulink> que ya se conocen."
 
 #: C/conglomerate.xml:162(para)
 msgid ""
@@ -394,6 +462,10 @@ msgid ""
 "is being co-ordinated by the <ulink url=\"http://developer.gnome.org/"
 "projects/gtp/\">Gnome Translation Project</ulink>."
 msgstr ""
+"<emphasis role=\"bold\">Localización (I10n):</emphasis> localice "
+"<application>Conglomerate</application> en su propio idioma. La localización "
+"está coordinada por el <ulink url=\"http://developer.gnome.org/projects/gtp/"
+"\">Proyecto de Traducción de Gnome</ulink>."
 
 #: C/conglomerate.xml:168(para)
 msgid ""
@@ -401,18 +473,26 @@ msgid ""
 "<application>Conglomerate</application> User Manual and other documents into "
 "your own language."
 msgstr ""
+"<emphasis role=\"bold\">Internacionalización (I18n):</emphasis> traduzca el "
+"manual de usuario y otros documentos de <application>Conglomerate</"
+"application> a su propio idioma."
 
 #: C/conglomerate.xml:174(para)
 msgid ""
 "<emphasis role=\"bold\">Documentation:</emphasis> Write articles, add new "
 "sections, and improve on exiting sections within the documentation."
 msgstr ""
+"<emphasis role=\"bold\">Documentación:</emphasis> escriba artículos, agregue "
+"nuevas secciones y mejore las existentes en la documentación."
 
 #: C/conglomerate.xml:179(para)
 msgid ""
 "<emphasis role=\"bold\">General:</emphasis> Suggest new features that would "
 "make it easier to use get your work done - or are just simply cool!"
 msgstr ""
+"<emphasis role=\"bold\">General:</emphasis> sugiera nuevas características "
+"que hagan más sencillo su trabajo, que mejoren el uso o que sean simplemente "
+"geniales."
 
 #: C/conglomerate.xml:186(title)
 msgid "Acknowledgments"
@@ -432,8 +512,8 @@ msgid ""
 "This book is most effective when used in conjunction with the Conglomerate "
 "XML Editor V0.7.10."
 msgstr ""
-"Este libro es más efectivo cuando se usa junto al editor de XML "
-"Conglomerate  V0.7.10."
+"Este libro es más efectivo cuando se usa junto al editor XML Conglomerate  "
+"V0.7.10."
 
 #: C/conglomerate.xml:198(para)
 msgid ""
@@ -602,6 +682,10 @@ msgid ""
 "ulink> and other XML document types. It aims to hide the complexity and "
 "jargon of XML behind a friendly GUI."
 msgstr ""
+"El <application>Editor XML Conglomerate</application> es un editor XML "
+"libre, amigable para <ulink url=\"http://www.oasis-open.org/\">DocBook</"
+"ulink> y otros tipos de documentos XML. Apunta a ocultar la complejidad y la "
+"jerga del XML detrás de un IGU amigable."
 
 #: C/conglomerate.xml:333(para)
 msgid ""
@@ -615,6 +699,15 @@ msgid ""
 "and lets the user target several formatted output file types from a single "
 "XML source."
 msgstr ""
+"El <application>Editor XML Conglomerate</application> es una parte del "
+"proyecto <application>Conglomerate</application> para crear un sistema "
+"completo y estructurado de autoría, gestión, archivo, control de cambios y "
+"transformación de la información. El <application>Editor XML Conglomerate</"
+"application> usa semántica XML y una edición gráfica potente junto con un "
+"modelo de almacenamiento centralizado y un lenguaje flexible de "
+"transformación para crear un entorno fácil de usar, producir una salida "
+"estructurada de alta calidad y dejar al usuario elegir entre varios formatos "
+"de archivo de salida desde una única fuente XML."
 
 #: C/conglomerate.xml:342(title)
 msgid "Requirements"
@@ -669,6 +762,9 @@ msgid ""
 "<application>Conglomerate</application> V0.7.10 is an unstable release. "
 "Current releases are intended as previews that some people may find useful."
 msgstr ""
+"<application>Conglomerate</application> V0.7.10 es una versión inestable. "
+"Las versiones actuales son avances que pueden resultar útiles en algunos "
+"casos."
 
 #: C/conglomerate.xml:377(title)
 msgid "Installation"
@@ -681,6 +777,10 @@ msgid ""
 "Software Installer. Please refer to your distro documentation for "
 "information on how to install new packages."
 msgstr ""
+"Si <application>Conglomerate</application> se entregó con su distribución, "
+"usted debería poder instalarlo desde la fuente de la distribución usando su "
+"instalador de software. Busque en la documentación de su distribución para "
+"más información de cómo instalar paquetes nuevos."
 
 #: C/conglomerate.xml:381(para)
 msgid ""
@@ -689,10 +789,14 @@ msgid ""
 "or <link linkend=\"installation_from_cvs\" endterm=\"installation_from_cvs."
 "title\"/>."
 msgstr ""
+"Métodos alternativos de instalación pueden ser la instalación desde <link "
+"linkend=\"installation_from_tarball\" endterm=\"installation_from_tarball."
+"title\"/> o <link linkend=\"installation_from_cvs\" endterm="
+"\"installation_from_cvs.title\"/>."
 
 #: C/conglomerate.xml:384(title)
 msgid "Installation from tarball"
-msgstr ""
+msgstr "Instalación desde archivo tar (tarball)"
 
 #: C/conglomerate.xml:385(para)
 msgid ""
@@ -700,20 +804,26 @@ msgid ""
 "\"http://sourceforge.net/project/showfiles.php?group_id=82766\">project CVS</"
 "ulink> at SourceForge."
 msgstr ""
+"Los lanzamientos se empaquetan frecuentemente en archivos comprimidos y "
+"puestos en el <ulink url=\"http://sourceforge.net/project/showfiles.php?"
+"group_id=82766\">CVS del proyecto</ulink> en SourceForge."
 
 #: C/conglomerate.xml:387(para)
 msgid ""
 "When a new release is announced the tarball may take upto 24 hours to "
 "display in the Web based CVS interface."
 msgstr ""
+"Cada vez que se anuncia un nuevo lanzamiento, el archivo comprimido puede "
+"tardar hasta 24 horas en aparecer en la interfaz web del CVS."
 
 #: C/conglomerate.xml:391(title)
 msgid "General installation overview"
-msgstr ""
+msgstr "Resumen general de la instalación"
 
 #: C/conglomerate.xml:393(para)
 msgid "<action>Start</action> a <application>Bash</application> session."
 msgstr ""
+"<action>Iniciar</action> una sesión en <application>Bash</application>."
 
 #: C/conglomerate.xml:397(para)
 msgid "Login as root."
@@ -724,6 +834,8 @@ msgid ""
 "<action>Copy</action> the tarball to a location such as <filename class="
 "\"directory\">/usr/src/packages/</filename>."
 msgstr ""
+"<action>Copiar</action> el archivo comprimido a una ubicación como <filename "
+"class=\"directory\">/usr/src/packages/</filename>."
 
 #: C/conglomerate.xml:403(command)
 msgid "cp filename-0.2.3.tar.gz /usr/src/packages/"
@@ -731,7 +843,7 @@ msgstr "cp nombre_de_archivo-0.2.3.tar.gz /usr/src/packages/"
 
 #: C/conglomerate.xml:407(para)
 msgid "<action>Change</action> to this directory."
-msgstr ""
+msgstr "<action>Cambiar</action> a esta carpeta."
 
 #: C/conglomerate.xml:410(command)
 msgid "cd /usr/src/packages/"
@@ -742,6 +854,9 @@ msgid ""
 "<action>Extract</action> the tarball. This will create a new folder "
 "<filename class=\"directory\">filename-0.2.3</filename>"
 msgstr ""
+"<action>Extraer</action> el archivo comprimido. Esto creará una carpeta "
+"nueva llamada <filename class=\"directory\">nombre_de_archivo-0.2.3</"
+"filename>"
 
 #: C/conglomerate.xml:419(command)
 msgid "tar xzvf filename-0.2.3.tar.gz"
@@ -749,7 +864,7 @@ msgstr "tar xzvf nombre_de_archivo-0.2.3.tar.gz"
 
 #: C/conglomerate.xml:423(para)
 msgid "<action>Change</action> to the new folder."
-msgstr ""
+msgstr "<action>Cambiar</action> a la carpeta nueva."
 
 #: C/conglomerate.xml:426(command)
 msgid "cd filename-0.2.3"
@@ -758,7 +873,7 @@ msgstr "cd nombre_de_archivo-0.2.3"
 #: C/conglomerate.xml:430(para) C/conglomerate.xml:445(para)
 msgid ""
 "<action>Type</action> the following, followed by <keycap>Enter</keycap>."
-msgstr ""
+msgstr "<action>Escriba</action> lo siguiente y pulse <keycap>Intro</keycap>."
 
 #: C/conglomerate.xml:433(command)
 msgid "./configure"
@@ -769,6 +884,8 @@ msgid ""
 "If there are no errors, <action>type</action> the following, followed by "
 "<keycap>Enter</keycap>."
 msgstr ""
+"Si no hay errores, <action>escriba</action> lo siguiente y pulse "
+"<keycap>Intro</keycap>."
 
 #: C/conglomerate.xml:440(command)
 msgid "make"
@@ -776,7 +893,7 @@ msgstr "make"
 
 #: C/conglomerate.xml:442(para)
 msgid "If there are errors, resolve them if required."
-msgstr ""
+msgstr "Si hay errores, resuélvalos si es necesario."
 
 #: C/conglomerate.xml:448(command)
 msgid "make install"
@@ -835,8 +952,8 @@ msgid ""
 "Editor</guimenuitem></menuchoice>."
 msgstr ""
 "Elija <menuchoice><guimenu>Menú principal</guimenu><guisubmenu>Utilidades</"
-"guisubmenu><guisubmenu>Editor de texto</guisubmenu><guimenuitem>Editor de "
-"XML Conglomerate</guimenuitem></menuchoice>."
+"guisubmenu><guisubmenu>Editor de texto</guisubmenu><guimenuitem>Editor XML "
+"Conglomerate</guimenuitem></menuchoice>."
 
 #: C/conglomerate.xml:488(emphasis)
 msgid "From the Command Prompt"
@@ -1107,8 +1224,8 @@ msgid ""
 "access the Online Help."
 msgstr ""
 "Use el menú <guimenu>Ayuda</guimenu> para mostrar el diálogo «Acerca del» "
-"<application>Editor de XML Conglomerate</application> \"About\" dialog and "
-"access the Online Help."
+"<application>Editor XML Conglomerate</application> y acceda a la ayuda en "
+"línea."
 
 #: C/conglomerate.xml:833(title)
 msgid "Editor Window Toolbar"
@@ -1120,6 +1237,9 @@ msgid ""
 "the <application>Conglomerate XML Editor</application>. The following "
 "options are available:"
 msgstr ""
+"La barra de herramientas proporcionar un acceso rápido a las operaciones más "
+"comúnmente usadas por el  <application>Editor XML Conglomerate</"
+"application>. Las siguientes opciones están disponibles:"
 
 #: C/conglomerate.xml:837(title)
 msgid "Editor Window Toolbar Options"
@@ -1147,6 +1267,9 @@ msgid ""
 "\"save_a_document\" endterm=\"save_a_document.title\"/> that is already save "
 "to a new file with a different filename."
 msgstr ""
+"Use el botón <guibutton>Guardar</guibutton> para <link linkend="
+"\"save_a_document\" endterm=\"save_a_document.title\"/> que ya existe en un "
+"archivo nuevo con otro nombre de archivo."
 
 #: C/conglomerate.xml:858(emphasis)
 msgid "Undo"
@@ -1249,10 +1372,12 @@ msgstr ""
 #: C/conglomerate.xml:919(para)
 msgid "<link linkend=\"overview\" endterm=\"overview.title\"/> (left-tab)"
 msgstr ""
+"<link linkend=\"overview\" endterm=\"overview.title\"/> (pestaña izquierda)"
 
 #: C/conglomerate.xml:923(para)
 msgid "<link linkend=\"raw_xml\" endterm=\"raw_xml.title\"/> (right-tab)"
 msgstr ""
+"<link linkend=\"raw_xml\" endterm=\"raw_xml.title\"/> (pestaña derecha)"
 
 #: C/conglomerate.xml:927(para)
 msgid ""
@@ -1646,6 +1771,8 @@ msgid ""
 "<action>Click</action><guibutton>OK</guibutton> to save a new copy of the "
 "file."
 msgstr ""
+"<action>Pulse</action><guibutton>Aceptar</guibutton> para guardar una copia "
+"nueva del archivo."
 
 #: C/conglomerate.xml:1373(title)
 msgid "Import a document"
@@ -1733,7 +1860,7 @@ msgstr "Limpiar fuente XML"
 
 #: C/conglomerate.xml:1456(title)
 msgid "Modify Element Properties"
-msgstr ""
+msgstr "Modificar las propiedades del elemento"
 
 #: C/conglomerate.xml:1459(title)
 msgid "About XPath"
@@ -1837,6 +1964,8 @@ msgid ""
 "<link linkend=\"unsupported_docs\" endterm=\"unsupported_docs.title\"/>. We "
 "hope to add support in the future (patches welcome!)."
 msgstr ""
+"<link linkend=\"unsupported_docs\" endterm=\"unsupported_docs.title\"/>. Se "
+"espera añadir soporte en el futuro (los parches son bienvenidos)."
 
 #: C/conglomerate.xml:1552(title)
 msgid "Summary of Supported XML Document Types"
@@ -1962,7 +2091,7 @@ msgstr ""
 
 #: C/conglomerate.xml:1689(title)
 msgid "Relax NG"
-msgstr ""
+msgstr "Relax NG"
 
 #: C/conglomerate.xml:1690(para)
 msgid ""
@@ -2142,13 +2271,15 @@ msgstr "Referencia de elementos"
 
 #: C/conglomerate.xml:1836(title)
 msgid "collapseto"
-msgstr ""
+msgstr "collapseto"
 
 #: C/conglomerate.xml:1837(para)
 msgid ""
 "The <sgmltag class=\"starttag\">collapseto</sgmltag> element is currently "
 "unsupported."
 msgstr ""
+"El elemento <sgmltag class=\"starttag\">collapseto</sgmltag> no está "
+"soportado actualmente."
 
 #: C/conglomerate.xml:1838(para)
 msgid ""
@@ -2278,7 +2409,7 @@ msgstr "Consulte <link endterm=\"metadata.title\" linkend=\"metadata\"/>"
 
 #: C/conglomerate.xml:1912(title)
 msgid "dispspec"
-msgstr ""
+msgstr "dispspec"
 
 #: C/conglomerate.xml:1913(para)
 msgid ""
@@ -2715,5 +2846,6 @@ msgstr "Ahora me ves, después no me verás"
 #: C/conglomerate.xml:0(None)
 msgid "translator-credits"
 msgstr ""
+"Joaquín Aramendía <samsagax@gmail.com>, 2011\n"
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2011\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
