@@ -1,0 +1,5576 @@
+# translation of conglomerate_eu.po to Basque
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate_eu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-06-21 00:16-0400\n"
+"PO-Revision-Date: 2011-06-17 16:19+0200\n"
+"Last-Translator: \n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
+"\n"
+"\n"
+
+#: dispspecs/cnxml.xds.in.h:1
+msgid "Experimental \"cnxml\" format"
+msgstr "\"cnxml\" formatu esperimentala"
+
+#: dispspecs/cnxml.xds.in.h:2
+msgid "Test CNXML ds"
+msgstr "Probatu CNXML ds"
+
+#: dispspecs/cnxml.xds.in.h:3
+msgid "cite"
+msgstr "cite"
+
+#: dispspecs/cnxml.xds.in.h:4
+msgid "cnxn"
+msgstr "cnxn"
+
+#: dispspecs/cnxml.xds.in.h:5
+msgid "codeblock"
+msgstr "codeblock"
+
+#: dispspecs/cnxml.xds.in.h:6
+msgid "codeline"
+msgstr "codeline"
+
+#: dispspecs/cnxml.xds.in.h:7
+msgid "content"
+msgstr "content"
+
+#: dispspecs/cnxml.xds.in.h:8
+msgid "emphasis"
+msgstr "emphasis"
+
+#: dispspecs/cnxml.xds.in.h:9
+msgid "equation"
+msgstr "equation"
+
+#: dispspecs/cnxml.xds.in.h:10
+msgid "item"
+msgstr "item"
+
+#: dispspecs/cnxml.xds.in.h:11
+msgid "link"
+msgstr "link"
+
+#: dispspecs/cnxml.xds.in.h:12
+msgid "list"
+msgstr "list"
+
+#: dispspecs/cnxml.xds.in.h:13
+msgid "metadata"
+msgstr "metadata"
+
+#: dispspecs/cnxml.xds.in.h:14
+msgid "module"
+msgstr "module"
+
+#: dispspecs/cnxml.xds.in.h:15
+msgid "note"
+msgstr "note"
+
+#: dispspecs/cnxml.xds.in.h:16
+msgid "para"
+msgstr "para"
+
+#: dispspecs/cnxml.xds.in.h:17
+msgid "proof"
+msgstr "proof"
+
+#: dispspecs/cnxml.xds.in.h:18
+msgid "rule"
+msgstr "rule"
+
+#: dispspecs/cnxml.xds.in.h:19
+msgid "section"
+msgstr "section"
+
+#: dispspecs/cnxml.xds.in.h:20
+msgid "statement"
+msgstr "statement"
+
+#: dispspecs/cnxml.xds.in.h:21
+msgid "term"
+msgstr "term"
+
+#: dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr "Collapseto"
+
+#: dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "Conglomerate bistaratzeko zehaztapena"
+
+#: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:250
+#: src/cong-file-export.c:339 src/cong-file-new.c:363
+#: src/cong-file-print.c:250 src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Azalpena"
+
+#: dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "Dokumentu-ereduak"
+
+#: dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "Kanpoko dokumentu-ereduak"
+
+#: dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "Formatua"
+
+#: dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "GUI"
+
+#: dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "Goiburu-informazioa"
+
+#: dispspecs/dispspec.xds.in.h:9
+msgid ""
+"Information that tells Conglomerate how to display a particular type of file."
+msgstr ""
+"Conglomerate-ri fitxategi mota jakin bat nola bistaratu esaten dion "
+"informazioa."
+
+#: dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "XML elementuen zerrenda"
+
+#: dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "Dokumentu mota honen fitxategi moten zerrenda"
+
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
+#: dispspecs/website-webpage.xds.in.h:55
+msgid "Metadata"
+msgstr "Metadatuak"
+
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
+#: dispspecs/teixlite.xds.in.h:194 dispspecs/website-webpage.xds.in.h:57
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Izena"
+
+#: dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "XML elementu baten izena"
+
+#: dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "Serializazio moten zerrenda"
+
+#: dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "Azalpen laburra"
+
+#: dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "XML elementu baten azalpen laburra"
+
+#: dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "Dokumentu motaren azalpen laburra"
+
+#: dispspecs/dispspec.xds.in.h:19 dispspecs/relax-ng.xds.in.h:15
+msgid "XML Element"
+msgstr "XML elementua"
+
+#: dispspecs/docbook.xds.in.h:1 dispspecs/website-webpage.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "URL esteka bat (webgune batena agian)"
+
+#: dispspecs/docbook.xds.in.h:2
+msgid ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
+msgstr ""
+"Liburuaren uneko edukiaz gain, titulu bat eta agian material biografikoren "
+"bat dituen liburu bat."
+
+#: dispspecs/docbook.xds.in.h:3 dispspecs/website-webpage.xds.in.h:2
+msgid "A brief description of the version of a document."
+msgstr "Dokumentu baten bertsioaren azalpen laburra."
+
+#: dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "Liburu-bilduma bat."
+
+#: dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "Liburu baten goi-mailako zatiketa."
+
+#: dispspecs/docbook.xds.in.h:6 dispspecs/website-webpage.xds.in.h:3
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "Ordenagailu-sistema bateko datu-zati jakin bat, literalki hartuta."
+
+#: dispspecs/docbook.xds.in.h:7 dispspecs/website-webpage.xds.in.h:4
+msgid "A subsection within a section"
+msgstr "Atal bateko azpiatala"
+
+#: dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "Laburpen bat."
+
+#: dispspecs/docbook.xds.in.h:9 dispspecs/website-webpage.xds.in.h:6
+msgid "A top-level section of document"
+msgstr "Dokumentu bateko goi-mailako atala"
+
+#: dispspecs/docbook.xds.in.h:10 dispspecs/forrest-document.xds.in.h:1
+#: dispspecs/website-webpage.xds.in.h:7
+msgid "Abstract"
+msgstr "Abstraktua"
+
+#: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
+#: dispspecs/website-webpage.xds.in.h:8 dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "Akronimoa"
+
+#: dispspecs/docbook.xds.in.h:12 dispspecs/website-webpage.xds.in.h:9
+msgid "Additional metadata"
+msgstr "Metadatu gehigarriak"
+
+#: dispspecs/docbook.xds.in.h:13 dispspecs/teixlite.xds.in.h:56
+#: dispspecs/website-webpage.xds.in.h:10 dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "Helbidea"
+
+#: dispspecs/docbook.xds.in.h:14 dispspecs/website-webpage.xds.in.h:11
+msgid "An email address"
+msgstr "Helbide elektroniko bat"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: dispspecs/docbook.xds.in.h:16
+msgid "Anchor Point"
+msgstr "Ainguratze-puntua"
+
+#: dispspecs/docbook.xds.in.h:17
+msgid "Answer"
+msgstr "Erantzun"
+
+#: dispspecs/docbook.xds.in.h:18 dispspecs/website-webpage.xds.in.h:12
+msgid "Appendix"
+msgstr "Eranskina"
+
+#: dispspecs/docbook.xds.in.h:19 dispspecs/website-webpage.xds.in.h:13
+msgid "Application"
+msgstr "Aplikazioa"
+
+#: dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr "Artikulua"
+
+#: dispspecs/docbook.xds.in.h:21
+msgid "Article Header"
+msgstr "Artikuluaren titulua"
+
+#: dispspecs/docbook.xds.in.h:22
+msgid "Article Information"
+msgstr "Artikulu-informazioa"
+
+#: dispspecs/docbook.xds.in.h:23
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:3
+#: dispspecs/teixlite.xds.in.h:75 dispspecs/website-webpage.xds.in.h:14
+msgid "Author"
+msgstr "Autorea"
+
+#: dispspecs/docbook.xds.in.h:24
+msgid "Author Initials"
+msgstr "Egilearen inizialak"
+
+#: dispspecs/docbook.xds.in.h:25 dispspecs/website-webpage.xds.in.h:15
+msgid "Authorship Information"
+msgstr "Egiletzaren informazioa"
+
+#: dispspecs/docbook.xds.in.h:26 dispspecs/website-webpage.xds.in.h:16
+msgid "Bibliographic Information"
+msgstr "Informazio bibliografikoa"
+
+#: dispspecs/docbook.xds.in.h:27 dispspecs/website-webpage.xds.in.h:17
+msgid "Bibliography"
+msgstr "Bibliografia"
+
+#: dispspecs/docbook.xds.in.h:28
+msgid "Book"
+msgstr "Liburua"
+
+#: dispspecs/docbook.xds.in.h:29
+msgid "Book Information"
+msgstr "Liburu-informazioa"
+
+#: dispspecs/docbook.xds.in.h:30 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "Epigrafea"
+
+#: dispspecs/docbook.xds.in.h:31
+msgid "Caution"
+msgstr "Kontuz"
+
+#: dispspecs/docbook.xds.in.h:32 dispspecs/website-webpage.xds.in.h:18
+msgid "Chapter"
+msgstr "Kapitulua"
+
+#: dispspecs/docbook.xds.in.h:33 dispspecs/website-webpage.xds.in.h:19
+msgid "City"
+msgstr "Herria"
+
+#: dispspecs/docbook.xds.in.h:34 dispspecs/website-webpage.xds.in.h:20
+msgid "Colophon"
+msgstr "Kredituak"
+
+#: dispspecs/docbook.xds.in.h:35
+msgid "Command"
+msgstr "Komandoa"
+
+#: dispspecs/docbook.xds.in.h:36 dispspecs/website-webpage.xds.in.h:21
+msgid "Command Synopsis"
+msgstr "Komandoen sinopsia"
+
+#: dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "Ordenagailu-irteera"
+
+#: dispspecs/docbook.xds.in.h:38 dispspecs/website-layout.xds.in.h:4
+#: dispspecs/website-webpage.xds.in.h:22
+msgid "Copyright"
+msgstr "Copyrighta"
+
+#: dispspecs/docbook.xds.in.h:39 dispspecs/website-webpage.xds.in.h:23
+msgid "Copyright Holder"
+msgstr "Copyright-eskubideen jabea"
+
+#: dispspecs/docbook.xds.in.h:40
+msgid "Corporate Name"
+msgstr "Izen korporatiboa"
+
+#: dispspecs/docbook.xds.in.h:41 dispspecs/website-webpage.xds.in.h:24
+msgid "Cross-reference"
+msgstr "Erreferentzia gurutzatua"
+
+#: dispspecs/docbook.xds.in.h:42 dispspecs/teixlite.xds.in.h:103
+msgid "Date"
+msgstr "Data"
+
+#: dispspecs/docbook.xds.in.h:43 dispspecs/website-webpage.xds.in.h:25
+msgid "Date of Publication"
+msgstr "Argitalpen-data"
+
+#: dispspecs/docbook.xds.in.h:44
+msgid "Defined terms"
+msgstr "Definitutako terminoak"
+
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/website-webpage.xds.in.h:26 dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "Definizioa"
+
+#: dispspecs/docbook.xds.in.h:46
+msgid "DocBook"
+msgstr "DocBook"
+
+#: dispspecs/docbook.xds.in.h:47
+msgid ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+msgstr ""
+"DocBook dokumentu mota jende gehienak \"liburutzat\" hartzen duen "
+"horrekinbat dator orokorrean; ondo hornituta dago liburuak eta artikuluak "
+"idazteko, bai inprimatutako eta bai webean oinarritutako argitalpenetarako."
+
+#: dispspecs/docbook.xds.in.h:48 dispspecs/teixlite.xds.in.h:128
+#: dispspecs/website-webpage.xds.in.h:27
+msgid "Edition"
+msgstr "Edizioa"
+
+#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:11
+#: dispspecs/teixlite.xds.in.h:130 dispspecs/website-webpage.xds.in.h:28
+msgid "Editor"
+msgstr "Editorea"
+
+#: dispspecs/docbook.xds.in.h:50
+msgid "Email Address"
+msgstr "Helbide elektronikoa"
+
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13 dispspecs/readme.xds.in.h:5
+#: dispspecs/teixlite.xds.in.h:132 dispspecs/website-webpage.xds.in.h:29
+#: dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "Enfasia"
+
+#: dispspecs/docbook.xds.in.h:52 dispspecs/website-webpage.xds.in.h:30
+msgid "Entry"
+msgstr "Sarrera"
+
+#: dispspecs/docbook.xds.in.h:53
+msgid "Environment Variable"
+msgstr "Ingurune-aldagaia"
+
+#: dispspecs/docbook.xds.in.h:54
+msgid "Example (formal)"
+msgstr "Adibidea (formala)"
+
+#: dispspecs/docbook.xds.in.h:55 dispspecs/website-webpage.xds.in.h:31
+msgid "Example (informal)"
+msgstr "Adibidea (informala)"
+
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
+#: dispspecs/teixlite.xds.in.h:139
+msgid "Figure"
+msgstr "Irudia"
+
+#: dispspecs/docbook.xds.in.h:57
+msgid "Figure (informal)"
+msgstr "Irudia (informala)"
+
+#: dispspecs/docbook.xds.in.h:58 dispspecs/website-webpage.xds.in.h:32
+msgid "Filename"
+msgstr "Fitxategi-izena"
+
+#: dispspecs/docbook.xds.in.h:59 dispspecs/website-webpage.xds.in.h:33
+msgid "First Name"
+msgstr "Izena"
+
+#: dispspecs/docbook.xds.in.h:60 dispspecs/website-webpage.xds.in.h:34
+msgid "First Term"
+msgstr "Lehen terminoa"
+
+#: dispspecs/docbook.xds.in.h:61
+msgid "Footnote"
+msgstr "Oin-oharra"
+
+#: dispspecs/docbook.xds.in.h:62 dispspecs/website-webpage.xds.in.h:35
+msgid "Free-floating Heading"
+msgstr "Goiburu mugikorra"
+
+#: dispspecs/docbook.xds.in.h:63 dispspecs/website-webpage.xds.in.h:36
+msgid "Function"
+msgstr "Funtzioa"
+
+#. various related localNames need to be added
+#: dispspecs/docbook.xds.in.h:65
+msgid "Function Synopsis"
+msgstr "Funtzioaren sinopsia"
+
+#: dispspecs/docbook.xds.in.h:66 dispspecs/website-webpage.xds.in.h:37
+msgid "GUI Button"
+msgstr "GUI botoia"
+
+#: dispspecs/docbook.xds.in.h:67 dispspecs/website-webpage.xds.in.h:38
+msgid "GUI Label"
+msgstr "GUI etiketa"
+
+#: dispspecs/docbook.xds.in.h:68 dispspecs/website-webpage.xds.in.h:39
+msgid "GUI Menu"
+msgstr "GUI menua"
+
+#: dispspecs/docbook.xds.in.h:69 dispspecs/website-webpage.xds.in.h:40
+msgid "GUI Menu Item"
+msgstr "GUI menu-elementua"
+
+#: dispspecs/docbook.xds.in.h:70 dispspecs/website-webpage.xds.in.h:41
+msgid "GUI Submenu"
+msgstr "GUI azpimenua"
+
+#: dispspecs/docbook.xds.in.h:71 dispspecs/website-webpage.xds.in.h:42
+msgid "Glossary"
+msgstr "Glosarioa"
+
+#: dispspecs/docbook.xds.in.h:72 dispspecs/website-webpage.xds.in.h:43
+msgid "Glossary Entry"
+msgstr "Glosario-sarrera"
+
+#: dispspecs/docbook.xds.in.h:73
+msgid "Graphic"
+msgstr "Grafikoa"
+
+#: dispspecs/docbook.xds.in.h:74 dispspecs/website-webpage.xds.in.h:44
+msgid "ISBN"
+msgstr "ISBN"
+
+#: dispspecs/docbook.xds.in.h:75 dispspecs/website-webpage.xds.in.h:45
+msgid "ISSN"
+msgstr "ISSN"
+
+#: dispspecs/docbook.xds.in.h:76
+msgid "Image Data"
+msgstr "Irudi-datuak"
+
+#: dispspecs/docbook.xds.in.h:77
+msgid "Image Object"
+msgstr "Irudi-objektua"
+
+#: dispspecs/docbook.xds.in.h:78
+msgid "Important"
+msgstr "Garrantzitsua"
+
+#: dispspecs/docbook.xds.in.h:79 dispspecs/website-webpage.xds.in.h:46
+msgid "Index Term"
+msgstr "Indizeko terminoa"
+
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19 dispspecs/readme.xds.in.h:9
+msgid "Introduction"
+msgstr "Sarrera"
+
+#: dispspecs/docbook.xds.in.h:81 dispspecs/website-webpage.xds.in.h:47
+msgid "Key Caption"
+msgstr "Gako-epigrafea"
+
+#: dispspecs/docbook.xds.in.h:82 dispspecs/website-webpage.xds.in.h:48
+msgid "Legal Notice"
+msgstr "Lege-oharra"
+
+#: dispspecs/docbook.xds.in.h:83 dispspecs/website-webpage.xds.in.h:49
+msgid "List (itemised)"
+msgstr "Zerrenda (xehatua)"
+
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: dispspecs/website-webpage.xds.in.h:50 dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "Zerrenda (ordenatua)"
+
+#: dispspecs/docbook.xds.in.h:85 dispspecs/website-webpage.xds.in.h:51
+msgid "List (simple)"
+msgstr "Zerrenda (soila)"
+
+#: dispspecs/docbook.xds.in.h:86
+msgid "List (terms and definitions)"
+msgstr "Zerrenda (terminoak eta definizioak)"
+
+#: dispspecs/docbook.xds.in.h:87
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "Zerrendako elementua"
+
+#: dispspecs/docbook.xds.in.h:88
+msgid "List Member"
+msgstr "Zerrendako kidea"
+
+#: dispspecs/docbook.xds.in.h:89 dispspecs/website-webpage.xds.in.h:52
+msgid "Literal"
+msgstr "Literala"
+
+#: dispspecs/docbook.xds.in.h:90
+msgid "Media Object"
+msgstr "Euskarri-objektua"
+
+#: dispspecs/docbook.xds.in.h:91 dispspecs/website-webpage.xds.in.h:53
+msgid "Menu Choice"
+msgstr "Menu-aukera"
+
+#: dispspecs/docbook.xds.in.h:92 dispspecs/website-webpage.xds.in.h:54
+msgid "Meta-information about a Reference Page"
+msgstr "Erreferentzia-orri bati buruzko metainformazioa"
+
+#: dispspecs/docbook.xds.in.h:93
+msgid "Meta-information for a book"
+msgstr "Liburu bati buruzko metainformazioa"
+
+#: dispspecs/docbook.xds.in.h:94
+msgid "Meta-information for an article"
+msgstr "Artikulu bati buruzko metainformazioa"
+
+#: dispspecs/docbook.xds.in.h:96 dispspecs/website-webpage.xds.in.h:56
+msgid "Miscellaneous Bibliographic Information"
+msgstr "Orotariko informazio bibliografikoa"
+
+#: dispspecs/docbook.xds.in.h:98 dispspecs/website-webpage.xds.in.h:58
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "Erreferentzia-orri bati buruzko izena, helburua eta sailkapena"
+
+#: dispspecs/docbook.xds.in.h:99 dispspecs/website-webpage.xds.in.h:59
+msgid "Naming"
+msgstr "Izendatzea"
+
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
+#: dispspecs/teixlite.xds.in.h:195
+msgid "Note"
+msgstr "Oharra"
+
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: dispspecs/readme.xds.in.h:11 dispspecs/teixlite.xds.in.h:206
+#: dispspecs/website-webpage.xds.in.h:60 dispspecs/xhtml1-strict.xds.in.h:55
+#: src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "Paragrafoa"
+
+#: dispspecs/docbook.xds.in.h:102
+msgid "Paragraph (titled)"
+msgstr "Paragrafoa (titulua)"
+
+#: dispspecs/docbook.xds.in.h:103 dispspecs/website-webpage.xds.in.h:61
+msgid "Part"
+msgstr "Zatia"
+
+#: dispspecs/docbook.xds.in.h:104 dispspecs/website-webpage.xds.in.h:63
+msgid "Preface"
+msgstr "Hitzaurrea"
+
+#: dispspecs/docbook.xds.in.h:105 dispspecs/website-webpage.xds.in.h:64
+msgid "Printing History"
+msgstr "Historia inprimatzen"
+
+#: dispspecs/docbook.xds.in.h:106 dispspecs/website-webpage.xds.in.h:65
+msgid "Procedure"
+msgstr "Prozedura"
+
+#: dispspecs/docbook.xds.in.h:107 dispspecs/website-webpage.xds.in.h:66
+msgid "Product Name"
+msgstr "Produktuaren izena"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: dispspecs/docbook.xds.in.h:116
+msgid "Program Listing"
+msgstr "Programa-zerrenda"
+
+#: dispspecs/docbook.xds.in.h:117
+msgid "Prompt"
+msgstr "Galdetu"
+
+#: dispspecs/docbook.xds.in.h:118 dispspecs/teixlite.xds.in.h:214
+#: dispspecs/website-webpage.xds.in.h:67
+msgid "Publisher"
+msgstr "Argitaratzailea"
+
+#: dispspecs/docbook.xds.in.h:119 dispspecs/website-webpage.xds.in.h:68
+msgid "Publisher Name"
+msgstr "Argitaratzailearen izena"
+
+#: dispspecs/docbook.xds.in.h:120 dispspecs/website-webpage.xds.in.h:69
+msgid "Purpose"
+msgstr "Helburua"
+
+#: dispspecs/docbook.xds.in.h:121
+msgid "Question"
+msgstr "Galdera"
+
+#: dispspecs/docbook.xds.in.h:122
+msgid "Question-and-Answer"
+msgstr "Galdera-erantzunak"
+
+#: dispspecs/docbook.xds.in.h:123
+msgid "Question-and-Answer Set"
+msgstr "Galdera-erantzunen multzoa"
+
+#: dispspecs/docbook.xds.in.h:124
+msgid "Question-and-Answer Subset"
+msgstr "Galdera-erantzunen azpimultzoa"
+
+#: dispspecs/docbook.xds.in.h:125 dispspecs/readme.xds.in.h:12
+msgid "Quote"
+msgstr "Aipamena"
+
+#: dispspecs/docbook.xds.in.h:126 dispspecs/relax-ng.xds.in.h:10
+#: dispspecs/website-webpage.xds.in.h:70
+msgid "Reference"
+msgstr "Erreferentzia"
+
+#: dispspecs/docbook.xds.in.h:127 dispspecs/website-webpage.xds.in.h:71
+msgid "Reference Page"
+msgstr "Erreferentzia-orria"
+
+#: dispspecs/docbook.xds.in.h:128 dispspecs/website-webpage.xds.in.h:72
+msgid "Release Information"
+msgstr "Bertsioaren informazioa"
+
+#: dispspecs/docbook.xds.in.h:129 dispspecs/website-webpage.xds.in.h:73
+msgid "Replaceable Text"
+msgstr "Testu ordezgarria"
+
+#: dispspecs/docbook.xds.in.h:130
+msgid "Revision"
+msgstr "Berrikuspena"
+
+#: dispspecs/docbook.xds.in.h:131
+msgid "Revision History"
+msgstr "Berrikuspenaren historia"
+
+#: dispspecs/docbook.xds.in.h:132
+msgid "Revision Remark"
+msgstr "Berrikuspen-aholkuak"
+
+#: dispspecs/docbook.xds.in.h:133 dispspecs/website-webpage.xds.in.h:74
+msgid "SGML Tag"
+msgstr "SGML etiketa"
+
+#: dispspecs/docbook.xds.in.h:134 dispspecs/website-webpage.xds.in.h:75
+msgid "Screen"
+msgstr "Pantaila"
+
+#: dispspecs/docbook.xds.in.h:135
+msgid "Screenshot"
+msgstr "Pantaila-argazkia"
+
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:29
+#: dispspecs/readme.xds.in.h:13 dispspecs/website-webpage.xds.in.h:76
+msgid "Section"
+msgstr "Atala"
+
+#: dispspecs/docbook.xds.in.h:137 dispspecs/website-webpage.xds.in.h:77
+msgid "Section (level 5)"
+msgstr "Atala (5. maila)"
+
+#: dispspecs/docbook.xds.in.h:138
+msgid "Set"
+msgstr "Ezarri"
+
+#: dispspecs/docbook.xds.in.h:139 dispspecs/website-webpage.xds.in.h:78
+msgid "Step"
+msgstr "Urratsa"
+
+#: dispspecs/docbook.xds.in.h:140 dispspecs/website-webpage.xds.in.h:79
+msgid "Structure Name"
+msgstr "Egitura-izena"
+
+#: dispspecs/docbook.xds.in.h:141 dispspecs/website-webpage.xds.in.h:80
+msgid "Subsection"
+msgstr "Azpiatala"
+
+#: dispspecs/docbook.xds.in.h:142 dispspecs/website-webpage.xds.in.h:81
+msgid "Subsection (level 3)"
+msgstr "Azpiatala (3. maila)"
+
+#: dispspecs/docbook.xds.in.h:143 dispspecs/website-webpage.xds.in.h:82
+msgid "Subsection (level 4)"
+msgstr "Azpiatala (4. maila)"
+
+#: dispspecs/docbook.xds.in.h:144 dispspecs/website-webpage.xds.in.h:83
+msgid "Substeps"
+msgstr "Azpiurratsak"
+
+#: dispspecs/docbook.xds.in.h:145 dispspecs/website-webpage.xds.in.h:84
+msgid "Subsubsection"
+msgstr "Azpiazpiatala"
+
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
+#: dispspecs/website-webpage.xds.in.h:85
+msgid "Subtitle"
+msgstr "Azpititulua"
+
+#: dispspecs/docbook.xds.in.h:147 dispspecs/website-webpage.xds.in.h:86
+msgid "Surname"
+msgstr "Abizena"
+
+#: dispspecs/docbook.xds.in.h:148 dispspecs/website-webpage.xds.in.h:87
+msgid "Symbol"
+msgstr "Ikurra"
+
+#: dispspecs/docbook.xds.in.h:149 dispspecs/website-webpage.xds.in.h:88
+msgid "Synopsis (syntax)"
+msgstr "Sinopsia (sintaxia)"
+
+#: dispspecs/docbook.xds.in.h:150 dispspecs/website-webpage.xds.in.h:89
+msgid "Table (informal)"
+msgstr "Taula (informala)"
+
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "Taula-gorputza"
+
+#: dispspecs/docbook.xds.in.h:152
+msgid "Table Column Specification"
+msgstr "Taula-zutabearen zehaztapena"
+
+#: dispspecs/docbook.xds.in.h:153 src/plugin-table.c:417
+msgid "Table Entry"
+msgstr "Taula-sarrera"
+
+#: dispspecs/docbook.xds.in.h:154
+msgid "Table Entry (subtable)"
+msgstr "Taula-sarrera (azpitaula)"
+
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "Taularen orri-oina"
+
+#: dispspecs/docbook.xds.in.h:156 src/plugin-table.c:405
+msgid "Table Group"
+msgstr "Taula-taldea"
+
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "Taula-goiburua"
+
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
+#: src/plugin-table.c:411
+msgid "Table Row"
+msgstr "Taula-errenkada"
+
+#: dispspecs/docbook.xds.in.h:159 dispspecs/teixlite.xds.in.h:250
+#: dispspecs/website-webpage.xds.in.h:90
+msgid "Term"
+msgstr "Terminoa"
+
+#: dispspecs/docbook.xds.in.h:160
+msgid "Text Object"
+msgstr "Testu-objektua"
+
+#: dispspecs/docbook.xds.in.h:161 dispspecs/website-webpage.xds.in.h:91
+msgid "The International Standard Book Number of a document."
+msgstr "Dokumentu baten Nazioarteko liburu-zenbaki estandarra."
+
+#: dispspecs/docbook.xds.in.h:162 dispspecs/website-webpage.xds.in.h:92
+msgid "The International Standard Serial Number of a periodical."
+msgstr "Argitalpen periodiko baten Nazioarteko liburu-zenbaki estandarra."
+
+#: dispspecs/docbook.xds.in.h:163 dispspecs/website-webpage.xds.in.h:93
+msgid "The first place where a word or term occurs in a particular context"
+msgstr ""
+"Hitz edo termino bat testuinguru jakin batean azaltzen den lehenengo lekua"
+
+#: dispspecs/docbook.xds.in.h:164 dispspecs/website-webpage.xds.in.h:94
+msgid "The name of a function, subroutine or procedure"
+msgstr "Funtzio, azpierrutina edo prozedura baten izena"
+
+#: dispspecs/docbook.xds.in.h:165 dispspecs/website-webpage.xds.in.h:95
+msgid "The printed text on a particular key on a keyboard"
+msgstr "Teklatu bateko tekla jakin baten testu inprimatua"
+
+#: dispspecs/docbook.xds.in.h:166
+msgid "Tip"
+msgstr "Aholkua"
+
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: dispspecs/readme.xds.in.h:16 dispspecs/teixlite.xds.in.h:284
+#: dispspecs/website-webpage.xds.in.h:96 dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "Titulua"
+
+#: dispspecs/docbook.xds.in.h:168 dispspecs/website-webpage.xds.in.h:97
+msgid "Title Citation"
+msgstr "Tituluaren aipua"
+
+#: dispspecs/docbook.xds.in.h:169 dispspecs/website-webpage.xds.in.h:98
+msgid "URL Link"
+msgstr "URL esteka"
+
+#: dispspecs/docbook.xds.in.h:170
+msgid "User Input"
+msgstr "Erabiltzailearen sarrera"
+
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "Kontuz"
+
+#: dispspecs/docbook.xds.in.h:172 dispspecs/website-layout.xds.in.h:10
+#: dispspecs/website-webpage.xds.in.h:101
+msgid "Year"
+msgstr "Urtea"
+
+#: dispspecs/forrest-document.xds.in.h:3 dispspecs/teixlite.xds.in.h:64
+#: dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "Aingura"
+
+#: dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "Apache dokumentazioa DTD v1.2"
+
+#: dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "Egileak"
+
+#: dispspecs/forrest-document.xds.in.h:7
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: dispspecs/teixlite.xds.in.h:93 dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "Kodea"
+
+#: dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "Definitutako terminoa"
+
+#: dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "Definizioen zerrenda"
+
+#: dispspecs/forrest-document.xds.in.h:11 dispspecs/readme.xds.in.h:4
+#: src/cong-document.c:988
+msgid "Document"
+msgstr "Dokumentua"
+
+#: dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "Dokumentu-gorputza"
+
+#: dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "Konpontzeko"
+
+#: dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "Orri-oina"
+
+#: dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "Sardetu"
+
+#: dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "Goiburua"
+
+#: dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "Ikonoa"
+
+#: dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "Irudia"
+
+#: dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "Joan"
+
+#: dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "Lege-informazioa"
+
+#: dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "Lerro-jauzia"
+
+#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Esteka"
+
+#: dispspecs/forrest-document.xds.in.h:27
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "Zerrenda (ordenatu gabe)"
+
+#: dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "Zerrendako elementua"
+
+#: dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "Oharra"
+
+#: dispspecs/forrest-document.xds.in.h:32
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "Pertsona"
+
+#: dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "Iturburua"
+
+#: dispspecs/forrest-document.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "Indartsua"
+
+#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "Azpiindizea"
+
+#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "Goi-indizea"
+
+#: dispspecs/forrest-document.xds.in.h:39 dispspecs/teixlite.xds.in.h:245
+#: dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "Taula"
+
+#: dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "Taula-gelaxka"
+
+#: dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "Taula-goiburuko gelaxka"
+
+#: dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "Taulako errenkada"
+
+#: dispspecs/forrest-document.xds.in.h:43
+msgid ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://"
+"forrest.apache.org ."
+msgstr ""
+"DTD hau garatu zen Apache proiektuekin erabiltzeko software-dokumentaziorako "
+"dokumentu mota indartsu sinple bat sortzeko. XMLrekin bateragarria da DTD "
+"hau, eta Apache XML proiektuak mantentzen du. Ikus http://forrest.apache.org."
+
+#: dispspecs/forrest-document.xds.in.h:45
+#: glade/cong-file-properties.glade.h:17
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Mota"
+
+#: dispspecs/forrest-document.xds.in.h:46
+#: glade/cong-file-properties.glade.h:18
+msgid "Version"
+msgstr "Bertsioa"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "&quot;Kernel trafikoa&quot; Buletina"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid ""
+"A newsletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+msgstr ""
+"Iturburu libre/irekiko softwarearen munduko proiektu baten garapen "
+"teknikoaren jarraipena egiten duen buletina"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "Blokeatu aipamena"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "Lodia"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "Jauzia (eskuzkoa)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "Erdian"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "Aipua"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "Zuzenketa"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "Editorializatu"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "Letra-tipoa"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "Izenburua (1. maila)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "Izenburua (2. maila)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "Izenburua (3. maila)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "Hiperesteka"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "Jaulkipena"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "Etzana"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "Kernel Cousin buletina"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "Aipamena"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:30
+#: glade/cong-file-properties.glade.h:15
+msgid "Statistics"
+msgstr "Estatistika"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "Gaia"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Translator"
+msgstr "Itzultzailea"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Underlined"
+msgstr "Azpimarratuta"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Activity"
+msgstr "Bertsio-kontrolaren jarduera"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Statistics"
+msgstr "Bertsio-kontrolaren estatistikak"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
+msgid "Version Control Tree"
+msgstr "Bertsio-kontrolaren zuhaitza"
+
+#: dispspecs/opml.xds.in.h:1
+msgid "Apple OPML dispspec"
+msgstr "Apple OPML dispspec"
+
+#: dispspecs/opml.xds.in.h:2
+msgid "Experimental \"opml\" format"
+msgstr "\"opml\" formatu esperimentala"
+
+#: dispspecs/readme.xds.in.h:1
+msgid "Admission"
+msgstr "Onarpena"
+
+#: dispspecs/readme.xds.in.h:2
+msgid "Corp jargon"
+msgstr "Corp jargon"
+
+#: dispspecs/readme.xds.in.h:3
+msgid "Disclaimer"
+msgstr "Berme-ukatzea"
+
+#: dispspecs/readme.xds.in.h:6
+msgid "Excuse"
+msgstr "Barkatu"
+
+#: dispspecs/readme.xds.in.h:7
+msgid "Experimental \"readme\" format"
+msgstr "\"readme\" formatu esperimentala"
+
+#: dispspecs/readme.xds.in.h:8
+msgid "Inspirational"
+msgstr "Inspirazionala"
+
+#: dispspecs/readme.xds.in.h:10
+msgid "Optimistic"
+msgstr "Optimista"
+
+#: dispspecs/readme.xds.in.h:14 dispspecs/teixlite.xds.in.h:231
+msgid "Signature"
+msgstr "Sinadura"
+
+#: dispspecs/readme.xds.in.h:15
+msgid ""
+"This is a document type associated with the \"readme\" file distributed with "
+"the initial prototype of Conglomerate."
+msgstr ""
+"Conglomerate-ren lehenengo prototipoarekin banatutako \"readme\" "
+"fitxategiarekin lotutako dokumentu mota da hau."
+
+#: dispspecs/relax-ng.xds.in.h:1 src/cong-node-properties-dialog.c:879
+msgid "Choice"
+msgstr "Aukera"
+
+#: dispspecs/relax-ng.xds.in.h:2
+msgid "Define"
+msgstr "Definitu"
+
+#: dispspecs/relax-ng.xds.in.h:3
+msgid "Empty"
+msgstr "Hutsa"
+
+#: dispspecs/relax-ng.xds.in.h:4 dispspecs/teixlite.xds.in.h:149
+msgid "Group"
+msgstr "Elkartu"
+
+#: dispspecs/relax-ng.xds.in.h:5
+msgid "OneOrMore"
+msgstr "Bat edo gehiago"
+
+#: dispspecs/relax-ng.xds.in.h:6 src/cong-node-properties-dialog.c:914
+msgid "Optional"
+msgstr "Aukerakoa"
+
+#: dispspecs/relax-ng.xds.in.h:7
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: dispspecs/relax-ng.xds.in.h:8
+msgid "RELAX NG Grammar"
+msgstr "RELAX NG gramatika"
+
+#: dispspecs/relax-ng.xds.in.h:9
+msgid ""
+"RELAX NG is a schema language i.e. a language for describing the structure "
+"of an XML document."
+msgstr ""
+"RELAX NG eskema-lengoaia da, hau da, XML dokumentu bat deskribatzeko "
+"lengoaia."
+
+#: dispspecs/relax-ng.xds.in.h:11
+msgid "Start"
+msgstr "Hasi"
+
+#: dispspecs/relax-ng.xds.in.h:12 dispspecs/teixlite.xds.in.h:251
+#: src/cong-node-properties-dialog.c:827
+msgid "Text"
+msgstr "Testua"
+
+#: dispspecs/relax-ng.xds.in.h:13 src/cong-node-properties-dialog.c:621
+msgid "Value"
+msgstr "Balioa"
+
+#: dispspecs/relax-ng.xds.in.h:14
+msgid "XML Attribute"
+msgstr "XML atributua"
+
+#: dispspecs/relax-ng.xds.in.h:16
+msgid "ZeroOrMore"
+msgstr "Zero edo gehiago"
+
+#: dispspecs/teixlite.xds.in.h:1
+msgid ""
+"A bibliographic description of the copy text(s) from which an electronic "
+"text was derived or generated"
+msgstr ""
+"Testu elektronikoa eratorri edo sortu den kopia-testuei buruzko azalpen "
+"bibliografikoa"
+
+#: dispspecs/teixlite.xds.in.h:2
+msgid ""
+"A brief description of the place, date, time, etc. of production of a "
+"letter, newspaper story, or other work, prefixed or suffixed to it as a kind "
+"of heading or trailer"
+msgstr ""
+"Gutun, egunkari-historia edo bestelako lan bat egin zen lekuari, datari eta "
+"orduari buruzko azalpen laburra, hari aurretik nahiz atzetik lotuta goiburu "
+"edo aurrerakin gisa"
+
+#: dispspecs/teixlite.xds.in.h:3
+msgid ""
+"A brief prose description of the appearance or content of a graphic figure, "
+"for use when documenting an image without displaying it"
+msgstr ""
+"Irudi grafiko baten itxurari edo edukiari buruzko prosazko azalpen laburra, "
+"irudi bat bistaratu gabe dokumentatzen denean erabiltzeko"
+
+#: dispspecs/teixlite.xds.in.h:4
+msgid "A closing title or footer appearing at the end of a division of a text"
+msgstr ""
+"Testu baten zatiketaren amaieran azaltzen den ixte-titulua edo orri-oina"
+
+#: dispspecs/teixlite.xds.in.h:5
+msgid "A date in any format"
+msgstr "Data, edozein formatutan"
+
+#: dispspecs/teixlite.xds.in.h:6
+msgid ""
+"A detailed description of non-bibliographic aspects of a text, specifically "
+"the languages and sublanguages used, the situation in which it was produced, "
+"the participants and their setting"
+msgstr ""
+"Testu baten alderdi ez-bibliografikoei buruzko azalpen xehatua, bereziki "
+"erabilitako hizkuntzak eta azpihizkuntzak, egin den egoera, parte-"
+"hartzaileak eta haien ezarpena"
+
+#: dispspecs/teixlite.xds.in.h:7
+msgid "A fifth-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen bosgarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:8
+msgid ""
+"A first-level subdivision of the front, body, or back of a text (the "
+"largest, if &lt;div0&gt; is not used, the second largest if it is)"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen lehenengo mailako "
+"azpizatiketa (&lt;div0&gt; erabiltzen ez bada, handiena; erabiltzen bada, "
+"bigarren handiena)"
+
+#: dispspecs/teixlite.xds.in.h:9
+msgid ""
+"A formal list or prose description of the topics addressed by a subdivision "
+"of a text"
+msgstr ""
+"Testu baten azpizatiketak adierazitako gaien zerrenda formala edo prosa-"
+"azalpena"
+
+#: dispspecs/teixlite.xds.in.h:10
+msgid "A fourth-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen laugarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:11
+msgid "A full bibliographic description of an electronic file"
+msgstr "Fitxategi elektroniko bati buruzko azalpen bibliografiko osoa"
+
+#: dispspecs/teixlite.xds.in.h:12
+msgid ""
+"A fully-structured bibliographic citation, in which all components of the "
+"TEI file description are present"
+msgstr ""
+"Guztiz egituratutako aipamen bibliografikoa: TEI fitxategi-azalpenaren "
+"osagai guztiak bertan daude"
+
+#: dispspecs/teixlite.xds.in.h:13
+msgid ""
+"A group of verse lines functioning as a formal unit, e.g. a stanza, refrain, "
+"verse paragraph, etc."
+msgstr ""
+"Unitate formal gisa funtzionatzen duen paragrafo-lerroen taldea: ahapaldia, "
+"esaera zaharra, bertso-paragrafoa, etab."
+
+#: dispspecs/teixlite.xds.in.h:14
+msgid "A keyword in some formal language"
+msgstr "Gako-hitz bat, lengoaia formalen batean"
+
+#: dispspecs/teixlite.xds.in.h:15
+msgid ""
+"A letter, word or passage deleted, marked as deleted, or otherwise indicated "
+"as superfluous or spurious in the copy text by an author, scribe, annotator, "
+"or corrector"
+msgstr ""
+"Egile, idazkari, ohar-egile edo zuzentzaile batek kopia-testuan ezabatutako, "
+"ezabatutzat markatutako, edo bestela beharrezkoak ez direla edo "
+"alferrikakoak direla adierazitako letrak, hitzak edo pasarteak"
+
+#: dispspecs/teixlite.xds.in.h:16
+msgid "A list of bibliographic citations of any kind"
+msgstr "Edozein motatako aipamen bibliografikoen zerrenda"
+
+#: dispspecs/teixlite.xds.in.h:17
+msgid "A list of keywords or phrases identifying the topic or nature of a text"
+msgstr ""
+"Testu baten gaia edo izaera identifikatzeko gako-hitzen edo esaldien zerrenda"
+
+#: dispspecs/teixlite.xds.in.h:18
+msgid ""
+"A loosely-structured bibliographic citation of which the sub-components may "
+"or may not be explicitly localNameged"
+msgstr ""
+"Nolabaiteko egitura duen aipamen bibliografikoa; haren azpiosagarriak "
+"esplizituki izen lokalak izan daitezke edo ez"
+
+#: dispspecs/teixlite.xds.in.h:19
+msgid "A mathematical or other formula"
+msgstr "Formula matematikoa edo bestelako formula"
+
+#: dispspecs/teixlite.xds.in.h:20
+msgid "A note of any type"
+msgstr "Edozein motatako oharra"
+
+#: dispspecs/teixlite.xds.in.h:21
+msgid "A number, written in any form"
+msgstr "Zenbaki bat, edozein formatan idatzita"
+
+#: dispspecs/teixlite.xds.in.h:22
+msgid "A phrase defining a time of day in any format"
+msgstr "Eguneko ordu bat definitzeko esaldia, edozein formatutan"
+
+#: dispspecs/teixlite.xds.in.h:23
+msgid ""
+"A phrase describing the nature of a person's intellectual responsibility"
+msgstr ""
+"Pertsona baten erantzukizun intelektualaren izaera deskribatzeko esaldia"
+
+#: dispspecs/teixlite.xds.in.h:24
+msgid ""
+"A phrase or word used to provide a gloss or definition for some other word "
+"or phrase"
+msgstr ""
+"Beste hitz edo esaldi bati buruzko glosa edo azalpena emateko erabilitako "
+"esaldia edo hitza"
+
+#: dispspecs/teixlite.xds.in.h:25
+msgid ""
+"A pointer to another location in the current document in terms of one or "
+"more identifiable elements"
+msgstr ""
+"Uneko dokumentuk beste kokaleku baterako erakuslea, elementu identifikagarri "
+"bat edo gehiagoren terminoetan"
+
+#: dispspecs/teixlite.xds.in.h:26
+msgid ""
+"A pointer to another location in the current document or an external document"
+msgstr ""
+"Uneko dokumentuko edo kanpoko dokumentu bateko beste kokaleku baterako "
+"erakuslea"
+
+#: dispspecs/teixlite.xds.in.h:27
+msgid ""
+"A postal or other address, for example of a publisher, an organization, or "
+"an individual"
+msgstr ""
+"Posta-helbidea edo bestelako helbidea: argitaratzaile, erakunde nahiz "
+"gizabanako batena"
+
+#: dispspecs/teixlite.xds.in.h:28
+msgid "A proper noun or noun phrase"
+msgstr "Izen edo izen-esaldi egokia"
+
+#: dispspecs/teixlite.xds.in.h:29
+msgid ""
+"A prose description of the rationale and methods used in sampling texts in "
+"the creation of a corpus or collection"
+msgstr ""
+"Lagintze-testuetan corpus edo bilduma bat sortzeko erabilitako arrazoien eta "
+"metodoen prosazko azalpena"
+
+#: dispspecs/teixlite.xds.in.h:30
+msgid ""
+"A quotation from some other document, together with a bibliographic "
+"reference to its source"
+msgstr ""
+"Beste dokumentu bateko aipamena, haren iturburuari buruzko erreferentzia "
+"bibliografikoarekin batera"
+
+#: dispspecs/teixlite.xds.in.h:31
+msgid ""
+"A quotation or apparent quotation — a representation of speech or thought "
+"marked as being quoted from someone else (whether in fact quoted or not); in "
+"narrative, the words are usually those of of a character or speaker; in "
+"dictionaries, &lt;q&gt; may be used to mark real or contrived examples of "
+"usage"
+msgstr ""
+"Aipamena edo ageriko aipamena — beste norbaiten aipamen gisa markatutako "
+"hizketaren edo pentsamenduaren adierazpidea (koma artean nahiz ez); "
+"narratiban, hitzak pertsonaiaren nahiz hizlariarenak dira normalean; "
+"hiztegietan, &lt;q&gt; erabil daiteke erabilera-adibide errealak nahiz "
+"asmatuak markatzeko"
+
+#: dispspecs/teixlite.xds.in.h:32
+msgid ""
+"A quotation, anonymous or attributed, appearing at the start of a section or "
+"chapter, or on a title page"
+msgstr ""
+"Aipamen bat, anonimoa nahiz autoreduna, atal baten edo kapitulu baten "
+"hasieran, edo azal batean"
+
+#: dispspecs/teixlite.xds.in.h:33
+msgid "A reading which has been regularized or normalized in some sense"
+msgstr "Nolabait erregularizatutako edo normalizatutako irakurketa"
+
+#: dispspecs/teixlite.xds.in.h:34
+msgid ""
+"A reference to another location in the current document, in terms of one or "
+"more identifiable elements, possibly modified by additional text or comment"
+msgstr ""
+"Uneko dokumentuko beste kokaleku baterako erreferentzia, elementu "
+"identifikagarri bat edo gehiagoren terminoetan, testu nahiz iruzkin batek "
+
+#: dispspecs/teixlite.xds.in.h:35
+msgid ""
+"A reference to another location in the current document, or an external "
+"document, using an extended pointer notation, possibly modified by "
+"additional text or comment"
+msgstr ""
+"Uneko dokumentuko nahiz kanpoko elementu bateko beste kokaleku baterako "
+"erreferentzia, erakusle hedatuaren notazioa erabiliz, eta testu edo iruzkin "
+"gehigarri batek alda dezakeena"
+
+#: dispspecs/teixlite.xds.in.h:36
+msgid ""
+"A salutation or greeting prefixed to a foreword, dedicatory epistle, or "
+"other division of a text, or the salutation in the closing of a letter, "
+"preface, etc."
+msgstr ""
+"Sarrera, eskaintza-epistola edo bestelako testu-zati baten aurreko aldez "
+"aurrez finkatutako agurra, edo gutunak, prefazioak eta abar ixteko agurra"
+
+#: dispspecs/teixlite.xds.in.h:37
+msgid "A second-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen bigarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:38
+msgid "A sentence-like division of a text"
+msgstr "Testu baten esaldi moduko zatiketa"
+
+#: dispspecs/teixlite.xds.in.h:39
+msgid "A seventh-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen zazpigarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:40
+msgid ""
+"A short fragment of code in some formal language (often a programming "
+"language)"
+msgstr ""
+"Kode-zati labur bat, lengoaia formalen batean (programazio-lengoaia batean "
+"normalean)"
+
+#: dispspecs/teixlite.xds.in.h:41
+msgid "A single example demonstrating the use of an element or attribute"
+msgstr "Elementu edo atributu baten erabilera azaltzeko adibide soila"
+
+#: dispspecs/teixlite.xds.in.h:42
+msgid ""
+"A single text of any kind, whether unitary or composite, for example a poem "
+"or drama, a collection of essays, a novel, a dictionary, or a corpus sample"
+msgstr ""
+"Edozein motatako testu soila, unitarioa nahiz konposatua, esate baterako "
+"poema edo drama bat, saiakera-bilduma bat, eleberri bat, hiztegi bat, edo "
+"corpus-lagin bat"
+
+#: dispspecs/teixlite.xds.in.h:43
+msgid "A single, possibly incomplete, line of verse"
+msgstr "Bertso-lerro soil bat, agian osatu gabe"
+
+#: dispspecs/teixlite.xds.in.h:44
+msgid ""
+"A single-word, multi-word, or symbolic designation which is regarded as a "
+"technical term"
+msgstr ""
+"Termino tekniko gisa tratatzen den hitz bakarreko nahiz hitz anitzeko "
+"izendapena, edo izendapen sinbolikoa"
+
+#: dispspecs/teixlite.xds.in.h:45
+msgid "A sixth-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen seigarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:46
+msgid ""
+"A specialized form of heading or label, giving the name of one or more "
+"speakers in a dramatic text or fragment"
+msgstr ""
+"Goiburu nahiz etiketaren forma espezializatua, testu edo zati dramatiko "
+"bateko hizlari bat edo gehiagoren izena emanez"
+
+#: dispspecs/teixlite.xds.in.h:47
+msgid ""
+"A statement of responsibility for someone responsible for the intellectual "
+"content of a text, edition, recording, or series, where the specialized "
+"elements for authors, editors, etc. do not suffice or do not apply"
+msgstr ""
+"Testu, edizio, grabazio edo serie bateko eduki intelektualaren erantzukizuna "
+"duen norbaiten erantzukizun-adierazpena; autoreen, editoreen eta abarren "
+"elementu espezializatuak nahikoa ez direnean edo aplikatzen ez direnean"
+
+#: dispspecs/teixlite.xds.in.h:48
+msgid "A subdivision of the front, body, or back of a text"
+msgstr "Testu baten aurrealdearen, gorputzaren edo atzealdearen azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:49
+msgid ""
+"A subsection or division of the title of a work, as indicated on a title page"
+msgstr ""
+"Lan baten tituluaren azpiatala edo zatiketa, azal batean adierazi bezala"
+
+#: dispspecs/teixlite.xds.in.h:50
+msgid "A third-level subdivision of the front, body, or back of a text"
+msgstr ""
+"Testu baten aurrealdearen, gorputzaren edo atzealdearen hirugarren mailako "
+"azpizatiketa"
+
+#: dispspecs/teixlite.xds.in.h:51
+msgid ""
+"A word or phrase belonging to some language other than that of the "
+"surrounding text"
+msgstr "Inguruko testuaren hizkuntzan ez dagoen hitz edo esaldi bat"
+
+#: dispspecs/teixlite.xds.in.h:52
+msgid ""
+"A word or phrase for which the author or narrator indicates a disclaiming of "
+"responsibility, for example by the use of scare quotes or italics"
+msgstr ""
+"Autoreak edo narratzaileak erantzukizun-ukatzea adierazten duen hitza edo "
+"esaldia, komatxoen edo letra etzanaren bidez markatuz adibidez"
+
+#: dispspecs/teixlite.xds.in.h:53
+msgid ""
+"A word, phrase, or passage which cannot be transcribed with certainty "
+"because it is illegible or inaudible in the source"
+msgstr ""
+"Segurtasunez transkriba ez daitezkeen hitzak, esaldiak edo pasarteak, "
+"iturburuan ezin direlako irakurri edo entzun"
+
+#: dispspecs/teixlite.xds.in.h:54
+msgid "Abbr"
+msgstr "Laburtz"
+
+#: dispspecs/teixlite.xds.in.h:55
+msgid "Add"
+msgstr "Gehitu"
+
+#: dispspecs/teixlite.xds.in.h:57
+msgid "Address Line"
+msgstr "Helbide-lerroa"
+
+#: dispspecs/teixlite.xds.in.h:58
+msgid "An abbreviation of any sort"
+msgstr "Edozein motatako laburtzapena"
+
+#: dispspecs/teixlite.xds.in.h:59
+msgid "An edition statement as presented on a title page of a document"
+msgstr "Edizio-adierazpen bat, dokumentu baten azaletakoa bezalakoa"
+
+#: dispspecs/teixlite.xds.in.h:60
+msgid ""
+"An identifier of some kind, e.g. a variable name or the name of an SGML "
+"element or attribute"
+msgstr ""
+"Nolabaiteko identifikatzailea, esate baterako SGML elementu edo "
+"atributubaten aldagai-izena edo izena"
+
+#: dispspecs/teixlite.xds.in.h:61
+msgid ""
+"An individual descriptive category, possibly nested within a superordinate "
+"category, within a user-defined taxonomy"
+msgstr ""
+"Kategoria deskribatzaile indibiduala; habiaratuta egon daiteke goi-mailako "
+"kategoria batekin, erabiltzaileak definitutako taxonomia baten barruan"
+
+#: dispspecs/teixlite.xds.in.h:62
+msgid ""
+"An individual speech in a performance text, or a passage presented as such "
+"in a prose or verse text"
+msgstr ""
+"Performantzia-testu bateko hitzaldi indibiduala, edo hala aurkeztutako "
+"pasartea, prosazko nahiz bertsozko testu batean"
+
+#: dispspecs/teixlite.xds.in.h:63
+msgid "An interpretative annotation which can be linked to a span of text"
+msgstr "Testu-bitarte batekin esteka daitekeen anotazio interpretatzailea"
+
+#: dispspecs/teixlite.xds.in.h:65
+msgid "Anonymous Block (&lt;ab&gt;)"
+msgstr "Bloke anonimoa (&lt;ab&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:66
+msgid ""
+"Any arbitrary phrase-level unit of text (including other &lt;seg&gt; "
+"elements)"
+msgstr ""
+"Esaldi mailako edozein testu-unitate arbitrario (bestelako &lt;seg&gt; "
+"elementuak barne)"
+
+#: dispspecs/teixlite.xds.in.h:67
+msgid ""
+"Any heading, for example, the title of a section, or the heading of a list "
+"or glossary"
+msgstr ""
+"Edozein goiburu, esate baterako, atal baten titulua, edo zerrenda nahiz "
+"glosario bateko goiburua"
+
+#: dispspecs/teixlite.xds.in.h:68
+msgid "Any kind of stage direction within a dramatic text or fragment"
+msgstr "Testu edo zati dramatiko baten barruko edozein akotazio mota."
+
+#: dispspecs/teixlite.xds.in.h:69
+msgid ""
+"Any prefatory matter (headers, title page, prefaces, dedications, etc.) "
+"found at the start of a document, before the main body"
+msgstr ""
+"Dokumentu baten hasieran, gorputz nagusiaren aurretik, azaltzen den "
+"aurretiazko edozein zati (goiburua, azala, prefazioa, eskaintza, etab.)"
+
+#: dispspecs/teixlite.xds.in.h:70
+msgid "Any sequence of items organized as a list"
+msgstr "Zerrenda gisa antolatutako elementuen edozein sekuentzia"
+
+#: dispspecs/teixlite.xds.in.h:71
+msgid ""
+"Any standard or non-standard number used to identify a bibliographic item"
+msgstr ""
+"Elementu bibliografiko bat identifikatzeko erabilitako edozein zenbaki "
+"estandar nahiz ez-estandar"
+
+#: dispspecs/teixlite.xds.in.h:72
+msgid "Arbitrary Segment (&lt;seg&gt;)"
+msgstr "Segmentu arbitrarioa (&lt;seg&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:73
+msgid "Argument"
+msgstr "Argumentua"
+
+#: dispspecs/teixlite.xds.in.h:74
+msgid ""
+"Attaches an identifier to a point within a text, whether or not it "
+"corresponds with a textual element"
+msgstr ""
+"Identifikatzaile bat eransten dio testu baten barruko puntu bati, testu-"
+"elementu bati egokitu ala ez"
+
+#: dispspecs/teixlite.xds.in.h:76
+msgid "Authority"
+msgstr "Autoretza"
+
+#: dispspecs/teixlite.xds.in.h:77
+msgid "Availability"
+msgstr "Baliagarritasuna"
+
+#: dispspecs/teixlite.xds.in.h:78
+msgid "Back Matter"
+msgstr "Itzuli gaira"
+
+#: dispspecs/teixlite.xds.in.h:79
+msgid "BiblFull"
+msgstr "BiblFull"
+
+#: dispspecs/teixlite.xds.in.h:80
+msgid "Bibliographic Citation (&lt;bibl&gt;)"
+msgstr "aipamen bibliografikoa (&lt;bibl&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:81
+msgid "Bibliographic Scope"
+msgstr "Esparru bibliografikoa"
+
+#: dispspecs/teixlite.xds.in.h:82 dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "Gorputza"
+
+#: dispspecs/teixlite.xds.in.h:83
+msgid "Byline"
+msgstr "Autorea"
+
+#: dispspecs/teixlite.xds.in.h:84
+msgid "Category"
+msgstr "Kategoria"
+
+#: dispspecs/teixlite.xds.in.h:85
+msgid "Category Description"
+msgstr "Kategoriaren deskribapena"
+
+#: dispspecs/teixlite.xds.in.h:86
+msgid "Category Reference"
+msgstr "Kategoria-erreferentzia"
+
+#: dispspecs/teixlite.xds.in.h:87
+msgid "Cell"
+msgstr "Gelaxka"
+
+#: dispspecs/teixlite.xds.in.h:88
+msgid "Change"
+msgstr "Aldaketa"
+
+#: dispspecs/teixlite.xds.in.h:89 dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "Aipua"
+
+#: dispspecs/teixlite.xds.in.h:90
+msgid "ClassCode"
+msgstr "Sailkapenaren kodea"
+
+#: dispspecs/teixlite.xds.in.h:91
+msgid "Classification Declaration"
+msgstr "Sailkapenaren deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:92
+msgid "Closer"
+msgstr "Hurbilago"
+
+#: dispspecs/teixlite.xds.in.h:94
+msgid "Collects together &lt;interp&gt; tags"
+msgstr "Batera biltzen ditu &lt;interp&gt; etiketak"
+
+#: dispspecs/teixlite.xds.in.h:95
+msgid ""
+"Collects together any notes providing information about a text additional to "
+"that recorded in other parts of the bibliographic description"
+msgstr ""
+"Batera biltzen ditu azalpen bibliografikoaren beste zati batzuetan gordetako "
+"testuaren testu gehigarriari buruzko informazioa ematen duten oharrak"
+
+#: dispspecs/teixlite.xds.in.h:96
+msgid "Contains a general purpose name or referring string"
+msgstr "Izen edo erreferentzia-kate orokor bat dauka"
+
+#: dispspecs/teixlite.xds.in.h:97
+msgid ""
+"Contains a single TEI-conformant document, comprising a TEI header and a "
+"text, either in isolation or as part of a &lt;teiCorpus&gt; element"
+msgstr ""
+"TEIrekin bateragarria den dokumentu soila dauka, TEI goiburuarekin eta "
+"testuarekin, bereizita nahiz &lt;teiCorpus&gt; elementu baten zati gisa"
+
+#: dispspecs/teixlite.xds.in.h:98
+msgid "Contains any appendixes, etc. following the main part of a text"
+msgstr "Testu baten zati nagusiaren atzeko eranskinak, etab. dauzka"
+
+#: dispspecs/teixlite.xds.in.h:99
+msgid ""
+"Contains any arbitrary component-level unit of text, acting as an anonymous "
+"container for phrase or inter level elements analogous to, but without the "
+"semantic baggage of, a paragraph"
+msgstr ""
+"Osagarri mailako edozein testu-unitate arbitrario dauka, edukitzaile anonimo "
+"gisa jokatuz esaldietarako edo mailen arteko paragrafoen analogoak diren "
+"elementuetarako, paragrafoaren eduki semantikorik gabe"
+
+#: dispspecs/teixlite.xds.in.h:100
+msgid "Contains text displayed in tabular form, in rows and columns"
+msgstr "Taula moduan, errenkadatan eta zutabetan bistaratutako testua dauka"
+
+#: dispspecs/teixlite.xds.in.h:101
+msgid "Correct Form"
+msgstr "Forma zuzena"
+
+#: dispspecs/teixlite.xds.in.h:102
+msgid "Creation"
+msgstr "Sorrera"
+
+#: dispspecs/teixlite.xds.in.h:104
+msgid "Dateline"
+msgstr "Data-lerroa"
+
+#: dispspecs/teixlite.xds.in.h:105
+msgid ""
+"Defines a typology used to classify texts either implicitly, by means of a "
+"bibliographic citation, or explicitly by a structured taxonomy"
+msgstr ""
+"Testuak sailkatzeko erabilitako tipologia definitzen du, modu inplizituan "
+"(aipamen bibliografiko bidez) nahiz esplizituan (taxonomia egituratu bidez)"
+
+#: dispspecs/teixlite.xds.in.h:106
+msgid ""
+"Defines the scope of a bibliographic reference, for example as a list of "
+"pagenumbers, or a named subdivision of a larger work"
+msgstr ""
+"Erreferentzia bibliografiko baten esparrua definitzen du, orri-zenbakien "
+"zerrenda gisa esate baterako, edo lan handiago baten banaketa izendatutakoa"
+
+#: dispspecs/teixlite.xds.in.h:107
+msgid "Del"
+msgstr "Ezab"
+
+#: dispspecs/teixlite.xds.in.h:108
+msgid ""
+"Describes in detail the aim or purpose for which an electronic file was "
+"encoded, together with any other relevant information concerning the process "
+"by which it was assembled or collected"
+msgstr ""
+"Fitxategi elektroniko bat kodetzeko helburua deskribatzen du xehetasunez, "
+"bildu zen prozesuari dagokion edozein datu garrantzitsurekin batera"
+
+#: dispspecs/teixlite.xds.in.h:109
+msgid ""
+"Describes some category within a taxonomy or text typology, either in the "
+"form of a brief prose description or in terms of the situational parameters "
+"used by the TEI formal &lt;textDesc&gt;"
+msgstr ""
+"Taxonomia edo testu-tipologia bateko hainbat kategoria deskribatzen ditu, "
+"prosazko azalpen labur baten bidez edo TEI &lt;textDesc&gt; formalak "
+"erabilitako egoera-parametroen bidez"
+
+#: dispspecs/teixlite.xds.in.h:110
+msgid ""
+"Details of editorial principles and practices applied during the encoding of "
+"a text"
+msgstr ""
+"Testu baten kodeketan zehar aplikatutako argitaratze-hastapenen eta -"
+"praktiken xehetasunak"
+
+#: dispspecs/teixlite.xds.in.h:111
+msgid "Distributor"
+msgstr "Banatzailea"
+
+#: dispspecs/teixlite.xds.in.h:112
+msgid "Div"
+msgstr "Div"
+
+#: dispspecs/teixlite.xds.in.h:113
+msgid "Div0"
+msgstr "Div0"
+
+#: dispspecs/teixlite.xds.in.h:114
+msgid "Div1"
+msgstr "Div1"
+
+#: dispspecs/teixlite.xds.in.h:115
+msgid "Div2"
+msgstr "Div2"
+
+#: dispspecs/teixlite.xds.in.h:116
+msgid "Div3"
+msgstr "Div3"
+
+#: dispspecs/teixlite.xds.in.h:117
+msgid "Div4"
+msgstr "Div4"
+
+#: dispspecs/teixlite.xds.in.h:118
+msgid "Div5"
+msgstr "Div5"
+
+#: dispspecs/teixlite.xds.in.h:119
+msgid "Div6"
+msgstr "Div6"
+
+#: dispspecs/teixlite.xds.in.h:120
+msgid "Div7"
+msgstr "Div7"
+
+#: dispspecs/teixlite.xds.in.h:121
+msgid "DivGen"
+msgstr "DivGen"
+
+#: dispspecs/teixlite.xds.in.h:122
+msgid "Document Author"
+msgstr "Dokumentuaren egilea"
+
+#: dispspecs/teixlite.xds.in.h:123
+msgid "Document Date"
+msgstr "Dokumentuaren data"
+
+#: dispspecs/teixlite.xds.in.h:124
+msgid "Document Edition"
+msgstr "Dokumentuaren edizioa"
+
+#: dispspecs/teixlite.xds.in.h:125
+msgid "Document Imprint"
+msgstr "Dokumentuaren inprimategi-zigilua"
+
+#: dispspecs/teixlite.xds.in.h:126
+msgid "Document Title"
+msgstr "Dokumentuaren titulua"
+
+#: dispspecs/teixlite.xds.in.h:127
+msgid ""
+"Documents the relationship between an electronic text and the source or "
+"sources from which it was derived"
+msgstr ""
+"Testu elektronikoaren eta testua eratorritako iturburuaren edo iturburuen "
+"arteko harremana dokumentatzen du"
+
+#: dispspecs/teixlite.xds.in.h:129
+msgid "Edition Statement"
+msgstr "Edizio-adierazpena"
+
+#: dispspecs/teixlite.xds.in.h:131
+msgid "Editorial Declaration"
+msgstr "Argitaratze-deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:133
+msgid "Encoding Description"
+msgstr "Kodeketaren azalpena"
+
+#: dispspecs/teixlite.xds.in.h:134
+msgid "Epigraph"
+msgstr "Epigrafea"
+
+#: dispspecs/teixlite.xds.in.h:135
+msgid "Example"
+msgstr "Adibidea"
+
+#: dispspecs/teixlite.xds.in.h:136
+msgid "Extended Pointer (xptr)"
+msgstr "Erakusle hedatua (xptr)"
+
+#: dispspecs/teixlite.xds.in.h:137
+msgid "Extended Reference (&lt;xref&gt;)"
+msgstr "Erreferentzia hedatua (&lt;xref&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:138
+msgid "Extent"
+msgstr "Hedadura"
+
+#: dispspecs/teixlite.xds.in.h:140
+msgid "Figure Description"
+msgstr "Irudiaren azalpena"
+
+#: dispspecs/teixlite.xds.in.h:141
+msgid "File Description (fileDesc)"
+msgstr "Fitxategiaren deskribapena (fileDesc)"
+
+#: dispspecs/teixlite.xds.in.h:142
+msgid "Foreign"
+msgstr "Arrotza"
+
+#: dispspecs/teixlite.xds.in.h:143
+msgid "Formula"
+msgstr "Formula"
+
+#: dispspecs/teixlite.xds.in.h:144
+msgid "Front Matter"
+msgstr "Hasierako orriak"
+
+#: dispspecs/teixlite.xds.in.h:145
+msgid "Funder"
+msgstr "Fundatzailea"
+
+#: dispspecs/teixlite.xds.in.h:146
+msgid "Gap"
+msgstr "Tartea"
+
+#: dispspecs/teixlite.xds.in.h:147
+msgid "Generic Identifier (&lt;gi&gt;)"
+msgstr "Identifikatzaile generikoa (&lt;gi&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:148
+msgid "Gloss"
+msgstr "Glosa"
+
+#: dispspecs/teixlite.xds.in.h:150
+msgid ""
+"Groups information about the series, if any, to which a publication belongs"
+msgstr ""
+"Argitalpena serie batekoa bada, serieari buruzko informazioa taldekatzen du"
+
+#: dispspecs/teixlite.xds.in.h:151
+msgid ""
+"Groups information concerning the publication or distribution of an "
+"electronic or other text"
+msgstr ""
+"Testu elektroniko edo bestelako testu baten argitalpenari edo banaketari "
+"dagokien informazioa taldekatzen du"
+
+#: dispspecs/teixlite.xds.in.h:152
+msgid "Groups information relating to one edition of a text"
+msgstr "Testu bateko edizio bati buruzko informazioa taldekatzen du"
+
+#: dispspecs/teixlite.xds.in.h:153
+msgid ""
+"Groups information relating to the publication or distribution of a "
+"bibliographic item"
+msgstr ""
+"Elementu bibliografiko baten argitalpenari edo banaketari dagokien "
+"informazioa taldekatzen du"
+
+#: dispspecs/teixlite.xds.in.h:154
+msgid ""
+"Groups information which describes the nature or topic of a text in terms of "
+"a standard classification scheme, thesaurus, etc"
+msgstr ""
+"Testu baten izaera edo gaia deskribatzen dituen informazioa taldekatzen du, "
+"sailkapen-eskema estandar edo thesaurus bidez"
+
+#: dispspecs/teixlite.xds.in.h:155
+msgid ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a final group at the end of a division, especially of a letter"
+msgstr ""
+"Data-muga, egilea, agurra eta zatiketa baten amaieran amaierako talde gisa "
+"azaltzen diren antzeko esaldiak batera taldekatzen ditu, gutunen kasuan "
+"batez ere"
+
+#: dispspecs/teixlite.xds.in.h:156
+msgid ""
+"Groups together dateline, byline, salutation, and similar phrases appearing "
+"as a preliminary group at the start of a division, especially of a letter"
+msgstr ""
+"Data-muga, egilea, agurra eta zatiketa baten hasieran hasierako talde gisa "
+"azaltzen diren antzeko esaldiak batera taldekatzen ditu, gutunen kasuan "
+"batez ere"
+
+#: dispspecs/teixlite.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "Burua"
+
+#: dispspecs/teixlite.xds.in.h:158
+msgid "Highlighted"
+msgstr "Nabarmendua"
+
+#: dispspecs/teixlite.xds.in.h:159
+msgid "Id. Number"
+msgstr "ID zenbakia"
+
+#: dispspecs/teixlite.xds.in.h:160
+msgid "Ident"
+msgstr "Identifikazioa"
+
+#: dispspecs/teixlite.xds.in.h:161
+msgid ""
+"Identifies the language being described in the writing system declaration"
+msgstr ""
+"Idazketa-sistemaren deklarazioan deskribatutako hizkuntza identifikatzen du"
+
+#: dispspecs/teixlite.xds.in.h:162
+msgid "Imprint"
+msgstr "Inprimategi-zigilua"
+
+#: dispspecs/teixlite.xds.in.h:163
+msgid "Index"
+msgstr "Aurkibidea"
+
+#: dispspecs/teixlite.xds.in.h:164
+msgid ""
+"Indicates a point where material has been omitted in a transcription, "
+"whether for editorial reasons described in the TEI header, as part of "
+"sampling practice, or because the material is illegible or inaudible"
+msgstr ""
+"Transkripzio batean materiala ez ikusi egin den puntu bat adierazten du, TEI "
+"goiburuan deskribatutako argitalpen-arrazoiengatik, adibide-praktika zati "
+"gisa, edo ezin delako materiala irakurri edo entzun"
+
+#: dispspecs/teixlite.xds.in.h:165
+msgid "Indicates the location of a graphic, illustration, or figure"
+msgstr "Grafiko, ilustrazio nahiz irudi baten kokalekua adierazten du"
+
+#: dispspecs/teixlite.xds.in.h:166
+msgid ""
+"Information about the availability of a text, for example any restrictions "
+"on its use or distribution, its copyright status, etc."
+msgstr ""
+"Testu baten erabilgarritasunari buruzko informazioa: erabiltzeko nahiz "
+"banatzeko murrizketak, copyright-egoera, etab."
+
+#: dispspecs/teixlite.xds.in.h:167
+msgid "Information about the creation of a text"
+msgstr "Testu bat sortzeari buruzko informazioa"
+
+#: dispspecs/teixlite.xds.in.h:168
+msgid "Information about the intended rendition of one or more elements"
+msgstr "Elementu baten edo gehiagoren interpretazioari buruzko informazioa"
+
+#: dispspecs/teixlite.xds.in.h:169
+msgid ""
+"Information about the title of a work and those responsible for its "
+"intellectual content"
+msgstr ""
+"Lan baten izenburuari eta eduki intelektualaren erantzukizuna duenari "
+"buruzko informazioa"
+
+#: dispspecs/teixlite.xds.in.h:170
+msgid "Information about the usage of a specific element within a &lt;text&gt;"
+msgstr ""
+"&lt;text&gt; bateko elementu jakin baten erabilerari buruzko informazioa"
+
+#: dispspecs/teixlite.xds.in.h:171
+msgid "Interpretation"
+msgstr "Interpretazioa"
+
+#: dispspecs/teixlite.xds.in.h:172
+msgid "Interpretation Group"
+msgstr "Interpretazio taldea"
+
+#: dispspecs/teixlite.xds.in.h:173
+msgid "Item"
+msgstr "Elementua"
+
+#: dispspecs/teixlite.xds.in.h:174
+msgid "Keywords"
+msgstr "Gako-hitzak"
+
+#: dispspecs/teixlite.xds.in.h:175
+msgid "Kw"
+msgstr "Kw"
+
+#: dispspecs/teixlite.xds.in.h:176 dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "Etiketa"
+
+#: dispspecs/teixlite.xds.in.h:177 glade/docbook-common-properties.glade.h:2
+#: src/plugin-docbook.c:2149
+msgid "Language"
+msgstr "Hizkuntza"
+
+#: dispspecs/teixlite.xds.in.h:178
+msgid "Language Usage"
+msgstr "Hizkuntza-erabilera"
+
+#: dispspecs/teixlite.xds.in.h:179
+msgid ""
+"Letters, words, or phrases inserted in the text by an author, scribe, "
+"annotator, or corrector"
+msgstr ""
+"Egile, idazkari, ohar-egile edo zuzentzaile batek testu batean "
+"txertatutakoletrak, hitzak edo esaldiak"
+
+#: dispspecs/teixlite.xds.in.h:180
+msgid "Line Break"
+msgstr "Lerro-jauzia"
+
+#: dispspecs/teixlite.xds.in.h:181
+msgid "Line Group"
+msgstr "Lerro taldea"
+
+#: dispspecs/teixlite.xds.in.h:182
+msgid "List"
+msgstr "Zerrenda"
+
+#: dispspecs/teixlite.xds.in.h:183
+msgid "ListBibl"
+msgstr "Zerrenda bibliografikoa"
+
+#: dispspecs/teixlite.xds.in.h:184
+msgid "Marks a location to be indexed for whatever purpose"
+msgstr "Helbururen batetik indexatu beharreko kokalekua markatzen du"
+
+#: dispspecs/teixlite.xds.in.h:185
+msgid ""
+"Marks a word or phrase as graphically distinct from the surrounding text, "
+"for reasons concerning which no claim is made"
+msgstr ""
+"Inguruko testuarekiko grafikoki desberdin gisa markatzen ditu hitzak edo "
+"esaldiak, ezer adierazi gabeko arrazoiak direla-eta"
+
+#: dispspecs/teixlite.xds.in.h:186
+msgid "Marks paragraphs in prose"
+msgstr "Prosazko paragrafoak markatzen ditu"
+
+#: dispspecs/teixlite.xds.in.h:187
+msgid ""
+"Marks the boundary between one page of a text and the next in a standard "
+"reference system"
+msgstr ""
+"Testu bateko orri baten eta erreferentzia-sistema bateko hurrengoaren arteko "
+"muga markatzen du"
+
+#: dispspecs/teixlite.xds.in.h:188
+msgid ""
+"Marks the boundary between sections of a text, as indicated by changes in a "
+"standard reference system"
+msgstr ""
+"Testu bateko atalen arteko muga markatzen du, erreferentzia-sistema bateko "
+"aldaketek adierazi bezala"
+
+#: dispspecs/teixlite.xds.in.h:189
+msgid ""
+"Marks the start of a new (typographic) line in some edition or version of a "
+"text"
+msgstr ""
+"Lerro (tipografiko) berri baten hasiera markatzen du, testu baten edizio edo "
+"bertsioren batean"
+
+#: dispspecs/teixlite.xds.in.h:190
+msgid "Marks words or phrases mentioned, not used"
+msgstr "Aipatutako, eta erabili gabeko hitzak edo esaldiak markatzen ditu"
+
+#: dispspecs/teixlite.xds.in.h:191
+msgid ""
+"Marks words or phrases which are stressed or emphasized for linguistic or "
+"rhetorical effect"
+msgstr ""
+"Garrantzia edo enfasia emandako hitzak edo esaldiak markatzen ditu, efektu "
+"linguistikoa edo erretorikoa lortzeko"
+
+#: dispspecs/teixlite.xds.in.h:192
+msgid "Mentioned"
+msgstr "Aipatuta"
+
+#: dispspecs/teixlite.xds.in.h:193
+msgid "Milestone"
+msgstr "Mugarria"
+
+#: dispspecs/teixlite.xds.in.h:196
+msgid "Notes Statement"
+msgstr "Oharren instrukzioa"
+
+#: dispspecs/teixlite.xds.in.h:197
+msgid "Num"
+msgstr "Zenbakizkoa"
+
+#: dispspecs/teixlite.xds.in.h:198
+msgid "One cell of a table"
+msgstr "Taula bateko gelaxka bat"
+
+#: dispspecs/teixlite.xds.in.h:199
+msgid "One component of a list"
+msgstr "Zerrenda bateko osagai bat"
+
+#: dispspecs/teixlite.xds.in.h:200
+msgid "One line of a postal or other address"
+msgstr "Posta-helbide nahiz beste helbideren baten lerro bat"
+
+#: dispspecs/teixlite.xds.in.h:201
+msgid ""
+"One or more taxonomies defining any classificatory codes used elsewhere in "
+"the text"
+msgstr ""
+"Testuan non-nahi erabilitako sailkapen-kodeak definitzen dituzten taxonomia "
+"bat edo gehiago"
+
+#: dispspecs/teixlite.xds.in.h:202
+msgid "One row of a table"
+msgstr "Taula bateko errenkada bat"
+
+#: dispspecs/teixlite.xds.in.h:203
+msgid "Opener"
+msgstr "Lehenengo esaldia"
+
+#: dispspecs/teixlite.xds.in.h:204
+msgid "Original Form"
+msgstr "Jatorrizko forma"
+
+#: dispspecs/teixlite.xds.in.h:205
+msgid "Page Break"
+msgstr "Orri-jauzia"
+
+#: dispspecs/teixlite.xds.in.h:207
+msgid "Pointer"
+msgstr "Erakuslea"
+
+#: dispspecs/teixlite.xds.in.h:208
+msgid "Principal Researcher"
+msgstr "Ikertzaile nagusia"
+
+#: dispspecs/teixlite.xds.in.h:209
+msgid "Profile Description"
+msgstr "Profilaren deskribapena"
+
+#: dispspecs/teixlite.xds.in.h:210
+msgid "Project Description"
+msgstr "Proiektuaren deskribapena"
+
+#: dispspecs/teixlite.xds.in.h:211
+msgid ""
+"Provides detailed information about the tagging applied to an SGML or XML "
+"document"
+msgstr ""
+"SGML edo XML dokumentu bati aplikatutako etiketatzeari buruzko informazio "
+"xehatua"
+
+#: dispspecs/teixlite.xds.in.h:212
+msgid "Publication Place"
+msgstr "Argitalpenaren lekua"
+
+#: dispspecs/teixlite.xds.in.h:213
+msgid "Publication Statement"
+msgstr "Argitalpenaren instrukzioa"
+
+#: dispspecs/teixlite.xds.in.h:215
+msgid "Quotation (&lt;q&gt;)"
+msgstr "Aipamena (&lt;q&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:216
+msgid "Ref"
+msgstr "Erref"
+
+#: dispspecs/teixlite.xds.in.h:217
+msgid "References Declaration"
+msgstr "Erreferentzien deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:218
+msgid "Referencing String (&lt;rs&gt;)"
+msgstr "Erreferentzia-katea (&lt;rs&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:219
+msgid "Reg"
+msgstr "Erreg"
+
+#: dispspecs/teixlite.xds.in.h:220
+msgid "Rendition"
+msgstr "Interpretazioa"
+
+#: dispspecs/teixlite.xds.in.h:221
+msgid "Resp"
+msgstr "Ardura"
+
+#: dispspecs/teixlite.xds.in.h:222
+msgid "Responsibility Statement (respStmt)"
+msgstr "Erantzukizun-adierazpena (respStmt)"
+
+#: dispspecs/teixlite.xds.in.h:223
+msgid "Revision Description"
+msgstr "Berrikuspenaren deskribapena"
+
+#: dispspecs/teixlite.xds.in.h:224
+msgid "Row"
+msgstr "Errenkada"
+
+#: dispspecs/teixlite.xds.in.h:225
+msgid "Salute"
+msgstr "Agurra"
+
+#: dispspecs/teixlite.xds.in.h:226
+msgid "Sampling Declaration"
+msgstr "Lagintze-deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:227
+msgid ""
+"Secondary statement of responsibility for a bibliographic item, for example "
+"the name of an individual, institution or organization, (or of several such) "
+"acting as editor, compiler, translator, etc."
+msgstr ""
+"Elementu bibliografiko baten bigarren mailako erantzukizun-adierazpena, "
+"esate baterako, gizabanako, instituzio edo erakunde baten (edo batzuen) "
+"izena, editore, konpiladore, itzultzaile, etab. gisa jokatzen duena."
+
+#: dispspecs/teixlite.xds.in.h:228
+msgid "Sentence"
+msgstr "Esaldia"
+
+#: dispspecs/teixlite.xds.in.h:229
+msgid "Series Statement"
+msgstr "Serie-deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:230
+msgid "Sic"
+msgstr "Sic"
+
+#: dispspecs/teixlite.xds.in.h:232
+msgid "So Called"
+msgstr "Izenekoa"
+
+#: dispspecs/teixlite.xds.in.h:233
+msgid "Source Description"
+msgstr "Iturburuaren deskribapena"
+
+#: dispspecs/teixlite.xds.in.h:234
+msgid "Speaker"
+msgstr "Hizlaria"
+
+#: dispspecs/teixlite.xds.in.h:235
+msgid "Specifies how canonical references are constructed for this text"
+msgstr ""
+"Erreferentzia kanonikoak nola eraikitzen diren testu honetarako zehazten du"
+
+#: dispspecs/teixlite.xds.in.h:236
+msgid ""
+"Specifies one or more defined categories within some taxonomy or text "
+"typology"
+msgstr ""
+"Taxonomietan nahiz testu-tipologietan definitutako kategoria bat edo gehiago "
+"zehazten ditu"
+
+#: dispspecs/teixlite.xds.in.h:237
+msgid "Speech (&lt;sp&gt;)"
+msgstr "Hizketa (&lt;sp&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:238
+msgid "Sponsor"
+msgstr "Bultzatzailea"
+
+#: dispspecs/teixlite.xds.in.h:239
+msgid "Stage Direction (&lt;stage&gt;)"
+msgstr "Akotazioa (&lt;stage&gt;)"
+
+#: dispspecs/teixlite.xds.in.h:240
+msgid ""
+"Summarizes a particular change or correction made to a particular version of "
+"an electronic text which is shared between several researchers"
+msgstr ""
+"Ikertzaile batzuek partekatzen duten testu elektroniko baten bertsio zehatz "
+"batean egindako aldaketa edo zuzenketa jakin bat laburtzen du"
+
+#: dispspecs/teixlite.xds.in.h:241
+msgid "Summarizes the revision history for a file"
+msgstr "Fitxategi baten berrikuspen-historia laburtzen du"
+
+#: dispspecs/teixlite.xds.in.h:242
+msgid "TEI Lite"
+msgstr "TEI Lite"
+
+#: dispspecs/teixlite.xds.in.h:243
+msgid ""
+"TEI stands for Text Encoding Initiative, see http://www.tei-c.org/ for more "
+"information; the TEI Lite dtd is a subset of the powerful TEI dtds which "
+"comprises the most commonly used elements."
+msgstr ""
+"TEIren esanahia Text Encoding Initiative da, ikus http://www.tei-c.org/ "
+"informazio gehiago lortzeko; TEI Lite dtd-a TEI dtd indartsuen azpimultzoa "
+"da, eta gehien erabiltzen diren elementuak dauzka."
+
+#: dispspecs/teixlite.xds.in.h:244
+msgid "TEI.2"
+msgstr "TEI.2"
+
+#: dispspecs/teixlite.xds.in.h:246
+msgid "Tag Usage"
+msgstr "Etiketa-erabilera"
+
+#: dispspecs/teixlite.xds.in.h:247
+msgid "Tagging Declaration"
+msgstr "Etiketatze-deklarazioa"
+
+#: dispspecs/teixlite.xds.in.h:248
+msgid "Taxonomy"
+msgstr "Taxonomia"
+
+#: dispspecs/teixlite.xds.in.h:249
+msgid "Tei Header"
+msgstr "Tei goiburua"
+
+#: dispspecs/teixlite.xds.in.h:252
+msgid "Text Classification"
+msgstr "Testu-sailkapena"
+
+#: dispspecs/teixlite.xds.in.h:253
+msgid "Text reproduced although apparently incorrect or inaccurate"
+msgstr "Testua erreproduzitu da, zuzena edo desegokia ematen duen arren"
+
+#: dispspecs/teixlite.xds.in.h:254
+msgid ""
+"The approximate size of the electronic text as stored on some carrier "
+"medium, specified in any convenient units"
+msgstr ""
+"Testu elektronikoak euskarri eramangarri batean biltegiratzean duen gutxi "
+"gorabeherako tamaina, dagokion unitatean zehaztuta"
+
+#: dispspecs/teixlite.xds.in.h:255
+msgid ""
+"The body of a composite text, grouping together a sequence of distinct texts "
+"(or groups of such texts) which are regarded as a unit for some purpose, for "
+"example the collected works of an author, a sequence of prose essays, etc."
+msgstr ""
+"Testu konposatu baten gorputza, helbururen batekin unitate gisa hartzen "
+"diren testu batzuen (edo testu horien taldeen) sekuentzia bat batera "
+"taldekatuz, adibidez, autore baten bilduma-lanak, prosazko saiakera batzuen "
+"sekuentzia, etab."
+
+#: dispspecs/teixlite.xds.in.h:256
+msgid ""
+"The classification code used for this text in some standard classification "
+"system"
+msgstr ""
+"Testu honetarako erabilitako sailkapen-kodea sailkapen-sistema estandar "
+"batzuetan"
+
+#: dispspecs/teixlite.xds.in.h:257
+msgid ""
+"The closing salutation, etc., appended to a foreword, dedicatory epistle, or "
+"other division of a text"
+msgstr ""
+"Sarrera, eskaintza-epistola edo bestelako testu-zati bati erantsitako ixte-"
+"agurra"
+
+#: dispspecs/teixlite.xds.in.h:258
+msgid "The correct form of a passage apparently erroneous in the copy text"
+msgstr "Itxuraz akastuna den kopia-testuaren pasarte baten forma zuzena."
+
+#: dispspecs/teixlite.xds.in.h:259
+msgid "The date of a document, as given (usually) on a title page"
+msgstr "Dokumentu baten data, (normalean) azalean azaltzen den bezala"
+
+#: dispspecs/teixlite.xds.in.h:260
+msgid ""
+"The descriptive and declarative information making up an ‘electronic title "
+"page’ prefixed to every TEI-conformant text"
+msgstr ""
+"'Azal elektroniko' bat osatzen duen deskribapen- eta azalpen-informazioa,"
+"TEIrekin bateragarriak diren testu guztientzat aurrez finkatua"
+
+#: dispspecs/teixlite.xds.in.h:261
+msgid ""
+"The imprint statement (place and date of publication, publisher name), as "
+"given (usually) at the foot of a title page"
+msgstr ""
+"Inprimatze-adierazpena (argitalpenaren lekua eta data, argitaratzailea), "
+"azaletako behealdean normalean ematen den bezala"
+
+#: dispspecs/teixlite.xds.in.h:262
+msgid ""
+"The label associated with an item in a list; in glossaries, marks the term "
+"being defined"
+msgstr ""
+"Zerrenda bateko elementu batekin asoziatutako etiketa; glosarioetan, "
+"definitzen ari den terminoa markatzen du"
+
+#: dispspecs/teixlite.xds.in.h:263
+msgid ""
+"The languages, sublanguages, registers, dialects etc. represented within a "
+"text"
+msgstr ""
+"Testu baten barruan adierazitako hizkuntzak, azpi-hizkuntzak, erregistroak, "
+"dialektoak etab."
+
+#: dispspecs/teixlite.xds.in.h:264
+msgid "The largest possible subdivision of the body of a text"
+msgstr "Testu bateko gorputzaren ahalik eta banaketarik handiena"
+
+#: dispspecs/teixlite.xds.in.h:265
+msgid ""
+"The location at which a textual division generated automatically by a text-"
+"processing application is to appear"
+msgstr ""
+"Testua prozesatzeko aplikazio batek automatikoki sortutako testu-banaketa "
+"azalduko den kokalekua"
+
+#: dispspecs/teixlite.xds.in.h:266
+msgid "The name (generic identifier) of an element"
+msgstr "Elementu baten izena (identifikatzaile generikoa)"
+
+#: dispspecs/teixlite.xds.in.h:267
+msgid ""
+"The name of a person or other agency responsible for making an electronic "
+"file available, other than a publisher or distributor"
+msgstr ""
+"fitxategi elektroniko bat erabilgarri egiteko ardura duen pertsonaren edo "
+"bestelako agentziaren izena, argitaratzailea edo banatzailea ez dena"
+
+#: dispspecs/teixlite.xds.in.h:268
+msgid ""
+"The name of a person or other agency responsible for the distribution of a "
+"text"
+msgstr ""
+"Testu bat banatzeko ardura duen pertsonaren edo bestelako agentziaren izena"
+
+#: dispspecs/teixlite.xds.in.h:269
+msgid "The name of a sponsoring organization or institution"
+msgstr "Erakunde babesle baten izena"
+
+#: dispspecs/teixlite.xds.in.h:270
+msgid ""
+"The name of an individual, institution, or organization responsible for the "
+"funding of a project or text"
+msgstr ""
+"Proiektu edo testu bat eratzeko ardura duen gizabanakoaren edo erakundearen "
+"izena"
+
+#: dispspecs/teixlite.xds.in.h:271
+msgid ""
+"The name of the author of the document, as given on the title page (often "
+"but not always contained in a &lt;byline&gt;)"
+msgstr ""
+"Dokumentuaren egilearen izena, azalean eman den bezala (maiz baina ez beti "
+"&lt;egilea&gt; lerroan dagoena)"
+
+#: dispspecs/teixlite.xds.in.h:272
+msgid ""
+"The name of the author(s), personal or corporate, of a work; the primary "
+"statement of responsibility for any bibliographic item"
+msgstr ""
+"Lan baten autore(ar)en izena(k), gizabanakoak nahiz korporatiboak; edozein "
+"elementu bibliografikoren lehen mailako ardura-adierazpena"
+
+#: dispspecs/teixlite.xds.in.h:273
+msgid ""
+"The name of the organization responsible for the publication or distribution "
+"of a bibliographic item"
+msgstr ""
+"Elementu bibliografiko bat argitaratzeko edo banatzeko ardura duen "
+"erakundearen izena"
+
+#: dispspecs/teixlite.xds.in.h:274
+msgid "The name of the place where a bibliographic item was published"
+msgstr "Elementu bibliografiko bat argitaratu zen lekuaren izena"
+
+#: dispspecs/teixlite.xds.in.h:275
+msgid ""
+"The name of the principal researcher responsible for the creation of an "
+"electronic text"
+msgstr "Testu elektroniko bat sortzeko ardura duen ikertzaile nagusiaren izena"
+
+#: dispspecs/teixlite.xds.in.h:276
+msgid ""
+"The original form of a reading, for which a regularized form is given in an "
+"attribute value"
+msgstr ""
+"Irakurketa baten jatorrizko forma, atributu-balio batean bere forma "
+"erregularizatua ematen denean"
+
+#: dispspecs/teixlite.xds.in.h:277
+msgid "The particularities of one edition of a text"
+msgstr "Testu bateko edizio bati buruzko berezitasunak"
+
+#: dispspecs/teixlite.xds.in.h:278
+msgid ""
+"The primary statement of responsibility given for a work on its title page "
+"or at the head or end of the work"
+msgstr ""
+"Lan bati azalean edo lanaren hasieran nahiz bukaeran emandako lehenengo "
+"mailako ardura-adierazpena"
+
+#: dispspecs/teixlite.xds.in.h:279
+msgid ""
+"The title of a document, including all its constituents, as given on a title "
+"page"
+msgstr ""
+"Dokumentu baten titulua, bere osagai guztiekin, azalean eman den bezala"
+
+#: dispspecs/teixlite.xds.in.h:280
+msgid ""
+"The title of a work, whether article, book, journal, or series, including "
+"any alternative titles or subtitles"
+msgstr ""
+"Lan baten titulua, eta artikulua, liburua, egunkaria ala seriea den, ordezko "
+"tituluak nahiz tituluak barne"
+
+#: dispspecs/teixlite.xds.in.h:281
+msgid "The title page of a text, appearing within the front or back matter"
+msgstr "Testu baten azala, aurreko eta atzeko gaiekin"
+
+#: dispspecs/teixlite.xds.in.h:282
+msgid ""
+"The whole body of a single unitary text, excluding any front or back matter"
+msgstr "Testu bakar baten gorputz osoa, aurrealdeko nahiz atzeko gairik gabe"
+
+#: dispspecs/teixlite.xds.in.h:283
+msgid "Time"
+msgstr "Ordua"
+
+#: dispspecs/teixlite.xds.in.h:285
+msgid "Title Page"
+msgstr "Azala"
+
+#: dispspecs/teixlite.xds.in.h:286
+msgid "Title Part"
+msgstr "Titulu zatia"
+
+#: dispspecs/teixlite.xds.in.h:287
+msgid "Title Statement"
+msgstr "Titulu-adierazpena"
+
+#: dispspecs/teixlite.xds.in.h:288
+msgid "Trailer"
+msgstr "Aurrerakina"
+
+#: dispspecs/teixlite.xds.in.h:289
+msgid "Unclear"
+msgstr "Iluna"
+
+#: dispspecs/teixlite.xds.in.h:290
+msgid "Verse Line (&lt;l&gt;)"
+msgstr "Bertso-lerroa (&lt;l&gt;)"
+
+#: dispspecs/website-layout.xds.in.h:1
+msgid "Additional Content"
+msgstr "Eduki gehigarria"
+
+#: dispspecs/website-layout.xds.in.h:2
+msgid "Configuration Data"
+msgstr "Konfigurazio-datuak"
+
+#: dispspecs/website-layout.xds.in.h:3
+msgid "Content"
+msgstr "Edukia"
+
+#: dispspecs/website-layout.xds.in.h:5
+msgid "Header Link"
+msgstr "Goiburu-esteka"
+
+#: dispspecs/website-layout.xds.in.h:6
+msgid "Holder"
+msgstr "Jabea"
+
+#: dispspecs/website-layout.xds.in.h:7 dispspecs/xsl.xds.in.h:2
+msgid "Stylesheet"
+msgstr "Estilo-orria"
+
+#: dispspecs/website-layout.xds.in.h:8
+msgid "Table of Contents"
+msgstr "Aurkibidea"
+
+#: dispspecs/website-layout.xds.in.h:9
+msgid "Website Layout"
+msgstr "Webgunearen diseinua"
+
+#: dispspecs/website-webpage.xds.in.h:5
+msgid "A sumamry."
+msgstr "Laburpen bat."
+
+#: dispspecs/website-webpage.xds.in.h:62
+msgid "Part Introduction"
+msgstr "Sarrera-zatia"
+
+#: dispspecs/website-webpage.xds.in.h:99
+msgid "Web Page"
+msgstr "Web-orria"
+
+#: dispspecs/website-webpage.xds.in.h:100
+msgid "Webpage"
+msgstr "Web-orria"
+
+#: dispspecs/website-webpage.xds.in.h:102
+msgid "email"
+msgstr "posta elektronikoa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "Forma laburtua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr "Ordezko script-dun edukia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "Area"
+
+#: dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "Oinarria"
+
+#: dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr "Noranzko biko baliogabetzea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "Handia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "Bloke-aipamena"
+
+#: dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "Botoia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "Zutabea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "Zutabe-taldea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "Definizioen zerrenda"
+
+#: dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "Definizio-baldintza"
+
+#: dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "Ezabatutako testua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "Zatiketa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "Behartutako lerro-jauzia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "Inprimakiko kontrola"
+
+#: dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "Inprimakiko kontrol-taldea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "HTML orria"
+
+#: dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "Izenburua (4. maila)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "Izenburua (5. maila)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "Izenburua (6. maila)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "Erregela horizontala"
+
+#: dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "Irudia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "Irudi-mapa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "Barneko aipamena"
+
+#: dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "Txertatutako testua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "Formatu interaktiboa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "Etzana"
+
+#: dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "Teklatua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "Legenda"
+
+#: dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "Metainformazioa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "Lerro anitzeko testu-eremua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "Objektua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "Aukera-taldea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "Aukera-hautatzailea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "Parametroa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "Aurrez formatua emandako testua"
+
+#: dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "Lagina"
+
+#: dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "Scripta"
+
+#: dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "Aukera hautagarria"
+
+#: dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "Txikia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:62 glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Hedadura"
+
+#: dispspecs/xhtml1-strict.xds.in.h:64
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Estiloa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "Taula-gelaxka (datuak)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "Taula-gelaxka (goiburua)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "Teletipoa"
+
+#: dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "HTMLren XML bertsio zorrotza"
+
+#: dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "Aldagaia"
+
+#: dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (zorrotza)"
+
+#: dispspecs/xsl.xds.in.h:1
+msgid ""
+"An XSL stylesheet describes a way of transforming a document of one type "
+"into one in another form. For example, it might describe a way of converting "
+"DocBook files into HTML web pages."
+msgstr ""
+"XSL estilo-orri batek dokumentu bat mota batetik bestera aldatzeko modua "
+"deskribatzen du. Esate baterako, deskriba dezake nola bihurtu DocBook "
+"fitxategiak HTML web-orri."
+
+#: dispspecs/xsl.xds.in.h:3
+msgid "Template-matching Rule"
+msgstr "Txantiloiarekin bat datorren araua"
+
+#: dispspecs/xsl.xds.in.h:4
+msgid "XSL stylesheet"
+msgstr "XSL estilo-orria"
+
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
+#: src/cong-primary-window.c:605 src/cong-primary-window.c:793
+#: src/cong-primary-window.c:795 src/cong-primary-window.c:801
+msgid "Conglomerate XML Editor"
+msgstr "Conglomerate XML editorea"
+
+#: data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "Editatu XML fitxategiak"
+
+#: data/conglomerate.schemas.in.h:1
+msgid ""
+"A list of custom directories where Conglomerate should look for the display "
+"specification (called dispspec, or .xds) files, in addition to the standard "
+"installation path. When documents are loaded a matching dispspec is searched "
+"for in these directories, and the first matching dispspec file is used."
+msgstr ""
+"Conglomerate-k bistaratze-zehaztapenaren fitxategiak (dispspec, edo .xds "
+"izenekoak) bilatu beharko lituzkeen direktorio pertsonalizatuen zerrenda, "
+"instalatzeko bide-izen estandarraz gain. Dokumentuak kargatzean, bat "
+"datorren dispspec fitxategi bat bilatzen da direktorio horietan, eta bat "
+"datorren lehen dispspec fitxategia erabiliko da."
+
+#: data/conglomerate.schemas.in.h:2
+msgid ""
+"A list of directories where Conglomerate should look for template xml files. "
+"These documents will be used by the new document assistant as types of "
+"documents which can be created by the user."
+msgstr ""
+"Conglomerate-k xml txantiloi-fitxategiak bilatu beharko lituzkeen "
+"direktorio--zerrenda. Dokumentu-laguntzaile berriak erabiltzaileak sor "
+"ditzakeen dokumentuen mota gisa erabiliko dira."
+
+#: data/conglomerate.schemas.in.h:3
+msgid "Custom locations for display specification files."
+msgstr "Bistaratzeko zehaztapenen fitxategien kokaleku pertsonalizatuak."
+
+#: data/conglomerate.schemas.in.h:4
+msgid "Locations for template files."
+msgstr "Txantiloi-fitxategien kokalekuak."
+
+#: glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "Fitxategiak inportatzeko aukerak"
+
+#: glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "Inportatzailea"
+
+#: glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "Aukerak"
+
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
+#: src/cong-node-properties-dialog.c:1321
+msgid "Advanced"
+msgstr "Aurreratua"
+
+#: glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "Oinarrizkoa"
+
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
+msgid "Document Type Declaration"
+msgstr "Dokumentu motaren deklarazioa"
+
+#: glade/cong-file-properties.glade.h:5
+msgid "Encoding"
+msgstr "Kodeketa"
+
+#: glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr "Kanpoko IDa"
+
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:281
+#: src/cong-file-print.c:217
+msgid "General"
+msgstr "Orokorra"
+
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:247
+msgid "Location"
+msgstr "Kokalekua"
+
+#: glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr "Aldatuta"
+
+#: glade/cong-file-properties.glade.h:11
+msgid "Number of elements:"
+msgstr "Elementu kopurua:"
+
+#: glade/cong-file-properties.glade.h:12
+msgid "Number of words :"
+msgstr "Hitz kopurua:"
+
+#: glade/cong-file-properties.glade.h:13
+#: glade/docbook-common-properties.glade.h:3
+#: glade/docbook-orderedlist-properties.glade.h:9
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
+msgid "Properties"
+msgstr "Propietateak"
+
+#: glade/cong-file-properties.glade.h:14
+msgid "Standalone"
+msgstr "Autonomoa"
+
+#: glade/cong-file-properties.glade.h:16
+msgid "System ID"
+msgstr "Sistemaren IDa"
+
+#: glade/cong-file-properties.glade.h:19
+msgid "XML Header"
+msgstr "XML goiburua"
+
+#: glade/cong-file-properties.glade.h:20 src/cong-file-properties.c:279
+msgid "_Associate this DTD"
+msgstr "_Esleitu DTD hau"
+
+#: glade/cong-file-properties.glade.h:21
+msgid "label_dtd_external_id"
+msgstr "label_dtd_external_id"
+
+#: glade/cong-file-properties.glade.h:22
+msgid "label_dtd_notes"
+msgstr "label_dtd_notes"
+
+#: glade/cong-file-properties.glade.h:23
+msgid "label_dtd_system_id"
+msgstr "label_dtd_system_id"
+
+#: glade/cong-file-properties.glade.h:24
+msgid "label_elements"
+msgstr "label_elements"
+
+#: glade/cong-file-properties.glade.h:25
+msgid "label_location"
+msgstr "label_location"
+
+#: glade/cong-file-properties.glade.h:26
+msgid "label_modified"
+msgstr "label_modified"
+
+#: glade/cong-file-properties.glade.h:27
+msgid "label_name"
+msgstr "label_name"
+
+#: glade/cong-file-properties.glade.h:28
+msgid "label_typedesc"
+msgstr "label_typedesc"
+
+#: glade/cong-file-properties.glade.h:29
+msgid "label_typename"
+msgstr "label_typename"
+
+#: glade/cong-file-properties.glade.h:30
+msgid "label_words"
+msgstr "label_words"
+
+#: glade/cong-file-properties.glade.h:31
+msgid "label_xml_encoding"
+msgstr "label_xml_encoding"
+
+#: glade/cong-file-properties.glade.h:32
+msgid "label_xml_standalone"
+msgstr "label_xml_standalone"
+
+#: glade/cong-file-properties.glade.h:33
+msgid "label_xml_version"
+msgstr "label_xml_version"
+
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/cong-find-replace.glade.h:2
+msgid "Find Next"
+msgstr "Bilatu hurrengoa"
+
+#: glade/cong-find-replace.glade.h:3
+msgid "Match _entire word only"
+msgstr "_Hitz osoak soilik"
+
+#: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
+#: src/cong-edit-find-and-replace.c:836 src/cong-edit-find-and-replace.c:850
+msgid "Replace"
+msgstr "Ordeztu"
+
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:908
+msgid "Replace All"
+msgstr "Ordeztu denak"
+
+#: glade/cong-find-replace.glade.h:6
+msgid "Replace _with: "
+msgstr "Ordeztu _honekin: "
+
+#: glade/cong-find-replace.glade.h:7
+msgid "Search _backwards"
+msgstr "Bilatu _atzerantz"
+
+#: glade/cong-find-replace.glade.h:8
+msgid "_Match case"
+msgstr "_Maiuskula/minuskula"
+
+#: glade/cong-find-replace.glade.h:9
+msgid "_Search for: "
+msgstr "_Bilatu: "
+
+#: glade/cong-find-replace.glade.h:10
+msgid "_Wrap around"
+msgstr "_Itzulbiratu"
+
+#: glade/cong-preferences.glade.h:1
+msgid "Conglomerate Preferences"
+msgstr "Conglomerate-ren hobespenak"
+
+#: glade/cong-preferences.glade.h:2
+msgid "Document Types"
+msgstr "Dokumentu motak"
+
+#: glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "Pluginak"
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "Adhoc elementua"
+
+#: glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "Elementu-izena"
+
+#: glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "Elementu mota"
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "Ez dit axola"
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "Egiturazkoa"
+
+#: glade/docbook-common-properties.glade.h:1
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+"<small>Zein da testuaren esparrua? Orri hau erabil dezakezu testuak "
+"ordenagailu-sistema desberdinetan izango duen garrantzia zehazteko.</small>"
+
+#: glade/docbook-common-properties.glade.h:4 src/plugin-docbook.c:2155
+msgid "Revisions"
+msgstr "Berrikuspenak"
+
+#: glade/docbook-common-properties.glade.h:5 src/plugin-docbook.c:2143
+msgid "Scope"
+msgstr "Esparrua"
+
+#: glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"Leku-marken orria da hau.  Orri hau erabil dezakezu DocBook-en bertsio "
+"soilaren jarraipen-informazioa manipulatzeko.\n"
+"\n"
+"Bugzilla zerrendan agertzen da, 122538. akatsa da"
+
+#: glade/docbook-common-properties.glade.h:9
+msgid "_Architecture"
+msgstr "_Arkitektura"
+
+#: glade/docbook-common-properties.glade.h:10
+msgid "_Operating System"
+msgstr "_Sistema eragilea"
+
+#: glade/docbook-common-properties.glade.h:11
+msgid "_User Level"
+msgstr "_Erabiltzaile maila"
+
+#: glade/docbook-common-properties.glade.h:12
+msgid "_Vendor"
+msgstr "_Hornitzailea"
+
+#: glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr "Jarraitu zenbakitzen aurreko zerrendatik"
+
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:337
+#: src/cong-error-file-open.c:518
+msgid "Details"
+msgstr "Xehetasunak"
+
+#: glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr "Heredatu numerazioa inguruko zerrendetatik"
+
+#: glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr "Ikonotu espazio bertikala"
+
+#: glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "Zenbakitzea"
+
+#: glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+"<small>DocBook aplikazio batzuek estekaren portaera aldatzea onartzen dute, "
+"\"mota\" atributuaren bidez. </small>"
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "Helburua"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "URLa"
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr "_Probatu esteka hau"
+
+#: glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr "Izen lokala"
+
+#: glade/plugin-arbitrary.glade.h:3
+msgid "Namespace URI"
+msgstr "Izen-espazioaren URIa"
+
+#: glade/plugin-arbitrary.glade.h:4
+msgid "Preview"
+msgstr "Aurrebista"
+
+#: glade/plugin-arbitrary.glade.h:6
+msgid "Top-level Element"
+msgstr "Goi-mailako elementua"
+
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "Sortze-parametroak"
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Sakonera"
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
+msgid "Document Type"
+msgstr "Dokumentu mota"
+
+#: glade/string_selection_dialog.glade.h:1
+msgid "string_selection_dialog"
+msgstr "string_selection_dialog"
+
+#: src/cong-app.c:960
+msgid ""
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
+msgstr ""
+"Unitate-proba: irten berehala (komando-lerroan zehaztutako fitxategiak "
+"kargatu ondoren)"
+
+#: src/cong-app.c:1021
+msgid "XML Editor"
+msgstr "XML editorea"
+
+#: src/cong-app.c:1158
+msgid "Conglomerate could not load any xds files"
+msgstr "Conglomerate-k ezin izan du xds fitxategirik kargatu"
+
+#: src/cong-app.c:1160
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "Conglomerate-k ezin izan du dokumentu moten deskribapenik aurkitu."
+
+#: src/cong-app.c:1162
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+"Errore hau ikusten baduzu, Conglomerate eraiki izan bazenu baina instalatu "
+"izan ez bazenu bezala da.  Saiatu instalatzen.  Bistaratzeko spec bide-"
+"izenaren ezarpen lehenetsia aldatu baduzu, egiaztatu bi aldiz ere bai."
+
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
+#: src/cong-node-properties-dialog.c:470
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "Gehitu \"%s\" atributua"
+
+#: src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-editor.c:253
+#: src/cong-attribute-wrapper.c:263 src/cong-node-properties-dialog.c:506
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Ezabatu \"%s\" atributua"
+
+#: src/cong-attribute-editor-enumeration.c:122
+msgid "(unspecified)"
+msgstr "(zehaztugabea)"
+
+#: src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr "Bretoiera"
+
+#: src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr "Katalana"
+
+#: src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr "Txekiera"
+
+#: src/cong-attribute-editor-lang.c:51
+msgid "Danish"
+msgstr "Daniera"
+
+#: src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr "Alemana (Alemania)"
+
+#: src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr "Alemana (Suitzakoa)"
+
+#: src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr "Ingelesa (AEBetakoa)"
+
+#: src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr "Ingelesa (Britainiakoa)"
+
+#: src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr "Ingelesa (Kanadakoa)"
+
+#: src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr "Esperantoa"
+
+#: src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr "Gaztelania"
+
+#: src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr "Faroera"
+
+#: src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr "Frantsesa (Frantzia)"
+
+#: src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr "Frantsesa (Suitzakoa)"
+
+#: src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr "Italiera"
+
+#: src/cong-attribute-editor-lang.c:63
+msgid "Dutch"
+msgstr "Nederlandera"
+
+#: src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr "Norvegiera"
+
+#: src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr "Poloniera"
+
+#: src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr "Portugesa (Portugal)"
+
+#: src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr "Portugesa (Brasilgoa)"
+
+#: src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr "Errusiera"
+
+#: src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr "Suediera"
+
+#: src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr "Ukrainera"
+
+#: src/cong-attribute-editor-lang.c:157
+msgid "No Language"
+msgstr "Hizkuntzarik ez"
+
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
+#, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Ezin da \"%s\" atributua ezarri: \"%s\""
+
+#: src/cong-attribute-editor-nmtoken.c:236
+msgid "The attribute value must be an XML name token."
+msgstr "Atributu-balioak XML izen-tokena izan behar du."
+
+#: src/cong-attribute-editor-nmtoken.c:237
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr "XML izen-tokenek karaktere alfanumerikoak eta/edo ideografikoak eta "
+
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
+#: src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Ezarri \"%s\" atributua - \"%s\""
+
+#: src/cong-dialog.c:301
+msgid "_Close without Saving"
+msgstr "_Itxi gorde gabe"
+
+#: src/cong-dialog.c:316
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "\"%s\" dokumentuko aldaketak gorde nahi dituzu itxi aurretik?"
+
+#: src/cong-dialog.c:321
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr ""
+"Gorde gabe ixten baduzu, azken %li orduetako aldaketak baztertuko dira."
+
+#: src/cong-dialog.c:323
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr ""
+"Gorde gabe ixten baduzu, azken %li minutuetako aldaketak baztertuko dira."
+
+#: src/cong-dialog.c:325
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr "Gorde gabe ixten baduzu, azken minutuko aldaketak baztertuko dira."
+
+#: src/cong-dialog.c:379
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "\"%s\" dokumentuko gorde gabeko aldaketak leheneratu nahi dituzu?"
+
+#: src/cong-dialog.c:384
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "Azken %li orduetako aldaketak baztertuko dira."
+
+#: src/cong-dialog.c:386
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "Azken %li minutuetako aldaketak baztertuko dira."
+
+#: src/cong-dialog.c:388
+msgid "Changes from the past minute will be discarded."
+msgstr "Azken minutuko aldaketak baztertuko dira."
+
+#: src/cong-dispspec-element.c:661 src/cong-xpath-expression.c:248
+msgid "(xpath failed)"
+msgstr "(xpath-ek huts egin du)"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec-element.c:697
+msgid "<untitled>"
+msgstr "<izengabea>"
+
+#: src/cong-dispspec-registry.c:108
+msgid "Conglomerate could not read its registry of document types."
+msgstr "Conglomerate-k ezin izan du irakurri dokumentu moten bere erregistroa."
+
+#: src/cong-dispspec-registry.c:111
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "Conglomerate saiatu da kokalekuko fitxategi guztiak begiratzen."
+
+#: src/cong-dispspec-registry.c:333 src/cong-file-new.c:343
+msgid "File Type"
+msgstr "Fitxategi mota"
+
+#: src/cong-dispspec-registry.c:344
+msgid "Coverage"
+msgstr "Estaldura"
+
+#: src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "izengabea"
+
+#: src/cong-dispspec.c:536
+msgid "No description available."
+msgstr "Ez dago azalpen erabilgarririk."
+
+#: src/cong-document.c:651
+msgid "(Untitled)"
+msgstr "(izengabea)"
+
+#: src/cong-document.c:955
+#, c-format
+msgid "Attribute \"%s\""
+msgstr "\"%s\" atributua"
+
+#: src/cong-document.c:962
+#, c-format
+msgid "Text \"%s\""
+msgstr "\"%s\" testua"
+
+#: src/cong-document.c:968
+msgid "Character Data"
+msgstr "Karaktere-datuak"
+
+#: src/cong-document.c:971
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "\"%s\" entitate-erreferentzia"
+
+#: src/cong-document.c:974
+#, c-format
+msgid "Entity \"%s\""
+msgstr "\"%s\" entitatea"
+
+#: src/cong-document.c:977
+msgid "XML Processing Instruction"
+msgstr "XML prozesatze-instrukzioa"
+
+#: src/cong-document.c:982
+#, c-format
+msgid "Comment \"%s\""
+msgstr "\"%s\" iruzkina"
+
+#: src/cong-document.c:994
+msgid "Document Fragment"
+msgstr "Dokumentu-zatia"
+
+#: src/cong-document.c:997
+msgid "Notation"
+msgstr "Idazkera"
+
+#: src/cong-document.c:1000
+msgid "HTML Document"
+msgstr "HTML dokumentua"
+
+#: src/cong-document.c:1006
+msgid "Element Declaration"
+msgstr "Elementu-deklarazioa"
+
+#: src/cong-document.c:1009
+msgid "Attribute Declaration"
+msgstr "Atributu-deklarazioa"
+
+#: src/cong-document.c:1012
+msgid "Entity Declaration"
+msgstr "Entitate-deklarazioa"
+
+#: src/cong-document.c:1015
+msgid "Namespace Declaration"
+msgstr "Izen-espazioaren deklarazioa"
+
+#: src/cong-document.c:1018
+msgid "XInclude Start"
+msgstr "XInclude hasiera"
+
+#: src/cong-document.c:1021
+msgid "XInclude End"
+msgstr "XInclude amaiera"
+
+#: src/cong-document.c:2194
+#, c-format
+msgid "Select %s"
+msgstr "Hautatu %s"
+
+#: src/cong-dom-view.c:225
+msgid "UNKNOWN"
+msgstr "EZEZAGUNA"
+
+#: src/cong-dom-view.c:252
+msgid "Text:"
+msgstr "Testua:"
+
+#: src/cong-dom-view.c:258
+msgid "CDATA:"
+msgstr "CDATA:"
+
+#: src/cong-edit-find-and-replace.c:98
+#, c-format
+msgid "The text \"%s\" was not found."
+msgstr "\"%s\" testua ez da aurkitu."
+
+#: src/cong-edit-find-and-replace.c:200
+msgid "Replace _All"
+msgstr "Ordeztu _guztiak"
+
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:761
+#: src/cong-edit-find-and-replace.c:959 src/cong-edit-find-and-replace.c:1000
+msgid "Find"
+msgstr "Bilatu"
+
+#: src/cong-editor-node-text.c:887
+msgid "Select line"
+msgstr "Hautatu lerroa"
+
+#: src/cong-editor-node-text.c:911
+msgid "Select word"
+msgstr "Hautatu hitza"
+
+#: src/cong-editor-node-text.c:936
+msgid "Move cursor"
+msgstr "Lekuz aldatu kurtsorea"
+
+#: src/cong-editor-node-text.c:1022
+msgid "Drag out selection"
+msgstr "Arrastatu hautapena"
+
+#: src/cong-editor-widget3.c:269
+msgid "Expander Size"
+msgstr "Zabaltzailearen tamaina"
+
+#: src/cong-editor-widget3.c:270
+msgid "Size of the expander arrow"
+msgstr "Zabaltzailearen geziaren tamaina"
+
+#: src/cong-editor-widget3.c:748
+msgid "Input Method"
+msgstr "Sarrera-metodoa"
+
+#: src/cong-editor-widget3.c:878 src/cong-editor-widget3.c:1409
+msgid "Typing"
+msgstr "Idazkera"
+
+#: src/cong-editor-widget3.c:1310
+msgid "Cursor Movement"
+msgstr "Kurtsorearen mugimendua"
+
+#: src/cong-editor-widget3.c:1350 src/cong-editor-widget3.c:1363
+msgid "Delete Selection"
+msgstr "Ezabatu hautapena"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:231 src/cong-error-dialog.c:271
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "Programatzaile bat bazara, arazoa %s fitxategian dago, %i lerroan\n"
+
+#: src/cong-error-dialog.c:235
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "Eginbide hori oraindik ez da inplementatu. Barkatu."
+
+#: src/cong-error-dialog.c:265
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+"Eginbide hori oraindik ez da inplementatu. Barkatu.\n"
+"\n"
+"Arazo hau ezagutzen dugu; #%i akatsa da (programa-erroreen segimendua, %s)"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:321
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "Errore bat gertatu da \"%s\" eragiketa egiten saiatzean"
+
+#: src/cong-error-dialog.c:325
+msgid "A GError occurred; the error report was:"
+msgstr "GError bat gertatu da; errore-txostena:"
+
+#: src/cong-error-dialog.c:335 src/cong-error-file-open.c:516
+msgid "An unexpected error occurred."
+msgstr "Ustekabeko errore bat gertatu da."
+
+#: src/cong-error-dialog.c:336 src/cong-error-file-open.c:517
+msgid "For more information, click on the \"Details\" button."
+msgstr "Informazio gehiago lortzeko, egin klik \"Xehetasunak\" botoian."
+
+#: src/cong-error-dialog.c:386
+msgid "An error occurred whilst running this system command:"
+msgstr "Errore bat gertatu da sistema-komando hau exekutatzean:"
+
+#: src/cong-error-dialog.c:389
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr ""
+"Berri emandako errorearen zenbakia %d da.  Komandoak ateratako errorea "
+"behekoa da."
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:67
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "Conglomerate-k ezin izan du Bilaketa-tresna exekutatu.\n"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:103
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%s(e)k ezin du \"%s\" irakurri (%s)."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:106
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%s(e)k ezin izan du \"%s\" irakurri (%s)."
+
+#: src/cong-error-file-open.c:264 src/cong-error-file-save.c:92
+msgid "An unexpected internal error occurred."
+msgstr "Ustekabeko barneko errore bat gertatu da."
+
+#: src/cong-error-file-open.c:265 src/cong-error-file-save.c:93
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, bete akats-txosten bat aplikazio "
+"honen mantentzailearekin."
+
+#: src/cong-error-file-open.c:291
+msgid "There is no file with that name at that location."
+msgstr "Ez dago izen hori duen fitxategirik kokaleku horretan."
+
+#: src/cong-error-file-open.c:292
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Begiratu ea fitxategiaren izena ondo idatzi duzun.  Gogoratu minuskulen/"
+"maiuskulen erabilerak garrantzia duela (\"NireFitxategia\" eta "
+"\"NIREFITXATEGIA\" edo \"nirefitxategia\" ez dira gauza bera).\n"
+"(ii) Erabili Bilaketa-tresna fitxategiak aurkitzeko."
+
+#: src/cong-error-file-open.c:293 src/cong-error-file-open.c:302
+#: src/cong-error-file-open.c:357 src/cong-error-file-open.c:398
+msgid "Search"
+msgstr "Bilatu"
+
+#: src/cong-error-file-open.c:300 src/cong-error-file-save.c:110
+msgid "The location does not exist."
+msgstr "Kokalekua ez dago."
+
+#: src/cong-error-file-open.c:301
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.  Gogoratu minuskulen/"
+"maiuskulen erabilerak garrantzia duela (\"NireDirektorioa\" eta "
+"\"NIREDIREKTORIOA\" edo \"niredirektorioa\" ez dira gauza bera).\n"
+"(ii) Erabili Bilaketa-tresna fitxategiak aurkitzeko."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:314
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "\"%s\" kokalekuak ez du onartzen fitxategiak irakurtzea."
+
+#: src/cong-error-file-open.c:318
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+"Saiatu fitxategi bat beste kokaleku batetik deskargatzen.  Uste baduzu gai "
+"izan beharko zenukeela fitxategi hau irakurtzeko, galdetu sare-"
+"administratzaileari."
+
+#: src/cong-error-file-open.c:328
+msgid "There were problems reading the content of the file."
+msgstr "Arazoak gertatu dira fitxategiaren edukia irakurtzean."
+
+#: src/cong-error-file-open.c:329 src/cong-error-file-open.c:347
+#: src/cong-error-file-open.c:386
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, galdetu sistema-"
+"administratzaileari."
+
+#: src/cong-error-file-open.c:338
+msgid "The contents of the file seem to be corrupt."
+msgstr "Badirudi fitxategiaren edukia hondatuta dagoela."
+
+#: src/cong-error-file-open.c:339
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, saiatu fitxategiaren babeskopia "
+"bilatzen."
+
+#: src/cong-error-file-open.c:346 src/cong-error-file-open.c:385
+msgid "There were problems reading the contents of the file."
+msgstr "Arazoak gertatu dira fitxategiaren edukia irakurtzean."
+
+#: src/cong-error-file-open.c:355 src/cong-error-file-save.c:251
+msgid "The system does not recognise that as a valid location."
+msgstr "Sistemak ez du ezagutzen baliozko kokaleku gisa."
+
+#: src/cong-error-file-open.c:356
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.  Gogoratu minuskulen/"
+"maiuskulen erabilerak garrantzia duela (\"http\" eta \"Http\" edo \"HTTP\" "
+"ez dira gauza bera).\n"
+"(ii) Erabili Bilaketa-tresna fitxategiak aurkitzeko."
+
+#: src/cong-error-file-open.c:367
+msgid "You do not have permission to read that file."
+msgstr "Ez duzu baimenik fitxategi hori irakurtzeko."
+
+#: src/cong-error-file-open.c:368
+msgid "Try asking your system administrator to give you permission."
+msgstr "Eskatu baimena sistema-administratzaileari."
+
+#: src/cong-error-file-open.c:375 src/cong-error-file-save.c:274
+msgid "The system is trying to operate on too many files at once."
+msgstr "Sistema fitxategi gehiegirekin batera ari da lanean."
+
+#: src/cong-error-file-open.c:376 src/cong-error-file-open.c:410
+#: src/cong-error-file-save.c:275 src/cong-error-file-save.c:294
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, saiatu nahi ez dituzun "
+"aplikazioak ixten, edo galdetu sistema-administratzaileari."
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:393
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\" direktorioa da, eta ez fitxategia."
+
+#: src/cong-error-file-open.c:397
+msgid "Try using the Search Tool to find your file."
+msgstr "Erabili Bilaketa-tresna fitxategiak aurkitzeko."
+
+#: src/cong-error-file-open.c:409 src/cong-error-file-save.c:293
+msgid "The system ran out of memory."
+msgstr "Sistemak ez du memoria gehiago."
+
+#: src/cong-error-file-open.c:418 src/cong-error-file-open.c:427
+#: src/cong-error-file-open.c:436 src/cong-error-file-save.c:302
+#: src/cong-error-file-save.c:311 src/cong-error-file-save.c:320
+msgid "The server could not be contacted."
+msgstr "Ezin izan da zerbitzariarekin kontaktatu."
+
+#: src/cong-error-file-open.c:419
+msgid "Try again.  If it fails again, the server may be down."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, baliteke zerbitzaria ez ibiltzea."
+
+#: src/cong-error-file-open.c:428 src/cong-error-file-open.c:437
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.\n"
+"(ii) Saiatu berriro. Berriro huts egiten badu, baliteke zerbitzaria ez "
+"ibiltzea."
+
+#: src/cong-error-file-open.c:445 src/cong-error-file-save.c:329
+msgid "The system could not login to the location."
+msgstr "Sistema ezin izan da kokalekuan sartu."
+
+#: src/cong-error-file-open.c:446 src/cong-error-file-open.c:456
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr ""
+"Saiatu berriro. Berriro huts egiten badu, galdetu sistema-"
+"administratzaileari."
+
+#: src/cong-error-file-open.c:455 src/cong-error-file-save.c:338
+msgid "The location was too busy."
+msgstr "Kokalekua oso lanpetuta dago."
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:505
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "\"%s\" errorea gertatu da \"%s\"(e)n sartzean"
+
+#: src/cong-error-file-open.c:509
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr ""
+"Programak errore-txosten bat jaso du ustekabean GNOMEren Fitxategi-sistema "
+"birtualetik."
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:61
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%s(e)k ezin du \"%s\" gorde %s(e)n."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:64
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%s(e)k ezin izan du \"%s\" gorde %s(e)n."
+
+#: src/cong-error-file-save.c:111
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.  Gogoratu minuskulen/"
+"maiuskulen erabilerak garrantzia duela (\"NireDirektorioa\" eta "
+"\"NIREDIREKTORIOA\" edo \"niredirektorioa\" ez dira gauza bera).\n"
+"(ii) Saiatu beste kokaleku batean gordetzen."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:119 src/cong-error-file-save.c:238
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "\"%s\" kokalekuak ez du onartzen fitxategietan idaztea."
+
+#: src/cong-error-file-save.c:123 src/cong-error-file-save.c:242
+#: src/cong-error-file-save.c:350
+msgid "Try saving to a different location."
+msgstr "Saiatu beste kokaleku batean gordetzen."
+
+#: src/cong-error-file-save.c:134
+msgid "There were problems writing the content of the file."
+msgstr "Arazoak gertatu dira fitxategiaren edukian idaztean."
+
+#: src/cong-error-file-save.c:135
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, saiatu beste kokaleku batean "
+"gordetzen."
+
+#: src/cong-error-file-save.c:159
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "Fitxategiaren tamaina %s zen, baina gailuaren edukiera %s da bakarrik."
+
+#. Can't get at the capacity for the device or "volume":
+#. FIXME: This is the workaround:
+#: src/cong-error-file-save.c:165 src/cong-error-file-save.c:169
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr ""
+"Fitxategia handiegia da gailuan gordetzeko (fitxategi-tamaina %s izango da)."
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:178
+msgid "The file is too big to fit on the device."
+msgstr "Fitxategia handiegia da gailuan gordetzeko."
+
+#: src/cong-error-file-save.c:187
+msgid "Try saving the file to a different location."
+msgstr "Saiatu fitxategia beste kokaleku batean gordetzen."
+
+#: src/cong-error-file-save.c:208
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+"Fitxategiaren tamaina %s izango da, baina %s bakarrik duzu libre gailu "
+"horretan."
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:214
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+"Fitxategia handiegia da gailuan gelditzen den lekuan gordetzeko (fitxategi "
+"tamaina %s izango da)."
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:222
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "Fitxategia handiegia da gailuan gelditzen den lekuan gordetzeko."
+
+#: src/cong-error-file-save.c:231
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+"Saiatu fitxategia beste kokaleku batean gordetzen, edo libratu leku gehiago "
+"nahi ez dituzun fitxategiak gailutik paperontzira eramanez."
+
+#: src/cong-error-file-save.c:252
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.  Gogoratu minuskulen/"
+"maiuskulen erabilerak garrantzia duela (\"http\" eta \"Http\" edo \"HTTP\" "
+"ez dira gauza bera).\n"
+"(ii) Saiatu beste kokaleku batean gordetzen."
+
+#: src/cong-error-file-save.c:266
+msgid "You do not have permission to write to that location."
+msgstr "Ez duzu baimenik kokaleku horretan idazteko."
+
+#: src/cong-error-file-save.c:267
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr ""
+"Saiatu beste kokaleku batean gordetzen, edo eskatu baimena zure sistema--"
+"administratzaileari."
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:281
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\" direktorioa da."
+
+#: src/cong-error-file-save.c:285
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr ""
+"Direktorio bateko fitxategi batean gorde behar duzu, eta ez direktorioan "
+"bertan."
+
+#: src/cong-error-file-save.c:303
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr ""
+"Saiatu berriro.  Berriro huts egiten badu, baliteke zerbitzaria ez ibiltzea; "
+"saiatu beste kokaleku batean gordetzen."
+
+#: src/cong-error-file-save.c:312 src/cong-error-file-save.c:321
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+"(i) Begiratu ea kokalekuaren izena ondo idatzi duzun.\n"
+"(ii) Saiatu berriro. Berriro huts egiten badu, baliteke zerbitzaria ez "
+"ibiltzea; saiatu beste kokaleku batean gordetzen."
+
+#: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
+msgid "Try again. If it fails again, try saving to another location."
+msgstr ""
+"Saiatu berriro. Berriro huts egiten badu, saiatu beste kokaleku batean "
+"gordetzen."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:346
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr ""
+"\"%s\" kokalekuan fitxategiak irakur daitezke, baina ezin da fitxategietan "
+"idatzi."
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:358
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "\"%s\" izena luzeegia da kokalekuak kudeatu ahal izateko."
+
+#: src/cong-error-file-save.c:362
+msgid "Try again with a shorter file name."
+msgstr "Saiatu berriro fitxategi-izen laburrago batekin."
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:25
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "Fitxategia probatzen->Ireki %s emaitza duen \"%s\"(r)en hutsegitea"
+
+#: src/cong-error-tests.c:31
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "Fitxategia probatzen->Gorde %s emaitza duen \"%s\"(r)en hutsegitea"
+
+#: src/cong-error-tests.c:37
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "%s emaitza duen \"%s\"(r)en hutsegite generikoa probatzen"
+
+#: src/cong-error-tests.c:40
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr ""
+"Conglomerate fitxategi-eragiketa generiko baten hutsegitea simulatzen ari da."
+
+#: src/cong-error-tests.c:43
+msgid "This dialog was generated by the automated testing routine"
+msgstr "Proba-errutina automatizatuak sortu du elkarrizketa-koadro hau"
+
+#: src/cong-file-export.c:153
+msgid "(No description available)"
+msgstr "(Azalpena ez dago erabilgarri)"
+
+#: src/cong-file-export.c:212
+msgid "Select file to export to"
+msgstr "Hautatu esportatzeko fitxategia"
+
+#: src/cong-file-export.c:260
+#, c-format
+msgid "Export \"%s\""
+msgstr "Esportatu \"%s\""
+
+#: src/cong-file-export.c:265
+msgid "Export"
+msgstr "Esportatu"
+
+#: src/cong-file-export.c:317
+msgid "Exporter:"
+msgstr "Esportatzailea:"
+
+#: src/cong-file-export.c:319
+msgid "File:"
+msgstr "Fitxategia:"
+
+#: src/cong-file-export.c:321
+msgid "Export Options"
+msgstr "Esportatzeko aukerak"
+
+#: src/cong-file-export.c:431
+msgid "No output file specified"
+msgstr "Ez da irteera-fitxategirik zehaztu"
+
+#: src/cong-file-export.c:432
+msgid "Please specify a file name."
+msgstr "Adierazi fitxategi-izen bat."
+
+#: src/cong-file-import.c:80
+msgid "Import file..."
+msgstr "Inportatu fitxategia..."
+
+#: src/cong-file-new.c:169
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "(%s) fitxategi berri bat sortzea"
+
+#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
+#: src/cong-file-new.c:643
+msgid "Creating a new file"
+msgstr "Fitxategi berri bat sortzea"
+
+#: src/cong-file-new.c:619
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"Laguntzaileak fitxategi berri bat sortzen lagunduko dizu.\n"
+"\n"
+"Hainbat fitxategi mota daude erabilgarri, eta Conglomerate-k emango "
+"dizuhainbat \"boilerplate\" eduki.\n"
+"\n"
+"Espero dugu Conglomerate-ren etorkizuneko bertsioetan zuk \"txantiloi-"
+"dokumentuak\" sortu ahal izatea sistema honi gehitzeko."
+
+#: src/cong-file-new.c:632
+msgid "What type of file would you like to create?"
+msgstr "Zein fitxategi mota sortu nahiko zenuke?"
+
+#: src/cong-file-new.c:634
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+"Nabarmendu zerrendako elementu bat, eta hautatu \"Aurrera\" jarraitzeko"
+
+#: src/cong-file-new.c:644
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"Conglomerate-k badu orain dokumentua sortzeko behar duen informazioa.  "
+"Hautatu \"Aplikatu\" sortzeko.  Dokumentua gorde beharko duzu, gerora "
+"gordeta eduki nahi baduzu."
+
+#: src/cong-file-open.c:73
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+"Dokumentuaren barneko egitura ez dator bat Conglomerate-k ezagutzen dituen "
+"motekin."
+
+#: src/cong-file-open.c:74
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+"Conglomerate dokumentua kargatzera behartzeko, egin klik beheko \"Behartu\" "
+"botoian, baina baliteke emaitzak idealak ez izatea."
+
+#: src/cong-file-open.c:75
+msgid "Force"
+msgstr "Behartu"
+
+#: src/cong-file-open.c:228
+msgid "Select an XML document"
+msgstr "Hautatu XML dokumentu bat"
+
+#: src/cong-file-print.c:195
+#, c-format
+msgid "Print \"%s\""
+msgstr "Inprimatu \"%s\""
+
+#: src/cong-file-print.c:201
+msgid "Print"
+msgstr "Inprimatu"
+
+#: src/cong-file-print.c:233
+msgid "Print Method:"
+msgstr "Inprimatzeko metodoa:"
+
+#: src/cong-file-print.c:241
+msgid "Print Options"
+msgstr "Inprimatzeko aukerak"
+
+#: src/cong-file-print.c:336 src/cong-menus.c:727
+msgid "Print Preview"
+msgstr "Inprimatzeko aurrebista"
+
+#: src/cong-file-print.c:346
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "Conglomerate-k ezin du \"%s\" inprimatu"
+
+#: src/cong-file-print.c:349
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr ""
+"Conglomerate-ren pluginek ez dakite nola inprimatu mota horretako "
+"fitxategiak."
+
+#: src/cong-file-properties.c:200
+msgid "Yes"
+msgstr "Bai"
+
+#: src/cong-file-properties.c:200
+msgid "No"
+msgstr "Ez"
+
+#: src/cong-file-properties.c:219 src/cong-file-properties.c:222
+msgid "None"
+msgstr "Bat ere ez"
+
+#: src/cong-file-properties.c:260
+msgid "_Remove this DTD"
+msgstr "_Kendu DTD hau"
+
+#: src/cong-file-properties.c:285
+msgid ""
+"The document does not specify an external DTD, but Conglomerate believes the "
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr ""
+"Dokumentuak ez du kanpoko DTDrik zehazten, baina Conglomerate-k uste du "
+"goiko informazioa egokia dela.  Hautatu \"Esleitu DTD hau\", informazio hau "
+"dokumentuan esplizituki zehazteko."
+
+#: src/cong-file-properties.c:294
+msgid "No External Subset"
+msgstr "Kanpoko azpimultzorik ez"
+
+#: src/cong-file-properties.c:296 src/plugin-validate.c:171
+msgid "_Add a DTD"
+msgstr "_Gehitu DTD bat"
+
+#: src/cong-file-properties.c:373 src/cong-file-properties.c:375
+msgid "Unknown"
+msgstr "Ezezaguna"
+
+#: src/cong-file-properties.c:386
+msgid "Unspecified"
+msgstr "Zehaztugabea"
+
+#: src/cong-file-properties.c:461
+msgid "Remove DTD"
+msgstr "Kendu DTDa"
+
+#: src/cong-file-properties.c:478 src/cong-util.c:1636
+msgid "Associate with DTD"
+msgstr "Asoziatu DTDarekin"
+
+#: src/cong-file-save.c:75
+msgid "Save XML as..."
+msgstr "Gorde XMLa honela..."
+
+#: src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "\"%s\" fitxategia soilik irakurtzekoa da.\n"
+
+#: src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "\"%s\" fitxategia badago lehendik.\n"
+
+#: src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "_Ordeztu"
+
+#: src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Gordetzen ari zarenarekin ordeztu nahi duzu?"
+
+#: src/cong-location.c:395 src/cong-location.c:416
+msgid "Merge tags"
+msgstr "Batu etiketak"
+
+#: src/cong-location.c:467
+msgid "Delete character"
+msgstr "Ezabatu karakterea"
+
+#: src/cong-location.c:1061
+msgid "Calculating previous page"
+msgstr "Aurreko orria kalkulatzen"
+
+#: src/cong-location.c:1084
+msgid "Calculating next page"
+msgstr "Hurrengo orria kalkulatzen"
+
+#: src/cong-menus.c:112 src/cong-menus.c:165 src/cong-menus.c:199
+msgid "The selected menu item has not yet been implemented."
+msgstr "Hautatutako menu-elementua oraindik ez da inplementatu."
+
+#: src/cong-menus.c:463
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "Conglomerate-k ezin du transformazioaren emaitza ireki"
+
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:528 src/cong-stylesheet.c:226
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "Arazo bat zegoen \"%s\" estilo-orriaren fitxategia irakurtzean"
+
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-stylesheet.c:228
+#: src/cong-stylesheet.c:291
+msgid "Conglomerate could not transform the document"
+msgstr "Conglomerate-k ezin izan du dokumentua transformatu"
+
+#: src/cong-menus.c:552
+msgid "There was a problem applying the stylesheet file"
+msgstr "Arazo bat zegoen estilo-orriaren fitxategia aplikatzean"
+
+#: src/cong-menus.c:1113
+msgid "Test Progress Checklist"
+msgstr "Probatu progresioaren egiaztapen-zerrenda"
+
+#: src/cong-menus.c:1117
+#, c-format
+msgid "This is stage %i"
+msgstr "%i fasea da hau"
+
+#: src/cong-menus.c:1168
+msgid "Message Log - Conglomerate"
+msgstr "Mezuen egunkaria - Conglomerate"
+
+#: src/cong-menus.c:1187
+msgid "Signal Log - Conglomerate"
+msgstr "Seinaleen egunkaria - Conglomerate"
+
+#: src/cong-menus.c:1427
+msgid "translator_credits"
+msgstr ""
+"Hizkuntza Politikarako Sailburuordetza\n"
+"(<hizkpol@ej-gv.es>)"
+
+#: src/cong-menus.c:1446
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+
+#: src/cong-menus.c:1447
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "Conglomerate: doako XML editore lagungarria"
+
+#. Menus:
+#: src/cong-menus.c:1481
+msgid "_File"
+msgstr "_Fitxategia"
+
+#: src/cong-menus.c:1482
+msgid "_Edit"
+msgstr "_Editatu"
+
+#: src/cong-menus.c:1487
+msgid "_Help"
+msgstr "_Laguntza"
+
+#. Sub-menus:
+#: src/cong-menus.c:1490 src/popup.c:1121
+msgid "New sub-element"
+msgstr "Azpielementu berria"
+
+#: src/cong-menus.c:1491 src/popup.c:1135
+msgid "New sibling"
+msgstr "Ume berria"
+
+#: src/cong-menus.c:1492
+msgid "Remove span tag"
+msgstr "Kendu span etiketa"
+
+#. Actions found in File menu:
+#: src/cong-menus.c:1495
+msgid "_New..."
+msgstr "_Berria..."
+
+#: src/cong-menus.c:1496
+msgid "_Open..."
+msgstr "_Ireki..."
+
+#: src/cong-menus.c:1497
+msgid "_Import..."
+msgstr "I_nportatu..."
+
+#: src/cong-menus.c:1498
+msgid "_Close"
+msgstr "_Itxi"
+
+#: src/cong-menus.c:1499
+msgid "_Quit"
+msgstr "I_rten"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1503
+msgid "Pr_eferences"
+msgstr "_Hobespenak"
+
+#. Actions found in Help menu:
+#: src/cong-menus.c:1516
+msgid "_Contents"
+msgstr "_Edukia"
+
+#: src/cong-menus.c:1517
+msgid "_Homepage"
+msgstr "_Etxeko orria"
+
+#: src/cong-menus.c:1518
+msgid "_About"
+msgstr "Honi _buruz"
+
+#: src/cong-menus.c:1524
+msgid "_Tools"
+msgstr "_Tresnak"
+
+#. Actions found in File menu:
+#: src/cong-menus.c:1528
+msgid "_Save"
+msgstr "_Gorde"
+
+#: src/cong-menus.c:1529
+msgid "Save _as..."
+msgstr "Gorde _honela..."
+
+#: src/cong-menus.c:1530
+msgid "Sa_ve a Copy..."
+msgstr "Gorde _kopia bat..."
+
+#: src/cong-menus.c:1532
+msgid "Print Previe_w..."
+msgstr "Inprimatzeko _aurrebista..."
+
+#: src/cong-menus.c:1533
+msgid "_Print"
+msgstr "I_nprimatu"
+
+#: src/cong-menus.c:1536
+msgid "_Revert"
+msgstr "_Leheneratu"
+
+#: src/cong-menus.c:1538
+msgid "_Export..."
+msgstr "E_sportatu..."
+
+#: src/cong-menus.c:1539
+msgid "Proper_ties"
+msgstr "_Propietateak"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1543 src/cong-menus.c:1772
+msgid "_Undo"
+msgstr "_Desegin"
+
+#: src/cong-menus.c:1544 src/cong-menus.c:1782
+msgid "_Redo"
+msgstr "_Berregin"
+
+#: src/cong-menus.c:1545
+msgid "Cu_t"
+msgstr "_Ebaki"
+
+#: src/cong-menus.c:1546 src/popup.c:776 src/popup.c:1073
+msgid "_Copy"
+msgstr "_Kopiatu"
+
+#: src/cong-menus.c:1547 src/popup.c:790
+msgid "_Paste"
+msgstr "_Itsatsi"
+
+#: src/cong-menus.c:1548
+msgid "_Find..."
+msgstr "_Bilatu..."
+
+#: src/cong-menus.c:1549
+msgid "Find Ne_xt"
+msgstr "Bilatu _hurrengoa"
+
+#: src/cong-menus.c:1550
+msgid "Find Pre_vious"
+msgstr "Bilatu _aurrekoa"
+
+#: src/cong-menus.c:1551
+msgid "R_eplace..."
+msgstr "_Ordeztu..."
+
+#: src/cong-menus.c:1553
+msgid "_Insert..."
+msgstr "_Txertatu..."
+
+#: src/cong-menus.c:1554
+msgid "View _Source"
+msgstr "_Ikusi iturburua"
+
+#: src/cong-menus.c:1768
+#, c-format
+msgid "_Undo: %s"
+msgstr "_Desegin: %s"
+
+#: src/cong-menus.c:1778
+#, c-format
+msgid "_Redo: %s"
+msgstr "_Berregin: %s"
+
+#: src/cong-menus.c:1972
+#, c-format
+msgid "Open '%s'"
+msgstr "Ireki \"%s\""
+
+#: src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr "XPath"
+
+#: src/cong-node-properties-dialog.c:379
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "Jarri \"%s\" atributuari \"%s\" izena"
+
+#: src/cong-node-properties-dialog.c:560
+msgid "Namespace"
+msgstr "Izen-espazioa"
+
+#: src/cong-node-properties-dialog.c:588
+msgid "Raw Attributes"
+msgstr "Atributu gordinak"
+
+#: src/cong-node-properties-dialog.c:713
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> elementuen atributuak"
+
+#: src/cong-node-properties-dialog.c:930
+msgid "Zero or more"
+msgstr "Zero edo gehiago"
+
+#: src/cong-node-properties-dialog.c:946
+msgid "One or more"
+msgstr "Bat edo gehiago"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:1013
+msgid "Valid Content"
+msgstr "Baliozko edukia"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:1038
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> elementuen eduki-modeloa"
+
+#: src/cong-node-properties-dialog.c:1185
+#: src/cong-node-properties-dialog.c:1316
+msgid "DTD"
+msgstr "DTDa"
+
+#: src/cong-overview-view.c:207
+msgid "Unknown data"
+msgstr "Datu ezezagunak"
+
+#: src/cong-parser-error.c:228
+#, c-format
+msgid "Parse errors loading %s"
+msgstr "Analisi-erroreak %s kargatzean"
+
+#: src/cong-parser-error.c:236
+msgid "_Retry"
+msgstr "_Saiatu berriro"
+
+#: src/cong-parser-error.c:315
+msgid "Line Number"
+msgstr "Lerro-zenbakia"
+
+#: src/cong-parser-error.c:393
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "%s(e)k ezin du ulertu fitxategiaren barne-formatua."
+
+#: src/cong-parser-error.c:401
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+"Conglomerate-k dokumentuak \"ondo osatuta\" egotea behar du; beste "
+"arakatzaile gehienek baino arau zorrotzagoak ditu gaur egun.  Era berean, ez "
+"du oraindik SGML onartzen.  Espero dugu arazo hauek hurrengo bertsio batean "
+"konpontzea."
+
+#: src/cong-parser-error.c:402
+msgid "Show Details"
+msgstr "Erakutsi xehetasunak"
+
+#: src/cong-plugin.c:515 src/cong-plugin.c:580
+msgid "Conglomerate could not find display information for the new file"
+msgstr ""
+"Conglomerate-k ezin izan du aurkitu fitxategi berriari buruzko bistaratze-"
+"informaziorik"
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: src/cong-plugin.c:1004
+#, c-format
+msgid "<%s> property dialog"
+msgstr "<%s> propietatearen elkarrizketa-koadroa"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: src/cong-plugin.c:1007
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr "<%s> elementuaren propietateen elkarrizketa-koadroa hornitzen du"
+
+#: src/cong-plugin.c:1091
+#, c-format
+msgid "<%s> property page"
+msgstr "<%s> propietate-orria"
+
+#. Generate a user-visible description for this plugin
+#: src/cong-plugin.c:1095
+#, c-format
+msgid "Provides a Properties page for the <%s> element"
+msgstr "<%s> elementuaren propietateen orria hornitzen du"
+
+#: src/cong-primary-window.c:415
+msgid "Overview"
+msgstr "Ikuspegi orokorra"
+
+#: src/cong-primary-window.c:426
+msgid "Bookmarks"
+msgstr "Laster-markak"
+
+#: src/cong-primary-window.c:436
+msgid "Raw XML"
+msgstr "XML gordina"
+
+#: src/cong-primary-window.c:660 src/cong-primary-window.c:679
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "Ongi etorri asko atzeratutako Conglomerate editorera."
+
+#: src/cong-primary-window.c:793
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s (aldatuta) - %s"
+
+#: src/cong-source-layout.c:513 src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "Garbitu XML iturburua"
+
+#: src/cong-stylesheet.c:230
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+"Conglomerate-k ezin izan duenez estilo-orria irakurri, baliteke zure XML "
+"katalogo-fitxategia gaizki konfiguratuta egotea. Ikus http://www.xmlsoft.org/"
+"catalog.html katalogoei buruzko informazio gehiago lortzeko."
+
+#: src/cong-stylesheet.c:261
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr ""
+"Arazo bat zegoen \"%s\" estilo-orriaren fitxategia \"%s\"(r)i aplikatzean"
+
+#: src/cong-stylesheet.c:278
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"Ondoko estilo-orriko parametroak erabili dira:\n"
+
+#: src/cong-util.c:321 src/plugin-docbook.c:1402
+msgid "Printing XSL Formatting Objects"
+msgstr "XSL formateatze-objektuak inprimatzen"
+
+#: src/cong-util.c:365
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "Honen emaitza izan liteke: cong_util_print_xslfo"
+
+#: src/cong-util.c:1437
+msgid "(no description available)"
+msgstr "(azalpena ez dago erabilgarri)"
+
+#: src/cong-util.c:1625
+msgid "DTD files"
+msgstr "DTD fitxategiak"
+
+#: src/cong-util.c:1628
+msgid "Select a DTD"
+msgstr "Hautatu DTD bat"
+
+#: src/cursor.c:129
+#, c-format
+msgid "Split <%s> element"
+msgstr "Zatitu <%s> elementua"
+
+#: src/file.c:106
+msgid "XML Files"
+msgstr "XML fitxategiak"
+
+#: src/file.c:118
+msgid "All Files"
+msgstr "Fitxategi guztiak"
+
+#: src/plugin-admonition.c:77
+msgid "Admonition"
+msgstr "Abisua"
+
+#: src/plugin-admonition.c:78
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Iradokizunak, abisuak etab. bistaratzeko editore-nodoa"
+
+#: src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr "XML dokumentuak goi-mailako elementu bat behar du."
+
+#: src/plugin-arbitrary.c:270
+msgid "Empty XML Document"
+msgstr "XML dokumentu hutsa"
+
+#: src/plugin-arbitrary.c:271
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "Sortu mota arbitrario bateko XML dokumentua."
+
+#: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
+#: src/plugin-cleanup-source.c:78
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr ""
+"Dokumentuaren XML iturburua garbitzen du, erraza izan dadin kode-editore "
+"batean irakurtzea."
+
+#: src/plugin-cleanup-source.c:76
+msgid "_Clean the XML Source"
+msgstr "_Garbitu XML iturburua"
+
+#: src/plugin-convert-case.c:125
+msgid "Export as \"lower case\" XML"
+msgstr "Esportatu \"minuskulaz\" XMLa"
+
+#: src/plugin-convert-case.c:126
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+"XML fitxategi gisa esportatzen du, dokumentuko etiketa eta atributu guztiak "
+"minuskulara bihurtuz.  Oso erabilgarria izaten da SGML dokumentu "
+"heredatuekin lan egiteko."
+
+#: src/plugin-docbook.c:225
+msgid "Untitled section"
+msgstr "Izenik gabeko atala"
+
+#: src/plugin-docbook.c:232
+msgid "Text of the article goes here"
+msgstr "Artikuluaren testua hemen doa"
+
+#: src/plugin-docbook.c:251
+msgid "Untitled Article"
+msgstr "Izenik gabeko artikulua"
+
+#: src/plugin-docbook.c:301
+msgid "Untitled chapter"
+msgstr "Izenik gabeko kapitulua"
+
+#: src/plugin-docbook.c:308
+msgid "Text of the first chapter goes here"
+msgstr "Lehenengo kapituluaren testua testua hemen doa"
+
+#: src/plugin-docbook.c:327
+msgid "Untitled Book"
+msgstr "Izenik gabeko liburua"
+
+#: src/plugin-docbook.c:378
+msgid "Untitled book"
+msgstr "Izenik gabeko liburua"
+
+#: src/plugin-docbook.c:397
+msgid "Untitled Set of Documents"
+msgstr "Izenik gabeko dokumentu multzoa"
+
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: src/plugin-docbook.c:1103
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr ""
+"Conglomerate-k ezin du aurkitu DocBook %s bihurtzeko erabilitako estilo-orria"
+
+#: src/plugin-docbook.c:1106
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Ezin dira aurkitu DocBook estilo-orriak"
+
+#: src/plugin-docbook.c:1108
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr ""
+"Ziurtatu Norman Walsh-en DocBook XSL estilo-orriak (http:docbook.//"
+"sourceforge.net/projects/xsl/ helbidean erabilgarri), instalatuta daudela "
+"eta zure XML katalogo-fitxategian gehituta (ikus http://www.xmlsoft.org/"
+"catalog.html katalogoei buruzko informazio gehiago lortzeko)."
+
+#: src/plugin-docbook.c:1144
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"%s bihurketa amaitu da.\n"
+"\n"
+"%s %s bihurtuta - %s"
+
+#: src/plugin-docbook.c:1268
+msgid "Exporting PDF file"
+msgstr "PDF fitxategia esportatzea"
+
+#: src/plugin-docbook.c:1272 src/plugin-docbook.c:1400
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr "DocBook XSL formateatze-objektu bihurtzea"
+
+#: src/plugin-docbook.c:1274
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "XSL formateatze-objektuak PDF fitxategi gisa aurkeztea"
+
+#: src/plugin-docbook.c:1289 src/plugin-fo.c:97
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "XSL formateatze-objektuak PDF bihurtzea"
+
+#: src/plugin-docbook.c:1396
+msgid "Printing DocBook file"
+msgstr "DocBook fitxategia inprimatzea"
+
+#: src/plugin-docbook.c:2060
+msgid "DocBook Article"
+msgstr "DocBook artikulua"
+
+#: src/plugin-docbook.c:2061
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr ""
+"Sortu artikulu bat, webgune nahiz aldizkari batekoa, \"DocBook\" formatua "
+"erabiliz"
+
+#: src/plugin-docbook.c:2068
+msgid "DocBook Book"
+msgstr "DocBook liburua"
+
+#: src/plugin-docbook.c:2069
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "Sortu liburu bat, \"DocBook\" formatua erabiliz"
+
+#: src/plugin-docbook.c:2076
+msgid "DocBook Set"
+msgstr "DocBook multzoa"
+
+#: src/plugin-docbook.c:2077
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "Sortu lotutako liburuen multzo bat, \"DocBook\" formatua erabiliz"
+
+#: src/plugin-docbook.c:2085
+msgid "Import text as a DocBook article"
+msgstr "Inportatu testua DocBook artikulu gisa"
+
+#: src/plugin-docbook.c:2086
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr ""
+"Inportatu testu soileko fitxategi bat \"DocBook\" formatura, artikulu gisa."
+
+#: src/plugin-docbook.c:2104
+msgid "Export DocBook as HTML"
+msgstr "Esportatu DocBook HTML gisa"
+
+#: src/plugin-docbook.c:2105
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr ""
+"Erabili Norman Walsh-en DocBook estilo-orriak web-orri bat sortzeko DocBook "
+"fitxategi honetatik"
+
+#: src/plugin-docbook.c:2113
+msgid "Export DocBook as PDF"
+msgstr "Esportatu DocBook PDF gisa"
+
+#: src/plugin-docbook.c:2114
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr ""
+"Erabili Norman Walsh-en DocBook estilo-orriak PDF fitxategi bat sortzeko "
+"DocBook fitxategi honetatik"
+
+#: src/plugin-docbook.c:2122
+msgid "Export DocBook as XSL:FO"
+msgstr "Esportatu DocBook XSL:FO gisa"
+
+#: src/plugin-docbook.c:2123
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+"Erabili Norman Walsh-en DocBook estilo-orriak XSL:FO fitxategi bat sortzeko "
+"DocBook fitxategi honetatik, geroago inprimatu edo PDFra bihurtu ahal "
+"izateko."
+
+#: src/plugin-docbook.c:2132
+msgid "Print DocBook"
+msgstr "Inprimatu DocBook"
+
+#: src/plugin-docbook.c:2144
+msgid "Provides a Scope properties page for most DocBook nodes"
+msgstr "Esparru-propietateen orria hornitzen du DocBook nodo gehienentzat"
+
+#: src/plugin-docbook.c:2150
+msgid "Provides a Language properties page for most DocBook nodes"
+msgstr ""
+"Hizkuntza-propietateen orria hornitzen du DocBook-eko nodo gehienentzat"
+
+#: src/plugin-docbook.c:2156
+msgid "Provides a Revisions properties page for most DocBook nodes"
+msgstr ""
+"Berrikuspen-propietateen orria hornitzen du DocBook-eko nodo gehienentzat"
+
+#: src/plugin-docbook.c:2173
+msgid "Generic DocBook property dialog"
+msgstr "DocBook propietateen elkarrizketa-koadro generikoa"
+
+#: src/plugin-docbook.c:2174
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr ""
+"Propietateen elkarrizketa-koadroa hornitzen du DocBook nodo gehienentzat"
+
+#: src/plugin-docbook.c:2192 src/plugin-docbook.c:2195 src/plugin-html.c:137
+#: src/plugin-html.c:140
+msgid "Open Link in Browser"
+msgstr "Ireki esteka arakatzailean"
+
+#: src/plugin-docbook.c:2204
+msgid "Promote Section"
+msgstr "Atal bat gora"
+
+#: src/plugin-docbook.c:2205
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr ""
+"DocBook atala antolamendu maila altuago batera igotzen du, dokumentuaren "
+"barruan"
+
+#: src/plugin-docbook.c:2207 src/plugin-html.c:148 src/plugin-html.c:151
+msgid "Promote"
+msgstr "Maila jaso"
+
+#: src/plugin-docbook.c:2208 src/plugin-docbook.c:2209
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr ""
+"Atala antolamendu maila altuago batera igotzen du, dokumentuaren barruan"
+
+#: src/plugin-docbook.c:2215
+msgid "Demote Section"
+msgstr "Atal bat behera"
+
+#: src/plugin-docbook.c:2216
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr ""
+"DocBook atala antolamendu maila baxuago batera igotzen du, dokumentuaren "
+"barruan"
+
+#: src/plugin-docbook.c:2218 src/plugin-html.c:159 src/plugin-html.c:162
+msgid "Demote"
+msgstr "Maila jaitsi"
+
+#: src/plugin-docbook.c:2219 src/plugin-docbook.c:2220
+msgid "Demote the section to a lower organisational level within the document"
+msgstr ""
+"Atala antolamendu maila baxuago batera jaisten du, dokumentuaren barruan"
+
+#: src/plugin-dtd.c:93
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "%s(e)n oinarritutako eta automatikoki sortutako dokumentu mota"
+
+#: src/plugin-dtd.c:94
+#, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr ""
+"Conglomerate bistaratzeko zehaztapen hau automatikoki sortu da %s(e)tik"
+
+#: src/plugin-dtd.c:215
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "Bihurtu DTDa Conglomerate bistaratzeko zehaztapena"
+
+#: src/plugin-dtd.c:216
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "Inportatu DTD fitxategi bat, Conglomerate bistaratzeko zehaztapeneko "
+
+#: src/plugin-dtd.c:224
+msgid "Convert DTD into a Relax NG schema"
+msgstr "Bihurtu DTDa Relax NG eskema"
+
+#: src/plugin-dtd.c:225
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "Inportatu DTD fitxategi bat, RELAX NG eskema bihurtuz."
+
+#: src/plugin-dtd.c:233
+msgid "Convert DTD into W3C XML Schema"
+msgstr "Bihurtu DTDa W3C XML eskema"
+
+#: src/plugin-dtd.c:234
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "Inportatu DTD fitxategi bat, W3C XML eskema bihurtuz."
+
+#: src/plugin-dtd.c:242
+msgid "Convert DTD into a Schematron file"
+msgstr "Bihurtu DTDa Schematron fitxategia"
+
+#: src/plugin-dtd.c:243
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "Inportatu DTD fitxategi bat, Schematron eskema bihurtuz."
+
+#: src/plugin-dtd.c:251
+msgid "Convert DTD into an Examplotron file"
+msgstr "Bihurtu DTDa Examplotron fitxategia"
+
+#: src/plugin-dtd.c:252
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "Inportatu DTD fitxategi bat, Examplotron eskema bihurtuz."
+
+#: src/plugin-fo.c:152
+msgid "Export XSL-FO as PDF"
+msgstr "Esportatu XSL-FO PDF gisa"
+
+#: src/plugin-fo.c:153
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "Sortu PDF fitxategi bat XSL:FO informaziotik"
+
+#: src/plugin-fo.c:162
+msgid "Print XSL:FO"
+msgstr "Inprimatu XSL:FO"
+
+#: src/plugin-lists.c:77
+msgid "List Member Element"
+msgstr "Zerrendako kidearen elementua"
+
+#: src/plugin-lists.c:78
+msgid "An editor node for visualising a member of a list"
+msgstr "Zerrendako kideak bistaratzeko editore-nodoa"
+
+#: src/plugin-paragraph.c:69
+msgid "An editor node for visualising a paragraph"
+msgstr "Paragrafoak bistaratzeko editore-nodoa"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Inprimatu XML iturburua"
+
+#: src/plugin-random.c:140
+msgid "What kind of random XML document would you like to create?"
+msgstr "Zein ausazko XML dokumentu mota sortu nahiko zenuke?"
+
+#: src/plugin-random.c:223
+msgid "Random Document"
+msgstr "Ausazko dokumentua"
+
+#: src/plugin-random.c:224
+msgid "Create an XML document containing random content."
+msgstr "Sortu ausazko edukia duen XML dokumentu bat."
+
+#: src/plugin-relaxng.c:128
+msgid "Compact Syntax View"
+msgstr "Sintaxi-ikuspegi trinkoa"
+
+#: src/plugin-relaxng.c:146 src/plugin-relaxng.c:149
+msgid "View as Compact RELAX NG"
+msgstr "Ikusi RELAX NG trinko gisa"
+
+#: src/plugin-relaxng.c:147
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr "Bistaratu RELAX NG eskema baten sintaxi-formatu trinkoa"
+
+#: src/plugin-save-dispspec.c:155
+msgid "Dump Display Spec"
+msgstr "Irauli bistaratzeko spec-a"
+
+#: src/plugin-save-dispspec.c:156 src/plugin-save-dispspec.c:159
+#: src/plugin-save-dispspec.c:160
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+"Uneko bistaratzeko spec-a bistaratzeko spec-aren xml fitxategi batean "
+"idazten du. Conglomerate-ren erabiltzaileak pertsonaliza dezake fitxategi hau"
+
+#: src/plugin-save-dispspec.c:158
+msgid "_Dump Display Spec"
+msgstr "_Irauli bistaratzeko spec-a"
+
+#: src/plugin-save-dispspec.c:166
+msgid "Edit Display Spec"
+msgstr "Editatu bistaratzeko spec-a"
+
+#: src/plugin-save-dispspec.c:167 src/plugin-save-dispspec.c:170
+#: src/plugin-save-dispspec.c:171
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "Uneko bistaratzeko spec-a Conglomerate dokumentu gisa irekitzen du."
+
+#: src/plugin-save-dispspec.c:169
+msgid "_Edit Display Spec"
+msgstr "_Editatu bistaratzeko spec-a"
+
+#: src/plugin-sgml.c:43
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "Conglomerate-k ezin izan du \"%s\" fitxategia inportatu"
+
+#: src/plugin-sgml.c:135
+msgid "Attempting to run the sgml2xml tool"
+msgstr "sgml2xml tresna exekutatzen saiatzen"
+
+#: src/plugin-sgml.c:190
+msgid "Importing SGML"
+msgstr "SGML inportatzea"
+
+#: src/plugin-sgml.c:209
+msgid "Import SGML"
+msgstr "Inportatu SGMLa"
+
+#: src/plugin-sgml.c:210
+msgid "Import an SGML file, converting to XML."
+msgstr "Inportatu SGML fitxategi bat, XML bihurtzen."
+
+#: src/plugin-tests.c:64
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+"Adibiderako egutegi-kontrola da hau; leku-marka da, eta aukera erabilgarri "
+"batzuekin ordez liteke"
+
+#: src/plugin-tests.c:142 src/plugin-tests.c:221
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr "Unicode karaktereak 0x%04X-0x%04X"
+
+#: src/plugin-tests.c:359
+msgid "Unicode Character Reference"
+msgstr "Unicode karaktere-erreferentzia"
+
+#: src/plugin-tests.c:360
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr ""
+"Sortu taula bat Unicode karaktere-jokoaren zati bat zerrendatuz DocBook "
+"artikulu gisa"
+
+#: src/plugin-validate.c:163
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "\"%s\" dokumentuaren baliagarritasuna ezin da egiaztatu."
+
+#: src/plugin-validate.c:170
+msgid ""
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr ""
+"Hori konpontzeko, gehitu Document Type Declaration (DTD) bat dokumentuari"
+
+#: src/plugin-validate.c:215
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr "\"%s\" dokumentua baliozkoa da."
+
+#: src/plugin-validate.c:249
+msgid "Validate Document"
+msgstr "Balidatu dokumentua"
+
+#: src/plugin-validate.c:250 src/plugin-validate.c:253
+#: src/plugin-validate.c:254
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+"Dokumentua \"baliozkoa\" den begiratzen du, adibidez, dagokion dokumentu "
+"motak edo eskemak emandako arau multzoarekin bat datorren"
+
+#: src/plugin-validate.c:252
+msgid "_Validate Document"
+msgstr "_Balidatu dokumentua"
+
+#: src/plugin-website.c:465
+msgid "Generating website"
+msgstr "Webgunea sortzen"
+
+#: src/plugin-website.c:472
+msgid "Finished generating website."
+msgstr "Webgunea sortzen amaitu du."
+
+#: src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr "Conglomerate-k ez du amaitu webgunea sortzen"
+
+#: src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr "Urratsetako batek errorea eman du."
+
+#: src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr "Informazio gehiago lortzeko, egin klik \"Xehetasunak\" botoian"
+
+#: src/plugin-website.c:480
+msgid "_Details"
+msgstr "_Xehetasunak"
+
+#: src/plugin-website.c:508
+msgid "Generate website"
+msgstr "Sortu webgunea"
+
+#: src/plugin-website.c:509 src/plugin-website.c:512 src/plugin-website.c:513
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "HTML orrien bilduma bat sortzen du webguneko XML deskribapenetik"
+
+#: src/plugin-website.c:511
+msgid "Generate _Website"
+msgstr "Sortu _webgunea"
+
+#: src/plugin-xsl.c:324
+msgid "XSL Template Element"
+msgstr "XSL txantiloi-elementua"
+
+#: src/plugin-xsl.c:325
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "Txantiloi-arauak XSL estilo-orrian bistaratzeko elementua"
+
+#: src/popup.c:490
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "Aplikatu span etiketa: %s"
+
+#: src/popup.c:561
+msgid "Remove Span Tag"
+msgstr "Kendu span etiketa"
+
+#: src/popup.c:607
+msgid "Convert to a comment"
+msgstr "Bihurtu iruzkin"
+
+#: src/popup.c:627 src/tree.c:521
+msgid "Uncomment"
+msgstr "Kendu iruzkina"
+
+#: src/popup.c:628
+msgid ""
+"Convert a comment containing XML source code into the corresponding code"
+msgstr "Bihurtu XML iturburu-koda duen iruzkin bat dagokion kodekoa"
+
+#. FIXME: could do with better text here
+#: src/popup.c:648
+msgid "Convert Reference into a Copy"
+msgstr "Erreferentzia bihurtu kopia"
+
+#. FIXME: could do with better text here
+#: src/popup.c:650
+msgid ""
+"Convert a reference to an XML entity to an inline copy of that entity's "
+"content"
+msgstr ""
+"Bihurtu XML entitate baterako erreferentzia entitate horren edukiaren "
+"barneko kopia"
+
+#: src/popup.c:729 src/popup.c:1047
+msgid "_Properties"
+msgstr "_Propietateak"
+
+#: src/popup.c:763 src/popup.c:1064
+msgid "_Cut"
+msgstr "_Ebaki"
+
+#: src/popup.c:989
+msgid "Other XML element..."
+msgstr "Beste XML elementu bat..."
+
+#: src/popup.c:1083
+msgid "Paste into"
+msgstr "Itsatsi hemen"
+
+#: src/popup.c:1093
+msgid "Paste before"
+msgstr "Itsatsi aurretik"
+
+#: src/popup.c:1103
+msgid "Paste after"
+msgstr "Itsatsi ondoren"
+
+#: src/tree.c:104 src/tree.c:136
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "Txertatu anai-arreba: %s"
+
+#: src/tree.c:188 src/tree.c:216
+#, c-format
+msgid "Insert child: %s"
+msgstr "Txertatu umea: %s"
+
+#: src/tree.c:311 src/xmledit.c:51
+msgid "Cut"
+msgstr "Ebaki"
+
+#: src/tree.c:469
+msgid "Convert to comment"
+msgstr "Bihurtu iruzkin"
+
+#: src/tree.c:585
+#, c-format
+msgid "Convert reference to \"%s\" to copy"
+msgstr "\"%s\"(e)rako erreferentzia bihurtu kopia"
+
+#. create description for dialog
+#: src/xmldata.c:452
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr ""
+"\"%s\" elementuak ume bat behar du baliozkoa izateko. Aukeratu ondoko ume "
+"motetako bat."
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: src/xmldata.c:457
+msgid "Required Children Choices"
+msgstr "Ume-aukerak behar dira"
+
+#: src/xmledit.c:166
+msgid "Paste"
+msgstr "Itsatsi"
+
+#: src/xmledit.c:252
+msgid "Paste Under"
+msgstr "Itsatsi azpian"
+
+#: src/xmledit.c:303
+msgid "Paste Before"
+msgstr "Itsatsi aurretik"
+
+#: src/xmledit.c:353
+msgid "Paste After"
+msgstr "Itsatsi ondoren"
+
+#: src/xmledit.c:394
+msgid "Source View - Conglomerate"
+msgstr "Iturburuaren ikuspegia - Conglomerate"
+
