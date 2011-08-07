@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=conglomerate&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-04 17:48+0000\n"
-"PO-Revision-Date: 2011-04-07 20:02+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
+"POT-Creation-Date: 2011-07-28 17:06+0000\n"
+"PO-Revision-Date: 2011-08-05 14:44+0100\n"
+"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1473,13 +1473,12 @@ msgid "A proper noun or noun phrase"
 msgstr "Ein richtiges Nomen oder Nominalphrase"
 
 #: ../dispspecs/teixlite.xds.in.h:29
-#, fuzzy
 msgid ""
 "A prose description of the rationale and methods used in sampling texts in "
 "the creation of a corpus or collection"
 msgstr ""
-"Eine Prosa-Beschreibung von Argumentation und Methoden in Leseproben zur "
-"Erstellung"
+"Eine Prosa-Beschreibung von Argumentation und Methoden in Leseproben während "
+"der Erstellung eines Hauptteils oder einer Sammlung"
 
 #: ../dispspecs/teixlite.xds.in.h:30
 msgid ""
@@ -1615,6 +1614,11 @@ msgid ""
 "content of a text, edition, recording, or series, where the specialized "
 "elements for authors, editors, etc. do not suffice or do not apply"
 msgstr ""
+"Eine Stellungnahme zur Verantwortlichkeit für jemanden, der für den "
+"intellektuellen Inhalt eines Texts, einer Auflage, einer Aufzeichnung oder "
+"einer Reihe verantwortlich ist. Dies gilt für den Fall, dass andere "
+"besondere Elemente für Autoren, Redakteure usw. nicht zutreffen oder nicht "
+"genügen"
 
 #: ../dispspecs/teixlite.xds.in.h:48
 msgid "A subdivision of the front, body, or back of a text"
@@ -1647,6 +1651,9 @@ msgid ""
 "A word or phrase for which the author or narrator indicates a disclaiming of "
 "responsibility, for example by the use of scare quotes or italics"
 msgstr ""
+"Ein Wort oder Satzteil, für welchen der Autor oder Erzähler eine "
+"Verantwortlichkeitsablehnung andeutet, wie zum Beispiel durch Zitatzeichen "
+"oder Kursivschrift"
 
 #: ../dispspecs/teixlite.xds.in.h:53
 msgid ""
@@ -1886,6 +1893,8 @@ msgid ""
 "Defines a typology used to classify texts either implicitly, by means of a "
 "bibliographic citation, or explicitly by a structured taxonomy"
 msgstr ""
+"Definiert eine Typologie zur impliziten (durch bibliografische Zitate) oder "
+"expliziten (durch strukturierte Taxonomie) Klassifizierung von Texten"
 
 #: ../dispspecs/teixlite.xds.in.h:106
 msgid ""
@@ -1916,13 +1925,17 @@ msgid ""
 "Describes some category within a taxonomy or text typology, either in the "
 "form of a brief prose description or in terms of the situational parameters "
 "used by the TEI formal &lt;textDesc&gt;"
-msgstr "Beschreibt eine Kategorie in einer Taxonomie ..."
+msgstr ""
+"Beschreibt eine Kategorie in einer Taxonomie oder Text-Typologie, entweder "
+"in Form einer knappen Prosa-Beschreibung oder im Rahmen von ..."
 
 #: ../dispspecs/teixlite.xds.in.h:110
 msgid ""
 "Details of editorial principles and practices applied during the encoding of "
 "a text"
 msgstr ""
+"Details zu redaktionellen Grundsätzen und Praktiken für das Aufsetzen eines "
+"Texts"
 
 #: ../dispspecs/teixlite.xds.in.h:111
 msgid "Distributor"
@@ -2262,7 +2275,7 @@ msgid ""
 "for reasons concerning which no claim is made"
 msgstr ""
 "Markiert ein Wort oder eine Phrase als vom umgebenden Text grafisch "
-"hervorgehoben aus Gründen, für die kein Anspruch erhoben wurde (?)"
+"hervorgehoben aus Gründen, für die kein Anspruch erhoben wird  (?)"
 
 #: ../dispspecs/teixlite.xds.in.h:186
 msgid "Marks paragraphs in prose"
@@ -2362,7 +2375,7 @@ msgstr "Verweis"
 
 #: ../dispspecs/teixlite.xds.in.h:208
 msgid "Principal Researcher"
-msgstr ""
+msgstr "Feder führender Rechercheur"
 
 #: ../dispspecs/teixlite.xds.in.h:209
 msgid "Profile Description"
@@ -2433,10 +2446,8 @@ msgid "Salute"
 msgstr "Gruß"
 
 #: ../dispspecs/teixlite.xds.in.h:226
-#, fuzzy
-#| msgid "Namespace Declaration"
 msgid "Sampling Declaration"
-msgstr "Namensraumdeklaration"
+msgstr "Leseprobe"
 
 #: ../dispspecs/teixlite.xds.in.h:227
 msgid ""
@@ -2478,6 +2489,8 @@ msgid ""
 "Specifies one or more defined categories within some taxonomy or text "
 "typology"
 msgstr ""
+"Gibt eine oder mehrere definierte Kategorien innerhalb einer Taxonomie oder "
+"Text-Typologie an"
 
 #: ../dispspecs/teixlite.xds.in.h:237
 msgid "Speech (&lt;sp&gt;)"
@@ -2496,6 +2509,9 @@ msgid ""
 "Summarizes a particular change or correction made to a particular version of "
 "an electronic text which is shared between several researchers"
 msgstr ""
+"Erstellt eine Zusammenfassung einer bestimmten Änderung oder Korrektur, die "
+"an einer bestimmten Version eines elektronischen Texts vorgenommen wurde, "
+"welche von mehreren Rechercheuren gemeinsam genutzt wird"
 
 #: ../dispspecs/teixlite.xds.in.h:241
 msgid "Summarizes the revision history for a file"
@@ -2699,6 +2715,8 @@ msgid ""
 "The name of the principal researcher responsible for the creation of an "
 "electronic text"
 msgstr ""
+"Der Name des Feder führenden Rechercheurs, der für die Erstellung eines "
+"elektronischen Texts verantwortlich ist"
 
 #: ../dispspecs/teixlite.xds.in.h:276
 msgid ""
@@ -2743,6 +2761,8 @@ msgstr ""
 msgid ""
 "The whole body of a single unitary text, excluding any front or back matter"
 msgstr ""
+"Der gesamte Hauptteil eines einzelnen einheitlichen Texts, ausschließlich "
+"Titel- und Rückseite"
 
 #: ../dispspecs/teixlite.xds.in.h:283
 msgid "Time"
