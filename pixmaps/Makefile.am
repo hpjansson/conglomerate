@@ -1,5 +1,5 @@
 # application icons
-appiconsdir = $(datadir)/pixmaps/conglomerate
+appiconsdir = $(datadir)/conglomerate/pixmaps
 appicons_DATA = \
 	conglomerate-icon-32.png \
 	cong-docbook-set-16.png \
