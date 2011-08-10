@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-node-modification-remove-attribute.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -50,10 +49,9 @@ static void
 redo (CongModification *modification);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongNodeModificationRemoveAttribute, 
-			cong_node_modification_remove_attribute,
-			CongNodeModification,
-			CONG_NODE_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongNodeModificationRemoveAttribute,
+              cong_node_modification_remove_attribute,
+              CONG_NODE_MODIFICATION_TYPE );
 
 static void
 cong_node_modification_remove_attribute_class_init (CongNodeModificationRemoveAttributeClass *klass)
@@ -66,7 +64,7 @@ cong_node_modification_remove_attribute_class_init (CongNodeModificationRemoveAt
 }
 
 static void
-cong_node_modification_remove_attribute_instance_init (CongNodeModificationRemoveAttribute *node)
+cong_node_modification_remove_attribute_init (CongNodeModificationRemoveAttribute *node)
 {
 	node->private = g_new0(CongNodeModificationRemoveAttributeDetails,1);
 }
@@ -142,7 +140,7 @@ finalize (GObject *object)
 	g_free (node_modification_remove_attribute->private);
 	node_modification_remove_attribute->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_node_modification_remove_attribute_parent_class)->finalize (object);
 
 }
 
@@ -173,7 +171,7 @@ dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_node_modification_remove_attribute_parent_class)->dispose (object);
 }
 
 static void

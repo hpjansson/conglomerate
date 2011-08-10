@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-border.h"
-#include <libgnome/gnome-macros.h>
 
 #define PRIVATE(x) ((x)->private)
 
@@ -46,10 +45,9 @@ static void
 allocate_child_space (CongEditorArea *area);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaBorder, 
-			cong_editor_area_border,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaBorder,
+              cong_editor_area_border,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_border_class_init (CongEditorAreaBorderClass *klass)
@@ -61,7 +59,7 @@ cong_editor_area_border_class_init (CongEditorAreaBorderClass *klass)
 }
 
 static void
-cong_editor_area_border_instance_init (CongEditorAreaBorder *area_border)
+cong_editor_area_border_init (CongEditorAreaBorder *area_border)
 {
 	area_border->private = g_new0(CongEditorAreaBorderDetails,1);
 }

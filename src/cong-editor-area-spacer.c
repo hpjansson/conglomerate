@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-spacer.h"
-#include <libgnome/gnome-macros.h>
 
 #define PRIVATE(x) ((x)->private)
 
@@ -42,10 +41,9 @@ calc_requisition (CongEditorArea *area,
 		  int width_hint);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaSpacer, 
-			cong_editor_area_spacer,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaSpacer,
+              cong_editor_area_spacer,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_spacer_class_init (CongEditorAreaSpacerClass *klass)
@@ -56,7 +54,7 @@ cong_editor_area_spacer_class_init (CongEditorAreaSpacerClass *klass)
 }
 
 static void
-cong_editor_area_spacer_instance_init (CongEditorAreaSpacer *area_spacer)
+cong_editor_area_spacer_init (CongEditorAreaSpacer *area_spacer)
 {
 	area_spacer->private = g_new0(CongEditorAreaSpacerDetails,1);
 }

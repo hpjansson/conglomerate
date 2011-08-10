@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-node-modification-set-text.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -52,10 +51,9 @@ static void
 redo (CongModification *modification);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongNodeModificationSetText, 
-			cong_node_modification_set_text,
-			CongNodeModification,
-			CONG_NODE_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongNodeModificationSetText,
+              cong_node_modification_set_text,
+              CONG_NODE_MODIFICATION_TYPE );
 
 static void
 cong_node_modification_set_text_class_init (CongNodeModificationSetTextClass *klass)
@@ -68,7 +66,7 @@ cong_node_modification_set_text_class_init (CongNodeModificationSetTextClass *kl
 }
 
 static void
-cong_node_modification_set_text_instance_init (CongNodeModificationSetText *node)
+cong_node_modification_set_text_init (CongNodeModificationSetText *node)
 {
 	node->private = g_new0(CongNodeModificationSetTextDetails,1);
 }
@@ -131,7 +129,7 @@ finalize (GObject *object)
 	g_free (node_modification_set_text->private);
 	node_modification_set_text->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_node_modification_set_text_parent_class)->finalize (object);
 
 }
 
@@ -157,7 +155,7 @@ dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_node_modification_set_text_parent_class)->dispose (object);
 }
 
 static void

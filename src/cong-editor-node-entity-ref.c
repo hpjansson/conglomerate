@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-entity-ref.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-editor-area-entity-ref.h"
@@ -41,10 +40,9 @@ struct _CongEditorNodeEntityRefDetails
 CONG_EDITOR_NODE_DECLARE_HOOKS(entity_ref)
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityRef, 
-			cong_editor_node_entity_ref,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
+G_DEFINE_TYPE(CongEditorNodeEntityRef,
+              cong_editor_node_entity_ref,
+              CONG_EDITOR_NODE_TYPE );
 
 static void
 cong_editor_node_entity_ref_class_init (CongEditorNodeEntityRefClass *klass)
@@ -53,7 +51,7 @@ cong_editor_node_entity_ref_class_init (CongEditorNodeEntityRefClass *klass)
 }
 
 static void
-cong_editor_node_entity_ref_instance_init (CongEditorNodeEntityRef *node_entity_ref)
+cong_editor_node_entity_ref_init (CongEditorNodeEntityRef *node_entity_ref)
 {
 	node_entity_ref->private = g_new0(CongEditorNodeEntityRefDetails,1);
 }

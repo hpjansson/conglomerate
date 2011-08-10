@@ -63,11 +63,8 @@ CRCascade*
 make_cascade (void)
 {
         CRCascade *cascade;
-	gchar *css_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-							 GNOME_FILE_DOMAIN_APP_DATADIR,
-							 "conglomerate/css/docbook.css", /* FIXME: why do I need the conglomerate prefix? */
-							 FALSE,
-							 NULL);
+	gchar *css_filename = cong_app_locate_file (cong_app_singleton(),
+						    "conglomerate/css/docbook.css"); /* FIXME: why do I need the conglomerate prefix? */
 	g_message (css_filename);
 
         cascade = cr_cascade_new (load_stylesheet (css_filename),

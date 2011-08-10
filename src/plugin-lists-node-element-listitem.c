@@ -25,7 +25,6 @@
 
 #include "global.h"
 #include "plugin-lists-node-element-listitem.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-util.h"
 #include "cong-enum-mapping.h"

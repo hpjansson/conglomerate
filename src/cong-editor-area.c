@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-marshal.h"
 #include "cong-editor-node.h"
@@ -120,10 +119,9 @@ CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space)
 #endif
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorArea, 
-			cong_editor_area,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongEditorArea,
+              cong_editor_area,
+              G_TYPE_OBJECT );
 
 static void
 cong_editor_area_class_init (CongEditorAreaClass *klass)
@@ -214,7 +212,7 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 }
 
 static void
-cong_editor_area_instance_init (CongEditorArea *area)
+cong_editor_area_init (CongEditorArea *area)
 {
 	area->private = g_new0(CongEditorAreaDetails,1);
 }
@@ -1375,7 +1373,7 @@ finalize (GObject *object)
 	g_free (editor_area->private);
 	editor_area->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_editor_area_parent_class)->finalize (object);
 }
 
 static void
@@ -1402,5 +1400,5 @@ dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_editor_area_parent_class)->dispose (object);
 }

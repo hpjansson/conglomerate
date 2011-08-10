@@ -64,10 +64,9 @@ on_remove_attribute (CongDocument *doc,
 		     CongAttributeWrapper *attribute_wrapper);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeWrapper, 
-			cong_attribute_wrapper,
-			GObject,
-			G_TYPE_OBJECT);
+G_DEFINE_TYPE(CongAttributeWrapper,
+              cong_attribute_wrapper,
+              G_TYPE_OBJECT);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_wrapper, set_attribute_handler);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_wrapper, remove_attribute_handler);
@@ -87,7 +86,7 @@ cong_attribute_wrapper_class_init (CongAttributeWrapperClass *klass)
 }
 
 static void
-cong_attribute_wrapper_instance_init (CongAttributeWrapper *attribute_wrapper)
+cong_attribute_wrapper_init (CongAttributeWrapper *attribute_wrapper)
 {
 	attribute_wrapper->private = g_new0(CongAttributeWrapperDetails,1);
 }
@@ -285,7 +284,7 @@ finalize (GObject *object)
 	g_free (attribute_wrapper->private);
 	attribute_wrapper->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_attribute_wrapper_parent_class)->finalize (object);
 }
 
 static void
@@ -306,7 +305,7 @@ dispose (GObject *object)
 		g_free (PRIVATE(attribute_wrapper)->attribute_name);
 	}
 		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_attribute_wrapper_parent_class)->finalize (object);
 }
 
 static void

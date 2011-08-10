@@ -505,11 +505,13 @@ setup_find_data_from_dialog (CongDialogReplace *dialog)
 	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
 	replace_string = gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));		
 
+#if 0
         if (search_string && strlen(search_string) > 0)
   	  gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
 
         if (replace_string && strlen(replace_string) > 0)
   	  gnome_entry_prepend_history (GNOME_ENTRY (dialog->replace_entry_list), TRUE, replace_string);
+#endif
 		
 	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));

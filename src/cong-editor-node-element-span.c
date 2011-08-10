@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-element-span.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-editor-area-span-tag.h"
@@ -56,10 +55,9 @@ generate_area (CongEditorNode *editor_node,
 #endif
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeElementSpan, 
-			cong_editor_node_element_span,
-			CongEditorNodeElement,
-			CONG_EDITOR_NODE_ELEMENT_TYPE );
+G_DEFINE_TYPE(CongEditorNodeElementSpan,
+              cong_editor_node_element_span,
+              CONG_EDITOR_NODE_ELEMENT_TYPE );
 
 static void
 cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
@@ -71,7 +69,7 @@ cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 }
 
 static void
-cong_editor_node_element_span_instance_init (CongEditorNodeElementSpan *node_element_span)
+cong_editor_node_element_span_init (CongEditorNodeElementSpan *node_element_span)
 {
 	node_element_span->private = g_new0(CongEditorNodeElementSpanDetails,1);
 }

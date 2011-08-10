@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-modification-cursor-change.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-command.h"
 
@@ -54,10 +53,9 @@ redo (CongModification *modification);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongModificationCursorChange, 
-			cong_modification_cursor_change,
-			CongModification,
-			CONG_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongModificationCursorChange,
+              cong_modification_cursor_change,
+              CONG_MODIFICATION_TYPE );
 
 static void
 cong_modification_cursor_change_class_init (CongModificationCursorChangeClass *klass)
@@ -70,7 +68,7 @@ cong_modification_cursor_change_class_init (CongModificationCursorChangeClass *k
 }
 
 static void
-cong_modification_cursor_change_instance_init (CongModificationCursorChange *node)
+cong_modification_cursor_change_init (CongModificationCursorChange *node)
 {
 	node->private = g_new0(CongModificationCursorChangeDetails,1);
 }
@@ -138,7 +136,7 @@ finalize (GObject *object)
 	g_free (modification_cursor_change->private);
 	modification_cursor_change->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_modification_cursor_change_parent_class)->finalize (object);
 
 }
 
@@ -159,7 +157,7 @@ dispose (GObject *object)
 	cong_location_nullify_with_ref (doc, &PRIVATE(modification_cursor_change)->new_location);
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_modification_cursor_change_parent_class)->dispose (object);
 }
 
 static void

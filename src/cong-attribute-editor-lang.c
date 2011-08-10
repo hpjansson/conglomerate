@@ -90,10 +90,9 @@ on_selection_changed (GtkTreeSelection *selected, gpointer user_data);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorLang, 
-			cong_attribute_editor_lang,
-			CongAttributeEditor,
-			CONG_ATTRIBUTE_EDITOR_TYPE);
+G_DEFINE_TYPE(CongAttributeEditorLang,
+              cong_attribute_editor_lang,
+              CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
 cong_attribute_editor_lang_class_init (CongAttributeEditorLangClass *klass)
@@ -105,7 +104,7 @@ cong_attribute_editor_lang_class_init (CongAttributeEditorLangClass *klass)
 }
 
 static void
-cong_attribute_editor_lang_instance_init (CongAttributeEditorLang *attribute_editor)
+cong_attribute_editor_lang_init (CongAttributeEditorLang *attribute_editor)
 {
 	attribute_editor->private = g_new0(CongAttributeEditorLangDetails,1);
 }

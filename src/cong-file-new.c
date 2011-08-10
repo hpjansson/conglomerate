@@ -55,12 +55,11 @@ enum
 
 struct CongNewFileAssistant
 {
-	GtkWidget *window;
-	GnomeDruid *druid;
+	GtkAssistant *druid;
 	GtkWidget *first_page;
 	GtkWidget *second_page;
 	GtkWidget *final_page;
-	GnomeDruidPage *previous_page;
+	GtkWidget *previous_page;
 	GtkWidget *type_selection_widget;
 	GdkPixbuf *logo;
 	GdkPixbuf *watermark;
@@ -71,8 +70,13 @@ struct CongNewFileAssistant
 
 	/* Mapping from factories to pages; the "first" page for each factory, actually the third page within the druid */
 	GHashTable *hash_table_of_factory_to_page;
+	/* Also the "last" page for each factory */
+	GHashTable *hash_table_of_factory_to_last_page;
 	GHashTable *hash_table_of_factory_to_data;
 };
+
+static void
+on_type_selection_changed(GtkTreeSelection *tree_selection, CongNewFileAssistant *assistant);
 
 static void
 set_pixbuf (GtkTreeViewColumn *tree_column,
@@ -100,48 +104,69 @@ set_pixbuf (GtkTreeViewColumn *tree_column,
 	}
 }
 
-/**
- * first_page_of_factory_back:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- * Returns:
- */
-gboolean 
-first_page_of_factory_back(GnomeDruidPage *druidpage,
-			   GtkWidget *widget,
-			   gpointer user_data)
+static void
+format_page(CongNewFileAssistant *assistant, GtkWidget *page)
 {
-	CongNewFileAssistant *assistant = user_data;
-
-	gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->second_page));
-
-	return TRUE;
+	gtk_assistant_set_page_header_image(assistant->druid, page, assistant->top_watermark);
+	gtk_assistant_set_page_side_image(assistant->druid, page, assistant->logo);
+	gtk_widget_show(page);
 }
 
-/**
- * last_page_of_factory_next:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- * Returns:
- */
-gboolean 
-last_page_of_factory_next(GnomeDruidPage *druidpage,
-			  GtkWidget *widget,
-			  gpointer user_data)
+static GtkWidget *
+add_new_page(CongNewFileAssistant *assistant, const char *text, GtkAssistantPageType type)
 {
-	CongNewFileAssistant *assistant = user_data;
+	GtkWidget *page = gtk_label_new(text);
+	gtk_label_set_line_wrap(GTK_LABEL(page), TRUE);
+	gtk_assistant_append_page(assistant->druid, page);
+	gtk_assistant_set_page_type(assistant->druid, page, type);
+	gtk_assistant_set_page_title(assistant->druid, page, _("Creating a new file"));
+	format_page(assistant, page);
+	return page;
+}
 
-	/* Store page, so that the final page's back button takes us back here: */
-	assistant->previous_page = druidpage;
-	gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->final_page));
+/* Build the page to look more or less like GnomeDruid would have done it */
+static GtkWidget *
+add_new_page_with_widget(CongNewFileAssistant *assistant,
+                         const char *title,
+                         const char *question,
+                         const char *info,
+                         GtkWidget *widget)
+{
+	GtkWidget *page, *top_label, *bottom_label;
+	char *text;
 
-	return TRUE;
+	page = gtk_vbox_new(FALSE, 0);
+	if(question) {
+		top_label = gtk_label_new(question);
+		g_object_set(top_label,
+			     "use-markup", TRUE,
+			     "use-underline", TRUE,
+			     "mnemonic-widget", widget,
+			     "justify", GTK_JUSTIFY_LEFT,
+			     "xalign", 0.0,
+			     NULL);
+		gtk_box_pack_start(GTK_BOX(page), top_label, FALSE, FALSE, 0);
+	}
+	gtk_box_pack_start(GTK_BOX(page), widget, FALSE, FALSE, 0);
+	if(info) {
+		text = g_strconcat("<span size=\"small\">", info, "</span>", NULL);
+		bottom_label = gtk_label_new(text);
+		g_free(text);
+		g_object_set(bottom_label,
+			     "use-markup", TRUE,
+			     "justify", GTK_JUSTIFY_LEFT,
+			     "xalign", 0.0,
+			     "xpad", 24,
+			     NULL);
+		gtk_box_pack_start(GTK_BOX(page), bottom_label, FALSE, FALSE, 0);
+	}
+
+	gtk_assistant_append_page(assistant->druid, page);
+	gtk_assistant_set_page_type(assistant->druid, page, GTK_ASSISTANT_PAGE_CONTENT);
+	gtk_assistant_set_page_title(assistant->druid, page, title);
+	gtk_assistant_set_page_complete(assistant->druid, page, TRUE);
+	format_page(assistant, page);
+	return page;
 }
 
 /**
@@ -154,13 +179,16 @@ last_page_of_factory_next(GnomeDruidPage *druidpage,
  * TODO: Write me
  * Returns:
  */
-GnomeDruidPageStandard *
+GtkWidget *
 cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
 				 CongServiceDocumentFactory *document_factory, 
+                                 GtkWidget *content,
+                                 const char *question,
+                                 const char *info,
 				 gboolean is_first_of_factory,
 				 gboolean is_last_of_factory)
 {
-	GnomeDruidPageStandard *page;
+	GtkWidget *page;
 	gchar *title;
 
 	g_return_val_if_fail(assistant, NULL);
@@ -168,27 +196,16 @@ cong_new_file_assistant_new_page(CongNewFileAssistant *assistant,
 
 	title = g_strdup_printf(_("Creating a new file (%s)"), 
 				cong_service_get_name(CONG_SERVICE(document_factory)));
-
-	page = GNOME_DRUID_PAGE_STANDARD(gnome_druid_page_standard_new_with_vals(title,
-										 assistant->logo,
-										 assistant->top_watermark));
-
+	page = add_new_page_with_widget(assistant, title, question, info, content);
 	g_free(title);
-
-	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(page));
-	gtk_widget_show(GTK_WIDGET(page));
 
 	if (is_first_of_factory) {
 		/* add to mapping from factories to pages: */
 		g_hash_table_insert(assistant->hash_table_of_factory_to_page, document_factory, page);
-
-		/* "Back" should take us to the druid's second page: */
-		g_signal_connect(GTK_OBJECT(page), "back", G_CALLBACK(first_page_of_factory_back), assistant);
 	}
 
 	if (is_last_of_factory) {
-		/* "Forward" should take us to the druid's final page: */
-		g_signal_connect(GTK_OBJECT(page), "next", G_CALLBACK(last_page_of_factory_next), assistant);
+		g_hash_table_insert(assistant->hash_table_of_factory_to_last_page, document_factory, page);
 	}
 
 	return page;
@@ -202,14 +219,18 @@ cong_new_file_assistant_new_page(CongNewFileAssistant *assistant,
  * TODO: Write me
  */
 void 
-cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage *page)
+cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GtkWidget *page)
 {
 	g_return_if_fail(assistant);
 	g_return_if_fail(page);
 
-
-	gnome_druid_set_page(GNOME_DRUID(assistant->druid), page);
-	
+	int count;
+	for(count = gtk_assistant_get_n_pages(assistant->druid); count >= 0; count--) {
+		if(gtk_assistant_get_nth_page(assistant->druid, count) == page) {
+			gtk_assistant_set_current_page(assistant->druid, count);
+			break;
+		}
+	}
 }
 
 /**
@@ -224,7 +245,7 @@ cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 {
 	g_return_val_if_fail (assistant, NULL);
 
-	return GTK_WINDOW(assistant->window);
+	return GTK_WINDOW(assistant->druid);
 }
 
 /**
@@ -322,6 +343,7 @@ make_type_selection_widget(CongNewFileAssistant *assistant)
 #endif
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
+	GtkTreeSelection *selection;
 
 	assistant->list_store = gtk_list_store_new (NEWDOCTYPELIST_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER);
 
@@ -369,6 +391,10 @@ make_type_selection_widget(CongNewFileAssistant *assistant)
 
 	gtk_widget_show(assistant->list_view);
 
+	/* Listen for a selection */
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(assistant->list_view));
+	g_signal_connect(selection, "changed", G_CALLBACK(on_type_selection_changed), assistant);
+
 #if 1
 	return assistant->list_view;
 #else
@@ -379,64 +405,29 @@ make_type_selection_widget(CongNewFileAssistant *assistant)
 #endif
 }
 
-/**
- * second_page_prepare:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- */
-void 
-second_page_prepare(GnomeDruidPage *druidpage,
-		    GtkWidget *widget,
-		    gpointer user_data)
+static void
+on_type_selection_changed(GtkTreeSelection *tree_selection, CongNewFileAssistant *assistant)
 {
-	CongNewFileAssistant *assistant = user_data;
-
-#if DEBUG_FILE_NEW_ASSISTANT
-	g_message("second_page_prepare");
-#endif
-
-	gnome_druid_set_buttons_sensitive(GNOME_DRUID(assistant->druid),
-					  TRUE, /* gboolean back_sensitive, */
-					  FALSE, /* gboolean next_sensitive, */
-					  TRUE, /* gboolean cancel_sensitive, */
-					  TRUE); /* gboolean help_sensitive */
-
-}
-
-/**
- * second_page_next:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- * Returns:
- */
-gboolean 
-second_page_next(GnomeDruidPage *druidpage,
-		 GtkWidget *widget,
-		 gpointer user_data)
-{
-	CongNewFileAssistant *assistant = user_data;
-	GtkTreeSelection* tree_selection;
 	GtkTreeModel *tree_model;
 	GtkTreeIter iter;
+	int n_pages, count;
 
 #if DEBUG_FILE_NEW_ASSISTANT
-	g_message("second_page_next");
+	g_message("on_type_selection_changed");
 #endif
+	/* Hide all factory pages (all except 0, 1 and last) */
+	n_pages = gtk_assistant_get_n_pages(assistant->druid);
+	for(count = 2; count < n_pages - 1; count++) {
+		GtkWidget *page = gtk_assistant_get_nth_page(assistant->druid, count);
+		gtk_widget_hide_all(page);
+	}
 
 	/* Get selected factory */
-	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(assistant->list_view));
-
 	if (gtk_tree_selection_get_selected (tree_selection,
                                              &tree_model,
                                              &iter) ) {
 		CongServiceDocumentFactory *factory;		
-		GnomeDruidPage *appropriate_third_page;
+		GtkWidget *appropriate_third_page, *factory_last_page;
 
 		gtk_tree_model_get(tree_model,
 				   &iter,
@@ -447,18 +438,31 @@ second_page_next(GnomeDruidPage *druidpage,
 		/* Find the relevant page for this factory within the druid: */
 		appropriate_third_page = g_hash_table_lookup(assistant->hash_table_of_factory_to_page,
 							     factory);
+		factory_last_page = g_hash_table_lookup(assistant->hash_table_of_factory_to_last_page,
+		                                        factory);
 
 		if (appropriate_third_page) {
-			cong_new_file_assistant_set_page(assistant, GNOME_DRUID_PAGE(appropriate_third_page));
+			if (appropriate_third_page == factory_last_page) {
+				gtk_widget_show_all(appropriate_third_page);
+			} else {
+				gboolean show_page = FALSE;
+				for(count = 2; count < n_pages - 1; count++) {
+					GtkWidget *page = gtk_assistant_get_nth_page(assistant->druid, count);
+					if(page == appropriate_third_page)
+						show_page = TRUE;
+					if(show_page)
+						gtk_widget_show_all(page);
+					if(page == factory_last_page)
+						show_page = FALSE;
+				}
+			}
 		} else {
 			/* what to do in this case? */
 #if DEBUG_FILE_NEW_ASSISTANT
 			g_message("haven't got a third page registered for factory \"%s\"", 
 				  cong_service_get_name(CONG_SERVICE(factory)));
 #endif
-			/* go to final page: */
-			assistant->previous_page = druidpage;
-			gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->final_page));
+			/* go to final page, by keeping all the in-between pages hidden */
 		}
 
 #if 0
@@ -466,59 +470,24 @@ second_page_next(GnomeDruidPage *druidpage,
 		cong_document_factory_invoke_action_callback(factory, assistant);
 #endif
 
-
-		/* Don't advance to the next page; this should have been done already */
-		return TRUE;
+		/* Allow advancing to the next page */
+		gtk_assistant_set_page_complete(assistant->druid, assistant->second_page, TRUE);
 	} else {
 		/* Nothing selected; don't advance to the next page */
-		return TRUE;
+		gtk_assistant_set_page_complete(assistant->druid, assistant->second_page, FALSE);
 	}
 
 }
 
-/**
- * final_page_back:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- * Returns:
- */
-gboolean 
-final_page_back(GnomeDruidPage *druidpage,
-		GtkWidget *widget,
-		gpointer user_data)
+static void
+on_apply(GtkAssistant *widget, CongNewFileAssistant *assistant)
 {
-	CongNewFileAssistant *assistant = user_data;
-
-	/* go back to the stored previous page: */
-	gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->previous_page));
-
-	return TRUE;
-}
-
-/**
- * final_page_finish:
- * @druidpage:
- * @widget:
- * @user_data:
- *
- * TODO: Write me
- * Returns:
- */
-gboolean 
-final_page_finish(GnomeDruidPage *druidpage,
-		  GtkWidget *widget,
-		  gpointer user_data)
-{
-	CongNewFileAssistant *assistant = user_data;
 	GtkTreeSelection* tree_selection;
 	GtkTreeModel *tree_model;
 	GtkTreeIter iter;
 
 #if DEBUG_FILE_NEW_ASSISTANT
-	g_message("final_page_finish");
+	g_message("on_apply");
 #endif
 
 	/* Get selected factory */
@@ -537,17 +506,11 @@ final_page_finish(GnomeDruidPage *druidpage,
 
 		/* Invoke the factory: */
 		cong_document_factory_invoke_action_callback(factory, assistant);
-
-		/* Close the assistant: */
-		gtk_widget_destroy(assistant->window);
-
-		/* FIXME: this leaks memory */
-
 	} else {
 		g_warning("No selected factory");
 	}
 
-	return TRUE;
+	/* The assistant closes automatically */
 }
 
 static void
@@ -585,83 +548,67 @@ new_document(GtkWindow *parent_window)
 
 	/* FIXME:  what if no document factories found? */
 
-	/* We don't use gnome_druid_new_with_window since this shows the window, and we've got lots of construction work to do before that should happen: */
-	assistant->druid = GNOME_DRUID (gnome_druid_new ());
+	assistant->druid = GTK_ASSISTANT(gtk_assistant_new());
 	gtk_widget_show (GTK_WIDGET (assistant->druid));
+	g_printerr("Number of pages: %d\n", gtk_assistant_get_n_pages(assistant->druid));
 
-	assistant->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-
-	gtk_window_set_title (GTK_WINDOW (assistant->window), 
+	gtk_window_set_title (GTK_WINDOW (assistant->druid),
 			      _("Creating a new file"));
 
 	if (parent_window != NULL) {
-		gtk_window_set_transient_for (GTK_WINDOW (assistant->window),
+		gtk_window_set_transient_for (GTK_WINDOW (assistant->druid),
 					      parent_window);
 	}	
 	
-	gtk_container_add (GTK_CONTAINER (assistant->window), 
-			   GTK_WIDGET (assistant->druid));
-	
 	g_signal_connect_object (assistant->druid, "cancel",
 				 G_CALLBACK (gtk_widget_destroy),
-				 assistant->window,
+				 assistant->druid,
 				 G_CONNECT_SWAPPED);
-	
-	/* When the druid gets destroyed so does the window */
-	g_signal_connect_object (assistant->druid, "destroy",
-				 G_CALLBACK (gtk_widget_destroy),
-				 assistant->window,
-				 G_CONNECT_SWAPPED);
+	g_signal_connect (assistant->druid, "apply",
+                     G_CALLBACK (on_apply),
+                     assistant);
+	g_signal_connect (assistant->druid, "close",
+                     G_CALLBACK (gtk_widget_destroy),
+                     NULL);
 
-	assistant->first_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_START,
-								   TRUE,
-								   _("Creating a new file"),
-								   _("This assistant will guide you through creating a new file.\n\nVarious types of file are available, and Conglomerate may be able to supply some of the \"boilerplate\" content for you.\n\nWe hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system."),
-								   assistant->logo,
-								   assistant->watermark,
-								   assistant->top_watermark);
-	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->first_page));
-	gtk_widget_show(GTK_WIDGET(assistant->first_page));
-
-	assistant->second_page = gnome_druid_page_standard_new_with_vals(_("Creating a new file"),
-							      assistant->logo,
-							      assistant->top_watermark);
+	assistant->first_page = add_new_page(assistant, _("This assistant will "
+		"guide you through creating a new file.\n\n"
+		"Various types of file are available, and Conglomerate may be "
+		"able to supply some of the \"boilerplate\" content for you.\n\n"
+		"We hope that in future versions of Conglomerate you will be "
+		"able to create \"template documents\" to add to this system."),
+	                                     GTK_ASSISTANT_PAGE_INTRO);
+	gtk_assistant_set_page_complete(assistant->druid, assistant->first_page, TRUE);
 
 	assistant->type_selection_widget = make_type_selection_widget(assistant);
-	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(assistant->second_page),
-					      _("What type of file would you like to create?"),
-					      assistant->type_selection_widget,
-					      _("Highlight one of the items in the list and select \"Forward\" to continue"));
-	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->second_page));
-	gtk_widget_show(GTK_WIDGET(assistant->second_page));
-
-	g_signal_connect(GTK_OBJECT(assistant->second_page), "prepare", G_CALLBACK(second_page_prepare), assistant);
-	g_signal_connect(GTK_OBJECT(assistant->second_page), "next", G_CALLBACK(second_page_next), assistant);
-
-	assistant->final_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_FINISH,
-								    TRUE,
-								    _("Creating a new file"),
-								    _("Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it."),
-								    assistant->logo,
-								    assistant->watermark,
-								    assistant->top_watermark);
-	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->final_page));
-	gtk_widget_show(GTK_WIDGET(assistant->final_page));
-	g_signal_connect(GTK_OBJECT(assistant->final_page), "back", G_CALLBACK(final_page_back), assistant);
-	g_signal_connect(GTK_OBJECT(assistant->final_page), "finish", G_CALLBACK(final_page_finish), assistant);
+	assistant->second_page = add_new_page_with_widget(assistant,
+	                                                  _("Creating a new file"),
+	                                                  _("What type of file would you like to create?"),
+	                                                  _("Highlight one of the items in the list and select \"Forward\" to continue"),
+	                                                  assistant->type_selection_widget);
+	gtk_widget_show_all(assistant->second_page);
 
 	/* 
 	   There doesn't seem to be a way to delete pages from a druid.  Hence we have to create the GUI for all of the factories
 	   at the creation of the druid, rather than "on-demand".
+	   FIXME: With GtkAssistant, gtk_container_remove() should work.
 	 */
 	assistant->hash_table_of_factory_to_page = g_hash_table_new(g_direct_hash, g_direct_equal);
+	assistant->hash_table_of_factory_to_last_page = g_hash_table_new(g_direct_hash, g_direct_equal);
 	assistant->hash_table_of_factory_to_data = g_hash_table_new (g_direct_hash, 
 								     g_direct_equal);
 	cong_plugin_manager_for_each_document_factory (cong_app_get_plugin_manager (cong_app_singleton()), 
 						       add_pages_for_factory_callback, 
 						       assistant);
 
-	gtk_widget_show(GTK_WIDGET(assistant->window));
+	assistant->final_page = add_new_page(assistant, _("Conglomerate now has the "
+		"information it needs to create the document.  Press \"Apply\" "
+		"to create it.  You will need to save the document if you wish "
+		"to keep it."), GTK_ASSISTANT_PAGE_CONFIRM);
+	gtk_assistant_set_page_complete(assistant->druid, assistant->final_page, TRUE);
+
+	gtk_assistant_set_current_page(assistant->druid, 0);
+	gtk_widget_show(GTK_WIDGET(assistant->druid));
 
 #if 0
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");

@@ -67,10 +67,9 @@ on_remove_attribute (CongDocument *doc,
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditor, 
-			cong_attribute_editor,
-			GtkHBox,
-			GTK_TYPE_HBOX);
+G_DEFINE_TYPE(CongAttributeEditor,
+              cong_attribute_editor,
+              GTK_TYPE_HBOX);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_editor, set_attribute_handler);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_editor, remove_attribute_handler);
@@ -90,7 +89,7 @@ cong_attribute_editor_class_init (CongAttributeEditorClass *klass)
 }
 
 static void
-cong_attribute_editor_instance_init (CongAttributeEditor *attribute_editor)
+cong_attribute_editor_init (CongAttributeEditor *attribute_editor)
 {
 	attribute_editor->private = g_new0(CongAttributeEditorDetails,1);
 }
@@ -374,7 +373,7 @@ finalize (GObject *object)
 	g_free (attribute_editor->private);
 	attribute_editor->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_attribute_editor_parent_class)->finalize (object);
 }
 
 static void
@@ -398,7 +397,7 @@ dispose (GObject *object)
 		g_free (PRIVATE(attribute_editor)->attribute_name);
 	}
 		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_attribute_editor_parent_class)->dispose (object);
 }
 
 static void

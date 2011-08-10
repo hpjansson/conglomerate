@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "plugin-paragraph-area-paragraph.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-eel.h"
 #include "cong-app.h"
@@ -47,10 +46,9 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaParagraph, 
-			cong_editor_area_paragraph,
-			CongEditorAreaBorder,
-			CONG_EDITOR_AREA_BORDER_TYPE );
+G_DEFINE_TYPE(CongEditorAreaParagraph,
+              cong_editor_area_paragraph,
+              CONG_EDITOR_AREA_BORDER_TYPE );
 
 static void
 cong_editor_area_paragraph_class_init (CongEditorAreaParagraphClass *klass)
@@ -62,7 +60,7 @@ cong_editor_area_paragraph_class_init (CongEditorAreaParagraphClass *klass)
 }
 
 static void
-cong_editor_area_paragraph_instance_init (CongEditorAreaParagraph *area_paragraph)
+cong_editor_area_paragraph_init (CongEditorAreaParagraph *area_paragraph)
 {
 	area_paragraph->private = g_new0(CongEditorAreaParagraphDetails,1);
 

@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "plugin-paragraph-node-element-paragraph.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "plugin-paragraph-area-paragraph.h"

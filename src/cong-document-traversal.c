@@ -2,7 +2,6 @@
 #include <gtk/gtk.h>
 #include "global.h"
 #include "cong-selection.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-util.h"
 #include "cong-marshal.h"
 #include "cong-document-traversal.h"
@@ -142,10 +141,9 @@ struct _CongDocumentTraversalDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongDocumentTraversal, 
-			cong_document_traversal,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongDocumentTraversal,
+              cong_document_traversal,
+              G_TYPE_OBJECT );
 
 static void
 cong_document_traversal_class_init (CongDocumentTraversalClass *klass)
@@ -174,7 +172,7 @@ cong_document_traversal_class_init (CongDocumentTraversalClass *klass)
 }
 
 static void
-cong_document_traversal_instance_init (CongDocumentTraversal *doc)
+cong_document_traversal_init (CongDocumentTraversal *doc)
 {
 	doc->private = g_new0(CongDocumentTraversalDetails,1);
 }
@@ -766,7 +764,7 @@ finalize (GObject *object)
 	g_free (doc_traversal->private);
 	doc_traversal->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_document_traversal_parent_class)->finalize (object);
 }
 
 static void
@@ -781,7 +779,7 @@ dispose (GObject *object)
 	/* FIXME: */
 	
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_document_traversal_parent_class)->dispose (object);
 }
 
 /**

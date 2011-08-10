@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-text-fragment.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-font.h"
 #include "cong-document.h"
 
@@ -61,10 +60,9 @@ get_location_at_xy (CongEditorArea *editor_area,
 #endif
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaTextFragment, 
-			cong_editor_area_text_fragment,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaTextFragment,
+              cong_editor_area_text_fragment,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_text_fragment_class_init (CongEditorAreaTextFragmentClass *klass)
@@ -77,7 +75,7 @@ cong_editor_area_text_fragment_class_init (CongEditorAreaTextFragmentClass *klas
 }
 
 static void
-cong_editor_area_text_fragment_instance_init (CongEditorAreaTextFragment *area_text_fragment)
+cong_editor_area_text_fragment_init (CongEditorAreaTextFragment *area_text_fragment)
 {
 	area_text_fragment->private = g_new0(CongEditorAreaTextFragmentDetails,1);
 }

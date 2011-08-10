@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-modification-selection-change.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-selection.h"
 
@@ -56,10 +55,9 @@ redo (CongModification *modification);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongModificationSelectionChange, 
-			cong_modification_selection_change,
-			CongModification,
-			CONG_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongModificationSelectionChange,
+              cong_modification_selection_change,
+              CONG_MODIFICATION_TYPE );
 
 static void
 cong_modification_selection_change_class_init (CongModificationSelectionChangeClass *klass)
@@ -72,7 +70,7 @@ cong_modification_selection_change_class_init (CongModificationSelectionChangeCl
 }
 
 static void
-cong_modification_selection_change_instance_init (CongModificationSelectionChange *node)
+cong_modification_selection_change_init (CongModificationSelectionChange *node)
 {
 	node->private = g_new0(CongModificationSelectionChangeDetails,1);
 }
@@ -148,7 +146,7 @@ finalize (GObject *object)
 	g_free (modification_selection_change->private);
 	modification_selection_change->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_modification_selection_change_parent_class)->finalize (object);
 
 }
 
@@ -171,7 +169,7 @@ dispose (GObject *object)
 	cong_location_nullify_with_ref (doc, &PRIVATE(modification_selection_change)->new_logical_end);
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_modification_selection_change_parent_class)->dispose (object);
 }
 
 static void

@@ -49,7 +49,7 @@ struct UnicodeCreationInfo
 void 
 factory_page_creation_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
-	GnomeDruidPageStandard *page;
+	GtkWidget *page;
 
 #if 0
 	g_message("factory_page_creation_callback_unicode");
@@ -57,13 +57,11 @@ factory_page_creation_callback_unicode(CongServiceDocumentFactory *factory, Cong
 
 	page = cong_new_file_assistant_new_page(assistant, 
 						factory, 
+	                                        gtk_calendar_new(),
+	                                        _("This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"),
+	                                        user_data,
 						TRUE,
 						TRUE);
-
-	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(page),
-					      _("This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"),
-					      gtk_calendar_new(),
-					      user_data);
 
 #if 0
 	cong_new_file_assistant_set_page(assistant, GNOME_DRUID_PAGE(page));

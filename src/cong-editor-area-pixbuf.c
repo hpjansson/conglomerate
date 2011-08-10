@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-pixbuf.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-eel-graphic-effects.h"
 
@@ -55,10 +54,9 @@ generate_pixbuf_for_state (GdkPixbuf *normal_pixbuf,
 
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaPixbuf, 
-			cong_editor_area_pixbuf,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaPixbuf,
+              cong_editor_area_pixbuf,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_pixbuf_class_init (CongEditorAreaPixbufClass *klass)
@@ -70,7 +68,7 @@ cong_editor_area_pixbuf_class_init (CongEditorAreaPixbufClass *klass)
 }
 
 static void
-cong_editor_area_pixbuf_instance_init (CongEditorAreaPixbuf *area_pixbuf)
+cong_editor_area_pixbuf_init (CongEditorAreaPixbuf *area_pixbuf)
 {
 	area_pixbuf->private = g_new0(CongEditorAreaPixbufDetails,1);
 }

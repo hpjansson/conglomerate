@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-labelled.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-eel.h"
 #include "cong-app.h"
@@ -65,10 +64,9 @@ add_child (CongEditorAreaContainer *area_container,
 	   gboolean add_to_end);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaLabelled, 
-			cong_editor_area_labelled,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaLabelled,
+              cong_editor_area_labelled,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_labelled_class_init (CongEditorAreaLabelledClass *klass)
@@ -86,7 +84,7 @@ cong_editor_area_labelled_class_init (CongEditorAreaLabelledClass *klass)
 }
 
 static void
-cong_editor_area_labelled_instance_init (CongEditorAreaLabelled *area_labelled)
+cong_editor_area_labelled_init (CongEditorAreaLabelled *area_labelled)
 {
 	area_labelled->private = g_new0(CongEditorAreaLabelledDetails,1);
 }

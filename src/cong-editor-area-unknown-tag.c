@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-unknown-tag.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
@@ -111,10 +110,9 @@ on_expansion_changed (CongEditorAreaExpander *area_expander,
 		      gpointer user_data);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaUnknownTag, 
-			cong_editor_area_unknown_tag,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaUnknownTag,
+              cong_editor_area_unknown_tag,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_unknown_tag_class_init (CongEditorAreaUnknownTagClass *klass)
@@ -134,7 +132,7 @@ cong_editor_area_unknown_tag_class_init (CongEditorAreaUnknownTagClass *klass)
 }
 
 static void
-cong_editor_area_unknown_tag_instance_init (CongEditorAreaUnknownTag *area_unknown_tag)
+cong_editor_area_unknown_tag_init (CongEditorAreaUnknownTag *area_unknown_tag)
 {
 	area_unknown_tag->private = g_new0(CongEditorAreaUnknownTagDetails,1);
 }
@@ -150,7 +148,7 @@ dispose (GObject *object)
 	g_signal_handler_disconnect (G_OBJECT(doc),
 				     PRIVATE(area_unknown_tag)->handler_id_remove_attribute);	
 
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS(cong_editor_area_unknown_tag_parent_class)->dispose(object);
 }
 
 static const gchar*

@@ -889,13 +889,13 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 static gpointer
 find_best_value_for_language (GHashTable *hash_of_language)
 {
-	const GList *iter;
+	const char * const *language_list;
 
 	g_assert (hash_of_language);
 
-	for (iter = cong_app_get_language_list (cong_app_singleton ()); iter; iter=iter->next) {
+	for (language_list = g_get_language_names (); *language_list; language_list++) {
 		gpointer value = g_hash_table_lookup (hash_of_language,
-						      (gchar*)iter->data);
+						      *language_list);
 
 		if (value) {
 			return value;

@@ -60,10 +60,9 @@ static gboolean
 should_button_be_active (CongAttributeWrapperRadioButton *attribute_wrapper);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeWrapperRadioButton, 
-			cong_attribute_wrapper_radio_button,
-			CongAttributeWrapper,
-			CONG_ATTRIBUTE_WRAPPER_TYPE);
+G_DEFINE_TYPE(CongAttributeWrapperRadioButton,
+              cong_attribute_wrapper_radio_button,
+              CONG_ATTRIBUTE_WRAPPER_TYPE);
 
 static void
 cong_attribute_wrapper_radio_button_class_init (CongAttributeWrapperRadioButtonClass *klass)
@@ -78,7 +77,7 @@ cong_attribute_wrapper_radio_button_class_init (CongAttributeWrapperRadioButtonC
 }
 
 static void
-cong_attribute_wrapper_radio_button_instance_init (CongAttributeWrapperRadioButton *attribute_wrapper)
+cong_attribute_wrapper_radio_button_init (CongAttributeWrapperRadioButton *attribute_wrapper)
 {
 	attribute_wrapper->private = g_new0(CongAttributeWrapperRadioButtonDetails,1);
 }
@@ -177,7 +176,7 @@ finalize (GObject *object)
 	g_free (attribute_wrapper_radio_button->private);
 	attribute_wrapper_radio_button->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_attribute_wrapper_radio_button_parent_class)->finalize (object);
 }
 
 static void
@@ -190,7 +189,7 @@ dispose (GObject *object)
 		PRIVATE(attribute_wrapper_radio_button)->attribute_value = NULL;
 	}
 	
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_attribute_wrapper_radio_button_parent_class)->dispose (object);
 }
 
 static void

@@ -43,8 +43,6 @@
 #include "cong-ui-hooks.h"
 
 #if 1
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
@@ -1217,11 +1215,8 @@ static void
 action_callback_debug_glade_test (GtkAction *action,
 				  CongPrimaryWindow *primary_window)
 {
-	gchar* glade_filename = gnome_program_locate_file(cong_app_get_gnome_program (cong_app_singleton()),
-							  GNOME_FILE_DOMAIN_APP_DATADIR,
-							  "conglomerate/glade/test.glade",
-							  FALSE,
-							  NULL);
+	gchar* glade_filename = cong_app_locate_file(cong_app_singleton(),
+						     "conglomerate/glade/test.glade");
 
 	GladeXML *xml = glade_xml_new(glade_filename, NULL, NULL);
 	glade_xml_signal_autoconnect(xml);
@@ -1404,7 +1399,14 @@ static void
 action_callback_homepage (GtkAction *action,
 			  CongPrimaryWindow *primary_window)
 {
-   gnome_url_show ("http://www.conglomerate.org", NULL);
+	GError *error = NULL;
+	if(!gtk_show_uri(NULL, "http://www.conglomerate.org", GDK_CURRENT_TIME, &error)) {
+		cong_error_dialog_new(cong_primary_window_get_toplevel(primary_window),
+		                      _("You were supposed to see the Conglomerate website in your browser, but it didn't open."),
+		                      error->message,
+		                      _("Make sure you have a web browser installed and it is registered as the default web browser."));
+		g_error_free(error);
+	}
 }				   
 
 static void 
@@ -1426,37 +1428,17 @@ action_callback_about (GtkAction *action,
 
  	gchar* translator_credits = _("translator_credits");
 
-        gchar *logo_path;
-
-	GdkPixbuf *logo_pixbuf;
-  
- 	GtkWidget *about;
-	
-	logo_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-					       GNOME_FILE_DOMAIN_APP_PIXMAP,
-					       "conglomerate/conglomerate-logo.png",
-					       FALSE,
-					       NULL);
-	logo_pixbuf = gdk_pixbuf_new_from_file(logo_path, NULL);
-	
-	g_free(logo_path);
-	
-	about  = gnome_about_new(_("Conglomerate XML Editor"),
- 					   PACKAGE_VERSION,
- 					   _("(C) 1999 Hans Petter Jansson\n(C) 2004 David Malcolm"),
- 					   _("Conglomerate: a free, user-friendly XML editor"),
- 					   (const char **)authors,
- 					   (const char **)documenters,
- 					   strcmp(translator_credits, "translator_credits") != 0 ?
- 						    translator_credits : NULL,
-  					   logo_pixbuf);
-	gdk_pixbuf_unref(logo_pixbuf);
-
-	gtk_window_set_transient_for(GTK_WINDOW(about), 
-				     cong_primary_window_get_toplevel(primary_window));
-
-	gtk_dialog_run(GTK_DIALOG(about));
-
+	gtk_show_about_dialog(cong_primary_window_get_toplevel(primary_window),
+		"program-name", _("Conglomerate XML Editor"),
+		"version", PACKAGE_VERSION,
+		"copyright", _("(C) 1999 Hans Petter Jansson\n(C) 2004 David Malcolm"),
+		"comments", _("Conglomerate: a free, user-friendly XML editor"),
+		"authors", authors,
+		"documenters", documenters,
+		"translator-credits", strcmp(translator_credits, "translator_credits") != 0 ?
+			translator_credits : NULL,
+		"logo-icon-name", "conglomerate",
+		NULL);
 }
 
 static void 
@@ -1465,9 +1447,7 @@ action_callback_help (GtkAction *action,
 {
 	GError *error = NULL;
 
-	gnome_help_display("conglomerate.xml", NULL, &error);
-
-	if(error!=NULL)
+	if(!gtk_show_uri(NULL, "ghelp:conglomerate", GDK_CURRENT_TIME, &error))
 	{
 		g_warning("%s", error->message);
 		g_error_free(error);
@@ -1515,7 +1495,7 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 	/* Actions found in Help menu: */
 	{ "Contents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL, G_CALLBACK (action_callback_help) },	
 	{ "Homepage", GTK_STOCK_HOME, N_("_Homepage"), NULL, NULL, G_CALLBACK (action_callback_homepage) },	
-	{ "About", GNOME_STOCK_ABOUT, N_("_About"), NULL, NULL, G_CALLBACK (action_callback_about) },	
+	{ "About", GTK_STOCK_ABOUT, N_("_About"), NULL, NULL, G_CALLBACK (action_callback_about) },
 };
 
 /* Document-level Action Entries with a CongPrimaryWindow pointer as the callback data: */

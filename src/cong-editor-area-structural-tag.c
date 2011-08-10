@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-structural-tag.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
@@ -90,10 +89,9 @@ on_button_press (CongEditorArea *editor_area,
 
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaStructuralTag, 
-			cong_editor_area_structural_tag,
-			CongEditorAreaStructural,
-			CONG_EDITOR_AREA_STRUCTURAL_TYPE );
+G_DEFINE_TYPE(CongEditorAreaStructuralTag,
+              cong_editor_area_structural_tag,
+              CONG_EDITOR_AREA_STRUCTURAL_TYPE );
 
 static void
 cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *klass)
@@ -114,7 +112,7 @@ cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *kl
 }
 
 static void
-cong_editor_area_structural_tag_instance_init (CongEditorAreaStructuralTag *area_structural_tag)
+cong_editor_area_structural_tag_init (CongEditorAreaStructuralTag *area_structural_tag)
 {
 	area_structural_tag->private = g_new0(CongEditorAreaStructuralTagDetails,1);
 }

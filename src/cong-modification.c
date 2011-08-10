@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-modification.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-app.h"
@@ -40,10 +39,9 @@ struct _CongModificationDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongModification, 
-			cong_modification,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongModification,
+              cong_modification,
+              G_TYPE_OBJECT );
 
 static void
 cong_modification_class_init (CongModificationClass *klass)
@@ -51,7 +49,7 @@ cong_modification_class_init (CongModificationClass *klass)
 }
 
 static void
-cong_modification_instance_init (CongModification *node)
+cong_modification_init (CongModification *node)
 {
 	node->private = g_new0(CongModificationDetails,1);
 }

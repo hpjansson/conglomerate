@@ -50,10 +50,9 @@ on_selection_change (CongDocument *doc,
 		     CongPropertyPage *property_page);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongPropertyPage, 
-			cong_property_page,
-			GtkHBox,
-			GTK_TYPE_HBOX);
+G_DEFINE_TYPE(CongPropertyPage,
+              cong_property_page,
+              GTK_TYPE_HBOX);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_property_page, selection_change_handler);
 
@@ -68,7 +67,7 @@ cong_property_page_class_init (CongPropertyPageClass *klass)
 }
 
 static void
-cong_property_page_instance_init (CongPropertyPage *property_page)
+cong_property_page_init (CongPropertyPage *property_page)
 {
 	property_page->private = g_new0(CongPropertyPageDetails,1);
 }
@@ -124,7 +123,7 @@ finalize (GObject *object)
 	g_free (property_page->private);
 	property_page->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_property_page_parent_class)->finalize (object);
 }
 
 static void
@@ -142,7 +141,7 @@ dispose (GObject *object)
 		PRIVATE(property_page)->doc = NULL;
 	}
 		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_property_page_parent_class)->dispose (object);
 }
 
 static void

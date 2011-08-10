@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-modification-set-dtd-ptr.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -53,10 +52,9 @@ redo (CongModification *modification);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongModificationSetDtdPtr, 
-			cong_modification_set_dtd_ptr,
-			CongModification,
-			CONG_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongModificationSetDtdPtr,
+              cong_modification_set_dtd_ptr,
+              CONG_MODIFICATION_TYPE );
 
 static void
 cong_modification_set_dtd_ptr_class_init (CongModificationSetDtdPtrClass *klass)
@@ -69,7 +67,7 @@ cong_modification_set_dtd_ptr_class_init (CongModificationSetDtdPtrClass *klass)
 }
 
 static void
-cong_modification_set_dtd_ptr_instance_init (CongModificationSetDtdPtr *node)
+cong_modification_set_dtd_ptr_init (CongModificationSetDtdPtr *node)
 {
 	node->private = g_new0(CongModificationSetDtdPtrDetails,1);
 }
@@ -137,7 +135,7 @@ finalize (GObject *object)
 	g_free (modification_set_dtd_ptr->private);
 	modification_set_dtd_ptr->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_modification_set_dtd_ptr_parent_class)->finalize (object);
 
 }
 
@@ -160,7 +158,7 @@ dispose (GObject *object)
 	PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr = NULL;
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_modification_set_dtd_ptr_parent_class)->dispose (object);
 }
 
 static void

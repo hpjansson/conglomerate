@@ -44,7 +44,7 @@ typedef struct ArbitraryGUI ArbitraryGUI;
 
 struct ArbitraryGUI
 {
-	GnomeDruidPageStandard *page;
+	GtkWidget *page;
 	GladeXML *xml;
 	GtkWidget *middle_page;
 	GtkEntry *entry_ns_uri;
@@ -161,13 +161,11 @@ factory_page_creation_callback_arbitrary(CongServiceDocumentFactory *factory, Co
 	
 	arbitrary_gui->page = cong_new_file_assistant_new_page (assistant, 
 								factory, 
+	                                                        arbitrary_gui->middle_page,
+	                                                        _("The XML document needs a top-level element."),
+	                                                        NULL,
 								TRUE,
 								TRUE);
-
-	gnome_druid_page_standard_append_item (GNOME_DRUID_PAGE_STANDARD(arbitrary_gui->page),
-					       _("The XML document needs a top-level element."),
-					       arbitrary_gui->middle_page,
-					       "");
 
 	arbitrary_gui->entry_ns_uri = GTK_ENTRY (glade_xml_get_widget (arbitrary_gui->xml, "entry_ns_uri"));
 	g_assert (arbitrary_gui->entry_ns_uri);

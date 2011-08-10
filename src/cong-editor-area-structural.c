@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-structural.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
@@ -92,10 +91,9 @@ state_changed (CongEditorArea *area);
 
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaStructural, 
-			cong_editor_area_structural,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaStructural,
+              cong_editor_area_structural,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_structural_class_init (CongEditorAreaStructuralClass *klass)
@@ -113,7 +111,7 @@ cong_editor_area_structural_class_init (CongEditorAreaStructuralClass *klass)
 }
 
 static void
-cong_editor_area_structural_instance_init (CongEditorAreaStructural *area_structural)
+cong_editor_area_structural_init (CongEditorAreaStructural *area_structural)
 {
 	area_structural->private = g_new0(CongEditorAreaStructuralDetails,1);
 }

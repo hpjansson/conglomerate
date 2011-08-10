@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-composer.h"
-#include <libgnome/gnome-macros.h>
 
 #define DEBUG_CHILD_ALLOCATIONS 0
 
@@ -81,10 +80,9 @@ get_child_details (CongEditorAreaComposer *area_composer,
 		   CongEditorArea *child);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaComposer, 
-			cong_editor_area_composer,
-			CongEditorAreaContainer,
-			CONG_EDITOR_AREA_CONTAINER_TYPE );
+G_DEFINE_TYPE(CongEditorAreaComposer,
+              cong_editor_area_composer,
+              CONG_EDITOR_AREA_CONTAINER_TYPE );
 
 static void
 cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
@@ -103,7 +101,7 @@ cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
 }
 
 static void
-cong_editor_area_composer_instance_init (CongEditorAreaComposer *area_composer)
+cong_editor_area_composer_init (CongEditorAreaComposer *area_composer)
 {
 	area_composer->private = g_new0(CongEditorAreaComposerDetails,1);
 }

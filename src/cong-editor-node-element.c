@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-element.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-document.h"
 
@@ -37,10 +36,9 @@ struct _CongEditorNodeElementDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeElement, 
-			cong_editor_node_element,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
+G_DEFINE_TYPE(CongEditorNodeElement,
+              cong_editor_node_element,
+              CONG_EDITOR_NODE_TYPE );
 
 static void
 cong_editor_node_element_class_init (CongEditorNodeElementClass *klass)
@@ -48,7 +46,7 @@ cong_editor_node_element_class_init (CongEditorNodeElementClass *klass)
 }
 
 static void
-cong_editor_node_element_instance_init (CongEditorNodeElement *node_element)
+cong_editor_node_element_init (CongEditorNodeElement *node_element)
 {
 	node_element->private = g_new0(CongEditorNodeElementDetails,1);
 }

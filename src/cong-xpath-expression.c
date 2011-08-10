@@ -23,7 +23,6 @@
  */
 
 #include "global.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-util.h"
 #include "cong-xpath-expression.h"
@@ -64,10 +63,9 @@ static gchar*
 evaluate_expression (CongXPathExpression *xpath_expression);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongXPathExpression, 
-			cong_xpath_expression,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongXPathExpression,
+              cong_xpath_expression,
+              G_TYPE_OBJECT );
 
 static void
 cong_xpath_expression_class_init (CongXPathExpressionClass *klass)
@@ -86,7 +84,7 @@ cong_xpath_expression_class_init (CongXPathExpressionClass *klass)
 }
 
 static void
-cong_xpath_expression_instance_init (CongXPathExpression *node)
+cong_xpath_expression_init (CongXPathExpression *node)
 {
 	node->private = g_new0(CongXPathExpressionDetails,1);
 }
@@ -200,7 +198,7 @@ finalize (GObject *object)
 	g_free (xpath_expression->private);
 	xpath_expression->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_xpath_expression_parent_class)->finalize (object);
 }
 
 static void
@@ -223,7 +221,7 @@ dispose (GObject *object)
 	xmlXPathFreeContext (PRIVATE(xpath_expression)->ctxt);
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_xpath_expression_parent_class)->dispose (object);
 }
 
 /* Implementation details: */

@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-entity-ref.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
@@ -71,10 +70,9 @@ add_child (CongEditorAreaContainer *area_container,
 	   gboolean add_to_end);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaEntityRef, 
-			cong_editor_area_entity_ref,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaEntityRef,
+              cong_editor_area_entity_ref,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_entity_ref_class_init (CongEditorAreaEntityRefClass *klass)
@@ -91,7 +89,7 @@ cong_editor_area_entity_ref_class_init (CongEditorAreaEntityRefClass *klass)
 }
 
 static void
-cong_editor_area_entity_ref_instance_init (CongEditorAreaEntityRef *area_entity_ref)
+cong_editor_area_entity_ref_init (CongEditorAreaEntityRef *area_entity_ref)
 {
 	area_entity_ref->private = g_new0(CongEditorAreaEntityRefDetails,1);
 }

@@ -69,11 +69,8 @@ cong_util_load_glade_file (const gchar *filename,
 		g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	}
 
-	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    filename,
-						    FALSE,
-						    NULL);
+	glade_filename = cong_app_locate_file (cong_app_singleton(),
+					       filename);
 	global_glade_doc_ptr = doc;
 	global_glade_node_ptr = node;
 	

@@ -218,12 +218,9 @@ cong_util_load_icon (const gchar *icon_basename)
 
 	g_return_val_if_fail(icon_basename, NULL);
 
-	filename = g_strdup_printf("conglomerate/%s-16.png", icon_basename);
-	full_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-					       GNOME_FILE_DOMAIN_APP_PIXMAP,
-					       filename,
-					       FALSE,
-					       NULL);
+	filename = g_strdup_printf("conglomerate/pixmaps/%s-16.png", icon_basename);
+	full_path = cong_app_locate_file (cong_app_singleton(),
+					  filename);
 	pixbuf = gdk_pixbuf_new_from_file(full_path, NULL);
 	
 	g_free(full_path);
@@ -1556,37 +1553,17 @@ cong_util_show_in_window (GtkWidget *content,
 	g_return_if_fail (content);
 	g_return_if_fail (title);
 
-	window = gnome_app_new (PACKAGE_NAME,
-				title);
-	gnome_app_set_contents (GNOME_APP(window), 
-				content);
-
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(window), title);
+	gtk_container_add(GTK_CONTAINER(window), content);
+	gtk_window_set_icon_name(GTK_WINDOW(window), "conglomerate");
+	
 	/* Set up the window nicely: */
-	{	
-		gchar *logo_path;
-		GdkPixbuf *pixbuf;
-		
-		logo_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-						       GNOME_FILE_DOMAIN_APP_PIXMAP,
-						       "conglomerate/conglomerate-logo.png",
-						       FALSE,
-						       NULL);
-		pixbuf = gdk_pixbuf_new_from_file(logo_path, NULL);
-	
-		g_free(logo_path);
-	
-		gtk_window_set_icon(GTK_WINDOW(window),
-				    pixbuf);
-
-		gdk_pixbuf_unref(pixbuf);
-
-	}
-
 	gtk_window_set_default_size(GTK_WINDOW(window),
 				    500,
 				    400);
 
-	gtk_widget_show(GTK_WIDGET(window));
+	gtk_widget_show_all(GTK_WIDGET(window));
 }
 
 GtkFileFilter*

@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "plugin-lists-area-listitem.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-eel.h"
 #include "cong-app.h"
@@ -40,10 +39,9 @@ struct _CongEditorAreaListitemDetails
 
 /* Method implementation prototypes: */
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaListitem, 
-			cong_editor_area_listitem,
-			CongEditorAreaLabelled,
-			CONG_EDITOR_AREA_LABELLED_TYPE );
+G_DEFINE_TYPE(CongEditorAreaListitem,
+              cong_editor_area_listitem,
+              CONG_EDITOR_AREA_LABELLED_TYPE );
 
 static void
 cong_editor_area_listitem_class_init (CongEditorAreaListitemClass *klass)
@@ -51,7 +49,7 @@ cong_editor_area_listitem_class_init (CongEditorAreaListitemClass *klass)
 }
 
 static void
-cong_editor_area_listitem_instance_init (CongEditorAreaListitem *area_listitem)
+cong_editor_area_listitem_init (CongEditorAreaListitem *area_listitem)
 {
 	area_listitem->private = g_new0(CongEditorAreaListitemDetails,1);
 }

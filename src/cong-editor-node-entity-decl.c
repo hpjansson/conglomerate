@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-entity-decl.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-editor-area-entity-decl.h"
@@ -41,10 +40,9 @@ struct _CongEditorNodeEntityDeclDetails
 CONG_EDITOR_NODE_DECLARE_HOOKS(entity_decl)
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityDecl, 
-			cong_editor_node_entity_decl,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
+G_DEFINE_TYPE(CongEditorNodeEntityDecl,
+              cong_editor_node_entity_decl,
+              CONG_EDITOR_NODE_TYPE );
 
 static void
 cong_editor_node_entity_decl_class_init (CongEditorNodeEntityDeclClass *klass)
@@ -53,7 +51,7 @@ cong_editor_node_entity_decl_class_init (CongEditorNodeEntityDeclClass *klass)
 }
 
 static void
-cong_editor_node_entity_decl_instance_init (CongEditorNodeEntityDecl *node_entity_decl)
+cong_editor_node_entity_decl_init (CongEditorNodeEntityDecl *node_entity_decl)
 {
 	node_entity_decl->private = g_new0(CongEditorNodeEntityDeclDetails,1);
 }

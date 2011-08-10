@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-text.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-font.h"
 #include "cong-ui-hooks.h"
 
@@ -54,10 +53,9 @@ allocate_child_space (CongEditorArea *area);
 
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaText, 
-			cong_editor_area_text,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaText,
+              cong_editor_area_text,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_text_class_init (CongEditorAreaTextClass *klass)
@@ -70,7 +68,7 @@ cong_editor_area_text_class_init (CongEditorAreaTextClass *klass)
 }
 
 static void
-cong_editor_area_text_instance_init (CongEditorAreaText *area_text)
+cong_editor_area_text_init (CongEditorAreaText *area_text)
 {
 	area_text->private = g_new0(CongEditorAreaTextDetails,1);
 }

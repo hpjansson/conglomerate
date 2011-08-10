@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-expander.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -64,10 +63,9 @@ gint
 on_timeout (gpointer data);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaExpander, 
-			cong_editor_area_expander,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaExpander,
+              cong_editor_area_expander,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_expander_class_init (CongEditorAreaExpanderClass *klass)
@@ -88,7 +86,7 @@ cong_editor_area_expander_class_init (CongEditorAreaExpanderClass *klass)
 }
 
 static void
-cong_editor_area_expander_instance_init (CongEditorAreaExpander *area_expander)
+cong_editor_area_expander_init (CongEditorAreaExpander *area_expander)
 {
 	area_expander->private = g_new0(CongEditorAreaExpanderDetails,1);
 }

@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-line.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-container.h"
@@ -73,10 +72,9 @@ set_to_not_expand_cb (CongEditorArea *editor_area,
 		      gpointer user_data);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaLine, 
-			cong_editor_area_line,
-			CongEditorAreaContainer,
-			CONG_EDITOR_AREA_CONTAINER_TYPE );
+G_DEFINE_TYPE(CongEditorAreaLine,
+              cong_editor_area_line,
+              CONG_EDITOR_AREA_CONTAINER_TYPE );
 
 static void
 cong_editor_area_line_class_init (CongEditorAreaLineClass *klass)
@@ -94,7 +92,7 @@ cong_editor_area_line_class_init (CongEditorAreaLineClass *klass)
 }
 
 static void
-cong_editor_area_line_instance_init (CongEditorAreaLine *line)
+cong_editor_area_line_init (CongEditorAreaLine *line)
 {
 	line->private = g_new0(CongEditorAreaLineDetails,1);
 }

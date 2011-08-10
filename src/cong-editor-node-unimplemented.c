@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-unimplemented.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-app.h"
@@ -41,10 +40,9 @@ struct _CongEditorNodeUnimplementedDetails
 CONG_EDITOR_NODE_DECLARE_HOOKS(unimplemented)
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented, 
-			cong_editor_node_unimplemented,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
+G_DEFINE_TYPE(CongEditorNodeUnimplemented,
+              cong_editor_node_unimplemented,
+              CONG_EDITOR_NODE_TYPE );
 
 static void
 cong_editor_node_unimplemented_class_init (CongEditorNodeUnimplementedClass *klass)
@@ -53,7 +51,7 @@ cong_editor_node_unimplemented_class_init (CongEditorNodeUnimplementedClass *kla
 }
 
 static void
-cong_editor_node_unimplemented_instance_init (CongEditorNodeUnimplemented *node_unimplemented)
+cong_editor_node_unimplemented_init (CongEditorNodeUnimplemented *node_unimplemented)
 {
 	node_unimplemented->private = g_new0(CongEditorNodeUnimplementedDetails,1);
 }

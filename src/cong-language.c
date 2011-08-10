@@ -55,16 +55,14 @@ cong_per_language_data_free (CongPerLanguageData *per_language)
 gpointer
 cong_per_language_get_data (CongPerLanguageData *per_language)
 {
-	const GList *lang_iter;
+	const char * const *lang;
 	gpointer result;
 
 	g_return_val_if_fail (per_language, NULL);
 
-	for (lang_iter = cong_app_get_language_list (cong_app_singleton ()); lang_iter; lang_iter=lang_iter->next) {
-		const gchar *lang = (const gchar*)lang_iter->data;
-		
- 		result = g_hash_table_lookup (per_language->hash_table,
-					      lang);
+	for (lang = g_get_language_names(); *lang; lang++) {
+		result = g_hash_table_lookup (per_language->hash_table,
+					      *lang);
 		if (result) {
 			return result;
 		}

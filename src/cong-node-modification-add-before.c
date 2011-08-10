@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-node-modification-add-before.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -54,10 +53,9 @@ static void
 redo (CongModification *modification);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongNodeModificationAddBefore, 
-			cong_node_modification_add_before,
-			CongNodeModification,
-			CONG_NODE_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongNodeModificationAddBefore,
+              cong_node_modification_add_before,
+              CONG_NODE_MODIFICATION_TYPE );
 
 static void
 cong_node_modification_add_before_class_init (CongNodeModificationAddBeforeClass *klass)
@@ -70,7 +68,7 @@ cong_node_modification_add_before_class_init (CongNodeModificationAddBeforeClass
 }
 
 static void
-cong_node_modification_add_before_instance_init (CongNodeModificationAddBefore *node)
+cong_node_modification_add_before_init (CongNodeModificationAddBefore *node)
 {
 	node->private = g_new0(CongNodeModificationAddBeforeDetails,1);
 }
@@ -147,7 +145,7 @@ finalize (GObject *object)
 	g_free (node_modification_add_before->private);
 	node_modification_add_before->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_node_modification_add_before_parent_class)->finalize (object);
 
 }
 
@@ -187,7 +185,7 @@ dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_node_modification_add_before_parent_class)->dispose (object);
 }
 
 static void

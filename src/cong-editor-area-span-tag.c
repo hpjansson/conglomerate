@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-span-tag.h"
-#include <libgnome/gnome-macros.h>
 
 #include "cong-app.h"
 #include "cong-editor-area-bin.h"
@@ -78,10 +77,9 @@ add_child (CongEditorAreaContainer *area_container,
 	   gboolean add_to_end);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaSpanTag, 
-			cong_editor_area_span_tag,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+G_DEFINE_TYPE(CongEditorAreaSpanTag,
+              cong_editor_area_span_tag,
+              CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_span_tag_class_init (CongEditorAreaSpanTagClass *klass)
@@ -99,7 +97,7 @@ cong_editor_area_span_tag_class_init (CongEditorAreaSpanTagClass *klass)
 }
 
 static void
-cong_editor_area_span_tag_instance_init (CongEditorAreaSpanTag *area_span_tag)
+cong_editor_area_span_tag_init (CongEditorAreaSpanTag *area_span_tag)
 {
 	area_span_tag->private = g_new0(CongEditorAreaSpanTagDetails,1);
 }

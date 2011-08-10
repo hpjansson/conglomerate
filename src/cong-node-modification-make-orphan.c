@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-node-modification-make-orphan.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -50,10 +49,9 @@ static void
 redo (CongModification *modification);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongNodeModificationMakeOrphan, 
-			cong_node_modification_make_orphan,
-			CongNodeModification,
-			CONG_NODE_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongNodeModificationMakeOrphan,
+              cong_node_modification_make_orphan,
+              CONG_NODE_MODIFICATION_TYPE );
 
 static void
 cong_node_modification_make_orphan_class_init (CongNodeModificationMakeOrphanClass *klass)
@@ -66,7 +64,7 @@ cong_node_modification_make_orphan_class_init (CongNodeModificationMakeOrphanCla
 }
 
 static void
-cong_node_modification_make_orphan_instance_init (CongNodeModificationMakeOrphan *node)
+cong_node_modification_make_orphan_init (CongNodeModificationMakeOrphan *node)
 {
 	node->private = g_new0(CongNodeModificationMakeOrphanDetails,1);
 }
@@ -135,7 +133,7 @@ finalize (GObject *object)
 	g_free (node_modification_make_orphan->private);
 	node_modification_make_orphan->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_node_modification_make_orphan_parent_class)->finalize (object);
 
 }
 
@@ -164,7 +162,7 @@ dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_node_modification_make_orphan_parent_class)->dispose (object);
 }
 
 static void

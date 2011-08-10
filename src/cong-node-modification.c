@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-node-modification.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -35,10 +34,9 @@ struct _CongNodeModificationDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongNodeModification, 
-			cong_node_modification,
-			CongModification,
-			CONG_MODIFICATION_TYPE );
+G_DEFINE_TYPE(CongNodeModification,
+              cong_node_modification,
+              CONG_MODIFICATION_TYPE );
 
 static void
 cong_node_modification_class_init (CongNodeModificationClass *klass)
@@ -46,7 +44,7 @@ cong_node_modification_class_init (CongNodeModificationClass *klass)
 }
 
 static void
-cong_node_modification_instance_init (CongNodeModification *node)
+cong_node_modification_init (CongNodeModification *node)
 {
 	node->private = g_new0(CongNodeModificationDetails,1);
 }

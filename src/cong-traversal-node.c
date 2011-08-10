@@ -25,7 +25,6 @@
 #include "global.h"
 #include "cong-traversal-node.h"
 #include "cong-document-traversal.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-marshal.h"
 
@@ -39,10 +38,9 @@ struct _CongTraversalNodeDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongTraversalNode, 
-			cong_traversal_node,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongTraversalNode,
+              cong_traversal_node,
+              G_TYPE_OBJECT );
 
 static void
 cong_traversal_node_class_init (CongTraversalNodeClass *klass)
@@ -50,7 +48,7 @@ cong_traversal_node_class_init (CongTraversalNodeClass *klass)
 }
 
 static void
-cong_traversal_node_instance_init (CongTraversalNode *traversal_node)
+cong_traversal_node_init (CongTraversalNode *traversal_node)
 {
 	traversal_node->private = g_new0(CongTraversalNodeDetails,1);
 }

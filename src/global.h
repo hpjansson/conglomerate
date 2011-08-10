@@ -27,8 +27,7 @@
 
 #include <libxml/tree.h>
 #include <gtk/gtk.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 
 /* We include GnomeVFS stuff here to try to alleviate build problems on Fink: */

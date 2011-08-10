@@ -90,14 +90,17 @@ cong_plugin_for_each_document_factory (CongPlugin *plugin,
 
 /* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
    navigation easier */
-GnomeDruidPageStandard*
-cong_new_file_assistant_new_page (CongNewFileAssistant *assistant, 
-				  CongServiceDocumentFactory *document_factory, 
-				  gboolean is_first_of_factory,
-				  gboolean is_last_of_factory);
+GtkWidget *
+cong_new_file_assistant_new_page(CongNewFileAssistant *assistant,
+				 CongServiceDocumentFactory *document_factory,
+                                 GtkWidget *content,
+                                 const char *question,
+                                 const char *info,
+				 gboolean is_first_of_factory,
+				 gboolean is_last_of_factory);
 void 
 cong_new_file_assistant_set_page (CongNewFileAssistant *assistant, 
-				  GnomeDruidPage *page);
+				  GtkWidget *page);
 
 /* Method to get toplevel window of the assistant; useful when displaying error dialogs */
 GtkWindow*

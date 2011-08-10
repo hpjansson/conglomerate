@@ -59,10 +59,9 @@ do_refresh (CongAttributeEditorNmtoken *attribute_editor_nmtoken);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorNmtoken, 
-			cong_attribute_editor_nmtoken,
-			CongAttributeEditor,
-			CONG_ATTRIBUTE_EDITOR_TYPE);
+G_DEFINE_TYPE(CongAttributeEditorNmtoken,
+              cong_attribute_editor_nmtoken,
+              CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
 cong_attribute_editor_nmtoken_class_init (CongAttributeEditorNmtokenClass *klass)
@@ -74,7 +73,7 @@ cong_attribute_editor_nmtoken_class_init (CongAttributeEditorNmtokenClass *klass
 }
 
 static void
-cong_attribute_editor_nmtoken_instance_init (CongAttributeEditorNmtoken *area)
+cong_attribute_editor_nmtoken_init (CongAttributeEditorNmtoken *area)
 {
 	area->private = g_new0(CongAttributeEditorNmtokenDetails,1);
 }

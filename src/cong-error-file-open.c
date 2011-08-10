@@ -13,7 +13,6 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
-#include <libgnome/libgnome.h>
 #include "cong-error-dialog.h"
 #include "cong-util.h"
 
@@ -53,20 +52,20 @@ cong_error_get_appname(void)
 
 static void on_search(gpointer data)
 {
-	char* argv[1];
-	int process_id;
+	GError *error = NULL;
+	gboolean result;
 
 	g_message("on_search\n");
 
 	/* Launch the GNOME Search Tool: */
-	argv[0] = "gnome-search-tool";
-	process_id = gnome_execute_async(NULL,1,argv);
+	result = g_spawn_command_line_async("gnome-search-tool", &error);
 
-	if (-1==process_id) {
+	if (!result) {
 		cong_error_dialog_do( cong_error_dialog_new(NULL, /* FIXME: ought to set up the parent window properly */
 							    _("Conglomerate could not run the Search Tool.\n"),
-							    "FIXME",
+							    error->message,
 							    "FIXME") );
+		g_error_free(error);
 	}
 }
 

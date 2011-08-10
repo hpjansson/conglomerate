@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-command.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-util.h"
 
@@ -68,10 +67,9 @@ struct _CongCommandDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongCommand, 
-			cong_command,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongCommand,
+              cong_command,
+              G_TYPE_OBJECT);
 
 static void
 cong_command_class_init (CongCommandClass *klass)
@@ -79,7 +77,7 @@ cong_command_class_init (CongCommandClass *klass)
 }
 
 static void
-cong_command_instance_init (CongCommand *node)
+cong_command_init (CongCommand *node)
 {
 	node->priv = g_new0(CongCommandDetails,1);
 }

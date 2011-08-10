@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-node-text.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-app.h"

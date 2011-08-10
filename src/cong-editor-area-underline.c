@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-underline.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-ui-hooks.h"
 
 
@@ -48,10 +47,9 @@ calc_requisition (CongEditorArea *area,
 		  int width_hint);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaUnderline, 
-			cong_editor_area_underline,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaUnderline,
+              cong_editor_area_underline,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_underline_class_init (CongEditorAreaUnderlineClass *klass)
@@ -63,7 +61,7 @@ cong_editor_area_underline_class_init (CongEditorAreaUnderlineClass *klass)
 }
 
 static void
-cong_editor_area_underline_instance_init (CongEditorAreaUnderline *area_underline)
+cong_editor_area_underline_init (CongEditorAreaUnderline *area_underline)
 {
 	area_underline->private = g_new0(CongEditorAreaUnderlineDetails,1);
 }

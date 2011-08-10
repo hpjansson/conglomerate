@@ -56,10 +56,9 @@ on_selection_changed (GtkComboBox *combo_box,
 		      CongAttributeEditorEnumeration *attribute_editor_enumeration);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorEnumeration, 
-			cong_attribute_editor_enumeration,
-			CongAttributeEditor,
-			CONG_ATTRIBUTE_EDITOR_TYPE);
+G_DEFINE_TYPE(CongAttributeEditorEnumeration,
+              cong_attribute_editor_enumeration,
+              CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
 cong_attribute_editor_enumeration_class_init (CongAttributeEditorEnumerationClass *klass)
@@ -74,7 +73,7 @@ cong_attribute_editor_enumeration_class_init (CongAttributeEditorEnumerationClas
 }
 
 static void
-cong_attribute_editor_enumeration_instance_init (CongAttributeEditorEnumeration *area)
+cong_attribute_editor_enumeration_init (CongAttributeEditorEnumeration *area)
 {
 	area->private = g_new0(CongAttributeEditorEnumerationDetails,1);
 }
@@ -189,7 +188,7 @@ finalize (GObject *object)
 	g_free (PRIVATE(attribute_editor_enumeration));
 	PRIVATE(attribute_editor_enumeration) = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_attribute_editor_enumeration_parent_class)->finalize (object);
 }
 
 static void
@@ -203,7 +202,7 @@ dispose (GObject *object)
 		PRIVATE(attribute_editor_enumeration)->combo_array = NULL;
 	}
 
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_attribute_editor_enumeration_parent_class)->dispose (object);
 }
 
 static void

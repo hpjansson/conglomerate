@@ -48,9 +48,10 @@ struct _CongPrimaryWindow
 	GtkWidget *cong_editor_widget3;
 	GtkWidget *scroller3;
 
+	GtkWidget *vbox;
 	GtkWidget *window, *menus;
 	GtkToolbar *toolbar;
-	GtkWidget *app_bar;
+	GtkWidget *status;
 
 	/* Property pages: */
 	GtkNotebook *property_notebook;
@@ -61,6 +62,9 @@ struct _CongPrimaryWindow
 	GtkRecentManager *recent_manager;
 	GtkActionGroup   *recent_action_group;
 	guint             recent_ui_id;
+
+	/* Status bar message contexts: */
+	unsigned status_main_ctx, status_xpath_ctx;
 };
 
 

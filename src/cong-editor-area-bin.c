@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-bin.h"
-#include <libgnome/gnome-macros.h>
 
 #define PRIVATE(x) ((x)->private)
 
@@ -59,10 +58,9 @@ remove_child (CongEditorAreaContainer *area_container,
 	      CongEditorArea *child);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaBin, 
-			cong_editor_area_bin,
-			CongEditorAreaContainer,
-			CONG_EDITOR_AREA_CONTAINER_TYPE );
+G_DEFINE_TYPE(CongEditorAreaBin,
+              cong_editor_area_bin,
+              CONG_EDITOR_AREA_CONTAINER_TYPE );
 
 static void
 cong_editor_area_bin_class_init (CongEditorAreaBinClass *klass)
@@ -81,7 +79,7 @@ cong_editor_area_bin_class_init (CongEditorAreaBinClass *klass)
 }
 
 static void
-cong_editor_area_bin_instance_init (CongEditorAreaBin *area_bin)
+cong_editor_area_bin_init (CongEditorAreaBin *area_bin)
 {
 	area_bin->private = g_new0(CongEditorAreaBinDetails,1);
 }

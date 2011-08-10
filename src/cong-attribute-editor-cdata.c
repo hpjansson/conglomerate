@@ -56,10 +56,9 @@ do_refresh (CongAttributeEditorCData *attribute_editor_cdata);
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeEditorCData, 
-			cong_attribute_editor_cdata,
-			CongAttributeEditor,
-			CONG_ATTRIBUTE_EDITOR_TYPE);
+G_DEFINE_TYPE(CongAttributeEditorCData,
+              cong_attribute_editor_cdata,
+              CONG_ATTRIBUTE_EDITOR_TYPE);
 
 static void
 cong_attribute_editor_cdata_class_init (CongAttributeEditorCDataClass *klass)
@@ -71,7 +70,7 @@ cong_attribute_editor_cdata_class_init (CongAttributeEditorCDataClass *klass)
 }
 
 static void
-cong_attribute_editor_cdata_instance_init (CongAttributeEditorCData *area)
+cong_attribute_editor_cdata_init (CongAttributeEditorCData *area)
 {
 	area->private = g_new0(CongAttributeEditorCDataDetails,1);
 }

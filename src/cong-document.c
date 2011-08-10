@@ -7,7 +7,6 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
 #include "cong-selection.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-util.h"
 #include "cong-primary-window.h"
 #include "cong-command.h"
@@ -150,10 +149,9 @@ struct _CongDocumentDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongDocument, 
-			cong_document,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongDocument,
+              cong_document,
+              G_TYPE_OBJECT );
 
 static void
 cong_document_class_init (CongDocumentClass *klass)
@@ -295,7 +293,7 @@ cong_document_class_init (CongDocumentClass *klass)
 }
 
 static void
-cong_document_instance_init (CongDocument *doc)
+cong_document_init (CongDocument *doc)
 {
 	doc->private = g_new0(CongDocumentDetails,1);
 }
@@ -2351,7 +2349,7 @@ cong_document_finalize (GObject *object)
 	g_free (doc->private);
 	doc->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_document_parent_class)->finalize (object);
 }
 
 static void
@@ -2408,7 +2406,7 @@ cong_document_dispose (GObject *object)
 	*/
 	
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_document_parent_class)->dispose (object);
 }
 
 /* Implementation of default signal handlers: */

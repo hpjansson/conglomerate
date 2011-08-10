@@ -47,7 +47,7 @@ typedef struct RandomGUI RandomGUI;
 
 struct RandomGUI
 {
-	GnomeDruidPageStandard *page;
+	GtkWidget *page;
 	GladeXML *xml;
 	GtkWidget *middle_page;
 	GtkWidget *combo_box;
@@ -133,13 +133,11 @@ factory_page_creation_callback_random(CongServiceDocumentFactory *factory, CongN
 	
 	random_gui->page = cong_new_file_assistant_new_page (assistant, 
 							    factory, 
+	                                                    random_gui->middle_page,
+	                                                    _("What kind of random XML document would you like to create?"),
+	                                                    NULL,
 							    TRUE,
 							    TRUE);	
-
-	gnome_druid_page_standard_append_item (GNOME_DRUID_PAGE_STANDARD(random_gui->page),
-					       _("What kind of random XML document would you like to create?"),
-					       random_gui->middle_page,
-					       "");
 
 	/*
 	 * In order to get the combo box to work in its "simple" mode - i.e.

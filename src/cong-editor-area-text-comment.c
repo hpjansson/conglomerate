@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-text-comment.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-font.h"
 #include "cong-eel.h"
 #include "cong-ui-hooks.h"
@@ -62,10 +61,9 @@ allocate_child_space (CongEditorArea *area);
 
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaTextComment, 
-			cong_editor_area_text_comment,
-			CongEditorAreaText,
-			CONG_EDITOR_AREA_TEXT_TYPE );
+G_DEFINE_TYPE(CongEditorAreaTextComment,
+              cong_editor_area_text_comment,
+              CONG_EDITOR_AREA_TEXT_TYPE );
 
 static void
 cong_editor_area_text_comment_class_init (CongEditorAreaTextCommentClass *klass)
@@ -80,7 +78,7 @@ cong_editor_area_text_comment_class_init (CongEditorAreaTextCommentClass *klass)
 }
 
 static void
-cong_editor_area_text_comment_instance_init (CongEditorAreaTextComment *area_text_comment)
+cong_editor_area_text_comment_init (CongEditorAreaTextComment *area_text_comment)
 {
 	area_text_comment->private = g_new0(CongEditorAreaTextCommentDetails,1);
 }
@@ -248,9 +246,7 @@ render_self (CongEditorArea *area,
 			    rect->height);
 
 	/* Call base class: */
-	CONG_EEL_CALL_PARENT(CONG_EDITOR_AREA_CLASS, 
-			     render_self, 
-			     (area, widget_rect));
+	CONG_EDITOR_AREA_CLASS(cong_editor_area_text_comment_parent_class)->render_self(area, widget_rect);
 }
 
 #if 0

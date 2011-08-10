@@ -31,6 +31,7 @@
 #include "cong-util.h"
 
 #include <gtk/gtkdrawingarea.h>
+#include <gdk/gdkkeysyms.h>
 
 /* Test code: */
 #include "cong-editor-area-border.h"
@@ -243,10 +244,9 @@ on_root_requisition_change (CongEditorArea *child_area,
 			    gpointer user_data);
 
 /* Implementations of public functions: */
-GNOME_CLASS_BOILERPLATE(CongEditorWidget3, 
-			cong_editor_widget3,
-			GtkDrawingArea,
-			GTK_TYPE_DRAWING_AREA );
+G_DEFINE_TYPE(CongEditorWidget3,
+              cong_editor_widget3,
+              GTK_TYPE_DRAWING_AREA );
 
 static void
 cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
@@ -275,7 +275,7 @@ cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
 }
 
 static void
-cong_editor_widget3_instance_init (CongEditorWidget3 *widget)
+cong_editor_widget3_init (CongEditorWidget3 *widget)
 {
 	widget->private = g_new0(CongEditorWidget3Details,1);
 }
@@ -831,7 +831,7 @@ cong_editor_widget3_finalize (GObject *object)
 	g_free (editor_widget->private);
 	editor_widget->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_editor_widget3_parent_class)->finalize (object);
 }
 
 static void
@@ -864,7 +864,7 @@ cong_editor_widget3_dispose (GObject *object)
 #endif
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_editor_widget3_parent_class)->dispose (object);
 }
 
 static void
@@ -984,7 +984,7 @@ static void   realize  (GtkWidget        *widget)
 	gtk_im_context_set_client_window (PRIVATE(editor_widget)->im_context, widget->window);
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
+	GTK_WIDGET_CLASS (cong_editor_widget3_parent_class)->realize (widget);
 }
 
 static void   unrealize (GtkWidget        *widget)
@@ -994,7 +994,7 @@ static void   unrealize (GtkWidget        *widget)
 	gtk_im_context_set_client_window (PRIVATE(editor_widget)->im_context, NULL);  
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, unrealize, (widget));
+	GTK_WIDGET_CLASS (cong_editor_widget3_parent_class)->unrealize (widget);
 }
 
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data)

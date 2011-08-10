@@ -65,9 +65,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 					  const gchar* xml_fragment,
 					  CongDocument *source_doc);
 
-GnomeProgram*
-cong_app_get_gnome_program (CongApp *app);
-
 GtkTooltips*
 cong_app_get_tooltips (CongApp *app);
 
@@ -84,8 +81,8 @@ cong_app_get_dispspec_registry (CongApp *app);
 GConfClient*
 cong_app_get_gconf_client (CongApp *app);
 
-const GList*
-cong_app_get_language_list (CongApp *app);
+char *
+cong_app_locate_file(CongApp *app, const char *file_name);
 
 G_END_DECLS
 

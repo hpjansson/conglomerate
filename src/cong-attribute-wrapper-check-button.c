@@ -61,10 +61,9 @@ static gboolean
 should_button_be_active (CongAttributeWrapperCheckButton *attribute_wrapper);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongAttributeWrapperCheckButton, 
-			cong_attribute_wrapper_check_button,
-			CongAttributeWrapper,
-			CONG_ATTRIBUTE_WRAPPER_TYPE);
+G_DEFINE_TYPE(CongAttributeWrapperCheckButton,
+              cong_attribute_wrapper_check_button,
+              CONG_ATTRIBUTE_WRAPPER_TYPE);
 
 static void
 cong_attribute_wrapper_check_button_class_init (CongAttributeWrapperCheckButtonClass *klass)
@@ -79,7 +78,7 @@ cong_attribute_wrapper_check_button_class_init (CongAttributeWrapperCheckButtonC
 }
 
 static void
-cong_attribute_wrapper_check_button_instance_init (CongAttributeWrapperCheckButton *attribute_wrapper)
+cong_attribute_wrapper_check_button_init (CongAttributeWrapperCheckButton *attribute_wrapper)
 {
 	attribute_wrapper->private = g_new0(CongAttributeWrapperCheckButtonDetails,1);
 }
@@ -185,7 +184,7 @@ finalize (GObject *object)
 	g_free (attribute_wrapper_check_button->private);
 	attribute_wrapper_check_button->private = NULL;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (cong_attribute_wrapper_check_button_parent_class)->finalize (object);
 }
 
 static void
@@ -202,7 +201,7 @@ dispose (GObject *object)
 		PRIVATE(attribute_wrapper)->attribute_value_checked = NULL;
 	}
 	
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	G_OBJECT_CLASS (cong_attribute_wrapper_check_button_parent_class)->dispose (object);
 }
 
 static void

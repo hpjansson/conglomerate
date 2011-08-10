@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-command-history.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #include "cong-document.h"
@@ -51,10 +50,9 @@ struct _CongCommandHistoryDetails
 };
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongCommandHistory, 
-			cong_command_history,
-			GObject,
-			G_TYPE_OBJECT );
+G_DEFINE_TYPE(CongCommandHistory,
+              cong_command_history,
+              G_TYPE_OBJECT );
 
 static void
 cong_command_history_class_init (CongCommandHistoryClass *klass)
@@ -70,7 +68,7 @@ cong_command_history_class_init (CongCommandHistoryClass *klass)
 }
 
 static void
-cong_command_history_instance_init (CongCommandHistory *history)
+cong_command_history_init (CongCommandHistory *history)
 {
 	history->private = g_new0(CongCommandHistoryDetails,1);
 }

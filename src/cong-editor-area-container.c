@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-container.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
@@ -61,10 +60,9 @@ on_child_flush_requisition_cache (CongEditorArea *child_area,
 				  gpointer user_data);
 
 /* GObject boilerplate stuff: */
-GNOME_CLASS_BOILERPLATE(CongEditorAreaContainer, 
-			cong_editor_area_container,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+G_DEFINE_TYPE(CongEditorAreaContainer,
+              cong_editor_area_container,
+              CONG_EDITOR_AREA_TYPE );
 
 static void
 cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
@@ -103,7 +101,7 @@ cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 }
 
 static void
-cong_editor_area_container_instance_init (CongEditorAreaContainer *area_container)
+cong_editor_area_container_init (CongEditorAreaContainer *area_container)
 {
 	area_container->private = g_new0(CongEditorAreaContainerDetails,1);
 }

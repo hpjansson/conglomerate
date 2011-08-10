@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "plugin-admonition-node-element.h"
-#include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
@@ -81,12 +80,9 @@ load_icon (const gchar *icon_filename)
 
 	g_return_val_if_fail(icon_filename, NULL);
 
-	modified_icon_filename = g_strconcat(PACKAGE_NAME,"/",icon_filename, NULL);
-	full_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-					       GNOME_FILE_DOMAIN_APP_PIXMAP,
-					       modified_icon_filename,
-					       FALSE,
-					       NULL);
+	modified_icon_filename = g_build_filename(PACKAGE_NAME, "pixmaps", icon_filename, NULL);
+	full_path = cong_app_locate_file (cong_app_singleton(),
+					  modified_icon_filename);
 
 	g_message ("Trying to load \"%s\"", full_path);
 

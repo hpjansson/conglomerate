@@ -22,6 +22,8 @@
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
  */
 
+#include <string.h>
+
 #include "global.h"
 #include "cong-app.h"
 #include "cong-dialog.h"
@@ -68,7 +70,6 @@ struct CongSelectionData
 
 struct _CongAppPrivate
 {
-	GnomeProgram *gnome_program;
 	CongPluginManager *plugin_manager;
 #if 0
 	GdkGC *insert_element_gc;
@@ -77,8 +78,6 @@ struct _CongAppPrivate
 	GConfClient* gconf_client;
 	GtkTooltips *tooltips;
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
-
-	const GList *language_list;
 
 	CongSelectionData clipboard_selection;
 	CongSelectionData primary_selection;
@@ -841,21 +840,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 }
 
 /**
- * cong_app_get_gnome_program:
- * @app:
- *
- * TODO: Write me
- * Returns:
- */
-GnomeProgram*
-cong_app_get_gnome_program (CongApp *app)
-{
-	g_return_val_if_fail (app, NULL);
-
-	return PRIVATE(app)->gnome_program;
-}
-
-/**
  * cong_app_get_tooltips:
  * @app:
  *
@@ -933,54 +917,37 @@ cong_app_get_gconf_client (CongApp *app)
 	return PRIVATE(app)->gconf_client;
 }
 
-/**
- * cong_app_get_language_list:
- * @app:
- *
- * TODO: Write me
- * Returns:
- */
-const GList*
-cong_app_get_language_list (CongApp *app)
-{
-	g_return_val_if_fail (app, NULL);
-
-	return PRIVATE(app)->language_list;
-}
-
 int unit_test = FALSE;
+static gchar **startup_files = NULL;
 
-const struct poptOption options[] = {
+static const GOptionEntry options[] = {
 	{
 		"unit-test",
 		'\0',
-		POPT_ARG_NONE,
-		&unit_test,
 		0,
+		G_OPTION_ARG_NONE,
+		&unit_test,
 		N_("Unit test: quit immediately (after loading any files specified on the command-line)"),
 		NULL
 	},
 	{
-		NULL,
-		'\0',
+		G_OPTION_REMAINING,
 		0,
-		NULL,
 		0,
-		NULL,
-		NULL
-	}
+		G_OPTION_ARG_FILENAME_ARRAY,
+		&startup_files,
+		"",
+		N_("[FILE1 FILE2 ...]")
+	},
+	{ NULL }
 };
 
 static gboolean
-handle_cmdline_args (gpointer data)
+handle_cmdline_args ()
 {
-	poptContext ctx;
-	const gchar **startup_files;
+	GError *error = NULL;
 	gchar *uri;
 	int i;
-
-	ctx = data;
-	startup_files = poptGetArgs (ctx);
 
 	if (startup_files) {
 		for (i = 0; startup_files [i]; ++i) {
@@ -988,10 +955,9 @@ handle_cmdline_args (gpointer data)
 		       open_document_do (uri, NULL);
 		       g_free(uri);
 		   }
+		   g_strfreev (startup_files);
 	}
 	
-	poptFreeContext (ctx);
-
 	/* Quit immediately after load, for a unit test: */
 	if (unit_test) {
 		gtk_main_quit ();
@@ -1007,28 +973,23 @@ cong_app_new (int   argc,
 	      char *argv[])
 {
 	CongApp *app;
-	GValue value = { 0 };
-	poptContext ctx;
+	GError *error = NULL;
+	GOptionContext *context;
 
 	app = g_new0(CongApp,1);
 	app->private = g_new0(CongAppPrivate,1);
 
+	g_set_application_name(_("XML Editor"));
 
-	/* Set up the GnomeProgram: */
-	PRIVATE(app)->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
-							  LIBGNOMEUI_MODULE,
-							  argc,argv,
-							  GNOME_PARAM_HUMAN_READABLE_NAME, _("XML Editor"),
-							  GNOME_PARAM_POPT_TABLE, options,
-							  GNOME_PROGRAM_STANDARD_PROPERTIES,
-							  GNOME_PARAM_NONE);
+	context = g_option_context_new(_("- XML Editor"));
+	g_option_context_add_main_entries(context, options, GETTEXT_PACKAGE);
+	g_option_context_add_group(context, gtk_get_option_group (TRUE));
+	if(!g_option_context_parse (context, &argc, &argv, &error))
+	{
+		g_critical("option parsing failed: %s", error->message);
+	}
 
-	g_value_init (&value, G_TYPE_POINTER);
-	g_object_get_property (G_OBJECT (PRIVATE (app)->gnome_program), GNOME_PARAM_POPT_CONTEXT,
-			       &value);
-	ctx = g_value_get_pointer (&value);
-	g_value_unset (&value);
-	g_idle_add (handle_cmdline_args, ctx);
+	g_idle_add (handle_cmdline_args, NULL);
 
 	/* Set up usage of GConf: */
 	PRIVATE(app)->gconf_client = gconf_client_get_default();
@@ -1041,26 +1002,10 @@ cong_app_new (int   argc,
 
 	PRIVATE(app)->tooltips = gtk_tooltips_new();
 
-	PRIVATE(app)->language_list = gnome_i18n_get_language_list (NULL);
-
-#if 0
-	/* Debug the language list: */
-	{
-		const GList *iter;
-
-		for (iter = PRIVATE(app)->language_list; iter; iter=iter->next) {
-			g_message ("\"%s\"", (gchar*)iter->data);
-		}
-	}
-#endif
-
 	/* Load stylesheets: */
 	{
-		gchar *stylesheet_file = gnome_program_locate_file (PRIVATE(app)->gnome_program,
-								    GNOME_FILE_DOMAIN_APP_DATADIR,
-								    "conglomerate/stylesheets/selection-to-text.xsl",
-								    FALSE,
-								    NULL);
+		gchar *stylesheet_file = cong_app_locate_file (app,
+							       "conglomerate/stylesheets/selection-to-text.xsl");
 
 		PRIVATE (app)->xsl_selection_to_text = xsltParseStylesheetFile ((const xmlChar*)stylesheet_file);
 		if (PRIVATE (app)->xsl_selection_to_text==NULL) {
@@ -1138,11 +1083,8 @@ cong_app_private_load_displayspecs (CongApp *app,
 
 	/* Finally, try the standard installation path.  This used to be listed in the GConf path, see Bugzilla #129776 */
 	{
-		gchar* xds_directory = gnome_program_locate_file (PRIVATE(app)->gnome_program,
-								  GNOME_FILE_DOMAIN_APP_DATADIR,
-								  "conglomerate/dispspecs",
-								  FALSE,
-								  NULL);
+		gchar* xds_directory = cong_app_locate_file (app,
+							     "conglomerate/dispspecs");
 
 		
 		cong_dispspec_registry_add_dir (PRIVATE(app)->ds_registry, xds_directory, toplevel_window, 0);
@@ -1189,4 +1131,24 @@ cong_app_private_insert_element_init (CongApp *app)
 	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
 	gdk_gc_set_foreground(app->insert_element_gc, &gcol);
 #endif
+}
+
+char *
+cong_app_locate_file(CongApp *app, const char *file_name)
+{
+	char *full_path = g_build_filename(DATADIR, file_name, NULL);
+
+	if(!g_file_test(full_path, G_FILE_TEST_EXISTS)) {
+		char *why_failed = g_strdup_printf(_("The file '%s' was not in the expected location."), file_name);
+		GtkDialog *dialog = cong_error_dialog_new(NULL,
+			_("Conglomerate could not find a data file."),
+			why_failed,
+			_("If you see this error, it is likely that you built Conglomerate, but did not install it. Try installing it."));
+		g_free(why_failed);
+		cong_error_dialog_run(dialog);
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		g_error("Could not find data file '%s' in '%s'", file_name, full_path);
+	}
+
+	return full_path;
 }

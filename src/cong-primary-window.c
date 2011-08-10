@@ -43,8 +43,6 @@
 #include "cong-plugin-manager.h"
 
 #if 0
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
@@ -82,7 +80,7 @@
  * |         O <- split pane                |
  * |         |                              |
  * |----------------------------------------|
- * | AppBar                                 |
+ * | Status bar                             |
  * `----------------------------------------'
  * 
  */
@@ -387,7 +385,7 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 
 	/* --- Main window -> hpane --- */
 	w1 = gtk_hpaned_new();
-	gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
+	gtk_box_pack_start(GTK_BOX(primary_window->vbox), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
 
 	/* Sidebar vpane */
@@ -485,7 +483,7 @@ add_tree_layout_for_doc (CongPrimaryWindow *primary_window,
 {
 	GtkWidget *widget = cong_dom_view_new (primary_window->doc,
 					       primary_window);
-	gnome_app_set_contents(GNOME_APP(primary_window->window),widget);
+	gtk_box_pack_start(GTK_BOX(primary_window->vbox), widget, TRUE, TRUE, 0);
 }
 
 static void
@@ -494,6 +492,9 @@ refresh_statusbar (CongPrimaryWindow *primary_window)
 	gchar *status_text = NULL;
 
 	g_assert (primary_window);
+
+	gtk_statusbar_pop(GTK_STATUSBAR(primary_window->status),
+	                  primary_window->status_xpath_ctx);
 	
 	/* Set status bar to XPath of selection (if any) */
 	if (primary_window->doc) {
@@ -501,16 +502,11 @@ refresh_statusbar (CongPrimaryWindow *primary_window)
 
 		if (selected_node) {
 			status_text = cong_node_get_path (selected_node);
+			gtk_statusbar_push (GTK_STATUSBAR(primary_window->status),
+			                    primary_window->status_xpath_ctx,
+			                    status_text);
+			g_free(status_text);
 		}
-	}
-
-	if (status_text) {
-		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
-					 status_text);
-		g_free(status_text);
-	} else {
-		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
-					 "");
 	}
 }
 
@@ -596,17 +592,14 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 void 
 cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 {
-	gchar *title;
-
 	g_assert(primary_window);
 
 	gdk_rgb_init();
-
-	title = g_strdup(_("Conglomerate XML Editor"));
 	
 	/* --- Main window --- */
-	primary_window->window = gnome_app_new(PACKAGE_NAME,
-					       title);
+	primary_window->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(primary_window->window),
+	                     _("Conglomerate XML Editor"));
 
 	gtk_window_set_default_icon_name("conglomerate");
 
@@ -620,12 +613,16 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	gtk_widget_realize(GTK_WIDGET(primary_window->window));
 
+	/* --- Application vbox --- */
+
+	primary_window->vbox = gtk_vbox_new(FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(primary_window->window), primary_window->vbox);
+
 	/* --- Menus --- */
 
 	primary_window->merge_id = cong_menus_setup_ui_layout (primary_window);
 	primary_window->menus = gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainMenuBar");
-	gnome_app_set_menus(GNOME_APP(primary_window->window), GTK_MENU_BAR(primary_window->menus));
-	gtk_widget_show(primary_window->menus);
+	gtk_box_pack_start(GTK_BOX(primary_window->vbox), primary_window->menus, FALSE, FALSE, 0);
 
 	{
 		GtkAccelGroup *accel_group;
@@ -645,48 +642,27 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	/* --- Toolbar --- */
 	primary_window->toolbar = GTK_TOOLBAR (gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainToolBar"));
-	gnome_app_set_toolbar(GNOME_APP(primary_window->window), primary_window->toolbar);
-	gtk_widget_show(GTK_WIDGET(primary_window->toolbar));
+	gtk_box_pack_start(GTK_BOX(primary_window->vbox), GTK_WIDGET(primary_window->toolbar), FALSE, FALSE, 0);
 
 	primary_window->doc = NULL;
 
 	/* --- Main window -> status area --- */
-#if 1
-	primary_window->app_bar = gnome_appbar_new (TRUE,
-						    TRUE,
-						    GNOME_PREFERENCES_NEVER);
 
-	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->app_bar);
-
-	{
-		gchar *status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
-
-		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
-					 status_text);
-
-		g_free(status_text);
-	}
-	
-#else
 	primary_window->status = gtk_statusbar_new();
 
-	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->status);
+	gtk_box_pack_end(GTK_BOX(primary_window->vbox), primary_window->status, FALSE, FALSE, 0);
 
 	/* --- Putting it together --- */
 
 	primary_window->status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(primary_window->status), 
 								       "Main");
+	primary_window->status_xpath_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(primary_window->status),
+	                                                                "xpath");
+	gtk_statusbar_push(GTK_STATUSBAR(primary_window->status),
+			   primary_window->status_main_ctx,
+			   _("Welcome to the much-delayed Conglomerate editor."));
 
-	{
-		gchar *status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
-
-		gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
-				   primary_window->status_main_ctx,
-				   status_text);
-
-		g_free(status_text);
-	}
-#endif
+	gtk_widget_show_all(primary_window->vbox);
 }
 
 /**
