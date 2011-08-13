@@ -33,7 +33,7 @@ cong_cursor_init(CongCursor *curs, CongDocument *doc)
 
 	cong_location_nullify(&curs->location);
 
-	curs->timeout_id = gtk_timeout_add(500, cong_cursor_blink, curs);
+	curs->timeout_id = g_timeout_add(500, cong_cursor_blink, curs);
 	curs->gc = gdk_gc_new(cong_gui_get_a_window()->window);
 	gdk_gc_copy(curs->gc, cong_gui_get_a_window()->style->black_gc);
 	/* we really want a black cursor for visibility */	
@@ -58,7 +58,7 @@ cong_cursor_uninit(CongCursor *curs)
 	cong_location_nullify(&curs->location);
 
 	if (curs->timeout_id) {
-		gtk_timeout_remove (curs->timeout_id);
+		g_source_remove (curs->timeout_id);
 		curs->timeout_id = 0;
 	}
 

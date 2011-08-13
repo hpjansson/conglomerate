@@ -394,7 +394,7 @@ cong_document_find (CongDocument *doc)
 	if (!dialog)
 		return;
 
-	if (GTK_WIDGET_VISIBLE (dialog->dialog))
+	if (gtk_widget_get_visible (dialog->dialog))
 		return;
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
@@ -446,7 +446,7 @@ cong_document_replace (CongDocument *doc)
 	if (!dialog)
 		return;
 
-	if (GTK_WIDGET_VISIBLE (dialog->dialog))
+	if (gtk_widget_get_visible (dialog->dialog))
 		return;
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 

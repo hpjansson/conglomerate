@@ -231,7 +231,7 @@ CongApp the_app;
  * TODO: Write me
  * Returns:
  */
-GtkPixmap* 
+GtkImage*
 cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
 {
 	GdkPixmap *p;
@@ -245,7 +245,7 @@ cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
 	p = gdk_pixmap_create_from_xpm_d(primary_window->window->window, &mask,
 					 &style->bg[GTK_STATE_NORMAL],
 					 (gchar **) xpm);
-	return GTK_PIXMAP(gtk_pixmap_new(p, mask));
+	return GTK_IMAGE(gtk_image_new_from_pixmap(p, mask));
 }
 
 /**
@@ -593,8 +593,6 @@ void
 cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 {
 	g_assert(primary_window);
-
-	gdk_rgb_init();
 	
 	/* --- Main window --- */
 	primary_window->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -603,11 +601,11 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	gtk_window_set_default_icon_name("conglomerate");
 
-	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",
-			   GTK_SIGNAL_FUNC(delete_event), primary_window);
+	g_signal_connect(primary_window->window, "delete_event",
+			 G_CALLBACK(delete_event), primary_window);
 
-	gtk_signal_connect(GTK_OBJECT(primary_window->window), "destroy",
-			   GTK_SIGNAL_FUNC(destroy), primary_window);
+	g_signal_connect(primary_window->window, "destroy",
+			 G_CALLBACK(destroy), primary_window);
 
 	gtk_container_set_border_width(GTK_CONTAINER(primary_window->window), 0);
 

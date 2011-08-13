@@ -112,12 +112,12 @@ cong_error_dialog_new(GtkWindow *parent_window,
 	gtk_widget_show (dialog_action_area1);
 	gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area1), 5);
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area1), 10);
+	gtk_box_set_spacing (GTK_BOX (dialog_action_area1), 10);
 	
 	okbutton1 = gtk_button_new_from_stock ("gtk-ok");
 	gtk_widget_show (okbutton1);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dialog1), okbutton1, GTK_RESPONSE_OK);
-	GTK_WIDGET_SET_FLAGS (okbutton1, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (okbutton1, TRUE);
 
 	return GTK_DIALOG(dialog1);
 
@@ -185,7 +185,7 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 
        	dialog_action_area = GTK_DIALOG (dialog)->action_area;
 	gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area), 6);
-	gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area), 12);
+	gtk_box_set_spacing (GTK_BOX (dialog_action_area), 12);
         
 	if (is_convenience_default)
 	  {

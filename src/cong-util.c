@@ -1365,10 +1365,7 @@ cong_util_make_menu_item (const gchar *label,
 	}
 
 	if (tip) {
-		gtk_tooltips_set_tip (cong_app_get_tooltips (cong_app_singleton()),
-				      GTK_WIDGET(item),
-				      tip,
-				      tip);
+		gtk_widget_set_tooltip_text (GTK_WIDGET(item), tip);
 	}
 
 	return GTK_MENU_ITEM(item);

@@ -350,39 +350,41 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
 	/* Connect to GtkWidget events: */
-	gtk_signal_connect(GTK_OBJECT(editor_widget), 
-			   "expose_event",
-			   (GtkSignalFunc) expose_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(editor_widget), 
-			   "configure_event",
-			   (GtkSignalFunc) configure_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(editor_widget), 
-			   "button_press_event",
-			   (GtkSignalFunc) button_press_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(editor_widget), 
-			   "motion_notify_event",
-			   (GtkSignalFunc) motion_notify_event_handler, 
-			   NULL);
-	gtk_signal_connect_after(GTK_OBJECT(editor_widget), 
-				 "key_press_event",
-				 (GtkSignalFunc) key_press_event_handler, 
-				 NULL);
-	gtk_signal_connect_after(GTK_OBJECT(editor_widget), 
-				 "key_release_event",
-				 (GtkSignalFunc) key_release_event_handler, 
-				 NULL);
-	gtk_signal_connect(GTK_OBJECT(editor_widget),
- 			   "size-request",
- 			   (GtkSignalFunc) size_request_handler,
- 			   NULL);
+	g_signal_connect(editor_widget,
+	                 "expose_event",
+	                 G_CALLBACK(expose_event_handler),
+	                 NULL);
+	g_signal_connect(editor_widget,
+	                 "configure_event",
+	                 G_CALLBACK(configure_event_handler),
+	                 NULL);
+	g_signal_connect(editor_widget,
+	                 "button_press_event",
+	                 G_CALLBACK(button_press_event_handler),
+	                 NULL);
+	g_signal_connect(editor_widget,
+	                 "motion_notify_event",
+	                 G_CALLBACK(motion_notify_event_handler),
+	                 NULL);
+	g_signal_connect_after(editor_widget,
+	                       "key_press_event",
+	                       G_CALLBACK(key_press_event_handler),
+	                       NULL);
+	g_signal_connect_after(editor_widget,
+	                       "key_release_event",
+	                       G_CALLBACK(key_release_event_handler),
+	                       NULL);
+	g_signal_connect(editor_widget,
+	                 "size-request",
+	                 G_CALLBACK(size_request_handler),
+	                 NULL);
 
 	gtk_widget_set_events(GTK_WIDGET(editor_widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
 
-	gtk_widget_set(GTK_WIDGET(editor_widget), "can_focus", (gboolean) TRUE, NULL);
-	gtk_widget_set(GTK_WIDGET(editor_widget), "can_default", (gboolean) TRUE, NULL);
+	g_object_set(editor_widget,
+	             "can_focus", TRUE,
+	             "can_default", TRUE,
+	             NULL);
 
 	/* Set up GTK Input Method support: */
 	{

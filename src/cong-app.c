@@ -75,7 +75,6 @@ struct _CongAppPrivate
 #endif
 	CongDispspecRegistry* ds_registry;
 	GConfClient* gconf_client;
-	GtkTooltips *tooltips;
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
 
 	CongSelectionData clipboard_selection;
@@ -839,21 +838,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 }
 
 /**
- * cong_app_get_tooltips:
- * @app:
- *
- * TODO: Write me
- * Returns:
- */
-GtkTooltips*
-cong_app_get_tooltips (CongApp *app)
-{
-	g_return_val_if_fail (app, NULL);
-
-	return PRIVATE(app)->tooltips;
-}
-
-/**
  * cong_app_get_font:
  * @app:
  * @role:
@@ -997,8 +981,6 @@ cong_app_new (int   argc,
 			      NULL);
 
 	cong_app_private_load_fonts (app);
-
-	PRIVATE(app)->tooltips = gtk_tooltips_new();
 
 	/* Load stylesheets: */
 	{

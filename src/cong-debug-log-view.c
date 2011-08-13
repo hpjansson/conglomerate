@@ -480,7 +480,7 @@ make_window_etc(void)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(GTK_WIDGET(details->scrolled_window), 100, 50);
+	gtk_widget_set_size_request(GTK_WIDGET(details->scrolled_window), 100, 50);
 
         details->list_store = gtk_list_store_new (DEBUGLOGVIEW_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 	details->tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(details->list_store)));

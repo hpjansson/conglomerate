@@ -250,10 +250,10 @@ cong_tree_view_new (CongDocument *doc,
 		gtk_tree_view_append_column (GTK_TREE_VIEW (details->gtk_tree_view), column);
 		
 		/* Wire up the context-menu callback */
-		gtk_signal_connect_object(GTK_OBJECT(details->gtk_tree_view), 
-					  "event",
-					  (GtkSignalFunc) tree_popup_show, 
-					  details->gtk_tree_view);
+		g_signal_connect_swapped(details->gtk_tree_view,
+		                         "event",
+		                         G_CALLBACK(tree_popup_show),
+		                         details->gtk_tree_view);
 
 		/* Deal with selection changes: */
 		details->gtk_tree_view_selection_changed_handler = g_signal_connect (G_OBJECT(gtk_tree_view_get_selection (details->gtk_tree_view)), 

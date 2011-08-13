@@ -357,7 +357,7 @@ cong_eel_draw_pixbuf (GdkDrawable *drawable,
 		      gint x_dither,
 		      gint y_dither)
 {
-#if 0
+#if 1
 	/* Code for Gdk-2.2 and later: */
 	gdk_draw_pixbuf (drawable,
 			 gc,

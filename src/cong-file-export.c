@@ -303,7 +303,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	/* Set up filename entry widgetry: */
 	{
 		dialog_details->filename_entry = GTK_ENTRY(gtk_entry_new());
-		gtk_entry_set_editable(dialog_details->filename_entry, FALSE);		
+		gtk_editable_set_editable(GTK_EDITABLE(dialog_details->filename_entry), FALSE);
 
 		select_filename_button = gtk_button_new_from_stock(GTK_STOCK_SAVE_AS);
 

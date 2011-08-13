@@ -65,9 +65,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 					  const gchar* xml_fragment,
 					  CongDocument *source_doc);
 
-GtkTooltips*
-cong_app_get_tooltips (CongApp *app);
-
 CongFont*
 cong_app_get_font (CongApp *app,
 		   CongFontRole role);

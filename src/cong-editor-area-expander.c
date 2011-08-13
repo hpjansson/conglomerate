@@ -240,7 +240,7 @@ on_button_press (CongEditorArea *editor_area,
 
 		if (PRIVATE(area_expander)->target_expander_style == PRIVATE(area_expander)->current_expander_style) {
 			if (PRIVATE(area_expander)->timeout_handler_id) {
-				gtk_timeout_remove (PRIVATE(area_expander)->timeout_handler_id);
+				g_source_remove (PRIVATE(area_expander)->timeout_handler_id);
 				PRIVATE(area_expander)->timeout_handler_id = 0;
 			}
 
@@ -249,9 +249,9 @@ on_button_press (CongEditorArea *editor_area,
 			
 		} else {
 			if (!PRIVATE(area_expander)->timeout_handler_id) {
-				PRIVATE(area_expander)->timeout_handler_id = gtk_timeout_add (10,
-											      on_timeout,
-											      area_expander);
+				PRIVATE(area_expander)->timeout_handler_id = g_timeout_add (10,
+				                                                            on_timeout,
+				                                                            area_expander);
 			}
 		}
 
