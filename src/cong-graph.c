@@ -24,13 +24,13 @@ const CongDependencyNodeClass klass_pure_dependency = {
  * Returns: the new #CongDependencyNode
  */
 CongDependencyNode *
-cong_dependency_node_new_from_file(GnomeVFSURI *uri)
+cong_dependency_node_new_from_file(GFile *file)
 {
 	CongDependencyNodeFromFile *node;
 
 	node = g_new0(CongDependencyNodeFromFile,1);
 
-	construct_dependency_node_from_file(node, &klass_pure_dependency, uri);
+	construct_dependency_node_from_file(node, &klass_pure_dependency, file);
 
 	return CONG_DEPENDENCY_NODE(node);
 }
@@ -44,13 +44,13 @@ cong_dependency_node_new_from_file(GnomeVFSURI *uri)
  * TODO: Write me
  */
 void 
-construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GnomeVFSURI *uri)
+construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GFile *file)
 {
 	node->base.klass = klass;
-	node->base.debug_name = gnome_vfs_uri_to_string(uri, GNOME_VFS_URI_HIDE_PASSWORD);	
+	node->base.debug_name = g_file_get_uri(file);
 	
-	node->uri = uri;
-	gnome_vfs_uri_ref(uri);
+	node->file = file;
+	g_object_ref(file);
 }
 
 /**

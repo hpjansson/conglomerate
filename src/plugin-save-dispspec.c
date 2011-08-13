@@ -44,14 +44,20 @@ static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer
  *
  * TODO: Write me
  */
-gchar* 
-change_to_xds(gchar* filename)
+GFile *
+change_to_xds(GFile* file)
 {
+	char *filename;
 	gchar **split_strings;
 	gchar *old_doc_name;
 	gchar *result;
+	GFile *parent;
+	GFile *new_child;
+
+	filename = g_file_get_basename(file);
 
 	split_strings = g_strsplit (filename, ".", 2);
+	g_free(filename);
 	
 	old_doc_name = split_strings[0];
 
@@ -63,19 +69,25 @@ change_to_xds(gchar* filename)
 	
 	g_strfreev (split_strings);
 
-	return result;
+	parent = g_file_get_parent(file);
+	new_child = g_file_get_child(parent, result);
+	g_object_unref(parent);
+	g_free(result);
+
+	return new_child;
 }
 
 static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
-	gchar *new_doc_name;
-	gchar *old_doc_name;
+	GFile *new_doc_name;
+	GFile *old_doc_name;
 	CongDocument *doc;
 	xmlDocPtr xml;
+	char *new_doc_uri;
 
 	doc = cong_primary_window_get_document(primary_window);
 
-	old_doc_name = change_to_xds (cong_document_get_filename(doc));
+	old_doc_name = change_to_xds (cong_document_get_file(doc));
 
 	new_doc_name = cong_get_file_name("Save Display Specification",
 					  old_doc_name, 
@@ -84,7 +96,7 @@ static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 					  NULL /* FIXME */);
 
 	if (!new_doc_name) {
-		g_free (old_doc_name);
+		g_object_unref (old_doc_name);
 		return;
 	}
 
@@ -93,12 +105,14 @@ static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 			    (const xmlChar*)"dispspec", 
 			    NULL, 
 			    (const xmlChar*)"dispspec.dtd");
-	xmlSaveFormatFile(new_doc_name, xml, TRUE);
+	new_doc_uri = g_file_get_uri(new_doc_name);
+	xmlSaveFormatFile(new_doc_uri, xml, TRUE);
+	g_free(new_doc_uri);
 
 	/* FIXME: does this leak xml? */
 
-	g_free(new_doc_name);
-	g_free(old_doc_name);
+	g_object_unref(new_doc_name);
+	g_object_unref(old_doc_name);
 
 }
 

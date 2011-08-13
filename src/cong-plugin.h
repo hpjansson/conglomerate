@@ -152,12 +152,12 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 gboolean cong_ui_transform_doc_to_uri(CongDocument *doc,
 				      const gchar *stylesheet_filename,
 				      GList *list_of_parameters,
-				      const gchar *string_uri,
+				      GFile *file,
 				      GtkWindow *toplevel_window);
 
-gboolean cong_ui_load_imported_file_content(const gchar *uri,
+gboolean cong_ui_load_imported_file_content(GFile *file,
 					    char** buffer,
-					    GnomeVFSFileSize* size,
+					    gsize* size,
 					    GtkWindow *parent_window);
 
 void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,

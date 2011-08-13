@@ -306,6 +306,12 @@ cong_util_set_attribute_bool (xmlNodePtr xml_node, const gchar* name, gboolean v
 void
 cong_util_set_attribute_int (xmlNodePtr xml_node, const gchar* name, int value);
 
+char *
+cong_util_expand_initial_tilde(const char *path);
+
+char *
+cong_util_format_file_size_for_display (gsize size);
+
 G_END_DECLS
 
 #endif

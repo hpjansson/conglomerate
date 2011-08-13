@@ -9,73 +9,11 @@
 #include "cong-app.h"
 #include "cong-util.h"
 
-/* FIXME: eventually abstract this into cong-vfs */
-#include <libgnomevfs/gnome-vfs.h>
-
 struct CongDispspecRegistry
 {
 	int num;
 	CongDispspec** array;
 };
-
-struct LoadingDetails
-{
-	CongDispspecRegistry* registry;
-	GnomeVFSURI* path_uri;
-};
-
-/**
- * visit_func:
- * @rel_path:
- * @info:
- * @recursing_will_loop:
- * @data:
- * @recurse:
- *
- * TODO: Write me
- */
-gboolean
-visit_func(const gchar *rel_path,
-	   GnomeVFSFileInfo *info,
-	   gboolean recursing_will_loop,
-	   gpointer data,
-	   gboolean *recurse)
-{
-	struct LoadingDetails* details = (struct LoadingDetails*)data;
-	char* match;
-
-	/* g_message("visit_func called\n"); */
-
-	/* FIXME: Ultimately we should do a MIME-lookup */
-	/* Search for strings that are terminated with ".xds" */
-	match=strstr(rel_path,".xds");
-	if (match && match[4]=='\0') {
-		/* This looks like an xds file: */
-		/* get at name */
-		GnomeVFSURI* uri_filename = gnome_vfs_uri_append_string(details->path_uri,
-									rel_path);
-		gchar* filename = gnome_vfs_uri_extract_short_path_name(uri_filename);
-
-		CongDispspec* ds;
-		GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri_filename, &ds);
-
-		if (vfs_result==GNOME_VFS_OK) {
-			
-			if (ds!=NULL) {
-				cong_dispspec_registry_add(details->registry, ds);
-			} else {
-				g_warning("Problem parsing xds file: %s.\n",filename);
-			}
-		} else {
-			g_warning("Problem loading xds file: %s.\n",filename);
-		}
-
-		gnome_vfs_uri_unref(uri_filename);
-		/* FIXME: should filename be unref-ed ? GSt */
-	}
-	
-	return TRUE;
-}
 
 /* Add all disspecs found in directory to an existing DispspecRegistry */
 /**
@@ -90,32 +28,84 @@ visit_func(const gchar *rel_path,
 void
 cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_directory, GtkWindow *toplevel_window, gboolean raise_errs)
 {
-	GnomeVFSResult vfs_result;
-	struct LoadingDetails details;
+	gboolean result;
+	GFile *xds_dir;
+	GFileEnumerator *directory;
+	GFileInfo *info;
+	GError *error = NULL;
 
-	details.registry=registry;
-	details.path_uri=gnome_vfs_uri_new(xds_directory);
+	xds_dir = g_file_new_for_path(xds_directory);
 
 	/* Scan the directory for xds files: */
-	vfs_result = gnome_vfs_directory_visit(xds_directory,
-					       GNOME_VFS_FILE_INFO_DEFAULT,
-					       GNOME_VFS_DIRECTORY_VISIT_DEFAULT,
-					       visit_func,
-					       (gpointer)&details);
 
-	if (raise_errs && vfs_result!=GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
-										      _("Conglomerate could not read its registry of document types."),
-										      xds_directory,
-										      vfs_result, 
-										      _("Conglomerate attempted to look at all the files in the location."));
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
+	directory = g_file_enumerate_children(xds_dir,
+	                                      G_FILE_ATTRIBUTE_STANDARD_NAME,
+	                                      G_FILE_QUERY_INFO_NONE,
+	                                      NULL,
+	                                      &error);
 
-		gnome_vfs_uri_unref(details.path_uri);
+	if(!directory) {
+		if(raise_errs) {
+			GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
+			                                                                      _("Conglomerate could not read its registry of document types."),
+			                                                                      xds_dir,
+			                                                                      error,
+			                                                                      _("Conglomerate attempted to look at all the files in the location."));
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+		}
+
+		g_object_unref(xds_dir);
+		return;
 	}
 
-	gnome_vfs_uri_unref(details.path_uri);
+	while((info = g_file_enumerator_next_file(directory, NULL, &error)) != NULL) {
+		const char *rel_path = g_file_info_get_name(info);
+		/* FIXME: Ultimately we should do a MIME-lookup */
+		/* Search for strings that are terminated with ".xds" */
+		if (g_str_has_suffix(rel_path, ".xds")) {
+			/* This looks like an xds file: */
+			/* get at name */
+			GFile *file = g_file_get_child(xds_dir, rel_path);
+			char *filename = g_file_get_path(file);
+			CongDispspec* ds;
+			gboolean result;
+
+			result = cong_dispspec_new_from_xds_file(file, &ds, &error);
+			if (result == TRUE) {
+				if (ds!=NULL) {
+					cong_dispspec_registry_add(registry, ds);
+				} else {
+					g_warning("Problem parsing xds file: %s.\n", filename);
+				}
+			} else {
+				g_warning("Problem loading xds file: %s.\n",filename);
+			}
+
+			g_free(filename);
+			g_object_unref(file);
+		}
+		g_object_unref(info);
+	}
+
+	if(raise_errs && error) {
+		GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
+		                                                                      _("Conglomerate failed while reading its registry of document types."),
+		                                                                      xds_dir,
+		                                                                      error,
+		                                                                      _("Conglomerate attempted to look at all the files in the location."));
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+	}
+
+	result = g_file_enumerator_close(directory, NULL, &error);
+	if(!result) {
+		g_warning("Error closing directory '%s': %s", xds_directory, error->message);
+		g_error_free(error);
+	}
+
+	g_object_unref(directory);
+	g_object_unref(xds_dir);
 }	
 
 /* Create a new DispspecRegistry.

@@ -34,150 +34,63 @@
  */
 /**
  * cong_vfs_read_bytes:
- * @vfs_handle:
+ * @input_stream:
  * @buffer:
  * @bytes:
  *
  * TODO: Write me
- * Returns:
+ * Returns: %TRUE in any case.
  */
-GnomeVFSResult
-cong_vfs_read_bytes (GnomeVFSHandle* vfs_handle, 
+gboolean
+cong_vfs_read_bytes (GInputStream* stream,
 		     char* buffer, 
-		     GnomeVFSFileSize bytes)
+		     gsize bytes)
 {
-	GnomeVFSFileSize bytes_read;
-	GnomeVFSResult vfs_result = gnome_vfs_read(vfs_handle,buffer,bytes,&bytes_read);
+	gsize bytes_read = g_input_stream_read(stream, buffer, bytes, NULL, NULL);
 
 	g_assert(bytes==bytes_read); /* for now */
 
-	return vfs_result;
+	return TRUE;
 }
 
 /* 
    A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+   -- It does indeed! g_file_get_contents().
 */
 /**
  * cong_vfs_new_buffer_from_file:
- * @filename:
+ * @file:
  * @buffer:
  * @size:
+ * @error: Return location for an error, or %NULL.
  *
  * TODO: Write me
- * Returns:
+ * Returns: %TRUE on success, %FALSE if @error was set.
  */
-GnomeVFSResult
-cong_vfs_new_buffer_from_file (const char* filename, 
+gboolean
+cong_vfs_new_buffer_from_file (GFile *file,
 			       char** buffer, 
-			       GnomeVFSFileSize* size)
+			       gsize* size,
+			       GError **error)
 {
-	GnomeVFSResult vfs_result;
-	GnomeVFSURI* uri;
+	g_return_val_if_fail(file, FALSE);
+	g_return_val_if_fail(buffer, FALSE);
+	g_return_val_if_fail(size, FALSE);
 
-	g_return_val_if_fail(filename,GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
-
-	uri = gnome_vfs_uri_new (filename);
-
-	vfs_result = cong_vfs_new_buffer_from_uri(uri, buffer, size);
-
-	gnome_vfs_uri_unref(uri);
-
-	return vfs_result;
+	return g_file_load_contents(file, NULL, buffer, size, NULL, error);
 }
 
 /**
- * cong_vfs_new_buffer_from_uri:
- * @vfs_uri:
- * @buffer:
- * @size:
- *
- * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
- *
- * Returns:
- */
-GnomeVFSResult
-cong_vfs_new_buffer_from_uri (GnomeVFSURI* uri, 
-			      char** buffer, 
-			      GnomeVFSFileSize* size)
-{
-	GnomeVFSResult vfs_result;
-	GnomeVFSHandle *vfs_handle;
-
-	g_return_val_if_fail(uri,GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
-
-	vfs_result = gnome_vfs_open_uri(&vfs_handle,
-					uri,
-					GNOME_VFS_OPEN_READ);
-
-	if (GNOME_VFS_OK!=vfs_result) {
-		return vfs_result;
-	} else {
-		GnomeVFSFileInfo *info;
-		*buffer=NULL;
-		
-		info = gnome_vfs_file_info_new ();
-
-		/* Get the size of the file: */
-		vfs_result = gnome_vfs_get_file_info_from_handle(vfs_handle,
-								 info,
-								 GNOME_VFS_FILE_INFO_DEFAULT);
-		if (GNOME_VFS_OK!=vfs_result) {
-			gnome_vfs_close(vfs_handle);
-			gnome_vfs_file_info_unref (info);
-			
-			return vfs_result;
-		}
-
-		if (!(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)) {
-			gnome_vfs_close(vfs_handle);
-			gnome_vfs_file_info_unref (info);
-			
-			return GNOME_VFS_ERROR_IO; /* FIXME: is this appropriate? */
-		}
-
-		
-		/* Allocate the buffer: */
-		*buffer = g_malloc(info->size);
-		
-		/* Read the file into the buffer: */
-		vfs_result = cong_vfs_read_bytes(vfs_handle, *buffer, info->size);
-		
-		if (GNOME_VFS_OK!=vfs_result) {
-			
-			g_free(*buffer);
-			gnome_vfs_close(vfs_handle);
-			gnome_vfs_file_info_unref (info);
-
-			*buffer=NULL;
-			
-			return vfs_result;
-		}
-		
-		gnome_vfs_close(vfs_handle);
-		
-		*size = info->size;
-		
-		gnome_vfs_file_info_unref (info);
-
-		return GNOME_VFS_OK;
-	}
-}
-
-/**
- * cong_vfs_load_xml_from_uri:
- * @string_uri:
+ * cong_vfs_load_xml_from_file:
+ * @file:
  * @parent_window:
  *
  * TODO: Write me
  * Returns:
  */
 xmlDocPtr
-cong_vfs_load_xml_from_uri (const gchar *string_uri,
-			    GtkWindow *parent_window)
+cong_vfs_load_xml_from_file (GFile *file,
+			     GtkWindow *parent_window)
 {
 	xmlDocPtr xml_doc = NULL;
 
@@ -238,22 +151,22 @@ cong_vfs_load_xml_from_uri (const gchar *string_uri,
 		return(ret);
 	}
 #else
-	/* Load using GnomeVFS: */
+	/* Load using GIO: */
 	{
-		GnomeVFSURI* vfs_uri = gnome_vfs_uri_new (string_uri);
 		char* buffer;
-		GnomeVFSFileSize size;
-		GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file (string_uri, 
-									   &buffer, 
-									   &size);		
-		if (vfs_result!=GNOME_VFS_OK) {
-			GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result (parent_window,
-													  string_uri,
-													  vfs_result);
+		gsize size;
+		GError *error = NULL;
+		gboolean result = cong_vfs_new_buffer_from_file (file,
+		                                                 &buffer,
+		                                                 &size,
+		                                                 &error);
+
+		if (!result) {
+			GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_gerror (parent_window,
+			                                                                              file,
+			                                                                              error);
 			cong_error_dialog_run(GTK_DIALOG(dialog));
 			gtk_widget_destroy(GTK_WIDGET(dialog));
-
-			gnome_vfs_uri_unref (vfs_uri);
 			
 			return NULL;
 		}
@@ -263,11 +176,9 @@ cong_vfs_load_xml_from_uri (const gchar *string_uri,
 		/* Parse the file from the buffer: */
 		xml_doc = cong_ui_parse_buffer (buffer, 
 						size, 
-						string_uri, 
+						file,
 						parent_window);
 		g_free(buffer);
-
-		gnome_vfs_uri_unref (vfs_uri);
 
 		return xml_doc;
 	}
@@ -275,28 +186,30 @@ cong_vfs_load_xml_from_uri (const gchar *string_uri,
 }
 
 /**
- * cong_vfs_save_xml_to_uri:
+ * cong_vfs_save_xml_to_file:
  * @doc_ptr:
- * @vfs_uri:
+ * @file: a file reference to save to.
  * @output_file_size:
+ * @error: return location for an error, or %NULL.
  *
  * TODO: Write me
- * Returns:
+ * Returns: %TRUE on success, %FALSE if @error was set.
  */
-GnomeVFSResult
-cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr, 
-			  GnomeVFSURI *file_uri,	
-			  GnomeVFSFileSize *output_file_size)
+gboolean
+cong_vfs_save_xml_to_file (xmlDocPtr doc_ptr,
+			   GFile *file,
+			   gsize *output_file_size,
+                           GError **error)
 {
 	xmlChar* mem;
 	int size;
-	GnomeVFSResult vfs_result;
-	GnomeVFSHandle *vfs_handle;
-	GnomeVFSFileSize written_size;
+	gboolean result;
+	GFileOutputStream *stream;
+	gsize written_size;
 
-	g_return_val_if_fail(doc_ptr, GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(file_uri, GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(output_file_size, GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(doc_ptr, FALSE);
+	g_return_val_if_fail(file, FALSE);
+	g_return_val_if_fail(output_file_size, FALSE);
 
 	/* Dump to a memory buffer. then write out buffer to GnomeVFS: */
 	xmlDocDumpMemory(doc_ptr,
@@ -307,32 +220,35 @@ cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr,
 
 	*output_file_size = size;
 
-	vfs_result = gnome_vfs_create_uri(&vfs_handle,
-					  file_uri,
-					  GNOME_VFS_OPEN_WRITE,
-					  FALSE,
-					  0644
-					);
-
-	if (vfs_result != GNOME_VFS_OK) {
-		return vfs_result;
+	stream = g_file_replace(file,
+	                        NULL,
+	                        FALSE,
+	                        G_FILE_CREATE_NONE,
+	                        NULL,
+	                        error);
+	if(!stream) {
+		xmlFree(mem);
+		return FALSE;
 	}
 
-	vfs_result = gnome_vfs_write(vfs_handle,
-				     mem,
-				     *output_file_size,
-				     &written_size);
+	result = g_output_stream_write_all(G_OUTPUT_STREAM(stream),
+	                                   mem,
+	                                   *output_file_size,
+	                                   &written_size,
+	                                   NULL,
+	                                   error);
+	xmlFree(mem);
 
-	if (vfs_result != GNOME_VFS_OK) {
-		gnome_vfs_close(vfs_handle);
-		return vfs_result;
+	if (!result) {
+		g_output_stream_close(G_OUTPUT_STREAM(stream), NULL, NULL);
+		return FALSE;
 	}
 
 	g_assert(*output_file_size == written_size);
 
-	vfs_result = gnome_vfs_close(vfs_handle);
+	result = g_output_stream_close(G_OUTPUT_STREAM(stream), NULL, error);
 
-	return vfs_result;
+	return result;
 }
 
 /**
@@ -343,113 +259,98 @@ cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr,
  * valid
  */
 gchar*
-cong_vfs_get_local_path_from_uri (GnomeVFSURI *uri)
+cong_vfs_get_local_path_from_file (GFile *file)
 {
-	gchar *uri_string;
+	gchar *path_string;
 
-	g_return_val_if_fail(uri, NULL);
+	g_return_val_if_fail(file, NULL);
 
-	uri_string = gnome_vfs_uri_to_string(uri, 
-					     (GNOME_VFS_URI_HIDE_USER_NAME
-					      |GNOME_VFS_URI_HIDE_PASSWORD
-					      |GNOME_VFS_URI_HIDE_HOST_NAME
-					      |GNOME_VFS_URI_HIDE_HOST_PORT
-					      |GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD
-					      |GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER)
-					     );
+	path_string = g_file_get_path(file);
 
-	g_message("got \"%s\"",uri_string);
-	return uri_string;
+	g_message("got \"%s\"", path_string);
+	return path_string;
 }
 
 /**
- * cong_vfs_split_vfs_uri:
- * @vfs_uri:
- * @filename_alone:
- * @path:
+ * cong_vfs_split_file_path:
+ * @file:
+ * @filename_alone: (allow-none): Return location for the basename of the file,
+ * or %NULL if you aren't interested in it.
+ * @path: (allow-none): Return location for the path to the file, or %NULL if
+ * you aren't interested in it.
  *
  * TODO: Write me
  */
 void
-cong_vfs_split_vfs_uri (const GnomeVFSURI* vfs_uri, 
-			gchar** filename_alone, 
-			gchar** path)
+cong_vfs_split_file_path (GFile *file,
+			  gchar** filename_alone,
+			  gchar** path)
 {
-	GnomeVFSURI* parent_uri;
+	GFile *parent;
 
-	g_return_if_fail(vfs_uri);
+	g_return_if_fail(file);
 	g_return_if_fail(filename_alone);
 	g_return_if_fail(path);
 
-	parent_uri = gnome_vfs_uri_get_parent(vfs_uri);
+	if (filename_alone)
+		*filename_alone = g_file_get_basename(file);
 
-	*filename_alone=gnome_vfs_uri_extract_short_name(vfs_uri);
+	if(path) {
+		parent = g_file_get_parent(file);
 
-#if 1
-	/* This version seems better when dealing with e.g. http and ftp methods etc: */
-	if (parent_uri) {
+		if (parent) {
 
-		*path=gnome_vfs_uri_to_string(parent_uri,
-					      GNOME_VFS_URI_HIDE_USER_NAME|GNOME_VFS_URI_HIDE_PASSWORD);
-		gnome_vfs_uri_unref(parent_uri);
-	} else {
-		*path=g_strdup("");
+			*path = g_file_get_path(parent);
+			g_object_unref(parent);
+		} else {
+			*path=g_strdup("");
+		}
 	}
-#else
-	/* This version seems better when dealing with the "file" method; perhaps we should have a conditional here? */ 
-	*path=gnome_vfs_uri_extract_dirname(vfs_uri);
-
-	gnome_vfs_uri_unref(parent_uri);
-
-#endif
-}
-
-/**
- * cong_vfs_split_string_uri:
- * @string_uri:
- * @filename_alone:
- * @path:
- *
- * TODO: Write me
- */
-void
-cong_vfs_split_string_uri (const gchar* string_uri,
-			   gchar** filename_alone, 
-			   gchar** path)
-{
-	GnomeVFSURI* vfs_uri;
-
-	g_return_if_fail(string_uri);
-
-	vfs_uri = gnome_vfs_uri_new (string_uri);
-
-	cong_vfs_split_vfs_uri (vfs_uri, 
-				filename_alone, 
-				path);
-	
-	gnome_vfs_uri_unref (vfs_uri);
 }
 
 /**
  * cong_vfs_extract_short_name:
- * @string_uri:
+ * @file: file reference to query.
  *
- * TODO: Write me
- * Returns:
+ * Gets the short name (base name) of @file. Free the string when done. Note,
+ * this string is in the filename encoding, which might not be UTF-8!
+ * Returns: (transfer full): file's short name, or %NULL on error.
  */
 gchar*
-cong_vfs_extract_short_name (const gchar *string_uri)
+cong_vfs_extract_short_name (GFile *file)
 {
-	GnomeVFSURI* vfs_uri;
-	gchar *result;
+	g_return_val_if_fail(file, NULL);
+	return g_file_get_basename(file);
+}
 
-	g_return_val_if_fail(string_uri, NULL);
+/**
+ * cong_vfs_extract_display_name:
+ * @file: file reference to query.
+ *
+ * Gets a short filename suitable for display. Free the string when done. May
+ * fall back to the short non-display name if necessary.
+ * Returns: (transfer full): file's display name, or %NULL on error.
+ */
+char *
+cong_vfs_extract_display_name (GFile *file)
+{
+	GFileInfo *info;
+	char *retval;
 
-	vfs_uri = gnome_vfs_uri_new (string_uri);
+	g_return_val_if_fail(file, NULL);
 
-	result = gnome_vfs_uri_extract_short_name(vfs_uri);
-	
-	gnome_vfs_uri_unref (vfs_uri);
+	info = g_file_query_info(file,
+	                  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+	                  G_FILE_QUERY_INFO_NONE,
+	                  NULL,
+	                  NULL);
+	if(info) {
+		retval = g_strdup(g_file_info_get_display_name(info));
+		g_object_unref(info);
+	} else {
+		g_warning("Couldn't query file info");
+		retval = cong_vfs_extract_short_name(file);
+	}
 
-	return result;
+	return retval;
 }

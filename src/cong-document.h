@@ -109,8 +109,8 @@ struct _CongDocumentClass
 	void (*set_dtd_ptr) (CongDocument *doc,
 			     xmlDtdPtr dtd_ptr);
 
-	void (*set_url) (CongDocument *doc,
-			 const gchar *new_url);
+	void (*set_file) (CongDocument *doc,
+			  GFile *new_file);
 };
 
 GType
@@ -120,12 +120,12 @@ CongDocument*
 cong_document_construct (CongDocument *doc,
 			 xmlDocPtr xml_doc,
 			 CongDispspec *ds, 
-			 const gchar *url);
+			 GFile *file);
 
 CongDocument*
 cong_document_new_from_xmldoc (xmlDocPtr xml_doc, 
 			       CongDispspec *ds, 
-			       const gchar *url);
+			       GFile *file);
 
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc);
@@ -162,13 +162,13 @@ gchar*
 cong_document_get_filename(CongDocument *doc);
 /* caller is responsible for freeeing */
 
-gchar*
-cong_document_get_full_uri(CongDocument *doc);
-/* caller is responsible for freeeing */
+GFile *
+cong_document_get_file(CongDocument *doc);
+/* caller is responsible for unreffing */
 
-gchar*
-cong_document_get_parent_uri(CongDocument *doc);
-/* caller is responsible for freeeing */
+GFile *
+cong_document_get_parent(CongDocument *doc);
+/* caller is responsible for unreffing */
 
 const gchar*
 cong_document_get_dtd_public_identifier(CongDocument *doc);
@@ -185,7 +185,7 @@ cong_document_get_nsptr (CongDocument *doc, const gchar* xmlns);
 
 void
 cong_document_save(CongDocument *doc, 
-		   const char* filename,
+		   GFile *file,
 		   GtkWindow *parent_window);
 
 gboolean
@@ -201,7 +201,7 @@ CongPrimaryWindow*
 cong_document_get_primary_window(CongDocument *doc);
 
 void 
-cong_document_set_url(CongDocument *doc, const gchar *url);
+cong_document_set_file(CongDocument *doc, GFile *file);
 
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);

@@ -28,6 +28,7 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 #include "cong-parser-error.h"
+#include "cong-vfs.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -90,7 +91,7 @@ static gboolean on_stderr(GIOChannel *source,
  * TODO: Write me
  */
 void 
-sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+sgml_importer_action_callback(CongServiceImporter *importer, GFile *file, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 #if 0
 	char* buffer;
@@ -106,13 +107,13 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 	GError *error = NULL; 
 	gboolean result;
 
-/* 	gchar * posix_name = cong_util_get_local_path_from_uri(GnomeVFSURI *uri); */
+	gchar *posix_name = cong_vfs_get_local_path_from_file(file);
  
 
 	g_message("sgml_importer_action_callback");
 
 	argv[0] = "sgml2xml";
-	argv[1] = (gchar*)uri; /* FIXME: this is GnomeVFS uri path string, not a POSIX path */
+	argv[1] = posix_name;
 	argv[2] = NULL;
 
 
@@ -129,7 +130,7 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 			      &error);
 
 	if (!result) {
-		gchar *what_failed = cong_ui_make_what_failed_string_for_import(uri);
+		gchar *what_failed = cong_ui_make_what_failed_string_for_import(posix_name);
 		GtkDialog *dialog = cong_error_dialog_new_from_gerror(toplevel_window,
 								      what_failed,
 								      _("Attempting to run the sgml2xml tool"),
@@ -147,7 +148,7 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 	g_assert(standard_error);
 
 	if (exit_status) {
-		gchar *what_failed = cong_ui_make_what_failed_string_for_import(uri);
+		gchar *what_failed = cong_ui_make_what_failed_string_for_import(posix_name);
 
 
 		GtkDialog* dialog = cong_error_dialog_new_from_shell_command_failure_with_argv(toplevel_window,
@@ -172,7 +173,7 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 	{
 		xml_doc = cong_ui_parse_buffer (standard_output, 
 						strlen(standard_output), 
-						uri, 
+						file,
 						toplevel_window);
 	}
 

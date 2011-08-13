@@ -221,9 +221,9 @@ cong_parser_result_dialog_new(CongParserResult *parser_result)
 	g_return_val_if_fail(parser_result, NULL);
 
 	g_assert(parser_result);
-	g_assert(parser_result->string_uri);
+	g_assert(parser_result->file);
 
-	filename = cong_vfs_extract_short_name (parser_result->string_uri);
+	filename = cong_vfs_extract_short_name (parser_result->file);
 
 	title = g_strdup_printf(_("Parse errors loading %s"), filename);
 
@@ -376,14 +376,14 @@ on_parser_error_details(gpointer data)
 
 /**
  * cong_error_dialog_new_file_open_failed_from_parser_error:
- * @string_uri:
+ * @file:
  * @parser_result:
  *
  * TODO: Write me
  * Returns:
  */
 GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
+cong_error_dialog_new_file_open_failed_from_parser_error (GFile *file,
 							  CongParserResult *parser_result)
 {
 	GtkDialog* dialog = NULL;
@@ -395,7 +395,7 @@ cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_ur
 	g_assert(parser_result);
 
 	dialog = cong_error_dialog_new_from_file_open_failure_with_convenience (parser_result->parent_window,
-										string_uri, 
+										file,
 										FALSE,
 										why_failed,
 										_("Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."),
@@ -421,8 +421,8 @@ cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_ur
  */
 xmlDocPtr 
 cong_ui_parse_buffer (const char* buffer,
-		      GnomeVFSFileSize size, 
-		      const gchar *string_uri,
+		      gsize size,
+		      GFile *file,
 		      GtkWindow *parent_window)
 {
 #if 1
@@ -432,14 +432,14 @@ cong_ui_parse_buffer (const char* buffer,
 	CongParserResult parser_result;
 
 	g_return_val_if_fail(buffer, NULL);
-	g_return_val_if_fail(string_uri, NULL);
+	g_return_val_if_fail(file, NULL);
 
 	parser_result.buffer=buffer;
 	parser_result.size=size;
 	parser_result.issues=NULL;
 	parser_result.parent_window=parent_window;
 
-	parser_result.string_uri = g_strdup (string_uri);
+	parser_result.file = g_file_dup(file);
 	
 	ctxt = cong_parse_from_memory (buffer, 
 				       size,
@@ -448,7 +448,7 @@ cong_ui_parse_buffer (const char* buffer,
 	if (ctxt->wellFormed) {
 		ret = ctxt->myDoc;
 	} else {
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error (string_uri,
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error (file,
 											      &parser_result);
 	
 		cong_error_dialog_run(GTK_DIALOG(dialog));
@@ -523,7 +523,7 @@ cong_parse_from_filename (const gchar* string_uri,
  */
 xmlParserCtxtPtr
 cong_parse_from_memory (const char* buffer, 
-			GnomeVFSFileSize size,
+			gsize size,
 			CongParserResult *parser_result)
 {
 	xmlParserCtxtPtr ctxt;

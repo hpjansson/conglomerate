@@ -48,7 +48,7 @@ typedef GtkWidget*
 typedef void 
 (*CongServiceExporterActionCallback) (CongServiceExporter *exporter, 
 				      CongDocument *doc, 
-				      const gchar *uri, 
+				      GFile *file,
 				      gpointer user_data, 
 				      GtkWindow *toplevel_window);
 
@@ -78,14 +78,14 @@ cong_exporter_supports_document (CongServiceExporter *exporter,
 void 
 cong_exporter_invoke (CongServiceExporter *exporter, 
 		      CongDocument *doc, 
-		      const gchar *uri, 
+		      GFile *file,
 		      GtkWindow *toplevel_window);
-gchar*
-cong_exporter_get_preferred_uri (CongServiceExporter *exporter);
+GFile *
+cong_exporter_get_preferred_location (CongServiceExporter *exporter);
 
 void
-cong_exporter_set_preferred_uri (CongServiceExporter *exporter, 
-				 const gchar *uri);
+cong_exporter_set_preferred_location (CongServiceExporter *exporter,
+                                      GFile *uri);
 
 GtkWidget* 
 cong_exporter_make_options_widget (CongServiceExporter *exporter, 

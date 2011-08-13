@@ -308,11 +308,11 @@ cong_ui_transform_doc(CongDocument *doc,
  * @doc:
  * @stylesheet_filename:
  * @list_of_parameters: a #GList of #CongStylesheetParameter
- * @string_uri:
+ * @file:
  * @toplevel_window:
  *
  * Applies the stylesheet (@stylesheet_filename) to the
- * document (@doc) and saves the output to @string_uri.
+ * document (@doc) and saves the output to @file.
  * 
  * At present, it is assumed that a dialog window will be
  * created if there is an error in the processing (e.g.
@@ -329,17 +329,17 @@ gboolean
 cong_ui_transform_doc_to_uri(CongDocument *doc,
 			     const gchar *stylesheet_filename,
 			     GList *list_of_parameters,
-			     const gchar *string_uri,
+			     GFile *file,
 			     GtkWindow *toplevel_window)
 {
 	xmlDocPtr doc_ptr;
-	GnomeVFSURI *vfs_uri;
-	GnomeVFSResult vfs_result;
-	GnomeVFSFileSize file_size;
+	gboolean result;
+	gsize file_size;
+	GError *error = NULL;
 
 	g_return_val_if_fail (doc, 0);
 	g_return_val_if_fail (stylesheet_filename, 0);
-	g_return_val_if_fail (string_uri, 0);
+	g_return_val_if_fail (file, 0);
 
 	doc_ptr = cong_ui_transform_doc(doc,
 					stylesheet_filename,
@@ -349,15 +349,15 @@ cong_ui_transform_doc_to_uri(CongDocument *doc,
 		return 0;
 	}
 
-	vfs_uri = gnome_vfs_uri_new(string_uri);
-	vfs_result = cong_vfs_save_xml_to_uri (doc_ptr, 
-					       vfs_uri,	
-					       &file_size);
+	result = cong_vfs_save_xml_to_file (doc_ptr,
+	                                    file,
+	                                    &file_size,
+	                                    &error);
 		
-	if (vfs_result != GNOME_VFS_OK) {
+	if (!result) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
-										 string_uri, 
-										 vfs_result, 
+										 file,
+										 error,
 										 &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
@@ -365,7 +365,6 @@ cong_ui_transform_doc_to_uri(CongDocument *doc,
 		return 0;
 	}
 		
-	gnome_vfs_uri_unref(vfs_uri);
 	xmlFreeDoc(doc_ptr);
 	return 1;
 }

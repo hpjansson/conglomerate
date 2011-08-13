@@ -341,6 +341,8 @@ cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
 							details_dialog);
 	/* FIXME: this will leak the details dialog */
 
+	g_error_free(error);
+
 	return dialog;
 }
 

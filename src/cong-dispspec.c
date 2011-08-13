@@ -238,31 +238,31 @@ cong_dispspec_new(void)
  * cong_dispspec_new_from_xds_file:
  * @uri:
  * @ds:
+ * @error: Return location for an error, or %NULL.
  *
  * TODO: Write me
- * Returns:
+ * Returns: %TRUE on success, %FALSE if @error was set.
  */
-GnomeVFSResult 
-cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
+gboolean
+cong_dispspec_new_from_xds_file(GFile *file, CongDispspec** ds, GError **error)
 {
 	char* buffer;
-	GnomeVFSFileSize size;
-	GnomeVFSResult vfs_result;
+	gsize size;
+	gboolean result;
 
-	g_return_val_if_fail(uri, GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(ds, GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(file, FALSE);
+	g_return_val_if_fail(ds, FALSE);
 
-	vfs_result = cong_vfs_new_buffer_from_uri(uri, &buffer, &size);
+	result = cong_vfs_new_buffer_from_file(file, &buffer, &size, error);
 
-	if (vfs_result!=GNOME_VFS_OK) {
-		return vfs_result;
-	}
+	if (!result)
+		return FALSE;
 
 	*ds = cong_dispspec_new_from_xds_buffer(buffer, size);
 
 	g_free (buffer);
 
-	return vfs_result;	
+	return TRUE;
 }
 
 /**

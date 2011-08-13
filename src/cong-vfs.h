@@ -25,8 +25,6 @@
 #ifndef __CONG_VFS_H__
 #define __CONG_VFS_H__
 
-#include <libgnomevfs/gnome-vfs.h>
-
 G_BEGIN_DECLS
 
 /* Handy utility functions: */
@@ -36,52 +34,48 @@ G_BEGIN_DECLS
  * @filename:
  * @buffer:
  * @size:
+ * @error: Return location for an error, or %NULL.
  * 
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
  * (I believe that CVS gnome-vfs has a routine gnome_vfs_read_entire_file that does this)
  * 
- * Returns:
+ * Returns: %TRUE on success, %FALSE if @error was set.
  */
-GnomeVFSResult
-cong_vfs_new_buffer_from_file (const char* filename, 
+gboolean
+cong_vfs_new_buffer_from_file (GFile *file,
 			       char** buffer, 
-			       GnomeVFSFileSize* size);
-
-GnomeVFSResult
-cong_vfs_new_buffer_from_uri (GnomeVFSURI *vfs_uri, 
-			      char** buffer, 
-			      GnomeVFSFileSize* size);
+			       gsize* size,
+                               GError **error);
 
 xmlDocPtr
-cong_vfs_load_xml_from_uri (const gchar *string_uri,
-			    GtkWindow *parent_window);
+cong_vfs_load_xml_from_file (GFile *file,
+			     GtkWindow *parent_window);
 
-GnomeVFSResult
-cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr, 
-			  GnomeVFSURI *vfs_uri,
-			  GnomeVFSFileSize *output_file_size);
+gboolean
+cong_vfs_save_xml_to_file (xmlDocPtr doc_ptr,
+                           GFile *file,
+                           gsize *output_file_size,
+                           GError **error);
 
 /**
    Convert a URI into a POSIX, path, assuming that this is valid: 
 */
 gchar*
-cong_vfs_get_local_path_from_uri (GnomeVFSURI *vfs_uri);
+cong_vfs_get_local_path_from_file (GFile *file);
 
 void
-cong_vfs_split_vfs_uri (const GnomeVFSURI* vfs_uri, 
-			gchar** filename_alone, 
-			gchar** path);
-
-void
-cong_vfs_split_string_uri (const gchar* string_uri,
-			   gchar** filename_alone, 
-			   gchar** path);
+cong_vfs_split_file_path (GFile* file,
+                          gchar** filename_alone,
+                          gchar** path);
 
 /**
  * Extract a short name from a stringified URI; typically the filename itself, without any path etc
  */
 gchar*
-cong_vfs_extract_short_name (const gchar *string_uri);
+cong_vfs_extract_short_name (GFile *file);
+
+char *
+cong_vfs_extract_display_name (GFile *file);
 
 G_END_DECLS
 

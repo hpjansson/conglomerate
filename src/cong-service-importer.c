@@ -108,18 +108,18 @@ cong_importer_make_file_filter (CongServiceImporter *importer)
  */
 void 
 cong_importer_invoke (CongServiceImporter *importer, 
-		      const gchar *filename, 
+		      GFile *file,
 		      const gchar *mime_type, 
 		      GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_IMPORTER (importer));
-	g_return_if_fail (filename);
+	g_return_if_fail (file);
 	g_return_if_fail (mime_type);
 	
 	g_assert(PRIVATE (importer)->action_callback);
 
 	return PRIVATE (importer)->action_callback (importer, 
-						    filename, 
+						    file,
 						    mime_type, 
 						    PRIVATE (importer)->user_data, toplevel_window);
 }

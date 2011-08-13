@@ -23,6 +23,8 @@
  * Fragments of code based upon libxslt: numbers.c
  */
 
+#include <sys/types.h>
+#include <pwd.h>
 #include "global.h"
 #include "cong-util.h"
 #include "cong-app.h"
@@ -1594,7 +1596,7 @@ void
 cong_util_run_add_dtd_dialog (CongDocument *doc,
 			      GtkWindow *parent_window)
 {
-	gchar* dtd_filename;
+	GFile *dtd_file;
 	GList *list_of_filters;
 
 	g_return_if_fail (doc);
@@ -1602,24 +1604,26 @@ cong_util_run_add_dtd_dialog (CongDocument *doc,
 	list_of_filters = g_list_append (NULL, cong_util_make_file_filter (_("DTD files"), 
 									   "text/x-dtd"));
 	
-	dtd_filename = cong_get_file_name (_("Select a DTD"), 
-					   NULL,
-					   parent_window,
-					   CONG_FILE_CHOOSER_ACTION_OPEN,
-					   list_of_filters);
+	dtd_file = cong_get_file_name (_("Select a DTD"),
+	                               NULL,
+	                               parent_window,
+	                               CONG_FILE_CHOOSER_ACTION_OPEN,
+	                               list_of_filters);
 
-	if (dtd_filename) {
+	if (dtd_file) {
 		CongCommand *cmd = cong_document_begin_command (doc,
 								_("Associate with DTD"),
 								NULL);
+		char *dtd_uri = g_file_get_uri(dtd_file);
 		cong_command_add_set_external_dtd (cmd,
 						   (const gchar*)cong_document_get_root_element (doc)->name,
 						   NULL,
-						   dtd_filename);
+						   dtd_uri);
 		cong_document_end_command (doc,
 					   cmd);
 		
-		g_free (dtd_filename);
+		g_free(dtd_uri);
+		g_object_unref (dtd_file);
 	}
 }
 
@@ -1824,4 +1828,82 @@ cong_util_set_attribute_int (xmlNodePtr xml_node, const gchar* name, int value)
 	textual_value = g_strdup_printf("%i", value);
 	xmlSetProp (xml_node, (const xmlChar*)name, (const xmlChar*)textual_value);
 	g_free(textual_value);
+}
+
+/* From gnome-vfs-utils.c */
+
+/**
+ * cong_util_expand_initial_tilde:
+ * @path: a local file path which may start with a '~'.
+ *
+ * If @path starts with a ~, representing the user's home
+ * directory, expand it to the actual path location.
+ *
+ * Return value: a newly allocated string with the initial
+ * tilde (if there was one) converted to an actual path.
+ */
+char *
+cong_util_expand_initial_tilde(const char *path)
+{
+	char *slash_after_user_name, *user_name;
+	struct passwd *passwd_file_entry;
+
+	g_return_val_if_fail(path != NULL, NULL);
+
+	if(path[0] != '~')
+		return g_strdup(path);
+
+	if(path[1] == '/' || path[1] == '\0')
+		return g_strconcat(g_get_home_dir(), &path[1], NULL);
+
+	slash_after_user_name = strchr(&path[1], '/');
+	if(slash_after_user_name == NULL)
+		user_name = g_strdup(&path[1]);
+	else
+		user_name = g_strndup(&path[1], slash_after_user_name - &path[1]);
+
+	passwd_file_entry = getpwnam(user_name);
+	g_free(user_name);
+
+	if(passwd_file_entry == NULL || passwd_file_entry->pw_dir == NULL)
+		return g_strdup(path);
+
+	return g_strconcat(passwd_file_entry->pw_dir, slash_after_user_name, NULL);
+}
+
+/**
+ * cong_util_format_file_size_for_display:
+ * @size: a #gsize.
+ *
+ * Formats the file @size passed so that it is easy for
+ * the user to read. Gives the size in bytes, kilobytes, megabytes, or
+ * gigabytes, choosing whatever is appropriate.
+ *
+ * Returns: a newly allocated string with the size ready to be shown.
+ */
+#define KILOBYTE_FACTOR 1024.0
+#define MEGABYTE_FACTOR 1024.0 * KILOBYTE_FACTOR
+#define GIGABYTE_FACTOR 1024.0 * MEGABYTE_FACTOR
+char *
+cong_util_format_file_size_for_display (gsize size)
+{
+	if (size < (gsize)KILOBYTE_FACTOR) {
+		return g_strdup_printf (dngettext(GETTEXT_PACKAGE, "%u byte", "%u bytes", (unsigned) size), (unsigned) size);
+	} else {
+		double displayed_size;
+
+		if (size < (gsize) MEGABYTE_FACTOR) {
+			displayed_size = (double) size / KILOBYTE_FACTOR;
+			return g_strdup_printf (_("%.1f KB"),
+						       displayed_size);
+		} else if (size < (gsize) GIGABYTE_FACTOR) {
+			displayed_size = (double) size / MEGABYTE_FACTOR;
+			return g_strdup_printf (_("%.1f MB"),
+						       displayed_size);
+		} else  {
+			displayed_size = (double) size / GIGABYTE_FACTOR;
+			return g_strdup_printf (_("%.1f GB"),
+						       displayed_size);
+		}
+	}
 }

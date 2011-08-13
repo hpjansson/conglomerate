@@ -49,7 +49,7 @@ typedef GtkWidget*
 
 typedef void 
 (*CongServiceImporterActionCallback) (CongServiceImporter *importer, 
-				      const gchar *uri, 
+				      GFile *file,
 				      const gchar *mime_type, 
 				      gpointer user_data, 
 				      GtkWindow *toplevel_window);
@@ -78,7 +78,7 @@ cong_importer_make_file_filter (CongServiceImporter *importer);
 
 void 
 cong_importer_invoke (CongServiceImporter *importer, 
-		      const gchar *filename, 
+		      GFile *file,
 		      const gchar *mime_type, 
 		      GtkWindow *toplevel_window);
 

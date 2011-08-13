@@ -45,7 +45,7 @@ struct CongFilePropertiesDialogDetails
 
 	gulong sigid_end_edit;
 	gulong sigid_set_dtd;
-	gulong sigid_set_url;
+	gulong sigid_set_file;
 };
 
 static gboolean
@@ -66,9 +66,9 @@ on_doc_set_dtd_ptr (CongDocument *doc,
 		    gpointer user_data);
 
 static void
-on_doc_set_url (CongDocument *doc,
-		const gchar *new_url,
-		gpointer user_data);
+on_doc_set_file (CongDocument *doc,
+		 GFile *new_file,
+		 gpointer user_data);
 
 static guint 
 count_words (PangoLanguage *language,
@@ -183,12 +183,16 @@ refresh_filename_and_location (CongFilePropertiesDialogDetails *dialog_details,
 	
 	/* Location: */
 	{
-		gchar *path;
-		path = cong_document_get_parent_uri (doc);
-		
+		GFile *parent;
+		char *path;
+
+		parent = cong_document_get_parent (doc);
+		path = g_file_get_uri (parent);
+
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_location")), 
 				     path);
 		g_free (path);
+		g_object_unref (parent);
 	}
 }
 
@@ -349,10 +353,10 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	/* Filename & Location: */
 	refresh_filename_and_location (dialog_details, doc);
 	
-	dialog_details->sigid_set_url =  g_signal_connect_after (G_OBJECT (doc),
-								 "set_url",
-								 G_CALLBACK (on_doc_set_url),
-								 dialog_details);
+	dialog_details->sigid_set_file =  g_signal_connect_after (G_OBJECT (doc),
+								  "set_file",
+								  G_CALLBACK (on_doc_set_file),
+								  dialog_details);
 	
 	/* Modified: */
 	{
@@ -427,7 +431,7 @@ on_dialog_destroy (GtkWidget *widget,
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
-				     dialog_details->sigid_set_url);
+				     dialog_details->sigid_set_file);
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
 				     dialog_details->sigid_end_edit);
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
@@ -520,13 +524,13 @@ on_doc_set_dtd_ptr (CongDocument *doc,
 }
 
 static void
-on_doc_set_url (CongDocument *doc,
-		const gchar *new_url,
-		gpointer user_data)
+on_doc_set_file (CongDocument *doc,
+		 GFile *new_file,
+		 gpointer user_data)
 {
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 	g_assert (IS_CONG_DOCUMENT (doc));
-	g_assert (new_url);
+	g_assert (new_file);
 
 	refresh_filename_and_location (dialog_details,
 				       doc);

@@ -21,8 +21,8 @@
 /**
  * cong_error_dialog_new_from_file_save_failure:
  * @parent_window:
- * @string_uri:
- * @vfs_result:
+ * @file: the file reference for the file you tried to access
+ * @error: the error that occurred. For convenience, this function frees the error.
  * @file_size:
  *
  * TODO: Write me
@@ -30,9 +30,9 @@
  */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 
-					     const gchar* string_uri, 
-					     GnomeVFSResult vfs_result, 
-					     const GnomeVFSFileSize* file_size)
+					     GFile *file,
+					     GError *error,
+					     gsize* file_size)
 {
 	GtkDialog* dialog = NULL;
 	gchar* app_name;
@@ -40,22 +40,20 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	gchar* path;
 	gchar* what_failed_permanent;
 	gchar* what_failed_transient;
-	GnomeVFSURI* vfs_uri;
-	GnomeVFSURI* parent_uri;
+	GFile* parent;
 
-	g_return_val_if_fail(string_uri, NULL);
-	g_return_val_if_fail(GNOME_VFS_OK!=vfs_result, NULL);
+	g_return_val_if_fail(file, NULL);
+	g_return_val_if_fail(error, NULL);
 
 	app_name = cong_error_get_appname();
 
-	cong_vfs_split_string_uri (string_uri, &filename_alone, &path);
+	cong_vfs_split_file_path (file, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
 
 	/* Get at the parent URI in case it's needed: */
-	vfs_uri = gnome_vfs_uri_new (string_uri);
-	parent_uri = gnome_vfs_uri_get_parent(vfs_uri);
+	parent = g_file_get_parent (file);
 
 	/* A "what failed" message when the failure is likely to be permanent; this URI won't be saveable */
 	what_failed_permanent = g_strdup_printf(_("%s cannot save \"%s\" to %s."),app_name, filename_alone, path);
@@ -63,28 +61,19 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	/* A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting. */
 	what_failed_transient = g_strdup_printf(_("%s could not save \"%s\" to %s."),app_name, filename_alone, path);
 
-	switch (vfs_result) {
+	switch (error->code) {
 	default:
-	case GNOME_VFS_ERROR_GENERIC:
-	case GNOME_VFS_ERROR_INTERNAL:
-	case GNOME_VFS_ERROR_BAD_PARAMETERS:
-	case GNOME_VFS_ERROR_WRONG_FORMAT:
-	case GNOME_VFS_ERROR_NOT_OPEN:
-	case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-	case GNOME_VFS_ERROR_EOF:
-	case GNOME_VFS_ERROR_LOOP:
-	case GNOME_VFS_ERROR_CANCELLED:
-	case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-	case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-	case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
+	case G_IO_ERROR_FAILED:
+	case G_IO_ERROR_INVALID_ARGUMENT:
+	case G_IO_ERROR_CLOSED:
+	case G_IO_ERROR_WOULD_RECURSE:
+	case G_IO_ERROR_CANCELLED:
+	case G_IO_ERROR_NOT_EMPTY:
+	case G_IO_ERROR_TOO_MANY_LINKS:
 
-	case GNOME_VFS_ERROR_NOT_A_DIRECTORY: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_IN_PROGRESS: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_INTERRUPTED: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_FILE_EXISTS: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_SERVICE_OBSOLETE: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_PROTOCOL_ERROR: /* FIXME: when does this occur? */
+	case G_IO_ERROR_NOT_DIRECTORY: /* FIXME: when does this occur? */
+	case G_IO_ERROR_PENDING: /* FIXME: when does this occur? */
+	case G_IO_ERROR_EXISTS: /* FIXME: when does this occur? */
 	  {
 		  /* Unknown (or inapplicable) error */
 		  dialog = cong_error_dialog_new(parent_window, 
@@ -102,7 +91,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	  }
 	  break;
 	  
-	case GNOME_VFS_ERROR_NOT_FOUND:
+	case G_IO_ERROR_NOT_FOUND:
 		{
 			/* Since we're saving, this must be "path not found" rather than "file not found": */
 			dialog = cong_error_dialog_new(parent_window, 
@@ -112,8 +101,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_NOT_SUPPORTED:
-	case GNOME_VFS_ERROR_NOT_PERMITTED:
+	case G_IO_ERROR_NOT_SUPPORTED:
 		{
 			/* FIXME: need some thought about the messages for this */
 			gchar* why_failed = g_strdup_printf(_("The location \"%s\" does not support the writing of files."),path);
@@ -124,86 +112,27 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 			g_free(why_failed);
 		}
 		break;
-		
-	case GNOME_VFS_ERROR_IO:
-	case GNOME_VFS_ERROR_CORRUPTED_DATA:
-	case GNOME_VFS_ERROR_BAD_FILE:
-		{
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_transient,
-						       _("There were problems writing the content of the file."),
-						       _("Try again.  If it fails again, try saving to a different location."));
-		}
-		break;
-		
-	case GNOME_VFS_ERROR_TOO_BIG:
+
+	case G_IO_ERROR_NO_SPACE:
 		{
 			gchar* why_failed = NULL;
 
 			if (file_size) {
 
-				char* file_size_string = gnome_vfs_format_file_size_for_display(*file_size);
-
-#if 0
-				GnomeVFSFileSize volume_capacity;
+				char* file_size_string = cong_util_format_file_size_for_display(*file_size);
 
 				/* We call the "get space" function on the parent URI rather than the file URI since this function fails if
 				   the URI does not exist (it decides it's not a local URI as it can't stat the file) */
+				GFileInfo *info = g_file_query_info(parent,
+				                                    G_FILE_ATTRIBUTE_FILESYSTEM_FREE,
+				                                    G_FILE_QUERY_INFO_NONE,
+				                                    NULL,
+				                                    NULL);
+				if(info) {
+					guint64 free_space = g_file_info_get_attribute_uint64(info,
+					                                                      G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
 
-				/* FIXME: this function only exists at the moment on my local version of GNOME VFS */
-				GnomeVFSResult volume_capacity_result = gnome_vfs_get_volume_capacity (parent_uri,
-												       &volume_capacity);
-				if (volume_capacity_result==GNOME_VFS_OK) {
-					char* volume_capacity_string = gnome_vfs_format_file_size_for_display(volume_capacity);
-				
-					why_failed = g_strdup_printf(_("The size of the file would be %s, but the device only has a capacity of %s."),file_size_string,volume_capacity_string);
-				
-					g_free(volume_capacity_string);
-				} else {
-					
-					/* Can't get at the capacity for the device or "volume": */
-					why_failed = g_strdup_printf(_("The file is too big to fit on the device (file size would be %s)."), file_size_string);
-				}
-#else
-				/* FIXME: This is the workaround: */
-				why_failed = g_strdup_printf(_("The file is too big to fit on the device (file size would be %s)."), file_size_string);
-#endif
-
-
-				g_free(file_size_string);
-
-			} else {
-				
-				/* We don't know the size of the file: */
-				why_failed = g_strdup_printf(_("The file is too big to fit on the device."));
-
-			}
-
-			g_assert(why_failed);
-
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_permanent,
-						       why_failed,
-						       _("Try saving the file to a different location."));
-			g_free(why_failed);
-		}
-		break;
-	case GNOME_VFS_ERROR_NO_SPACE:
-		{
-			gchar* why_failed = NULL;
-
-			if (file_size) {
-
-				char* file_size_string = gnome_vfs_format_file_size_for_display(*file_size);
-
-				/* We call the "get space" function on the parent URI rather than the file URI since this function fails if
-				   the URI does not exist (it decides it's not a local URI as it can't stat the file) */
-				GnomeVFSFileSize free_space;
-				GnomeVFSResult free_space_result = gnome_vfs_get_volume_free_space(parent_uri,
-												   &free_space);
-				
-				if (free_space_result==GNOME_VFS_OK) {
-					char* free_space_string = gnome_vfs_format_file_size_for_display(free_space);
+					char* free_space_string = cong_util_format_file_size_for_display(free_space);
 				
 					why_failed = g_strdup_printf(_("The size of the file would be %s, but you only have %s free on that device."),file_size_string,free_space_string);
 				
@@ -232,7 +161,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 			g_free(why_failed);
 		}
 		break;
-	case GNOME_VFS_ERROR_READ_ONLY:
+	case G_IO_ERROR_READ_ONLY:
 		{
 			/* FIXME: need some thought about the messages for this */
 			gchar* why_failed = g_strdup_printf(_("The location \"%s\" does not support the writing of files."),path);
@@ -243,7 +172,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 			g_free(why_failed);
 		}
 		break;
-	case GNOME_VFS_ERROR_INVALID_URI:
+	case G_IO_ERROR_INVALID_FILENAME:
 		{
 			/* FIXME: is case significant for VFS method names? */
 			dialog = cong_error_dialog_new(parent_window, 
@@ -252,7 +181,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 						       _("(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n(ii) Try saving to a different location."));
 		}
 		break;
-	case GNOME_VFS_ERROR_ACCESS_DENIED:
+	case G_IO_ERROR_PERMISSION_DENIED:
 		{
 			/**
 			   FIXME:  This error can occur when attempting to write to the mountpoint of a filesystem that has not been mounted e.g. "file:///mnt/floppy".
@@ -267,7 +196,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 						       _("Try saving to a different location, or ask your system administrator to give you permission."));
 		}
 		break;
-	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
+	case G_IO_ERROR_TOO_MANY_OPEN_FILES:
 		{
 			dialog = cong_error_dialog_new(parent_window, 
 						       what_failed_transient,
@@ -275,7 +204,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 						       _("Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."));
 		}
 		break;
-	case GNOME_VFS_ERROR_IS_DIRECTORY:
+	case G_IO_ERROR_IS_DIRECTORY:
 		{
 			/* FIXME:  capitalisation issues */
 			gchar* why_failed = g_strdup_printf(_("\"%s\" is a directory."),filename_alone);
@@ -286,15 +215,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 			g_free(why_failed);
 		}
 		break;
-	case GNOME_VFS_ERROR_NO_MEMORY:
-		{
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_transient,
-						       _("The system ran out of memory."),
-						       _("Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."));
-		}
-		break;
-	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+	case G_IO_ERROR_HOST_NOT_FOUND:
 		{
 			/* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new(parent_window, 
@@ -303,25 +224,8 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 						       _("Try again.  If it fails again, the server may be down; try saving to another location."));
 		}
 		break;
-	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-		{
-			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_permanent,
-						       _("The server could not be contacted."),
-						       _("(i) Try checking that you spelt the location correctly.\n(ii) Try again. If it fails again, the server may be down; try saving to another location."));
-		}
-		break;
-	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-		{
-			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_permanent,
-						       _("The server could not be contacted."),
-						       _("(i) Try checking that you spelt the location correctly.\n(ii) Try again. If it fails again, the server may be down; try saving to another location."));
-		}
-		break;
-	case GNOME_VFS_ERROR_LOGIN_FAILED:
+#if GLIB_CHECK_VERSION(2,26,0)
+	case G_IO_ERROR_CONNECTION_REFUSED:
 		{
 			/* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new(parent_window, 
@@ -330,7 +234,8 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 						       _("Try again. If it fails again, try saving to another location."));
 		}
 		break;
-	case GNOME_VFS_ERROR_DIRECTORY_BUSY:
+#endif
+	case G_IO_ERROR_BUSY:
 		{
 			/* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new(parent_window, 
@@ -340,19 +245,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 		}
 		break;
 
-	case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
-		{
-			/* FIXME: need some thought about the messages for this */
-			gchar* why_failed = g_strdup_printf(_("The location \"%s\" only allows files to be read, not written."),path);
-			dialog = cong_error_dialog_new(parent_window, 
-						       what_failed_permanent,
-						       why_failed,
-						       _("Try saving to a different location."));
-			g_free(why_failed);
-		}
-		break;
-
-	case GNOME_VFS_ERROR_NAME_TOO_LONG:
+	case G_IO_ERROR_FILENAME_TOO_LONG:
 		{
 			/* FIXME: need to think more about these messages */
 			char* why_failed = g_strdup_printf(_("The name \"%s\" is too long for the location to manage."), filename_alone);
@@ -364,6 +257,18 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 		}
 		break;
 
+	case G_IO_ERROR_FAILED_HANDLED:
+		{
+			/* FIXME: This means a helper program has already interacted
+			 * with the user and we shouldn't display an error dialog. */
+			dialog = GTK_DIALOG(gtk_message_dialog_new(parent_window,
+			                                           GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			                                           GTK_MESSAGE_INFO,
+			                                           GTK_BUTTONS_OK,
+			                                           _("Click OK to continue.")));
+		}
+		break;
+
 	}
 
 	g_free(what_failed_transient);
@@ -371,12 +276,13 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	g_free(filename_alone);
 	g_free(path);
 
-	gnome_vfs_uri_unref (parent_uri);
-	gnome_vfs_uri_unref (vfs_uri);
+	g_object_unref (parent);
 
 	g_free(app_name);
 
 	g_assert(dialog);
+
+	g_error_free(error);
 
 	return dialog;
 }

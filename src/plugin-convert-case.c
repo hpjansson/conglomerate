@@ -59,13 +59,13 @@ static void visit_node(xmlNodePtr node) {
 	}
 }
 
-static void convert_case_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+static void convert_case_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, GFile *file, gpointer user_data, GtkWindow *toplevel_window)
 {
 	xmlDocPtr doc_ptr;
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
-	g_return_if_fail(uri);
+	g_return_if_fail(file);
 
 	g_message("convert_case_exporter_action_callback");
 
@@ -84,25 +84,24 @@ static void convert_case_exporter_action_callback(CongServiceExporter *exporter,
 
 	/* Save the result: */
 	if (doc_ptr) {
-		GnomeVFSURI *file_uri = gnome_vfs_uri_new(uri);
-		GnomeVFSResult vfs_result;
-		GnomeVFSFileSize file_size;
+		gboolean result;
+		gsize file_size;
+		GError *error = NULL;
 	
-		vfs_result = cong_vfs_save_xml_to_uri (doc_ptr, 
-						       file_uri,	
-						       &file_size);
+		result = cong_vfs_save_xml_to_file (doc_ptr,
+						    file,
+						    &file_size,
+		                                    &error);
 		
-		if (vfs_result != GNOME_VFS_OK) {
+		if (!result) {
 			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
-											 uri, 
-											 vfs_result, 
+											 file,
+											 error,
 											 &file_size);
 			
 			cong_error_dialog_run(GTK_DIALOG(dialog));
 			gtk_widget_destroy(GTK_WIDGET(dialog));
 		}
-		
-		gnome_vfs_uri_unref(file_uri);
 
 		xmlFreeDoc(doc_ptr);
 	}

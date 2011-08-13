@@ -85,13 +85,13 @@ fo_pdf_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc
  * TODO: Write me
  */
 void 
-fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, GFile *file, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("fo_pdf_exporter_action_callback");
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
-	g_return_if_fail(uri);
+	g_return_if_fail(file);
 
 	
 	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, _("Converting XSL Formatting Objects to PDF"), 108467);

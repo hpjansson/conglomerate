@@ -33,8 +33,7 @@
 #include "cong-document.h"
 #include "cong-font.h"
 #include "cong-plugin-manager.h"
-
-#include <libgnomevfs/gnome-vfs.h>
+#include "cong-util.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -945,15 +944,14 @@ static const GOptionEntry options[] = {
 static gboolean
 handle_cmdline_args ()
 {
-	GError *error = NULL;
-	gchar *uri;
+	GFile *file;
 	int i;
 
 	if (startup_files) {
 		for (i = 0; startup_files [i]; ++i) {
-		       uri = gnome_vfs_make_uri_from_shell_arg (startup_files[i]);
-		       open_document_do (uri, NULL);
-		       g_free(uri);
+			file = g_file_new_for_commandline_arg (startup_files[i]);
+			open_document_do (file, NULL);
+			g_object_unref (file);
 		   }
 		   g_strfreev (startup_files);
 	}
@@ -1072,7 +1070,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 	while (path != NULL) {
 		if (path->data != NULL) {
 			gchar *realpath;
-			realpath = gnome_vfs_expand_initial_tilde((char *)(path->data));
+			realpath = cong_util_expand_initial_tilde((char *)(path->data));
 			/* g_message("Loading xds files from \"%s\"\n", realpath); */
 			cong_dispspec_registry_add_dir(PRIVATE(app)->ds_registry, realpath, toplevel_window, 0);
 			g_free (realpath);

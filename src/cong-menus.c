@@ -42,11 +42,6 @@
 #include "cong-range.h"
 #include "cong-ui-hooks.h"
 
-#if 1
-#include <libgnomevfs/gnome-vfs.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#endif
-
 #include <libxml/tree.h>
 
 #include <libxslt/xsltInternals.h>
@@ -1930,13 +1925,16 @@ recent_open_cb (GtkAction *action, CongPrimaryWindow *primary_window)
 {
 	GtkRecentInfo *info;
 	const gchar   *uri;
+	GFile         *file;
 
 	info = g_object_get_data (G_OBJECT (action), "gtk-recent-info");
 	g_assert (info != NULL);
 	
 	uri = gtk_recent_info_get_uri (info);
+	file = g_file_new_for_uri (uri);
 	
-	open_document_do (uri, GTK_WINDOW (primary_window->window));
+	open_document_do (file, GTK_WINDOW (primary_window->window));
+	g_object_unref (file);
 }
 
 static gint

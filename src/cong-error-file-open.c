@@ -78,7 +78,7 @@ static void on_search(gpointer data)
  * Returns:
  */
 gchar*
-cong_error_what_failed_on_file_open_failure (const gchar *string_uri, 
+cong_error_what_failed_on_file_open_failure (GFile *file,
 					     gboolean transient)
 {
 	gchar* app_name;
@@ -86,13 +86,13 @@ cong_error_what_failed_on_file_open_failure (const gchar *string_uri,
 	gchar* path;
 	gchar* what_failed;
 
-	g_return_val_if_fail (string_uri, NULL);
+	g_return_val_if_fail (file, NULL);
 
 	app_name = cong_error_get_appname();
 
-	cong_vfs_split_string_uri (string_uri, 
-				   &filename_alone, 
-				   &path);
+	cong_vfs_split_file_path (file,
+				  &filename_alone,
+				  &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
@@ -115,7 +115,7 @@ cong_error_what_failed_on_file_open_failure (const gchar *string_uri,
 /**
  * cong_error_dialog_new_from_file_open_failure:
  * @parent_window:
- * @string_uri:
+ * @file:
  * @transient:
  * @why_failed:
  * @suggestions:
@@ -125,7 +125,7 @@ cong_error_what_failed_on_file_open_failure (const gchar *string_uri,
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
-					     const gchar* string_uri, 
+					     GFile *file,
 					     gboolean transient, 
 					     const gchar* why_failed, 
 					     const gchar* suggestions)
@@ -134,11 +134,11 @@ cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
 
 	gchar* what_failed;
 
-	g_return_val_if_fail(string_uri, NULL);
+	g_return_val_if_fail(file, NULL);
 	g_return_val_if_fail(why_failed, NULL);
 	g_return_val_if_fail(suggestions, NULL);
 
-	what_failed = cong_error_what_failed_on_file_open_failure (string_uri, 
+	what_failed = cong_error_what_failed_on_file_open_failure (file,
 								   transient);
 	
 	dialog = cong_error_dialog_new (parent_window,
@@ -154,7 +154,7 @@ cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
 /**
  * cong_error_dialog_new_from_file_open_failure_with_convenience:
  * @parent_window:
- * @string_uri:
+ * @file:
  * @transient:
  * @why_failed:
  * @suggestions:
@@ -167,7 +167,7 @@ cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_window,
-							      const gchar *string_uri, 
+							      GFile *file,
 							      gboolean transient, 
 							      const gchar* why_failed, 
 							      const gchar* suggestions,
@@ -179,11 +179,11 @@ cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_
 
 	gchar* what_failed;
 
-	g_return_val_if_fail(string_uri, NULL);
+	g_return_val_if_fail(file, NULL);
 	g_return_val_if_fail(why_failed, NULL);
 	g_return_val_if_fail(suggestions, NULL);
 
-	what_failed = cong_error_what_failed_on_file_open_failure(string_uri, transient);
+	what_failed = cong_error_what_failed_on_file_open_failure(file, transient);
 	
 	dialog = cong_error_dialog_new_with_convenience(parent_window,
 							what_failed,
@@ -201,65 +201,56 @@ cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_
 }
 
 /**
- * cong_error_dialog_new_from_file_open_failure_with_vfs_result:
+ * cong_error_dialog_new_from_file_open_failure_with_gerror:
  * @parent_window:
- * @string_uri:
- * @vfs_result:
+ * @file: the file reference of the file you tried to open.
+ * @error: the #GError that resulted from the failed file operation. For
+ * convenience, this function frees the error.
  *
  * TODO: Write me
  * Returns:
  */
 GtkDialog*
-cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
-							     const gchar *string_uri, 
-							     GnomeVFSResult vfs_result)
+cong_error_dialog_new_from_file_open_failure_with_gerror(GtkWindow *parent_window,
+                                                         GFile *file,
+                                                         GError *error)
 {
 	GtkDialog* dialog = NULL;
 	gchar* filename_alone;
 	gchar* path;
-	GnomeVFSURI* vfs_uri;
-	GnomeVFSURI* parent_uri;
+	GFile* parent;
 
-	g_return_val_if_fail (string_uri, NULL);
-	g_return_val_if_fail (GNOME_VFS_OK!=vfs_result, NULL);
+	g_return_val_if_fail (file, NULL);
+	g_return_val_if_fail (error, NULL);
 
-	cong_vfs_split_string_uri (string_uri, &filename_alone, &path);
+	cong_vfs_split_file_path (file, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
 
 	/* Get at the parent URI in case it's needed: */
-	vfs_uri = gnome_vfs_uri_new (string_uri);
-	parent_uri = gnome_vfs_uri_get_parent (vfs_uri);
+	parent = g_file_get_parent (file);
 
-	switch (vfs_result) {
+	switch (error->code) {
 	default:
-	case GNOME_VFS_ERROR_INTERNAL:
-	case GNOME_VFS_ERROR_BAD_PARAMETERS:
-	case GNOME_VFS_ERROR_GENERIC:
-	case GNOME_VFS_ERROR_TOO_BIG:
-	case GNOME_VFS_ERROR_NO_SPACE:
-	case GNOME_VFS_ERROR_READ_ONLY:
-	case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-	case GNOME_VFS_ERROR_NOT_OPEN:
-	case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-	case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_FILE_EXISTS:
-	case GNOME_VFS_ERROR_LOOP:
-	case GNOME_VFS_ERROR_CANCELLED:
-	case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-	case GNOME_VFS_ERROR_NAME_TOO_LONG:
+	case G_IO_ERROR_INVALID_ARGUMENT:
+	case G_IO_ERROR_FAILED:
+	case G_IO_ERROR_NO_SPACE:
+	case G_IO_ERROR_READ_ONLY:
+	case G_IO_ERROR_TOO_MANY_LINKS:
+	case G_IO_ERROR_CLOSED:
+	case G_IO_ERROR_EXISTS:
+	case G_IO_ERROR_WOULD_RECURSE:
+	case G_IO_ERROR_CANCELLED:
+	case G_IO_ERROR_NOT_EMPTY:
+	case G_IO_ERROR_FILENAME_TOO_LONG:
 
-	case GNOME_VFS_ERROR_NOT_A_DIRECTORY: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_IN_PROGRESS: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_SERVICE_OBSOLETE: /* FIXME: when does this occur? */
-	case GNOME_VFS_ERROR_PROTOCOL_ERROR: /* FIXME: when does this occur? */
+	case G_IO_ERROR_NOT_DIRECTORY: /* FIXME: when does this occur? */
+	case G_IO_ERROR_PENDING: /* FIXME: when does this occur? */
 		{
 			/* Unknown (or inapplicable) error */
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									      string_uri, TRUE, 
+									      file, TRUE,
 									      _("An unexpected internal error occurred."),
 									      _("Try again.  If it fails again, file a bug report with the maintainer of this application."));
 			/* FIXME: ought to provide a convenience button that launches bug-buddy with lots of details filled in, including info
@@ -272,21 +263,14 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_NOT_FOUND:
+	case G_IO_ERROR_NOT_FOUND:
 		{
 			/* Either "file not found" or "path not found": */
-			/* Does the parent_uri exist? */
-			GnomeVFSDirectoryHandle *handle;
-			GnomeVFSResult vfs_result = gnome_vfs_directory_open_from_uri(&handle,
-										      parent_uri,
-										      GNOME_VFS_FILE_INFO_DEFAULT);
-
-			if (vfs_result==GNOME_VFS_OK) {
-				gnome_vfs_directory_close(handle);
-				
+			/* Does the parent exist? */
+			if (g_file_query_exists(parent, NULL)) {
 				/* OK; the path exists, but the file doesn't: */
 				dialog = cong_error_dialog_new_from_file_open_failure_with_convenience(parent_window, 
-												 string_uri, TRUE, 
+												 file, TRUE,
 												 _("There is no file with that name at that location."),
 												 _("(i) Try checking that you spelt the file's name correctly.  Remember that capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or \"myfile\").\n(ii) Try using the Search Tool to find your file."),
 												 _("Search"),
@@ -295,7 +279,7 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 			} else {
 				/* The path doesn't exist: */
 				dialog = cong_error_dialog_new_from_file_open_failure_with_convenience(parent_window, 
-												 string_uri, TRUE, 
+												 file, TRUE,
 												 _("The location does not exist."),
 												 _("(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"mydirectory\" or \"MYDIRECTORY\").\n(ii) Try using the Search Tool to find your file."),
 												 _("Search"),
@@ -306,51 +290,23 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_NOT_SUPPORTED:
-	case GNOME_VFS_ERROR_NOT_PERMITTED:
+	case G_IO_ERROR_NOT_SUPPORTED:
 		{
 			/* FIXME: need some thought about the messages for this */
 			gchar* why_failed = g_strdup_printf(_("The location \"%s\" does not support the reading of files."),path);
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, FALSE, 
+									file, FALSE,
 									why_failed,
 									_("Try loading a file from a different location.  If you think that you ought to be able to read this file, contact your system administrator."));
 			g_free(why_failed);
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_IO:
-	case GNOME_VFS_ERROR_EOF:
-		{
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
-									_("There were problems reading the content of the file."),
-									_("Try again.  If it fails again, contact your system administrator."));
-		}
-		break;
-		
-	case GNOME_VFS_ERROR_CORRUPTED_DATA:
-	case GNOME_VFS_ERROR_BAD_FILE:
-		{
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
-									_("The contents of the file seem to be corrupt."),
-									_("Try again.  If it fails again, try looking for a backup copy of the file."));
-		}
-		break;
-	case GNOME_VFS_ERROR_WRONG_FORMAT:
-		{
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
-									_("There were problems reading the contents of the file."),
-									_("Try again.  If it fails again, contact your system administrator."));
-		}
-		break;
-	case GNOME_VFS_ERROR_INVALID_URI:
+	case G_IO_ERROR_INVALID_FILENAME:
 		{
 			/* FIXME: is case significant for VFS method names? */
 			dialog = cong_error_dialog_new_from_file_open_failure_with_convenience(parent_window, 
-											 string_uri, FALSE, 
+											 file, FALSE,
 											 _("The system does not recognise that as a valid location."),
 											 _("(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n(ii) Try using the Search Tool to find your file."),
 											 _("Search"),
@@ -359,39 +315,39 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 
 		}
 		break;
-	case GNOME_VFS_ERROR_ACCESS_DENIED:
+	case G_IO_ERROR_PERMISSION_DENIED:
 		{
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, FALSE, 
+									file, FALSE,
 									_("You do not have permission to read that file."),
 									_("Try asking your system administrator to give you permission."));
 		}
 		break;
-	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
+	case G_IO_ERROR_TOO_MANY_OPEN_FILES:
 		{
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
+									file, TRUE,
 									_("The system is trying to operate on too many files at once."),
 									_("Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."));
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_INTERRUPTED:
+	case G_IO_ERROR_TIMED_OUT:
 		{
 			/* FIXME: need a better "why-failed" message */
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
+									file, TRUE,
 									_("There were problems reading the contents of the file."),
 									_("Try again.  If it fails again, contact your system administrator."));
 		}
 		break;
 		
-	case GNOME_VFS_ERROR_IS_DIRECTORY:
+	case G_IO_ERROR_IS_DIRECTORY:
 		{
 			/* FIXME:  capitalisation issues */
 			gchar* why_failed = g_strdup_printf(_("\"%s\" is a directory, rather than a file."),filename_alone);
 			dialog = cong_error_dialog_new_from_file_open_failure_with_convenience(parent_window, 
-											 string_uri, FALSE, 
+											 file, FALSE,
 											 why_failed,
 											 _("Try using the Search Tool to find your file."),
 											 _("Search"),
@@ -401,67 +357,56 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 			g_free(why_failed);
 	  }
 		break;
-	case GNOME_VFS_ERROR_NO_MEMORY:
-		{
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
-									_("The system ran out of memory."),
-									_("Try again.  If it fails again, try closing unwanted applications, or contact your system administrator."));
-		}
-		break;
-	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+	case G_IO_ERROR_HOST_NOT_FOUND:
 		{
 	    /* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, FALSE, 
+									file, FALSE,
 									_("The server could not be contacted."),
 									_("Try again.  If it fails again, the server may be down."));
 		}
 	  break;
-	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
+#if GLIB_CHECK_VERSION(2,26,0)
+	case G_IO_ERROR_CONNECTION_REFUSED:
 		{
 			/* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, FALSE, 
-									_("The server could not be contacted."),
-									_("(i) Try checking that you spelt the location correctly.\n(ii) Try again. If it fails again, the server may be down."));
-		}
-		break;
-	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-		{
-			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, FALSE, 
-									_("The server could not be contacted."),
-									_("(i) Try checking that you spelt the location correctly.\n(ii) Try again. If it fails again, the server may be down."));
-		}
-		break;
-	case GNOME_VFS_ERROR_LOGIN_FAILED:
-		{
-			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									string_uri, TRUE, 
+									file, TRUE,
 									_("The system could not login to the location."),
 									_("Try again. If it fails again, contact your system administrator."));
 		}
 		break;
-		
-	case GNOME_VFS_ERROR_DIRECTORY_BUSY:
+#endif
+	case G_IO_ERROR_BUSY:
 		{
 			/* FIXME: need to think more about these messages */
 			dialog = cong_error_dialog_new_from_file_open_failure(parent_window, 
-									      string_uri, TRUE, 
+									      file, TRUE,
 									_("The location was too busy."),
 									_("Try again. If it fails again, contact your system administrator."));
 		}
 		break;
 
+	case G_IO_ERROR_FAILED_HANDLED:
+		{
+			/* FIXME: This means a helper program has already interacted
+			 * with the user and we shouldn't display an error dialog. */
+			dialog = GTK_DIALOG(gtk_message_dialog_new(parent_window,
+			                                           GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			                                           GTK_MESSAGE_INFO,
+			                                           GTK_BUTTONS_OK,
+			                                           _("Click OK to continue.")));
+		}
+		break;
 	}
 
-	gnome_vfs_uri_unref (parent_uri);
-	gnome_vfs_uri_unref (vfs_uri);
+	g_object_unref (parent);
+	g_free(filename_alone);
+	g_free(path);
 
 	g_assert(dialog);
+
+	g_error_free(error);
 
 	return dialog;
 }
@@ -477,8 +422,8 @@ static void on_details(gpointer data)
  * cong_error_dialog_new_from_file_operation_failure:
  * @parent_window:
  * @what_failed:
- * @string_uri: the URI from which you tried to access file.
- * @vfs_result:
+ * @file: the file reference for the file you tried to access
+ * @error: the error that occurred. For convenience, this function frees the error.
  * @technical_details:
  * 
  * Routine to manufacture an error dialog for when some file operation fails that doesn't fall into one of the categories above.
@@ -489,20 +434,21 @@ static void on_details(gpointer data)
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 						  const gchar *what_failed,
-						  const gchar *string_uri, 
-						  GnomeVFSResult vfs_result, 
+						  GFile *file,
+						  GError *error,
 						  const gchar *technical_details)
 {
 	GtkDialog *dialog;
 	GtkDialog *details_dialog;
 	gchar *secondary_text;
+	char *string_uri = g_file_get_uri(file);
 
 	g_return_val_if_fail(what_failed,NULL);
 	g_return_val_if_fail(technical_details,NULL);
 
 	/* Manufacture a dialog that is displayed if the user requests further details: */
 	secondary_text = g_strdup_printf(_("The error \"%s\" was reported whilst accessing \"%s\""), 
-					 gnome_vfs_result_to_string(vfs_result),
+					 error->message,
 					 string_uri);
 	details_dialog = cong_error_dialog_new(parent_window,
 						_("The program unexpectedly received an error report from the GNOME Virtual File System."), 
@@ -520,6 +466,9 @@ cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 							on_details,							
 							details_dialog);
 	/* FIXME: this will leak the details dialog */
+
+	g_error_free(error);
+	g_free(string_uri);
 
 	return dialog;
 }

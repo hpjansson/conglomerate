@@ -111,33 +111,34 @@ cong_exporter_supports_document(CongServiceExporter *exporter, CongDocument *doc
  * TODO: Write me
  */
 void 
-cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
+cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, GFile *file, GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_EXPORTER (exporter));
 	g_return_if_fail (doc);
-	g_return_if_fail (uri);
+	g_return_if_fail (file);
 	
 	g_assert (PRIVATE (exporter)->action_callback);
 
 	return PRIVATE (exporter)->action_callback (exporter, 
 						    doc, 
-						    uri, 
+						    file,
 						    PRIVATE (exporter)->user_data, 
 						    toplevel_window);
 }
 
 /**
- * cong_exporter_get_preferred_uri:
+ * cong_exporter_get_preferred_location:
  * @exporter:
  *
  * TODO: Write me
  * Returns:
  */
-gchar *
-cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
+GFile *
+cong_exporter_get_preferred_location(CongServiceExporter *exporter)
 {
 	gchar *gconf_key;
 	gchar *preferred_uri;
+	GFile *retval;
 
 	g_return_val_if_fail (IS_CONG_SERVICE_EXPORTER (exporter), NULL);
 
@@ -150,25 +151,30 @@ cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
 
 	g_free(gconf_key);
 
-	return preferred_uri;
+	retval = g_file_new_for_uri(preferred_uri);
+	g_free(preferred_uri);
+
+	return retval;
 }
 
 /**
- * cong_exporter_set_preferred_uri:
+ * cong_exporter_set_preferred_location:
  * @exporter:
- * @uri:
+ * @file:
  *
  * TODO: Write me
  */
 void 
-cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
+cong_exporter_set_preferred_location(CongServiceExporter *exporter, GFile *file)
 {
 	gchar *gconf_key;
+	char *uri;
 
 	g_return_if_fail (IS_CONG_SERVICE_EXPORTER (exporter));
-	g_return_if_fail (uri);
+	g_return_if_fail (file);
 
 	gconf_key = cong_service_get_gconf_key(CONG_SERVICE(exporter), "preferred-uri");
+	uri = g_file_get_uri(file);
 
 	gconf_client_set_string (cong_app_get_gconf_client (cong_app_singleton()),
 				 gconf_key,
@@ -176,6 +182,7 @@ cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
 				 NULL);
 	
 	g_free(gconf_key);
+	g_free(uri);
 }
 
 GtkWidget* 

@@ -33,16 +33,16 @@ typedef enum
   CONG_FILE_CHOOSER_ACTION_SAVE
 } CongFileChooserAction;
 
-gchar*
+GFile *
 cong_get_file_name (const gchar *title, 
-		    const gchar *uri,
+		    GFile *start_file,
 		    GtkWindow *parent_window,
 		    CongFileChooserAction action,
 		    GList *list_of_filters);
 
-gchar*
+GFile *
 cong_get_file_name_with_filter (const gchar *title, 
-				const gchar *filename,
+				GFile *start_file,
 				GtkWindow *parent_window,
 				CongFileChooserAction action,
 				GList *list_of_filters,

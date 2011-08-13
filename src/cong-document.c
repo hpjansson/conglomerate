@@ -19,6 +19,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-service-exporter.h"
 #include "cong-plugin-manager.h"
+#include "cong-vfs.h"
 
 #if ENABLE_PRINTING
 #include "cong-service-print-method.h"
@@ -70,8 +71,8 @@ cong_document_handle_set_dtd_ptr (CongDocument *doc,
 				  xmlDtdPtr dtd_ptr);
 
 static void
-cong_document_handle_set_url (CongDocument *doc,
-			      const gchar *new_url);
+cong_document_handle_set_file (CongDocument *doc,
+			       GFile *new_file);
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
@@ -102,7 +103,7 @@ enum {
 	SELECTION_CHANGE,
 	CURSOR_CHANGE,
 	SET_DTD_PTR,
-	SET_URL,
+	SET_FILE,
 
 	LAST_SIGNAL
 };
@@ -117,7 +118,7 @@ struct _CongDocumentDetails
 
 	CongDocumentTraversal *traversal;
 
-	gchar *url;
+	GFile *file;
 
 	GList *views; /* a list of CongView* */
 
@@ -172,7 +173,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	klass->selection_change = cong_document_handle_selection_change;
 	klass->cursor_change = cong_document_handle_cursor_change;
 	klass->set_dtd_ptr = cong_document_handle_set_dtd_ptr;
-	klass->set_url = cong_document_handle_set_url;
+	klass->set_file = cong_document_handle_set_file;
 
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
@@ -282,14 +283,14 @@ cong_document_class_init (CongDocumentClass *klass)
 					     cong_cclosure_marshal_VOID__POINTER,
 					     G_TYPE_NONE, 
 					     1, G_TYPE_POINTER);
-	signals[SET_URL] = g_signal_new ("set_url",
-					 CONG_DOCUMENT_TYPE,
-					 G_SIGNAL_RUN_LAST,
-					 G_STRUCT_OFFSET(CongDocumentClass, set_url),
-					 NULL, NULL,
-					 g_cclosure_marshal_VOID__STRING,
-					 G_TYPE_NONE, 
-					 1, G_TYPE_STRING);
+	signals[SET_FILE] = g_signal_new ("set_file",
+					  CONG_DOCUMENT_TYPE,
+					  G_SIGNAL_RUN_LAST,
+					  G_STRUCT_OFFSET(CongDocumentClass, set_file),
+					  NULL, NULL,
+					  g_cclosure_marshal_VOID__STRING,
+					  G_TYPE_NONE,
+					  1, G_TYPE_FILE);
 }
 
 static void
@@ -361,7 +362,7 @@ CongDocument*
 cong_document_construct (CongDocument *doc,
 			 xmlDocPtr xml_doc,
 			 CongDispspec *ds, 
-			 const gchar *url)
+			 GFile *file)
 {
 	CongNodePtr initial_cursor_node;
 
@@ -370,7 +371,7 @@ cong_document_construct (CongDocument *doc,
 
 	PRIVATE(doc)->xml_doc = xml_doc;
 	PRIVATE(doc)->default_ds = ds;
-	PRIVATE(doc)->url = g_strdup(url);
+	PRIVATE(doc)->file = file? g_file_dup(file) : NULL;
 
 	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
 	PRIVATE(doc)->modified = FALSE;
@@ -438,7 +439,7 @@ cong_document_construct (CongDocument *doc,
 CongDocument*
 cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 			       CongDispspec *ds, 
-			       const gchar *url)
+			       GFile *file)
 {
 	g_return_val_if_fail(xml_doc!=NULL, NULL);
 #if 0
@@ -448,7 +449,7 @@ cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 	return cong_document_construct (g_object_new (CONG_DOCUMENT_TYPE, NULL),
 					xml_doc,
 					ds,
-					url);
+					file);
 }
 
 /**
@@ -632,71 +633,43 @@ cong_document_get_filename(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	if (PRIVATE(doc)->url) {
-		gchar *filename;
-		gchar *path;
-		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
-		
-		cong_vfs_split_vfs_uri (uri, &filename, &path);
-
-		gnome_vfs_uri_unref(uri);
-
-		g_free(path);
-		
-		return filename;
-
-	} else {
-		return g_strdup(_("(Untitled)"));
-	}
+	if (PRIVATE(doc)->file)
+		return cong_vfs_extract_display_name (PRIVATE(doc)->file);
+	return g_strdup(_("(Untitled)"));
 }
 
 /**
- * cong_document_get_full_uri:
+ * cong_document_get_file:
+ * @doc:
+ *
+ * TODO: Write me
+ * Returns: (transfer none): A #GFile referring to this document. Don't unref
+ * the file; it belongs to the document.
+ */
+GFile *
+cong_document_get_file(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	return PRIVATE(doc)->file;
+}
+
+/**
+ * cong_document_get_parent:
  * @doc:
  *
  * TODO: Write me
  * Returns:
  */
-gchar*
-cong_document_get_full_uri(CongDocument *doc) 
+GFile *
+cong_document_get_parent(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	if (PRIVATE(doc)->url) {
-		return g_strdup(PRIVATE(doc)->url);
-	}
-	else {
-		return NULL;
-	}		    
-}
-
-/**
- * cong_document_get_parent_uri:
- * @doc:
- *
- * TODO: Write me
- * Returns:
- */
-gchar*
-cong_document_get_parent_uri(CongDocument *doc)
-{
-	g_return_val_if_fail(doc, NULL);
-
-	if (PRIVATE(doc)->url) {
-		gchar *filename;
-		gchar *path;
-		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
-		
-		cong_vfs_split_vfs_uri (uri, &filename, &path);
-
-		gnome_vfs_uri_unref(uri);
-
-		g_free(filename);
-		
-		return path;
-
+	if (PRIVATE(doc)->file) {
+		return g_file_get_parent(PRIVATE(doc)->file);
 	} else {
-		return g_strdup(".");
+		return g_file_new_for_path(".");
 	}
 }
 
@@ -756,51 +729,41 @@ cong_document_get_xml_ns (CongDocument *doc,
  */
 void
 cong_document_save(CongDocument *doc, 
-		   const char* filename, 
+		   GFile *file,
 		   GtkWindow *toplevel_window)
 {
 
-	GnomeVFSURI *file_uri;
-	GnomeVFSResult vfs_result;
-	GnomeVFSFileSize file_size;
+	gboolean result;
+	gsize file_size;
+	GError *error = NULL;
 
 	g_return_if_fail(doc);
-	g_return_if_fail(filename);
+	g_return_if_fail(file);
 
-	if (!g_path_is_absolute (filename) && !(g_str_has_prefix (filename, "file:"))) {
+	result = cong_vfs_save_xml_to_file (PRIVATE(doc)->xml_doc,
+	                                    file,
+	                                    &file_size,
+	                                    &error);
 
-		gchar *absolute_path = g_strconcat (g_get_current_dir(), GNOME_VFS_URI_PATH_STR, filename, NULL);
-    		file_uri = gnome_vfs_uri_new (absolute_path);
-		g_free (absolute_path);
-	} else {
-	file_uri = gnome_vfs_uri_new(filename);
-	}
-	
-	vfs_result = cong_vfs_save_xml_to_uri (PRIVATE(doc)->xml_doc, 
-					       file_uri,	
-					       &file_size);
-
-	if (vfs_result != GNOME_VFS_OK) {
+	if (!result) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure (toplevel_window,
-										  filename, 
-										  vfs_result, 
+										  file,
+										  error,
 										  &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 
-		gnome_vfs_uri_unref(file_uri);
+		g_object_unref(file);
 
 		return;
 	}
 
-	cong_document_set_url(doc, filename);
+	cong_document_set_file(doc, file);
 
 	cong_document_set_modified(doc, FALSE);
 
 	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
-
-	gnome_vfs_uri_unref(file_uri);
 }
 
 /**
@@ -880,19 +843,19 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 /**
  * cong_document_set_url:
  * @doc:
- * @url:
+ * @file:
  *
  * TODO: Write me
  */
 void 
-cong_document_set_url(CongDocument *doc, const gchar *url) 
+cong_document_set_file(CongDocument *doc, GFile *file)
 {
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (url);
+	g_return_if_fail (file);
 
 	g_signal_emit (G_OBJECT(doc),
-		       signals[SET_URL], 0,
-		       url);
+		       signals[SET_FILE], 0,
+		       file);
 }
 
 /**
@@ -2345,6 +2308,11 @@ cong_document_finalize (GObject *object)
 	CongDocument *doc = CONG_DOCUMENT (object);
 
 	g_message ("cong_document_finalize");
+
+	if(PRIVATE(doc)->file) {
+		g_object_unref(PRIVATE(doc)->file);
+		PRIVATE(doc)->file = NULL;
+	}
 	
 	g_free (doc->private);
 	doc->private = NULL;
@@ -2377,11 +2345,6 @@ cong_document_dispose (GObject *object)
 		PRIVATE(doc)->default_ds = NULL;
 	}
 #endif
-	
-	if (PRIVATE(doc)->url) {
-		g_free (PRIVATE(doc)->url);
-		PRIVATE(doc)->url = NULL;
-	}
 	
 	cong_cursor_uninit(&PRIVATE(doc)->cursor);
 
@@ -2900,13 +2863,13 @@ cong_document_handle_set_dtd_ptr (CongDocument *doc,
 }
 
 static void
-cong_document_handle_set_url (CongDocument *doc,
-			      const gchar *new_url)
+cong_document_handle_set_file (CongDocument *doc,
+			       GFile *new_file)
 {
-	if (PRIVATE(doc)->url) {
-		g_free(PRIVATE(doc)->url);
+	if (PRIVATE(doc)->file) {
+		g_object_unref(PRIVATE(doc)->file);
 	}
-	PRIVATE(doc)->url = g_strdup(new_url);
+	PRIVATE(doc)->file = g_file_dup(new_file);
 
 	/* FIXME: replace this with signal handler? */
 	/* get at primary window; set title */

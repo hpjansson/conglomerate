@@ -47,7 +47,7 @@ struct _CongDependencyNodeFromFile
 {
 	CongDependencyNode base;
 
-	GnomeVFSURI *uri; /* in a subclass, to allow in-memory modification */
+	GFile *file; /* in a subclass, to allow in-memory modification */
 };
 
 struct _CongDependencyGraph
@@ -60,11 +60,11 @@ struct _CongBuildProcess
 	/* mapping from targets to modification times? */
 };
 
-/* Manufacture a "pure" dependency from a URI: */
-CongDependencyNode *cong_dependency_node_new_from_file(GnomeVFSURI *uri);
+/* Manufacture a "pure" dependency from a GFile: */
+CongDependencyNode *cong_dependency_node_new_from_file(GFile *file);
 void cong_dependency_node_add_dependency(CongDependencyNode *downstream, CongDependencyNode *upstream);
 
-void construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GnomeVFSURI *uri);
+void construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GFile *uri);
 
 CongDependencyGraph *cong_dependency_graph_new(void);
 void cong_dependency_graph_add_ultimate_target(CongDependencyGraph *graph, CongDependencyNode *target);

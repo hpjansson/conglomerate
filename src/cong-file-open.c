@@ -91,21 +91,21 @@ query_for_forced_dispspec (gchar *what_failed,
 
 /**
  * get_filename_extension:
- * @uri:
+ * @file:
  *
  * TODO: Write me
  * Returns:
  */
 gchar*
-get_filename_extension (const GnomeVFSURI *uri)
+get_filename_extension (GFile *file)
 {
 	gchar *result = NULL;
 	gchar *short_name;
 	gchar *separator;
 
-	g_return_val_if_fail (uri, NULL);
+	g_return_val_if_fail (file, NULL);
 
-	short_name = gnome_vfs_uri_extract_short_name (uri);
+	short_name = g_file_get_basename(file);
 
 	separator = g_strrstr (short_name, ".");
 
@@ -126,14 +126,14 @@ get_filename_extension (const GnomeVFSURI *uri)
  * TODO: Write me
  */
 void 
-open_document_do (const gchar* doc_name, 
+open_document_do (GFile* doc_name,
 		  GtkWindow *parent_window)
 {
 	CongDispspec *ds;
 	CongDocument *cong_doc;
 	xmlDocPtr doc = NULL;
 
-	doc = cong_vfs_load_xml_from_uri (doc_name, parent_window);
+	doc = cong_vfs_load_xml_from_file (doc_name, parent_window);
 
 	if (NULL==doc) {
 		return;
@@ -141,10 +141,9 @@ open_document_do (const gchar* doc_name,
 
 	/* Use libxml to load the doc: */
 	{
-		GnomeVFSURI* file_uri = gnome_vfs_uri_new(doc_name);
 		gchar *filename_extension;
 
-		filename_extension = get_filename_extension (file_uri);
+		filename_extension = get_filename_extension (doc_name);
 
 		ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 								      doc,
@@ -176,8 +175,6 @@ open_document_do (const gchar* doc_name,
 		}
 		#endif
 
-		gnome_vfs_uri_unref(file_uri);
-
 		if (filename_extension) {
 			g_free (filename_extension);
 		}		
@@ -201,7 +198,9 @@ open_document_do (const gchar* doc_name,
 	/* Add recent entry */
 	{
 		CongPrimaryWindow *primary_window = cong_document_get_primary_window(cong_doc);
-		gtk_recent_manager_add_item (primary_window->recent_manager, doc_name);
+		char *uri = g_file_get_uri(doc_name);
+		gtk_recent_manager_add_item (primary_window->recent_manager, uri);
+		g_free(uri);
 	}
 
 	g_object_unref( G_OBJECT(cong_doc));
@@ -216,7 +215,7 @@ open_document_do (const gchar* doc_name,
 void 
 open_document(GtkWindow *parent_window)
 {
-	char *doc_name;
+	GFile *doc_name;
 
 	g_return_if_fail(parent_window);
 	
@@ -231,7 +230,7 @@ open_document(GtkWindow *parent_window)
 
 	open_document_do(doc_name, parent_window);
 
-	g_free(doc_name);
+	g_object_unref(doc_name);
 }
 
 /**

@@ -35,11 +35,9 @@
 #include "cong-eel.h"
 #include <glade/glade-xml.h>
 #include "cong-vfs.h"
-#include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include "cong-file-selection.h"
 #include "cong-service-importer.h"
 #include "cong-plugin-manager.h"
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 static void add_importer_to_list(CongServiceImporter *importer, gpointer user_data)
 {
@@ -64,7 +62,7 @@ static void add_importer_to_list(CongServiceImporter *importer, gpointer user_da
 void
 cong_ui_hook_file_import (GtkWindow *toplevel_window)
 {
-	gchar *filename;
+	GFile *file;
 	GList *list_of_filters = NULL;
 	GtkFileFilter *filter = NULL;
 	GList *iter;
@@ -77,16 +75,23 @@ cong_ui_hook_file_import (GtkWindow *toplevel_window)
 		g_object_ref (G_OBJECT (iter->data));
 	}
 
-	filename = cong_get_file_name_with_filter (_("Import file..."), 
-						   NULL, 
-						   toplevel_window,
-						   CONG_FILE_CHOOSER_ACTION_OPEN,
-						   list_of_filters,
-						   &filter);
+	file = cong_get_file_name_with_filter (_("Import file..."),
+	                                       NULL,
+	                                       toplevel_window,
+	                                       CONG_FILE_CHOOSER_ACTION_OPEN,
+	                                       list_of_filters,
+	                                       &filter);
 
-	if (filename) {
+	if (file) {
 		CongServiceImporter *importer;
-		char* mime_type = gnome_vfs_get_mime_type (filename);
+		GFileInfo *info = g_file_query_info(file,
+		                                    G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE,
+		                                    G_FILE_QUERY_INFO_NONE,
+		                                    NULL,
+		                                    NULL);
+
+		char* mime_type = g_file_info_get_attribute_as_string(info,
+		                                                      G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE);
 
 		g_assert (filter);
 		importer = g_object_get_data (G_OBJECT (filter),
@@ -94,11 +99,11 @@ cong_ui_hook_file_import (GtkWindow *toplevel_window)
 		g_assert (importer);
 
 		cong_importer_invoke (importer, 
-				      filename, 
+				      file,
 				      mime_type, 
 				      toplevel_window);
 		g_free (mime_type);
-		g_free (filename);
+		g_object_unref (file);
 	}
 
 	for (iter=list_of_filters;iter;iter=iter->next) {

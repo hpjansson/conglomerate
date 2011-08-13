@@ -97,11 +97,13 @@ static void gconf_notify_func(GConfClient *client,
 	g_message("gconf_notify_function");
 
 	if (exporter) {
-		gchar *uri = cong_exporter_get_preferred_uri(exporter);
+		GFile *file = cong_exporter_get_preferred_location(exporter);
+		char *uri = g_file_get_uri(file);
 	
 		gtk_entry_set_text(details->filename_entry, uri);
 		
 		g_free(uri);
+		g_object_unref(file);
 	}
 }
 
@@ -127,7 +129,8 @@ static void monitor_exporter(CongExportDialogDetails *dialog_details)
 
 	/* get value and set up entry accordingly */
 	{
-		gchar *uri = cong_exporter_get_preferred_uri(exporter);
+		GFile *file = cong_exporter_get_preferred_location(exporter);
+		char *uri = g_file_get_uri(file);
 
 		if (uri) {
 			gtk_entry_set_text(dialog_details->filename_entry, uri);
@@ -135,6 +138,7 @@ static void monitor_exporter(CongExportDialogDetails *dialog_details)
 		} else {
 			gtk_entry_set_text(dialog_details->filename_entry, "");
 		}
+		g_object_unref(file);
 	}
 }
 
@@ -197,8 +201,8 @@ static void on_exporter_selection_changed(GtkWidget *combo_box,
 static void on_select_filename_button_clicked(GtkButton *button,
 					      gpointer user_data)
 {
-	gchar *export_uri;
-	gchar *new_uri;
+	GFile *export_file;
+	GFile *new_file;
 	CongExportDialogDetails *details = user_data;
 	CongServiceExporter* exporter = get_selected_exporter(details);
 	g_assert(exporter);
@@ -207,21 +211,21 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	   FIXME: ought to set up MIME-filters according to the selected exporter plugin.
 	   Needs a decent file-selector API for this...
 	*/
-	export_uri = cong_exporter_get_preferred_uri(exporter);
+	export_file = cong_exporter_get_preferred_location(exporter);
 	
-	new_uri = cong_get_file_name(_("Select file to export to"),
-				     export_uri,
-				     GTK_WINDOW(details->dialog),
-				     CONG_FILE_CHOOSER_ACTION_SAVE,
-				     NULL /* For now */);
+	new_file = cong_get_file_name(_("Select file to export to"),
+				      export_file,
+				      GTK_WINDOW(details->dialog),
+				      CONG_FILE_CHOOSER_ACTION_SAVE,
+				      NULL /* For now */);
 
-	if (new_uri) {
-		cong_exporter_set_preferred_uri(exporter, new_uri);
-		g_free(new_uri);
+	if (new_file) {
+		cong_exporter_set_preferred_location(exporter, new_file);
+		g_object_unref(new_file);
 	}
 	
-	if (export_uri) {
-		g_free(export_uri);
+	if (export_file) {
+		g_object_unref(export_file);
 	}
 }
 
@@ -392,7 +396,7 @@ cong_ui_hook_file_export (CongDocument *doc,
 	GtkWidget *dialog;
 	CongExportDialogDetails *dialog_details;
 	CongServiceExporter* exporter = NULL;
-	gchar *export_uri = NULL;
+	GFile *export_file = NULL;
 	gint flag = 1;
 
 	g_return_if_fail(doc);
@@ -424,8 +428,8 @@ cong_ui_hook_file_export (CongDocument *doc,
 			exporter = get_selected_exporter (dialog_details);
 			g_assert (exporter);
 
-			export_uri = cong_exporter_get_preferred_uri (exporter);
-			if (export_uri==NULL) {
+			export_file = cong_exporter_get_preferred_location (exporter);
+			if (export_file==NULL) {
 				GtkDialog* error_dialog;
 				error_dialog = cong_error_dialog_new (toplevel_window,
 								      _("No output file specified"), 
@@ -456,16 +460,19 @@ cong_ui_hook_file_export (CongDocument *doc,
          *  we call the exporter)
 	 */
 	if (exporter) {
-		g_assert (export_uri);
+		g_assert (export_file);
+
+		char *export_uri = g_file_get_uri(export_file);
 		g_message("Exporter invoked: \"%s\" to \"%s\"",
 			  cong_service_get_name(CONG_SERVICE(exporter)),
 			  export_uri);
+		g_free(export_uri);
 
 		cong_exporter_invoke (exporter, 
 				      doc, 
-				      export_uri,
+				      export_file,
 				      toplevel_window);
-		g_free (export_uri);
+		g_object_unref(export_file);
 	}
 
 }

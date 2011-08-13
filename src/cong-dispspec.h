@@ -48,7 +48,7 @@ CongDispspec* cong_dispspec_new(void);
 
 /* Constructors that use the standard format: */
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
-GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds);
+gboolean cong_dispspec_new_from_xds_file(GFile *file, CongDispspec** ds, GError **error);
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
 
 /* Constructors that try to generate from another format: */

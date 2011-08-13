@@ -611,23 +611,24 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
  * Returns:
  */
 gboolean 
-cong_ui_load_imported_file_content(const gchar *string_uri,
+cong_ui_load_imported_file_content(GFile *file,
 				   char** buffer,
-				   GnomeVFSFileSize* size,
+				   gsize* size,
 				   GtkWindow *parent_window)
 {
-	GnomeVFSResult vfs_result;
+	gboolean result;
+	GError *error = NULL;
 
-	g_return_val_if_fail (string_uri, FALSE);
+	g_return_val_if_fail (file, FALSE);
 	g_return_val_if_fail (buffer, FALSE);
 	g_return_val_if_fail (size, FALSE);
 
-	vfs_result = cong_vfs_new_buffer_from_file(string_uri, buffer, size);
+	result = cong_vfs_new_buffer_from_file(file, buffer, size, &error);
 	
-	if (vfs_result!=GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result (parent_window,
-												  string_uri, 
-												  vfs_result);
+	if (!result) {
+		GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_gerror (parent_window,
+		                                                                              file,
+		                                                                              error);
 		
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));

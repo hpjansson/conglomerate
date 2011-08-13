@@ -34,6 +34,7 @@ AM_GLIB_GNU_GETTEXT
 dnl --- Package configuration ---
 
 GTK2_REQUIRED=2.10.0
+GIO_REQUIRED=2.20.0
 LIBXML_REQUIRED=2.0.0
 LIBXSLT_REQUIRED=1.0.0
 LIBGNOMEPRINT_REQUIRED=1.116.0
@@ -49,10 +50,10 @@ dnl --- Fundamentals ---
 
 PKG_CHECK_MODULES([CONGLOMERATE], [
   gtk+-2.0 >= $GTK2_REQUIRED
+  gio-2.0 >= $GIO_REQUIRED
   gconf-2.0 >= $GCONF2_REQUIRED
   libxml-2.0 >= $LIBXML_REQUIRED
   libxslt >= $LIBXSLT_REQUIRED
-  gnome-vfs-2.0
   libart-2.0
   libglade-2.0 >= $LIBGLADE2_REQUIRED])
 

@@ -212,7 +212,7 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
 
 char *pick_structural_tag(CongDispspec *ds);
 
-void open_document_do(const gchar *doc_name, GtkWindow *parent_window);
+void open_document_do(GFile *file, GtkWindow *parent_window);
 
 void new_document(GtkWindow *parent_window);
 int gui_window_new_document_make();

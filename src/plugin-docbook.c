@@ -45,13 +45,13 @@
 /* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
 static GList*
 split_utf8_into_unichar_lines (const gchar *utf8_input,
-			       GnomeVFSFileSize size);
+			       gsize size);
 
 static void
 parse_text_buffer_into_docbook (CongDocument *doc,
 				CongNodePtr root_node, 
 				const char* buffer,
-				GnomeVFSFileSize size);
+				gsize size);
 
 #if 0
 struct DocBookAuthorInfo
@@ -470,7 +470,7 @@ append_line (GList **result,
 
 static GList*
 split_utf8_into_unichar_lines (const gchar *utf8_input,
-			       GnomeVFSFileSize size)
+			       gsize size)
 {
 	GList *result = NULL;
 	gunichar* ucs4_full_string;
@@ -706,7 +706,7 @@ static void
 parse_text_buffer_into_docbook (CongDocument *doc,
 				CongNodePtr root_node, 
 				const char* buffer,
-				GnomeVFSFileSize size)
+				gsize size)
 {
 	/* Note: this routine uses the private CongDocument methods which are normally reserved for the undo/redo system.
 	   It is safe here, since we are not interacting with that - the document has only just been created. */
@@ -918,7 +918,7 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 /**
  * text_importer_action_callback:
  * @importer:
- * @uri:
+ * @file:
  * @mime_type:
  * @user_data:
  * @toplevel_window:
@@ -926,15 +926,15 @@ parse_text_buffer_into_docbook (CongDocument *doc,
  * TODO: Write me
  */
 void 
-text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+text_importer_action_callback(CongServiceImporter *importer, GFile *file, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
-	GnomeVFSFileSize size;
+	gsize size;
 	xmlDocPtr xml_doc;
 
 	g_message("text_importer_action_callback");
 
-	if (cong_ui_load_imported_file_content(uri, &buffer, &size, toplevel_window)) {
+	if (cong_ui_load_imported_file_content(file, &buffer, &size, toplevel_window)) {
 		CongDocument *doc;
 		xmlNodePtr root_node;
 
@@ -1005,17 +1005,20 @@ sourcecode_importer_mime_filter(CongServiceImporter *importer, const gchar *mime
  * TODO: Write me
  */
 void 
-sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+sourcecode_importer_action_callback(CongServiceImporter *importer, GFile *file, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
-	GnomeVFSFileSize size;
+	gsize size;
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
+	char *uri;
 
 	g_message("sourcecode_importer_action_callback");
 
-	if (cong_ui_load_imported_file_content(uri, &buffer, &size, toplevel_window)) {
+	if (cong_ui_load_imported_file_content(file, &buffer, &size, toplevel_window)) {
 		g_assert(buffer);
+
+		uri = g_file_get_uri(file);
 
 		/* Build up the document and its content: */
 		xml_doc = xmlNewDoc((const xmlChar*)"1.0");
@@ -1044,6 +1047,7 @@ sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *
 
 		/* Finished building content: */
 		g_free(buffer);
+		g_free(uri);
 
 		/* Do appropriate UI stuff: */
 		cong_ui_new_document_from_imported_xml(xml_doc,
@@ -1121,7 +1125,7 @@ do_transform(gchar *type,
 	     CongDocument *doc,
 	     const gchar *stylesheet_path,
 	     GList *stylesheet_args,
-	     const gchar *string_uri,
+	     GFile *file,
 	     GtkWindow *toplevel_window)
 {
 	/*
@@ -1132,7 +1136,7 @@ do_transform(gchar *type,
 	if (cong_ui_transform_doc_to_uri(doc,
 					 stylesheet_path,
 					 stylesheet_args, 
-					 string_uri,
+					 file,
 					 toplevel_window)) {
 
 		GtkDialog *dialog;
@@ -1140,7 +1144,7 @@ do_transform(gchar *type,
 		gchar *path;
 		gchar *message;
 		
-		cong_vfs_split_string_uri (string_uri, &filename_alone, &path);
+		cong_vfs_split_file_path (file, &filename_alone, &path);
 		message = g_strdup_printf (_("%s conversion complete.\n\nConverted %s to %s in %s"),
 					   type,
 					   cong_document_get_filename (doc),
@@ -1168,13 +1172,13 @@ do_transform(gchar *type,
  * TODO: Write me
  */
 void 
-html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, GFile *file, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
-	g_return_if_fail(uri);
+	g_return_if_fail(file);
 
 	g_message("html_exporter_action_callback");
 
@@ -1188,7 +1192,7 @@ html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, 
 		      doc,
 		      stylesheet_path,
 		      NULL, 
-		      uri,
+		      file,
 		      toplevel_window);
 	g_free (stylesheet_path);
 }
@@ -1243,7 +1247,7 @@ pdf_exporter_options_callback (CongServiceExporter *exporter,
  * TODO: Write me
  */
 void 
-pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, GFile *file, gpointer user_data, GtkWindow *toplevel_window)
 {
 #if 1
 	GtkWidget *progress_checklist_dialog;
@@ -1256,7 +1260,7 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
-	g_return_if_fail(uri);
+	g_return_if_fail(file);
 
 	stylesheet_path = get_and_check_stylesheet_path ("fo","XSL:FO",toplevel_window);
 	if (stylesheet_path==NULL) {
@@ -1321,14 +1325,14 @@ fo_exporter_options_callback (CongServiceExporter *exporter,
  * TODO: Write me
  */
 void 
-fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, GFile *file, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 	GList *list_of_parameters;
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
-	g_return_if_fail(uri);
+	g_return_if_fail(file);
 
 	g_message("fo_exporter_action_callback");
 
@@ -1343,7 +1347,7 @@ fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, co
 		      doc,
 		      stylesheet_path,
 		      list_of_parameters, 
-		      uri,
+		      file,
 		      toplevel_window);
 	g_free(stylesheet_path);
 	cong_stylesheet_parameter_list_free (list_of_parameters);

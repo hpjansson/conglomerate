@@ -117,30 +117,30 @@ cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_win
 
 /**
  * Routine to manufacture a "what failed" string for when File->Open fails.
- * @string_uri:  the stringified URI from which you tried to open the file.
+ * @file: the file reference of the file you tried to open.
  */
 gchar*
-cong_error_what_failed_on_file_open_failure (const gchar *string_uri, 
+cong_error_what_failed_on_file_open_failure (GFile *file,
 					     gboolean transient);
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @string_uri:  the stringified URI from which you tried to open the file.
+ * @file: the file reference of the file you tried to open.
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure (GtkWindow *parent_window,
-					      const gchar* string_uri, 
+					      GFile *file,
 					      gboolean transient, 
 					      const gchar* why_failed, 
 					      const gchar* suggestions);
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @string_uri:  the stringified URI from which you tried to open the file.
+ * @file: the file reference of the file you tried to open.
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_convenience (GtkWindow *parent_window,
-							       const gchar* string_uri, 
+							       GFile *file,
 							       gboolean transient, 
 							       const gchar* why_failed, 
 							       const gchar* suggestions,
@@ -151,32 +151,32 @@ cong_error_dialog_new_from_file_open_failure_with_convenience (GtkWindow *parent
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @string_uri:  the URI from which you tried to open the file.
- * @vfs_result: the error code that occurred.
+ * @file: the file reference of the file you tried to open.
+ * @error: the GError that occurred.
  */
 GtkDialog*
-cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
-							     const gchar *string_uri,
-							     GnomeVFSResult vfs_result);
+cong_error_dialog_new_from_file_open_failure_with_gerror(GtkWindow *parent_window,
+							 GFile *file,
+							 GError *error);
 
 
 /**
  * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.
- * @string_uri:  the URI to which you tried to save the file.
- * @vfs_result: the error code that occurred.
+ * @file: the file reference of the file you tried to save.
+ * @error: the GError that occurred.
  * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
  */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
-					     const gchar *string_uri, 
-					     GnomeVFSResult vfs_result, 
-					     const GnomeVFSFileSize* file_size);
+					     GFile *file,
+					     GError *error,
+					     gsize *file_size);
 
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 						  const gchar *what_failed,
-						  const gchar *string_uri, 
-						  GnomeVFSResult vfs_result, 
+						  GFile *file,
+						  GError *error,
 						  const gchar *technical_details);
 /** 
  * A bunch of self-tests.

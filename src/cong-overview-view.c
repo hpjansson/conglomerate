@@ -47,9 +47,9 @@ GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 			    gpointer user_data);
 
 static void
-on_doc_set_url (CongDocument *doc,
-		const gchar *new_url,
-		gpointer user_data);
+on_doc_set_file (CongDocument *doc,
+		 GFile *new_file,
+		 gpointer user_data);
 
 static void
 on_widget_destroy (GtkWidget *widget,
@@ -62,7 +62,7 @@ struct CongOverviewDetails
 {
 	CongTreeView *tree_view;
 	CongDocument *doc;
-	gulong sigid_set_url;
+	gulong sigid_set_file;
 };
 
 /* Exported function implementations: */
@@ -94,10 +94,10 @@ cong_overview_view_new (CongDocument *doc,
 
 	overview_details->doc = doc;
 	g_object_ref (G_OBJECT (doc));
-	overview_details->sigid_set_url = g_signal_connect_after (G_OBJECT (doc),
-								  "set_url",
-								  G_CALLBACK (on_doc_set_url),
-								  overview_details);
+	overview_details->sigid_set_file = g_signal_connect_after (G_OBJECT (doc),
+								   "set_file",
+								   G_CALLBACK (on_doc_set_file),
+								   overview_details);
 	g_signal_connect_after (G_OBJECT (cong_tree_view_get_widget (overview_details->tree_view)),
 				"destroy",
 				G_CALLBACK (on_widget_destroy),
@@ -327,13 +327,13 @@ GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 }
 
 static void
-on_doc_set_url (CongDocument *doc,
-		const gchar *new_url,
-		gpointer user_data)
+on_doc_set_file (CongDocument *doc,
+		 GFile *new_file,
+		 gpointer user_data)
 {
 	CongOverviewDetails *overview_details = (CongOverviewDetails*)user_data;
 	g_assert (IS_CONG_DOCUMENT (doc));
-	g_assert (new_url);
+	g_assert (new_file);
 
 	/* Update root: */
 	cong_tree_view_protected_force_node_update (overview_details->tree_view,
@@ -347,7 +347,7 @@ on_widget_destroy (GtkWidget *widget,
 	CongOverviewDetails *overview_details = (CongOverviewDetails*)user_data;
 
 	g_signal_handler_disconnect (G_OBJECT (overview_details->doc),
-				     overview_details->sigid_set_url);
+				     overview_details->sigid_set_file);
 	g_object_unref (G_OBJECT (overview_details->doc));
 
 	g_free (overview_details);

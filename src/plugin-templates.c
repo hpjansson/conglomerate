@@ -162,12 +162,9 @@ static xmlChar* cong_get_template_description(xmlDocPtr doc)
 				   (const xmlChar*)"string(/*/cong:template/cong:description)");
 }
 
-static gboolean
-register_template(const gchar *rel_path,
-	   GnomeVFSFileInfo *info,
-	   gboolean recursing_will_loop,
-	   gpointer data,
-	   gboolean *recurse)
+static void
+register_template(GFileInfo *info,
+	   gpointer data)
 {
 	xmlDocPtr doc;
 	gchar* file_name;
@@ -176,11 +173,11 @@ register_template(const gchar *rel_path,
 
 	CongTemplate* template = (CongTemplate*)data;
 
-	g_return_val_if_fail(template->dir, TRUE);
-	g_return_val_if_fail(rel_path, TRUE);
+	g_return_if_fail(template->dir);
+	g_return_if_fail(info);
 
-	file_name = g_strconcat(template->dir, "/", rel_path, NULL);
-	g_return_val_if_fail(file_name, TRUE);
+	file_name = g_build_filename(template->dir, g_file_info_get_name(info), NULL);
+	g_return_if_fail(file_name);
 
 	g_message("template file: %s", file_name);
 
@@ -199,41 +196,62 @@ register_template(const gchar *rel_path,
 			(const char*)name, 
 			factory_page_creation_callback_templates,
 			factory_action_callback_templates,
-			rel_path,
+			g_file_info_get_name(info),
 			file_name);
 	}else{
 		g_warning("Template %s is not a valid template", file_name);
 	}
 
+	g_free(file_name);
 	xmlFree(name);
 	xmlFree(description);
 	xmlFreeDoc(doc);
-
-	return TRUE;
 }
 
-static void visit_paths(GSList* paths, GnomeVFSDirectoryVisitFunc visit_path,
+static void visit_paths(GSList* paths, void (*visit_path)(GFileInfo *, gpointer),
 		void* data)
 {
 	GSList* path;
-	path = paths;
 
 	for(path = paths; path != NULL; path = g_slist_next(path))
 	{
-		GnomeVFSResult vfs_result;
-
-		gchar* absolute_path;
-		absolute_path = gnome_vfs_expand_initial_tilde(path->data);
+		GFile *file;
+		GFileEnumerator *visitor;
+		GError *error = NULL;
+		GFileInfo *info;
+		char *absolute_path;
+		absolute_path = cong_util_expand_initial_tilde (path->data);
+		file = g_file_new_for_path(absolute_path);
 
 		/* g_message("loading templates from %s", absolute_path); */
 
 		((CongTemplate*)data)->dir = absolute_path;
 
-		vfs_result = gnome_vfs_directory_visit(absolute_path,
-			GNOME_VFS_FILE_INFO_DEFAULT,
-			GNOME_VFS_DIRECTORY_VISIT_DEFAULT,
-			visit_path,
-			data);
+		visitor = g_file_enumerate_children(file,
+		                                    G_FILE_ATTRIBUTE_STANDARD_NAME,
+		                                    G_FILE_QUERY_INFO_NONE,
+		                                    NULL,
+		                                    &error);
+		if(!visitor) {
+			g_warning("Couldn't visit directory %s: %s", absolute_path, error->message);
+			g_free(absolute_path);
+			g_object_unref(file);
+			g_error_free(error);
+			continue;
+		}
+
+		while((info = g_file_enumerator_next_file(visitor, NULL, &error)) != NULL) {
+			visit_path(info, data);
+			g_object_unref(info);
+		}
+
+		if(error)
+			g_warning("Error visiting directory %s: %s", absolute_path, error->message);
+
+		g_free(absolute_path);
+		g_object_unref(file);
+		g_object_unref(visitor);
+		g_error_free(error);
 	}
 
 }
