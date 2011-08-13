@@ -43,7 +43,7 @@ LIBGLADE2_REQUIRED=2.0.0
 LIBFO_REQUIRED=0.2.3
 SEWFOX_REQUIRED=0.0.0
 GCONF2_REQUIRED=1.2.0
-GTKSOURCEVIEW_REQUIRED=0.6
+GTKSOURCEVIEW_REQUIRED=2.4
 ENCHANT_REQUIRED=0.1.0
 
 dnl --- Fundamentals ---
@@ -151,7 +151,7 @@ AC_ARG_ENABLE(gtksourceview, [  --enable-gtksourceview  build with GtkSourceView
 
 if test x$enable_gtksourceview = xauto || test x$enable_gtksourceview = xyes ; then
         PKG_CHECK_MODULES(GTKSOURCEVIEW, \
-                          gtksourceview-1.0 >= $GTKSOURCEVIEW_REQUIRED, \
+                          gtksourceview-2.0 >= $GTKSOURCEVIEW_REQUIRED, \
                           have_gtksourceview=yes, have_gtksourceview=no)
         if test x"$have_gtksourceview" = "xyes"; then
                 enable_gtksourceview=yes

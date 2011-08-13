@@ -8,7 +8,7 @@
 
 #ifdef ENABLE_GTKSOURCEVIEW
 #include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourcelanguagesmanager.h>
+#include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #endif
 
@@ -332,7 +332,7 @@ cong_util_make_source_view (const gchar *source_mime_type,
 			    GtkTextView **output_text_view)
 {
 #ifdef ENABLE_GTKSOURCEVIEW
-        GtkSourceLanguagesManager *lang_manager;
+        GtkSourceLanguageManager *lang_manager;
         GtkSourceLanguage *lang;
         GtkSourceBuffer *text_buffer;
         GtkSourceView *text_view;
@@ -348,15 +348,14 @@ cong_util_make_source_view (const gchar *source_mime_type,
 					GTK_POLICY_AUTOMATIC);
 
 #ifdef ENABLE_GTKSOURCEVIEW
-        lang_manager = gtk_source_languages_manager_new ();
-        lang = gtk_source_languages_manager_get_language_from_mime_type (lang_manager, 
-									 source_mime_type);
+        lang_manager = gtk_source_language_manager_get_default ();
+        lang = gtk_source_language_manager_guess_language (lang_manager,
+                                                           NULL,
+                                                           source_mime_type);
         text_buffer = gtk_source_buffer_new_with_language (lang);
 	text_view = GTK_SOURCE_VIEW (gtk_source_view_new_with_buffer (text_buffer));
-        gtk_source_buffer_set_highlight (text_buffer, 
-					 TRUE);
-        g_object_unref(lang_manager);
-        g_object_unref(lang);
+        gtk_source_buffer_set_highlight_syntax (text_buffer,
+                                                TRUE);
 #else
         text_buffer = gtk_text_buffer_new (NULL);
         text_view = GTK_TEXT_VIEW (gtk_text_view_new_with_buffer(text_buffer));
