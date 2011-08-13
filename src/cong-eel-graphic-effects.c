@@ -28,19 +28,18 @@
 #include <config.h>
 #include "cong-eel-graphic-effects.h"
 
-#include <libart_lgpl/art_rect.h>
-#include <libart_lgpl/art_rgb.h>
+#include <string.h>
 
 /* shared utility to create a new pixbuf from the passed-in one */
 
 static GdkPixbuf *
 create_new_pixbuf (GdkPixbuf *src)
 {
-	g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
-	g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
-			       && gdk_pixbuf_get_n_channels (src) == 3)
-			      || (gdk_pixbuf_get_has_alpha (src)
-				  && gdk_pixbuf_get_n_channels (src) == 4), NULL);
+	g_assert (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB);
+	g_assert ((!gdk_pixbuf_get_has_alpha (src)
+	           && gdk_pixbuf_get_n_channels (src) == 3)
+	          || (gdk_pixbuf_get_has_alpha (src)
+	              && gdk_pixbuf_get_n_channels (src) == 4));
 
 	return gdk_pixbuf_new (gdk_pixbuf_get_colorspace (src),
 			       gdk_pixbuf_get_has_alpha (src),
@@ -52,11 +51,11 @@ create_new_pixbuf (GdkPixbuf *src)
 static GdkPixbuf *
 create_new_pixbuf_with_alpha (GdkPixbuf *src)
 {
-	g_return_val_if_fail (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB, NULL);
-	g_return_val_if_fail ((!gdk_pixbuf_get_has_alpha (src)
-			       && gdk_pixbuf_get_n_channels (src) == 3)
-			      || (gdk_pixbuf_get_has_alpha (src)
-				  && gdk_pixbuf_get_n_channels (src) == 4), NULL);
+	g_assert (gdk_pixbuf_get_colorspace (src) == GDK_COLORSPACE_RGB);
+	g_assert ((!gdk_pixbuf_get_has_alpha (src)
+	           && gdk_pixbuf_get_n_channels (src) == 3)
+	          || (gdk_pixbuf_get_has_alpha (src)
+	              && gdk_pixbuf_get_n_channels (src) == 4));
 
 	return gdk_pixbuf_new (gdk_pixbuf_get_colorspace (src),
 			       TRUE,
@@ -298,7 +297,7 @@ draw_frame_column (GdkPixbuf *frame_image, int target_height, int source_height,
  */
 GdkPixbuf *
 eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset,
-				int dest_width, int dest_height, gboolean fill_flag)
+			 int dest_width, int dest_height, gboolean fill_flag)
 {
 	GdkPixbuf *result_pixbuf;
 	guchar *pixels_ptr;
@@ -321,7 +320,7 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
 	/* clear the new pixbuf */
 	if (!fill_flag) {
 		for (y = 0; y < dest_height; y++) {
-			art_rgb_run_alpha (pixels_ptr, 255, 255, 255, 255, dest_width);
+			memset (pixels_ptr, 255, row_stride);
 			pixels_ptr += row_stride; 
 		}
 	}
