@@ -1,15 +1,16 @@
 # Chinese simplified translation for Conglomerate.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) Free Software Foundation, Inc.
 # This file is distributed under the same license as the Conglomerate package.
 # Funda Wang <fundawang@linux.net.cn>, 2004.
+# Yinghua Wang <wantinghard@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: conglomerate\n"
+"Project-Id-Version: conglomerate master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=conglomerate&component=general\n"
-"POT-Creation-Date: 2010-10-19 17:49+0000\n"
-"PO-Revision-Date: 2010-10-28 15:57+0800\n"
+"product=conglomerate&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-07-28 17:06+0000\n"
+"PO-Revision-Date: 2011-08-14 19:41+0800\n"
 "Last-Translator: Yinghua Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +27,7 @@ msgstr "测试 CNXML ds"
 
 #: ../dispspecs/cnxml.xds.in.h:3
 msgid "cite"
-msgstr ""
+msgstr "引用"
 
 #: ../dispspecs/cnxml.xds.in.h:4
 msgid "cnxn"
@@ -34,13 +35,11 @@ msgstr "cnxn"
 
 #: ../dispspecs/cnxml.xds.in.h:5
 msgid "codeblock"
-msgstr ""
+msgstr "代码块"
 
 #: ../dispspecs/cnxml.xds.in.h:6
-#, fuzzy
-#| msgid "Encoding"
 msgid "codeline"
-msgstr "编码"
+msgstr "代码行"
 
 #: ../dispspecs/cnxml.xds.in.h:7
 msgid "content"
@@ -76,7 +75,7 @@ msgstr "模块"
 
 #: ../dispspecs/cnxml.xds.in.h:15
 msgid "note"
-msgstr ""
+msgstr "注释"
 
 #: ../dispspecs/cnxml.xds.in.h:16
 msgid "para"
@@ -84,21 +83,19 @@ msgstr "段"
 
 #: ../dispspecs/cnxml.xds.in.h:17
 msgid "proof"
-msgstr ""
+msgstr "证明"
 
 #: ../dispspecs/cnxml.xds.in.h:18
 msgid "rule"
-msgstr ""
+msgstr "法则"
 
 #: ../dispspecs/cnxml.xds.in.h:19
-#, fuzzy
-#| msgid "Description"
 msgid "section"
 msgstr "节"
 
 #: ../dispspecs/cnxml.xds.in.h:20
 msgid "statement"
-msgstr ""
+msgstr "声明"
 
 #: ../dispspecs/cnxml.xds.in.h:21
 msgid "term"
@@ -171,7 +168,7 @@ msgstr "XML 元素名称"
 
 #: ../dispspecs/dispspec.xds.in.h:15
 msgid "Serialisation Type List"
-msgstr ""
+msgstr "连载类型列表"
 
 #: ../dispspecs/dispspec.xds.in.h:16
 msgid "Short Description"
@@ -197,7 +194,7 @@ msgstr "一个 URL 链接(可能指向某个网站)"
 msgid ""
 "A book, with a title, and perhaps with some bibliographical material, in "
 "addition to the actual content of the book."
-msgstr ""
+msgstr "一本带有标题及正文的书(还可能有一些参考文献材料)"
 
 #: ../dispspecs/docbook.xds.in.h:3 ../dispspecs/website-webpage.xds.in.h:2
 msgid "A brief description of the version of a document."
@@ -208,24 +205,25 @@ msgid "A collection of books."
 msgstr "书签收集。"
 
 #: ../dispspecs/docbook.xds.in.h:5
+#, fuzzy
 msgid "A high-level division of a book."
-msgstr ""
+msgstr "一本书的高层分块"
 
 #: ../dispspecs/docbook.xds.in.h:6 ../dispspecs/website-webpage.xds.in.h:3
 msgid "A specific piece of data from a computer system, to be taken literally."
-msgstr ""
+msgstr "计算机系统中一段特定的、需要原样摘录的数据。"
 
 #: ../dispspecs/docbook.xds.in.h:7 ../dispspecs/website-webpage.xds.in.h:4
 msgid "A subsection within a section"
-msgstr ""
+msgstr "一节中的小节"
 
 #: ../dispspecs/docbook.xds.in.h:8 ../dispspecs/website-webpage.xds.in.h:5
 msgid "A summary."
-msgstr ""
+msgstr "一段总结。"
 
 #: ../dispspecs/docbook.xds.in.h:9 ../dispspecs/website-webpage.xds.in.h:6
 msgid "A top-level section of document"
-msgstr ""
+msgstr "文档中顶层的节"
 
 #: ../dispspecs/docbook.xds.in.h:10 ../dispspecs/forrest-document.xds.in.h:1
 #: ../dispspecs/website-webpage.xds.in.h:7
@@ -275,7 +273,7 @@ msgstr "文章"
 
 #: ../dispspecs/docbook.xds.in.h:21
 msgid "Article Header"
-msgstr ""
+msgstr "文章头"
 
 #: ../dispspecs/docbook.xds.in.h:22
 msgid "Article Information"
@@ -289,11 +287,11 @@ msgstr "作者"
 
 #: ../dispspecs/docbook.xds.in.h:24
 msgid "Author Initials"
-msgstr ""
+msgstr "作者缩写"
 
 #: ../dispspecs/docbook.xds.in.h:25 ../dispspecs/website-webpage.xds.in.h:15
 msgid "Authorship Information"
-msgstr ""
+msgstr "作者信息"
 
 #: ../dispspecs/docbook.xds.in.h:26 ../dispspecs/website-webpage.xds.in.h:16
 msgid "Bibliographic Information"
@@ -313,8 +311,9 @@ msgstr "书信息"
 
 #: ../dispspecs/docbook.xds.in.h:30 ../dispspecs/forrest-document.xds.in.h:6
 #: ../dispspecs/xhtml1-strict.xds.in.h:14
+#, fuzzy
 msgid "Caption"
-msgstr ""
+msgstr "标题"
 
 #: ../dispspecs/docbook.xds.in.h:31
 msgid "Caution"
@@ -338,7 +337,7 @@ msgstr "命令"
 
 #: ../dispspecs/docbook.xds.in.h:36 ../dispspecs/website-webpage.xds.in.h:21
 msgid "Command Synopsis"
-msgstr ""
+msgstr "命令提要"
 
 #: ../dispspecs/docbook.xds.in.h:37
 msgid "Computer Output"
@@ -355,11 +354,11 @@ msgstr "版权持有者"
 
 #: ../dispspecs/docbook.xds.in.h:40
 msgid "Corporate Name"
-msgstr ""
+msgstr "协作者姓名"
 
 #: ../dispspecs/docbook.xds.in.h:41 ../dispspecs/website-webpage.xds.in.h:24
 msgid "Cross-reference"
-msgstr "交叉引用"
+msgstr "交互参考"
 
 #: ../dispspecs/docbook.xds.in.h:42 ../dispspecs/teixlite.xds.in.h:103
 msgid "Date"
@@ -371,7 +370,7 @@ msgstr "出版日期"
 
 #: ../dispspecs/docbook.xds.in.h:44
 msgid "Defined terms"
-msgstr ""
+msgstr "术语定义"
 
 #: ../dispspecs/docbook.xds.in.h:45 ../dispspecs/forrest-document.xds.in.h:9
 #: ../dispspecs/website-webpage.xds.in.h:26
@@ -381,7 +380,7 @@ msgstr "定义"
 
 #: ../dispspecs/docbook.xds.in.h:46
 msgid "DocBook"
-msgstr ""
+msgstr "DocBook"
 
 #: ../dispspecs/docbook.xds.in.h:47
 msgid ""
@@ -389,6 +388,8 @@ msgid ""
 "think of as \"a book\"; it is well-suited for writing books and articles, "
 "for both print and web-based publication."
 msgstr ""
+"DocBook 是一种从多方面讲符合大众理念的“书籍”式文件类型；它非常适合撰写用于打"
+"印及基于网络出版的书籍和文章。"
 
 #: ../dispspecs/docbook.xds.in.h:48 ../dispspecs/teixlite.xds.in.h:128
 #: ../dispspecs/website-webpage.xds.in.h:27
@@ -411,11 +412,11 @@ msgstr "电子邮件地址"
 #: ../dispspecs/website-webpage.xds.in.h:29
 #: ../dispspecs/xhtml1-strict.xds.in.h:24
 msgid "Emphasis"
-msgstr ""
+msgstr "强调"
 
 #: ../dispspecs/docbook.xds.in.h:52 ../dispspecs/website-webpage.xds.in.h:30
 msgid "Entry"
-msgstr ""
+msgstr "条目"
 
 #: ../dispspecs/docbook.xds.in.h:53
 msgid "Environment Variable"
@@ -444,11 +445,11 @@ msgstr "文件名"
 
 #: ../dispspecs/docbook.xds.in.h:59 ../dispspecs/website-webpage.xds.in.h:33
 msgid "First Name"
-msgstr ""
+msgstr "名"
 
 #: ../dispspecs/docbook.xds.in.h:60 ../dispspecs/website-webpage.xds.in.h:34
 msgid "First Term"
-msgstr ""
+msgstr "首项"
 
 #: ../dispspecs/docbook.xds.in.h:61
 msgid "Footnote"
@@ -456,7 +457,7 @@ msgstr "尾注"
 
 #: ../dispspecs/docbook.xds.in.h:62 ../dispspecs/website-webpage.xds.in.h:35
 msgid "Free-floating Heading"
-msgstr ""
+msgstr "自由浮动式标题"
 
 #: ../dispspecs/docbook.xds.in.h:63 ../dispspecs/website-webpage.xds.in.h:36
 msgid "Function"
@@ -465,7 +466,7 @@ msgstr "函数"
 #. various related localNames need to be added
 #: ../dispspecs/docbook.xds.in.h:65
 msgid "Function Synopsis"
-msgstr ""
+msgstr "函数提要"
 
 #: ../dispspecs/docbook.xds.in.h:66 ../dispspecs/website-webpage.xds.in.h:37
 msgid "GUI Button"
@@ -521,7 +522,7 @@ msgstr "重要"
 
 #: ../dispspecs/docbook.xds.in.h:79 ../dispspecs/website-webpage.xds.in.h:46
 msgid "Index Term"
-msgstr ""
+msgstr "索引项"
 
 #: ../dispspecs/docbook.xds.in.h:80 ../dispspecs/forrest-document.xds.in.h:21
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:19
@@ -531,7 +532,7 @@ msgstr "介绍"
 
 #: ../dispspecs/docbook.xds.in.h:81 ../dispspecs/website-webpage.xds.in.h:47
 msgid "Key Caption"
-msgstr ""
+msgstr "键名"
 
 #: ../dispspecs/docbook.xds.in.h:82 ../dispspecs/website-webpage.xds.in.h:48
 msgid "Legal Notice"
@@ -539,73 +540,73 @@ msgstr "法律公告"
 
 #: ../dispspecs/docbook.xds.in.h:83 ../dispspecs/website-webpage.xds.in.h:49
 msgid "List (itemised)"
-msgstr ""
+msgstr "列表(项目符号)"
 
 #: ../dispspecs/docbook.xds.in.h:84 ../dispspecs/forrest-document.xds.in.h:26
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:23
 #: ../dispspecs/website-webpage.xds.in.h:50
 #: ../dispspecs/xhtml1-strict.xds.in.h:47
 msgid "List (ordered)"
-msgstr ""
+msgstr "列表(排序)"
 
 #: ../dispspecs/docbook.xds.in.h:85 ../dispspecs/website-webpage.xds.in.h:51
 msgid "List (simple)"
-msgstr ""
+msgstr "列表(简单)"
 
 #: ../dispspecs/docbook.xds.in.h:86
 msgid "List (terms and definitions)"
-msgstr ""
+msgstr "列表(术语和定义)"
 
 #: ../dispspecs/docbook.xds.in.h:87
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:25
 #: ../dispspecs/xhtml1-strict.xds.in.h:49
 msgid "List Item"
-msgstr ""
+msgstr "列表项目"
 
 #: ../dispspecs/docbook.xds.in.h:88
 msgid "List Member"
-msgstr ""
+msgstr "列表成员"
 
 #: ../dispspecs/docbook.xds.in.h:89 ../dispspecs/website-webpage.xds.in.h:52
 msgid "Literal"
-msgstr ""
+msgstr "照原文"
 
 #: ../dispspecs/docbook.xds.in.h:90
 msgid "Media Object"
-msgstr ""
+msgstr "媒体对象"
 
 #: ../dispspecs/docbook.xds.in.h:91 ../dispspecs/website-webpage.xds.in.h:53
 msgid "Menu Choice"
-msgstr ""
+msgstr "菜单选项"
 
 #: ../dispspecs/docbook.xds.in.h:92 ../dispspecs/website-webpage.xds.in.h:54
 msgid "Meta-information about a Reference Page"
-msgstr ""
+msgstr "有关参考页面的元信息"
 
 #: ../dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
-msgstr ""
+msgstr "有关书籍的元信息"
 
 #: ../dispspecs/docbook.xds.in.h:94
 msgid "Meta-information for an article"
-msgstr ""
+msgstr "有关文章的元信息"
 
 #: ../dispspecs/docbook.xds.in.h:96 ../dispspecs/website-webpage.xds.in.h:56
 msgid "Miscellaneous Bibliographic Information"
-msgstr ""
+msgstr "其他参考文献信息"
 
 #: ../dispspecs/docbook.xds.in.h:98 ../dispspecs/website-webpage.xds.in.h:58
 msgid "Name, purpose and classification about a Reference Page"
-msgstr ""
+msgstr "参考页面的名称、用途和分类"
 
 #: ../dispspecs/docbook.xds.in.h:99 ../dispspecs/website-webpage.xds.in.h:59
 msgid "Naming"
-msgstr ""
+msgstr "命名"
 
 #: ../dispspecs/docbook.xds.in.h:100 ../dispspecs/forrest-document.xds.in.h:29
 #: ../dispspecs/teixlite.xds.in.h:195
 msgid "Note"
-msgstr ""
+msgstr "注释"
 
 #: ../dispspecs/docbook.xds.in.h:101 ../dispspecs/forrest-document.xds.in.h:31
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:26
@@ -613,31 +614,31 @@ msgstr ""
 #: ../dispspecs/website-webpage.xds.in.h:60
 #: ../dispspecs/xhtml1-strict.xds.in.h:55 ../src/plugin-paragraph.c:68
 msgid "Paragraph"
-msgstr ""
+msgstr "段落"
 
 #: ../dispspecs/docbook.xds.in.h:102
 msgid "Paragraph (titled)"
-msgstr ""
+msgstr "段落(带标题)"
 
 #: ../dispspecs/docbook.xds.in.h:103 ../dispspecs/website-webpage.xds.in.h:61
 msgid "Part"
-msgstr ""
+msgstr "部"
 
 #: ../dispspecs/docbook.xds.in.h:104 ../dispspecs/website-webpage.xds.in.h:63
 msgid "Preface"
-msgstr ""
+msgstr "前言"
 
 #: ../dispspecs/docbook.xds.in.h:105 ../dispspecs/website-webpage.xds.in.h:64
 msgid "Printing History"
-msgstr ""
+msgstr "印刷历史"
 
 #: ../dispspecs/docbook.xds.in.h:106 ../dispspecs/website-webpage.xds.in.h:65
 msgid "Procedure"
-msgstr ""
+msgstr "流程"
 
 #: ../dispspecs/docbook.xds.in.h:107 ../dispspecs/website-webpage.xds.in.h:66
 msgid "Product Name"
-msgstr ""
+msgstr "产品名称"
 
 #.
 #. perhaps this should use a fixed-space font
@@ -649,24 +650,25 @@ msgstr ""
 #.
 #: ../dispspecs/docbook.xds.in.h:116
 msgid "Program Listing"
-msgstr ""
+msgstr "程序清单"
 
 #: ../dispspecs/docbook.xds.in.h:117
+#, fuzzy
 msgid "Prompt"
-msgstr ""
+msgstr "交付日期"
 
 #: ../dispspecs/docbook.xds.in.h:118 ../dispspecs/teixlite.xds.in.h:214
 #: ../dispspecs/website-webpage.xds.in.h:67
 msgid "Publisher"
-msgstr ""
+msgstr "出版商"
 
 #: ../dispspecs/docbook.xds.in.h:119 ../dispspecs/website-webpage.xds.in.h:68
 msgid "Publisher Name"
-msgstr ""
+msgstr "出版商名称"
 
 #: ../dispspecs/docbook.xds.in.h:120 ../dispspecs/website-webpage.xds.in.h:69
 msgid "Purpose"
-msgstr ""
+msgstr "用途"
 
 #: ../dispspecs/docbook.xds.in.h:121
 msgid "Question"
@@ -686,7 +688,7 @@ msgstr "问答子集"
 
 #: ../dispspecs/docbook.xds.in.h:125 ../dispspecs/readme.xds.in.h:12
 msgid "Quote"
-msgstr ""
+msgstr "引述"
 
 #: ../dispspecs/docbook.xds.in.h:126 ../dispspecs/relax-ng.xds.in.h:10
 #: ../dispspecs/website-webpage.xds.in.h:70
@@ -715,11 +717,11 @@ msgstr "修订历史"
 
 #: ../dispspecs/docbook.xds.in.h:132
 msgid "Revision Remark"
-msgstr ""
+msgstr "修订记录"
 
 #: ../dispspecs/docbook.xds.in.h:133 ../dispspecs/website-webpage.xds.in.h:74
 msgid "SGML Tag"
-msgstr ""
+msgstr "SGML 标签"
 
 #: ../dispspecs/docbook.xds.in.h:134 ../dispspecs/website-webpage.xds.in.h:75
 msgid "Screen"
@@ -727,25 +729,25 @@ msgstr "屏幕"
 
 #: ../dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
-msgstr ""
+msgstr "截屏"
 
 #: ../dispspecs/docbook.xds.in.h:136 ../dispspecs/forrest-document.xds.in.h:33
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:29
 #: ../dispspecs/readme.xds.in.h:13 ../dispspecs/website-webpage.xds.in.h:76
 msgid "Section"
-msgstr ""
+msgstr "节"
 
 #: ../dispspecs/docbook.xds.in.h:137 ../dispspecs/website-webpage.xds.in.h:77
 msgid "Section (level 5)"
-msgstr ""
+msgstr "节(第 5 级)"
 
 #: ../dispspecs/docbook.xds.in.h:138
 msgid "Set"
-msgstr ""
+msgstr "集"
 
 #: ../dispspecs/docbook.xds.in.h:139 ../dispspecs/website-webpage.xds.in.h:78
 msgid "Step"
-msgstr ""
+msgstr "步"
 
 #: ../dispspecs/docbook.xds.in.h:140 ../dispspecs/website-webpage.xds.in.h:79
 msgid "Structure Name"
@@ -753,23 +755,23 @@ msgstr "结构名称"
 
 #: ../dispspecs/docbook.xds.in.h:141 ../dispspecs/website-webpage.xds.in.h:80
 msgid "Subsection"
-msgstr ""
+msgstr "小节"
 
 #: ../dispspecs/docbook.xds.in.h:142 ../dispspecs/website-webpage.xds.in.h:81
 msgid "Subsection (level 3)"
-msgstr ""
+msgstr "小节(第 3 级)"
 
 #: ../dispspecs/docbook.xds.in.h:143 ../dispspecs/website-webpage.xds.in.h:82
 msgid "Subsection (level 4)"
-msgstr ""
+msgstr "小节(第 4 级)"
 
 #: ../dispspecs/docbook.xds.in.h:144 ../dispspecs/website-webpage.xds.in.h:83
 msgid "Substeps"
-msgstr ""
+msgstr "小步"
 
 #: ../dispspecs/docbook.xds.in.h:145 ../dispspecs/website-webpage.xds.in.h:84
 msgid "Subsubsection"
-msgstr ""
+msgstr "次小节"
 
 #: ../dispspecs/docbook.xds.in.h:146 ../dispspecs/forrest-document.xds.in.h:37
 #: ../dispspecs/website-webpage.xds.in.h:85
@@ -778,7 +780,7 @@ msgstr "副标题"
 
 #: ../dispspecs/docbook.xds.in.h:147 ../dispspecs/website-webpage.xds.in.h:86
 msgid "Surname"
-msgstr ""
+msgstr "姓氏"
 
 #: ../dispspecs/docbook.xds.in.h:148 ../dispspecs/website-webpage.xds.in.h:87
 msgid "Symbol"
@@ -786,49 +788,49 @@ msgstr "符号"
 
 #: ../dispspecs/docbook.xds.in.h:149 ../dispspecs/website-webpage.xds.in.h:88
 msgid "Synopsis (syntax)"
-msgstr ""
+msgstr "提要(语法)"
 
 #: ../dispspecs/docbook.xds.in.h:150 ../dispspecs/website-webpage.xds.in.h:89
 msgid "Table (informal)"
-msgstr ""
+msgstr "表格(非正式)"
 
 #: ../dispspecs/docbook.xds.in.h:151 ../dispspecs/xhtml1-strict.xds.in.h:68
 msgid "Table Body"
-msgstr ""
+msgstr "表格主体"
 
 #: ../dispspecs/docbook.xds.in.h:152
 msgid "Table Column Specification"
-msgstr ""
+msgstr "表格列规范"
 
 #: ../dispspecs/docbook.xds.in.h:153 ../src/plugin-table.c:417
 msgid "Table Entry"
-msgstr ""
+msgstr "表格条目"
 
 #: ../dispspecs/docbook.xds.in.h:154
 msgid "Table Entry (subtable)"
-msgstr ""
+msgstr "表格条目(子表格)"
 
 #: ../dispspecs/docbook.xds.in.h:155 ../dispspecs/xhtml1-strict.xds.in.h:71
 msgid "Table Footer"
-msgstr ""
+msgstr "表格脚"
 
 #: ../dispspecs/docbook.xds.in.h:156 ../src/plugin-table.c:405
 msgid "Table Group"
-msgstr ""
+msgstr "表格组"
 
 #: ../dispspecs/docbook.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:72
 msgid "Table Header"
-msgstr ""
+msgstr "表格标题"
 
 #: ../dispspecs/docbook.xds.in.h:158 ../dispspecs/xhtml1-strict.xds.in.h:73
 #: ../src/plugin-table.c:411
 msgid "Table Row"
-msgstr ""
+msgstr "表格行"
 
 #: ../dispspecs/docbook.xds.in.h:159 ../dispspecs/teixlite.xds.in.h:250
 #: ../dispspecs/website-webpage.xds.in.h:90
 msgid "Term"
-msgstr ""
+msgstr "项"
 
 #: ../dispspecs/docbook.xds.in.h:160
 msgid "Text Object"
@@ -844,11 +846,11 @@ msgstr "期刊的国际标准序号(ISSN)。"
 
 #: ../dispspecs/docbook.xds.in.h:163 ../dispspecs/website-webpage.xds.in.h:93
 msgid "The first place where a word or term occurs in a particular context"
-msgstr ""
+msgstr "特定上下文中某个单词或短语首次出现的位置"
 
 #: ../dispspecs/docbook.xds.in.h:164 ../dispspecs/website-webpage.xds.in.h:94
 msgid "The name of a function, subroutine or procedure"
-msgstr ""
+msgstr "函数、子例程或过程的名称"
 
 #: ../dispspecs/docbook.xds.in.h:165 ../dispspecs/website-webpage.xds.in.h:95
 msgid "The printed text on a particular key on a keyboard"
@@ -856,7 +858,7 @@ msgstr "键盘上特定按键上印刷的文本"
 
 #: ../dispspecs/docbook.xds.in.h:166
 msgid "Tip"
-msgstr ""
+msgstr "提示"
 
 #: ../dispspecs/docbook.xds.in.h:167 ../dispspecs/forrest-document.xds.in.h:44
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:32
@@ -868,7 +870,7 @@ msgstr "标题"
 
 #: ../dispspecs/docbook.xds.in.h:168 ../dispspecs/website-webpage.xds.in.h:97
 msgid "Title Citation"
-msgstr ""
+msgstr "标题引用"
 
 #: ../dispspecs/docbook.xds.in.h:169 ../dispspecs/website-webpage.xds.in.h:98
 msgid "URL Link"
@@ -890,11 +892,11 @@ msgstr "年份"
 #: ../dispspecs/forrest-document.xds.in.h:3 ../dispspecs/teixlite.xds.in.h:64
 #: ../dispspecs/xhtml1-strict.xds.in.h:5
 msgid "Anchor"
-msgstr ""
+msgstr "锚"
 
 #: ../dispspecs/forrest-document.xds.in.h:4
 msgid "Apache Documentation DTD v1.2"
-msgstr ""
+msgstr "Apache Documentation DTD v1.2"
 
 #: ../dispspecs/forrest-document.xds.in.h:5
 msgid "Authors"
@@ -908,11 +910,11 @@ msgstr "代码"
 
 #: ../dispspecs/forrest-document.xds.in.h:8
 msgid "Defined term"
-msgstr ""
+msgstr "定义的术语"
 
 #: ../dispspecs/forrest-document.xds.in.h:10
 msgid "Definition list"
-msgstr ""
+msgstr "定义列表"
 
 #: ../dispspecs/forrest-document.xds.in.h:11 ../dispspecs/readme.xds.in.h:4
 #: ../src/cong-document.c:988
@@ -926,15 +928,16 @@ msgstr "文档主体"
 
 #: ../dispspecs/forrest-document.xds.in.h:15
 msgid "Fixme"
-msgstr ""
+msgstr "待修订"
 
 #: ../dispspecs/forrest-document.xds.in.h:16
 msgid "Footer"
 msgstr "页脚"
 
 #: ../dispspecs/forrest-document.xds.in.h:17
+#, fuzzy
 msgid "Fork"
-msgstr ""
+msgstr "派生"
 
 #: ../dispspecs/forrest-document.xds.in.h:18
 msgid "Header"
@@ -983,11 +986,11 @@ msgstr "注意"
 #: ../dispspecs/forrest-document.xds.in.h:32
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:27
 msgid "Person"
-msgstr ""
+msgstr "个人"
 
 #: ../dispspecs/forrest-document.xds.in.h:34
 msgid "Source"
-msgstr ""
+msgstr "源"
 
 #: ../dispspecs/forrest-document.xds.in.h:35
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:31
@@ -998,12 +1001,12 @@ msgstr "强"
 #: ../dispspecs/forrest-document.xds.in.h:36
 #: ../dispspecs/xhtml1-strict.xds.in.h:65
 msgid "Subscript"
-msgstr ""
+msgstr "下标"
 
 #: ../dispspecs/forrest-document.xds.in.h:38
 #: ../dispspecs/xhtml1-strict.xds.in.h:66
 msgid "Superscript"
-msgstr ""
+msgstr "上标"
 
 #: ../dispspecs/forrest-document.xds.in.h:39
 #: ../dispspecs/teixlite.xds.in.h:245 ../dispspecs/xhtml1-strict.xds.in.h:67
@@ -1029,6 +1032,8 @@ msgid ""
 "compliant DTD and it's maintained by the Apache XML project. See http://"
 "forrest.apache.org ."
 msgstr ""
+"该 DTD 用于为 Apache 项目的软件文档创建一种简单而强大的文档格式。它是一种与 "
+"XML 兼容的 DTD，由 Apache XML 项目维护。参见 http://forrest.apache.org ."
 
 #: ../dispspecs/forrest-document.xds.in.h:45
 #: ../glade/cong-file-properties.glade.h:17
@@ -1043,7 +1048,7 @@ msgstr "版本"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:1
 msgid "&quot;Kernel Traffic&quot; Newsletter"
-msgstr ""
+msgstr "&quot;Kernel Traffic&quot; 时事通讯"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid ""
@@ -1053,7 +1058,7 @@ msgstr "自由/开源软件界追踪项目技术研发进展的一种新闻通�
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:4
 msgid "Block Quote"
-msgstr "块引用"
+msgstr "块引述"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:5
 #: ../dispspecs/xhtml1-strict.xds.in.h:12
@@ -1078,7 +1083,7 @@ msgstr "修正"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:12
 msgid "Editorialize"
-msgstr ""
+msgstr "发表社论"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:14
 msgid "Font"
@@ -1105,7 +1110,7 @@ msgstr "超链接"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:20
 msgid "Issue"
-msgstr ""
+msgstr "期号"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:21
 msgid "Italicised"
@@ -1113,7 +1118,7 @@ msgstr "斜体"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:22
 msgid "Kernel Cousin Newsletter"
-msgstr ""
+msgstr "Kernel Cousin 时事通讯"
 
 #: ../dispspecs/kernel-traffic-newsletter.xds.in.h:28
 msgid "Quotation"
@@ -1151,7 +1156,7 @@ msgstr "版本控制树"
 
 #: ../dispspecs/opml.xds.in.h:1
 msgid "Apple OPML dispspec"
-msgstr ""
+msgstr "Apple OPML 显示规范"
 
 #: ../dispspecs/opml.xds.in.h:2
 msgid "Experimental \"opml\" format"
@@ -1159,7 +1164,7 @@ msgstr "实验性的“opml”格式"
 
 #: ../dispspecs/readme.xds.in.h:1
 msgid "Admission"
-msgstr ""
+msgstr "许可"
 
 #: ../dispspecs/readme.xds.in.h:2
 msgid "Corp jargon"
@@ -1167,7 +1172,7 @@ msgstr ""
 
 #: ../dispspecs/readme.xds.in.h:3
 msgid "Disclaimer"
-msgstr ""
+msgstr "免责声明"
 
 #: ../dispspecs/readme.xds.in.h:6
 msgid "Excuse"
@@ -1178,14 +1183,12 @@ msgid "Experimental \"readme\" format"
 msgstr "实验性的“readme”格式"
 
 #: ../dispspecs/readme.xds.in.h:8
-#, fuzzy
-#| msgid "Optional"
 msgid "Inspirational"
-msgstr "可选"
+msgstr "鼓舞人心的"
 
 #: ../dispspecs/readme.xds.in.h:10
 msgid "Optimistic"
-msgstr ""
+msgstr "乐观"
 
 #: ../dispspecs/readme.xds.in.h:14 ../dispspecs/teixlite.xds.in.h:231
 msgid "Signature"
@@ -1214,10 +1217,8 @@ msgid "Group"
 msgstr "组"
 
 #: ../dispspecs/relax-ng.xds.in.h:5
-#, fuzzy
-#| msgid "One or more"
 msgid "OneOrMore"
-msgstr "一次或更多"
+msgstr "一个以上"
 
 #: ../dispspecs/relax-ng.xds.in.h:6 ../src/cong-node-properties-dialog.c:914
 msgid "Optional"
@@ -1235,7 +1236,7 @@ msgstr "RELAX NG 语法"
 msgid ""
 "RELAX NG is a schema language i.e. a language for describing the structure "
 "of an XML document."
-msgstr ""
+msgstr "RELAX 是一种方案语言，即它是一种描述 XML 文档结构的语言。"
 
 #: ../dispspecs/relax-ng.xds.in.h:11
 msgid "Start"
@@ -1255,10 +1256,8 @@ msgid "XML Attribute"
 msgstr "XML 属性"
 
 #: ../dispspecs/relax-ng.xds.in.h:16
-#, fuzzy
-#| msgid "Zero or more"
 msgid "ZeroOrMore"
-msgstr "零次或更多"
+msgstr "零个或更多"
 
 #: ../dispspecs/teixlite.xds.in.h:1
 msgid ""
@@ -1357,11 +1356,11 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:19
 msgid "A mathematical or other formula"
-msgstr ""
+msgstr "数学或其他公式"
 
 #: ../dispspecs/teixlite.xds.in.h:20
 msgid "A note of any type"
-msgstr ""
+msgstr "任意类型的注释"
 
 #: ../dispspecs/teixlite.xds.in.h:21
 msgid "A number, written in any form"
@@ -1397,7 +1396,7 @@ msgstr "指定当前文档或外部文档中另一位置的指针"
 msgid ""
 "A postal or other address, for example of a publisher, an organization, or "
 "an individual"
-msgstr "一个邮寄或其他地址，如出版者、组织或个人的地址"
+msgstr "一个邮寄或其他地址，如出版商、组织或个人的地址"
 
 #: ../dispspecs/teixlite.xds.in.h:28
 msgid "A proper noun or noun phrase"
@@ -1410,10 +1409,11 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:30
+#, fuzzy
 msgid ""
 "A quotation from some other document, together with a bibliographic "
 "reference to its source"
-msgstr ""
+msgstr "一段对其他文档的引述及相应于其来源的文献参考"
 
 #: ../dispspecs/teixlite.xds.in.h:31
 msgid ""
@@ -1428,7 +1428,7 @@ msgstr ""
 msgid ""
 "A quotation, anonymous or attributed, appearing at the start of a section or "
 "chapter, or on a title page"
-msgstr ""
+msgstr "出现在章节开始处或标题页上的一段匿名或署名的引语"
 
 #: ../dispspecs/teixlite.xds.in.h:33
 msgid "A reading which has been regularized or normalized in some sense"
@@ -1439,6 +1439,8 @@ msgid ""
 "A reference to another location in the current document, in terms of one or "
 "more identifiable elements, possibly modified by additional text or comment"
 msgstr ""
+"以一个或多个可辨别的元素形式出现的，指向当前文档中另一位置的参考，可能经过了"
+"添加文字、评论等形式的修改"
 
 #: ../dispspecs/teixlite.xds.in.h:35
 msgid ""
@@ -1446,6 +1448,8 @@ msgid ""
 "document, using an extended pointer notation, possibly modified by "
 "additional text or comment"
 msgstr ""
+"指向当前文档中另一位置，或外部文档的参考，使用扩展的指针记号，可能经过了添加"
+"文字、评论等形式的修改"
 
 #: ../dispspecs/teixlite.xds.in.h:36
 msgid ""
@@ -1516,7 +1520,7 @@ msgstr ""
 #: ../dispspecs/teixlite.xds.in.h:49
 msgid ""
 "A subsection or division of the title of a work, as indicated on a title page"
-msgstr ""
+msgstr "标题页中标明的，著作标题的一小节或一块"
 
 #: ../dispspecs/teixlite.xds.in.h:50
 msgid "A third-level subdivision of the front, body, or back of a text"
@@ -1596,11 +1600,11 @@ msgstr ""
 msgid ""
 "Any heading, for example, the title of a section, or the heading of a list "
 "or glossary"
-msgstr ""
+msgstr "任意标题，如节标题、列表或术语表的标题"
 
 #: ../dispspecs/teixlite.xds.in.h:68
 msgid "Any kind of stage direction within a dramatic text or fragment"
-msgstr ""
+msgstr "戏剧剧本或片段中的场次指示"
 
 #: ../dispspecs/teixlite.xds.in.h:69
 msgid ""
@@ -1649,7 +1653,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:80
 msgid "Bibliographic Citation (&lt;bibl&gt;)"
-msgstr ""
+msgstr "参考文献引用(&lt;bibl&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:81
 msgid "Bibliographic Scope"
@@ -1665,19 +1669,15 @@ msgstr "署名"
 
 #: ../dispspecs/teixlite.xds.in.h:84
 msgid "Category"
-msgstr ""
+msgstr "类别"
 
 #: ../dispspecs/teixlite.xds.in.h:85
-#, fuzzy
-#| msgid "Short Description"
 msgid "Category Description"
-msgstr "短描述"
+msgstr "类别描述"
 
 #: ../dispspecs/teixlite.xds.in.h:86
-#, fuzzy
-#| msgid "Unicode Character Reference"
 msgid "Category Reference"
-msgstr "Unicode 字符引用"
+msgstr "类别参考"
 
 #: ../dispspecs/teixlite.xds.in.h:87
 msgid "Cell"
@@ -1696,26 +1696,22 @@ msgid "ClassCode"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:91
-#, fuzzy
-#| msgid "Namespace Declaration"
 msgid "Classification Declaration"
-msgstr "命名空间声明"
+msgstr "分类声明"
 
 #: ../dispspecs/teixlite.xds.in.h:92
-#, fuzzy
-#| msgid "_Close"
 msgid "Closer"
-msgstr "关闭(_C)"
+msgstr "更近"
 
 #: ../dispspecs/teixlite.xds.in.h:94
 msgid "Collects together &lt;interp&gt; tags"
-msgstr ""
+msgstr "收集 &lt;interp&gt; 标签"
 
 #: ../dispspecs/teixlite.xds.in.h:95
 msgid ""
 "Collects together any notes providing information about a text additional to "
 "that recorded in other parts of the bibliographic description"
-msgstr ""
+msgstr "收集任何有关一段文字的除参考文献描述中其他部分所记录之外的信息"
 
 #: ../dispspecs/teixlite.xds.in.h:96
 msgid "Contains a general purpose name or referring string"
@@ -1761,14 +1757,13 @@ msgid ""
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:106
+#, fuzzy
 msgid ""
 "Defines the scope of a bibliographic reference, for example as a list of "
 "pagenumbers, or a named subdivision of a larger work"
-msgstr ""
+msgstr "定义文献参考的范围，如以页码列表或一部大型著作中命名的片段"
 
 #: ../dispspecs/teixlite.xds.in.h:107
-#, fuzzy
-#| msgid "Details"
 msgid "Del"
 msgstr "删除"
 
@@ -1849,10 +1844,8 @@ msgid "Document Edition"
 msgstr "文档编辑"
 
 #: ../dispspecs/teixlite.xds.in.h:125
-#, fuzzy
-#| msgid "Document Type"
 msgid "Document Imprint"
-msgstr "文档类型"
+msgstr "文档印刷"
 
 #: ../dispspecs/teixlite.xds.in.h:126
 msgid "Document Title"
@@ -1890,19 +1883,17 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:137
 msgid "Extended Reference (&lt;xref&gt;)"
-msgstr ""
+msgstr "延伸参考(&lt;xref&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:138
 msgid "Extent"
-msgstr ""
+msgstr "延伸"
 
 #: ../dispspecs/teixlite.xds.in.h:140
 msgid "Figure Description"
 msgstr "图片描述"
 
 #: ../dispspecs/teixlite.xds.in.h:141
-#, fuzzy
-#| msgid "(No description available)"
 msgid "File Description (fileDesc)"
 msgstr "文件描述(fileDesc)"
 
@@ -1910,7 +1901,7 @@ msgstr "文件描述(fileDesc)"
 #, fuzzy
 #| msgid "Force"
 msgid "Foreign"
-msgstr "强制"
+msgstr "外文"
 
 #: ../dispspecs/teixlite.xds.in.h:143
 msgid "Formula"
@@ -1922,7 +1913,7 @@ msgstr "前页"
 
 #: ../dispspecs/teixlite.xds.in.h:145
 msgid "Funder"
-msgstr ""
+msgstr "创建者"
 
 #: ../dispspecs/teixlite.xds.in.h:146
 msgid "Gap"
@@ -1977,17 +1968,15 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:157 ../dispspecs/xhtml1-strict.xds.in.h:29
 msgid "Head"
-msgstr ""
+msgstr "头"
 
 #: ../dispspecs/teixlite.xds.in.h:158
 msgid "Highlighted"
 msgstr "突出的"
 
 #: ../dispspecs/teixlite.xds.in.h:159
-#, fuzzy
-#| msgid "Line Number"
 msgid "Id. Number"
-msgstr "行号"
+msgstr "ID 号"
 
 #: ../dispspecs/teixlite.xds.in.h:160
 msgid "Ident"
@@ -1999,10 +1988,8 @@ msgid ""
 msgstr "识别书写系统声明中的语言"
 
 #: ../dispspecs/teixlite.xds.in.h:162
-#, fuzzy
-#| msgid "Print"
 msgid "Imprint"
-msgstr "打印"
+msgstr "印刷"
 
 #: ../dispspecs/teixlite.xds.in.h:163
 msgid "Index"
@@ -2031,7 +2018,7 @@ msgstr "有关文本创建的信息"
 
 #: ../dispspecs/teixlite.xds.in.h:168
 msgid "Information about the intended rendition of one or more elements"
-msgstr ""
+msgstr "有关一个或多个元素的拟定译文的信息"
 
 #: ../dispspecs/teixlite.xds.in.h:169
 msgid ""
@@ -2053,7 +2040,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:173
 msgid "Item"
-msgstr ""
+msgstr "项"
 
 #: ../dispspecs/teixlite.xds.in.h:174
 msgid "Keywords"
@@ -2065,7 +2052,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:176 ../dispspecs/xhtml1-strict.xds.in.h:44
 msgid "Label"
-msgstr ""
+msgstr "标签"
 
 #: ../dispspecs/teixlite.xds.in.h:177
 #: ../glade/docbook-common-properties.glade.h:2 ../src/plugin-docbook.c:2149
@@ -2092,7 +2079,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:182
 msgid "List"
-msgstr ""
+msgstr "列表"
 
 #: ../dispspecs/teixlite.xds.in.h:183
 msgid "ListBibl"
@@ -2116,13 +2103,14 @@ msgstr ""
 msgid ""
 "Marks the boundary between one page of a text and the next in a standard "
 "reference system"
-msgstr ""
+msgstr "标记标准参考系统中一页文字与下一页之间的界限"
 
 #: ../dispspecs/teixlite.xds.in.h:188
+#, fuzzy
 msgid ""
 "Marks the boundary between sections of a text, as indicated by changes in a "
 "standard reference system"
-msgstr ""
+msgstr "标记各节文字之间的界限，显示在标准参考系统的更改中"
 
 #: ../dispspecs/teixlite.xds.in.h:189
 msgid ""
@@ -2150,7 +2138,7 @@ msgstr "里程碑"
 
 #: ../dispspecs/teixlite.xds.in.h:196
 msgid "Notes Statement"
-msgstr ""
+msgstr "注释语句"
 
 #: ../dispspecs/teixlite.xds.in.h:197
 msgid "Num"
@@ -2179,10 +2167,8 @@ msgid "One row of a table"
 msgstr "表格中的一行"
 
 #: ../dispspecs/teixlite.xds.in.h:203
-#, fuzzy
-#| msgid "General"
 msgid "Opener"
-msgstr "常规"
+msgstr "打开者"
 
 #: ../dispspecs/teixlite.xds.in.h:204
 msgid "Original Form"
@@ -2201,16 +2187,12 @@ msgid "Principal Researcher"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:209
-#, fuzzy
-#| msgid "Description"
 msgid "Profile Description"
-msgstr "描述"
+msgstr "个人资料描述"
 
 #: ../dispspecs/teixlite.xds.in.h:210
-#, fuzzy
-#| msgid "Short Description"
 msgid "Project Description"
-msgstr "短描述"
+msgstr "项目描述"
 
 #: ../dispspecs/teixlite.xds.in.h:211
 msgid ""
@@ -2232,11 +2214,11 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:216
 msgid "Ref"
-msgstr ""
+msgstr "参考"
 
 #: ../dispspecs/teixlite.xds.in.h:217
 msgid "References Declaration"
-msgstr "引用声明"
+msgstr "参考声明"
 
 #: ../dispspecs/teixlite.xds.in.h:218
 msgid "Referencing String (&lt;rs&gt;)"
@@ -2247,10 +2229,8 @@ msgid "Reg"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:220
-#, fuzzy
-#| msgid "Revisions"
 msgid "Rendition"
-msgstr "修订"
+msgstr "译文"
 
 #: ../dispspecs/teixlite.xds.in.h:221
 msgid "Resp"
@@ -2261,10 +2241,8 @@ msgid "Responsibility Statement (respStmt)"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:223
-#, fuzzy
-#| msgid "Description"
 msgid "Revision Description"
-msgstr "描述"
+msgstr "修订描述"
 
 #: ../dispspecs/teixlite.xds.in.h:224
 msgid "Row"
@@ -2274,13 +2252,11 @@ msgstr "行"
 #, fuzzy
 #| msgid "Value"
 msgid "Salute"
-msgstr "值"
+msgstr "致敬"
 
 #: ../dispspecs/teixlite.xds.in.h:226
-#, fuzzy
-#| msgid "Namespace Declaration"
 msgid "Sampling Declaration"
-msgstr "命名空间声明"
+msgstr "范例声明"
 
 #: ../dispspecs/teixlite.xds.in.h:227
 msgid ""
@@ -2288,10 +2264,12 @@ msgid ""
 "the name of an individual, institution or organization, (or of several such) "
 "acting as editor, compiler, translator, etc."
 msgstr ""
+"针对一条参考文献的次要声明，如个人、机构或组织的名称，担当编辑、编译者、翻译"
+"的人，等等。"
 
 #: ../dispspecs/teixlite.xds.in.h:228
 msgid "Sentence"
-msgstr ""
+msgstr "句子"
 
 #: ../dispspecs/teixlite.xds.in.h:229
 msgid "Series Statement"
@@ -2310,10 +2288,8 @@ msgid "Source Description"
 msgstr "源描述"
 
 #: ../dispspecs/teixlite.xds.in.h:234
-#, fuzzy
-#| msgid "Search"
 msgid "Speaker"
-msgstr "搜索"
+msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:235
 msgid "Specifies how canonical references are constructed for this text"
@@ -2327,15 +2303,15 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:237
 msgid "Speech (&lt;sp&gt;)"
-msgstr ""
+msgstr "演讲(&lt;sp&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:238
 msgid "Sponsor"
-msgstr ""
+msgstr "赞助商"
 
 #: ../dispspecs/teixlite.xds.in.h:239
 msgid "Stage Direction (&lt;stage&gt;)"
-msgstr ""
+msgstr "场次指示(&lt;stage&gt;)"
 
 #: ../dispspecs/teixlite.xds.in.h:240
 msgid ""
@@ -2345,7 +2321,7 @@ msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:241
 msgid "Summarizes the revision history for a file"
-msgstr ""
+msgstr "总结一个文件的修订历史"
 
 #: ../dispspecs/teixlite.xds.in.h:242
 msgid "TEI Lite"
@@ -2364,27 +2340,23 @@ msgstr "TEI.2"
 
 #: ../dispspecs/teixlite.xds.in.h:246
 msgid "Tag Usage"
-msgstr ""
+msgstr "标签用法"
 
 #: ../dispspecs/teixlite.xds.in.h:247
-#, fuzzy
-#| msgid "Entity Declaration"
 msgid "Tagging Declaration"
-msgstr "实体声明"
+msgstr "标签声明"
 
 #: ../dispspecs/teixlite.xds.in.h:248
 msgid "Taxonomy"
 msgstr ""
 
 #: ../dispspecs/teixlite.xds.in.h:249
-#, fuzzy
-#| msgid "XML Header"
 msgid "Tei Header"
-msgstr "XML 头"
+msgstr "Tei 头"
 
 #: ../dispspecs/teixlite.xds.in.h:252
 msgid "Text Classification"
-msgstr ""
+msgstr "文字分类"
 
 #: ../dispspecs/teixlite.xds.in.h:253
 msgid "Text reproduced although apparently incorrect or inaccurate"
@@ -2407,7 +2379,7 @@ msgstr ""
 msgid ""
 "The classification code used for this text in some standard classification "
 "system"
-msgstr ""
+msgstr "在某些标准分类系统中对应于此文字的分类码"
 
 #: ../dispspecs/teixlite.xds.in.h:257
 msgid ""
@@ -2433,7 +2405,7 @@ msgstr ""
 msgid ""
 "The imprint statement (place and date of publication, publisher name), as "
 "given (usually) at the foot of a title page"
-msgstr ""
+msgstr "印刷声明(出版地和出版日期、出版商名称)，常出现在标题页底部"
 
 #: ../dispspecs/teixlite.xds.in.h:262
 msgid ""
@@ -2493,7 +2465,7 @@ msgstr ""
 msgid ""
 "The name of the author(s), personal or corporate, of a work; the primary "
 "statement of responsibility for any bibliographic item"
-msgstr ""
+msgstr "著作的个人和协作作者的姓名；任何参考文献条目的主要责任声明"
 
 #: ../dispspecs/teixlite.xds.in.h:273
 msgid ""
@@ -2525,7 +2497,7 @@ msgstr ""
 msgid ""
 "The primary statement of responsibility given for a work on its title page "
 "or at the head or end of the work"
-msgstr ""
+msgstr "出现在著作标题页、作品开头或结尾处的主要责任声明"
 
 #: ../dispspecs/teixlite.xds.in.h:279
 msgid ""
@@ -2578,7 +2550,7 @@ msgstr ""
 
 #: ../dispspecs/website-layout.xds.in.h:1
 msgid "Additional Content"
-msgstr ""
+msgstr "附加内容"
 
 #: ../dispspecs/website-layout.xds.in.h:2
 msgid "Configuration Data"
@@ -2592,7 +2564,7 @@ msgstr "目录"
 #, fuzzy
 #| msgid "Header Information"
 msgid "Header Link"
-msgstr "头链接"
+msgstr "标题链接"
 
 #: ../dispspecs/website-layout.xds.in.h:6
 msgid "Holder"
@@ -2611,10 +2583,8 @@ msgid "Website Layout"
 msgstr "网站布局"
 
 #: ../dispspecs/website-webpage.xds.in.h:62
-#, fuzzy
-#| msgid "XML Processing Instruction"
 msgid "Part Introduction"
-msgstr "XML 处理指令"
+msgstr "Part 处理指令"
 
 #: ../dispspecs/website-webpage.xds.in.h:99
 msgid "Web Page"
@@ -2670,11 +2640,11 @@ msgstr ""
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:20
 msgid "Definition List"
-msgstr ""
+msgstr "定义列表"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:21
 msgid "Definition Term"
-msgstr ""
+msgstr "定义项"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:22
 msgid "Deleted Text"
@@ -2690,11 +2660,11 @@ msgstr "强制换行"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:26
 msgid "Form Control"
-msgstr ""
+msgstr "表单控件"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:27
 msgid "Form Control Group"
-msgstr ""
+msgstr "表单控件组"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:28
 msgid "HTML Page"
@@ -2786,7 +2756,7 @@ msgstr "脚本"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:60
 msgid "Selectable Choice"
-msgstr ""
+msgstr "可选项"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:61
 msgid "Small"
@@ -2794,7 +2764,7 @@ msgstr "小"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:62 ../glade/custom-element.glade.h:6
 msgid "Span"
-msgstr ""
+msgstr "范围"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:64
 #: ../glade/docbook-orderedlist-properties.glade.h:10
@@ -2807,7 +2777,7 @@ msgstr "表格单元(数据)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:70
 msgid "Table Cell (header)"
-msgstr ""
+msgstr "表格单元(标题)"
 
 #: ../dispspecs/xhtml1-strict.xds.in.h:74
 msgid "Teletype"
@@ -2834,7 +2804,7 @@ msgstr ""
 
 #: ../dispspecs/xsl.xds.in.h:3
 msgid "Template-matching Rule"
-msgstr ""
+msgstr "模块匹配规则"
 
 #: ../dispspecs/xsl.xds.in.h:4
 msgid "XSL stylesheet"
@@ -2972,10 +2942,8 @@ msgid "label_elements"
 msgstr ""
 
 #: ../glade/cong-file-properties.glade.h:25
-#, fuzzy
-#| msgid "Location"
 msgid "label_location"
-msgstr "位置"
+msgstr ""
 
 #: ../glade/cong-file-properties.glade.h:26
 msgid "label_modified"
@@ -3002,10 +2970,8 @@ msgid "label_xml_encoding"
 msgstr ""
 
 #: ../glade/cong-file-properties.glade.h:32
-#, fuzzy
-#| msgid "Standalone"
 msgid "label_xml_standalone"
-msgstr "独立"
+msgstr ""
 
 #: ../glade/cong-file-properties.glade.h:33
 msgid "label_xml_version"
@@ -3191,7 +3157,7 @@ msgstr "本地名称"
 
 #: ../glade/plugin-arbitrary.glade.h:3
 msgid "Namespace URI"
-msgstr ""
+msgstr "命名空间 URI"
 
 #: ../glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
@@ -3265,91 +3231,91 @@ msgstr "(未指定)"
 
 #: ../src/cong-attribute-editor-lang.c:48
 msgid "Breton"
-msgstr ""
+msgstr "布列塔尼语"
 
 #: ../src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr ""
+msgstr "加国泰尼亚语"
 
 #: ../src/cong-attribute-editor-lang.c:50
 msgid "Czech"
-msgstr ""
+msgstr "捷克语"
 
 #: ../src/cong-attribute-editor-lang.c:51
 msgid "Danish"
-msgstr ""
+msgstr "丹麦语"
 
 #: ../src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr ""
+msgstr "德语(德国)"
 
 #: ../src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr ""
+msgstr "德语(瑞士)"
 
 #: ../src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
-msgstr ""
+msgstr "英语(美国)"
 
 #: ../src/cong-attribute-editor-lang.c:55
 msgid "English (British)"
-msgstr ""
+msgstr "英语(英国)"
 
 #: ../src/cong-attribute-editor-lang.c:56
 msgid "English (Canadian)"
-msgstr ""
+msgstr "英语(加拿大)"
 
 #: ../src/cong-attribute-editor-lang.c:57
 msgid "Esperanto"
-msgstr ""
+msgstr "世界语"
 
 #: ../src/cong-attribute-editor-lang.c:58
 msgid "Spanish"
-msgstr ""
+msgstr "西班牙语"
 
 #: ../src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr ""
+msgstr "法罗语"
 
 #: ../src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr ""
+msgstr "法语(法国)"
 
 #: ../src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr ""
+msgstr "法语(瑞士)"
 
 #: ../src/cong-attribute-editor-lang.c:62
 msgid "Italian"
-msgstr ""
+msgstr "意大利语"
 
 #: ../src/cong-attribute-editor-lang.c:63
 msgid "Dutch"
-msgstr ""
+msgstr "荷兰语"
 
 #: ../src/cong-attribute-editor-lang.c:64
 msgid "Norwegian"
-msgstr ""
+msgstr "挪威语"
 
 #: ../src/cong-attribute-editor-lang.c:65
 msgid "Polish"
-msgstr ""
+msgstr "波兰语"
 
 #: ../src/cong-attribute-editor-lang.c:66
 msgid "Portuguese (Portugal)"
-msgstr ""
+msgstr "葡萄牙语(葡萄牙)"
 
 #: ../src/cong-attribute-editor-lang.c:67
 msgid "Portuguese (Brazilian)"
-msgstr ""
+msgstr "葡萄牙语(巴西)"
 
 #: ../src/cong-attribute-editor-lang.c:68
 msgid "Russian"
-msgstr ""
+msgstr "俄语"
 
 #: ../src/cong-attribute-editor-lang.c:69
 msgid "Swedish"
-msgstr ""
+msgstr "瑞典语"
 
 #: ../src/cong-attribute-editor-lang.c:70
 msgid "Ukrainian"
@@ -3496,12 +3462,12 @@ msgstr "字符数据"
 #: ../src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
-msgstr ""
+msgstr "指向实体“%s”的参考"
 
 #: ../src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
-msgstr ""
+msgstr "实体“%s”"
 
 #: ../src/cong-document.c:977
 #, c-format
@@ -3521,7 +3487,7 @@ msgstr "文档片段"
 #: ../src/cong-document.c:997
 #, c-format
 msgid "Notation"
-msgstr ""
+msgstr "记号"
 
 #: ../src/cong-document.c:1000
 #, c-format
@@ -3551,12 +3517,12 @@ msgstr "命名空间声明"
 #: ../src/cong-document.c:1018
 #, c-format
 msgid "XInclude Start"
-msgstr ""
+msgstr "XInclude 开始"
 
 #: ../src/cong-document.c:1021
 #, c-format
 msgid "XInclude End"
-msgstr ""
+msgstr "XInclude 结束"
 
 #: ../src/cong-document.c:2163
 #, c-format
@@ -4211,9 +4177,8 @@ msgid "Remove DTD"
 msgstr "移除 DTD"
 
 #: ../src/cong-file-properties.c:478 ../src/cong-util.c:1636
-#, fuzzy
 msgid "Associate with DTD"
-msgstr "关联此 DTD"
+msgstr "与 DTD 关联"
 
 #: ../src/cong-file-save.c:75
 msgid "Save XML as..."
@@ -4239,7 +4204,7 @@ msgstr "您想使用正在保存的这个替换它吗？"
 
 #: ../src/cong-location.c:395 ../src/cong-location.c:416
 msgid "Merge tags"
-msgstr ""
+msgstr "合并标签"
 
 #: ../src/cong-location.c:469
 msgid "Delete character"
@@ -4289,7 +4254,7 @@ msgstr ""
 #: ../src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
-msgstr ""
+msgstr "这是第 %i 场"
 
 #: ../src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
@@ -4337,11 +4302,11 @@ msgstr "新子元素"
 
 #: ../src/cong-menus.c:1491 ../src/popup.c:1135
 msgid "New sibling"
-msgstr ""
+msgstr "新并列元素"
 
 #: ../src/cong-menus.c:1492
 msgid "Remove span tag"
-msgstr ""
+msgstr "移除 span 标签"
 
 #. Actions found in File menu:
 #: ../src/cong-menus.c:1495
@@ -4582,7 +4547,7 @@ msgstr "为 <%s> 元素提供一个属性页"
 
 #: ../src/cong-primary-window.c:415
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #: ../src/cong-primary-window.c:426
 msgid "Bookmarks"
@@ -4593,7 +4558,6 @@ msgid "Raw XML"
 msgstr "原始 XML"
 
 #: ../src/cong-primary-window.c:662 ../src/cong-primary-window.c:681
-#, fuzzy
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "欢迎使用姗姗来迟的 Conglomerate 编辑器。"
 
@@ -4707,7 +4671,7 @@ msgstr ""
 
 #: ../src/plugin-docbook.c:225
 msgid "Untitled section"
-msgstr ""
+msgstr "无标题的节"
 
 #: ../src/plugin-docbook.c:232
 msgid "Text of the article goes here"
@@ -4809,11 +4773,11 @@ msgstr "创建一本书，使用“DocBook”格式"
 
 #: ../src/plugin-docbook.c:2076
 msgid "DocBook Set"
-msgstr ""
+msgstr "DocBook 集"
 
 #: ../src/plugin-docbook.c:2077
 msgid "Create a set of related books, using the \"DocBook\" format"
-msgstr ""
+msgstr "创建一个相关书籍的集合，用“DocBook”格式"
 
 #: ../src/plugin-docbook.c:2085
 msgid "Import text as a DocBook article"
@@ -4886,41 +4850,41 @@ msgstr "在浏览器链接"
 
 #: ../src/plugin-docbook.c:2204
 msgid "Promote Section"
-msgstr ""
+msgstr "提升节"
 
 #: ../src/plugin-docbook.c:2205
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
-msgstr ""
+msgstr "将 DocBook 的某节在文档的组织层次中提升一级"
 
 #: ../src/plugin-docbook.c:2207 ../src/plugin-html.c:148
 #: ../src/plugin-html.c:151
 msgid "Promote"
-msgstr ""
+msgstr "提升"
 
 #: ../src/plugin-docbook.c:2208 ../src/plugin-docbook.c:2209
 msgid ""
 "Promote the section to a higher organisational level within the document"
-msgstr ""
+msgstr "将该节在文档的组织层次中提升一级"
 
 #: ../src/plugin-docbook.c:2215
 msgid "Demote Section"
-msgstr ""
+msgstr "下降节"
 
 #: ../src/plugin-docbook.c:2216
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
-msgstr ""
+msgstr "将 DocBook 的某节在文档的组织层次中下降一级"
 
 #: ../src/plugin-docbook.c:2218 ../src/plugin-html.c:159
 #: ../src/plugin-html.c:162
 msgid "Demote"
-msgstr ""
+msgstr "下降"
 
 #: ../src/plugin-docbook.c:2219 ../src/plugin-docbook.c:2220
 msgid "Demote the section to a lower organisational level within the document"
-msgstr ""
+msgstr "将该节在文档的组织层次中下降一级"
 
 #: ../src/plugin-dtd.c:93
 #, c-format
@@ -5092,7 +5056,7 @@ msgstr "Unicode 字符 0x%04X-0x%04X"
 
 #: ../src/plugin-tests.c:359
 msgid "Unicode Character Reference"
-msgstr "Unicode 字符引用"
+msgstr "Unicode 字符参考"
 
 #: ../src/plugin-tests.c:360
 msgid ""
@@ -5178,11 +5142,11 @@ msgstr ""
 #: ../src/popup.c:490
 #, c-format
 msgid "Apply span tag: %s"
-msgstr ""
+msgstr "应用 span 标签：%s"
 
 #: ../src/popup.c:561
 msgid "Remove Span Tag"
-msgstr ""
+msgstr "移除 Span 标签"
 
 #: ../src/popup.c:607
 msgid "Convert to a comment"
@@ -5200,14 +5164,14 @@ msgstr "将包含 XML 源代码的注释转换为相应的代码"
 #. FIXME: could do with better text here
 #: ../src/popup.c:648
 msgid "Convert Reference into a Copy"
-msgstr ""
+msgstr "将参考转换为副本"
 
 #. FIXME: could do with better text here
 #: ../src/popup.c:650
 msgid ""
 "Convert a reference to an XML entity to an inline copy of that entity's "
 "content"
-msgstr ""
+msgstr "将对一个 XML 实体的参考转换为该副本内容的内嵌副本"
 
 #: ../src/popup.c:729 ../src/popup.c:1047
 msgid "_Properties"
@@ -5223,25 +5187,25 @@ msgstr "其它 XML 元素..."
 
 #: ../src/popup.c:1083
 msgid "Paste into"
-msgstr "粘贴到"
+msgstr "粘于里面"
 
 #: ../src/popup.c:1093
 msgid "Paste before"
-msgstr ""
+msgstr "粘于前面"
 
 #: ../src/popup.c:1103
 msgid "Paste after"
-msgstr ""
+msgstr "粘于后面"
 
 #: ../src/tree.c:104 ../src/tree.c:136
 #, c-format
 msgid "Insert sibling: %s"
-msgstr ""
+msgstr "插入并列元素：%s"
 
 #: ../src/tree.c:188 ../src/tree.c:216
 #, c-format
 msgid "Insert child: %s"
-msgstr ""
+msgstr "插入子元素：%s"
 
 #: ../src/tree.c:311 ../src/xmledit.c:51
 msgid "Cut"
@@ -5254,7 +5218,7 @@ msgstr "转换为注释"
 #: ../src/tree.c:585
 #, c-format
 msgid "Convert reference to \"%s\" to copy"
-msgstr ""
+msgstr "将指向“%s”的参考转换为副本"
 
 #. create description for dialog
 #: ../src/xmldata.c:452
@@ -5268,7 +5232,7 @@ msgstr ""
 #. select a dialog element
 #: ../src/xmldata.c:457
 msgid "Required Children Choices"
-msgstr ""
+msgstr "需要子选项"
 
 #: ../src/xmledit.c:166
 msgid "Paste"
@@ -5276,15 +5240,15 @@ msgstr "粘贴"
 
 #: ../src/xmledit.c:252
 msgid "Paste Under"
-msgstr ""
+msgstr "粘于下方"
 
 #: ../src/xmledit.c:303
 msgid "Paste Before"
-msgstr ""
+msgstr "粘于前面"
 
 #: ../src/xmledit.c:353
 msgid "Paste After"
-msgstr ""
+msgstr "粘于后面"
 
 #: ../src/xmledit.c:394
 msgid "Source View - Conglomerate"
