@@ -16,3 +16,5 @@ example_DATA 	 = \
 #@INTLTOOL_XML_RULE@
 
 EXTRA_DIST = $(example_DATA)
+
+-include $(top_srcdir)/git.mk

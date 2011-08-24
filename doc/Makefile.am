@@ -72,3 +72,5 @@ figures/tip.png \
 figures/warning.png
 
 DOC_LINGUAS = C de es fr sl
+
+-include $(top_srcdir)/git.mk

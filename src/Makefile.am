@@ -349,3 +349,5 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 EXTRA_DIST = Makefile.win cong.marshal marshal.make
 
 ## Last Line
+
+-include $(top_srcdir)/git.mk

@@ -13,3 +13,5 @@ glade_DATA 	 = docbook-common-properties.glade \
 
 EXTRA_DIST = $(glade_DATA)
 
+
+-include $(top_srcdir)/git.mk

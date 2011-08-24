@@ -51,3 +51,5 @@ DISTCLEANFILES = \
 	$(schema_DATA) \
 	$(keys_DATA)
 
+
+-include $(top_srcdir)/git.mk

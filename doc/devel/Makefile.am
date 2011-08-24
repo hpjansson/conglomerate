@@ -6,3 +6,5 @@ developers_docs =        \
   VersionNumbering
 
 EXTRA_DIST = $(developers_docs)
+
+-include $(top_srcdir)/git.mk

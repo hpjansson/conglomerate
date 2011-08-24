@@ -8,3 +8,5 @@ template_DATA 	 = \
 	$(NULL)
 
 EXTRA_DIST = $(template_DATA)
+
+-include $(top_srcdir)/git.mk

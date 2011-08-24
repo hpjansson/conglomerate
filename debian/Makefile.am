@@ -35,3 +35,5 @@ pkg_DISTS = \
 EXTRA_DIST = $(debian_DISTS) $(pkg_DISTS)
 
 ## end of Makefile.am
+
+-include $(top_srcdir)/git.mk

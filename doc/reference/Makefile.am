@@ -58,3 +58,5 @@ DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make
+
+-include $(top_srcdir)/git.mk

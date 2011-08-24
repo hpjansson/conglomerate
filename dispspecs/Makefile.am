@@ -49,3 +49,5 @@ DISTCLEANFILES = \
 	$(NULL)
 
 ## end of this Makefile.am
+
+-include $(top_srcdir)/git.mk

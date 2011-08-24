@@ -32,5 +32,24 @@ DISTCHECK_CONFIGURE_FLAGS = \
   --enable-gtk-doc \
   $(NULL)
 
+# from pango/Makefile.am
+MAINTAINERCLEANFILES = \
+  INSTALL \
+  aclocal.m4 \
+  compile \
+  config.guess \
+  config.h.in \
+  config.sub \
+  depcomp \
+  install-sh \
+  ltmain.sh \
+  missing \
+  mkinstalldirs \
+  omf.make \
+  xmldocs.make \
+  gtk-doc.make \
+  gnome-doc-utils.make
+
 # files to skip during `make dist`
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper | grep -v /share/gnome/help/ | grep -v \.omf
+-include $(top_srcdir)/git.mk

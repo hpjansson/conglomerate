@@ -20,3 +20,5 @@ EXTRA_DIST = 00list 00patch-opts \
 	sync \
 	$(NULL)
 ## eof
+
+-include $(top_srcdir)/git.mk
