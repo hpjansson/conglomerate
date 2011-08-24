@@ -7,6 +7,7 @@ AC_PREREQ(2.52)
 AC_INIT(conglomerate, 0.9.2)
 AC_CONFIG_SRCDIR(src/main.c)
 AM_INIT_AUTOMAKE
+AM_SILENT_RULES([yes])
 
 AC_CONFIG_HEADERS([config.h])
 
