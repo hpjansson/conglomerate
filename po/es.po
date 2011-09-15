@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: conglomerate-HEAD-SPANISH\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=conglomerate&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-25 04:15+0000\n"
-"PO-Revision-Date: 2011-08-26 11:26+0200\n"
+"POT-Creation-Date: 2011-08-26 19:24+0000\n"
+"PO-Revision-Date: 2011-09-15 11:51+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3067,11 +3067,11 @@ msgid ""
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
 msgstr ""
-"Una lista de directorios personalizados donde Conglomerate debería buscar "
-"los archivos de especificación de pantalla (llamdos dispspec o .xds), junto "
-"con la ruta estándar de instalación. Cuando los documentos se cargan, se "
-"busca un dispspeccoincidente en estos directorios, y el primer archivo "
-"dispspec coincidente se usa."
+"Una lista de carpetas personalizadas donde Conglomerate debería buscar los "
+"archivos de especificación de pantalla (llamdos dispspec o .xds), junto con "
+"la ruta estándar de instalación. Cuando los documentos se cargan, se busca "
+"un dispspec coincidente en estas carpetas, y el primer archivo dispspec "
+"coincidente se usa."
 
 #: ../data/conglomerate.schemas.in.h:2
 msgid ""
@@ -3079,9 +3079,9 @@ msgid ""
 "These documents will be used by the new document assistant as types of "
 "documents which can be created by the user."
 msgstr ""
-"Una lista de directorios donde Conglomerate debería buscar archivos de "
-"plantilla xml. Estos documentos serán usados por el asistente de nuevos "
-"documentos como tipos de documentos que pueden ser creados por el usuario."
+"Una lista de carpetas donde Conglomerate debería buscar archivos de "
+"plantilla xml. Estos documentos los usará el asistente de nuevos documentos "
+"como tipos de documentos que el usuario puede crear."
 
 #: ../data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
@@ -3460,7 +3460,6 @@ msgid "XML Editor"
 msgstr "Editor XML"
 
 #: ../src/cong-app.c:966
-#| msgid "XML Editor"
 msgid "- XML Editor"
 msgstr "- Editor XML"
 
@@ -3486,20 +3485,14 @@ msgstr ""
 
 #: ../src/cong-app.c:1122
 #, c-format
-#| msgid "The system could not login to the location."
 msgid "The file '%s' was not in the expected location."
 msgstr "El archivo «%s» no estaba en la ubicación esperada."
 
 #: ../src/cong-app.c:1124
-#| msgid "Conglomerate could not load any xds files"
 msgid "Conglomerate could not find a data file."
 msgstr "Conglomerate no pudo encontrar un archivo de datos."
 
 #: ../src/cong-app.c:1126
-#| msgid ""
-#| "If you see this error, it is likely that you built Conglomerate, but did "
-#| "not install it.  Try installing it.  If you have changed the default "
-#| "setting for the display spec path, please double check that as well."
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it. Try installing it."
@@ -3731,7 +3724,6 @@ msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate intentó mirar en todos los archivos en la ubicación."
 
 #: ../src/cong-dispspec-registry.c:93
-#| msgid "Conglomerate could not read its registry of document types."
 msgid "Conglomerate failed while reading its registry of document types."
 msgstr "Conglomerate falló al leer su registro de tipos de documento."
 
@@ -4025,8 +4017,8 @@ msgid ""
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
 "(i) Pruebe a verificar que escribió la ubicación correctamente. Recuerde que "
-"la capitalización es significante (\"MiDirectorio\" no es lo mismo que "
-"\"MIDIRECTORIO\" o \"midirectorio\").\n"
+"la capitalización es significante (\"MiCarpeta\" no es lo mismo que "
+"\"MICARPETA\" o \"micarpeta\").\n"
 "(ii) Intente usar la herramienta de búsqueda para encontrar su archivo."
 
 #. FIXME: need some thought about the messages for this
@@ -4094,7 +4086,7 @@ msgstr ""
 #: ../src/cong-error-file-open.c:348
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
-msgstr "«%s» es un directorio, en vez de un archivo."
+msgstr "«%s» es una carpeta, en vez de un archivo."
 
 #: ../src/cong-error-file-open.c:352
 msgid "Try using the Search Tool to find your file."
@@ -4161,9 +4153,9 @@ msgid ""
 msgstr ""
 "(i) Compruebe que escribió el nombre de la ubicación correctamente. "
 "Recuerde\n"
-"que la capitalización es significante (\"MiDirectorio\" no es lo mismo que "
-"\"MIDIRECTORIO\" O \"midirectorio\").\n"
-"(ii) Intente guadarlo en una ubicación diferente."
+"que la capitalización es significante (\"MiCarpeta\" no es lo mismo que "
+"\"MICARPETA\" O \"micarpeta\").\n"
+"(ii) Intente guardarlo en una ubicación diferente."
 
 #. FIXME: need some thought about the messages for this
 #: ../src/cong-error-file-save.c:107 ../src/cong-error-file-save.c:167
@@ -4237,15 +4229,15 @@ msgstr ""
 #: ../src/cong-error-file-save.c:210
 #, c-format
 msgid "\"%s\" is a directory."
-msgstr "«%s» es un directorio."
+msgstr "«%s» es una carpeta."
 
 #: ../src/cong-error-file-save.c:214
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
 msgstr ""
-"Debe guardar en un archivo dentro de un directorio, en vez de en el "
-"directorio mismo."
+"Debe guardar en un archivo dentro de una carpeta, en vez de en la propia "
+"carpeta."
 
 #: ../src/cong-error-file-save.c:224
 msgid ""
