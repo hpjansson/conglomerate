@@ -228,8 +228,8 @@
                 <filename>monospace</filename> type.</para>
         </listitem>
         <listitem>
-            <para>Commands that you type at a prompt will be shown in <command>
-                bold</command> type.</para>
+            <para>Commands that you type at a prompt will be shown in
+                <command>bold</command> type.</para>
         </listitem>
         <listitem>
             <para>Options that you click, select or choose in the user interface
