@@ -6,13 +6,14 @@
 # Jorge González González <aloriel@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
+# Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2011-03-13 11:09+0000\n"
-"PO-Revision-Date: 2011-04-04 15:59+0200\n"
+"POT-Creation-Date: 2011-12-09 08:12+0000\n"
+"PO-Revision-Date: 2011-12-11 18:33+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -181,7 +182,7 @@ msgstr ""
 
 #: C/conglomerate.xml:54(title)
 msgid "Conglomerate XML Editor"
-msgstr "Edito de XML Conglomerate"
+msgstr "Editor XML Conglomerate"
 
 #: C/conglomerate.xml:56(title)
 msgid "Conglomerate XML Editor Manual V0.0.1"
@@ -512,69 +513,93 @@ msgid ""
 "This book is most effective when used in conjunction with the Conglomerate "
 "XML Editor V0.7.10."
 msgstr ""
-"Este libro es más efectivo cuando se usa junto al editor XML Conglomerate  "
+"Este libro es más efectivo cuando se usa junto al editor XML Conglomerate "
 "V0.7.10."
 
+# Germana OB: Comienzo de la traduccion en la linea 60
 #: C/conglomerate.xml:198(para)
 msgid ""
 "Throughout this book the <ulink url=\"http://www.oasis-open.org/\">Docbook "
 "XML</ulink> document type will be used to explain and illustrate the "
 "functionality of the Conglomerate XML Editor."
 msgstr ""
+"A lo largo de este libro se utilizará el tipo de documento <ulink url="
+"\"http://www.oasis-open.org/\">Docbook XML</ulink> para explicar e ilustrar "
+"la funcionalidad del editor de XML Conglomerate."
 
 #: C/conglomerate.xml:201(para)
 msgid ""
 "Familiarity with the standard controls and Notations provided by the Window "
 "Manager and Linux File System is assumed."
 msgstr ""
+"Se asume el conocimiento de los controles estándar y notaciones "
+"proporcionadas por el gestor de ventanas y con el sistema de archivos de "
+"Linux."
 
 #: C/conglomerate.xml:204(emphasis)
 msgid "The following admonitions will be found throughout the book:"
-msgstr ""
+msgstr "Encontrará las siguientes advertencias a lo largo de este libro:"
 
+# surrounding :: entorno ¿?
+# El contexto no puede traducirse con "entorno"
 #: C/conglomerate.xml:208(para)
 msgid ""
 "A note presents interesting, sometimes technical, pieces of information "
 "related to the surrounding discussion."
 msgstr ""
+"Una nota presenta elementos de información interesante, a veces técnicos, "
+"relacionados con el tema que se está tratando."
 
+# Buscar traducción de "tip"
 #: C/conglomerate.xml:212(para)
 msgid "A tip offers advice or an easier way of doing something."
 msgstr ""
+"Un consejo le brinda sugerencias o una manera más fácil de hacer las cosas."
 
 #: C/conglomerate.xml:215(para)
 msgid ""
 "A caution advises you of potential problems and helps you to steer clear "
 "thereof."
 msgstr ""
+"Un aviso le informa sobre posibles problemas y le ayuda a mantenerse lejos "
+"de ellos."
 
+# Diferencia entre "caution" y "warning"
 #: C/conglomerate.xml:219(para)
 msgid ""
 "A warning advises you of a hazard condition that may be created in a given "
 "scenario."
 msgstr ""
+"Una advertencia le informa sobre una situación de peligro que se puede "
+"ocasionar en una situación determinada."
 
 #: C/conglomerate.xml:223(emphasis)
 msgid "Type conventions will be shown as follows:"
-msgstr ""
+msgstr "Las convenciones de tipo se mostrarán de la siguiente manera:"
 
 #: C/conglomerate.xml:227(para)
 msgid ""
 "File names or paths to directories will be shown in <filename>monospace</"
 "filename> type."
 msgstr ""
+"Los nombres de archivo o rutas de acceso a las carpetas ser presentarán con "
+"el tipo de letra <filename>monoespacio</filename>."
 
 #: C/conglomerate.xml:231(para)
 msgid ""
 "Commands that you type at a prompt will be shown in <command> bold</command> "
 "type."
 msgstr ""
+"Los comandos que se deben escribir en una terminal de comandos se mostrarán "
+"en <command>negrita</command>."
 
 #: C/conglomerate.xml:235(para)
 msgid ""
 "Options that you click, select or choose in the user interface will be shown "
 "in <filename>monospace</filename> type."
 msgstr ""
+"Las opciones que seleccione o elija en la interfaz de usuario se presentarán "
+"con el tipo de letra <filename>monoespacio</filename>."
 
 #: C/conglomerate.xml:239(para)
 msgid ""
@@ -582,10 +607,14 @@ msgid ""
 "of text will be shown in <command>monospaced</command> type, otherwise they "
 "will use the normal type."
 msgstr ""
+"Cuando las variables, parámetros, etiquetas sgml, etc., estén dentro de un "
+"párrafo, serán presentadas con el tipo de letra <command>monospaced</"
+"command>, en cualquier otro caso serán presentadas con un tipo de letra "
+"regular."
 
 #: C/conglomerate.xml:246(emphasis)
 msgid "Menu selections, mouse actions, and keyboard short-cuts:"
-msgstr ""
+msgstr "Opciones del menú, acciones del ratón, y atajos de teclado:"
 
 #: C/conglomerate.xml:250(para)
 msgid ""
@@ -593,6 +622,9 @@ msgid ""
 "<menuchoice><guimenu><accel>F</accel>ile</guimenu><guimenuitem><accel>O</"
 "accel>pen</guimenuitem></menuchoice>"
 msgstr ""
+"Una secuencia de selección de opciones del menú se presentará de la "
+"siguiente manera:<menuchoice><guimenu><accel>A</accel>rchivo</"
+"guimenu><guimenuitem><accel>A</accel>brir</guimenuitem></menuchoice>"
 
 #: C/conglomerate.xml:259(para)
 msgid ""
@@ -602,6 +634,11 @@ msgid ""
 "\"<mousebutton>right-click</mousebutton>\" refers to using the right-hand "
 "button."
 msgstr ""
+"Se asumirá que la configuración del ratón es para diestros. Los términos "
+"«<mousebutton>pulsación</mousebutton>» y «<mousebutton>doble pulsación</"
+"mousebutton>» se refieren al uso del botón izquierdo del ratón. El término "
+"«<mousebutton>pulsación derecha</mousebutton>» se refiere al uso del botón "
+"derecho del ratón."
 
 #: C/conglomerate.xml:267(para)
 msgid ""
@@ -611,28 +648,43 @@ msgid ""
 "keysym>, <keysym>Shift</keysym>, <keysym>Alt</keysym> respectively and shall "
 "mean to hold down the first key while pressing the second key."
 msgstr ""
+"Los atajos de teclado se presentarán de la siguiente manera: "
+"<keycombo><keysym>Ctrl+N</keysym></keycombo>. Donde <keysym>Ctrl</keysym>, "
+"<keysym>Mayús</keysym>, <keysym>Alt</keysym> representan las teclas "
+"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se "
+"deberá mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
 
 #: C/conglomerate.xml:278(emphasis)
-msgid "Cross reference conventions for pint will be shown as follows:"
+#| msgid "Cross reference conventions for pint will be shown as follows:"
+msgid "Cross reference conventions for print will be shown as follows:"
 msgstr ""
+"Las convenciones de referencias cruzadas para imprimir se mostrarán de la "
+"siguiente manera:"
 
 #: C/conglomerate.xml:283(para)
 msgid ""
 "Internal references will look like this: <xref linkend=\"introduction\"/>. "
 "The numeral contained by square braces is the [page number]."
 msgstr ""
+"Las referencias internas se mostrarán de la siguiente manera: <xref linkend="
+"\"introduction\"/>. El número que está entre los corchetes es el [número de "
+"página]."
 
 #: C/conglomerate.xml:287(para)
 msgid ""
 "External reference, say to a Web Site, will look like <ulink url=\"http://"
 "www.somedomain.com\">this</ulink>."
 msgstr ""
+"Las referencias externas, por ejemplo a una página web, se parecerán <ulink "
+"url=\"http://www.somedomain.com\">a esto</ulink>."
 
 #: C/conglomerate.xml:291(para)
 msgid ""
 "PDF, HTML or XHTML versions of this document will use hyper-links to denote "
 "cross-references."
 msgstr ""
+"Las versiones de este documento en PDF, HTML o XHTML usarán hipervínculos "
+"para indicar las referencias cruzadas."
 
 #: C/conglomerate.xml:295(emphasis)
 msgid "Code conventions:"
