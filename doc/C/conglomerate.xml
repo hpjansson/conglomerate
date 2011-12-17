@@ -173,7 +173,7 @@
                 <listitem>
                     <para>
                         <emphasis role="bold">Documentation:</emphasis> Write articles, add new
-                        sections, and improve on exiting sections within the documentation.</para>
+                        sections, and improve on existing sections within the documentation.</para>
                 </listitem>
                 <listitem>
                     <para>
@@ -513,7 +513,7 @@ Set Encore = Nothing
                 close the main window, exit the <application>Conglomerate</application> and to access
                 the user manual and about dialog which displays version and related information
                 about the <application>Conglomerate</application>. The main window becomes the editing
-                interface when a new document is created or an exiting document is opened. New
+                interface when a new document is created or an existing document is opened. New
                 options will then be displayed, they are described in <xref linkend="editor_window"/>.</para>
             <para>If you want to quickly get a glimpse of the editor window, create a new document
                 as follows. Documents are create with the help of templates, skeleton files that
@@ -578,7 +578,7 @@ Set Encore = Nothing
     <chapter id="editor_window">
         <title id="editor_window.title">Editor Window</title>
         <para>As the name implies, the editor window is used to edit documents. This window is
-            displayed when a new document is created or an exiting document is opened and has more
+            displayed when a new document is created or an existing document is opened and has more
             options than the main window. The figure below shows the editor window after a new
             "Docbook Article" has been created.</para>
         <figure id="fig_editorwindow">
@@ -1290,7 +1290,7 @@ Set Encore = Nothing
             </sect2>
             <sect2 id="open_a_document">
                 <title id="open_a_document.title">Open a document</title>
-                <para>The option to open an exiting document can be performed from the main and
+                <para>The option to open an existing document can be performed from the main and
                     editor windows. The following procedure is performed from the main window.</para>
                 <procedure>
                     <title>Opening a Document</title>
@@ -1333,7 +1333,7 @@ Set Encore = Nothing
             </sect2>
             <sect2 id="save_as_document">
                 <title id="save_as_document.title">Save As new document</title>
-                <para>It is sometimes convenient to save an exiting file to a copy using a new
+                <para>It is sometimes convenient to save an existing file to a copy using a new
                     filename or to a different location.</para>
                 <para>Assuming that a document is already open proceed as follows.</para>
                 <procedure>
