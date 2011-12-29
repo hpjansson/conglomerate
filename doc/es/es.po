@@ -3,7 +3,6 @@
 # Copyright (C) 2010 conglomerate's COPYRIGHT HOLDER
 # This file is distributed under the same license as the conglomerate package.
 #
-# Jorge González González <aloriel@gmail.com>, 2010.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
 # Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011.
