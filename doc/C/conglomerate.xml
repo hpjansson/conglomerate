@@ -1046,7 +1046,7 @@ Set Encore = Nothing
             <sect2 id="page_view">
                 <title id="page_view.title">Page view</title>
                 <para>The page view shows the content of the open document and the elements in which
-                    various content typesare tagged.</para>
+                    various content types are tagged.</para>
                 <para>Block elements such as <sgmltag class="starttag">article</sgmltag>, <sgmltag class="starttag">sect1</sgmltag>, <sgmltag class="starttag">sect2</sgmltag>, and
                         <sgmltag class="starttag">figure</sgmltag> are shown in "structural
                     element borders" and inline elements are displayed with a line beneath
