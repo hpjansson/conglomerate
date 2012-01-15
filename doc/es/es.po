@@ -5,14 +5,14 @@
 #
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
-# Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
+# Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011, 2012.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2011-12-17 12:31+0000\n"
-"PO-Revision-Date: 2011-12-29 10:22+0100\n"
+"POT-Creation-Date: 2012-01-12 09:22+0000\n"
+"PO-Revision-Date: 2012-01-15 18:46+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -181,15 +181,15 @@ msgstr ""
 
 #: C/conglomerate.xml:54(title)
 msgid "Conglomerate XML Editor"
-msgstr "Editor XML Conglomerate"
+msgstr "editor de XML Conglomerate"
 
 #: C/conglomerate.xml:56(title)
 msgid "Conglomerate XML Editor Manual V0.0.1"
-msgstr "Manual del editor XML Conglomerate V0.0.1"
+msgstr "Manual del editor de XML Conglomerate V0.0.1"
 
 #: C/conglomerate.xml:58(para)
 msgid "User manual for the conglomerate XML editor."
-msgstr "Manual de usuario del editor XML Conglomerate."
+msgstr "Manual de usuario del editor de XML Conglomerate."
 
 # Extensible Markup Language Format = Formato de lenguaje de marcado extensible.
 #
@@ -204,10 +204,10 @@ msgid ""
 "jargon of <acronym>XML</acronym> behind a friendly Graphical User Interface "
 "(<acronym>GUI</acronym>)."
 msgstr ""
-"Esta es la versión V0.0.1 del manual de usuario del <application>Editor XML "
-"Conglomerate</application> V0.7.10, un software libre que proporciona una "
-"herramienta amigable para la edición de <ulink url=\"http://www.oasis-open."
-"org/\">DocBook</ulink> y otros tipos de documentos creados en el "
+"Esta es la versión V0.0.1 del manual de usuario del <application>editor de "
+"XML Conglomerate</application> V0.7.10, un software libre que proporciona "
+"una herramienta amigable para la edición de <ulink url=\"http://www.oasis-"
+"open.org/\">DocBook</ulink> y otros tipos de documentos creados en el "
 "<glossterm>Formato de lenguaje de marcas extensible</glossterm> "
 "(<acronym>XML</acronym>). Pretende ocultar la complejidad y la jerga del "
 "<acronym>XML</acronym> detrás de una interfaz gráfica de usuario "
@@ -478,9 +478,6 @@ msgstr ""
 "application> a su propio idioma."
 
 #: C/conglomerate.xml:174(para)
-#| msgid ""
-#| "<emphasis role=\"bold\">Documentation:</emphasis> Write articles, add new "
-#| "sections, and improve on exiting sections within the documentation."
 msgid ""
 "<emphasis role=\"bold\">Documentation:</emphasis> Write articles, add new "
 "sections, and improve on existing sections within the documentation."
@@ -515,7 +512,7 @@ msgid ""
 "This book is most effective when used in conjunction with the Conglomerate "
 "XML Editor V0.7.10."
 msgstr ""
-"Este libro es más efectivo cuando se usa junto al editor XML Conglomerate "
+"Este libro es más efectivo cuando se usa junto al editor de XML Conglomerate "
 "V0.7.10."
 
 # Germana OB: Comienzo de la traduccion en la linea 60
@@ -653,8 +650,8 @@ msgstr ""
 "Los atajos de teclado se presentarán de la siguiente manera: "
 "<keycombo><keysym>Ctrl+N</keysym></keycombo>. Donde <keysym>Ctrl</keysym>, "
 "<keysym>Mayús</keysym>, <keysym>Alt</keysym> representan las teclas "
-"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se deberá "
-"mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
+"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se "
+"deberá mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
 
 #: C/conglomerate.xml:278(emphasis)
 msgid "Cross reference conventions for print will be shown as follows:"
@@ -732,6 +729,20 @@ msgid ""
 "Set Encore = Nothing\n"
 "    "
 msgstr ""
+"\n"
+"Dim uid, Encore\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"uid = Encore.logon(\"ADMIN\",\"\" ,\"0\" ,\"\", \"00\", 0, 0,\"\")\n"
+"\n"
+"<emphasis>UID de la caja de texto, , \"El ID del grupo creado para el acceso y  \\\n"
+"    y usado en todas las llamadas al método\"</emphasis>\n"
+"\n"
+"Set Encore = CreateObject(\"Encore.Query\")\n"
+"\n"
+"Set Encore = createobject(\"Encore.Utilities\")\n"
+"Encore.logoff(uid)\n"
+"Set Encore = Nothing\n"
+"    "
 
 #: C/conglomerate.xml:329(title)
 msgid "Introduction"
@@ -744,10 +755,10 @@ msgid ""
 "ulink> and other XML document types. It aims to hide the complexity and "
 "jargon of XML behind a friendly GUI."
 msgstr ""
-"El <application>Editor XML Conglomerate</application> es un editor XML "
+"El <application>editor de XML Conglomerate</application> es un editor XML "
 "libre, amigable para <ulink url=\"http://www.oasis-open.org/\">DocBook</"
 "ulink> y otros tipos de documentos XML. Apunta a ocultar la complejidad y la "
-"jerga del XML detrás de un IGU amigable."
+"jerga del XML detrás de una IGU amigable."
 
 #: C/conglomerate.xml:333(para)
 msgid ""
@@ -761,12 +772,12 @@ msgid ""
 "and lets the user target several formatted output file types from a single "
 "XML source."
 msgstr ""
-"El <application>Editor XML Conglomerate</application> es una parte del "
+"El <application>editor de XML Conglomerate</application> es una parte del "
 "proyecto <application>Conglomerate</application> para crear un sistema "
 "completo y estructurado de autoría, gestión, archivo, control de cambios y "
-"transformación de la información. El <application>Editor XML Conglomerate</"
-"application> usa semántica XML y una edición gráfica potente junto con un "
-"modelo de almacenamiento centralizado y un lenguaje flexible de "
+"transformación de la información. El <application>editor de XML "
+"Conglomerate</application> usa semántica XML y una edición gráfica potente "
+"junto con un modelo de almacenamiento centralizado y un lenguaje flexible de "
 "transformación para crear un entorno fácil de usar, producir una salida "
 "estructurada de alta calidad y dejar al usuario elegir entre varios formatos "
 "de archivo de salida desde una única fuente XML."
@@ -782,7 +793,7 @@ msgid ""
 "met Conglomerate can be run under the <ulink url=\"http://www.gnome.org"
 "\">Gnome</ulink> or <ulink url=\"http://www.kde.org\">KDE</ulink> desktops."
 msgstr ""
-"El <application>editor XML Conglomerate</application> puede ejecutarse en "
+"El <application>editor de XML Conglomerate</application> puede ejecutarse en "
 "cualquier sistema Linux que tenga instalado GNOME en su versión 2.4 o "
 "superior. Si esta condición se cumple, Conglomerate se puede ejecutar en "
 "escritorios <ulink url=\"http://www.gnome.org\">GNOME</ulink> o <ulink url="
@@ -1026,8 +1037,8 @@ msgid ""
 "Editor</guimenuitem></menuchoice>."
 msgstr ""
 "Elija <menuchoice><guimenu>Menú principal</guimenu><guisubmenu>Utilidades</"
-"guisubmenu><guisubmenu>Editor de texto</guisubmenu><guimenuitem>Editor XML "
-"Conglomerate</guimenuitem></menuchoice>."
+"guisubmenu><guisubmenu>Editor de texto</guisubmenu><guimenuitem>editor de "
+"XML Conglomerate</guimenuitem></menuchoice>."
 
 #: C/conglomerate.xml:488(emphasis)
 msgid "From the Command Prompt"
@@ -1051,7 +1062,7 @@ msgstr ""
 "También puede abrir un archivo XML directamente desde la línea de comandos "
 "indicando el nombre del archivo XML cuando se inicia "
 "<application>Conglomerate</application>, de la siguiente manera "
-"<command>conglomerate archivo.xml</application>"
+"<command>conglomerate archivo.xml</command>"
 
 #: C/conglomerate.xml:499(para)
 msgid ""
@@ -1066,17 +1077,6 @@ msgid "Conglomerate Start Up Window"
 msgstr "Ventana de inicio de Conglomerate"
 
 #: C/conglomerate.xml:510(para)
-#| msgid ""
-#| "This is the main window of the <application>Conglomerate XML Editor</"
-#| "application>. It provides basic options that can be used to create, open "
-#| "and import files when the <application>Conglomerate</application> is "
-#| "first started. It also provides options to close the main window, exit "
-#| "the <application>Conglomerate</application> and to access the user manual "
-#| "and about dialog which displays version and related information about the "
-#| "<application>Conglomerate</application>. The main window becomes the "
-#| "editing interface when a new document is created or an exiting document "
-#| "is opened. New options will then be displayed, they are described in "
-#| "<xref linkend=\"editor_window\"/>."
 msgid ""
 "This is the main window of the <application>Conglomerate XML Editor</"
 "application>. It provides basic options that can be used to create, open and "
@@ -1089,7 +1089,7 @@ msgid ""
 "New options will then be displayed, they are described in <xref linkend="
 "\"editor_window\"/>."
 msgstr ""
-"Esta es la ventana principal del <application>editor XML Conglomerate</"
+"Esta es la ventana principal del <application>editor de XML Conglomerate</"
 "application>. Proporciona las opciones básicas que se pueden usar para "
 "crear, abrir e importar archivos, una vez se inicia "
 "<application>Conglomerate</application>. También tiene opciones para cerrar "
@@ -1193,7 +1193,7 @@ msgid ""
 "developed to support creation and editing of any XML wide variety of data or "
 "document orientated XML instances."
 msgstr ""
-"Últimamente el <application>editor XML Conglomerate</application> está en "
+"Últimamente el <application>editor de XML Conglomerate</application> está en "
 "desarrollo para dar soporte a la creación y edición de cualquier variedad de "
 "datos XML o instancias orientadas a XML."
 
@@ -1212,8 +1212,8 @@ msgid ""
 "to each of the document types and references where you can find more "
 "information."
 msgstr ""
-"Una lista completa de los Tipos de Documentos XML soportados puede ser "
-"encontrada en <xref linkend=\"doc_type_support\"/>. Este documento también "
+"Una lista completa de los Tipos de documentos XML soportados se puede "
+"encontrar en la <xref linkend=\"doc_type_support\"/>. Este documento también "
 "proporciona una introducción a cada uno de los tipos de documentos y "
 "referencias de donde encontrar más información."
 
@@ -1222,11 +1222,6 @@ msgid "Editor Window"
 msgstr "Ventana del editor"
 
 #: C/conglomerate.xml:580(para)
-#| msgid ""
-#| "As the name implies, the editor window is used to edit documents. This "
-#| "window is displayed when a new document is created or an exiting document "
-#| "is opened and has more options than the main window. The figure below "
-#| "shows the editor window after a new \"Docbook Article\" has been created."
 msgid ""
 "As the name implies, the editor window is used to edit documents. This "
 "window is displayed when a new document is created or an existing document "
@@ -1258,6 +1253,11 @@ msgid ""
 "<literal>(Untitled)</literal>. The window titlebar also provides the "
 "standard menus and controls of the <application>Window Manager</application>."
 msgstr ""
+"La barra de título de la ventana muestra el nombre del archivo que se está "
+"editando. Si el archivo se ha guardado todavía, el nombre del archivo será "
+"<literal>(Sin Título)</literal>. La barra de título de la ventana también "
+"proporciona los menús y controles estándar del <application>Administrador de "
+"ventanas</application>."
 
 #: C/conglomerate.xml:616(emphasis)
 msgid "Menubar"
@@ -1270,6 +1270,10 @@ msgid ""
 "application>. The menu options are described in the <link linkend="
 "\"editor_window_menus\" endterm=\"editor_window_menus.title\"/>."
 msgstr ""
+"La Barra de menú proporciona menús que organizan y proporcionan acceso a "
+"todas las funciones del <application>editor de XML Conglomerate</"
+"application>. Las opciones del menú se describen en <link linkend="
+"\"editor_window_menus\" endterm=\"editor_window_menus.title\"/>."
 
 #: C/conglomerate.xml:633(emphasis)
 msgid "Toolbar"
@@ -1282,14 +1286,18 @@ msgid ""
 "described in the <link linkend=\"editor_window_toolbar\" endterm="
 "\"editor_window_toolbar.title\"/>."
 msgstr ""
+"La Barra de herramientas proporciona acceso rápido a las operaciones más "
+"usadas del <application>editor de XML Conglomerate</application>. Las "
+"opciones del menú se describen en <link linkend=\"editor_window_toolbar\" "
+"endterm=\"editor_window_toolbar.title\"/>."
 
 #: C/conglomerate.xml:650(emphasis)
 msgid "Document Area"
-msgstr ""
+msgstr "Área del documento"
 
 #: C/conglomerate.xml:653(para)
 msgid "The Document Area is the main workspace."
-msgstr ""
+msgstr "El Área del documento se encuentra el área de trabajo principal."
 
 #: C/conglomerate.xml:665(emphasis)
 msgid "Status bar"
@@ -1301,10 +1309,13 @@ msgid ""
 "a window \"Resize\" control with which to increase or decrease the size of "
 "the editor window."
 msgstr ""
+"La Barra de estado muestra el «Tipo de Documento» del documento abierto y "
+"proporciona un control para «Redimensionar» la ventana con el que se puede "
+"incrementar o reducir el tamaño de la ventana del editor."
 
 #: C/conglomerate.xml:682(title)
 msgid "Editor Window Menus"
-msgstr ""
+msgstr "Menús de la ventana del editor"
 
 #: C/conglomerate.xml:683(para)
 msgid ""
@@ -1312,10 +1323,13 @@ msgid ""
 "functional operations of the <application>Conglomerate XML Editor</"
 "application>. The following options are available:"
 msgstr ""
+"La Barra de menús dispone de menús que organizan y proporcionan acceso a "
+"todas las operaciones del <application>editor de XML Conglomerate</"
+"application>. Las siguientes opciones están disponibles:"
 
 #: C/conglomerate.xml:687(title)
 msgid "Editor Window Menus and Options"
-msgstr ""
+msgstr "Menús y opciones de la ventana del editor"
 
 #: C/conglomerate.xml:692(accel)
 msgid "F"
@@ -1372,7 +1386,7 @@ msgid ""
 "access the Online Help."
 msgstr ""
 "Use el menú <guimenu>Ayuda</guimenu> para mostrar el diálogo «Acerca del» "
-"<application>Editor XML Conglomerate</application> y acceda a la ayuda en "
+"<application>editor de XML Conglomerate</application> y acceda a la ayuda en "
 "línea."
 
 #: C/conglomerate.xml:833(title)
@@ -1386,7 +1400,7 @@ msgid ""
 "options are available:"
 msgstr ""
 "La barra de herramientas proporcionar un acceso rápido a las operaciones más "
-"comúnmente usadas por el  <application>Editor XML Conglomerate</"
+"comúnmente usadas por el  <application>editor de XML Conglomerate</"
 "application>. Las siguientes opciones están disponibles:"
 
 #: C/conglomerate.xml:837(title)
@@ -1481,13 +1495,15 @@ msgstr ""
 
 #: C/conglomerate.xml:899(title)
 msgid "Editor Window Document Area"
-msgstr ""
+msgstr "Área del documento de la ventana del editor"
 
 #: C/conglomerate.xml:900(para)
 msgid ""
 "The document area is the main workspace. It provides two views of the open "
 "document:"
 msgstr ""
+"El área del documento es el área de trabajo principal. Este área proporciona "
+"dos vistas del documento abierto:"
 
 #: C/conglomerate.xml:903(para)
 msgid ""
@@ -1506,16 +1522,21 @@ msgid ""
 "Each view is shown in a pane. The separator between the panes can be used to "
 "adjust how much of the document area is taken up by each of the views."
 msgstr ""
+"Cada vista se muestra en un panel. El separador de los paneles se puede usar "
+"para ajustar el área que abarca cada una de las vistas."
 
 #: C/conglomerate.xml:914(title)
 msgid "Outline view"
-msgstr ""
+msgstr "Vista de esquema"
 
 #: C/conglomerate.xml:915(para)
 msgid ""
 "Shows the structure of the document in a \"Tree View\" control. The outline "
 "view provides two XML tree perspectives of the open document:"
 msgstr ""
+"Muestra la estructura del documento en un dominio con «Vista de Árbol». La "
+"vista de esquema proporcionan dos perspectivas de árbol XML del documento "
+"abierto:"
 
 #: C/conglomerate.xml:919(para)
 msgid "<link linkend=\"overview\" endterm=\"overview.title\"/> (left-tab)"
@@ -1533,6 +1554,9 @@ msgid ""
 "navigated. Starting from the root node of the tree, elements that have "
 "\"child\" or \"sibling-elements\" can be expanded and collapsed."
 msgstr ""
+"Ambas perspectivas permiten la navegación de la estructura en árbol del "
+"documento abierto. Comenzando desde el nodo raíz del árbol, los elementos "
+"que tengan «hijos» o «elementos hermanos» se pueden expandir y contraer."
 
 #: C/conglomerate.xml:931(para)
 msgid ""
@@ -1552,14 +1576,26 @@ msgid ""
 "acronym> element that forms part of the vocabulary of the \"Document Type\" "
 "are selected, these options will be available as shown in the figure below."
 msgstr ""
+"Las opciones mostradas en la ventana emergente dependen del tipo de nodo "
+"seleccionado. Por ejemplo, cuando se seleccionan nodos representativos de la "
+"raíz del árbol, declaraciones <acronym>XML</acronym>, o declaraciones del "
+"tipo de documento, las opciones <guimenuitem>Cortar</guimenuitem>, "
+"<guimenuitem>Copiar</guimenuitem>, <guimenuitem>Pegar</guimenuitem>, "
+"<guimenuitem>Pegar antes</guimenuitem>, y <guimenuitem>Pegar después</"
+"guimenuitem> no se muestran. Cuando se seleccionan nodos representativos de "
+"un elemento <acronym>XML</acronym> que forma parte del vocabulario del «Tipo "
+"de documento», estas opciones estarán disponibles como muestra la figura de "
+"abajo."
 
 #: C/conglomerate.xml:944(title)
 msgid "Outline view pop-up menu"
-msgstr ""
+msgstr "Menú emergente de la vista de esquema"
 
 #: C/conglomerate.xml:953(para)
 msgid "Use the outline view pop-up menu to perform the following tasks:"
 msgstr ""
+"Use el menú emergente de la vista de esquema para realizar las siguientes "
+"tareas:"
 
 #: C/conglomerate.xml:986(para) C/conglomerate.xml:1132(para)
 msgid ""
@@ -1583,10 +1619,13 @@ msgid ""
 "<action>right-clicked</action> in the <link linkend=\"page_view\" endterm="
 "\"page_view.title\"/>."
 msgstr ""
+"Este menú emergente también está disponible cuando a un elemento "
+"<acronym>XML</acronym> se le realiza una <action>pulsación derecha</action> "
+"del ratón en la <link linkend=\"page_view\" endterm=\"page_view.title\"/>."
 
 #: C/conglomerate.xml:997(title)
 msgid "Overview tree perspective"
-msgstr ""
+msgstr "Vista general de la perspectiva en árbol"
 
 #: C/conglomerate.xml:998(para)
 msgid ""
@@ -1596,6 +1635,11 @@ msgid ""
 "<sgmltag class=\"starttag\">para</sgmltag> elements within the tree cannot "
 "be expanded."
 msgstr ""
+"En la perspectiva de vista general los nodos del árbol del documento abierto "
+"se presentan por su nombre de elemento en Docbook usando una vista lógica. "
+"El valor, o texto que contiene el elemento no se muestra. Por esta razón, "
+"los elementos párrafo o <sgmltag class=\"starttag\">para</sgmltag> que se "
+"encuentran dentro del árbol no se pueden expandir."
 
 #: C/conglomerate.xml:1003(para)
 msgid ""
@@ -1614,15 +1658,32 @@ msgid ""
 "for various document types is provided in <xref linkend="
 "\"display_spec_element_map_ref\"/>."
 msgstr ""
+"El nombre del elemento que se muestra en la vista en árbol no siempre es "
+"igual al que se muestra en el <link linkend=\"page_view\" endterm="
+"\"page_view.title\"/>. Esto es porque Conglomerate renombra los elementos de "
+"acuerdo con la información provista por una «Especificación de "
+"Visualización» que puede definir un nombre alternativo para cualquier tipo "
+"de elemento. Estos nombres no son nombres de elementos válidos y por lo "
+"tanto no se usan para crear elementos <acronym>XML</acronym> dentro del "
+"archivo fuente <acronym>XML</acronym>. Por el contrario se asignan a "
+"elementos válidos Docbook que son lo que se crean en el archivo fuente "
+"abierto <acronym>XML</acronym> o documento. Si se inserta utilizando los "
+"nombres propuestos por <application>Conglomerate</application>, el documento "
+"no será válido por violar las reglas especificadas en la "
+"<glossterm>Definición de tipo de documento</glossterm> (<acronym>DTD</"
+"acronym>) de los documentos. Se proporciona una lista de las asignaciones "
+"para diferentes tipos de documentos en la <xref linkend="
+"\"display_spec_element_map_ref\"/>."
 
 #: C/conglomerate.xml:1017(title)
 msgid "Outline view in Overview perspective"
-msgstr ""
+msgstr "Vista esquemática en la perspectiva de Vista general"
 
 #: C/conglomerate.xml:1028(title)
 msgid "Raw XML tree perspective"
-msgstr ""
+msgstr "Vista general del árbol XML en bruto"
 
+# pareciera que los caracteres entre parentesis estan intercambiados.
 #: C/conglomerate.xml:1029(para)
 msgid ""
 "In Raw XML perspective the tree nodes of the open document are shown using "
@@ -1631,10 +1692,16 @@ msgid ""
 "the tagged text, is also shown alongside the element in inverted commas (see "
 "<xref linkend=\"fig_outline_raw_xml\"/>)."
 msgstr ""
+"En la perspectiva del árbol XML en bruto los nodos del documento abierto se "
+"presentan usando una sintaxis completa de XML, por lo que se muestran los "
+"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. "
+"El valor del elemento, el texto etiquetado, también se muestra a un lado del "
+"elemento dentro de las comas invertidas (consulte la <xref linkend="
+"\"fig_outline_raw_xml\"/>)."
 
 #: C/conglomerate.xml:1035(title)
 msgid "Outline view in Raw XML perspective"
-msgstr ""
+msgstr "Vista esquemática en la perspectiva XML en bruto"
 
 #: C/conglomerate.xml:1047(title)
 msgid "Page view"
@@ -1643,7 +1710,7 @@ msgstr "Vista de página"
 #: C/conglomerate.xml:1048(para)
 msgid ""
 "The page view shows the content of the open document and the elements in "
-"which various content typesare tagged."
+"which various content types are tagged."
 msgstr ""
 
 #: C/conglomerate.xml:1050(para)
@@ -1655,6 +1722,12 @@ msgid ""
 "with a line beneath the tagged text (see <xref linkend="
 "\"fig_page_view_doc_edit\"/>)."
 msgstr ""
+"Los elementos de bloque como <sgmltag class=\"starttag\">artículo</sgmltag>, "
+"<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
+"\">sect2</sgmltag>, y <sgmltag class=\"starttag\">figura</sgmltag> se "
+"muestran en los «bordes del elemento estructural» y los elementos lineales "
+"se muestran con una línea debajo del texto etiquetado (consulte la <xref "
+"linkend=\"fig_page_view_doc_edit\"/>)."
 
 #: C/conglomerate.xml:1054(para)
 msgid ""
@@ -1670,11 +1743,23 @@ msgid ""
 "\"display_spec_element_map_ref\"/> for each of the <link linkend="
 "\"doc_type_support\" endterm=\"doc_type_support.title\"/>."
 msgstr ""
+"Los «bordes del elemento estructural» para estructuras de bloque anidado se "
+"colorean de forma alternativa para ayudar a su lectura. Las leyendas usadas "
+"corresponden a las equivalencias de los elementos de Tipo de documento en "
+"<application>Conglomerate</application>. Por ejemplo, en la siguiente figura "
+"la leyenda «Párrafo» de <application>Conglomerate</application> corresponde "
+"al elemento <literal>&lt;para&gt;</literal> de Docbook. Para los elementos "
+"en línea el nombre de la leyenda se escribe en el centro de la línea debajo "
+"del texto etiquetado. Hay disponible una lista de los nombres de "
+"<application>Conglomerate</application> en la <xref linkend="
+"\"display_spec_element_map_ref\"/> para cada uno de los <link linkend="
+"\"doc_type_support\" endterm=\"doc_type_support.title\"/>."
 
 #: C/conglomerate.xml:1064(title)
 msgid "Page view display of elements"
-msgstr ""
+msgstr "Visualización de elementos en la vista de página"
 
+# Podria traducirse como embeber?
 #: C/conglomerate.xml:1073(para)
 msgid ""
 "Wrapped captions can be expanded or collapsed by <action>clicking</action> "
@@ -1683,20 +1768,28 @@ msgid ""
 "\" under the <sgmltag class=\"starttag\">articleinfo</sgmltag>, and the "
 "\"Author\" has been hidden. Inline elements cannot be collapsed."
 msgstr ""
+"Las leyendas anidadas pueden expandirse o contraerse realizando una "
+"<action>pulsación</action> del ratón en la etiqueta de la leyenda. En la "
+"<xref linkend=\"fig_wrapped_caption_states\"/> se muestran ambos estados. "
+"Tenga en cuenta que el contenido para «Subtitulo», «Título» bajo <sgmltag "
+"class=\"starttag\">articleinfo</sgmltag>, y el «Autor» están ocultos. Los "
+"elemento de línea no se pueden contraer."
 
 #: C/conglomerate.xml:1079(title)
 msgid "Wrapped caption states - expanded and collapsed"
-msgstr ""
+msgstr "Estados de las leyendas anidadas: expandido y contraído"
 
 #: C/conglomerate.xml:1088(para)
 msgid ""
 "Two pop-up menus are available in the page view, each is associated with a "
 "different object:"
 msgstr ""
+"Hay dos menús emergentes en la vista de página, cada uno está asociado a un "
+"objeto diferente:"
 
 #: C/conglomerate.xml:1093(emphasis)
 msgid "Block Element Menu"
-msgstr ""
+msgstr "Menú de Elemento de bloque"
 
 #: C/conglomerate.xml:1096(para)
 msgid ""
@@ -1706,10 +1799,15 @@ msgid ""
 "caption label is <action>right-clicked</action>. Use the block element menu "
 "to:"
 msgstr ""
+"Este es el mismo menú que esta disponible cuando se realiza una "
+"<action>pulsación derecha</action> a un elemento XML en el <link linkend="
+"\"outline_view\" endterm=\"outline_view.title\"/>, el menú sólo se muestra "
+"esta vez cuando se realiza una <action>pulsación derecha</action> a la "
+"leyenda de la etiqueta. Use el menú de elemento de bloque para:"
 
 #: C/conglomerate.xml:1143(emphasis)
 msgid "Text Menu"
-msgstr ""
+msgstr "Menú de texto"
 
 #: C/conglomerate.xml:1146(para)
 msgid ""
@@ -1717,11 +1815,15 @@ msgid ""
 "<action>right-clicked</action>. It displays a list of options that allow you "
 "to:"
 msgstr ""
+"Este menú se muestra cuando se realiza una <action>pulsación derecha</"
+"action> a un texto contenido dentro de un elemento de bloque. Este menú "
+"muestra una lista de opciones que le permiten:"
 
 #: C/conglomerate.xml:1177(title)
 msgid "Window Management"
 msgstr "Gestión de la ventana"
 
+# real-estate??
 #: C/conglomerate.xml:1178(para)
 msgid ""
 "The <application>Conglomerate XML Editor</application> uses your chosen "
@@ -1737,12 +1839,27 @@ msgid ""
 "desktop environment will also help you to define the behavior of your "
 "<application>Conglomerate</application> windows."
 msgstr ""
+"El <application>editor de XML Conglomerate</application> usa su "
+"<application>Gestor de Ventanas</application> seleccionado para crear las "
+"ventanas principal y del editor. Se pueden ejecutar carias instancias de "
+"<application>Conglomerate</application> al mismo tiempo y se pueden abrir "
+"varias ventanas del editor, cada una mostrando un único documento. Con "
+"tantas ventanas abiertas, el gestor de ventana puede convertirse en un "
+"problema. Afortunadamente, la mayoría de los sistemas de escritorio como "
+"<ulink url=\"http://www.gnome.org\">GNOME</ulink> y <ulink url=\"http://www."
+"kde.org\">KDE</ulink> tienen una <application>Barra de tareas</application> "
+"con características avanzadas de gestión del escritorio. Esto le permitirá "
+"maximizar el uso físico de la pantalla. Los controles estándar de la ventana "
+"de su sistema de escritorio le ayudarán a definir el comportamiento de las "
+"ventanas de <application>Conglomerate</application>."
 
 #: C/conglomerate.xml:1188(para)
 msgid ""
 "Within <application>Conglomerate</application> there are two options for "
 "window and application management:"
 msgstr ""
+"Dentro de <application>Conglomerate</application> hay dos opciones para la "
+"gestión de ventanas y aplicaciones:"
 
 #: C/conglomerate.xml:1203(title)
 msgid "Close"
@@ -1756,6 +1873,11 @@ msgid ""
 "using the keyboard combination <keycombo><keycap>Ctrl</keycap><keycap>W</"
 "keycap></keycombo>."
 msgstr ""
+"Como se pueden abrir muchas ventas del editor, estas se pueden cerrar "
+"individualmente seleccionando <menuchoice><guimenu><accel>A</accel>rchivo</"
+"guimenu><guimenuitem><accel>C</accel>errar</guimenuitem></menuchoice> o "
+"usando la siguiente combinación de teclado <keycombo><keycap>Ctrl</"
+"keycap><keycap>W</keycap></keycombo>."
 
 #: C/conglomerate.xml:1215(para)
 msgid ""
@@ -1764,6 +1886,10 @@ msgid ""
 "associated with a <application>Conglomerate</application> instance and "
 "terminate the application."
 msgstr ""
+"Esta opción no de debe confundir con la opción <option>Salir</option>, la "
+"cual cerrará todas las ventanas de <application>Conglomerate</application> "
+"asociadas con una instancia de <application>Conglomerate</application> y "
+"finalizará la aplicación."
 
 #: C/conglomerate.xml:1221(title)
 msgid "Exit"
@@ -1778,6 +1904,13 @@ msgid ""
 "associated with the <application>Conglomerate</application> instance and "
 "exit the application."
 msgstr ""
+"Seleccionando <menuchoice><guimenu><accel>A</accel>rchivo</"
+"guimenu><guimenuitem><accel>A</accel>bandonar</guimenuitem></menuchoice> o "
+"usando la combinación de teclado <keycombo><keycap>Ctrl</keycap><keycap>Q</"
+"keycap></keycombo> en la ventana principal y en cualquier ventana del "
+"editor  cerrará todas las ventanas asociadas con una instancia de "
+"<application>Conglomerate</application> y finalizará la ejecución de la "
+"aplicación."
 
 #: C/conglomerate.xml:1236(title)
 msgid "Performing Tasks"
@@ -1797,6 +1930,10 @@ msgid ""
 "does not provide editing functionality. To display the editor window Create "
 "or <link linkend=\"open_a_document\" endterm=\"open_a_document.title\"/>."
 msgstr ""
+"Cuando <application>Conglomerate</application> se ejecuta por primera vez la "
+"ventana principal no presenta funcionalidad para la edición. Para visualizar "
+"la ventana del editor cree o <link linkend=\"open_a_document\" endterm="
+"\"open_a_document.title\"/>."
 
 #: C/conglomerate.xml:1244(title)
 msgid "Creating a Document"
