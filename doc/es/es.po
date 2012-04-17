@@ -6,13 +6,14 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Joaquín Ignacio Aramendía <samsagax@gmail.com>, 2011.
 # Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011, 2012.
+# Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2012-01-12 09:22+0000\n"
-"PO-Revision-Date: 2012-01-15 18:46+0100\n"
+"POT-Creation-Date: 2012-04-17 08:29+0000\n"
+"PO-Revision-Date: 2012-04-17 10:39+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -650,8 +651,8 @@ msgstr ""
 "Los atajos de teclado se presentarán de la siguiente manera: "
 "<keycombo><keysym>Ctrl+N</keysym></keycombo>. Donde <keysym>Ctrl</keysym>, "
 "<keysym>Mayús</keysym>, <keysym>Alt</keysym> representan las teclas "
-"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se "
-"deberá mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
+"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se deberá "
+"mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
 
 #: C/conglomerate.xml:278(emphasis)
 msgid "Cross reference conventions for print will be shown as follows:"
@@ -1001,6 +1002,11 @@ msgid ""
 "cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;"
 "module=default\">Gnome</ulink>."
 msgstr ""
+"Si no le preocupa ejecutarlo «al filo» del desarrollo, también puede ejecutar "
+"su instalación desde el proyecto <glossterm>Sistema de control de versiones "
+"concurrente</glossterm> (<acronym>CVS</acronym>) ubicado en <ulink url="
+"\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/"
+"gnome&amp;module=default\">Gnome</ulink>."
 
 #: C/conglomerate.xml:463(para)
 msgid ""
@@ -1563,6 +1569,8 @@ msgid ""
 "A context-sensitive pop-up menu is available when a selected node is "
 "<action>right-clicked</action> with the mouse."
 msgstr ""
+"Está disponible un menú emergente sensible al contexto cuando un nodo "
+"seleccionado se <action>pulsa con el botón derecho</action> del ratón."
 
 #: C/conglomerate.xml:933(para)
 msgid ""
@@ -1661,19 +1669,18 @@ msgstr ""
 "El nombre del elemento que se muestra en la vista en árbol no siempre es "
 "igual al que se muestra en el <link linkend=\"page_view\" endterm="
 "\"page_view.title\"/>. Esto es porque Conglomerate renombra los elementos de "
-"acuerdo con la información provista por una «Especificación de "
-"Visualización» que puede definir un nombre alternativo para cualquier tipo "
-"de elemento. Estos nombres no son nombres de elementos válidos y por lo "
-"tanto no se usan para crear elementos <acronym>XML</acronym> dentro del "
-"archivo fuente <acronym>XML</acronym>. Por el contrario se asignan a "
-"elementos válidos Docbook que son lo que se crean en el archivo fuente "
-"abierto <acronym>XML</acronym> o documento. Si se inserta utilizando los "
-"nombres propuestos por <application>Conglomerate</application>, el documento "
-"no será válido por violar las reglas especificadas en la "
-"<glossterm>Definición de tipo de documento</glossterm> (<acronym>DTD</"
-"acronym>) de los documentos. Se proporciona una lista de las asignaciones "
-"para diferentes tipos de documentos en la <xref linkend="
-"\"display_spec_element_map_ref\"/>."
+"acuerdo con la información provista por una «Especificación de Visualización» "
+"que puede definir un nombre alternativo para cualquier tipo de elemento. "
+"Estos nombres no son nombres de elementos válidos y por lo tanto no se usan "
+"para crear elementos <acronym>XML</acronym> dentro del archivo fuente "
+"<acronym>XML</acronym>. Por el contrario se asignan a elementos válidos "
+"Docbook que son lo que se crean en el archivo fuente abierto <acronym>XML</"
+"acronym> o documento. Si se inserta utilizando los nombres propuestos por "
+"<application>Conglomerate</application>, el documento no será válido por "
+"violar las reglas especificadas en la <glossterm>Definición de tipo de "
+"documento</glossterm> (<acronym>DTD</acronym>) de los documentos. Se "
+"proporciona una lista de las asignaciones para diferentes tipos de "
+"documentos en la <xref linkend=\"display_spec_element_map_ref\"/>."
 
 #: C/conglomerate.xml:1017(title)
 msgid "Outline view in Overview perspective"
@@ -1694,8 +1701,8 @@ msgid ""
 msgstr ""
 "En la perspectiva del árbol XML en bruto los nodos del documento abierto se "
 "presentan usando una sintaxis completa de XML, por lo que se muestran los "
-"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. "
-"El valor del elemento, el texto etiquetado, también se muestra a un lado del "
+"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. El "
+"valor del elemento, el texto etiquetado, también se muestra a un lado del "
 "elemento dentro de las comas invertidas (consulte la <xref linkend="
 "\"fig_outline_raw_xml\"/>)."
 
@@ -1712,6 +1719,8 @@ msgid ""
 "The page view shows the content of the open document and the elements in "
 "which various content types are tagged."
 msgstr ""
+"La vista de página muestra el contenido del documento abierto y los "
+"elementos en los que están etiquetados diversos tipos de contenido."
 
 #: C/conglomerate.xml:1050(para)
 msgid ""
@@ -1725,8 +1734,8 @@ msgstr ""
 "Los elementos de bloque como <sgmltag class=\"starttag\">artículo</sgmltag>, "
 "<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
 "\">sect2</sgmltag>, y <sgmltag class=\"starttag\">figura</sgmltag> se "
-"muestran en los «bordes del elemento estructural» y los elementos lineales "
-"se muestran con una línea debajo del texto etiquetado (consulte la <xref "
+"muestran en los «bordes del elemento estructural» y los elementos lineales se "
+"muestran con una línea debajo del texto etiquetado (consulte la <xref "
 "linkend=\"fig_page_view_doc_edit\"/>)."
 
 #: C/conglomerate.xml:1054(para)
@@ -1945,12 +1954,21 @@ msgid ""
 "guimenu><guimenuitem>New</guimenuitem></menuchoice>. The <application>Create "
 "New File</application> wizard is started."
 msgstr ""
+"En el menú de la ventana principal <action>seleccione</"
+"action><menuchoice><guimenu>Archivo</guimenu><guimenuitem>Nuevo</"
+"guimenuitem></menuchoice>. Se iniciará el asistente para <application>Crear "
+"un archivo nuevo</application>."
 
 #: C/conglomerate.xml:1260(para)
+#| msgid ""
+#| "<action>Click</action> the <guibutton>Forward</guibutton> button. The "
+#| "wizard displays alist of document type templates."
 msgid ""
 "<action>Click</action> the <guibutton>Forward</guibutton> button. The wizard "
-"displays alist of document type templates."
+"displays a list of document type templates."
 msgstr ""
+"<action>Pulse</action> el botón <guibutton>Avanzar</guibutton>. El asistente "
+"muestra una lista de plantillas de tipo de documento."
 
 #: C/conglomerate.xml:1272(para)
 msgid ""
@@ -1958,12 +1976,17 @@ msgid ""
 "<action>click</action> the <guibutton>Forward</guibutton> button. The final "
 "dialog of the wizard is displayed."
 msgstr ""
+"<action>Seleccione</action> una plantilla adecuada de la lista, y "
+"<action>pulse</action> el botón <guibutton>Avanzar</guibutton>. Se mostrará "
+"el diálogo final del asistente."
 
 #: C/conglomerate.xml:1278(para)
 msgid ""
 "<action>Click</action> the <guibutton>Apply</guibutton> button. The Editor "
 "Window is displayed with the selected template ready for editing."
 msgstr ""
+"<action>Pulse</action> el botón <guibutton>Aplicar</guibutton>. La ventana "
+"del editor se muestra con la plantilla seleccionada lista para la edición."
 
 #: C/conglomerate.xml:1292(title)
 msgid "Open a document"
@@ -1974,6 +1997,9 @@ msgid ""
 "The option to open an existing document can be performed from the main and "
 "editor windows. The following procedure is performed from the main window."
 msgstr ""
+"La opción de abrir un documento existente se puede hacer en la ventana "
+"principal y en la del editor. El siguiente procedimiento se realiza en la "
+"ventana principal."
 
 #: C/conglomerate.xml:1296(title)
 msgid "Opening a Document"
@@ -1985,22 +2011,30 @@ msgid ""
 "guimenu><guimenuitem>Open</guimenuitem></menuchoice>. The Select an XML File "
 "dialog is displayed."
 msgstr ""
+"De la barra de menú <action>Seleccionar</"
+"action><menuchoice><guimenu>Archivo</guimenu><guimenuitem>Abrir</"
+"guimenuitem></menuchoice>. Se muestra la selección de un diálogo de archivo "
+"XML."
 
 #: C/conglomerate.xml:1312(para)
 msgid ""
 "Use the Folders list view to <action>Navigate</action> to the folder "
 "containing the required file."
 msgstr ""
+"Use la vista de lista de carpetas para <action>navegar</action> a la carpeta "
+"que contiene el archivo requerido."
 
 #: C/conglomerate.xml:1316(para)
 msgid ""
 "Use the Files list view to <action>select</action> the file, then "
 "<action>click</action><guibutton>OK</guibutton>."
 msgstr ""
+"Use la vista de lista de archivos para <action>seleccionar</action> el "
+"archivo, luego <action>pulse</action><guibutton>Aceptar</guibutton>."
 
 #: C/conglomerate.xml:1320(para)
 msgid "The selected file is opened in the editor window."
-msgstr ""
+msgstr "El archivo seleccionado se abre en la ventana del editor."
 
 #: C/conglomerate.xml:1325(title)
 msgid "Save a document"
@@ -2013,12 +2047,22 @@ msgid ""
 "linkend=\"save_as_document\"/>). Once a document is saved to disk, the save "
 "operation will write directly to the open file."
 msgstr ""
+"La primera vez que guarde el documento deberá proporcionar un nombre de "
+"archivo y seleccionar una ubicación donde el archivo se escribirá en el "
+"disco (consulte la <xref linkend=\"save_as_document\"/>). Una vez que un "
+"documento se guarda en el disco, la operación de guardar escribirá "
+"directamente en el archivo abierto."
 
 #: C/conglomerate.xml:1330(para)
+#| msgid ""
+#| "Save your document before you start and regularly there after to avoid "
+#| "loosing work due to unexpected software failure."
 msgid ""
 "Save your document before you start and regularly there after to avoid "
-"loosing work due to unexpected software failure."
+"losing work due to unexpected software failure."
 msgstr ""
+"Guarde su documento antes de empezar y después guárdelo regularmente para no "
+"perder el trabajo debido a un fallo inesperado del software."
 
 #: C/conglomerate.xml:1335(title) C/conglomerate.xml:1340(title)
 msgid "Save As new document"
@@ -2029,27 +2073,40 @@ msgid ""
 "It is sometimes convenient to save an existing file to a copy using a new "
 "filename or to a different location."
 msgstr ""
+"A veces es conveniente guardar un archivo existente en una copia con un "
+"nombre de archivo nuevo o en una ubicación diferente."
 
 #: C/conglomerate.xml:1338(para)
 msgid "Assuming that a document is already open proceed as follows."
-msgstr ""
+msgstr "Asumiendo que ya hay un documento abierto, proceda como sigue."
 
 #: C/conglomerate.xml:1342(para)
+#| msgid ""
+#| "<action>Select</action><menuchoice><guimenu>File</"
+#| "guimenu><guimenuitem>Save As</guimenuitem></menuchoice> "
+#| "(<keycombo><keycap>Ctrl+Shft+S</keycap></keycombo>). The Save XML As "
+#| "dialog is displayed."
 msgid ""
 "<action>Select</action><menuchoice><guimenu>File</guimenu><guimenuitem>Save "
-"As</guimenuitem></menuchoice> (<keycombo><keycap>Ctrl+Shft+S</keycap></"
+"As</guimenuitem></menuchoice> (<keycombo><keycap>Ctrl+Shift+S</keycap></"
 "keycombo>). The Save XML As dialog is displayed."
 msgstr ""
+"<action>Seleccione</action><menuchoice><guimenu>Archivo</"
+"guimenu><guimenuitem>Guardar como</guimenuitem></menuchoice> "
+"(<keycombo><keycap>Ctrl+Mayús+S</keycap></keycombo>). Se muestra el diálogo "
+"«Guardar XML como»."
 
 #: C/conglomerate.xml:1359(para)
 msgid ""
 "Use the Folders list to navigate to the folder where the new copy of the "
 "file will be saved."
 msgstr ""
+"Use la lista de carpetas para navegar a la carpeta donde se guardará la "
+"nueva copia del archivo."
 
 #: C/conglomerate.xml:1363(para)
 msgid "Enter a filename in the Selection field."
-msgstr ""
+msgstr "Introduzca un nombre de archivo en el campo Selección."
 
 #: C/conglomerate.xml:1366(para)
 msgid ""
@@ -2125,7 +2182,7 @@ msgstr "Insertar elementos"
 
 #: C/conglomerate.xml:1435(title)
 msgid "New sibling-element"
-msgstr ""
+msgstr "Nuevo elemento hermano"
 
 #: C/conglomerate.xml:1439(title)
 msgid "New sub-element"
