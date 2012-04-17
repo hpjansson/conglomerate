@@ -1259,7 +1259,7 @@ Set Encore = Nothing
                     <step>
                         <para>
                             <action>Click</action> the <guibutton>Forward</guibutton> button. The
-                            wizard displays alist of document type templates.</para>
+                            wizard displays a list of document type templates.</para>
                         <screenshot>
                             <mediaobject>
                                 <imageobject>
@@ -1328,7 +1328,7 @@ Set Encore = Nothing
                     operation will write directly to the open file.</para>
                 <tip>
                     <para>Save your document before you start and regularly there after to avoid
-                        loosing work due to unexpected software failure.</para>
+                        losing work due to unexpected software failure.</para>
                 </tip>
             </sect2>
             <sect2 id="save_as_document">
@@ -1345,7 +1345,7 @@ Set Encore = Nothing
                                 <guimenu>File</guimenu>
                                 <guimenuitem>Save As</guimenuitem>
                             </menuchoice> (<keycombo>
-                                <keycap>Ctrl+Shft+S</keycap>
+                                <keycap>Ctrl+Shift+S</keycap>
                             </keycombo>). The Save XML As dialog is displayed.</para>
                         <screenshot>
                             <mediaobject>
