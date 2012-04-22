@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2012-04-17 08:29+0000\n"
-"PO-Revision-Date: 2012-04-17 10:39+0200\n"
+"POT-Creation-Date: 2012-04-17 08:41+0000\n"
+"PO-Revision-Date: 2012-04-22 13:40+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -651,8 +651,8 @@ msgstr ""
 "Los atajos de teclado se presentarán de la siguiente manera: "
 "<keycombo><keysym>Ctrl+N</keysym></keycombo>. Donde <keysym>Ctrl</keysym>, "
 "<keysym>Mayús</keysym>, <keysym>Alt</keysym> representan las teclas "
-"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se deberá "
-"mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
+"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se "
+"deberá mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
 
 #: C/conglomerate.xml:278(emphasis)
 msgid "Cross reference conventions for print will be shown as follows:"
@@ -1002,11 +1002,11 @@ msgid ""
 "cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;"
 "module=default\">Gnome</ulink>."
 msgstr ""
-"Si no le preocupa ejecutarlo «al filo» del desarrollo, también puede ejecutar "
-"su instalación desde el proyecto <glossterm>Sistema de control de versiones "
-"concurrente</glossterm> (<acronym>CVS</acronym>) ubicado en <ulink url="
-"\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/"
-"gnome&amp;module=default\">Gnome</ulink>."
+"Si no le preocupa ejecutarlo «al filo» del desarrollo, también puede "
+"ejecutar su instalación desde el proyecto <glossterm>Sistema de control de "
+"versiones concurrente</glossterm> (<acronym>CVS</acronym>) ubicado en <ulink "
+"url=\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/"
+"cvs/gnome&amp;module=default\">Gnome</ulink>."
 
 #: C/conglomerate.xml:463(para)
 msgid ""
@@ -1669,18 +1669,19 @@ msgstr ""
 "El nombre del elemento que se muestra en la vista en árbol no siempre es "
 "igual al que se muestra en el <link linkend=\"page_view\" endterm="
 "\"page_view.title\"/>. Esto es porque Conglomerate renombra los elementos de "
-"acuerdo con la información provista por una «Especificación de Visualización» "
-"que puede definir un nombre alternativo para cualquier tipo de elemento. "
-"Estos nombres no son nombres de elementos válidos y por lo tanto no se usan "
-"para crear elementos <acronym>XML</acronym> dentro del archivo fuente "
-"<acronym>XML</acronym>. Por el contrario se asignan a elementos válidos "
-"Docbook que son lo que se crean en el archivo fuente abierto <acronym>XML</"
-"acronym> o documento. Si se inserta utilizando los nombres propuestos por "
-"<application>Conglomerate</application>, el documento no será válido por "
-"violar las reglas especificadas en la <glossterm>Definición de tipo de "
-"documento</glossterm> (<acronym>DTD</acronym>) de los documentos. Se "
-"proporciona una lista de las asignaciones para diferentes tipos de "
-"documentos en la <xref linkend=\"display_spec_element_map_ref\"/>."
+"acuerdo con la información provista por una «Especificación de "
+"Visualización» que puede definir un nombre alternativo para cualquier tipo "
+"de elemento. Estos nombres no son nombres de elementos válidos y por lo "
+"tanto no se usan para crear elementos <acronym>XML</acronym> dentro del "
+"archivo fuente <acronym>XML</acronym>. Por el contrario se asignan a "
+"elementos válidos Docbook que son lo que se crean en el archivo fuente "
+"abierto <acronym>XML</acronym> o documento. Si se inserta utilizando los "
+"nombres propuestos por <application>Conglomerate</application>, el documento "
+"no será válido por violar las reglas especificadas en la "
+"<glossterm>Definición de tipo de documento</glossterm> (<acronym>DTD</"
+"acronym>) de los documentos. Se proporciona una lista de las asignaciones "
+"para diferentes tipos de documentos en la <xref linkend="
+"\"display_spec_element_map_ref\"/>."
 
 #: C/conglomerate.xml:1017(title)
 msgid "Outline view in Overview perspective"
@@ -1701,8 +1702,8 @@ msgid ""
 msgstr ""
 "En la perspectiva del árbol XML en bruto los nodos del documento abierto se "
 "presentan usando una sintaxis completa de XML, por lo que se muestran los "
-"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. El "
-"valor del elemento, el texto etiquetado, también se muestra a un lado del "
+"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. "
+"El valor del elemento, el texto etiquetado, también se muestra a un lado del "
 "elemento dentro de las comas invertidas (consulte la <xref linkend="
 "\"fig_outline_raw_xml\"/>)."
 
@@ -1734,8 +1735,8 @@ msgstr ""
 "Los elementos de bloque como <sgmltag class=\"starttag\">artículo</sgmltag>, "
 "<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
 "\">sect2</sgmltag>, y <sgmltag class=\"starttag\">figura</sgmltag> se "
-"muestran en los «bordes del elemento estructural» y los elementos lineales se "
-"muestran con una línea debajo del texto etiquetado (consulte la <xref "
+"muestran en los «bordes del elemento estructural» y los elementos lineales "
+"se muestran con una línea debajo del texto etiquetado (consulte la <xref "
 "linkend=\"fig_page_view_doc_edit\"/>)."
 
 #: C/conglomerate.xml:1054(para)
@@ -1960,9 +1961,6 @@ msgstr ""
 "un archivo nuevo</application>."
 
 #: C/conglomerate.xml:1260(para)
-#| msgid ""
-#| "<action>Click</action> the <guibutton>Forward</guibutton> button. The "
-#| "wizard displays alist of document type templates."
 msgid ""
 "<action>Click</action> the <guibutton>Forward</guibutton> button. The wizard "
 "displays a list of document type templates."
@@ -2054,9 +2052,6 @@ msgstr ""
 "directamente en el archivo abierto."
 
 #: C/conglomerate.xml:1330(para)
-#| msgid ""
-#| "Save your document before you start and regularly there after to avoid "
-#| "loosing work due to unexpected software failure."
 msgid ""
 "Save your document before you start and regularly there after to avoid "
 "losing work due to unexpected software failure."
@@ -2081,11 +2076,6 @@ msgid "Assuming that a document is already open proceed as follows."
 msgstr "Asumiendo que ya hay un documento abierto, proceda como sigue."
 
 #: C/conglomerate.xml:1342(para)
-#| msgid ""
-#| "<action>Select</action><menuchoice><guimenu>File</"
-#| "guimenu><guimenuitem>Save As</guimenuitem></menuchoice> "
-#| "(<keycombo><keycap>Ctrl+Shft+S</keycap></keycombo>). The Save XML As "
-#| "dialog is displayed."
 msgid ""
 "<action>Select</action><menuchoice><guimenu>File</guimenu><guimenuitem>Save "
 "As</guimenuitem></menuchoice> (<keycombo><keycap>Ctrl+Shift+S</keycap></"
@@ -2186,15 +2176,15 @@ msgstr "Nuevo elemento hermano"
 
 #: C/conglomerate.xml:1439(title)
 msgid "New sub-element"
-msgstr ""
+msgstr "Nuevo sub-elemento"
 
 #: C/conglomerate.xml:1443(title)
 msgid "Insert inline elements"
-msgstr ""
+msgstr "Insertar elementos en línea"
 
 #: C/conglomerate.xml:1447(title)
 msgid "Remove inline elements"
-msgstr ""
+msgstr "Quitar elementos en línea"
 
 #: C/conglomerate.xml:1452(title)
 msgid "Cleanup XML source"
@@ -2238,7 +2228,7 @@ msgstr "Validar un documento"
 
 #: C/conglomerate.xml:1494(title)
 msgid "Designing Display Definitions"
-msgstr ""
+msgstr "Diseñar definiciones de pantalla"
 
 #: C/conglomerate.xml:1495(para)
 msgid ""
@@ -2247,6 +2237,10 @@ msgid ""
 "that annotate a one or more Document Types that may be edited with the "
 "Conglomerate XML Editor."
 msgstr ""
+"Las especificaciones de pantalla son archivos <acronym>XML</acronym> "
+"guardados con la extensión <filename>XDS</filename>. Contienen varios tipos "
+"de información, que anotan uno o más tipos de documento que se pueden editar "
+"con el editor de XML Conglomerate."
 
 #: C/conglomerate.xml:1498(para)
 msgid ""
@@ -2255,6 +2249,10 @@ msgid ""
 "information to <application>Conglomerate</application> when editing a given "
 "<acronym>XML</acronym> instance."
 msgstr ""
+"Las especificaciones de pantalla no toman el lugar de <acronym>DTD</"
+"acronym>, esquema XML, o archivos <acronym>XSL</acronym>. Su función es solo "
+"ofrecer información a <application>Conglomerate</application> al editar una "
+"instancia <acronym>XML</acronym> determinada."
 
 #: C/conglomerate.xml:1501(para)
 msgid ""
@@ -2263,24 +2261,30 @@ msgid ""
 "application> editing environment to the particluar requirements of a user or "
 "a specific <acronym>XML</acronym> file."
 msgstr ""
+"Dado que las especificaciones de pantalla son <acronym>XML</acronym>, se "
+"pueden modificar fácilmente con el fin de personalizar el entorno de edición "
+"de <application>Conglomerate</application> a los requerimientos particulares "
+"de un usuario o de un archivo <acronym>XML</acronym> específico."
 
 #: C/conglomerate.xml:1504(para)
 msgid ""
 "A complete definition of the Conglomerate XDS DTD is available in <xref "
 "linkend=\"xds_dtd_def\"/>."
 msgstr ""
+"Hay disponible una definición completa del DTS de XDS de Conglomerate en la "
+"<xref linkend=\"xds_dtd_def\"/>."
 
 #: C/conglomerate.xml:1505(para)
 msgid "The following operations can be performed on XDS files:"
-msgstr ""
+msgstr "Las siguientes operaciones se pueden realizar en archivos XDS:"
 
 #: C/conglomerate.xml:1519(title)
 msgid "Edit a Display Spec"
-msgstr ""
+msgstr "Editar una especificación de pantalla"
 
 #: C/conglomerate.xml:1523(title)
 msgid "Dump a Display Spec"
-msgstr ""
+msgstr "Descargar una especificación de pantalla"
 
 #: C/conglomerate.xml:1534(para)
 msgid ""
@@ -2288,6 +2292,9 @@ msgid ""
 "range of XML documents. During developed three levels of support are "
 "recognized:"
 msgstr ""
+"El proyecto Conglomerate tiene como objetivo proporcionar soporte para la "
+"edición de un amplio rango de documentos XML. Durante el desarrollo se "
+"reconocen tres niveles de soporte:"
 
 #: C/conglomerate.xml:1538(para)
 msgid "<link linkend=\"supported_docs\" endterm=\"supported_docs.title\"/>."
@@ -2311,7 +2318,7 @@ msgstr ""
 
 #: C/conglomerate.xml:1552(title)
 msgid "Summary of Supported XML Document Types"
-msgstr ""
+msgstr "Resumen de tipos de documento XML soportados"
 
 #: C/conglomerate.xml:1556(entry)
 msgid "Document Type"
@@ -2330,6 +2337,8 @@ msgid ""
 "Following is an introduction to the XML Document Types \"supported\" by the "
 "Conglomerate XML Editor."
 msgstr ""
+"A continuación se ofrece una introducción a los tipos de documento XML "
+"«soportados» por el editor de XML Conglomerate."
 
 #: C/conglomerate.xml:1633(title)
 msgid "Docbook XML 4.1.2"
@@ -2342,6 +2351,11 @@ msgid ""
 "XML that offers a markup vocabulary that is particularly well suited to the "
 "semantic description of content related computer hardware and software."
 msgstr ""
+"El primer tipo de documento XML que <application>Conglomerate</application> "
+"soportó fue DocBook XML. Docbook XML es una aplicación basada en estándares "
+"de XML que ofrece un vocabulario de marcado que se adapta particularmente "
+"bien a la descripción semántica de contenido relacionado con hardware y "
+"software."
 
 #: C/conglomerate.xml:1638(para)
 msgid ""
@@ -2350,6 +2364,11 @@ msgid ""
 "leading free desktop environments <ulink url=\"http://www.gnome.org\">GNOME</"
 "ulink> and <ulink url=\"http://www.kde.org\">KDE</ulink>."
 msgstr ""
+"Numerosos proyectos de software libre y de código abierto han adoptado "
+"Docbook XML como su estándar para la creación de contenidos y "
+"almacenamiento. Más significativamente los dos entornos de escritorio libres "
+"líderes <ulink url=\"http://www.gnome.org\">GNOME</ulink> y <ulink url="
+"\"http://www.kde.org\">KDE</ulink>."
 
 #: C/conglomerate.xml:1641(para)
 msgid ""
@@ -2358,12 +2377,18 @@ msgid ""
 "Development is conducted at the <ulink url=\"http://docbook.sourceforge.net"
 "\">Docbook Open Repository</ulink>."
 msgstr ""
+"El lanzamiento oficial de la definición de tipo de documento Docbook XML "
+"(DTD) está disponible en <ulink url=\"http://www.oasis-open.org/\">OASIS</"
+"ulink>. El desarrollo se llevó a cabo en el <ulink url=\"http://docbook."
+"sourceforge.net\">repositorio abierto de Docbook</ulink>."
 
 #: C/conglomerate.xml:1644(para)
 msgid ""
 "There are two references of note that will get you started with Docbook and "
 "its usage:"
 msgstr ""
+"Hay dos referencias significativas que le llevarán a empezar con Docbook y "
+"su uso:"
 
 #: C/conglomerate.xml:1648(ulink)
 msgid "Docbook: The Definitive Guide"
@@ -2378,6 +2403,8 @@ msgid ""
 "Docbook is used throughout the user manual to explain and illustrate the "
 "functionality of the <application>Conglomerate XML Editor</application>."
 msgstr ""
+"Docbook se utiliza a lo largo del manual de usuario para explicar e ilustrar "
+"la funcionalidad del <application>editor de XML Conglomerate</application>."
 
 #: C/conglomerate.xml:1661(title)
 msgid "XHTML (strict)"
@@ -2389,6 +2416,10 @@ msgid ""
 "which is aimed to replace HTML. It looks almost identical to HTML 4.01, but "
 "is stricter and cleaner because XHTML is HTML defined as an XML application."
 msgstr ""
+"<acronym>XHTML</acronym> entendido como el Lenguaje de marcado de hipertexto "
+"extensible está destinado a sustituir a HTML. Luce casi idéntico al HTML "
+"4.01, pero es más estricta y limpia porque XHTML es HTML definido como una "
+"aplicación XML."
 
 #: C/conglomerate.xml:1666(para)
 msgid ""
