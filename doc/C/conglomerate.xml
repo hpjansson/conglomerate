@@ -1675,8 +1675,8 @@ Set Encore = Nothing
             </itemizedlist>
         </sect2>
         <sect2 id="kernel_traffic">
-            <title id="kernel_traffic.title">"Kernel Traffic" newsetter format</title>
-            <para>The "Kernel Trafffic" news letter is a HTML format used by the
+            <title id="kernel_traffic.title">"Kernel Traffic" newsletter format</title>
+            <para>The "Kernel Traffic" newsletter is a HTML format used by the
                     <ulink url="http://kt.zork.net/">Kernel Traffic Web Site</ulink>. The news
                 letter tracks the technical development of various projects of the <ulink url="http://www.gnu.org/philosophy/free-sw.html">Free</ulink> and Open Source world.</para>
         </sect2>
@@ -1710,7 +1710,7 @@ Set Encore = Nothing
             <para>
                 <acronym>XSL-FO</acronym> is a language for formatting <acronym>XML</acronym> data.
                 The acronym stands for Extensible Stylesheet Language Formatting Objects.
-                <acronym>XSL-FO</acronym> is a part of the the Extensible Stylesheet Language Family
+                <acronym>XSL-FO</acronym> is a part of the Extensible Stylesheet Language Family
                 (<acronym>XSL</acronym>) of <ulink url="http://www.w3.org/Style/XSL/">W3C Recommendations</ulink>.</para>
             <para>The following online resources will be helpful in geting you started with <acronym>XSL-FO</acronym>:</para>
             <itemizedlist>
@@ -1777,11 +1777,11 @@ Set Encore = Nothing
             <title>title</title>
             <tgroup cols="2">
                 <thead>
-                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                    <row><entry>column</entry><entry>column</entry></row>
                 </thead>
                 
                 <tbody>
-                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                    <row><entry>column</entry><entry>column</entry></row>
                 </tbody>
             </tgroup>
             
