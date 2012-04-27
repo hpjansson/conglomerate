@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2012-04-26 09:03+0000\n"
-"PO-Revision-Date: 2012-04-26 11:03+0200\n"
+"POT-Creation-Date: 2012-04-27 09:12+0000\n"
+"PO-Revision-Date: 2012-04-27 12:07+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2487,9 +2487,6 @@ msgstr ""
 "open.org/committees/relax-ng/\">Comité técnico de RELAX NG</ulink>."
 
 #: C/conglomerate.xml:1693(para)
-#| msgid ""
-#| "The following online resources will be helpful in geting you started with "
-#| "<acronym>Relax NG</acronym>:"
 msgid ""
 "The following online resources will be helpful in getting you started with "
 "<acronym>Relax NG</acronym>:"
@@ -2525,9 +2522,6 @@ msgstr ""
 "\">recomendaciones del W3C</ulink>."
 
 #: C/conglomerate.xml:1715(para)
-#| msgid ""
-#| "The following online resources will be helpful in geting you started with "
-#| "<acronym>XSL-FO</acronym>:"
 msgid ""
 "The following online resources will be helpful in getting you started with "
 "<acronym>XSL-FO</acronym>:"
@@ -2664,16 +2658,22 @@ msgid ""
 "invalid, <application>Conglomerate</application> may throw an exception and "
 "exit."
 msgstr ""
+"Al crear o editar un XDS, las etiquetas XML utilizadas, sus atributos y su "
+"distribución deben ajustarse a <filename>xds.dtd</filename>. Si el XDS no es "
+"válido, <application>Conglomerate</application> puede lanzar una excepción y "
+"salir."
 
 #: C/conglomerate.xml:1813(title)
 msgid "Anatomy of a Display Specification"
-msgstr ""
+msgstr "Anatomía de una especificación de visualización"
 
 #: C/conglomerate.xml:1814(para)
 msgid ""
 "A display specification is an XML file, it therefore has an XML prolog like "
 "such."
 msgstr ""
+"Una especificación de visualización es un archivo XML, por lo tanto tiene un "
+"prólogo XML como tal."
 
 #: C/conglomerate.xml:1818(para)
 msgid ""
@@ -2682,6 +2682,11 @@ msgid ""
 "against it. The Document Type Declaration of a display specification always "
 "defines the \"root\" as <sgmltag class=\"starttag\">dispspec</sgmltag>."
 msgstr ""
+"Al crear o editar un XDS, la especificación de visualización DTD "
+"(<filename>xds.dtd</filename>) se debe declarar de modo que sus XDS "
+"personalizados se puedan validar. La declaración de tipo de documento de una "
+"especificación de visualización siempre define la «raíz» como <sgmltag class="
+"\"starttag\">dispspec</sgmltag>."
 
 #: C/conglomerate.xml:1822(para)
 msgid ""
@@ -2690,16 +2695,22 @@ msgid ""
 "is therefore specified using the SYSTEM Identifier as shown in the following "
 "example."
 msgstr ""
+"La declaración de tipo de documento no tiene un identificador PÚBLIC, ya que "
+"no son estrictamente necesarios para documentos <acronym>XML</acronym>. La "
+"ubicación de DTD está por lo tanto especificada mediante el identificador de "
+"SYSTEM como se muestra en el siguiente ejemplo."
 
 #: C/conglomerate.xml:1829(para)
 msgid ""
 "<application>Conglomerate</application> does currently validate XDS files at "
 "run-time."
 msgstr ""
+"<application>Conglomerate</application> actualmente valida archivos XDS en "
+"tiempo de ejecución."
 
 #: C/conglomerate.xml:1834(title)
 msgid "Element Reference"
-msgstr "Referencia de elementos"
+msgstr "Referencia de elemento"
 
 #: C/conglomerate.xml:1836(title)
 msgid "collapseto"
@@ -2721,6 +2732,11 @@ msgid ""
 "outdented at the point where the element with <sgmltag class=\"starttag"
 "\">collapseto</sgmltag> set is located."
 msgstr ""
+"Cuando esté soportado, establecer <sgmltag class=\"starttag\">collapseto</"
+"sgmltag> hará que el contenedor del elemento forme parte del contenedor del "
+"elemento del nodo padre. La línea vertical del contenedor del elemento padre "
+"está marcado o sin sangría en el punto donde el elemento con <sgmltag class="
+"\"starttag\">collapseto</sgmltag> se encuentra establecido."
 
 #: C/conglomerate.xml:1843(title) C/conglomerate.xml:1865(title)
 #: C/conglomerate.xml:1915(title) C/conglomerate.xml:1955(title)
@@ -2793,8 +2809,9 @@ msgid "description"
 msgstr "descripción"
 
 #: C/conglomerate.xml:1863(para)
-msgid "A paragraph describing the Document Type annoted by the XDS."
-msgstr ""
+#| msgid "A paragraph describing the Document Type annoted by the XDS."
+msgid "A paragraph describing the Document Type annotated by the XDS."
+msgstr "Un párrafo que describe el tipo de documento anotado por el XDS."
 
 #: C/conglomerate.xml:1870(entry) C/conglomerate.xml:2005(entry)
 #: C/conglomerate.xml:2157(entry) C/conglomerate.xml:2246(entry)
@@ -2833,7 +2850,7 @@ msgstr "es"
 #: C/conglomerate.xml:1888(entry) C/conglomerate.xml:2406(entry)
 #: C/conglomerate.xml:2645(entry)
 msgid "Language localization"
-msgstr ""
+msgstr "Localización del idioma"
 
 #: C/conglomerate.xml:1907(para)
 msgid "See <link endterm=\"metadata.title\" linkend=\"metadata\"/>"
@@ -2848,12 +2865,14 @@ msgid ""
 "This is the root element of the Conglomerate Display Specification Document "
 "Type."
 msgstr ""
+"Este es el elemento raíz del tipo de documento de especificación de "
+"visualización de Conglomerate."
 
 #: C/conglomerate.xml:1916(para) C/conglomerate.xml:1956(para)
 #: C/conglomerate.xml:2105(para) C/conglomerate.xml:2289(para)
 #: C/conglomerate.xml:2325(para) C/conglomerate.xml:2348(para)
 msgid "None Applicable."
-msgstr ""
+msgstr "No aplicable."
 
 #: C/conglomerate.xml:1924(para)
 msgid ""
@@ -2869,7 +2888,7 @@ msgstr ""
 
 #: C/conglomerate.xml:1951(title)
 msgid "document-models"
-msgstr ""
+msgstr "Modelos de documentos"
 
 #: C/conglomerate.xml:1952(para)
 msgid ""
@@ -2877,6 +2896,9 @@ msgid ""
 "sgmltag>. Mutiple <sgmltag class=\"starttag\">external-document-model</"
 "sgmltag> elements may be specified."
 msgstr ""
+"Un elemento contenedor para <sgmltag class=\"starttag\">external-document-"
+"model</sgmltag>. Se pueden especificar varios elementos <sgmltag class="
+"\"starttag\">external-document-model</sgmltag>."
 
 #: C/conglomerate.xml:1988(title)
 msgid "element"
@@ -2908,11 +2930,15 @@ msgid ""
 "values (<placeholder-1/>). The lowest value that can be given to one light "
 "source is 0 (hex #00). The highest value is 255 (hex #FF)."
 msgstr ""
+"Use la notación hexadecimal para la combinación de valores de color del "
+"rojo, verde y azul (<placeholder-1/>). El valor más bajo que se puede dar a "
+"una fuente de luz es 0 (hexadecimal #00). El valor más alto es 255 "
+"(hexadecimal #FF)."
 
 #: C/conglomerate.xml:2019(entry) C/conglomerate.xml:2461(entry)
 #: C/conglomerate.xml:2700(entry) C/conglomerate.xml:2813(entry)
 msgid "filename-xpath"
-msgstr ""
+msgstr "filename-xpath"
 
 #: C/conglomerate.xml:2020(entry) C/conglomerate.xml:2025(entry)
 #: C/conglomerate.xml:2030(entry) C/conglomerate.xml:2035(entry)
@@ -2940,7 +2966,7 @@ msgstr "valor"
 #: C/conglomerate.xml:2825(entry) C/conglomerate.xml:2830(entry)
 #: C/conglomerate.xml:2846(entry) C/conglomerate.xml:2854(entry)
 msgid "desc"
-msgstr ""
+msgstr "desc"
 
 #: C/conglomerate.xml:2024(entry) C/conglomerate.xml:2466(entry)
 #: C/conglomerate.xml:2705(entry) C/conglomerate.xml:2818(entry)
@@ -2950,13 +2976,13 @@ msgstr "icono"
 #: C/conglomerate.xml:2029(entry) C/conglomerate.xml:2471(entry)
 #: C/conglomerate.xml:2710(entry) C/conglomerate.xml:2823(entry)
 msgid "ns"
-msgstr ""
+msgstr "ns"
 
 #: C/conglomerate.xml:2034(entry) C/conglomerate.xml:2476(entry)
 #: C/conglomerate.xml:2558(entry) C/conglomerate.xml:2715(entry)
 #: C/conglomerate.xml:2828(entry)
 msgid "plugin-id"
-msgstr ""
+msgstr "identificador de complemento"
 
 #: C/conglomerate.xml:2039(entry) C/conglomerate.xml:2253(entry)
 #: C/conglomerate.xml:2256(sgmltag) C/conglomerate.xml:2481(entry)
@@ -2967,7 +2993,7 @@ msgstr "etiqueta"
 #: C/conglomerate.xml:2040(entry) C/conglomerate.xml:2482(entry)
 #: C/conglomerate.xml:2721(entry) C/conglomerate.xml:2834(entry)
 msgid "external element name"
-msgstr ""
+msgstr "nombre del elemento externo"
 
 #: C/conglomerate.xml:2041(entry) C/conglomerate.xml:2483(entry)
 #: C/conglomerate.xml:2722(entry) C/conglomerate.xml:2835(entry)
@@ -2975,6 +3001,8 @@ msgid ""
 "The name of an element declared by the DTD specified in <link endterm="
 "\"external-document-model.title\" linkend=\"external-document-model\"/>."
 msgstr ""
+"El nombre de un elemento declarado por el DTD especificado en <link endterm="
+"\"external-document-model.title\" linkend=\"external-document-model\"/>."
 
 #: C/conglomerate.xml:2044(entry) C/conglomerate.xml:2164(entry)
 #: C/conglomerate.xml:2486(entry) C/conglomerate.xml:2725(entry)
@@ -2985,7 +3013,7 @@ msgstr "tipo"
 #: C/conglomerate.xml:2046(para) C/conglomerate.xml:2488(para)
 #: C/conglomerate.xml:2727(para) C/conglomerate.xml:2840(para)
 msgid "embedded-external-file"
-msgstr ""
+msgstr "archivo-externo-integrado"
 
 #: C/conglomerate.xml:2047(para) C/conglomerate.xml:2489(para)
 #: C/conglomerate.xml:2728(para) C/conglomerate.xml:2841(para)
@@ -3000,27 +3028,27 @@ msgstr "complemento"
 #: C/conglomerate.xml:2049(para) C/conglomerate.xml:2491(para)
 #: C/conglomerate.xml:2730(para) C/conglomerate.xml:2843(para)
 msgid "span"
-msgstr ""
+msgstr "span"
 
 #: C/conglomerate.xml:2050(para) C/conglomerate.xml:2492(para)
 #: C/conglomerate.xml:2731(para) C/conglomerate.xml:2844(para)
 msgid "structural"
-msgstr ""
+msgstr "estructural"
 
-#: C/conglomerate.xml:2055(entry) C/conglomerate.xml:2497(entry)
-#: C/conglomerate.xml:2736(entry) C/conglomerate.xml:2849(entry)
-msgid "whitepace"
-msgstr ""
+#: C/conglomerate.xml:2055(entry)
+#| msgid "whitepace"
+msgid "whitespace"
+msgstr "espacio en blanco"
 
 #: C/conglomerate.xml:2057(para) C/conglomerate.xml:2499(para)
 #: C/conglomerate.xml:2738(para) C/conglomerate.xml:2851(para)
 msgid "normalize"
-msgstr ""
+msgstr "normalizar"
 
 #: C/conglomerate.xml:2058(para) C/conglomerate.xml:2500(para)
 #: C/conglomerate.xml:2739(para) C/conglomerate.xml:2852(para)
 msgid "preserve"
-msgstr ""
+msgstr "preservar"
 
 #: C/conglomerate.xml:2075(para) C/conglomerate.xml:2517(para)
 #: C/conglomerate.xml:2756(para) C/conglomerate.xml:2869(para)
@@ -3227,6 +3255,11 @@ msgstr ""
 #: C/conglomerate.xml:2430(title)
 msgid "plugin-element"
 msgstr ""
+
+#: C/conglomerate.xml:2497(entry) C/conglomerate.xml:2736(entry)
+#: C/conglomerate.xml:2849(entry)
+msgid "whitepace"
+msgstr "espacio en blanco"
 
 #: C/conglomerate.xml:2543(title)
 msgid "property-dialog"
