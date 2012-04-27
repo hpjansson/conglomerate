@@ -2494,7 +2494,7 @@ Set Encore = Nothing
                 <entry>desc</entry>
             </row>
             <row>
-                <entry>whitepace</entry>
+                <entry>whitespace</entry>
                 <entry>
                     <para>normalize</para>
                     <para>preserve</para>
