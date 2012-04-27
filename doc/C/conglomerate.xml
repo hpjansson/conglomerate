@@ -1860,7 +1860,7 @@ Set Encore = Nothing
         </sect2>
         <sect2 id="description">
             <title id="description.title">description</title>
-            <para>A paragraph describing the Document Type annoted by the XDS.</para>
+            <para>A paragraph describing the Document Type annotated by the XDS.</para>
             <sect3 id="description_attributes">
                 <title>Attributes</title>
                 <informaltable>
@@ -2052,7 +2052,7 @@ Set Encore = Nothing
                 <entry>desc</entry>
             </row>
             <row>
-                <entry>whitepace</entry>
+                <entry>whitespace</entry>
                 <entry>
                     <para>normalize</para>
                     <para>preserve</para>
