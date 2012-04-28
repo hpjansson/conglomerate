@@ -2172,12 +2172,12 @@ Set Encore = Nothing
                             <row>
                                 <entry>public-id</entry>
                                 <entry>value</entry>
-                                <entry>The PUBLIC Identifier by which the Documen Type is recognized.</entry>
+                                <entry>The PUBLIC Identifier by which the Document Type is recognized.</entry>
                             </row>
                             <row>
                                 <entry>system-id</entry>
                                 <entry>value</entry>
-                                <entry>The SYSTEM Indentifier by which the Document Type is to be recognized.</entry>
+                                <entry>The SYSTEM Identifier by which the Document Type is to be recognized.</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -2251,9 +2251,9 @@ Set Encore = Nothing
                         <tbody>
                             <row>
                                 <entry>tag</entry>
-                                <entry>An element name from the anotated Document Type.</entry>
+                                <entry>An element name from the annotated Document Type.</entry>
                                 <entry>When an element name is provided Conglomerate will search for a
-                                    child node whose name corrsponds to the value of <sgmltag class="attribute">tag</sgmltag> and return the value of the next
+                                    child node whose name corresponds to the value of <sgmltag class="attribute">tag</sgmltag> and return the value of the next
                                     child node for [title].</entry>
                             </row>
                             <row>
