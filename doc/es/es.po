@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.help.master\n"
-"POT-Creation-Date: 2012-04-27 09:12+0000\n"
-"PO-Revision-Date: 2012-04-27 12:07+0200\n"
+"POT-Creation-Date: 2012-04-28 09:13+0000\n"
+"PO-Revision-Date: 2012-04-28 11:26+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -205,7 +205,7 @@ msgid ""
 "jargon of <acronym>XML</acronym> behind a friendly Graphical User Interface "
 "(<acronym>GUI</acronym>)."
 msgstr ""
-"Esta es la versión V0.0.1 del manual de usuario del <application>editor de "
+"Esta es la versión v0.0.1 del manual de usuario del <application>editor de "
 "XML Conglomerate</application> V0.7.10, un software libre que proporciona "
 "una herramienta amigable para la edición de <ulink url=\"http://www.oasis-"
 "open.org/\">DocBook</ulink> y otros tipos de documentos creados en el "
@@ -651,8 +651,8 @@ msgstr ""
 "Los atajos de teclado se presentarán de la siguiente manera: "
 "<keycombo><keysym>Ctrl+N</keysym></keycombo>. Donde <keysym>Ctrl</keysym>, "
 "<keysym>Mayús</keysym>, <keysym>Alt</keysym> representan las teclas "
-"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se deberá "
-"mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
+"«Control», «Mayúsculas» y «Alt» respectivamente, y que significa que se "
+"deberá mantener pulsada la primera tecla mientras se pulsa la segunda tecla."
 
 #: C/conglomerate.xml:278(emphasis)
 msgid "Cross reference conventions for print will be shown as follows:"
@@ -1002,11 +1002,11 @@ msgid ""
 "cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;"
 "module=default\">Gnome</ulink>."
 msgstr ""
-"Si no le preocupa ejecutarlo «al filo» del desarrollo, también puede ejecutar "
-"su instalación desde el proyecto <glossterm>Sistema de control de versiones "
-"concurrente</glossterm> (<acronym>CVS</acronym>) ubicado en <ulink url="
-"\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/"
-"gnome&amp;module=default\">Gnome</ulink>."
+"Si no le preocupa ejecutarlo «al filo» del desarrollo, también puede "
+"ejecutar su instalación desde el proyecto <glossterm>Sistema de control de "
+"versiones concurrente</glossterm> (<acronym>CVS</acronym>) ubicado en <ulink "
+"url=\"http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/"
+"cvs/gnome&amp;module=default\">Gnome</ulink>."
 
 #: C/conglomerate.xml:463(para)
 msgid ""
@@ -1669,18 +1669,19 @@ msgstr ""
 "El nombre del elemento que se muestra en la vista en árbol no siempre es "
 "igual al que se muestra en el <link linkend=\"page_view\" endterm="
 "\"page_view.title\"/>. Esto es porque Conglomerate renombra los elementos de "
-"acuerdo con la información provista por una «Especificación de Visualización» "
-"que puede definir un nombre alternativo para cualquier tipo de elemento. "
-"Estos nombres no son nombres de elementos válidos y por lo tanto no se usan "
-"para crear elementos <acronym>XML</acronym> dentro del archivo fuente "
-"<acronym>XML</acronym>. Por el contrario se asignan a elementos válidos "
-"Docbook que son lo que se crean en el archivo fuente abierto <acronym>XML</"
-"acronym> o documento. Si se inserta utilizando los nombres propuestos por "
-"<application>Conglomerate</application>, el documento no será válido por "
-"violar las reglas especificadas en la <glossterm>Definición de tipo de "
-"documento</glossterm> (<acronym>DTD</acronym>) de los documentos. Se "
-"proporciona una lista de las asignaciones para diferentes tipos de "
-"documentos en la <xref linkend=\"display_spec_element_map_ref\"/>."
+"acuerdo con la información provista por una «Especificación de "
+"Visualización» que puede definir un nombre alternativo para cualquier tipo "
+"de elemento. Estos nombres no son nombres de elementos válidos y por lo "
+"tanto no se usan para crear elementos <acronym>XML</acronym> dentro del "
+"archivo fuente <acronym>XML</acronym>. Por el contrario se asignan a "
+"elementos válidos Docbook que son lo que se crean en el archivo fuente "
+"abierto <acronym>XML</acronym> o documento. Si se inserta utilizando los "
+"nombres propuestos por <application>Conglomerate</application>, el documento "
+"no será válido por violar las reglas especificadas en la "
+"<glossterm>Definición de tipo de documento</glossterm> (<acronym>DTD</"
+"acronym>) de los documentos. Se proporciona una lista de las asignaciones "
+"para diferentes tipos de documentos en la <xref linkend="
+"\"display_spec_element_map_ref\"/>."
 
 #: C/conglomerate.xml:1017(title)
 msgid "Outline view in Overview perspective"
@@ -1701,8 +1702,8 @@ msgid ""
 msgstr ""
 "En la perspectiva del árbol XML en bruto los nodos del documento abierto se "
 "presentan usando una sintaxis completa de XML, por lo que se muestran los "
-"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. El "
-"valor del elemento, el texto etiquetado, también se muestra a un lado del "
+"caracteres «mayor que» (&lt;) y «menor que» (&gt;) que rodean al elemento. "
+"El valor del elemento, el texto etiquetado, también se muestra a un lado del "
 "elemento dentro de las comas invertidas (consulte la <xref linkend="
 "\"fig_outline_raw_xml\"/>)."
 
@@ -1734,8 +1735,8 @@ msgstr ""
 "Los elementos de bloque como <sgmltag class=\"starttag\">artículo</sgmltag>, "
 "<sgmltag class=\"starttag\">sect1</sgmltag>, <sgmltag class=\"starttag"
 "\">sect2</sgmltag>, y <sgmltag class=\"starttag\">figura</sgmltag> se "
-"muestran en los «bordes del elemento estructural» y los elementos lineales se "
-"muestran con una línea debajo del texto etiquetado (consulte la <xref "
+"muestran en los «bordes del elemento estructural» y los elementos lineales "
+"se muestran con una línea debajo del texto etiquetado (consulte la <xref "
 "linkend=\"fig_page_view_doc_edit\"/>)."
 
 #: C/conglomerate.xml:1054(para)
@@ -2628,7 +2629,7 @@ msgstr "columna"
 
 #: C/conglomerate.xml:1792(title)
 msgid "Map to Relax NG"
-msgstr "Asignar a Relax NG"
+msgstr "Mapear a Relax NG"
 
 #: C/conglomerate.xml:1803(title)
 msgid "Display Specification DTD"
@@ -2809,7 +2810,6 @@ msgid "description"
 msgstr "descripción"
 
 #: C/conglomerate.xml:1863(para)
-#| msgid "A paragraph describing the Document Type annoted by the XDS."
 msgid "A paragraph describing the Document Type annotated by the XDS."
 msgstr "Un párrafo que describe el tipo de documento anotado por el XDS."
 
@@ -2888,7 +2888,7 @@ msgstr ""
 
 #: C/conglomerate.xml:1951(title)
 msgid "document-models"
-msgstr "Modelos de documentos"
+msgstr "document-models"
 
 #: C/conglomerate.xml:1952(para)
 msgid ""
@@ -2902,7 +2902,7 @@ msgstr ""
 
 #: C/conglomerate.xml:1988(title)
 msgid "element"
-msgstr "elemento"
+msgstr "element"
 
 #: C/conglomerate.xml:1989(para)
 msgid "An XML element."
@@ -3013,7 +3013,7 @@ msgstr "tipo"
 #: C/conglomerate.xml:2046(para) C/conglomerate.xml:2488(para)
 #: C/conglomerate.xml:2727(para) C/conglomerate.xml:2840(para)
 msgid "embedded-external-file"
-msgstr "archivo-externo-integrado"
+msgstr "embedded-external-file"
 
 #: C/conglomerate.xml:2047(para) C/conglomerate.xml:2489(para)
 #: C/conglomerate.xml:2728(para) C/conglomerate.xml:2841(para)
@@ -3035,8 +3035,8 @@ msgstr "span"
 msgid "structural"
 msgstr "estructural"
 
-#: C/conglomerate.xml:2055(entry)
-#| msgid "whitepace"
+#: C/conglomerate.xml:2055(entry) C/conglomerate.xml:2497(entry)
+#: C/conglomerate.xml:2736(entry) C/conglomerate.xml:2849(entry)
 msgid "whitespace"
 msgstr "espacio en blanco"
 
@@ -3067,11 +3067,11 @@ msgstr ""
 
 #: C/conglomerate.xml:2101(title)
 msgid "element-list"
-msgstr ""
+msgstr "element-list"
 
 #: C/conglomerate.xml:2102(para)
 msgid "A wrapper element for element types."
-msgstr ""
+msgstr "Un elemento contenedor para tipos de elemento."
 
 #: C/conglomerate.xml:2115(para) C/conglomerate.xml:2293(para)
 #: C/conglomerate.xml:2568(para) C/conglomerate.xml:2654(para)
@@ -3088,13 +3088,15 @@ msgstr ""
 
 #: C/conglomerate.xml:2148(title)
 msgid "external-document-model"
-msgstr ""
+msgstr "external-document-model"
 
 #: C/conglomerate.xml:2149(para)
 msgid ""
 "Specifies the Document Type Definition (DTD) annotated by this Display "
 "Specification (XDS)."
 msgstr ""
+"Especifica la definición de tipo de documento (DTD) anotado en la "
+"especificación de visualización (XDS)."
 
 #: C/conglomerate.xml:2166(para)
 msgid "dtd"
@@ -3102,27 +3104,30 @@ msgstr "dtd"
 
 #: C/conglomerate.xml:2167(para)
 msgid "relax-ng-schema"
-msgstr ""
+msgstr "relax-ng-schema"
 
 #: C/conglomerate.xml:2168(para)
 msgid "w3c-schema"
-msgstr ""
+msgstr "w3c-schema"
 
 #: C/conglomerate.xml:2173(entry)
 msgid "public-id"
-msgstr ""
+msgstr "public-id"
 
 #: C/conglomerate.xml:2175(entry)
-msgid "The PUBLIC Identifier by which the Documen Type is recognized."
-msgstr ""
+#| msgid "The PUBLIC Identifier by which the Documen Type is recognized."
+msgid "The PUBLIC Identifier by which the Document Type is recognized."
+msgstr "El identificador PUBLIC por el que se reconoce el tipo de documento."
 
 #: C/conglomerate.xml:2178(entry)
 msgid "system-id"
-msgstr ""
+msgstr "system-id"
 
 #: C/conglomerate.xml:2180(entry)
-msgid "The SYSTEM Indentifier by which the Document Type is to be recognized."
-msgstr ""
+#| msgid ""
+#| "The SYSTEM Indentifier by which the Document Type is to be recognized."
+msgid "The SYSTEM Identifier by which the Document Type is to be recognized."
+msgstr "El identificador SYSTEM por el que se reconoce el tipo de documento."
 
 #: C/conglomerate.xml:2198(para)
 msgid ""
@@ -3142,7 +3147,7 @@ msgstr ""
 
 #: C/conglomerate.xml:2225(title)
 msgid "header-info"
-msgstr ""
+msgstr "header-info"
 
 #: C/conglomerate.xml:2226(para)
 msgid ""
@@ -3150,12 +3155,18 @@ msgid ""
 "element wrappers shown in the page view. Node content is comprised of two "
 "parts [element name] : [title] where:"
 msgstr ""
+"Defina el contenido del título para los nodos mostrado en la vista de árbol "
+"de esquema y los contenedores de elemento mostrados en la vista de página. "
+"El contenido del nodo se compone de dos partes [nombre del elemento] : "
+"[título] donde:"
 
 #: C/conglomerate.xml:2231(para)
 msgid ""
 "<emphasis role=\"bold\">[name]</emphasis> is derived from <sgmltag class="
 "\"starttag\">name</sgmltag>."
 msgstr ""
+"<emphasis role=\"bold\">[nombre]</emphasis> se deriva de <sgmltag class="
+"\"starttag\">name</sgmltag>."
 
 #: C/conglomerate.xml:2235(para)
 msgid ""
@@ -3163,17 +3174,28 @@ msgid ""
 "of <sgmltag class=\"attribute\">tag</sgmltag> or the result of <sgmltag "
 "class=\"attribute\">xpath</sgmltag>."
 msgstr ""
+"<emphasis role=\"bold\">[título]</emphasis> se deriva del valor de la "
+"<sgmltag class=\"attribute\">tag</sgmltag> o del resultado de <sgmltag class="
+"\"attribute\">xpath</sgmltag>."
 
 #: C/conglomerate.xml:2254(entry)
-msgid "An element name from the anotated Document Type."
-msgstr ""
+#| msgid "An element name from the anotated Document Type."
+msgid "An element name from the annotated Document Type."
+msgstr "Un nombre de elemento del tipo de documento anotado."
 
 #: C/conglomerate.xml:2255(entry)
+#| msgid ""
+#| "When an element name is provided Conglomerate will search for a child "
+#| "node whose name corrsponds to the value of <placeholder-1/> and return "
+#| "the value of the next child node for [title]."
 msgid ""
 "When an element name is provided Conglomerate will search for a child node "
-"whose name corrsponds to the value of <placeholder-1/> and return the value "
+"whose name corresponds to the value of <placeholder-1/> and return the value "
 "of the next child node for [title]."
 msgstr ""
+"Cuando un nombre de elemento se proporciona Conglomerate buscará un nodo "
+"hijo, cuyo nombre corresponda al valor de <placeholder-1/> y devolverá el "
+"valor del siguiente nodo hijo para el [título]."
 
 #: C/conglomerate.xml:2260(entry)
 msgid "xpath"
@@ -3184,14 +3206,16 @@ msgid ""
 "An XPath expression that can be used to return a string. The resulting "
 "string is used for [title]."
 msgstr ""
+"Una expresión XPath que se puede usar para devolver una cadena. La cadena "
+"resultante se utiliza para [título]."
 
 #: C/conglomerate.xml:2285(title)
 msgid "key-value-list"
-msgstr ""
+msgstr "key-value-list"
 
 #: C/conglomerate.xml:2321(title)
 msgid "key-value-pair"
-msgstr ""
+msgstr "key-value-pair"
 
 #: C/conglomerate.xml:2339(para)
 msgid "See <link endterm=\"key-value-list.title\" linkend=\"key-value-list\"/>"
@@ -3200,13 +3224,15 @@ msgstr ""
 
 #: C/conglomerate.xml:2344(title)
 msgid "metadata"
-msgstr "metadatos"
+msgstr "metadata"
 
 #: C/conglomerate.xml:2345(para)
 msgid ""
 "A wrapper for elements that provide data about the Document Type which the "
 "XDS annotates."
 msgstr ""
+"Un contenedor para elementos que proporciona datos sobre el tipo de "
+"documento que anota XDS."
 
 #: C/conglomerate.xml:2358(para)
 msgid ""
@@ -3218,11 +3244,11 @@ msgstr ""
 
 #: C/conglomerate.xml:2380(title)
 msgid "name"
-msgstr "nombre"
+msgstr "name"
 
 #: C/conglomerate.xml:2381(para)
 msgid "The displayed name of an object."
-msgstr ""
+msgstr "El nombre mostrado de un objeto."
 
 #: C/conglomerate.xml:2415(para)
 msgid ""
@@ -3254,16 +3280,11 @@ msgstr ""
 
 #: C/conglomerate.xml:2430(title)
 msgid "plugin-element"
-msgstr ""
-
-#: C/conglomerate.xml:2497(entry) C/conglomerate.xml:2736(entry)
-#: C/conglomerate.xml:2849(entry)
-msgid "whitepace"
-msgstr "espacio en blanco"
+msgstr "plugin-element"
 
 #: C/conglomerate.xml:2543(title)
 msgid "property-dialog"
-msgstr ""
+msgstr "property-dialog"
 
 #: C/conglomerate.xml:2578(para) C/conglomerate.xml:2664(para)
 msgid ""
@@ -3279,25 +3300,27 @@ msgstr ""
 
 #: C/conglomerate.xml:2583(title)
 msgid "serialisation"
-msgstr ""
+msgstr "serialización"
 
 #: C/conglomerate.xml:2619(title)
 msgid "short-desc"
-msgstr ""
+msgstr "short-desc"
 
 #: C/conglomerate.xml:2620(para)
 msgid ""
 "A short description of the element specified in <sgmltag class=\"attribute"
 "\">tag</sgmltag>."
 msgstr ""
+"Una descripción breve del elemento especificado en <sgmltag class=\"attribute"
+"\">etiqueta</sgmltag>."
 
 #: C/conglomerate.xml:2669(title)
 msgid "span-element"
-msgstr ""
+msgstr "span-element"
 
 #: C/conglomerate.xml:2782(title)
 msgid "structural-element"
-msgstr ""
+msgstr "structural-element"
 
 #: C/conglomerate.xml:2898(glossterm)
 msgid "Dummy"
@@ -3311,7 +3334,11 @@ msgstr "Ahora me ves, después no me verás"
 #: C/conglomerate.xml:0(None)
 msgid "translator-credits"
 msgstr ""
+"Milagros Alessandra Infante Montero <maim92@gmail.com>, 2012\n"
+"Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012\n"
 "Germana Oliveira Blazetic <germanaoliveirab@gmail.com>, 2011\n"
 "Joaquín Aramendía <samsagax@gmail.com>, 2011\n"
-"Daniel Mustieles <daniel.mustieles@gmail.com>, 2011\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+
+#~ msgid "whitepace"
+#~ msgstr "espacio en blanco"
